@@ -85,10 +85,13 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .touch button:active {
-    transform: translateY(2px);
+  .touch button:active,
+  .touch button.pressed {
+    transform: translateY(2px) scale(0.96);
     border-bottom-width: 1px;
-    background: #c4f0eb;
+    background: #2dd4bf;
+    color: #07090e;
+    box-shadow: 0 0 14px rgba(45, 212, 191, 0.55);
   }
 
   .touch button:disabled {
