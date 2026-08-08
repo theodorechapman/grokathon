@@ -7,7 +7,15 @@ import styles from "./game-boy-player.module.css";
 type Direction = "left" | "right";
 type PlayerStatus = "loading" | "running" | "error";
 
-export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string }) {
+export function GameBoyPlayer({
+  romUrl,
+  title,
+  timeScored = false,
+}: {
+  romUrl: string;
+  title: string;
+  timeScored?: boolean;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<Gameboy | null>(null);
   const [status, setStatus] = useState<PlayerStatus>("loading");
@@ -42,6 +50,8 @@ export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string
       });
       gameboy.loadGame(await response.arrayBuffer());
       gameboy.run();
+
+      if (timeScored) watchForCompletion(canvas, () => cancelled);
     }
 
     function preventArrowScroll(event: KeyboardEvent) {
@@ -61,7 +71,34 @@ export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string
       gameboyRef.current = null;
       document.removeEventListener("keydown", preventArrowScroll);
     };
-  }, [romUrl]);
+  }, [romUrl, timeScored]);
+
+  // Breakout-style completion: watch the brick region empty out, then report
+  // elapsed run time as the score. The pipeline should replace this with
+  // memory-based win detection per game when it wires nova:score itself.
+  function watchForCompletion(canvas: HTMLCanvasElement, isCancelled: () => boolean) {
+    const ctx = canvas.getContext("2d", { alpha: false });
+    if (!ctx) return;
+    const startedAt = performance.now();
+    let baseline = 0;
+    const timer = setInterval(() => {
+      if (isCancelled()) {
+        clearInterval(timer);
+        return;
+      }
+      const img = ctx.getImageData(16, 16, 128, 80).data;
+      let dark = 0;
+      for (let i = 0; i < img.length; i += 4) {
+        if (img[i] < 100) dark++;
+      }
+      if (baseline === 0 && dark > 300) baseline = dark;
+      if (baseline > 0 && dark < baseline * 0.03) {
+        clearInterval(timer);
+        const elapsed = Math.round(performance.now() - startedAt);
+        window.postMessage({ type: "nova:score", score: elapsed }, window.location.origin);
+      }
+    }, 500);
+  }
 
   function setDirection(direction: Direction, pressed: boolean) {
     const input = gameboyRef.current?.input;

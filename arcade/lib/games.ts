@@ -10,6 +10,7 @@ export type GameManifest = {
   parent: string | null;
   createdAt: string;
   rom?: string;
+  scoring?: "time" | "points";
   hasCover: boolean;
   creator?: string | null;
   players?: 1 | 2;
