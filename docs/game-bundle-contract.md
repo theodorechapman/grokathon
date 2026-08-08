@@ -23,6 +23,7 @@ in the manifest's `rom` field.
 
 - `index.html` is fully self-contained. Inline JS and CSS or relative paths inside the bundle folder only. No CDN, no external fetch. It must run offline in an iframe.
 - A `.gb` bundle contains only the compiled ROM; the emulator and player UI belong to the arcade.
+- Game Boy ROMs MUST implement the NOVA_STATE protocol: one byte at WRAM `0xCF00`, written by the game as an absolute pointer (`#define NOVA_STATE (*(volatile uint8_t *)0xCF00)`): 1 when play begins, 2 on win, 3 on loss. The arcade polls this byte for the end-of-run screen and run timing. Ordinary globals move when the compiler relayouts, so a fixed absolute address is the only reliable channel. The verify bot should reject a ROM that never writes it.
 - Canvas or DOM rendering, either is fine. Must handle keyboard and touch.
 - The game must size itself to its viewport: scale to fit, no scrolling, nothing cut off, at any frame size from a phone to a desktop. The arcade gives the iframe a fixed box and disables scroll, so a game that overflows loses content. The verify bot should treat overflow as a failure.
 - No console errors on boot. The verify bot treats them as failures.
