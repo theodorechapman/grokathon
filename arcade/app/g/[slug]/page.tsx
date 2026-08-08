@@ -8,6 +8,7 @@ import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { GameFrame } from "./game-frame";
 import { RemixBox } from "./remix-box";
+import { SignInButton } from "../../sign-in-button";
 import { ScoreClaim } from "./score-claim";
 import { WaitingRoom } from "./waiting-room";
 
@@ -82,7 +83,14 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           </ol>
         </div>
       )}
-      <RemixBox parent={slug} />
+      {session ? (
+        <RemixBox parent={slug} />
+      ) : (
+        <div className="remixGate">
+          <p>Sign in with 𝕏 to remix this game</p>
+          <SignInButton variant="nav" />
+        </div>
+      )}
     </main>
   );
 }

@@ -43,6 +43,13 @@ RUN curl -fsSL "$CODEX_URL" -o /tmp/codex.tar.gz \
 RUN curl -fsSL https://bun.sh/install | bash \
     && ln -s /root/.bun/bin/bun /usr/local/bin/bun
 
+# GBDK-2020, so the agent can compile its raw-C reconstruction to a ROM
+ARG GBDK_URL=https://github.com/gbdk-2020/gbdk-2020/releases/download/4.5.0/gbdk-linux-arm64.tar.gz
+RUN curl -fsSL "$GBDK_URL" -o /tmp/gbdk.tar.gz \
+    && tar -xzf /tmp/gbdk.tar.gz -C /opt \
+    && rm /tmp/gbdk.tar.gz \
+    && /opt/gbdk/bin/lcc -v
+
 # staticre project lives at /opt/staticre in the base image; the harness expects
 # it at PIPELINE/static, so lay out /opt/pipeline accordingly.
 # Build context is the repo root. PIPELINE=/opt/pipeline, REPO=/opt, so the
