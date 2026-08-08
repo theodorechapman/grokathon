@@ -1118,3 +1118,25 @@ a.navSegment:hover {
 .stageDone { color: var(--accent); }
 .stageNow { color: var(--text); }
 .stagePending { color: var(--dim); }
+
+.remixOf {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+}
+
+.badgeFav {
+  font-size: 11px;
+  color: #fbbf24;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.badgeNew {
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}

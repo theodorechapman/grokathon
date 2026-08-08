@@ -22,12 +22,23 @@ export default async function ArcadePage({
   const filter = FILTERS[f ?? "all"] ?? FILTERS.all;
   const unranked = await listGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
-  const games = unranked
+  const ranked = unranked
     .filter(filter.match)
     .sort((a, b) => {
       const diff = rankScore(stats.get(b.slug)!) - rankScore(stats.get(a.slug)!);
       return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
     });
+  const bySlug = new Map(ranked.map((g) => [g.slug, g]));
+  const titleOf = (slug: string | null) => (slug && bySlug.get(slug)?.title) || null;
+  const roots = ranked.filter((g) => !g.parent || !bySlug.has(g.parent));
+  const games = roots.flatMap((root) => [
+    root,
+    ...ranked.filter((g) => g.parent === root.slug && g.slug !== root.slug),
+  ]);
+  const topSlug =
+    ranked.length > 0 && rankScore(stats.get(ranked[0].slug)!) > 0 ? ranked[0].slug : null;
+  const isNew = (g: (typeof games)[number]) =>
+    Date.now() - new Date(g.createdAt).getTime() < 2 * 60 * 60 * 1000;
   return (
     <main>
       <SiteNav active="arcade" />
@@ -73,8 +84,15 @@ export default async function ArcadePage({
                 )}
               </Link>
               <div className="gameBody">
+                {game.parent && bySlug.has(game.parent) && (
+                  <p className="remixOf">↳ remix of {titleOf(game.parent)}</p>
+                )}
                 <div className="gameTitleRow">
-                  <h3>{game.title}</h3>
+                  <h3>
+                    {game.title}
+                    {game.slug === topSlug && <span className="badgeFav"> ★ community favorite</span>}
+                    {game.slug !== topSlug && isNew(game) && <span className="badgeNew"> NEW</span>}
+                  </h3>
                   <span className="tag">{game.creator ? `@${game.creator}` : "Nova"}</span>
                 </div>
                 <p>{game.description}</p>

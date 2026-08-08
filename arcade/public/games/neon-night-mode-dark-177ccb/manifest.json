@@ -1,7 +1,7 @@
 {
   "slug": "neon-night-mode-dark-177ccb",
-  "title": "Breakout: Neon night mode: dark background, glow",
-  "description": "neon night mode: dark background, glowing ball trail, faster each brick you break",
+  "title": "Neon Night",
+  "description": "Dark mode breakout: glowing trail, speeds up every brick.",
   "controls": "left and right arrows to move the paddle",
   "source": "remix",
   "parent": "breakout",

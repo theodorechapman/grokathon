@@ -124,13 +124,28 @@ def make_cover(prompt: str, dest: Path) -> None:
             shutil.copy(parent_cover, dest)
 
 
-def title_for(prompt: str) -> str:
-    t = re.sub(r"\s+", " ", prompt).strip().rstrip(".")
-    return ("Breakout: " + (t[0].upper() + t[1:]))[:48]
+def title_for(prompt: str) -> tuple[str, str]:
+    fallback = (re.sub(r"\s+", " ", prompt).strip().rstrip(".")[:40] or "Remix", prompt[:120])
+    try:
+        raw = grok([
+            {"role": "system", "content": "Name a breakout-game remix. Reply with ONLY JSON: {\"title\": \"2-4 punchy words, no Breakout prefix\", \"description\": \"one short sentence\"}"},
+            {"role": "user", "content": prompt},
+        ], timeout=60)
+        m = re.search(r"\{.*\}", raw, re.S)
+        d = json.loads(m.group(0))
+        return d["title"][:32], d["description"][:120]
+    except Exception:
+        return fallback
+
+
+SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,59}$")
 
 
 def process_job(job: dict) -> Path | None:
     slug = job["slug"]
+    if not SLUG_RE.match(slug):
+        log(f"job rejected: unsafe slug {slug!r}")
+        return None
     log(f"job {slug}: '{job['prompt'][:60]}'")
     report(slug, "queued")
     main_c, rom, err = None, None, None
@@ -147,14 +162,15 @@ def process_job(job: dict) -> Path | None:
         log(f"job {slug}: giving up after 3 attempts")
         return None
 
+    title, desc = title_for(job["prompt"])
     bundle = GAMES / slug
     bundle.mkdir(parents=True, exist_ok=True)
     shutil.copy(rom, bundle / f"{slug}.gb")
     make_cover(job["prompt"], bundle / "cover.png")
     manifest = {
         "slug": slug,
-        "title": title_for(job["prompt"]),
-        "description": job["prompt"][:140],
+        "title": title,
+        "description": desc,
         "controls": "left and right arrows to move the paddle",
         "source": "remix" if job.get("parent") else job.get("source", "prompt-gen"),
         "parent": job.get("parent") or "breakout",
