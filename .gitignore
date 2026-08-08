@@ -9,3 +9,6 @@ workspaces/
 /agent/__pycache__/
 *.state
 *.png
+
+# arcade images (covers, og cards) are real content, not work artifacts
+!arcade/**/*.png
