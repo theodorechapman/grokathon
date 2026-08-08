@@ -1,8 +1,10 @@
 """Harness-level blinding: neutralize a Game Boy ROM before the agent sees it.
 
 The agent must never see the original filename or header title. We copy the
-ROM to a content-addressed neutral name, zero the header title field, and fix
-the header/global checksums so the ROM stays valid.
+ROM to a content-addressed neutral name, zero only the header bytes that are
+actually title data, and fix the header/global checksums so the ROM stays
+valid. Cartridge metadata (including the CGB flag and manufacturer code) is
+left intact.
 """
 
 from __future__ import annotations
@@ -12,7 +14,9 @@ import shutil
 from pathlib import Path
 
 TITLE_START = 0x134
-TITLE_END = 0x144  # exclusive; includes manufacturer/CGB byte region
+MANUFACTURER_START = 0x13F
+CGB_FLAG = 0x143
+LEGACY_TITLE_END = 0x144
 HEADER_CHECKSUM = 0x14D
 GLOBAL_CHECKSUM = 0x14E
 
@@ -20,7 +24,11 @@ GLOBAL_CHECKSUM = 0x14E
 def prepare_binary(src: str | Path, workdir: str | Path) -> dict:
     """Copy ROM into workdir under a neutral name, strip title, fix checksums.
 
-    Returns {"path", "program_id", "sha256_original", "sha256_blinded", "size"}.
+    CGB headers have an 11-byte title followed by a four-byte manufacturer
+    code and the CGB flag. Legacy DMG headers use the whole 16-byte region as
+    their title. Preserve every non-title header byte in either layout.
+
+    Returns {"path", "program_id", "sha256_original", "sha256", "size"}.
     """
     src = Path(src)
     workdir = Path(workdir)
@@ -30,7 +38,10 @@ def prepare_binary(src: str | Path, workdir: str | Path) -> dict:
     sha_orig = hashlib.sha256(data).hexdigest()
 
     if len(data) >= 0x150:
-        for i in range(TITLE_START, TITLE_END):
+        title_end = (
+            MANUFACTURER_START if data[CGB_FLAG] & 0x80 else LEGACY_TITLE_END
+        )
+        for i in range(TITLE_START, title_end):
             data[i] = 0
         # Header checksum covers 0x134..0x14C
         chk = 0
