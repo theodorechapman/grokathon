@@ -12,7 +12,7 @@ Land the current changes in the active repo as a merged PR, no confirmation stop
 3. Push with `git push -u origin <branch>`.
 4. `gh pr create` against main. Body is 2 to 4 sentences in Supratik's voice: short declaratives, contractions, bare numbers, no em dashes, no semicolons, no AI phrases. Run the humanizer skill on the body first per the global rule.
 5. `gh pr merge <number> --merge`, then `git checkout main && git pull`.
-6. Sync mirrored copies. In grokathon, `grok-games-prd.md` in the repo mirrors `~/grokathon/grok-games-prd.md`. Copy whichever is newer over the other so they match.
+6. Sync mirrored copies. In grokathon, `docs/grok-games-prd.md` in the repo mirrors `~/grokathon/grok-games-prd.md`. Copy whichever is newer over the other so they match.
 7. Reply with the PR link and one line on what landed.
 
 Merge immediately after creating the PR unless Supratik says he wants review first. If the merge fails on branch protection, say so and leave the PR open instead of forcing.
