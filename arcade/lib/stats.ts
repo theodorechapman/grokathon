@@ -45,3 +45,19 @@ export async function overLimit(key: string, limit: number, windowSec = 60): Pro
 export function clientIp(headers: Headers): string {
   return headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
 }
+
+export type ScoreRow = { handle: string; score: number };
+
+export async function topScores(slug: string, n = 5): Promise<ScoreRow[]> {
+  const r = redis();
+  if (!r) return [];
+  const raw = await r.zrange<(string | number)[]>(`hs:${slug}`, 0, n - 1, {
+    rev: true,
+    withScores: true,
+  });
+  const rows: ScoreRow[] = [];
+  for (let i = 0; i < raw.length; i += 2) {
+    rows.push({ handle: String(raw[i]), score: Number(raw[i + 1]) });
+  }
+  return rows;
+}

@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame } from "@/lib/games";
+import { topScores } from "@/lib/stats";
+import { readSession } from "@/lib/session";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { RemixBox } from "./remix-box";
+import { ScoreClaim } from "./score-claim";
 import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
@@ -41,10 +44,16 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     );
   }
 
+  const [scores, session] = await Promise.all([
+    topScores(slug),
+    readSession().catch(() => null),
+  ]);
+
   return (
     <main>
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} />
+      <ScoreClaim slug={slug} signedIn={session !== null} />
       <Link href="/arcade" className="back">
         ← Back to the arcade
       </Link>
@@ -59,6 +68,19 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         <p className="controls">{game.controls}</p>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
+      {scores.length > 0 && (
+        <div className="highScores">
+          <h2>High scores</h2>
+          <ol>
+            {scores.map((row) => (
+              <li key={row.handle}>
+                <span>@{row.handle}</span>
+                <span>{row.score.toLocaleString()}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
       <RemixBox parent={slug} />
     </main>
   );
