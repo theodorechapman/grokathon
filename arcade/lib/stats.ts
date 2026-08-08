@@ -33,3 +33,15 @@ export async function statsFor(slugs: string[]): Promise<Map<string, GameStats>>
 export function rankScore(s: GameStats): number {
   return s.votes * 3 + s.plays;
 }
+
+export async function overLimit(key: string, limit: number, windowSec = 60): Promise<boolean> {
+  const r = redis();
+  if (!r) return false;
+  const count = await r.incr(`rl:${key}`);
+  if (count === 1) await r.expire(`rl:${key}`, windowSec);
+  return count > limit;
+}
+
+export function clientIp(headers: Headers): string {
+  return headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+}

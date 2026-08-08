@@ -1,11 +1,15 @@
 import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { redis, SLUG_RE } from "@/lib/stats";
+import { clientIp, overLimit, redis, SLUG_RE } from "@/lib/stats";
 import { getGame } from "@/lib/games";
 
 export async function POST(req: NextRequest) {
   const r = redis();
   if (!r) return NextResponse.json({ error: "stats not configured" }, { status: 503 });
+
+  if (await overLimit(`vote:${clientIp(req.headers)}`, 10)) {
+    return NextResponse.json({ error: "rate limited" }, { status: 429 });
+  }
 
   let body: { slug?: string };
   try {
