@@ -1,0 +1,12 @@
+{
+  "slug": "starship-breakout",
+  "title": "Starship Breakout",
+  "description": "Launch a rocket from your pad and blast through 43 blocks spelling GROK.",
+  "controls": "left and right arrows to move the launch pad",
+  "source": "remix",
+  "parent": "breakout",
+  "rom": "starship-breakout.gb",
+  "createdAt": "2026-08-08T22:25:00Z",
+  "scoring": "time",
+  "players": 1
+}
