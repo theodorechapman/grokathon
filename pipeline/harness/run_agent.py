@@ -11,17 +11,16 @@ Each run gets its own directory under workspaces/ containing:
   - agent.log          full transcript of the headless run
 
 The agent gets normal file tools (read/write/search/shell) plus exactly one
-MCP server: staticre. Computer-use of the running game and live memory
-inspection are added later as additional MCP servers.
+MCP server: staticre. When the grokboy emulator bridge is built
+(pipeline/bin/libgrokboy.*), the task also includes a dynamic-verification
+step and the dynamic_re.md skill is copied into the workspace.
 
 The staticre MCP backend can run locally (`uv run`, the default) or inside the
 container image (`--mcp docker`), which takes the ROM as a mounted input.
 
 Usage:
   python pipeline/harness/run_agent.py --rom pipeline/raw_rom/breakout.gb
-  python pipeline/harness/run_agent.py --rom <rom> --engine codex
-  python pipeline/harness/run_agent.py --rom <rom> --mcp docker
-  python pipeline/harness/run_agent.py --rom <rom> --dry-run
+  python pipeline/harness/run_agent.py --rom <rom> --engine codex --dry-run
 """
 
 from __future__ import annotations
@@ -38,6 +37,13 @@ PIPELINE = Path(__file__).resolve().parent.parent   # .../grokathon/pipeline
 REPO = PIPELINE.parent                               # .../grokathon
 STATIC_DIR = PIPELINE / "static"
 SKILL = REPO / ".claude" / "skills" / "static-re" / "SKILL.md"
+DYNAMIC_SKILL = REPO / ".claude" / "skills" / "dynamic-re" / "SKILL.md"
+EMULATOR_LIB = PIPELINE / "bin" / (
+    "libgrokboy.dylib" if sys.platform == "darwin" else "libgrokboy.so"
+)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from write_task import write_task  # noqa: E402
 
 
 def _blind_rom(rom: Path, dest_dir: Path) -> dict:
@@ -96,45 +102,6 @@ def _write_grok_config(ws: Path, command: str, args: list[str], env: dict):
         lines += [f'{k} = "{v}"' for k, v in env.items()]
     cfg.write_text("\n".join(lines) + "\n")
     return cfg
-
-
-def _write_task(ws: Path, program_id: str) -> Path:
-    task = ws / "TASK.md"
-    task.write_text(
-        f"""# Task: reverse-engineer an unknown binary and reimplement it in TypeScript
-
-You are analyzing an unknown program, `{program_id}`, through the `staticre`
-MCP tools (Ghidra-backed static analysis of an SM83 / Game Boy binary). You do
-NOT know what the program is — infer everything from evidence.
-
-Read `static_re.md` in this workspace first; it documents the tools and the
-workflow. Then:
-
-1. Map the program: entry point, memory regions, functions.
-2. Work function by function. For each, form an evidence-backed hypothesis
-   about what it does, and record it with the `annotate` tool (name, comment,
-   tags, confidence, and evidence statements).
-3. As your understanding solidifies, write a faithful TypeScript
-   reimplementation of the program's logic under `src/` in this workspace.
-   Structure it so the CPU/memory model and the game logic are separable.
-   Prefer clear, evidence-traceable code over cleverness; cite the source
-   addresses (e.g. `// ROM:0150`) in comments.
-4. Make it playable. Add a small browser front-end (a `web/` dir with an
-   `index.html` and a TypeScript entry) that renders the game to a canvas and
-   maps the arrow keys / buttons to the input model, driving the same game
-   logic from `src/` (do NOT fork the logic into the UI). Provide a runnable
-   bun app: a `package.json` with a `start` script that builds the bundle with
-   `bun build` and serves `web/` (e.g. `bun run start` opens a playable page).
-   Keep the render layer thin and separate from the recovered logic.
-5. Keep a running `NOTES.md` in this workspace summarizing the memory map you
-   have recovered (which RAM addresses hold what) and open questions. These
-   open questions are the handoff to later dynamic analysis.
-
-Work autonomously. Do not ask for confirmation; proceed on the best available
-evidence and note your uncertainty in confidence values and NOTES.md.
-"""
-    )
-    return task
 
 
 def _make_workspace(base: Path, label: str | None) -> Path:
@@ -220,7 +187,13 @@ def main():
 
     shutil.copy(SKILL, ws / "static_re.md")
     _write_grok_config(ws, mcp_command, mcp_args, mcp_env)
-    _write_task(ws, binfo["program_id"])
+    emulator = EMULATOR_LIB.exists()
+    if emulator:
+        shutil.copy(DYNAMIC_SKILL, ws / "dynamic_re.md")
+        write_task(ws, binfo["program_id"],
+                   agent_dir=PIPELINE / "agent", rom_path=rom_path)
+    else:
+        write_task(ws, binfo["program_id"])
 
     (ws / "run_meta.json").write_text(
         __import__("json").dumps(
@@ -231,6 +204,7 @@ def main():
                 "effort": args.effort,
                 "tier": args.tier,
                 "mcp": args.mcp,
+                "emulator": emulator,
                 "image": args.image if args.mcp == "docker" else None,
                 "rom_source": str(rom),
                 "program_id": binfo["program_id"],

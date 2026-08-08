@@ -28,6 +28,7 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label bal
 | `.grok/config.toml` (or `.codex/`) | MCP config: only the `staticre` server, with a per-workspace Ghidra project dir |
 | `rom/program-<sha>.gb` | blinded copy of the ROM (title stripped, checksums fixed) |
 | `static_re.md` | the RE skill/instructions (copied from `.claude/skills/static-re/`) |
+| `dynamic_re.md` | emulator skill (copied from `.claude/skills/dynamic-re/` when the grokboy bridge is built) |
 | `TASK.md` | the concrete task prompt |
 | `ghidra_work/` | the agent's private Ghidra project + evidence sidecar |
 | `src/` | where the agent writes its TypeScript reimplementation |

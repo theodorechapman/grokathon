@@ -50,6 +50,7 @@ RUN curl -fsSL https://bun.sh/install | bash \
 RUN mkdir -p /opt/pipeline && ln -s /opt/staticre /opt/pipeline/static
 COPY pipeline/harness /opt/pipeline/harness
 COPY .claude/skills/static-re /opt/.claude/skills/static-re
+COPY .claude/skills/dynamic-re /opt/.claude/skills/dynamic-re
 
 # grokboy emulator bridge: sameboy.py resolves the library at <root>/bin and
 # the boot ROM under <root>/vendor/..., with root = /opt/pipeline. No ROM is
