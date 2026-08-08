@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGame, listGames } from "@/lib/games";
+import { getGame } from "@/lib/games";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
 import { PlayBeacon } from "./play-beacon";
@@ -9,6 +9,8 @@ import { RemixBox } from "./remix-box";
 import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -22,11 +24,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: { title: game.title, description, images: [image], url: `${SITE}/g/${slug}` },
     twitter: { card: "summary_large_image", title: game.title, description, images: [image] },
   };
-}
-
-export async function generateStaticParams() {
-  const games = await listGames();
-  return games.map((game) => ({ slug: game.slug }));
 }
 
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
