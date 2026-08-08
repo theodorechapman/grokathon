@@ -4,16 +4,21 @@ Wraps one StaticAnalysis instance (one binary per server). The target ROM
 comes from argv or the STATICRE_ROM env var; the agent never sees the
 original path — only blinded program metadata.
 
-The Ghidra JVM is started eagerly in main() on the true main thread before
-the async MCP loop begins (PyGhidra/JPype deadlocks if the JVM is first
-started from inside an async tool handler on macOS). Startup takes ~1 min the
-first time (mostly JVM boot; analysis of a small ROM is seconds); every tool
-call afterwards is fast. All Ghidra access is serialized behind a lock.
+Architecture: the Ghidra JVM does NOT live in this process. Embedding PyGhidra
+in the async MCP event loop deadlocks (JPype's JVM-startup thread-join blocks
+against the loop). Instead this server spawns the tested `staticre serve`
+subprocess (plain JSON-lines over a pipe, JVM embedded there on its own main
+thread) and proxies each tool call to it. The MCP `initialize` handshake
+answers instantly; only the first tool call waits for the backend's one-time
+JVM boot + analysis (a few seconds), then every call is fast.
 """
 
 from __future__ import annotations
 
+import itertools
+import json
 import os
+import subprocess
 import sys
 import threading
 
@@ -22,27 +27,52 @@ from mcp.server.mcpserver import MCPServer
 mcp = MCPServer("staticre")
 
 _lock = threading.Lock()
-_sa = None
+_proc: subprocess.Popen | None = None
+_ids = itertools.count(1)
 
 
-def _api():
-    global _sa
-    with _lock:
-        if _sa is None:
-            from .api import StaticAnalysis
+def _drain_stderr(proc: subprocess.Popen):
+    # Surface backend/Ghidra logs on our stderr so they land in the run log.
+    for line in proc.stderr:
+        sys.stderr.write(f"[backend] {line}")
+        sys.stderr.flush()
 
-            rom = os.environ.get("STATICRE_ROM") or (sys.argv[1] if len(sys.argv) > 1 else None)
-            if not rom:
-                raise RuntimeError("no ROM configured: pass a path or set STATICRE_ROM")
-            workdir = os.environ.get("STATICRE_WORKDIR", "work")
-            _sa = StaticAnalysis(rom, workdir=workdir)
-        return _sa
+
+def _ensure_backend():
+    global _proc
+    if _proc is not None and _proc.poll() is None:
+        return _proc
+    rom = os.environ.get("STATICRE_ROM") or (sys.argv[1] if len(sys.argv) > 1 else None)
+    if not rom:
+        raise RuntimeError("no ROM configured: pass a path or set STATICRE_ROM")
+    workdir = os.environ.get("STATICRE_WORKDIR", "work")
+    _proc = subprocess.Popen(
+        [sys.executable, "-m", "staticre.cli", "serve", rom, "--workdir", workdir],
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        text=True, bufsize=1, env=os.environ.copy(),
+    )
+    threading.Thread(target=_drain_stderr, args=(_proc,), daemon=True).start()
+    return _proc
 
 
 def _call(op: str, **params):
-    api = _api()
+    # Proxy one request to the `staticre serve` backend over its pipe. Blocking
+    # pipe I/O is safe here: no JVM lives in this process, so there is no
+    # cross-thread deadlock; the backend serializes work itself.
     with _lock:
-        return api.dispatch(op, params)
+        proc = _ensure_backend()
+        req = {"id": next(_ids), "op": op, "params": params}
+        proc.stdin.write(json.dumps(req) + "\n")
+        proc.stdin.flush()
+        line = proc.stdout.readline()
+        if not line:
+            code = proc.poll()
+            extra = f" (backend exited with code {code})" if code is not None else ""
+            raise RuntimeError(f"staticre backend closed the connection{extra}")
+        resp = json.loads(line)
+        if not resp.get("ok"):
+            raise RuntimeError(resp.get("error", "unknown backend error"))
+        return resp["result"]
 
 
 @mcp.tool()
@@ -170,15 +200,14 @@ def annotate(
 
 
 def main():
-    # Initialize Ghidra eagerly on the true main thread, BEFORE the async MCP
-    # loop starts. PyGhidra/JPype must start the JVM on the main thread; doing
-    # it lazily inside an async tool handler deadlocks on macOS (the JVM
-    # startup thread-join blocks against the event loop). This makes startup
-    # take ~1-2 min once, after which every tool call is fast.
-    print("staticre: initializing Ghidra analysis (first run ~1-2 min)...",
-          file=sys.stderr, flush=True)
-    _api()
-    print("staticre: analysis ready; serving MCP.", file=sys.stderr, flush=True)
+    # Kick off the backend (JVM boot + analysis) now so it warms up while the
+    # MCP handshake completes, but don't block the async loop on it — the first
+    # tool call will wait for readiness if warmup hasn't finished yet.
+    print("staticre: starting analysis backend...", file=sys.stderr, flush=True)
+    try:
+        _ensure_backend()
+    except Exception as e:  # surface config errors but still serve
+        print(f"staticre: backend start failed: {e}", file=sys.stderr, flush=True)
     mcp.run()
 
 
