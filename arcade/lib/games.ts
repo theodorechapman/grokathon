@@ -1,4 +1,4 @@
-import { readdir, readFile } from "fs/promises";
+import { access, readdir, readFile } from "fs/promises";
 import path from "path";
 
 export type GameManifest = {
@@ -9,6 +9,7 @@ export type GameManifest = {
   source: "rom-re" | "prompt-gen" | "remix";
   parent: string | null;
   createdAt: string;
+  hasCover: boolean;
 };
 
 const GAMES_DIR = path.join(process.cwd(), "public", "games");
@@ -47,5 +48,8 @@ async function readManifest(slug: string): Promise<GameManifest> {
   if (manifest.slug !== slug) {
     throw new Error(`games/${slug}: manifest slug "${manifest.slug}" doesn't match folder name`);
   }
+  manifest.hasCover = await access(path.join(GAMES_DIR, slug, "cover.png"))
+    .then(() => true)
+    .catch(() => false);
   return manifest;
 }

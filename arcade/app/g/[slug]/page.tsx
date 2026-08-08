@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame, listGames } from "@/lib/games";
+import { SiteNav } from "../../site-nav";
 
 export async function generateStaticParams() {
   const games = await listGames();
@@ -13,8 +14,9 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   if (!game) notFound();
   return (
     <main>
+      <SiteNav active="arcade" />
       <Link href="/arcade" className="back">
-        ← arcade
+        ← Back to the arcade
       </Link>
       <header className="masthead" style={{ marginTop: 16 }}>
         <h1>{game.title}</h1>
