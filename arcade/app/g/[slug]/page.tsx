@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const game = await getGame(slug);
+  const statsEnabled = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 
   if (!game) {
     const job = await pendingJob(slug);
@@ -53,7 +54,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   return (
     <main>
       <SiteNav active="arcade" />
-      <PlayBeacon slug={slug} />
+      <PlayBeacon slug={slug} enabled={statsEnabled} />
       <ScoreClaim slug={slug} signedIn={session !== null} />
       <div className="gameHead">
         <header className="masthead">
@@ -62,7 +63,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
-      <GameFrame slug={slug} title={game.title} />
+      <GameFrame slug={slug} title={game.title} rom={game.rom} />
       <div className="playerFoot">
         <p className="controls">{game.controls}</p>
         {!session && (

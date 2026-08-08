@@ -2,36 +2,52 @@
 
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
+import { GameBoyPlayer } from "./game-boy-player";
 
-export function GameFrame({ slug, title }: { slug: string; title: string }) {
+export function GameFrame({ slug, title, rom }: { slug: string; title: string; rom?: string }) {
+  const playerRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [runId, setRunId] = useState(0);
 
   const focusGame = useCallback(() => {
+    playerRef.current?.focus();
     const frame = frameRef.current;
-    if (!frame) return;
-    frame.focus();
-    frame.contentWindow?.focus();
+    if (frame) {
+      frame.focus();
+      frame.contentWindow?.focus();
+    }
   }, []);
 
   return (
     <>
-      <div className="player" onPointerDown={focusGame}>
-        <iframe
-          key={runId}
-          ref={frameRef}
-          src={`/games/${slug}/index.html`}
-          title={title}
-          scrolling="no"
-          tabIndex={0}
-          onLoad={focusGame}
-        />
+      <div className="player" ref={playerRef} tabIndex={rom ? 0 : -1} onPointerDown={focusGame}>
+        {rom ? (
+          <GameBoyPlayer
+            key={runId}
+            romUrl={`/games/${slug}/${rom}`}
+            title={title}
+          />
+        ) : (
+          <iframe
+            key={runId}
+            ref={frameRef}
+            src={`/games/${slug}/index.html`}
+            title={title}
+            scrolling="no"
+            tabIndex={0}
+            onLoad={focusGame}
+          />
+        )}
       </div>
       <div className="frameBar">
         <button
           className="frameBtn"
           onClick={() => {
-            setRunId((n) => n + 1);
+            if (rom) {
+              window.location.reload();
+            } else {
+              setRunId((n) => n + 1);
+            }
           }}
         >
           ↻ Replay

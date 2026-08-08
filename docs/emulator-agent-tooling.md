@@ -469,7 +469,7 @@ from agent.sameboy import SameBoy
 
 with (
     SameBoy("raw_rom/breakout.gb") as original,
-    SameBoy("gbdk-reconstruction/breakout-reconstructed.gb") as rebuilt,
+    SameBoy("pipeline/gbdk-reconstruction/breakout/breakout-reconstructed.gb") as rebuilt,
 ):
     for button, frames in [("left", 10), ("right", 20), ("left", 5)]:
         original.press(button, frames)
@@ -579,4 +579,4 @@ The following can be included in an agent system prompt:
 - `harness/grokboy.c`: native SameBoy bridge
 - `Makefile`: native build and smoke-test targets
 - `breakout-reverse-engineering.md`: Breakout-specific addresses and findings
-- `gbdk-reconstruction/differential_test.py`: differential-testing example
+- `pipeline/gbdk-reconstruction/breakout/differential_test.py`: differential-testing example
