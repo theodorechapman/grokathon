@@ -11,6 +11,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://playgrokgames.vercel.app"),
   title: "Nova — every game starts as a sentence",
   description: "Say a game and Nova makes it real: built by Grok, proven playable by a bot, live in your browser in seconds.",
   openGraph: {
@@ -18,6 +19,13 @@ export const metadata: Metadata = {
     description: "Every game starts as a sentence. Built on Grok.",
     url: "https://playgrokgames.vercel.app",
     siteName: "Nova",
+    images: ["/og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nova",
+    description: "Every game starts as a sentence. Built on Grok.",
+    images: ["/og.png"],
   },
 };
 
