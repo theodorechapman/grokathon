@@ -46,3 +46,18 @@ separate blinded ROM. Runs never share state, so several can be compared.
   keep the harness itself outside anything sensitive.
 - The first `staticre` tool call in a run is slow (JVM start + auto-analysis);
   this is expected.
+
+## Containerized runs (agent-in-a-box)
+
+`docker/` builds an image containing the full stack: staticre backend, Codex
+CLI, bun, this harness, and the grokboy SameBoy bridge (`agent/sameboy.py` +
+`bin/libgrokboy.so`) for dynamic analysis.
+
+```sh
+pipeline/harness/docker/build.sh        # build (needs staticre:local base)
+pipeline/harness/docker/smoke.sh        # verify the emulator bridge in-container
+pipeline/harness/docker/run.sh rom.gb   # one containerized agent run
+```
+
+Screenshots from the emulator bridge are PNGs upscaled 3x by default
+(480x432) so vision models can read them; pass `scale` (1..8) to override.

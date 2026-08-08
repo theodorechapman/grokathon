@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import struct
 import tempfile
 from pathlib import Path
 
@@ -57,7 +58,10 @@ def main() -> int:
             sameboy.run(frames=2)
 
             sameboy.screenshot(screenshot)
-            assert screenshot.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+            png = screenshot.read_bytes()
+            assert png.startswith(b"\x89PNG\r\n\x1a\n")
+            width, height = struct.unpack(">II", png[16:24])
+            assert (width, height) == (480, 432), (width, height)
 
             disassembly = sameboy.debug(f"disassemble/5 ${GAME_LOOP:04x}")
             assert disassembly.strip(), "SameBoy debugger produced no disassembly"

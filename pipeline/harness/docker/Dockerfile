@@ -1,7 +1,28 @@
 # Agent-in-a-box: the staticre backend (JDK + Ghidra + GhidraBoy + staticre)
-# plus the Codex CLI, bun, and the harness. A run is fully self-contained: the
-# staticre MCP runs as a subprocess *inside* this container (--mcp local). The
-# ROM is a bind-mount input; the workspace is written to a mounted /out.
+# plus the Codex CLI, bun, the harness, and the grokboy SameBoy bridge for
+# dynamic analysis. A run is fully self-contained: the staticre MCP runs as a
+# subprocess *inside* this container (--mcp local). The ROM is a bind-mount
+# input; the workspace is written to a mounted /out.
+
+# --- grokboy builder: SameBoy core + boot ROM + the native bridge ---
+# SameBoy's build needs rgbds (boot ROM assembly) and cppp (a small C
+# preprocessor by the SameBoy author, not packaged in Ubuntu — built from source).
+FROM staticre:local AS grokboy-build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends rgbds \
+    && rm -rf /var/lib/apt/lists/*
+ARG CPPP_URL=https://www.muppetlabs.com/~breadbox/pub/software/cppp-2.9.tar.gz
+ARG CPPP_SHA256=76a95b46c3e36d55c0a98175c0aa72b17b219e68062c2c2c26f971e749951c07
+RUN curl -fsSL "$CPPP_URL" -o /tmp/cppp.tar.gz \
+    && echo "$CPPP_SHA256  /tmp/cppp.tar.gz" | sha256sum -c - \
+    && mkdir /tmp/cppp && tar -xzf /tmp/cppp.tar.gz -C /tmp/cppp --strip-components=1 \
+    && make -C /tmp/cppp && install -m 755 /tmp/cppp/cppp /usr/local/bin/cppp \
+    && rm -rf /tmp/cppp /tmp/cppp.tar.gz
+COPY pipeline/Makefile /build/pipeline/Makefile
+COPY pipeline/harness/grokboy.c pipeline/harness/grokboy.h /build/pipeline/harness/
+COPY pipeline/vendor/SameBoy /build/pipeline/vendor/SameBoy
+RUN make -C /build/pipeline CC=gcc
+
 FROM staticre:local
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,6 +50,15 @@ RUN curl -fsSL https://bun.sh/install | bash \
 RUN mkdir -p /opt/pipeline && ln -s /opt/staticre /opt/pipeline/static
 COPY pipeline/harness /opt/pipeline/harness
 COPY .claude/skills/static-re /opt/.claude/skills/static-re
+
+# grokboy emulator bridge: sameboy.py resolves the library at <root>/bin and
+# the boot ROM under <root>/vendor/..., with root = /opt/pipeline. No ROM is
+# baked in — a named ROM in the image would unblind the agent's runs; the
+# smoke test bind-mounts its ROM instead (see smoke.sh).
+COPY pipeline/agent /opt/pipeline/agent
+COPY --from=grokboy-build /build/pipeline/bin/libgrokboy.so /opt/pipeline/bin/libgrokboy.so
+COPY --from=grokboy-build /build/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin \
+     /opt/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin
 
 ENV STATICRE_ROM=/rom.gb
 VOLUME ["/out"]

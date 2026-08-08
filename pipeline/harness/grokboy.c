@@ -7,6 +7,11 @@
 
 #include <sameboy/gb.h>
 
+/* glibc's <limits.h> hides PATH_MAX under strict -std=c11. */
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
 #define SB_SCREEN_WIDTH 160
 #define SB_SCREEN_HEIGHT 144
 #define SB_FRAME_RGB_SIZE (SB_SCREEN_WIDTH * SB_SCREEN_HEIGHT * 3)
