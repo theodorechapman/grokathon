@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { readSession } from "@/lib/session";
 
-export async function SiteNav({ active }: { active: "home" | "arcade" | "leaderboard" }) {
+export async function SiteNav({ active }: { active: "home" | "arcade" | "create" | "leaderboard" }) {
   const session = await readSession().catch(() => null);
   return (
     <nav className="siteNav">
@@ -16,6 +16,12 @@ export async function SiteNav({ active }: { active: "home" | "arcade" | "leaderb
             className={active === "arcade" ? "navSegment navSegmentActive" : "navSegment"}
           >
             Arcade
+          </Link>
+          <Link
+            href="/create"
+            className={active === "create" ? "navSegment navSegmentActive" : "navSegment"}
+          >
+            Create
           </Link>
           <Link
             href="/leaderboard"
