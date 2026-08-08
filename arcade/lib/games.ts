@@ -9,6 +9,7 @@ export type GameManifest = {
   source: "rom-re" | "prompt-gen" | "remix";
   parent: string | null;
   createdAt: string;
+  rom?: string;
   hasCover: boolean;
 };
 
@@ -47,6 +48,12 @@ async function readManifest(slug: string): Promise<GameManifest> {
   }
   if (manifest.slug !== slug) {
     throw new Error(`games/${slug}: manifest slug "${manifest.slug}" doesn't match folder name`);
+  }
+  if (
+    manifest.rom &&
+    (path.basename(manifest.rom) !== manifest.rom || path.extname(manifest.rom).toLowerCase() !== ".gb")
+  ) {
+    throw new Error(`games/${slug}: manifest rom must be a .gb filename`);
   }
   manifest.hasCover = await access(path.join(GAMES_DIR, slug, "cover.png"))
     .then(() => true)

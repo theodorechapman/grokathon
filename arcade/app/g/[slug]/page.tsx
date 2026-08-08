@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getGame } from "@/lib/games";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
+import { GameBoyPlayer } from "./game-boy-player";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { RemixBox } from "./remix-box";
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const game = await getGame(slug);
+  const statsEnabled = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 
   if (!game) {
     const job = await pendingJob(slug);
@@ -44,7 +46,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   return (
     <main>
       <SiteNav active="arcade" />
-      <PlayBeacon slug={slug} />
+      <PlayBeacon slug={slug} enabled={statsEnabled} />
       <Link href="/arcade" className="back">
         ← Back to the arcade
       </Link>
@@ -53,7 +55,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         <p>{game.description}</p>
       </header>
       <div className="player">
-        <iframe src={`/games/${slug}/index.html`} title={game.title} />
+        {game.rom ? (
+          <GameBoyPlayer romUrl={`/games/${slug}/${game.rom}`} title={game.title} />
+        ) : (
+          <iframe src={`/games/${slug}/index.html`} title={`${game.title} game`} />
+        )}
       </div>
       <div className="playerFoot">
         <p className="controls">{game.controls}</p>

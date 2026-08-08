@@ -5,5 +5,6 @@
   "controls": "left and right arrows to move the paddle",
   "source": "rom-re",
   "parent": null,
+  "rom": "breakout-reconstructed.gb",
   "createdAt": "2026-08-08T20:30:00Z"
 }

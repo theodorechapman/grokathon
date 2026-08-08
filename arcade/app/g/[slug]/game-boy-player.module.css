@@ -1,0 +1,93 @@
+.stage {
+  min-height: 70vh;
+  padding: clamp(24px, 5vw, 52px);
+  display: grid;
+  place-items: center;
+  position: relative;
+  background:
+    radial-gradient(circle at center, rgb(32 64 72 / 90%), transparent 34rem),
+    #0d171c;
+}
+
+.shell {
+  width: min(100%, calc((70vh - 104px) * 10 / 9));
+  padding: clamp(12px, 2vw, 22px);
+  border: clamp(5px, 0.7vw, 8px) solid #19323c;
+  border-radius: 16px;
+  background: #9bb8a8;
+  box-shadow:
+    0 20px 48px rgb(0 0 0 / 28%),
+    inset 0 0 0 4px rgb(255 255 255 / 20%);
+}
+
+.shell canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 10 / 9;
+  background: #c4f0eb;
+  image-rendering: pixelated;
+}
+
+.status {
+  position: absolute;
+  inset: auto 20px 16px;
+  color: #9aadb4;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.running {
+  opacity: 0;
+}
+
+.error {
+  color: #fecaca;
+  opacity: 1;
+}
+
+.touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .stage {
+    min-height: 64vh;
+    padding-bottom: 104px;
+  }
+
+  .shell {
+    width: min(100%, calc((64vh - 150px) * 10 / 9));
+  }
+
+  .touch {
+    position: absolute;
+    inset: auto 0 16px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .touch button {
+    width: 68px;
+    height: 68px;
+    border: 1px solid #819c94;
+    border-bottom-width: 5px;
+    border-radius: 50%;
+    color: #19323c;
+    background: #f3faf7;
+    font: 700 28px/1 var(--font-mono), monospace;
+    touch-action: none;
+  }
+
+  .touch button:active {
+    transform: translateY(3px);
+    border-bottom-width: 1px;
+    background: #c4f0eb;
+  }
+
+  .touch button:disabled {
+    opacity: 0.45;
+  }
+}

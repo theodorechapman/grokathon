@@ -8,14 +8,20 @@ A bundle is one folder dropped into `arcade/public/games/<slug>/`:
 
 ```
 arcade/public/games/<slug>/
-  index.html      # the whole game, self-contained, runs in an iframe
   manifest.json   # metadata the arcade reads
-  cover.png       # optional, share card + arcade tile (Grok Imagine or placeholder)
+  index.html      # browser game entry point, or:
+  game.gb         # Game Boy ROM loaded by the arcade's shared emulator
+  cover.png       # optional, share card + arcade tile
 ```
+
+Every bundle has a manifest and exactly one playable entry point. Browser games
+provide `index.html`. Game Boy reconstructions provide a `.gb` file and name it
+in the manifest's `rom` field.
 
 ## Rules
 
 - `index.html` is fully self-contained. Inline JS and CSS or relative paths inside the bundle folder only. No CDN, no external fetch. It must run offline in an iframe.
+- A `.gb` bundle contains only the compiled ROM; the emulator and player UI belong to the arcade.
 - Canvas or DOM rendering, either is fine. Must handle keyboard and touch.
 - No console errors on boot. The verify bot treats them as failures.
 
@@ -29,11 +35,13 @@ arcade/public/games/<slug>/
   "controls": "arrows or touch to move",
   "source": "rom-re | prompt-gen | remix",
   "parent": null,
+  "rom": "game.gb",
   "createdAt": "2026-08-08T12:00:00Z"
 }
 ```
 
 `source` says which pipeline made it. `parent` is the slug it was remixed from, null for originals. That's the lineage the ranking system credits.
+`rom` is required for Game Boy bundles and omitted for `index.html` bundles.
 
 ## Adding a game
 

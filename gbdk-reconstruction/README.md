@@ -23,19 +23,17 @@ make LCC=/path/to/gbdk/bin/lcc
 
 The output is `breakout-reconstructed.gb`.
 
-## Run in a browser
+## Publish to the arcade
 
-The `web` directory uses the TypeScript
-[`gameboy-emulator`](https://github.com/roblouie/gameboy-emulator) package.
-Build or copy the current ROM into the player and start its Vite development
-server:
+The arcade owns the browser emulator and player UI. Recompile this project and
+publish only the ROM artifact with:
 
 ```sh
-make serve-web
+GBDK_HOME=/path/to/gbdk bash publish-to-arcade.sh
 ```
 
-Then open the URL printed by Vite. Use the left and right arrow keys to move
-the paddle.
+The script forces a fresh build, runs differential verification, and atomically
+writes `../arcade/public/games/breakout/breakout-reconstructed.gb`.
 
 ## Differential verification
 
