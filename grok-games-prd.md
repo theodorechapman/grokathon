@@ -118,9 +118,11 @@ Stretch, only if core is solid:
 - Verify can check playable, not fun. Say so. Machine grades playability, the room judges fun through the live remix.
 - Live demo flake. Recorded fallback and pre-warmed examples.
 
-## Open questions
+## Open questions, all closed
 
-- How wide is the template space for the demo. Lean narrow: 2D arcade only.
-- Auth real or stubbed on the day.
-- Multiplayer in or out. Currently stretch.
-- Exact signals the verify bot grades. Draft: boots, input responsive, win reachable, no crash or soft-lock, frame budget. Henry owns this.
+- Template space: 2D arcade only. Decided in hard calls.
+- Auth: stubbed on the day. Upgrade to real Sign in with Grok only if core lands early.
+- Multiplayer: stretch, out of core.
+- Verify signals: draft stands. Boots, input responsive, win reachable, no crash or soft-lock, frame budget. Henry owns it.
+
+First 30 minutes before code: confirm working keys for Grok 4.5, Grok CLI, and Grok Imagine, and pick who deploys the arcade site so routes exist before the first game generates.
