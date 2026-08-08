@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame, listGames } from "@/lib/games";
+import { redis } from "@/lib/stats";
 import { readSession } from "@/lib/session";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
@@ -50,6 +51,16 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   const parent = game.parent ? all.find((g) => g.slug === game.parent) : null;
   const remixes = all.filter((g) => g.parent === slug);
 
+  type BuildLog = { stages: { name: string; at: number }[]; startedAt: number };
+  const r = redis();
+  const buildLog = r
+    ? await r.get<BuildLog>(`jobstatus:${slug}`).catch(() => null)
+    : null;
+  const packedTweet = r
+    ? await r.hget<string>("x:gamepost", slug).catch(() => null)
+    : null;
+  const tweetId = /^t(\d+)$/.exec(packedTweet ?? "")?.[1] ?? null;
+
   return (
     <main>
       <SiteNav active="arcade" />
@@ -89,6 +100,42 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             <p>Sign in with 𝕏 to remix this game</p>
             <SignInButton variant="nav" />
           </div>
+        )}
+        <p className="xDrive">
+          Or do it from X:{" "}
+          {tweetId ? (
+            <a href={`https://x.com/suprapan07/status/${tweetId}`}>
+              reply to this game&apos;s post
+            </a>
+          ) : (
+            <>reply to this game&apos;s post from @suprapan07</>
+          )}{" "}
+          with your idea and the pipeline builds it. Mention @suprapan07 with any
+          sentence to start a brand new game.
+        </p>
+      </section>
+
+      <section className="remixPanel">
+        <h2>How this game was built</h2>
+        <p>
+          No human wrote this bundle. The original Breakout was reverse-engineered
+          from a Game Boy ROM into C. Grok patches that source for every ask, GBDK
+          compiles it back into a real .gb ROM, a bot plays the build until it
+          passes, and the arcade watches WRAM at runtime to detect wins, losses,
+          and your clear time.
+        </p>
+        {buildLog && buildLog.stages.length > 0 && (
+          <ol className="buildStages buildLogDone">
+            {buildLog.stages.map((s, i) => (
+              <li key={`${s.name}-${s.at}`} className="stageDone">
+                ✓ {s.name}
+                <span className="stageTime">
+                  {" "}
+                  +{((s.at - (i === 0 ? buildLog.startedAt : buildLog.stages[i - 1].at)) / 1000).toFixed(1)}s
+                </span>
+              </li>
+            ))}
+          </ol>
         )}
       </section>
 
