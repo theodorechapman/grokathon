@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { overLimit, redis } from "@/lib/stats";
+import { readSession } from "@/lib/session";
 
 const REPO = "theodorechapman/grokathon";
 const MAX_PROMPT = 300;
@@ -87,6 +88,7 @@ export async function POST(req: NextRequest) {
   }
 
   const slug = slugify(prompt);
+  const session = await readSession().catch(() => null);
   const job = {
     id: slug,
     slug,
@@ -94,6 +96,7 @@ export async function POST(req: NextRequest) {
     parent: body.parent ?? null,
     requestedAt: new Date().toISOString(),
     source: "site",
+    creator: session?.handle ?? null,
   };
 
   const content = Buffer.from(JSON.stringify(job, null, 2)).toString("base64");
