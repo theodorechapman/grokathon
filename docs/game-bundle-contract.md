@@ -46,7 +46,7 @@ in the manifest's `rom` field.
 
 Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters), `scoring` ("time" or "points", default points). Time-scored games report elapsed milliseconds in nova:score and the boards rank fastest first; points games rank highest first.
 
-Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")`. Score 0 is fine. This drives the end-of-run claim screen and the leaderboards; a game that never emits it never gets players on a board. The verify bot should check the message fires on game over.
+Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number>, outcome: "win" | "loss", message: "you killed 14 zombies" }, "*")`. `score` is required; 0 is fine. `outcome` and `message` are optional: `outcome` defaults to "win", and `message` (max 120 chars) replaces the arcade's generic outcome line on the shared end screen — write it in the game's own voice. This drives the end-of-run screen (score, claim/sign-in, retry, remix) and the leaderboards; a game that never emits it never gets players on a board. The arcade renders the end screen, so the game must NOT draw its own claim/sign-in UI — freeze play and post the message. The verify bot should check the message fires on game over.
 
 ## Adding a game
 

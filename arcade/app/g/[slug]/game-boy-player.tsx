@@ -16,7 +16,7 @@ const BRICKS_START = 0x27;
 
 function watchRun(
   gameboy: Gameboy,
-  onRunEnd: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void,
+  onRunEnd: (end: { outcome: "win" | "loss"; score: number }) => void,
   isCancelled: () => boolean
 ) {
   let startedAt = 0;
@@ -33,10 +33,10 @@ function watchRun(
     }
     if (bricks === 0) {
       clearInterval(timer);
-      onRunEnd({ outcome: "win", elapsedMs: Math.round(performance.now() - startedAt) });
+      onRunEnd({ outcome: "win", score: Math.round(performance.now() - startedAt) });
     } else if (ballY >= BALL_Y_DEAD) {
       clearInterval(timer);
-      onRunEnd({ outcome: "loss", elapsedMs: Math.round(performance.now() - startedAt) });
+      onRunEnd({ outcome: "loss", score: Math.round(performance.now() - startedAt) });
     }
   }, 200);
 }
@@ -61,7 +61,7 @@ export function GameBoyPlayer({
   title: string;
   onRestart: () => void;
   timeScored?: boolean;
-  onRunEnd?: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void;
+  onRunEnd?: (end: { outcome: "win" | "loss"; score: number }) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<Gameboy | null>(null);

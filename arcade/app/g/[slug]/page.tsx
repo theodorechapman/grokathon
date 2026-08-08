@@ -8,7 +8,6 @@ import { QrPanel } from "./qr-panel";
 import { GameFrame } from "./game-frame";
 import { RemixBox } from "./remix-box";
 import { SignInButton } from "../../sign-in-button";
-import { ScoreClaim } from "./score-claim";
 import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
@@ -51,7 +50,6 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     <main>
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} enabled={statsEnabled} />
-      {!game.rom && <ScoreClaim slug={slug} signedIn={session !== null} scoring={game.scoring} />}
       <div className="gameHead">
         <header className="masthead">
           <h1>{game.title}</h1>
@@ -59,7 +57,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
-      <GameFrame slug={slug} title={game.title} rom={game.rom} timeScored={game.scoring === "time"} signedIn={session !== null} />
+      <GameFrame slug={slug} title={game.title} rom={game.rom} scoring={game.scoring ?? "points"} signedIn={session !== null} />
       <div className="playerFoot">
         <p className="controls">Instructions: {game.controls}</p>
         {!session && (
