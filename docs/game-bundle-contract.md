@@ -35,6 +35,10 @@ arcade/public/games/<slug>/
 
 `source` says which pipeline made it. `parent` is the slug it was remixed from, null for originals. That's the lineage the ranking system credits.
 
+Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters).
+
+Score reporting (optional, for high-score boards later): a game may `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")` when a run ends. The arcade ignores unknown messages, so emitting it is always safe.
+
 ## Adding a game
 
 Drop the folder in, done. The arcade scans `public/games/` at build time and lists every folder with a valid manifest. No registry file to update, no code change.
