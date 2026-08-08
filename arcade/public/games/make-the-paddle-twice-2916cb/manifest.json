@@ -1,0 +1,12 @@
+{
+  "slug": "make-the-paddle-twice-2916cb",
+  "title": "Breakout: Make the paddle twice as wide and the ",
+  "description": "make the paddle twice as wide and the ball slightly faster",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": null,
+  "rom": "make-the-paddle-twice-2916cb.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T22:22:05Z"
+}
