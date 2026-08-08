@@ -1,5 +1,5 @@
 # Agent-in-a-box: the staticre backend (JDK + Ghidra + GhidraBoy + staticre)
-# plus the Codex CLI, bun, the harness, and the grokboy SameBoy bridge for
+# plus the Codex CLI, GBDK-2020, the harness, and the grokboy SameBoy bridge for
 # dynamic analysis. A run is fully self-contained: the staticre MCP runs as a
 # subprocess *inside* this container (--mcp local). The ROM is a bind-mount
 # input; the workspace is written to a mounted /out.
@@ -38,10 +38,6 @@ RUN curl -fsSL "$CODEX_URL" -o /tmp/codex.tar.gz \
     && (mv /usr/local/bin/codex-aarch64-unknown-linux-musl /usr/local/bin/codex 2>/dev/null || true) \
     && chmod +x /usr/local/bin/codex \
     && rm /tmp/codex.tar.gz
-
-# bun, so the agent can build/serve/test the playable app it writes
-RUN curl -fsSL https://bun.sh/install | bash \
-    && ln -s /root/.bun/bin/bun /usr/local/bin/bun
 
 # GBDK-2020, so the agent can compile its raw-C reconstruction to a ROM
 ARG GBDK_URL=https://github.com/gbdk-2020/gbdk-2020/releases/download/4.5.0/gbdk-linux-arm64.tar.gz

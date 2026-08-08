@@ -142,14 +142,13 @@ hit = gb.run(frames=3600)
 print(hit["registers"]["pc"], gb.debug("disassemble/10 pc"), gb.debug("backtrace"))
 ```
 
-Differential test of your C reconstruction: open the original ROM and your
-rebuilt ROM in two `SameBoy` instances at once, drive both with the same input
-sequence, and compare the state you consider semantically equivalent (your
-recovered RAM addresses on the original side, your chosen addresses on the
-rebuilt side — an agreed mapping, not byte-for-byte RAM equality).
+Check your reconstruction against reality: drive the original ROM with a fixed
+input sequence, log the RAM addresses from your recovered memory map each
+frame, and check that your C logic predicts the same state transitions.
 Disagreements are either a bug in your reconstruction or a wrong hypothesis —
 investigate both ways, and record the outcome in `NOTES.md` with the trace as
-evidence.
+evidence. Only the original program runs in the emulator; never load your own
+build into it.
 
 ## Discipline
 
