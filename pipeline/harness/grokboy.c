@@ -19,6 +19,8 @@
 #define SB_MAX_WATCHPOINTS 128
 #define SB_LOG_SIZE 65536
 #define SB_CALL_TRACE_CAP 16384  /* power of two; open-addressing set of seeds */
+#define SB_ASSET_TRACE_CAP 16384  /* max coalesced VRAM-copy runs recorded */
+#define SB_ASSET_MIN_RUN 8  /* shorter streaks are decompression/fill noise, not copies */
 
 typedef struct {
     uint16_t address;
@@ -31,6 +33,13 @@ typedef struct {
     uint8_t access;
     bool enabled;
 } native_watchpoint;
+
+typedef struct {
+    uint16_t bank;   /* source ROM bank (0 for 0x0000-0x3fff) */
+    uint16_t src;    /* source ROM address of the run's first byte */
+    uint16_t dst;    /* VRAM destination of the run's first byte */
+    uint32_t len;    /* bytes in this contiguous 1:1 source->dest run */
+} native_asset_run;
 
 struct sb_handle {
     GB_gameboy_t *gb;
@@ -60,6 +69,21 @@ struct sb_handle {
     bool call_pending;
     uint32_t call_targets[SB_CALL_TRACE_CAP];
     size_t call_target_count;
+    /* Asset trace: provenance for data copied into VRAM. When on, each CPU
+       write to 0x8000-0x9fff is attributed to the most recent ROM byte read
+       (bank + address), and 1:1-advancing source->dest streaks are coalesced
+       into runs. A run whose length spans its whole dest region is an
+       uncompressed copy (statically extractable from the ROM); a short source
+       span feeding a long dest region indicates decompression (dump VRAM
+       instead). */
+    bool asset_trace_on;
+    bool have_last_rom_read;
+    uint16_t last_rom_read;
+    uint16_t cur_pc;   /* PC of the executing instruction; its own fetch +
+                          immediate reads must not count as a data source */
+    native_asset_run run;   /* run being coalesced; len == 0 means inactive */
+    native_asset_run asset_runs[SB_ASSET_TRACE_CAP];
+    size_t asset_run_count;
 };
 
 static _Thread_local char create_error[256];
@@ -131,15 +155,67 @@ static void record_watchpoint(GB_gameboy_t *gb, uint16_t address, uint8_t value,
     }
 }
 
+/* Flush the run being coalesced into the completed-runs array. Only genuine
+   copy streaks (>= SB_ASSET_MIN_RUN bytes advancing 1:1) are kept; shorter
+   runs are decompression or fill noise with no usable ROM source, and keeping
+   them would exhaust the table. */
+static void asset_run_flush(sb_handle *handle)
+{
+    if (handle->run.len >= SB_ASSET_MIN_RUN &&
+        handle->asset_run_count < SB_ASSET_TRACE_CAP) {
+        handle->asset_runs[handle->asset_run_count++] = handle->run;
+    }
+    handle->run.len = 0;
+}
+
+/* Attribute a VRAM write to the last ROM byte read, extending the current run
+   when source and dest both advance by one (a straight copy loop). */
+static void asset_record_vram_write(GB_gameboy_t *gb, sb_handle *handle, uint16_t dst)
+{
+    if (!handle->have_last_rom_read) return;
+    uint16_t src = handle->last_rom_read;
+    uint16_t bank = 0;
+    if (src >= 0x4000) {
+        size_t size = 0;
+        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &size, &bank);
+    }
+    native_asset_run *r = &handle->run;
+    if (r->len != 0 && r->bank == bank &&
+        src == (uint16_t)(r->src + r->len) && dst == (uint16_t)(r->dst + r->len)) {
+        r->len++;
+        return;
+    }
+    asset_run_flush(handle);
+    r->bank = bank;
+    r->src = src;
+    r->dst = dst;
+    r->len = 1;
+}
+
 static uint8_t on_memory_read(GB_gameboy_t *gb, uint16_t address, uint8_t value)
 {
     record_watchpoint(gb, address, value, SB_WATCH_READ);
+    sb_handle *handle = context(gb);
+    if (handle && handle->asset_trace_on && address <= 0x7FFF) {
+        /* Skip the instruction's own opcode + immediate fetches (they route
+           through this callback too); keep only genuine data reads like the
+           `ld a,[hl]` in a copy loop. */
+        uint16_t off = (uint16_t)(address - handle->cur_pc);
+        if (off > 2) {
+            handle->last_rom_read = address;
+            handle->have_last_rom_read = true;
+        }
+    }
     return value;
 }
 
 static bool on_memory_write(GB_gameboy_t *gb, uint16_t address, uint8_t value)
 {
     record_watchpoint(gb, address, value, SB_WATCH_WRITE);
+    sb_handle *handle = context(gb);
+    if (handle && handle->asset_trace_on && address >= 0x8000 && address <= 0x9FFF) {
+        asset_record_vram_write(gb, handle, address);
+    }
     return true;
 }
 
@@ -176,7 +252,9 @@ static bool opcode_is_call(uint8_t opcode)
 static void on_execution(GB_gameboy_t *gb, uint16_t address, uint8_t opcode)
 {
     sb_handle *handle = context(gb);
-    if (!handle || !handle->call_trace_on) return;
+    if (!handle) return;
+    handle->cur_pc = address;   /* used by the asset trace to skip fetch reads */
+    if (!handle->call_trace_on) return;
     /* The instruction executed right after a CALL is the callee's entry. If
        it lands in the switchable bank window, record it with the bank mapped
        at that moment (a cross-bank call switches the bank before calling). */
@@ -632,6 +710,44 @@ SB_EXPORT size_t sb_get_call_targets(const sb_handle *handle, uint32_t *out, siz
     size_t n = 0;
     for (size_t i = 0; i < SB_CALL_TRACE_CAP && n < capacity; i++) {
         if (handle->call_targets[i] != 0) out[n++] = handle->call_targets[i];
+    }
+    return n;
+}
+
+SB_EXPORT int sb_set_asset_trace(sb_handle *handle, bool on)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    handle->asset_trace_on = on;
+    if (!on) asset_run_flush(handle);
+    handle->have_last_rom_read = false;
+    return 0;
+}
+
+SB_EXPORT int sb_clear_asset_trace(sb_handle *handle)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    handle->asset_run_count = 0;
+    handle->run.len = 0;
+    handle->have_last_rom_read = false;
+    return 0;
+}
+
+/* Copy recorded VRAM-copy runs into out (4 x uint16 per run: bank, src, dst,
+   and length clamped to 0xffff). Flushes the in-progress run first. Returns
+   the number written; pass out=NULL to query the count. */
+SB_EXPORT size_t sb_get_asset_runs(sb_handle *handle, uint16_t *out, size_t capacity)
+{
+    if (!handle) return 0;
+    asset_run_flush(handle);
+    if (!out) return handle->asset_run_count;
+    size_t n = 0;
+    for (size_t i = 0; i < handle->asset_run_count && n < capacity; i++) {
+        native_asset_run *r = &handle->asset_runs[i];
+        out[n * 4 + 0] = r->bank;
+        out[n * 4 + 1] = r->src;
+        out[n * 4 + 2] = r->dst;
+        out[n * 4 + 3] = r->len > 0xFFFF ? 0xFFFF : (uint16_t)r->len;
+        n++;
     }
     return n;
 }

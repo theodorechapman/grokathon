@@ -180,6 +180,19 @@ def create_functions(seeds: list[str]) -> dict:
 
 
 @mcp.tool()
+def extract_data(ranges: list[dict]) -> dict:
+    """Extract raw ROM bytes into GBDK-ready C arrays so recovered assets can
+    be embedded in the reconstruction. Each range is {"address": "ROMn:hex",
+    "length": N, "name": optional}. Pair with the emulator's asset trace
+    (`asset_runs()`): feed the runs whose length covers their dest region
+    (uncompressed ROM->VRAM copies). For decompressed assets the ROM source is
+    compressed — snapshot VRAM from the emulator instead and embed that.
+    Returns per-range C arrays (name, address, length, sha256, c) plus a
+    combined header; write the C into your workspace yourself."""
+    return _call("static.extract_data", ranges=ranges)
+
+
+@mcp.tool()
 def annotate(
     kind: str,
     address: str,
