@@ -33,6 +33,19 @@ GAMES = REPO / "arcade" / "public" / "games"
 GBDK = Path.home() / "grokathon" / "gbdk"
 XAI_KEY = os.environ["XAI_API_KEY"]
 MODEL = "grok-4.5"
+STATUS_URL = "https://playgrokgames.vercel.app/api/job-status"
+SYNC_SECRET = os.environ.get("NOVA_X_SYNC_SECRET", "")
+
+
+def report(slug: str, stage: str, detail: str = "") -> None:
+    try:
+        body = json.dumps({"slug": slug, "stage": stage, "detail": detail}).encode()
+        req = urllib.request.Request(STATUS_URL, body, {
+            "Content-Type": "application/json", "x-runner-secret": SYNC_SECRET,
+        })
+        urllib.request.urlopen(req, timeout=10).read()
+    except Exception as e:
+        log(f"status report failed ({stage}): {e}")
 
 
 def log(msg: str) -> None:
@@ -119,11 +132,15 @@ def title_for(prompt: str) -> str:
 def process_job(job: dict) -> Path | None:
     slug = job["slug"]
     log(f"job {slug}: '{job['prompt'][:60]}'")
+    report(slug, "queued")
     main_c, rom, err = None, None, None
     for attempt in range(3):
+        report(slug, "patching source", f"attempt {attempt + 1}, grok is rewriting the C")
         main_c = patch_source(job["prompt"], err)
+        report(slug, "compiling", "gbdk building the rom")
         rom, err = build_rom(main_c, slug)
         if rom:
+            report(slug, "verifying", "rom checks")
             break
         log(f"job {slug}: build failed (attempt {attempt + 1}): {err.splitlines()[-1] if err else '?'}")
     if not rom:
@@ -147,6 +164,7 @@ def process_job(job: dict) -> Path | None:
         "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
     }
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    report(slug, "publishing", "pushing to the arcade")
     log(f"job {slug}: built and bundled")
     return bundle
 
@@ -180,6 +198,8 @@ def cycle() -> int:
         else:
             raise RuntimeError("push failed after retries")
         log(f"pushed: {msg}")
+        for name in shipped:
+            report(name, "published")
     return len(shipped)
 
 
