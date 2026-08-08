@@ -7,6 +7,14 @@ import styles from "./game-boy-player.module.css";
 type Direction = "left" | "right";
 type PlayerStatus = "loading" | "running" | "error";
 
+function installSilentAudioFallback() {
+  if (typeof SharedArrayBuffer !== "undefined") return;
+  Object.defineProperty(globalThis, "SharedArrayBuffer", {
+    configurable: true,
+    value: ArrayBuffer,
+  });
+}
+
 export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<Gameboy | null>(null);
@@ -19,6 +27,7 @@ export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string
       const canvas = canvasRef.current;
       if (!canvas) throw new Error("Game canvas is unavailable");
 
+      installSilentAudioFallback();
       const [{ Gameboy }, response] = await Promise.all([
         import("gameboy-emulator"),
         fetch(romUrl),
