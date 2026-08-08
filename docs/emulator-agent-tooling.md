@@ -579,7 +579,6 @@ The following can be included in an agent system prompt:
 - `agent/sameboy.py`: recommended Python and JSON interfaces
 - `agent/breakout_smoke.py`: complete executable example
 - `agent/postie_smoke.py`: CGB/MBC5, bank coverage, and video-memory example
-- `evaluator/evaluate.py`: independent deterministic ROM comparison
 - `harness/grokboy.h`: exported C ABI
 - `harness/grokboy.c`: native SameBoy bridge
 - `Makefile`: native build and smoke-test targets
