@@ -1,9 +1,0 @@
-{
-  "slug": "breakout-classic",
-  "title": "Breakout",
-  "description": "The classic. Clear every brick, don't drop the ball.",
-  "controls": "arrow keys or drag to move the paddle",
-  "source": "prompt-gen",
-  "parent": null,
-  "createdAt": "2026-08-08T12:00:00Z"
-}
