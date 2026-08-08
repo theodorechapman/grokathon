@@ -168,6 +168,18 @@ def create_function(address: str, name: str | None = None) -> dict:
 
 
 @mcp.tool()
+def create_functions(seeds: list[str]) -> dict:
+    """Bulk-recover bank-switched code. Pass runtime-resolved seed addresses —
+    the emulator's call-target trace (`call_targets()`), each a "SPACEhex"
+    string like "ROM5:4c00" — and this disassembles each and lets intra-bank
+    flow-following define the rest, turning otherwise-invisible banked banks
+    into real functions. Returns created addresses and before/after function
+    counts. This is how you make banked code (ROM1..ROMn) analyzable; static
+    analysis alone cannot resolve which bank a runtime call targets."""
+    return _call("static.create_functions", seeds=seeds)
+
+
+@mcp.tool()
 def annotate(
     kind: str,
     address: str,
