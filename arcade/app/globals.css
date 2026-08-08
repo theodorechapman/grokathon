@@ -800,3 +800,21 @@ a.navSegment:hover {
 .createHero .createBox {
   justify-content: center;
 }
+
+.gameHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.gameHead .masthead p {
+  max-width: 56ch;
+}
+
+@media (max-width: 720px) {
+  .gameHead {
+    flex-direction: column;
+  }
+}
