@@ -98,6 +98,38 @@ Other useful debugger commands: `registers`, `print`, `lcd`, `apu`,
 `palettes`, `dma`, `cartridge`. Use `evaluate()` for numbers, `debug()` when
 formatted output is useful evidence.
 
+## Recovering bank-switched code (important for ROMs > 32 KB)
+
+Static analysis can see the fixed bank (`ROM0`) but usually finds **no
+functions** in the switchable banks (`ROM1`, `ROM2`, …): a banked `call $4c00`
+targets whichever bank a runtime register selected, so Ghidra can't tell which
+bank — and leaves that code as raw bytes. On a multi-bank game that is most of
+the program (graphics, levels, enemies, audio, real gameplay logic).
+
+The emulator resolves this: it knows the live bank at every instruction. Turn
+on the call-target trace, **play through as much of the game as you can** (more
+coverage = more banked functions found), then hand the seeds to staticre's
+`create_functions`, which disassembles each and lets intra-bank flow-following
+define the rest.
+
+```python
+gb.call_trace(True)
+gb.run(frames=240); gb.press("start", frames=60); gb.run(frames=600)
+# ...drive real gameplay: move, jump, enter doors, trigger enemies...
+seeds = gb.call_targets()   # e.g. [{"canonical": "ROM5:4c00", "bank": 5, ...}, ...]
+```
+
+Then, via the staticre tools:
+
+```
+create_functions([s["canonical"] for s in seeds])   # ROM1..ROMn become real functions
+```
+
+Do this early: the banked functions it exposes are what you then annotate,
+decompile, and reconstruct. The more of the game you exercise before dumping
+seeds, the more of it becomes analyzable. Re-run the trace after reaching new
+areas to pick up newly executed banks.
+
 ## Screenshots
 
 ```python

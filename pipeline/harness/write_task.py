@@ -45,6 +45,15 @@ DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headle
    investigate and fix the C — and raise or lower annotation confidence based
    on what you observe. Only ever run the original program in the emulator,
    never your own build.
+
+   If the program uses more than one ROM bank (see `memory_map`: ROM1, ROM2,
+   … exist and static analysis found few or no functions in them), you MUST
+   recover the banked code before reconstructing — that is where most of the
+   game lives. Turn on the emulator's call-target trace, play through as much
+   of the game as you can, collect the seeds, and pass them to the
+   `create_functions` static tool. Read the "Recovering bank-switched code"
+   section of `dynamic_re.md` for the exact loop. Do this early, then annotate
+   and reconstruct the now-visible banked functions.
 """
 
 TASK_FOOTER = """

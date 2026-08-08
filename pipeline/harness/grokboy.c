@@ -18,6 +18,7 @@
 #define SB_MAX_BREAKPOINTS 128
 #define SB_MAX_WATCHPOINTS 128
 #define SB_LOG_SIZE 65536
+#define SB_CALL_TRACE_CAP 16384  /* power of two; open-addressing set of seeds */
 
 typedef struct {
     uint16_t address;
@@ -49,6 +50,16 @@ struct sb_handle {
     bool suppress_watchpoints;
     bool skip_breakpoint_once;
     uint16_t resume_breakpoint_address;
+    /* Call-target trace: seeds for static analysis of bank-switched code.
+       When on, the execution callback records (bank, address) of the
+       instruction executed immediately after a CALL, i.e. runtime-resolved
+       function entry points in the currently mapped ROM bank. Stored as an
+       open-addressing hash set of keys ((bank << 16) | address); address is
+       always >= 0x4000 so key 0 marks an empty slot. */
+    bool call_trace_on;
+    bool call_pending;
+    uint32_t call_targets[SB_CALL_TRACE_CAP];
+    size_t call_target_count;
 };
 
 static _Thread_local char create_error[256];
@@ -138,6 +149,46 @@ static char *no_debugger_input(GB_gameboy_t *gb)
     return NULL;
 }
 
+/* Insert a (bank, address) seed into the open-addressing set; ignores
+   duplicates and silently drops once the table is near full. */
+static void call_target_insert(sb_handle *handle, uint32_t key)
+{
+    if (handle->call_target_count >= (SB_CALL_TRACE_CAP * 3) / 4) return;
+    size_t mask = SB_CALL_TRACE_CAP - 1;
+    size_t i = (key * 2654435761u) & mask;
+    while (handle->call_targets[i] != 0) {
+        if (handle->call_targets[i] == key) return;
+        i = (i + 1) & mask;
+    }
+    handle->call_targets[i] = key;
+    handle->call_target_count++;
+}
+
+static bool opcode_is_call(uint8_t opcode)
+{
+    /* CALL a16 / CALL cc,a16 — the SM83 unconditional and conditional calls.
+       RST vectors target the fixed 0x00-0x38 page, never a bank, so are
+       excluded: their targets are not banked function entries. */
+    return opcode == 0xCD || opcode == 0xC4 || opcode == 0xCC ||
+           opcode == 0xD4 || opcode == 0xDC;
+}
+
+static void on_execution(GB_gameboy_t *gb, uint16_t address, uint8_t opcode)
+{
+    sb_handle *handle = context(gb);
+    if (!handle || !handle->call_trace_on) return;
+    /* The instruction executed right after a CALL is the callee's entry. If
+       it lands in the switchable bank window, record it with the bank mapped
+       at that moment (a cross-bank call switches the bank before calling). */
+    if (handle->call_pending && address >= 0x4000 && address <= 0x7FFF) {
+        uint16_t bank = 0;
+        size_t size = 0;
+        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &size, &bank);
+        call_target_insert(handle, ((uint32_t)bank << 16) | address);
+    }
+    handle->call_pending = opcode_is_call(opcode);
+}
+
 static void copy_registers(sb_handle *handle, sb_registers *out)
 {
     GB_registers_t *registers = GB_get_registers(handle->gb);
@@ -206,6 +257,7 @@ SB_EXPORT int sb_create(const char *rom_path, const char *boot_path, sb_handle *
     GB_set_async_input_callback(handle->gb, no_debugger_input);
     GB_set_read_memory_callback(handle->gb, on_memory_read);
     GB_set_write_memory_callback(handle->gb, on_memory_write);
+    GB_set_execution_callback(handle->gb, on_execution);
     GB_set_emulate_joypad_bouncing(handle->gb, false);
     GB_set_color_correction_mode(handle->gb, GB_COLOR_CORRECTION_MODERN_BALANCED);
 
@@ -551,6 +603,37 @@ SB_EXPORT int sb_debug(
 
     snprintf(output, capacity, "%s", handle->log);
     return 0;
+}
+
+SB_EXPORT int sb_set_call_trace(sb_handle *handle, bool on)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    handle->call_trace_on = on;
+    handle->call_pending = false;
+    return 0;
+}
+
+SB_EXPORT int sb_clear_call_trace(sb_handle *handle)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    for (size_t i = 0; i < SB_CALL_TRACE_CAP; i++) handle->call_targets[i] = 0;
+    handle->call_target_count = 0;
+    handle->call_pending = false;
+    return 0;
+}
+
+/* Copy the recorded seeds into out as packed (bank<<16 | address) keys,
+   compacting the sparse hash table. Returns the number written; pass out=NULL
+   to just query the count. */
+SB_EXPORT size_t sb_get_call_targets(const sb_handle *handle, uint32_t *out, size_t capacity)
+{
+    if (!handle) return 0;
+    if (!out) return handle->call_target_count;
+    size_t n = 0;
+    for (size_t i = 0; i < SB_CALL_TRACE_CAP && n < capacity; i++) {
+        if (handle->call_targets[i] != 0) out[n++] = handle->call_targets[i];
+    }
+    return n;
 }
 
 SB_EXPORT int sb_load_symbols(sb_handle *handle, const char *path)

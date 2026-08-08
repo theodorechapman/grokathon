@@ -527,6 +527,52 @@ class StaticAnalysis:
             raise
         return {"created": True, "function": self.get_function(self._canon(addr))}
 
+    def create_functions(self, seeds: list) -> dict:
+        """Bulk-define functions at runtime-recovered seed addresses (e.g. the
+        call-target trace from the emulator), then let flow-following define
+        the rest. Each seed is a canonical "SPACEhex" string or {space,offset}.
+        Disassembly inside a bank overlay follows intra-bank flow, so a handful
+        of seeds cascades into most of that bank's code. Returns per-seed
+        outcomes and the resulting function count."""
+        fm = self.program.getFunctionManager()
+        before = fm.getFunctionCount()
+        created, existing, failed = [], [], []
+        tx = self.program.startTransaction("agent create_functions")
+        try:
+            listing = self.program.getListing()
+            for seed in seeds:
+                try:
+                    addr = self._parse_addr(seed)
+                except Exception as e:
+                    failed.append({"seed": seed, "error": str(e)})
+                    continue
+                canonical = self._canon(addr)
+                if fm.getFunctionAt(addr) is not None:
+                    existing.append(canonical)
+                    continue
+                try:
+                    if listing.getInstructionAt(addr) is None:
+                        self.flat.disassemble(addr)
+                    if self.flat.createFunction(addr, None) is not None:
+                        created.append(canonical)
+                    else:
+                        failed.append({"seed": canonical, "error": "could not create"})
+                except Exception as e:
+                    failed.append({"seed": canonical, "error": str(e)})
+            self.program.endTransaction(tx, True)
+        except Exception:
+            self.program.endTransaction(tx, False)
+            raise
+        return {
+            "seeds": len(seeds),
+            "created": created,
+            "created_count": len(created),
+            "already_existed": len(existing),
+            "failed": failed,
+            "function_count_before": before,
+            "function_count_after": fm.getFunctionCount(),
+        }
+
     def annotate(self, target: dict, changes: dict, evidence: list | None = None) -> dict:
         kind = target.get("kind", "function")
         addr = self._parse_addr(target["address"])
@@ -611,6 +657,7 @@ class StaticAnalysis:
         "static.callees": "callees",
         "static.list_strings": "list_strings",
         "static.create_function": "create_function",
+        "static.create_functions": "create_functions",
         "static.annotate": "annotate",
     }
 
