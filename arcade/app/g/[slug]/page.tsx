@@ -53,17 +53,17 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} />
       <ScoreClaim slug={slug} signedIn={session !== null} />
-      <header className="masthead" style={{ marginTop: 8 }}>
-        <h1>{game.title}</h1>
-        <p>{game.description}</p>
-      </header>
+      <div className="gameHead">
+        <header className="masthead">
+          <h1>{game.title}</h1>
+          <p>{game.description}</p>
+        </header>
+        <QrPanel url={`${SITE}/g/${slug}`} />
+      </div>
       <div className="player">
         <iframe src={`/games/${slug}/index.html`} title={game.title} scrolling="no" />
       </div>
-      <div className="playerFoot">
-        <p className="controls">{game.controls}</p>
-        <QrPanel url={`${SITE}/g/${slug}`} />
-      </div>
+      <p className="controls">{game.controls}</p>
       {scores.length > 0 && (
         <div className="highScores">
           <h2>High scores</h2>
