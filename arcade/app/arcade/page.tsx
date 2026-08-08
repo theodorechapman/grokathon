@@ -43,16 +43,11 @@ export default async function ArcadePage({
 
       <header className="masthead" style={{ marginTop: 8 }}>
         <h1>The arcade</h1>
-        <p>Every game was played by a bot and passed before it shipped.</p>
       </header>
 
       <MyGames />
 
       <div className="shelfHead">
-        <div>
-          <h2>Global games</h2>
-          <p>Play instantly in your browser. Remix anything you like.</p>
-        </div>
         <div className="filterRow">
           {Object.entries(FILTERS).map(([key, def]) => (
             <Link
