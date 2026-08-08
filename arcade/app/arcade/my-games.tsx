@@ -56,7 +56,12 @@ export function MyGames() {
 
   return (
     <section className="myGames">
-      <h2>My games</h2>
+      <h2>
+        My games
+        <a href="/my" className="myGamesAll">
+          See all →
+        </a>
+      </h2>
       <div className="myGamesRow">
         {games.map((g) => (
           <a key={g.slug} href={`/g/${g.slug}`} className="myGameChip">
