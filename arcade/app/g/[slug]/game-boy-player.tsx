@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Gameboy } from "gameboy-emulator";
 import styles from "./game-boy-player.module.css";
 
-type Direction = "left" | "right";
+type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "select";
 
 // WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-specific:
 // when the pipeline ships more ROM games it should provide these per game
@@ -101,7 +101,7 @@ export function GameBoyPlayer({
     }
 
     function preventArrowScroll(event: KeyboardEvent) {
-      if (event.code === "ArrowLeft" || event.code === "ArrowRight") event.preventDefault();
+      if (event.code.startsWith("Arrow")) event.preventDefault();
     }
 
     document.addEventListener("keydown", preventArrowScroll);
@@ -119,11 +119,31 @@ export function GameBoyPlayer({
     };
   }, [romUrl, timeScored]);
 
-  function setDirection(direction: Direction, pressed: boolean) {
+  function setControl(control: InputControl, pressed: boolean) {
     const input = gameboyRef.current?.input;
     if (!input) return;
-    if (direction === "left") input.isPressingLeft = pressed;
-    if (direction === "right") input.isPressingRight = pressed;
+    if (control === "up") input.isPressingUp = pressed;
+    if (control === "down") input.isPressingDown = pressed;
+    if (control === "left") input.isPressingLeft = pressed;
+    if (control === "right") input.isPressingRight = pressed;
+    if (control === "a") input.isPressingA = pressed;
+    if (control === "b") input.isPressingB = pressed;
+    if (control === "start") input.isPressingStart = pressed;
+    if (control === "select") input.isPressingSelect = pressed;
+  }
+
+  function touchProps(control: InputControl) {
+    return {
+      disabled: status !== "running",
+      onPointerDown: (event: React.PointerEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        setControl(control, true);
+      },
+      onPointerUp: () => setControl(control, false),
+      onPointerCancel: () => setControl(control, false),
+      onLostPointerCapture: () => setControl(control, false),
+    };
   }
 
   return (
@@ -139,23 +159,21 @@ export function GameBoyPlayer({
         {status === "error" && "Unable to start the game"}
       </p>
       <div className={styles.touch} aria-label="Touch controls">
-        {(["left", "right"] as const).map((direction) => (
-          <button
-            key={direction}
-            type="button"
-            aria-label={`Move paddle ${direction}`}
-            disabled={status !== "running"}
-            onPointerDown={(event) => {
-              event.currentTarget.setPointerCapture(event.pointerId);
-              setDirection(direction, true);
-            }}
-            onPointerUp={() => setDirection(direction, false)}
-            onPointerCancel={() => setDirection(direction, false)}
-            onLostPointerCapture={() => setDirection(direction, false)}
-          >
-            {direction === "left" ? "←" : "→"}
-          </button>
-        ))}
+        <div className={styles.dpad} aria-label="Direction pad">
+          <button type="button" className={styles.up} aria-label="Up" {...touchProps("up")}>▲</button>
+          <button type="button" className={styles.left} aria-label="Left" {...touchProps("left")}>◀</button>
+          <span className={styles.dpadCenter} aria-hidden="true" />
+          <button type="button" className={styles.right} aria-label="Right" {...touchProps("right")}>▶</button>
+          <button type="button" className={styles.down} aria-label="Down" {...touchProps("down")}>▼</button>
+        </div>
+        <div className={styles.system} aria-label="System controls">
+          <button type="button" aria-label="Select" {...touchProps("select")}>Select</button>
+          <button type="button" aria-label="Start" {...touchProps("start")}>Start</button>
+        </div>
+        <div className={styles.actions} aria-label="Action buttons">
+          <button type="button" className={styles.b} aria-label="B button" {...touchProps("b")}>B</button>
+          <button type="button" className={styles.a} aria-label="A button" {...touchProps("a")}>A</button>
+        </div>
       </div>
     </div>
   );
