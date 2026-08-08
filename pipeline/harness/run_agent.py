@@ -70,8 +70,10 @@ def _mcp_invocation(mcp: str, image: str, rom_path: Path, workdir: Path):
         return command, args, {}  # ROM/workdir/Ghidra paths are baked into the image
     ghidra_dir = next((PIPELINE / "tools").glob("ghidra_*_PUBLIC"), None)
     env = {"STATICRE_ROM": str(rom_path), "STATICRE_WORKDIR": str(workdir)}
-    if ghidra_dir:
-        env["GHIDRA_INSTALL_DIR"] = str(ghidra_dir)
+    # Prefer the local tools/ install; fall back to a baked env var (container).
+    gh = str(ghidra_dir) if ghidra_dir else os.environ.get("GHIDRA_INSTALL_DIR")
+    if gh:
+        env["GHIDRA_INSTALL_DIR"] = gh
     return _uv_bin(), ["run", "--project", str(STATIC_DIR), "staticre-mcp"], env
 
 
@@ -135,10 +137,10 @@ evidence and note your uncertainty in confidence values and NOTES.md.
     return task
 
 
-def _make_workspace(rom: Path, label: str | None) -> Path:
+def _make_workspace(base: Path, label: str | None) -> Path:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     slug = f"{ts}-{label}" if label else ts
-    ws = PIPELINE / "workspaces" / slug
+    ws = base / slug
     (ws / "src").mkdir(parents=True, exist_ok=True)
     (ws / "rom").mkdir(parents=True, exist_ok=True)
     (ws / "ghidra_work").mkdir(parents=True, exist_ok=True)
@@ -194,6 +196,8 @@ def main():
     ap.add_argument("--tier", default=None,
                     help="service tier override (codex only, e.g. fast/priority)")
     ap.add_argument("--label", default=None, help="optional workspace name suffix")
+    ap.add_argument("--workspaces-dir", default=str(PIPELINE / "workspaces"),
+                    help="root dir for run workspaces (mount this in the container)")
     ap.add_argument("--mcp", choices=["local", "docker"], default="local",
                     help="run the staticre MCP backend on the host (local) or in the container image (docker)")
     ap.add_argument("--image", default="staticre:local",
@@ -206,7 +210,7 @@ def main():
     if not rom.exists():
         ap.error(f"ROM not found: {rom}")
 
-    ws = _make_workspace(rom, args.label)
+    ws = _make_workspace(Path(args.workspaces_dir).resolve(), args.label)
     binfo = _blind_rom(rom, ws / "rom")
     rom_path = Path(binfo["path"]).resolve()
     workdir = (ws / "ghidra_work").resolve()
