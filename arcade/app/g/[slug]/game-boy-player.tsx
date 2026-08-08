@@ -6,13 +6,12 @@ import styles from "./game-boy-player.module.css";
 
 type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "select";
 
-// WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-specific:
-// when the pipeline ships more ROM games it should provide these per game
-// (manifest field) instead of hardcoding.
+// WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-family:
+// remixes keep the layout but change the brick count, so the run starts at the
+// first nonzero brick read instead of a hardcoded count.
 const BRICKS_ADDR = 0xc0a5;
 const BALL_Y_ADDR = 0xc0a2;
 const BALL_Y_DEAD = 0x9a;
-const BRICKS_START = 0x27;
 
 function watchRun(
   gameboy: Gameboy,
@@ -28,7 +27,7 @@ function watchRun(
     const bricks = gameboy.memory.readByte(BRICKS_ADDR);
     const ballY = gameboy.memory.readByte(BALL_Y_ADDR);
     if (startedAt === 0) {
-      if (bricks === BRICKS_START) startedAt = performance.now();
+      if (bricks > 0) startedAt = performance.now();
       return;
     }
     if (bricks === 0) {

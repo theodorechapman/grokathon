@@ -1120,6 +1120,44 @@ a.navSegment:hover {
 .stageNow { color: var(--text); }
 .stagePending { color: var(--dim); }
 
+.remixJump {
+  display: inline-block;
+  margin-top: 14px;
+}
+
+.remixPanel {
+  margin-top: 40px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.remixPanel h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.remixPanel > p {
+  color: var(--dim);
+  font-size: 14px;
+  margin-top: 8px;
+  max-width: 60ch;
+}
+
+.remixPanel .remixBox,
+.remixPanel .remixGate {
+  margin-top: 16px;
+}
+
+.remixPanel .remixList {
+  margin-top: 12px;
+}
+
+.masthead .remixOf a {
+  color: var(--accent);
+}
+
 .filterDivider {
   width: 1px;
   align-self: stretch;
