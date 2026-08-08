@@ -8,6 +8,12 @@ import { VoteButton } from "./vote-button";
 
 export const dynamic = "force-dynamic";
 
+const SOURCE_LABEL: Record<string, string> = {
+  "rom-re": "reverse-engineered",
+  "prompt-gen": "prompted",
+  remix: "remix",
+};
+
 const FILTERS: Record<string, { label: string; match: (g: GameManifest) => boolean }> = {
   all: { label: "All", match: () => true },
   "1p": { label: "1 player", match: (g) => (g.players ?? 1) === 1 },
@@ -95,7 +101,7 @@ export default async function ArcadePage({
               <div className="gameBody">
                 <div className="gameTitleRow">
                   <h3>{game.title}</h3>
-                  <span className="tag">{game.source}</span>
+                  <span className="tag">{SOURCE_LABEL[game.source] ?? game.source}</span>
                 </div>
                 {game.creator && <p className="byline">by @{game.creator}</p>}
                 <p>{game.description}</p>

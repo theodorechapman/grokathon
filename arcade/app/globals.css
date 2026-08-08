@@ -703,3 +703,74 @@ a.navSegment:hover {
 .board tr td:first-child {
   color: var(--dim);
 }
+
+.scoreBanner {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 14px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.scoreBanner button {
+  background: var(--text);
+  color: var(--bg);
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.scoreBanner .scoreDismiss {
+  background: transparent;
+  color: var(--dim);
+  padding: 9px 4px;
+}
+
+.highScores {
+  margin-top: 28px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 24px;
+  max-width: 420px;
+}
+
+.highScores h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.highScores ol {
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.highScores li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.highScores li:last-child {
+  border-bottom: 0;
+}
+
+.highScores li span:last-child {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+}
