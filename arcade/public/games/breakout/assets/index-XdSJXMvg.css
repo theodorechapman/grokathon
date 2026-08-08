@@ -1,1 +1,9 @@
 :root{color:#19323c;font-synthesis:none;background:#d8eee8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}*{box-sizing:border-box}body{background:radial-gradient(circle at top,#ffffff8c,#0000 38rem),#d8eee8;place-items:center;min-width:320px;min-height:100vh;margin:0;display:grid}.player{text-align:center;width:min(92vw,760px);padding:2rem}header{margin-bottom:1.25rem}.eyebrow{color:#55776f;letter-spacing:.16em;text-transform:uppercase;margin:0 0 .35rem;font-size:.75rem}h1{letter-spacing:-.06em;margin:0;font-size:clamp(2rem,7vw,4rem)}.screen{background:#9bb8a8;border:.5rem solid #19323c;border-radius:1rem;padding:clamp(.75rem,3vw,1.5rem);box-shadow:0 1.25rem 3rem #19323c33,inset 0 0 0 .25rem #fff3}canvas{aspect-ratio:10/9;width:100%;image-rendering:pixelated;background:#c4f0eb;display:block}#status{color:#55776f;margin:1rem 0 .5rem}.controls{margin:0;font-size:.875rem}kbd{background:#f3faf7;border:1px solid #819c94;border-bottom-width:3px;border-radius:.3rem;min-width:1.7rem;padding:.15rem .35rem;display:inline-block}@media (width<=480px){.player{padding:1rem}}
+
+/* arcade integration override: fill the frame, nothing cut off */
+html, body { height: 100%; overflow: hidden; }
+body { min-height: 100%; }
+.player { width: auto; max-width: none; height: 100%; padding: 10px; display: flex; align-items: center; justify-content: center; }
+header, #status, .controls { display: none; }
+.screen { height: min(96%, 78vw); aspect-ratio: 10 / 9; display: flex; }
+canvas { width: auto; height: 100%; margin: auto; }

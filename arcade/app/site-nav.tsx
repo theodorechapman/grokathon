@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { readSession } from "@/lib/session";
+import { SignInButton } from "./sign-in-button";
 
-export async function SiteNav({ active }: { active: "home" | "arcade" | "create" | "leaderboard" }) {
+export async function SiteNav({
+  active,
+}: {
+  active: "home" | "arcade" | "create" | "leaderboard";
+}) {
   const session = await readSession().catch(() => null);
   return (
     <nav className="siteNav">
@@ -17,18 +22,26 @@ export async function SiteNav({ active }: { active: "home" | "arcade" | "create"
           >
             Arcade
           </Link>
-          <Link
-            href="/create"
-            className={active === "create" ? "navSegment navSegmentActive" : "navSegment"}
-          >
-            Create
-          </Link>
-          <Link
-            href="/leaderboard"
-            className={active === "leaderboard" ? "navSegment navSegmentActive" : "navSegment"}
-          >
-            Leaderboard
-          </Link>
+          {session ? (
+            <>
+              <Link
+                href="/create"
+                className={active === "create" ? "navSegment navSegmentActive" : "navSegment"}
+              >
+                Create
+              </Link>
+              <Link
+                href="/leaderboard"
+                className={
+                  active === "leaderboard" ? "navSegment navSegmentActive" : "navSegment"
+                }
+              >
+                Leaderboard
+              </Link>
+            </>
+          ) : (
+            <SignInButton />
+          )}
         </div>
         {session && (
           <span className="authChip">

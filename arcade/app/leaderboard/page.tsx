@@ -1,102 +1,128 @@
 import Link from "next/link";
 import { listGames } from "@/lib/games";
-import { rankScore, statsFor, topScores } from "@/lib/stats";
+import { playerBoard, topScores } from "@/lib/stats";
+import { readSession } from "@/lib/session";
 import { SiteNav } from "../site-nav";
+import { SignInButton } from "../sign-in-button";
 
 export const dynamic = "force-dynamic";
 
-type Row = { creator: string; games: number; plays: number; votes: number; score: number };
-
-export default async function LeaderboardPage() {
-  const games = await listGames();
-  const stats = await statsFor(games.map((g) => g.slug));
-  const perGame = await Promise.all(
-    games.map(async (g) => ({ game: g, top: await topScores(g.slug, 3) }))
-  );
-
-  const byCreator = new Map<string, Row>();
-  for (const game of games) {
-    const creator = game.creator ?? "the pipeline";
-    const s = stats.get(game.slug)!;
-    const row = byCreator.get(creator) ?? { creator, games: 0, plays: 0, votes: 0, score: 0 };
-    row.games += 1;
-    row.plays += s.plays;
-    row.votes += s.votes;
-    row.score += rankScore(s);
-    byCreator.set(creator, row);
+export default async function LeaderboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ g?: string }>;
+}) {
+  const session = await readSession().catch(() => null);
+  if (!session) {
+    return (
+      <main>
+        <SiteNav active="leaderboard" />
+        <section className="gate">
+          <h1>The leaderboard is for players</h1>
+          <p>Sign in to see who&apos;s on top and put your own handle up there.</p>
+          <SignInButton variant="big" />
+        </section>
+      </main>
+    );
   }
-  const rows = [...byCreator.values()].sort((a, b) => b.score - a.score);
+
+  const { g } = await searchParams;
+  const games = await listGames();
+  const selected = games.find((game) => game.slug === g) ?? null;
 
   return (
     <main>
       <SiteNav active="leaderboard" />
       <header className="masthead" style={{ marginTop: 8 }}>
         <h1>Leaderboard</h1>
-        <p>Creators ranked by what the crowd does with their games. Players ranked per game.</p>
+        <p>Who plays, and who tops each game&apos;s board.</p>
       </header>
 
-      <div className="shelfHead">
-        <h2>Creators</h2>
-        <p>Plays plus 3x votes across everything they&apos;ve made.</p>
+      <div className="filterRow" style={{ marginTop: 24 }}>
+        <Link href="/leaderboard" className={!selected ? "filterChip filterChipActive" : "filterChip"}>
+          All games
+        </Link>
+        {games.map((game) => (
+          <Link
+            key={game.slug}
+            href={`/leaderboard?g=${game.slug}`}
+            className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
+          >
+            {game.title}
+          </Link>
+        ))}
       </div>
-      {rows.length === 0 ? (
-        <p className="empty">No games, no glory yet. Say a game and claim the top spot.</p>
-      ) : (
-        <table className="board">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Creator</th>
-              <th>Games</th>
-              <th>Plays</th>
-              <th>Votes</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, i) => (
-              <tr key={row.creator}>
-                <td>{i + 1}</td>
-                <td>{row.creator === "the pipeline" ? row.creator : `@${row.creator}`}</td>
-                <td>{row.games}</td>
-                <td>{row.plays}</td>
-                <td>{row.votes}</td>
-                <td>{row.score}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
 
-      <div className="shelfHead">
-        <h2>High scores by game</h2>
-        <p>Sign in with X after a run to put your handle on a board.</p>
-      </div>
-      {perGame.length === 0 ? (
-        <p className="empty">Boards appear as games land on the shelf.</p>
+      {selected ? (
+        <GameBoard slug={selected.slug} title={selected.title} />
       ) : (
-        <div className="boardsGrid">
-          {perGame.map(({ game, top }) => (
-            <div key={game.slug} className="highScores">
-              <h2>
-                <Link href={`/g/${game.slug}`}>{game.title}</Link>
-              </h2>
-              {top.length === 0 ? (
-                <p className="boardEmpty">No claimed scores yet. Be first.</p>
-              ) : (
-                <ol>
-                  {top.map((row) => (
-                    <li key={row.handle}>
-                      <span>@{row.handle}</span>
-                      <span>{row.score.toLocaleString()}</span>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-          ))}
-        </div>
+        <OverallBoard />
       )}
     </main>
+  );
+}
+
+async function OverallBoard() {
+  const rows = await playerBoard();
+  if (rows.length === 0) {
+    return (
+      <p className="empty">
+        No signed-in plays yet. Play anything while signed in and you&apos;re on the
+        board.
+      </p>
+    );
+  }
+  return (
+    <table className="board">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Plays</th>
+          <th>Games played</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => (
+          <tr key={row.handle}>
+            <td>{i + 1}</td>
+            <td>@{row.handle}</td>
+            <td>{row.plays}</td>
+            <td>{row.games}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+async function GameBoard({ slug, title }: { slug: string; title: string }) {
+  const scores = await topScores(slug, 20);
+  if (scores.length === 0) {
+    return (
+      <p className="empty">
+        No claimed scores on {title} yet. Finish a run and claim yours.
+      </p>
+    );
+  }
+  return (
+    <table className="board">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>High score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {scores.map((row, i) => (
+          <tr key={row.handle}>
+            <td>{i + 1}</td>
+            <td>@{row.handle}</td>
+            <td>{row.score.toLocaleString()}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

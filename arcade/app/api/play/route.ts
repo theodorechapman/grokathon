@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { clientIp, overLimit, redis, SLUG_RE } from "@/lib/stats";
 import { getGame } from "@/lib/games";
+import { readSession } from "@/lib/session";
 
 export async function POST(req: NextRequest) {
   const r = redis();
@@ -21,5 +22,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "unknown game" }, { status: 404 });
   }
   const plays = await r.incr(`plays:${slug}`);
+  const session = await readSession().catch(() => null);
+  if (session) {
+    await Promise.all([
+      r.zincrby("uplays", 1, session.handle),
+      r.sadd(`ugames:${session.handle}`, slug),
+    ]);
+  }
   return NextResponse.json({ plays });
 }
