@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listGames } from "@/lib/games";
-import { rankScore, statsFor } from "@/lib/stats";
+import { rankScore, statsFor, topScores } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +10,10 @@ type Row = { creator: string; games: number; plays: number; votes: number; score
 export default async function LeaderboardPage() {
   const games = await listGames();
   const stats = await statsFor(games.map((g) => g.slug));
+  const perGame = await Promise.all(
+    games.map(async (g) => ({ game: g, top: await topScores(g.slug, 3) }))
+  );
+
   const byCreator = new Map<string, Row>();
   for (const game of games) {
     const creator = game.creator ?? "the pipeline";
@@ -25,14 +29,16 @@ export default async function LeaderboardPage() {
 
   return (
     <main>
-      <SiteNav active="arcade" />
-      <Link href="/arcade" className="back">
-        ← Back to the arcade
-      </Link>
-      <header className="masthead" style={{ marginTop: 16 }}>
-        <h1>Creator leaderboard</h1>
-        <p>Ranked by what the crowd does with your games: plays plus 3x votes.</p>
+      <SiteNav active="leaderboard" />
+      <header className="masthead" style={{ marginTop: 8 }}>
+        <h1>Leaderboard</h1>
+        <p>Creators ranked by what the crowd does with their games. Players ranked per game.</p>
       </header>
+
+      <div className="shelfHead">
+        <h2>Creators</h2>
+        <p>Plays plus 3x votes across everything they&apos;ve made.</p>
+      </div>
       {rows.length === 0 ? (
         <p className="empty">No games, no glory yet. Say a game and claim the top spot.</p>
       ) : (
@@ -60,6 +66,36 @@ export default async function LeaderboardPage() {
             ))}
           </tbody>
         </table>
+      )}
+
+      <div className="shelfHead">
+        <h2>High scores by game</h2>
+        <p>Sign in with X after a run to put your handle on a board.</p>
+      </div>
+      {perGame.length === 0 ? (
+        <p className="empty">Boards appear as games land on the shelf.</p>
+      ) : (
+        <div className="boardsGrid">
+          {perGame.map(({ game, top }) => (
+            <div key={game.slug} className="highScores">
+              <h2>
+                <Link href={`/g/${game.slug}`}>{game.title}</Link>
+              </h2>
+              {top.length === 0 ? (
+                <p className="boardEmpty">No claimed scores yet. Be first.</p>
+              ) : (
+                <ol>
+                  {top.map((row) => (
+                    <li key={row.handle}>
+                      <span>@{row.handle}</span>
+                      <span>{row.score.toLocaleString()}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          ))}
+        </div>
       )}
     </main>
   );

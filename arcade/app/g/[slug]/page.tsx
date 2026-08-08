@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame } from "@/lib/games";
 import { topScores } from "@/lib/stats";
@@ -54,15 +53,12 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} />
       <ScoreClaim slug={slug} signedIn={session !== null} />
-      <Link href="/arcade" className="back">
-        ← Back to the arcade
-      </Link>
-      <header className="masthead" style={{ marginTop: 16 }}>
+      <header className="masthead" style={{ marginTop: 8 }}>
         <h1>{game.title}</h1>
         <p>{game.description}</p>
       </header>
       <div className="player">
-        <iframe src={`/games/${slug}/index.html`} title={game.title} />
+        <iframe src={`/games/${slug}/index.html`} title={game.title} scrolling="no" />
       </div>
       <div className="playerFoot">
         <p className="controls">{game.controls}</p>

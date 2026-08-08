@@ -2,6 +2,7 @@ import Link from "next/link";
 import { listGames, type GameManifest } from "@/lib/games";
 import { rankScore, statsFor } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
+import { readSession } from "@/lib/session";
 import { CreateBox } from "./create-box";
 import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
@@ -29,6 +30,7 @@ export default async function ArcadePage({
   searchParams: Promise<{ f?: string }>;
 }) {
   const { f } = await searchParams;
+  const session = await readSession().catch(() => null);
   const filter = FILTERS[f ?? "all"] ?? FILTERS.all;
   const unranked = await listGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
@@ -50,20 +52,15 @@ export default async function ArcadePage({
             it shipped. Say a new one and it lands on this shelf.
           </p>
         </div>
-        <CreateBox />
+        <CreateBox signedIn={session !== null} />
       </section>
 
       <MyGames />
 
       <div className="shelfHead">
-        <div className="shelfTitleRow">
-          <div>
-            <h2>Global games</h2>
-            <p>Play instantly in your browser. Remix anything you like.</p>
-          </div>
-          <Link href="/leaderboard" className="leaderboardLink">
-            Creator leaderboard →
-          </Link>
+        <div>
+          <h2>Global games</h2>
+          <p>Play instantly in your browser. Remix anything you like.</p>
         </div>
         <div className="filterRow">
           {Object.entries(FILTERS).map(([key, def]) => (
