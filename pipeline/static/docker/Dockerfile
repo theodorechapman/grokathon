@@ -4,8 +4,10 @@
 FROM eclipse-temurin:21-jdk AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
+# build-essential + python3-dev: some deps (JPype1, PyGhidra's native backend)
+# build a C++ extension from source on linux/arm64 where no wheel is published.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3 python3-venv curl unzip ca-certificates \
+        python3 python3-venv python3-dev build-essential curl unzip ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # uv for reproducible Python deps

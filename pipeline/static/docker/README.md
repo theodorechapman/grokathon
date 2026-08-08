@@ -10,7 +10,7 @@ runtime input via a bind mount, so one image analyzes any Game Boy ROM.
 pipeline/static/docker/build.sh          # tags staticre:local
 ```
 
-First build downloads Ghidra (~456 MB) and pins GhidraBoy; the image is ~2.5 GB.
+First build downloads Ghidra (~456 MB) and pins GhidraBoy; the image is ~2.7 GB.
 
 ## Run
 
