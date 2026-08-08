@@ -628,3 +628,78 @@ a.navSegment:hover {
   margin: 4px 2px;
   background: var(--line);
 }
+
+.shelfTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.leaderboardLink {
+  color: var(--dim);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.leaderboardLink:hover {
+  color: var(--accent);
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.filterChip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.filterChip:hover {
+  color: var(--text);
+}
+
+.filterChipActive {
+  background: var(--panel);
+  color: var(--text);
+  border-color: var(--dim);
+}
+
+.byline {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.board {
+  width: 100%;
+  margin-top: 32px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.board th {
+  text-align: left;
+  color: var(--dim);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.board td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.board tr td:first-child {
+  color: var(--dim);
+}
