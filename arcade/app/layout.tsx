@@ -10,13 +10,13 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Grok Games",
-  description: "Say a game. Play it in seconds. A bot proves every game runs before you do.",
+  title: "Nova — every game starts as a sentence",
+  description: "Say a game and Nova makes it real: built by Grok, proven playable by a bot, live in your browser in seconds.",
   openGraph: {
-    title: "Grok Games",
-    description: "Say a game. Play it in seconds. Remix it live with the room.",
+    title: "Nova",
+    description: "Every game starts as a sentence. Built on Grok.",
     url: "https://playgrokgames.vercel.app",
-    siteName: "Grok Games",
+    siteName: "Nova",
   },
 };
 

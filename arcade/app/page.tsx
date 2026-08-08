@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import { HeroArt } from "./hero-art";
+import { NovaMark } from "./nova-mark";
 
 const HOW = [
   {
@@ -21,21 +22,14 @@ const HOW = [
   },
 ];
 
-const STAGES = [
-  ["ask", "you say the game"],
-  ["spec", "grok writes the rules"],
-  ["build", "an agent codes it"],
-  ["verify", "a bot plays it"],
-  ["repair", "fails get fixed"],
-  ["ship", "playable link"],
-  ["remix", "the room reshapes it"],
-] as const;
-
 export default function LandingPage() {
   return (
     <div className={styles.page}>
       <nav className={styles.nav}>
-        <span className={styles.wordmark}>Grok Games</span>
+        <span className={styles.wordmark}>
+          <NovaMark size={22} />
+          Nova
+        </span>
         <div className={styles.navPill}>
           <Link href="/arcade" className={styles.navActive}>
             Arcade
@@ -47,11 +41,19 @@ export default function LandingPage() {
       <header className={styles.hero}>
         <HeroArt />
         <div className={styles.heroInner}>
-          <h1>Grok Games</h1>
-          <p>Say a game. Play it in seconds. Remix it live with the room.</p>
+          <div className={styles.heroMark}>
+            <NovaMark size={44} />
+          </div>
+          <h1>Nova</h1>
+          <p className={styles.tagline}>Every game starts as a sentence.</p>
+          <p className={styles.sub}>
+            Say it, and Nova makes it real: built by Grok, proven playable by a
+            bot, live in your browser in seconds. Then the room remixes it.
+          </p>
           <Link href="/arcade" className={styles.heroCta}>
-            ▶&nbsp; Enter arcade
+            ▶&nbsp; Enter the arcade
           </Link>
+          <p className={styles.chip}>built on Grok</p>
         </div>
       </header>
 
@@ -71,26 +73,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <h2>The pipeline</h2>
-        <p className={styles.sectionSub}>
-          Seven stages from your sentence to a playable link. Verify is the gate:
-          nothing ships unverified.
-        </p>
-        <div className={styles.stages}>
-          {STAGES.map(([name, detail], i) => (
-            <div key={name} className={name === "verify" ? styles.stageGate : styles.stage}>
-              <span className={styles.stageNum}>{String(i + 1).padStart(2, "0")}</span>
-              <span className={styles.stageName}>{name}</span>
-              <span className={styles.stageDetail}>{detail}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <footer className={styles.footer}>
         <span>Grokathon · Aug 8 · Supratik, Theo, Henry</span>
-        <Link href="/arcade">Enter arcade</Link>
+        <Link href="/arcade">Enter the arcade</Link>
       </footer>
     </div>
   );

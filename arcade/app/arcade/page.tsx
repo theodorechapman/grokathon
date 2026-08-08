@@ -6,7 +6,7 @@ export default async function ArcadePage() {
   return (
     <main>
       <Link href="/" className="back">
-        ← Grok Games
+        ← Nova
       </Link>
       <header className="masthead" style={{ marginTop: 16 }}>
         <h1>Arcade</h1>

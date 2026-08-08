@@ -1,73 +1,35 @@
+const STARS: [number, number, number, number][] = [
+  [60, 80, 1.6, 0], [180, 190, 1, 1.2], [290, 60, 1.3, 2.1], [400, 250, 1, 0.4],
+  [520, 110, 1.8, 1.7], [640, 320, 1, 2.6], [730, 70, 1.2, 0.9], [850, 210, 1, 1.4],
+  [960, 100, 1.5, 2.3], [1080, 260, 1, 0.2], [1150, 60, 1.4, 1.9], [120, 330, 1, 2.8],
+  [340, 400, 1.2, 0.7], [580, 430, 1, 1.5], [820, 410, 1.3, 2.4], [1040, 380, 1, 0.5],
+  [220, 480, 1, 1.1], [470, 30, 1, 2.9], [910, 30, 1, 0.8], [700, 180, 2, 0.3],
+];
+
 export function HeroArt() {
   return (
-    <svg
-      className="heroArt"
-      viewBox="0 0 1200 520"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-    >
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#0b1526" />
-          <stop offset="0.65" stopColor="#0f2233" />
-          <stop offset="1" stopColor="#123a3d" />
-        </linearGradient>
-        <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#2dd4bf" stopOpacity="0" />
-          <stop offset="1" stopColor="#2dd4bf" stopOpacity="0.35" />
-        </linearGradient>
-        <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="18" />
-        </filter>
-      </defs>
-
-      <rect width="1200" height="520" fill="url(#sky)" />
-
-      {[
-        [90, 60, 1.6], [210, 130, 1], [340, 40, 1.3], [460, 100, 1], [560, 55, 1.8],
-        [700, 140, 1], [810, 70, 1.4], [930, 120, 1], [1050, 50, 1.7], [1150, 150, 1],
-        [150, 210, 1], [420, 190, 1.2], [640, 220, 1], [880, 200, 1.3], [1110, 230, 1],
-      ].map(([x, y, r], i) => (
-        <circle key={i} cx={x} cy={y} r={r} fill="#cfe9ff" opacity={0.5 + (i % 3) * 0.2} />
-      ))}
-
-      <g filter="url(#soft)" opacity="0.5">
-        <ellipse cx="220" cy="120" rx="150" ry="38" fill="#1d3a54" />
-        <ellipse cx="980" cy="90" rx="180" ry="42" fill="#1d3a54" />
-        <ellipse cx="620" cy="60" rx="130" ry="30" fill="#16304a" />
-      </g>
-
-      <g opacity="0.75">
-        {[0, 1, 2].map((row) =>
-          [0, 1, 2, 3].map((col) => (
-            <rect
-              key={`${row}-${col}`}
-              x={950 + col * 58}
-              y={58 + row * 27}
-              width={48}
-              height={18}
-              rx={5}
-              fill={["#f87171", "#fbbf24", "#4ade80"][row]}
-              opacity={0.7}
-            />
-          ))
-        )}
-        <circle cx="1052" cy="196" r="8" fill="#e8f6ff" />
-        <circle cx="1034" cy="216" r="4.5" fill="#e8f6ff" opacity="0.4" />
-        <circle cx="1018" cy="233" r="3" fill="#e8f6ff" opacity="0.2" />
-        <rect x="1042" y="248" width="84" height="11" rx="5.5" fill="#e8f6ff" opacity="0.85" />
-      </g>
-
-      <rect y="330" width="1200" height="190" fill="url(#glow)" />
-      <g stroke="#2dd4bf" strokeWidth="1" opacity="0.4">
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <line key={`h${i}`} x1="0" y1={360 + i * 32} x2="1200" y2={360 + i * 32} />
+    <div className="cosmos" aria-hidden="true">
+      <div className="nebula nebulaA" />
+      <div className="nebula nebulaB" />
+      <div className="vortex" />
+      <div className="core" />
+      <svg
+        viewBox="0 0 1200 520"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      >
+        {STARS.map(([x, y, r, d], i) => (
+          <circle
+            key={i}
+            cx={x}
+            cy={y}
+            r={r}
+            fill="#dff3ff"
+            className="tw"
+            style={{ animationDelay: `${d}s` }}
+          />
         ))}
-        {[-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <line key={`v${i}`} x1={600 + i * 40} y1="345" x2={600 + i * 260} y2="520" />
-        ))}
-      </g>
-    </svg>
+      </svg>
+    </div>
   );
 }
