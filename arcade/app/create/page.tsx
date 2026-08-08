@@ -29,6 +29,11 @@ export default async function CreatePage() {
           passes, and it lands in the arcade as a link anyone can play.
         </p>
         <CreateBox signedIn />
+        <p className="xDrive">
+          No form needed: mention @suprapan07 on X with your sentence and the
+          pipeline builds it the same way. Reply to any game&apos;s post to remix
+          it instead.
+        </p>
       </section>
     </main>
   );
