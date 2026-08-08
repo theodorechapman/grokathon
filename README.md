@@ -32,6 +32,9 @@ Boy ROMs with SameBoy. The current proof of concept targets `raw_rom/breakout.gb
 and supports the reverse-engineering pipeline described in
 `breakout-reverse-engineering.md`.
 
+Full setup, command reference, debugging recipes, and agent integration guidance:
+`docs/emulator-agent-tooling.md`.
+
 Unlike GUI automation, a small native bridge links directly to `libsameboy`
 while Python owns validation, files, PNG encoding, tracing, and the agent-facing
 protocol. An agent can:
