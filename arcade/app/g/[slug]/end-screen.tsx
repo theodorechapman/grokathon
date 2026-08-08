@@ -63,18 +63,26 @@ export function EndScreen({
     return false;
   }
 
-  function signInAndSave() {
+  function openLogin(onClosed?: () => void) {
     const popup = window.open("/api/auth/login", "nova-x-auth", "width=500,height=700");
     if (!popup) {
       window.location.href = "/api/auth/login";
       return;
     }
-    const timer = setInterval(async () => {
+    const timer = setInterval(() => {
       if (popup.closed) {
         clearInterval(timer);
-        await save();
+        onClosed?.();
       }
     }, 500);
+  }
+
+  function signInAndSave() {
+    openLogin(() => void save());
+  }
+
+  function signIn() {
+    openLogin(() => window.location.reload());
   }
 
   return (
@@ -84,18 +92,28 @@ export function EndScreen({
       {line && <p>{line}</p>}
       {claimable &&
         (saved ? (
-          <p>On the board. Better runs overwrite it.</p>
+          <p>
+            On the board. Better runs overwrite it.{" "}
+            <a className="endBoardLink" href={`/leaderboard?g=${slug}`}>
+              See the leaderboard →
+            </a>
+          </p>
         ) : signedIn ? (
           <button className="endPrimary" onClick={() => void save()}>
             Save to leaderboard
           </button>
         ) : (
           <button className="endPrimary" onClick={signInAndSave}>
-            Sign in with 𝕏 to save your {scoring === "time" ? "time" : "score"}
+            Sign in with 𝕏 to claim your spot on the board
           </button>
         ))}
+      {!claimable && !signedIn && (
+        <button className="endPrimary" onClick={signIn}>
+          Sign in with 𝕏 so your next run counts
+        </button>
+      )}
       {error && <p className="endErr">{error}</p>}
-      <button className={claimable ? "endGhost" : "endPrimary"} onClick={onReplay}>
+      <button className={claimable || !signedIn ? "endGhost" : "endPrimary"} onClick={onReplay}>
         {end.outcome === "win" ? "Play again" : "↻ Retry"}
       </button>
       {onRemix && (
