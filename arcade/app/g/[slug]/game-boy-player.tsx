@@ -6,12 +6,11 @@ import styles from "./game-boy-player.module.css";
 
 type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "select";
 
-// WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-family:
-// remixes keep the layout but change the brick count, so the run starts at the
-// first nonzero brick read instead of a hardcoded count.
-const BRICKS_ADDR = 0xc0a5;
-const BALL_Y_ADDR = 0xc0a2;
-const BALL_Y_DEAD = 0x9a;
+// Nova arcade protocol (docs/game-bundle-contract.md): every pipeline ROM
+// writes one byte at 0xCF00 — 1 run started, 2 won, 3 lost. It's an absolute
+// address in the C source, so the compiler can't relocate it the way it
+// relocates ordinary globals (which is how the old per-variable watching broke).
+const NOVA_STATE_ADDR = 0xcf00;
 
 function watchRun(
   gameboy: Gameboy,
@@ -24,18 +23,17 @@ function watchRun(
       clearInterval(timer);
       return;
     }
-    const bricks = gameboy.memory.readByte(BRICKS_ADDR);
-    const ballY = gameboy.memory.readByte(BALL_Y_ADDR);
+    const state = gameboy.memory.readByte(NOVA_STATE_ADDR);
     if (startedAt === 0) {
-      if (bricks > 0) startedAt = performance.now();
+      if (state === 1) startedAt = performance.now();
       return;
     }
-    if (bricks === 0) {
+    if (state === 2 || state === 3) {
       clearInterval(timer);
-      onRunEnd({ outcome: "win", score: Math.round(performance.now() - startedAt) });
-    } else if (ballY >= BALL_Y_DEAD) {
-      clearInterval(timer);
-      onRunEnd({ outcome: "loss", score: Math.round(performance.now() - startedAt) });
+      onRunEnd({
+        outcome: state === 2 ? "win" : "loss",
+        score: Math.round(performance.now() - startedAt),
+      });
     }
   }, 200);
 }

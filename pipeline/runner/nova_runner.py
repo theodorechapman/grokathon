@@ -80,10 +80,12 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
     system = (
         "You modify a GBDK-2020 Game Boy breakout game written in C. Apply the "
         "player's remix request faithfully but keep the game a winnable brick "
-        "breaker: the run must still end with bricks reaching zero (win) or the "
-        "ball passing the paddle (loss), and WRAM layout for bricks remaining "
-        "($C0A5) and ball Y ($C0A2) must stay where it is because the arcade "
-        "reads those addresses. Only standard GBDK headers available. Output the "
+        "breaker: the run must still end in a win or a loss. CRITICAL: the "
+        "NOVA_STATE protocol must stay intact exactly — the #define at 0xCF00 "
+        "and the writes NOVA_STATE = 1 when play begins, 2 on win, 3 on loss. "
+        "The arcade polls that byte to detect the end of a run; a game that "
+        "drops those writes never shows an end screen and never gets scores. "
+        "Only standard GBDK headers available. Output the "
         "COMPLETE modified main.c and nothing else, in a single ```c code block."
     )
     user = f"Remix request: {prompt}\n\nassets.h for reference:\n```c\n{assets_h}\n```\n\nCurrent main.c:\n```c\n{main_c}\n```"

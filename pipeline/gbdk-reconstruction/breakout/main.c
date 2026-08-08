@@ -29,6 +29,14 @@ enum {
 };
 
 /*
+ * Nova arcade protocol: one byte at a fixed WRAM address the arcade polls to
+ * detect run state. The linker can't move it because it's an absolute pointer,
+ * not a variable. 1 = run started, 2 = won, 3 = lost. Every game the pipeline
+ * ships MUST keep these three writes intact.
+ */
+#define NOVA_STATE (*(volatile uint8_t *)0xCF00)
+
+/*
  * These six values correspond to the original ROM's globals at $C0A0-$C0A5.
  * Positions use Game Boy OAM coordinates: visible X is X - 8 and visible Y
  * is Y - 16.
@@ -204,6 +212,7 @@ void main(void) {
 
     initialize_video();
     initialize_game();
+    NOVA_STATE = 1u;
 
     while (bricks_remaining != 0u) {
         keys = joypad();
@@ -233,6 +242,7 @@ void main(void) {
     }
 
     /* The original silently idles forever after both a win and a loss. */
+    NOVA_STATE = bricks_remaining == 0u ? 2u : 3u;
     while (true) {
         wait_vbl_done();
     }
