@@ -1003,3 +1003,71 @@ a.navSegment:hover {
     padding: 64px 16px;
   }
 }
+
+.endScreen {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(7, 9, 14, 0.88);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  padding: 24px;
+}
+
+.endScreen h2 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.endScreen p {
+  color: var(--dim);
+  font-size: 14px;
+  max-width: 40ch;
+}
+
+.endTime {
+  font-family: var(--font-mono), monospace;
+  font-size: 40px !important;
+  color: var(--accent) !important;
+  font-weight: 700;
+}
+
+.endPrimary {
+  background: var(--text);
+  color: var(--bg);
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 26px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.endGhost {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--dim);
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.endGhost:hover {
+  color: var(--text);
+}
+
+.endErr {
+  color: #f87171;
+}
+
+.player {
+  position: relative;
+}
