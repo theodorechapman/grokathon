@@ -515,3 +515,42 @@ main {
   line-height: 1.6;
   max-width: 48ch;
 }
+
+.myGames {
+  margin-top: 40px;
+}
+
+.myGames h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.myGamesRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.myGameChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.myGameChip:hover {
+  border-color: var(--accent);
+}
+
+.myGameStatus {
+  color: var(--accent);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
