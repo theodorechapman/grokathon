@@ -127,13 +127,14 @@ export default async function ArcadePage({
               </Link>
               <div className="gameBody">
                 <div className="gameTitleRow">
-                  <h3>
-                    {root.title}
-                    {root.slug === topSlug && <span className="badgeFav"> ★ community favorite</span>}
-                    {root.slug !== topSlug && isNew(root) && <span className="badgeNew"> NEW</span>}
-                  </h3>
-                  <span className="tag">{root.creator ? `@${root.creator}` : "Nova"}</span>
+                  <h3>{root.title}</h3>
+                  {root.slug === topSlug ? (
+                    <span className="badgeFav">★ community favorite</span>
+                  ) : (
+                    isNew(root) && <span className="badgeNew">NEW</span>
+                  )}
                 </div>
+                <p className="cardByline">by {root.creator ? `@${root.creator}` : "Nova"}</p>
                 <p>{root.description}</p>
                 <div className="gameActions">
                   <Link href={`/g/${root.slug}`} className="playBtn">

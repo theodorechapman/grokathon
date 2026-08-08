@@ -1065,6 +1065,32 @@ a.navSegment:hover {
   color: var(--text);
 }
 
+.cardByline {
+  color: var(--dim);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  margin-top: -4px;
+}
+
+.guestRow td {
+  color: var(--dim);
+}
+
+.boardGate {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--dim);
+  font-size: 14px;
+}
+
 .xDrive {
   margin-top: 16px;
   color: var(--dim);
