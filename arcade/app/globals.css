@@ -594,3 +594,37 @@ main {
 .authOut:hover {
   color: var(--text);
 }
+
+.navSegment {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  color: var(--dim);
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+}
+
+a.navSegment:hover {
+  color: var(--text);
+}
+
+.navSegmentActive {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.navUser {
+  color: var(--text);
+}
+
+.navDivider {
+  width: 1px;
+  align-self: stretch;
+  margin: 4px 2px;
+  background: var(--line);
+}

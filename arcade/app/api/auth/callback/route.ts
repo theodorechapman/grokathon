@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
   }
 
   const me = (await meRes.json()) as { data: { id: string; username: string; name: string } };
-  const res = NextResponse.redirect(`${SITE}/arcade`);
+  const res = NextResponse.redirect(`${SITE}/auth/done`);
   res.cookies.set(
     SESSION_COOKIE,
     encodeSession({ id: me.data.id, handle: me.data.username, name: me.data.name }),
