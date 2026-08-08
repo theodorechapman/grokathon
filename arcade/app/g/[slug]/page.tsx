@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGame } from "@/lib/games";
+import { getGame, listGames } from "@/lib/games";
 import { readSession } from "@/lib/session";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
@@ -45,6 +46,9 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   }
 
   const session = await readSession().catch(() => null);
+  const all = await listGames();
+  const parent = game.parent ? all.find((g) => g.slug === game.parent) : null;
+  const remixes = all.filter((g) => g.parent === slug);
 
   return (
     <main>
@@ -52,8 +56,16 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <PlayBeacon slug={slug} enabled={statsEnabled} />
       <div className="gameHead">
         <header className="masthead">
+          {parent && (
+            <p className="remixOf">
+              ↳ remix of <Link href={`/g/${parent.slug}`}>{parent.title}</Link>
+            </p>
+          )}
           <h1>{game.title}</h1>
           <p>{game.description}</p>
+          <a href="#remix" className="filterChip remixJump">
+            ↳ Remix this game
+          </a>
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
@@ -64,13 +76,39 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
         )}
       </div>
-      {session ? (
-        <RemixBox parent={slug} />
-      ) : (
-        <div className="remixGate">
-          <p>Sign in with 𝕏 to remix this game</p>
-          <SignInButton variant="nav" />
-        </div>
+      <section id="remix" className="remixPanel">
+        <h2>Want to remix {game.title}?</h2>
+        <p>
+          Say a sentence and a new version ships in about 90 seconds. Try &quot;make the
+          paddle tiny and the ball twice as fast&quot;.
+        </p>
+        {session ? (
+          <RemixBox parent={slug} />
+        ) : (
+          <div className="remixGate">
+            <p>Sign in with 𝕏 to remix this game</p>
+            <SignInButton variant="nav" />
+          </div>
+        )}
+      </section>
+
+      {remixes.length > 0 && (
+        <section className="remixPanel">
+          <h2>Remixes of {game.title}</h2>
+          <ul className="remixList">
+            {remixes.map((remix) => (
+              <li key={remix.slug} className="remixRow">
+                <Link href={`/g/${remix.slug}`} className="remixTitle">
+                  {remix.title}
+                </Link>
+                <span className="tag">{remix.creator ? `@${remix.creator}` : "Nova"}</span>
+                <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
+                  ▶
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
     </main>
   );
