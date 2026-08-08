@@ -158,10 +158,14 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           <ul className="remixList">
             {remixes.map((remix) => (
               <li key={remix.slug} className="remixRow">
-                <Link href={`/g/${remix.slug}`} className="remixTitle">
-                  {remix.title}
-                </Link>
-                <span className="tag">{remix.creator ? `@${remix.creator}` : "Nova"}</span>
+                <span className="remixMain">
+                  <Link href={`/g/${remix.slug}`} className="remixTitle">
+                    {remix.title}
+                  </Link>
+                  <span className="cardByline">
+                    by {remix.creator ? `@${remix.creator}` : "Nova"}
+                  </span>
+                </span>
                 <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
                   ▶
                 </Link>

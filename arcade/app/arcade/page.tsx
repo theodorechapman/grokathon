@@ -154,13 +154,15 @@ export default async function ArcadePage({
                     <ul className="remixList">
                       {remixes.map((remix) => (
                         <li key={remix.slug} className="remixRow">
-                          <Link href={`/g/${remix.slug}`} className="remixTitle">
-                            {remix.title}
-                            {isNew(remix) && <span className="badgeNew"> NEW</span>}
-                          </Link>
-                          <span className="tag">
-                            {remix.creator ? `@${remix.creator}` : "Nova"}
+                          <span className="remixMain">
+                            <Link href={`/g/${remix.slug}`} className="remixTitle">
+                              {remix.title}
+                            </Link>
+                            <span className="cardByline">
+                              by {remix.creator ? `@${remix.creator}` : "Nova"}
+                            </span>
                           </span>
+                          {isNew(remix) && <span className="badgeNew">NEW</span>}
                           <span className="gameControls">
                             {stats.get(remix.slug)!.plays} plays
                           </span>

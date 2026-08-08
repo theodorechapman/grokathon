@@ -1259,12 +1259,22 @@ a.navSegment:hover {
   flex-wrap: wrap;
 }
 
-.remixRow .remixTitle {
+.remixMain {
   flex: 1;
   min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.remixRow .remixTitle {
   font-size: 14px;
   font-weight: 600;
   color: var(--text);
+}
+
+.remixMain .cardByline {
+  margin-top: 0;
 }
 
 .remixRow .remixTitle:hover {
