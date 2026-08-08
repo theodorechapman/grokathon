@@ -8,7 +8,7 @@ export function anonId(): string {
   try {
     let id = localStorage.getItem(ANON_KEY);
     if (!id) {
-      id = Array.from(crypto.getRandomValues(new Uint8Array(3)))
+      id = Array.from(crypto.getRandomValues(new Uint8Array(16)))
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
       localStorage.setItem(ANON_KEY, id);

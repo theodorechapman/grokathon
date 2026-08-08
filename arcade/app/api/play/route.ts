@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   if (!SLUG_RE.test(slug) || !(await getGame(slug))) {
     return NextResponse.json({ error: "unknown game" }, { status: 404 });
   }
-  const anon = /^[0-9a-f]{6}$/.test(body.anon ?? "") ? `guest:${body.anon}` : null;
+  const anon = /^[0-9a-f]{32}$/.test(body.anon ?? "") ? `guest:${body.anon}` : null;
   const plays = await r.incr(`plays:${slug}`);
   const session = await readSession().catch(() => null);
   if (session) {
