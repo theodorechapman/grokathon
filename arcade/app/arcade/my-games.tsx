@@ -9,20 +9,47 @@ export function MyGames() {
   const [games, setGames] = useState<Mine[]>([]);
 
   useEffect(() => {
-    const slugs = myGameSlugs();
-    if (slugs.length === 0) return;
-    Promise.all(
-      slugs.map(async (slug): Promise<Mine> => {
-        try {
-          const res = await fetch(`/games/${slug}/manifest.json`);
-          if (res.ok) {
-            const m = await res.json();
-            return { slug, title: m.title ?? slug, shipped: true };
+    let cancelled = false;
+
+    async function serverSlugs(): Promise<string[]> {
+      try {
+        const res = await fetch("/api/my-games", { cache: "no-store" });
+        if (!res.ok) throw new Error(`my-games API ${res.status}`);
+        const data = (await res.json()) as { slugs?: unknown };
+        return Array.isArray(data.slugs)
+          ? data.slugs.filter((s): s is string => typeof s === "string")
+          : [];
+      } catch (err) {
+        console.error("my-games fetch failed, falling back to localStorage", err);
+        return [];
+      }
+    }
+
+    async function load() {
+      // server-known games first, then local ones; dedupe, cap 50
+      const slugs = [...new Set([...(await serverSlugs()), ...myGameSlugs()])].slice(0, 50);
+      if (slugs.length === 0) return;
+      const games = await Promise.all(
+        slugs.map(async (slug): Promise<Mine> => {
+          try {
+            const res = await fetch(`/games/${slug}/manifest.json`);
+            if (res.ok) {
+              const m = await res.json();
+              return { slug, title: m.title ?? slug, shipped: true };
+            }
+          } catch {
+            // no manifest yet means the game is still building
           }
-        } catch {}
-        return { slug, title: slug, shipped: false };
-      })
-    ).then(setGames);
+          return { slug, title: slug, shipped: false };
+        })
+      );
+      if (!cancelled) setGames(games);
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (games.length === 0) return null;
