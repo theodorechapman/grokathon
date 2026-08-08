@@ -13,6 +13,10 @@ pipeline/   agent work: ROM reverse engineering, prompt-gen, verify, repair
 
 The two sides meet at one interface: `docs/game-bundle-contract.md`. Pipelines drop a self-contained bundle into `arcade/public/games/<slug>/` and the arcade picks it up at build time. No registry, no code change.
 
+## Live
+
+Production: https://playgrokgames.vercel.app (backup alias: grok-arcade.vercel.app). Deployed from Supratik's machine via `vercel --prod` in `arcade/`, runs on every ship that touches arcade.
+
 ## Run
 
 ```
