@@ -87,7 +87,10 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       </div>
       <GameFrame slug={slug} title={game.title} rom={game.rom} scoring={game.scoring ?? "points"} signedIn={session !== null} />
       <div className="playerFoot">
-        <p className="controls">Instructions: {game.controls}</p>
+        <p className="controls">
+          Instructions: {game.controls}
+          {game.rom ? ". On a phone, use the D-pad and buttons under the screen." : ""}
+        </p>
         {!session && (
           <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
         )}
