@@ -1065,6 +1065,11 @@ a.navSegment:hover {
   color: var(--text);
 }
 
+.endBoardLink {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .endErr {
   color: #f87171;
 }
