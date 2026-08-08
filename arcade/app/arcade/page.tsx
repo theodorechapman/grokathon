@@ -2,8 +2,6 @@ import Link from "next/link";
 import { listGames, type GameManifest } from "@/lib/games";
 import { rankScore, statsFor } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
-import { readSession } from "@/lib/session";
-import { CreateBox } from "./create-box";
 import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
 
@@ -30,7 +28,6 @@ export default async function ArcadePage({
   searchParams: Promise<{ f?: string }>;
 }) {
   const { f } = await searchParams;
-  const session = await readSession().catch(() => null);
   const filter = FILTERS[f ?? "all"] ?? FILTERS.all;
   const unranked = await listGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
@@ -44,16 +41,10 @@ export default async function ArcadePage({
     <main>
       <SiteNav active="arcade" />
 
-      <section className="welcome">
-        <div className="welcomeText">
-          <h1>The arcade</h1>
-          <p>
-            Every game here started as a sentence and was played by a bot before
-            it shipped. Say a new one and it lands on this shelf.
-          </p>
-        </div>
-        <CreateBox signedIn={session !== null} />
-      </section>
+      <header className="masthead" style={{ marginTop: 8 }}>
+        <h1>The arcade</h1>
+        <p>Every game was played by a bot and passed before it shipped.</p>
+      </header>
 
       <MyGames />
 

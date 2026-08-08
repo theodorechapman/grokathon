@@ -774,3 +774,28 @@ a.navSegment:hover {
   font-family: var(--font-mono), monospace;
   color: var(--accent);
 }
+
+.createHero {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 90px 0 40px;
+  text-align: center;
+}
+
+.createHero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.createHero > p {
+  color: var(--dim);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 14px auto 32px;
+  max-width: 48ch;
+}
+
+.createHero .createBox {
+  justify-content: center;
+}
