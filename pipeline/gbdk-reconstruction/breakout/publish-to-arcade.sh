@@ -2,7 +2,8 @@
 set -euo pipefail
 
 RECONSTRUCTION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ARCADE_BUNDLE="$RECONSTRUCTION_DIR/../arcade/public/games/breakout"
+REPO_ROOT="$(cd "$RECONSTRUCTION_DIR/../../.." && pwd)"
+ARCADE_BUNDLE="$REPO_ROOT/arcade/public/games/breakout"
 ROM_NAME="breakout-reconstructed.gb"
 PUBLISHED_ROM="$ARCADE_BUNDLE/$ROM_NAME"
 TEMP_ROM="$PUBLISHED_ROM.tmp"

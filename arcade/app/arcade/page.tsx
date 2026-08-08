@@ -1,46 +1,78 @@
 import Link from "next/link";
-import { listGames } from "@/lib/games";
+import { listGames, type GameManifest } from "@/lib/games";
 import { rankScore, statsFor } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
-import { CreateBox } from "./create-box";
 import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
 
 export const dynamic = "force-dynamic";
 
-export default async function ArcadePage() {
+const SOURCE_LABEL: Record<string, string> = {
+  "rom-re": "reverse-engineered",
+  "prompt-gen": "prompted",
+  remix: "remix",
+};
+
+const FILTERS: Record<string, { label: string; match: (g: GameManifest) => boolean }> = {
+  all: { label: "All", match: () => true },
+  "1p": { label: "1 player", match: (g) => (g.players ?? 1) === 1 },
+  "2p": { label: "2 players", match: (g) => g.players === 2 },
+  "rom-re": { label: "Reverse-engineered", match: (g) => g.source === "rom-re" },
+  "prompt-gen": { label: "Prompted", match: (g) => g.source === "prompt-gen" },
+  remix: { label: "Remixes", match: (g) => g.source === "remix" },
+};
+
+export default async function ArcadePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ f?: string }>;
+}) {
+  const { f } = await searchParams;
+  const filter = FILTERS[f ?? "all"] ?? FILTERS.all;
   const unranked = await listGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
-  const games = [...unranked].sort((a, b) => {
-    const diff = rankScore(stats.get(b.slug)!) - rankScore(stats.get(a.slug)!);
-    return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
-  });
+  const games = unranked
+    .filter(filter.match)
+    .sort((a, b) => {
+      const diff = rankScore(stats.get(b.slug)!) - rankScore(stats.get(a.slug)!);
+      return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
+    });
   return (
     <main>
       <SiteNav active="arcade" />
 
-      <section className="welcome">
-        <div className="welcomeText">
-          <h1>The arcade</h1>
-          <p>
-            Every game here started as a sentence and was played by a bot before
-            it shipped. Say a new one and it lands on this shelf.
-          </p>
-        </div>
-        <CreateBox />
-      </section>
+      <header className="masthead" style={{ marginTop: 8 }}>
+        <h1>The arcade</h1>
+        <p>Every game was played by a bot and passed before it shipped.</p>
+      </header>
 
       <MyGames />
 
       <div className="shelfHead">
-        <h2>Global games</h2>
-        <p>Play instantly in your browser. Remix anything you like.</p>
+        <div>
+          <h2>Global games</h2>
+          <p>Play instantly in your browser. Remix anything you like.</p>
+        </div>
+        <div className="filterRow">
+          {Object.entries(FILTERS).map(([key, def]) => (
+            <Link
+              key={key}
+              href={key === "all" ? "/arcade" : `/arcade?f=${key}`}
+              className={
+                (f ?? "all") === key ? "filterChip filterChipActive" : "filterChip"
+              }
+            >
+              {def.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {games.length === 0 ? (
         <p className="empty">
-          No games on the shelf yet. The first one lands when the pipeline ships
-          its first verified bundle.
+          {unranked.length === 0
+            ? "No games on the shelf yet. The first one lands when the pipeline ships its first verified bundle."
+            : "Nothing matches this filter yet. Say a game and change that."}
         </p>
       ) : (
         <div className="grid">
@@ -57,8 +89,9 @@ export default async function ArcadePage() {
               <div className="gameBody">
                 <div className="gameTitleRow">
                   <h3>{game.title}</h3>
-                  <span className="tag">{game.source}</span>
+                  <span className="tag">{SOURCE_LABEL[game.source] ?? game.source}</span>
                 </div>
+                {game.creator && <p className="byline">by @{game.creator}</p>}
                 <p>{game.description}</p>
                 <div className="gameActions">
                   <Link href={`/g/${game.slug}`} className="playBtn">

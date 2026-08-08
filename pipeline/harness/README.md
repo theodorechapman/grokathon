@@ -28,6 +28,7 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label bal
 | `.grok/config.toml` (or `.codex/`) | MCP config: only the `staticre` server, with a per-workspace Ghidra project dir |
 | `rom/program-<sha>.gb` | blinded copy of the ROM (title stripped, checksums fixed) |
 | `static_re.md` | the RE skill/instructions (copied from `.claude/skills/static-re/`) |
+| `dynamic_re.md` | emulator skill (copied from `.claude/skills/dynamic-re/` when the grokboy bridge is built) |
 | `TASK.md` | the concrete task prompt |
 | `ghidra_work/` | the agent's private Ghidra project + evidence sidecar |
 | `src/` | where the agent writes its TypeScript reimplementation |
@@ -46,3 +47,18 @@ separate blinded ROM. Runs never share state, so several can be compared.
   keep the harness itself outside anything sensitive.
 - The first `staticre` tool call in a run is slow (JVM start + auto-analysis);
   this is expected.
+
+## Containerized runs (agent-in-a-box)
+
+`docker/` builds an image containing the full stack: staticre backend, Codex
+CLI, bun, this harness, and the grokboy SameBoy bridge (`agent/sameboy.py` +
+`bin/libgrokboy.so`) for dynamic analysis.
+
+```sh
+pipeline/harness/docker/build.sh        # build (needs staticre:local base)
+pipeline/harness/docker/smoke.sh        # verify the emulator bridge in-container
+pipeline/harness/docker/run.sh rom.gb   # one containerized agent run
+```
+
+Screenshots from the emulator bridge are PNGs upscaled 3x by default
+(480x432) so vision models can read them; pass `scale` (1..8) to override.

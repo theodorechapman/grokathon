@@ -18,7 +18,7 @@ $(TARGET): $(SOURCES) assets.h
 	"$(LCC)" -o "$@" $(SOURCES)
 
 verify: $(TARGET)
-	$(MAKE) -C .. bin/sameboy-harness
+	$(MAKE) -C ../.. all
 	python3 differential_test.py --frames "$(VERIFY_FRAMES)"
 
 clean:

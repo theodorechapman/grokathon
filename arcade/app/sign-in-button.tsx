@@ -1,6 +1,6 @@
 "use client";
 
-export function AuthButton() {
+export function SignInButton({ variant = "nav" }: { variant?: "nav" | "big" }) {
   function openPopup(e: React.MouseEvent) {
     e.preventDefault();
     const w = 500;
@@ -25,7 +25,11 @@ export function AuthButton() {
   }
 
   return (
-    <a href="/api/auth/login" onClick={openPopup} className="navSegment">
+    <a
+      href="/api/auth/login"
+      onClick={openPopup}
+      className={variant === "nav" ? "navSegment" : "bigSignIn"}
+    >
       Sign in with 𝕏
     </a>
   );

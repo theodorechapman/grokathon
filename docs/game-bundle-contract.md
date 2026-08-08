@@ -23,6 +23,7 @@ in the manifest's `rom` field.
 - `index.html` is fully self-contained. Inline JS and CSS or relative paths inside the bundle folder only. No CDN, no external fetch. It must run offline in an iframe.
 - A `.gb` bundle contains only the compiled ROM; the emulator and player UI belong to the arcade.
 - Canvas or DOM rendering, either is fine. Must handle keyboard and touch.
+- The game must size itself to its viewport: scale to fit, no scrolling, nothing cut off, at any frame size from a phone to a desktop. The arcade gives the iframe a fixed box and disables scroll, so a game that overflows loses content. The verify bot should treat overflow as a failure.
 - No console errors on boot. The verify bot treats them as failures.
 
 ## manifest.json
@@ -42,6 +43,10 @@ in the manifest's `rom` field.
 
 `source` says which pipeline made it. `parent` is the slug it was remixed from, null for originals. That's the lineage the ranking system credits.
 `rom` is required for Game Boy bundles and omitted for `index.html` bundles.
+
+Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters).
+
+Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")`. Score 0 is fine. This drives the end-of-run claim screen and the leaderboards; a game that never emits it never gets players on a board. The verify bot should check the message fires on game over.
 
 ## Adding a game
 

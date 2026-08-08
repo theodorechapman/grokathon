@@ -1,6 +1,6 @@
 # GBDK C reconstruction
 
-This is a behaviorally faithful C reconstruction of `../raw_rom/breakout.gb`
+This is a behaviorally faithful C reconstruction of `../../raw_rom/breakout.gb`
 for GBDK 2020. It preserves the original graphics, map, controls, object
 coordinates, collision order, 39-brick counter, and silent terminal state.
 
@@ -33,7 +33,7 @@ GBDK_HOME=/path/to/gbdk bash publish-to-arcade.sh
 ```
 
 The script forces a fresh build, runs differential verification, and atomically
-writes `../arcade/public/games/breakout/breakout-reconstructed.gb`.
+writes `../../../arcade/public/games/breakout/breakout-reconstructed.gb`.
 
 ## Differential verification
 

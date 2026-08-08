@@ -1,12 +1,14 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame } from "@/lib/games";
+import { topScores } from "@/lib/stats";
+import { readSession } from "@/lib/session";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
 import { GameBoyPlayer } from "./game-boy-player";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { RemixBox } from "./remix-box";
+import { ScoreClaim } from "./score-claim";
 import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
@@ -43,28 +45,53 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     );
   }
 
+  const [scores, session] = await Promise.all([
+    topScores(slug),
+    readSession().catch(() => null),
+  ]);
+
   return (
     <main>
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} enabled={statsEnabled} />
-      <Link href="/arcade" className="back">
-        ← Back to the arcade
-      </Link>
-      <header className="masthead" style={{ marginTop: 16 }}>
-        <h1>{game.title}</h1>
-        <p>{game.description}</p>
-      </header>
+      <ScoreClaim slug={slug} signedIn={session !== null} />
+      <div className="gameHead">
+        <header className="masthead">
+          <h1>{game.title}</h1>
+          <p>{game.description}</p>
+        </header>
+        <QrPanel url={`${SITE}/g/${slug}`} />
+      </div>
       <div className="player">
         {game.rom ? (
           <GameBoyPlayer romUrl={`/games/${slug}/${game.rom}`} title={game.title} />
         ) : (
-          <iframe src={`/games/${slug}/index.html`} title={`${game.title} game`} />
+          <iframe
+            src={`/games/${slug}/index.html`}
+            title={`${game.title} game`}
+            scrolling="no"
+          />
         )}
       </div>
       <div className="playerFoot">
         <p className="controls">{game.controls}</p>
-        <QrPanel url={`${SITE}/g/${slug}`} />
+        {!session && (
+          <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
+        )}
       </div>
+      {scores.length > 0 && (
+        <div className="highScores">
+          <h2>High scores</h2>
+          <ol>
+            {scores.map((row) => (
+              <li key={row.handle}>
+                <span>@{row.handle}</span>
+                <span>{row.score.toLocaleString()}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
       <RemixBox parent={slug} />
     </main>
   );

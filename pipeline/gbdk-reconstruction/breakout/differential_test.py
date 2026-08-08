@@ -8,13 +8,13 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "agent"))
+PIPELINE_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PIPELINE_ROOT / "agent"))
 
 from sameboy import SameBoy  # noqa: E402
 
 
-ORIGINAL_ROM = ROOT / "raw_rom" / "breakout.gb"
+ORIGINAL_ROM = PIPELINE_ROOT / "raw_rom" / "breakout.gb"
 RECONSTRUCTED_ROM = Path(__file__).resolve().parent / "breakout-reconstructed.gb"
 
 ACTIVE_TILES = (0x8F, 0x8C, 0x8D, 0x8E)

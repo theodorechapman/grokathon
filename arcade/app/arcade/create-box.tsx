@@ -3,13 +3,28 @@
 import { useState } from "react";
 import { rememberMyGame } from "@/lib/my-games";
 
+function openLogin(e: React.MouseEvent) {
+  e.preventDefault();
+  const popup = window.open("/api/auth/login", "nova-x-auth", "width=500,height=700");
+  if (!popup) {
+    window.location.href = "/api/auth/login";
+    return;
+  }
+  const timer = setInterval(() => {
+    if (popup.closed) {
+      clearInterval(timer);
+      window.location.reload();
+    }
+  }, 500);
+}
+
 type Status =
   | { kind: "idle" }
   | { kind: "sending" }
   | { kind: "queued"; slug: string }
   | { kind: "error"; message: string };
 
-export function CreateBox() {
+export function CreateBox({ signedIn = false }: { signedIn?: boolean }) {
   const [prompt, setPrompt] = useState("");
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
@@ -51,6 +66,14 @@ export function CreateBox() {
         </p>
       )}
       {status.kind === "error" && <p className="createNote createErr">{status.message}</p>}
+      {!signedIn && status.kind === "idle" && (
+        <p className="createNote">
+          <a href="/api/auth/login" onClick={openLogin}>
+            Sign in with 𝕏
+          </a>{" "}
+          to get credit for what you make.
+        </p>
+      )}
     </form>
   );
 }

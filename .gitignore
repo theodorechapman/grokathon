@@ -5,8 +5,8 @@ __pycache__/
 *.pyc
 workspaces/
 .playwright-cli/
-/bin/
-/agent/__pycache__/
+pipeline/bin/
+pipeline/agent/__pycache__/
 *.state
 *.png
 

@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { readSession } from "@/lib/session";
-import { AuthButton } from "./auth-button";
+import { SignInButton } from "./sign-in-button";
 
-export async function SiteNav({ active }: { active: "home" | "arcade" }) {
+export async function SiteNav({
+  active,
+}: {
+  active: "home" | "arcade" | "create" | "leaderboard";
+}) {
   const session = await readSession().catch(() => null);
   return (
     <nav className="siteNav">
@@ -10,23 +14,42 @@ export async function SiteNav({ active }: { active: "home" | "arcade" }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/nova-lockup.png" alt="Nova" className="siteNavLockup" />
       </Link>
-      <div className="siteNavPill">
-        <Link
-          href="/arcade"
-          className={active === "arcade" ? "navSegment navSegmentActive" : "navSegment"}
-        >
-          Arcade
-        </Link>
-        <span className="navDivider" />
-        {session ? (
-          <span className="navSegment navUser">
+      <div className="siteNavRight">
+        <div className="siteNavPill">
+          <Link
+            href="/arcade"
+            className={active === "arcade" ? "navSegment navSegmentActive" : "navSegment"}
+          >
+            Arcade
+          </Link>
+          {session ? (
+            <>
+              <Link
+                href="/create"
+                className={active === "create" ? "navSegment navSegmentActive" : "navSegment"}
+              >
+                Create
+              </Link>
+              <Link
+                href="/leaderboard"
+                className={
+                  active === "leaderboard" ? "navSegment navSegmentActive" : "navSegment"
+                }
+              >
+                Leaderboard
+              </Link>
+            </>
+          ) : (
+            <SignInButton />
+          )}
+        </div>
+        {session && (
+          <span className="authChip">
             @{session.handle}
             <a href="/api/auth/logout" className="authOut" title="Sign out">
               ✕
             </a>
           </span>
-        ) : (
-          <AuthButton />
         )}
       </div>
     </nav>

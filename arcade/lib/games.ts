@@ -11,6 +11,9 @@ export type GameManifest = {
   createdAt: string;
   rom?: string;
   hasCover: boolean;
+  creator?: string | null;
+  players?: 1 | 2;
+  tags?: string[];
 };
 
 const GAMES_DIR = path.join(process.cwd(), "public", "games");
