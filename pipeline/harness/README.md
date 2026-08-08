@@ -51,7 +51,7 @@ separate blinded ROM. Runs never share state, so several can be compared.
 ## Containerized runs (agent-in-a-box)
 
 `docker/` builds an image containing the full stack: staticre backend, Codex
-CLI, bun, this harness, and the grokboy SameBoy bridge (`agent/sameboy.py` +
+CLI, GBDK-2020, this harness, and the grokboy SameBoy bridge (`agent/sameboy.py` +
 `bin/libgrokboy.so`) for dynamic analysis.
 
 ```sh

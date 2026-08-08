@@ -24,19 +24,12 @@ workflow. Then:
    `src/reconstructed.gb`. Keep game logic separable from hardware access.
    Prefer clear, evidence-traceable code over cleverness; cite the source
    addresses (e.g. `/* ROM:0150 */`) in comments.
-4. Make it playable in the browser. Add a `web/` dir with an `index.html` and
-   a TypeScript entry that runs your rebuilt ROM in the `gameboy-emulator`
-   npm package, rendering to a canvas with arrow keys / buttons mapped to the
-   joypad. Provide a runnable bun app: a `package.json` with a `start` script
-   that builds the ROM (`make -C src`), bundles with `bun build`, and serves
-   `web/` (e.g. `bun run start` opens a playable page). The C reconstruction
-   is the game; the web layer only hosts the emulator.
-5. Keep a running `NOTES.md` in this workspace summarizing the memory map you
+4. Keep a running `NOTES.md` in this workspace summarizing the memory map you
    have recovered (which RAM addresses hold what) and open questions. These
    open questions are the handoff to later dynamic analysis.
 """
 
-DYNAMIC_TASK = """6. Dynamically verify. You can execute the program in a headless emulator and
+DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headless emulator and
    observe it while it runs — read `dynamic_re.md` in this workspace for the
    full API and discipline. Control it from Python:
 
@@ -46,15 +39,12 @@ DYNAMIC_TASK = """6. Dynamically verify. You can execute the program in a headle
    gb = SameBoy("{rom_path}")
    ```
 
-   Use it to test the hypotheses behind your reconstruction: watchpoints on
-   the RAM addresses in your recovered memory map, deterministic input
-   replays, screenshots of what the game actually shows. Once your C build
-   produces a ROM, differential-test it: open the original and
-   `src/reconstructed.gb` in two SameBoy instances, drive both with the same
-   input sequence, and compare the state you consider semantically equivalent.
-   Where the runtime evidence and your C reconstruction disagree, investigate
-   and fix — and raise or lower annotation confidence based on what you
-   observe.
+   Play the game: drive it with real input sequences, watch the screen, and
+   watchpoint the RAM addresses in your recovered memory map. Where the
+   runtime behavior and what your C reconstruction would predict disagree,
+   investigate and fix the C — and raise or lower annotation confidence based
+   on what you observe. Only ever run the original program in the emulator,
+   never your own build.
 """
 
 TASK_FOOTER = """
