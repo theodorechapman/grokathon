@@ -27,7 +27,13 @@ export default async function LeaderboardPage({
   }
 
   const { g } = await searchParams;
-  const games = await listGames();
+  const unordered = await listGames();
+  const slugs = new Set(unordered.map((x) => x.slug));
+  const rootsList = unordered.filter((x) => !x.parent || !slugs.has(x.parent));
+  const games = rootsList.flatMap((root) => [
+    root,
+    ...unordered.filter((x) => x.parent === root.slug && x.slug !== root.slug),
+  ]);
   const selected = games.find((game) => game.slug === g) ?? null;
 
   return (
@@ -48,7 +54,7 @@ export default async function LeaderboardPage({
             href={`/leaderboard?g=${game.slug}`}
             className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
           >
-            {game.title}
+            {game.parent && slugs.has(game.parent) ? `↳ ${game.title}` : game.title}
           </Link>
         ))}
       </div>
