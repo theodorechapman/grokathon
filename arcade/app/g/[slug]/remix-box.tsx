@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { rememberMyGame } from "@/lib/my-games";
 
 type Status =
   | { kind: "idle" }
@@ -24,6 +25,7 @@ export function RemixBox({ parent }: { parent: string }) {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "something broke");
+      rememberMyGame(data.slug);
       setStatus({ kind: "queued", slug: data.slug });
       setPrompt("");
     } catch (err) {

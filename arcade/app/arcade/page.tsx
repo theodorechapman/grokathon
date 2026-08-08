@@ -3,6 +3,7 @@ import { listGames } from "@/lib/games";
 import { rankScore, statsFor } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 import { CreateBox } from "./create-box";
+import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +30,10 @@ export default async function ArcadePage() {
         <CreateBox />
       </section>
 
+      <MyGames />
+
       <div className="shelfHead">
-        <h2>Games</h2>
+        <h2>Global games</h2>
         <p>Play instantly in your browser. Remix anything you like.</p>
       </div>
 
