@@ -1,10 +1,10 @@
 :root {
-  --bg: #0a0a0f;
-  --panel: #14141d;
-  --edge: #26263a;
-  --text: #e8e8f0;
-  --dim: #8a8aa3;
-  --accent: #7dd3fc;
+  --bg: #050506;
+  --panel: #0c0c0f;
+  --line: #1e1e24;
+  --text: #f2f2f5;
+  --dim: #74747f;
+  --go: #4ade80;
 }
 
 * {
@@ -16,8 +16,9 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--font-sans), "Helvetica Neue", sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -26,14 +27,15 @@ a {
 }
 
 main {
-  max-width: 960px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 48px 24px;
 }
 
 .masthead h1 {
   font-size: 28px;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -45,47 +47,62 @@ main {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
   margin-top: 40px;
 }
 
+.grid:empty {
+  display: none;
+}
+
 .card {
-  background: var(--panel);
-  border: 1px solid var(--edge);
-  border-radius: 8px;
-  padding: 20px;
+  background: var(--bg);
+  padding: 24px 20px;
   display: block;
-  transition: border-color 0.15s;
+  transition: background 0.15s;
 }
 
 .card:hover {
-  border-color: var(--accent);
+  background: var(--panel);
 }
 
 .card h2 {
   font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .card p {
   color: var(--dim);
   font-size: 13px;
   margin-top: 6px;
+  line-height: 1.5;
 }
 
 .card .tag {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 14px;
+  font-family: var(--font-mono), monospace;
   font-size: 11px;
-  color: var(--accent);
-  border: 1px solid var(--edge);
-  border-radius: 4px;
-  padding: 2px 8px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.empty {
+  margin-top: 40px;
+  border: 1px solid var(--line);
+  padding: 48px 24px;
+  color: var(--dim);
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
 }
 
 .player {
   margin-top: 24px;
-  border: 1px solid var(--edge);
-  border-radius: 8px;
+  border: 1px solid var(--line);
   overflow: hidden;
   background: #000;
 }
@@ -99,11 +116,14 @@ main {
 
 .back {
   color: var(--dim);
-  font-size: 13px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .back:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .controls {

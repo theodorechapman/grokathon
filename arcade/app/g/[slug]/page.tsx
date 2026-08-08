@@ -13,7 +13,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   if (!game) notFound();
   return (
     <main>
-      <Link href="/" className="back">
+      <Link href="/arcade" className="back">
         ← arcade
       </Link>
       <header className="masthead" style={{ marginTop: 16 }}>
