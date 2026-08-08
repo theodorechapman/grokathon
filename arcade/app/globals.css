@@ -113,6 +113,107 @@ main {
   border: 0;
 }
 
+.cosmos {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, #101a30 0%, #0a0d18 55%, #070910 100%);
+}
+
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+.nebulaA {
+  width: 520px;
+  height: 340px;
+  left: -80px;
+  top: -60px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.35), transparent 70%);
+}
+
+.nebulaB {
+  width: 620px;
+  height: 400px;
+  right: -120px;
+  bottom: -140px;
+  background: radial-gradient(circle, rgba(147, 122, 255, 0.3), transparent 70%);
+  animation-delay: -13s;
+}
+
+.vortex {
+  position: absolute;
+  width: 980px;
+  height: 980px;
+  left: 79%;
+  top: 42%;
+  margin: -490px 0 0 -490px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(45, 212, 191, 0.22) 70deg,
+    rgba(147, 122, 255, 0.18) 150deg,
+    transparent 210deg,
+    rgba(45, 212, 191, 0.14) 290deg,
+    transparent 360deg
+  );
+  filter: blur(26px);
+  animation: spin 46s linear infinite;
+}
+
+.core {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  left: 79%;
+  top: 42%;
+  margin: -55px 0 0 -55px;
+  border-radius: 50%;
+  background: #05060a;
+  box-shadow:
+    0 0 24px 6px rgba(127, 240, 225, 0.5),
+    0 0 90px 30px rgba(45, 212, 191, 0.25),
+    0 0 160px 70px rgba(147, 122, 255, 0.12);
+}
+
+.tw {
+  animation: twinkle 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate(40px, 24px) scale(1.08);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vortex,
+  .nebula,
+  .tw {
+    animation: none;
+  }
+}
+
 .back {
   color: var(--dim);
   font-size: 14px;
