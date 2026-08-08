@@ -72,7 +72,7 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
     # Remix lineage: start from the parent's shipped source when it exists so a
     # remix of a remix keeps its parent's changes instead of resetting to base.
     main_c = (BASE_SRC / "main.c").read_text()
-    if parent:
+    if parent and re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", parent):
         parent_src = GAMES / parent / "source.c"
         if parent_src.exists():
             main_c = parent_src.read_text()
