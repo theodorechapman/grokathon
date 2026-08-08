@@ -15,7 +15,15 @@ function installSilentAudioFallback() {
   });
 }
 
-export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string }) {
+export function GameBoyPlayer({
+  romUrl,
+  title,
+  onRestart,
+}: {
+  romUrl: string;
+  title: string;
+  onRestart: () => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<Gameboy | null>(null);
   const [status, setStatus] = useState<PlayerStatus>("loading");
@@ -122,6 +130,7 @@ export function GameBoyPlayer({ romUrl, title }: { romUrl: string; title: string
         <div className={styles.system} aria-label="System controls">
           <button type="button" aria-label="Select" {...touchProps("select")}>Select</button>
           <button type="button" aria-label="Start" {...touchProps("start")}>Start</button>
+          <button type="button" onClick={onRestart}>Restart</button>
         </div>
         <div className={styles.actions} aria-label="Action buttons">
           <button type="button" className={styles.b} aria-label="B button" {...touchProps("b")}>B</button>

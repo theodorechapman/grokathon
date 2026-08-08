@@ -9,6 +9,14 @@ export function GameFrame({ slug, title, rom }: { slug: string; title: string; r
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [runId, setRunId] = useState(0);
 
+  const restartGame = useCallback(() => {
+    if (rom) {
+      window.location.reload();
+      return;
+    }
+    setRunId((n) => n + 1);
+  }, [rom]);
+
   const focusGame = useCallback(() => {
     playerRef.current?.focus();
     const frame = frameRef.current;
@@ -26,6 +34,7 @@ export function GameFrame({ slug, title, rom }: { slug: string; title: string; r
             key={runId}
             romUrl={`/games/${slug}/${rom}`}
             title={title}
+            onRestart={restartGame}
           />
         ) : (
           <iframe
@@ -42,14 +51,8 @@ export function GameFrame({ slug, title, rom }: { slug: string; title: string; r
       <div className="frameBar">
         <button
           type="button"
-          className="frameBtn"
-          onClick={() => {
-            if (rom) {
-              window.location.reload();
-              return;
-            }
-            setRunId((n) => n + 1);
-          }}
+          className={rom ? "frameBtn frameRestartDesktop" : "frameBtn"}
+          onClick={restartGame}
         >
           ↻ Restart
         </button>
