@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "staticre": {
+      "command": "uv",
+      "args": ["run", "--project", "static", "staticre-mcp"],
+      "env": {
+        "STATICRE_ROM": "raw_rom/breakout.gb",
+        "STATICRE_WORKDIR": "static/work"
+      }
+    }
+  }
+}

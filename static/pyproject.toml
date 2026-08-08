@@ -6,10 +6,12 @@ requires-python = ">=3.11"
 dependencies = [
     # Pinned to the version bundled with Ghidra 11.4.2 (pyghidra 3.x needs Ghidra >=12)
     "pyghidra==2.2.1",
+    "mcp>=1.2",
 ]
 
 [project.scripts]
 staticre = "staticre.cli:main"
+staticre-mcp = "staticre.mcp_server:main"
 
 [build-system]
 requires = ["hatchling"]
