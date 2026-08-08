@@ -58,7 +58,7 @@ export function MyGames() {
     <section className="myGames">
       <h2>
         My games
-        <a href="/my" className="myGamesAll">
+        <a href="/create" className="myGamesAll">
           See all →
         </a>
       </h2>
