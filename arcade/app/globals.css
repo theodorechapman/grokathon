@@ -851,3 +851,30 @@ a.navSegment:hover {
 .bigSignIn:hover {
   background: #fff;
 }
+
+.frameBar {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.frameBtn {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+.frameBtn:hover {
+  border-color: var(--dim);
+}
+
+.frameLink {
+  display: inline-flex;
+  align-items: center;
+}

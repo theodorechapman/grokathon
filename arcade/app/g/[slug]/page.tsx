@@ -6,6 +6,7 @@ import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
+import { GameFrame } from "./game-frame";
 import { RemixBox } from "./remix-box";
 import { ScoreClaim } from "./score-claim";
 import { WaitingRoom } from "./waiting-room";
@@ -60,9 +61,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
-      <div className="player">
-        <iframe src={`/games/${slug}/index.html`} title={game.title} scrolling="no" />
-      </div>
+      <GameFrame slug={slug} title={game.title} />
       <div className="playerFoot">
         <p className="controls">{game.controls}</p>
         {!session && (
