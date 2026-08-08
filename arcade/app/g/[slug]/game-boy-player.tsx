@@ -133,16 +133,21 @@ export function GameBoyPlayer({
   }
 
   function touchProps(control: InputControl) {
+    const release = (event: React.PointerEvent<HTMLButtonElement>) => {
+      event.currentTarget.classList.remove(styles.pressed);
+      setControl(control, false);
+    };
     return {
       disabled: status !== "running",
       onPointerDown: (event: React.PointerEvent<HTMLButtonElement>) => {
         event.preventDefault();
         event.currentTarget.setPointerCapture(event.pointerId);
+        event.currentTarget.classList.add(styles.pressed);
         setControl(control, true);
       },
-      onPointerUp: () => setControl(control, false),
-      onPointerCancel: () => setControl(control, false),
-      onLostPointerCapture: () => setControl(control, false),
+      onPointerUp: release,
+      onPointerCancel: release,
+      onLostPointerCapture: release,
     };
   }
 
