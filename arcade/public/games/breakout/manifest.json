@@ -1,0 +1,9 @@
+{
+  "slug": "breakout",
+  "title": "Breakout",
+  "description": "The first game. Reverse-engineered from a Game Boy ROM and rebuilt for the browser, brick by brick.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "rom-re",
+  "parent": null,
+  "createdAt": "2026-08-08T20:30:00Z"
+}
