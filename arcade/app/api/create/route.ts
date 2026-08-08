@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redis } from "@/lib/stats";
+import { overLimit, redis } from "@/lib/stats";
 
 const REPO = "theodorechapman/grokathon";
 const MAX_PROMPT = 300;
@@ -59,6 +59,9 @@ export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (await rateLimited(ip)) {
     return NextResponse.json({ error: "slow down, one game a minute is plenty" }, { status: 429 });
+  }
+  if (await overLimit("create:global", 20)) {
+    return NextResponse.json({ error: "the arcade is busy, try again in a minute" }, { status: 429 });
   }
 
   let body: { prompt?: string; parent?: string };
