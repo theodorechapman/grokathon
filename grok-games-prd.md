@@ -34,6 +34,8 @@ Not one surface. Three, each doing one job.
 
 Browser is the play surface because it's the only one that's instant and works everywhere. X is the growth loop. Grok is the front door.
 
+Hosting: one Grok Games site, not a new site per game. Every game ships as a route on the same hosted arcade, something like grokgames.app/g/taco-dodge. A new game is a new route, not a new deploy. That keeps one deploy target, stable links for X cards and the Grok webview, and it gives us the arcade page for free: browse what's been made, play it, remix it. Remix culture needs a shared shelf.
+
 ## The loop
 
 Seven stages. Each one is one sentence.
@@ -85,10 +87,13 @@ Core, about 6 hours:
 - Playable link.
 - One live customization path.
 
-Integrations:
+Integrations, the Grok stack:
 
+- Grok CLI runs the pipeline. Spec, build, verify, repair all execute as Grok CLI agents in the sandbox.
 - Grok 4.5 for spec, code, and repair.
 - Structured outputs for the game spec.
+- Grok Imagine for the art: sprites, backgrounds, and the cover image on the share card. Templates ship with placeholder art so a slow or failed image call never blocks a playable game.
+- Grok Voice (Voice Agent API) only where a game calls for voice. Voice as an input method stays stretch.
 - Sign in with Grok, real or stubbed for the demo.
 
 Stretch, only if core is solid:
