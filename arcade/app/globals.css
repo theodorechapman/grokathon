@@ -109,8 +109,9 @@ main {
 .player iframe {
   display: block;
   width: 100%;
-  height: 70vh;
+  height: clamp(480px, 72vh, 860px);
   border: 0;
+  overflow: hidden;
 }
 
 .cosmos {

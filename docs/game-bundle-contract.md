@@ -17,6 +17,7 @@ arcade/public/games/<slug>/
 
 - `index.html` is fully self-contained. Inline JS and CSS or relative paths inside the bundle folder only. No CDN, no external fetch. It must run offline in an iframe.
 - Canvas or DOM rendering, either is fine. Must handle keyboard and touch.
+- The game must size itself to its viewport: scale to fit, no scrolling, nothing cut off, at any frame size from a phone to a desktop. The arcade gives the iframe a fixed box and disables scroll, so a game that overflows loses content. The verify bot should treat overflow as a failure.
 - No console errors on boot. The verify bot treats them as failures.
 
 ## manifest.json
