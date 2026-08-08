@@ -14,10 +14,10 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://playgrokgames.vercel.app"),
   title: "Nova — every game starts as a sentence",
-  description: "Say a game and Nova makes it real: built by Grok, proven playable by a bot, live in your browser in seconds.",
+  description: "The open source arcade the X community builds one reply at a time. Say a game and it's live in your browser in seconds.",
   openGraph: {
     title: "Nova",
-    description: "Every game starts as a sentence. Built on Grok.",
+    description: "Every game starts as a sentence. The X community builds the rest.",
     url: "https://playgrokgames.vercel.app",
     siteName: "Nova",
     images: ["/og.png"],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nova",
-    description: "Every game starts as a sentence. Built on Grok.",
+    description: "Every game starts as a sentence. The X community builds the rest.",
     images: ["/og.png"],
   },
 };
