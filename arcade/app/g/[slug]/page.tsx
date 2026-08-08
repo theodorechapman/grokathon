@@ -11,6 +11,7 @@ import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { GameFrame } from "./game-frame";
 import { RemixBox } from "./remix-box";
+import { DraftPanel } from "./draft-panel";
 import { SignInButton } from "../../sign-in-button";
 import { WaitingRoom } from "./waiting-room";
 
@@ -49,9 +50,26 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   }
 
   const session = await readSession().catch(() => null);
+
+  const isCreator = Boolean(session && game.creator && session.handle === game.creator);
+  if (game.draft && !isCreator) {
+    return (
+      <main>
+        <SiteNav active="arcade" />
+        <div className="waiting">
+          <h1>This draft isn&apos;t public yet</h1>
+          <p className="waitingNote">
+            The creator is still iterating on it. Check back after they publish
+            it, or <Link href="/arcade">browse the arcade</Link> meanwhile.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   const all = await listGames();
   const parent = game.parent ? all.find((g) => g.slug === game.parent) : null;
-  const remixes = all.filter((g) => g.parent === slug);
+  const remixes = all.filter((g) => g.parent === slug && !g.draft);
 
   type BuildLog = { stages: { name: string; at: number }[]; startedAt: number };
   const r = redis();
@@ -77,11 +95,16 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               ↳ remix of <Link href={`/g/${parent.slug}`}>{parent.title}</Link>
             </p>
           )}
-          <h1>{game.title}</h1>
+          <h1>
+            {game.title}
+            {game.draft && <span className="draftBadge">DRAFT</span>}
+          </h1>
           <p>{game.description}</p>
-          <a href="#remix" className="filterChip remixJump">
-            ↳ Remix this game
-          </a>
+          {!game.draft && (
+            <a href="#remix" className="filterChip remixJump">
+              ↳ Remix this game
+            </a>
+          )}
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
@@ -95,6 +118,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
         )}
       </div>
+      {game.draft && <DraftPanel slug={slug} />}
+      {!game.draft && (
       <section id="remix" className="remixPanel">
         <h2>Want to remix {game.title}?</h2>
         <p>
@@ -122,6 +147,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           sentence to start a brand new game.
         </p>
       </section>
+      )}
 
       <section className="remixPanel">
         <h2>How this game was built</h2>

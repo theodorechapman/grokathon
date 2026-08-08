@@ -152,12 +152,20 @@ def process_job(job: dict) -> Path | None:
     if not SLUG_RE.match(slug):
         log(f"job rejected: unsafe slug {slug!r}")
         return None
+    # Draft iteration: target is an existing draft bundle to rebuild in place.
+    # Its shipped source.c is the base the prompt edits.
+    target = job.get("target")
+    if target:
+        if not SLUG_RE.match(target):
+            log(f"job {slug} rejected: unsafe target {target!r}")
+            return None
+        slug = target
     log(f"job {slug}: '{job['prompt'][:60]}'")
     report(slug, "queued")
     main_c, rom, err = None, None, None
     for attempt in range(3):
         report(slug, "patching source", f"attempt {attempt + 1}, grok is rewriting the C")
-        main_c = patch_source(job["prompt"], err, job.get("parent"))
+        main_c = patch_source(job["prompt"], err, target or job.get("parent"))
         report(slug, "compiling", "gbdk building the rom")
         rom, err = build_rom(main_c, slug)
         if rom:
@@ -185,6 +193,19 @@ def process_job(job: dict) -> Path | None:
         "scoring": "time",
         "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
     }
+    if job.get("draft"):
+        manifest["draft"] = True
+    if target:
+        # Rebuild in place: keep the original identity fields so iteration
+        # never changes who made it, when, its lineage, or its draft state.
+        prev_path = bundle / "manifest.json"
+        if prev_path.exists():
+            prev = json.loads(prev_path.read_text())
+            for key in ("createdAt", "creator", "parent", "source"):
+                if key in prev:
+                    manifest[key] = prev[key]
+            if prev.get("draft"):
+                manifest["draft"] = True
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     (bundle / "source.c").write_text(main_c)
     report(slug, "publishing", "pushing to the arcade")

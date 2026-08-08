@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { Redis } from "@upstash/redis";
 import { redis } from "@/lib/stats";
-import { listGames } from "@/lib/games";
+import { listPublicGames } from "@/lib/games";
 import { submitJob } from "@/lib/submit-job";
 import { getBotMe, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
 
@@ -40,7 +40,7 @@ async function postOrDryRun(r: Redis, text: string, replyToId?: string): Promise
 }
 
 async function announceNewGames(r: Redis, result: SyncResult): Promise<void> {
-  const games = await listGames();
+  const games = await listPublicGames();
   const posted = new Set(await r.smembers("x:posted"));
   const gameposts = (await r.hgetall<Record<string, string>>("x:gamepost")) ?? {};
   for (const game of games) {
