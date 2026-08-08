@@ -117,7 +117,14 @@ workflow. Then:
    Structure it so the CPU/memory model and the game logic are separable.
    Prefer clear, evidence-traceable code over cleverness; cite the source
    addresses (e.g. `// ROM:0150`) in comments.
-4. Keep a running `NOTES.md` in this workspace summarizing the memory map you
+4. Make it playable. Add a small browser front-end (a `web/` dir with an
+   `index.html` and a TypeScript entry) that renders the game to a canvas and
+   maps the arrow keys / buttons to the input model, driving the same game
+   logic from `src/` (do NOT fork the logic into the UI). Provide a runnable
+   bun app: a `package.json` with a `start` script that builds the bundle with
+   `bun build` and serves `web/` (e.g. `bun run start` opens a playable page).
+   Keep the render layer thin and separate from the recovered logic.
+5. Keep a running `NOTES.md` in this workspace summarizing the memory map you
    have recovered (which RAM addresses hold what) and open questions. These
    open questions are the handoff to later dynamic analysis.
 
