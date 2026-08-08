@@ -6,7 +6,7 @@ Each run gets its own directory under workspaces/ containing:
   - static_re.md        the reverse-engineering skill/instructions (copied in)
   - rom/<program>.gb    a blinded copy of the target ROM
   - ghidra_work/        the agent's private Ghidra project + evidence sidecar
-  - src/                where the agent writes its TypeScript reimplementation
+  - src/                where the agent writes its raw-C (GBDK) reimplementation
   - TASK.md             the concrete task prompt
   - agent.log          full transcript of the headless run
 
