@@ -27,14 +27,21 @@ export async function POST(req: NextRequest) {
 
   const slug = body.slug ?? "";
   const score = body.score;
-  if (!SLUG_RE.test(slug) || !(await getGame(slug))) {
+  const game = SLUG_RE.test(slug) ? await getGame(slug) : null;
+  if (!game) {
     return NextResponse.json({ error: "unknown game" }, { status: 404 });
   }
-  if (typeof score !== "number" || !Number.isFinite(score) || score < 0 || score > MAX_SCORE) {
+  const isTime = game.scoring === "time";
+  const min = isTime ? 1 : 0;
+  if (typeof score !== "number" || !Number.isFinite(score) || score < min || score > MAX_SCORE) {
     return NextResponse.json({ error: "invalid score" }, { status: 400 });
   }
 
-  await r.zadd(`hs:${slug}`, { gt: true }, { score: Math.floor(score), member: session.handle });
+  await r.zadd(
+    `hs:${slug}`,
+    isTime ? { lt: true } : { gt: true },
+    { score: Math.floor(score), member: session.handle }
+  );
   const best = await r.zscore(`hs:${slug}`, session.handle);
   return NextResponse.json({ saved: true, handle: session.handle, best });
 }

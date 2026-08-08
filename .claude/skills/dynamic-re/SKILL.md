@@ -98,6 +98,38 @@ Other useful debugger commands: `registers`, `print`, `lcd`, `apu`,
 `palettes`, `dma`, `cartridge`. Use `evaluate()` for numbers, `debug()` when
 formatted output is useful evidence.
 
+## Recovering bank-switched code (important for ROMs > 32 KB)
+
+Static analysis can see the fixed bank (`ROM0`) but usually finds **no
+functions** in the switchable banks (`ROM1`, `ROM2`, …): a banked `call $4c00`
+targets whichever bank a runtime register selected, so Ghidra can't tell which
+bank — and leaves that code as raw bytes. On a multi-bank game that is most of
+the program (graphics, levels, enemies, audio, real gameplay logic).
+
+The emulator resolves this: it knows the live bank at every instruction. Turn
+on the call-target trace, **play through as much of the game as you can** (more
+coverage = more banked functions found), then hand the seeds to staticre's
+`create_functions`, which disassembles each and lets intra-bank flow-following
+define the rest.
+
+```python
+gb.call_trace(True)
+gb.run(frames=240); gb.press("start", frames=60); gb.run(frames=600)
+# ...drive real gameplay: move, jump, enter doors, trigger enemies...
+seeds = gb.call_targets()   # e.g. [{"canonical": "ROM5:4c00", "bank": 5, ...}, ...]
+```
+
+Then, via the staticre tools:
+
+```
+create_functions([s["canonical"] for s in seeds])   # ROM1..ROMn become real functions
+```
+
+Do this early: the banked functions it exposes are what you then annotate,
+decompile, and reconstruct. The more of the game you exercise before dumping
+seeds, the more of it becomes analyzable. Re-run the trace after reaching new
+areas to pick up newly executed banks.
+
 ## Screenshots
 
 ```python
@@ -142,14 +174,13 @@ hit = gb.run(frames=3600)
 print(hit["registers"]["pc"], gb.debug("disassemble/10 pc"), gb.debug("backtrace"))
 ```
 
-Differential test of your C reconstruction: open the original ROM and your
-rebuilt ROM in two `SameBoy` instances at once, drive both with the same input
-sequence, and compare the state you consider semantically equivalent (your
-recovered RAM addresses on the original side, your chosen addresses on the
-rebuilt side — an agreed mapping, not byte-for-byte RAM equality).
+Check your reconstruction against reality: drive the original ROM with a fixed
+input sequence, log the RAM addresses from your recovered memory map each
+frame, and check that your C logic predicts the same state transitions.
 Disagreements are either a bug in your reconstruction or a wrong hypothesis —
 investigate both ways, and record the outcome in `NOTES.md` with the trace as
-evidence.
+evidence. Only the original program runs in the emulator; never load your own
+build into it.
 
 ## Discipline
 

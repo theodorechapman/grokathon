@@ -201,6 +201,14 @@ def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
     library.sb_load_symbols.argtypes = [handle, ctypes.c_char_p]
     library.sb_load_symbols.restype = ctypes.c_int
 
+    library.sb_set_call_trace.argtypes = [handle, ctypes.c_bool]
+    library.sb_set_call_trace.restype = ctypes.c_int
+    library.sb_clear_call_trace.argtypes = [handle]
+    library.sb_clear_call_trace.restype = ctypes.c_int
+    library.sb_get_call_targets.argtypes = [
+        handle, ctypes.POINTER(ctypes.c_uint32), ctypes.c_size_t]
+    library.sb_get_call_targets.restype = ctypes.c_size_t
+
     library.sb_copy_frame_rgb.argtypes = [handle, byte_pointer, ctypes.c_size_t]
     library.sb_copy_frame_rgb.restype = ctypes.c_int
     library.sb_save_state.argtypes = [handle, ctypes.c_char_p]
@@ -577,6 +585,27 @@ class SameBoy:
             self._check(operation(self._handle, path))
             return {"ok": True}
 
+        if command == "call-trace":
+            action = request.get("action", "dump")
+            if action in {"on", "off"}:
+                self._check(self._library.sb_set_call_trace(self._handle, action == "on"))
+                return {"ok": True}
+            if action == "clear":
+                self._check(self._library.sb_clear_call_trace(self._handle))
+                return {"ok": True}
+            if action == "dump":
+                count = self._library.sb_get_call_targets(self._handle, None, 0)
+                buf = (ctypes.c_uint32 * count)()
+                n = self._library.sb_get_call_targets(self._handle, buf, count)
+                targets = [
+                    {"bank": key >> 16, "offset": key & 0xFFFF,
+                     "canonical": f"ROM{key >> 16}:{key & 0xFFFF:04x}"}
+                    for key in buf[:n]
+                ]
+                targets.sort(key=lambda t: (t["bank"], t["offset"]))
+                return {"ok": True, "count": len(targets), "targets": targets}
+            raise HarnessError("call-trace action must be on, off, clear, or dump")
+
         if command == "reset":
             quick = request.get("quick", False)
             if not isinstance(quick, bool):
@@ -693,6 +722,18 @@ class SameBoy:
 
     def load_symbols(self, path: str | Path) -> None:
         self.request({"cmd": "load-symbols", "path": str(Path(path).resolve())})
+
+    def call_trace(self, on: bool = True) -> None:
+        """Record runtime-resolved function entry points in switchable ROM
+        banks — seeds for static analysis of bank-switched code."""
+        self.request({"cmd": "call-trace", "action": "on" if on else "off"})
+
+    def clear_call_trace(self) -> None:
+        self.request({"cmd": "call-trace", "action": "clear"})
+
+    def call_targets(self) -> list[dict[str, Any]]:
+        """The recorded (bank, offset) seeds, e.g. {"canonical": "ROM5:4c00"}."""
+        return self.request({"cmd": "call-trace", "action": "dump"})["targets"]
 
     def reset(self, *, quick: bool = False) -> None:
         self.request({"cmd": "reset", "quick": quick})

@@ -12,3 +12,5 @@ pipeline/agent/__pycache__/
 
 # arcade images (covers, og cards) are real content, not work artifacts
 !arcade/**/*.png
+
+pipeline/gbdk-reconstruction/web/node_modules/

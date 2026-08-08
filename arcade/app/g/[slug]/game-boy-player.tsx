@@ -5,6 +5,41 @@ import type { Gameboy } from "gameboy-emulator";
 import styles from "./game-boy-player.module.css";
 
 type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "select";
+
+// WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-specific:
+// when the pipeline ships more ROM games it should provide these per game
+// (manifest field) instead of hardcoding.
+const BRICKS_ADDR = 0xc0a5;
+const BALL_Y_ADDR = 0xc0a2;
+const BALL_Y_DEAD = 0x9a;
+const BRICKS_START = 0x27;
+
+function watchRun(
+  gameboy: Gameboy,
+  onRunEnd: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void,
+  isCancelled: () => boolean
+) {
+  let startedAt = 0;
+  const timer = setInterval(() => {
+    if (isCancelled()) {
+      clearInterval(timer);
+      return;
+    }
+    const bricks = gameboy.memory.readByte(BRICKS_ADDR);
+    const ballY = gameboy.memory.readByte(BALL_Y_ADDR);
+    if (startedAt === 0) {
+      if (bricks === BRICKS_START) startedAt = performance.now();
+      return;
+    }
+    if (bricks === 0) {
+      clearInterval(timer);
+      onRunEnd({ outcome: "win", elapsedMs: Math.round(performance.now() - startedAt) });
+    } else if (ballY >= BALL_Y_DEAD) {
+      clearInterval(timer);
+      onRunEnd({ outcome: "loss", elapsedMs: Math.round(performance.now() - startedAt) });
+    }
+  }, 200);
+}
 type PlayerStatus = "loading" | "running" | "error";
 
 function installSilentAudioFallback() {
@@ -19,10 +54,14 @@ export function GameBoyPlayer({
   romUrl,
   title,
   onRestart,
+  timeScored = false,
+  onRunEnd,
 }: {
   romUrl: string;
   title: string;
   onRestart: () => void;
+  timeScored?: boolean;
+  onRunEnd?: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<Gameboy | null>(null);
@@ -59,6 +98,8 @@ export function GameBoyPlayer({
       });
       gameboy.loadGame(await response.arrayBuffer());
       gameboy.run();
+
+      if (timeScored && onRunEnd) watchRun(gameboy, onRunEnd, () => cancelled);
     }
 
     function preventArrowScroll(event: KeyboardEvent) {
@@ -78,7 +119,7 @@ export function GameBoyPlayer({
       gameboyRef.current = null;
       document.removeEventListener("keydown", preventArrowScroll);
     };
-  }, [romUrl]);
+  }, [romUrl, timeScored]);
 
   function setControl(control: InputControl, pressed: boolean) {
     const input = gameboyRef.current?.input;

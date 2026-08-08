@@ -68,10 +68,6 @@ body {
     flex-wrap: wrap;
   }
 
-  .frameRestartDesktop {
-    display: none;
-  }
-
   .player {
     margin-top: 18px;
     border-radius: 12px;
