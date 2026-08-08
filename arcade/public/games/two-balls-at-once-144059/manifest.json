@@ -1,0 +1,12 @@
+{
+  "slug": "two-balls-at-once-144059",
+  "title": "Double Trouble",
+  "description": "Juggle two balls at once for twice the chaos and fun.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": null,
+  "rom": "two-balls-at-once-144059.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T22:50:07Z"
+}
