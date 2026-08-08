@@ -4,7 +4,17 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { GameBoyPlayer } from "./game-boy-player";
 
-export function GameFrame({ slug, title, rom }: { slug: string; title: string; rom?: string }) {
+export function GameFrame({
+  slug,
+  title,
+  rom,
+  timeScored = false,
+}: {
+  slug: string;
+  title: string;
+  rom?: string;
+  timeScored?: boolean;
+}) {
   const playerRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [runId, setRunId] = useState(0);
@@ -26,6 +36,7 @@ export function GameFrame({ slug, title, rom }: { slug: string; title: string; r
             key={runId}
             romUrl={`/games/${slug}/${rom}`}
             title={title}
+            timeScored={timeScored}
           />
         ) : (
           <iframe

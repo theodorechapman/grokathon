@@ -44,7 +44,7 @@ in the manifest's `rom` field.
 `source` says which pipeline made it. `parent` is the slug it was remixed from, null for originals. That's the lineage the ranking system credits.
 `rom` is required for Game Boy bundles and omitted for `index.html` bundles.
 
-Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters).
+Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters), `scoring` ("time" or "points", default points). Time-scored games report elapsed milliseconds in nova:score and the boards rank fastest first; points games rank highest first.
 
 Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")`. Score 0 is fine. This drives the end-of-run claim screen and the leaderboards; a game that never emits it never gets players on a board. The verify bot should check the message fires on game over.
 

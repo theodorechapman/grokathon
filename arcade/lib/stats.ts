@@ -48,11 +48,11 @@ export function clientIp(headers: Headers): string {
 
 export type ScoreRow = { handle: string; score: number };
 
-export async function topScores(slug: string, n = 5): Promise<ScoreRow[]> {
+export async function topScores(slug: string, n = 5, asc = false): Promise<ScoreRow[]> {
   const r = redis();
   if (!r) return [];
   const raw = await r.zrange<(string | number)[]>(`hs:${slug}`, 0, n - 1, {
-    rev: true,
+    rev: !asc,
     withScores: true,
   });
   const rows: ScoreRow[] = [];
@@ -81,4 +81,12 @@ export async function playerBoard(n = 25): Promise<PlayerRow[]> {
     })
   );
   return rows;
+}
+
+export function formatScore(score: number, scoring?: "time" | "points"): string {
+  if (scoring !== "time") return score.toLocaleString();
+  const totalSec = score / 1000;
+  const min = Math.floor(totalSec / 60);
+  const sec = totalSec - min * 60;
+  return min > 0 ? `${min}:${sec.toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
 }

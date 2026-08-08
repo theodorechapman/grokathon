@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listGames } from "@/lib/games";
-import { playerBoard, topScores } from "@/lib/stats";
+import { formatScore, playerBoard, topScores } from "@/lib/stats";
 import { readSession } from "@/lib/session";
 import { SiteNav } from "../site-nav";
 import { SignInButton } from "../sign-in-button";
@@ -54,7 +54,7 @@ export default async function LeaderboardPage({
       </div>
 
       {selected ? (
-        <GameBoard slug={selected.slug} title={selected.title} />
+        <GameBoard slug={selected.slug} title={selected.title} scoring={selected.scoring} />
       ) : (
         <OverallBoard />
       )}
@@ -96,8 +96,16 @@ async function OverallBoard() {
   );
 }
 
-async function GameBoard({ slug, title }: { slug: string; title: string }) {
-  const scores = await topScores(slug, 20);
+async function GameBoard({
+  slug,
+  title,
+  scoring,
+}: {
+  slug: string;
+  title: string;
+  scoring?: "time" | "points";
+}) {
+  const scores = await topScores(slug, 20, scoring === "time");
   if (scores.length === 0) {
     return (
       <p className="empty">
@@ -111,7 +119,7 @@ async function GameBoard({ slug, title }: { slug: string; title: string }) {
         <tr>
           <th>#</th>
           <th>Player</th>
-          <th>High score</th>
+          <th>{scoring === "time" ? "Fastest clear" : "High score"}</th>
         </tr>
       </thead>
       <tbody>
@@ -119,7 +127,7 @@ async function GameBoard({ slug, title }: { slug: string; title: string }) {
           <tr key={row.handle}>
             <td>{i + 1}</td>
             <td>@{row.handle}</td>
-            <td>{row.score.toLocaleString()}</td>
+            <td>{formatScore(row.score, scoring)}</td>
           </tr>
         ))}
       </tbody>

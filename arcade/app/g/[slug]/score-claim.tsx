@@ -8,7 +8,22 @@ type Banner =
   | { kind: "saved"; score: number }
   | { kind: "error"; message: string };
 
-export function ScoreClaim({ slug, signedIn }: { slug: string; signedIn: boolean }) {
+function fmt(score: number, scoring?: "time" | "points"): string {
+  if (scoring !== "time") return score.toLocaleString();
+  const sec = score / 1000;
+  const min = Math.floor(sec / 60);
+  return min > 0 ? `${min}:${(sec - min * 60).toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
+}
+
+export function ScoreClaim({
+  slug,
+  signedIn,
+  scoring,
+}: {
+  slug: string;
+  signedIn: boolean;
+  scoring?: "time" | "points";
+}) {
   const [banner, setBanner] = useState<Banner>({ kind: "hidden" });
 
   async function submit(score: number): Promise<boolean> {
@@ -77,7 +92,8 @@ export function ScoreClaim({ slug, signedIn }: { slug: string; signedIn: boolean
       {banner.kind === "claim" && (
         <>
           <span>
-            Score <strong>{banner.score.toLocaleString()}</strong>. Nice run.
+            {scoring === "time" ? "Cleared in" : "Score"}{" "}
+            <strong>{fmt(banner.score, scoring)}</strong>. Nice run.
           </span>
           <button onClick={() => claimViaLogin(banner.score)}>
             Sign in with 𝕏 to claim it
@@ -89,7 +105,8 @@ export function ScoreClaim({ slug, signedIn }: { slug: string; signedIn: boolean
       )}
       {banner.kind === "saved" && (
         <span>
-          Score <strong>{banner.score.toLocaleString()}</strong> saved to the board.
+          {scoring === "time" ? "Clear time" : "Score"}{" "}
+          <strong>{fmt(banner.score, scoring)}</strong> saved to the board.
         </span>
       )}
       {banner.kind === "error" && <span>{banner.message}</span>}
