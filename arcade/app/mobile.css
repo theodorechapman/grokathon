@@ -9,12 +9,7 @@ body {
   }
 
   .qrPanel {
-    padding: 8px 12px;
-  }
-
-  .qrPanel img {
-    width: 72px;
-    height: 72px;
+    display: none;
   }
 }
 
