@@ -128,6 +128,19 @@ main {
   object-fit: cover;
 }
 
+.cosmosStill {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmosVideo {
+    display: none;
+  }
+  .cosmosStill {
+    display: block;
+  }
+}
+
 .cosmosShade {
   position: absolute;
   inset: 0;
