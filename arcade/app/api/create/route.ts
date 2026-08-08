@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { overLimit, redis } from "@/lib/stats";
 import { readSession } from "@/lib/session";
+import { JobQueueError, submitJob } from "@/lib/submit-job";
 
-const REPO = "theodorechapman/grokathon";
 const MAX_PROMPT = 300;
-const MAX_PENDING_JOBS = 30;
 const RATE_LIMIT_PER_MIN = 5;
 
 const hits = new Map<string, number[]>();
@@ -24,36 +23,8 @@ async function rateLimited(ip: string): Promise<boolean> {
   return recent.length > RATE_LIMIT_PER_MIN;
 }
 
-function slugify(prompt: string): string {
-  const words = prompt
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 4)
-    .join("-")
-    .slice(0, 48);
-  const suffix = crypto.randomUUID().slice(0, 6);
-  return `${words || "game"}-${suffix}`;
-}
-
-function commitSafe(prompt: string): string {
-  return prompt.replace(/[\r\n\t]+/g, " ").replace(/[^\x20-\x7e]/g, "").slice(0, 60);
-}
-
-async function pendingJobCount(token: string): Promise<number> {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/pipeline/jobs`, {
-    headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
-    cache: "no-store",
-  });
-  if (!res.ok) return 0;
-  const entries = (await res.json()) as { name: string }[];
-  return entries.filter((e) => e.name.endsWith(".json")).length;
-}
-
 export async function POST(req: NextRequest) {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) {
+  if (!process.env.GITHUB_TOKEN) {
     return NextResponse.json({ error: "job queue not configured" }, { status: 503 });
   }
 
@@ -80,46 +51,23 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if ((await pendingJobCount(token)) >= MAX_PENDING_JOBS) {
-    return NextResponse.json(
-      { error: "the queue is full, try again in a few minutes" },
-      { status: 503 }
-    );
-  }
-
-  const slug = slugify(prompt);
   const session = await readSession().catch(() => null);
-  const job = {
-    id: slug,
-    slug,
-    prompt,
-    parent: body.parent ?? null,
-    requestedAt: new Date().toISOString(),
-    source: "site",
-    creator: session?.handle ?? null,
-  };
-
-  const content = Buffer.from(JSON.stringify(job, null, 2)).toString("base64");
-  const res = await fetch(
-    `https://api.github.com/repos/${REPO}/contents/pipeline/jobs/${slug}.json`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: `job: ${commitSafe(prompt)}`,
-        content,
-      }),
+  let slug: string;
+  try {
+    slug = await submitJob({
+      prompt,
+      parent: body.parent ?? null,
+      source: "site",
+      creator: session?.handle ?? null,
+    });
+  } catch (err) {
+    if (err instanceof JobQueueError) {
+      console.error("job submit failed", err.status, err.message);
+      const friendly =
+        err.status === 503 ? "the queue is full, try again in a few minutes" : "failed to queue job";
+      return NextResponse.json({ error: friendly }, { status: err.status });
     }
-  );
-
-  if (!res.ok) {
-    const detail = await res.text();
-    console.error("job commit failed", res.status, detail.slice(0, 300));
-    return NextResponse.json({ error: "failed to queue job" }, { status: 502 });
+    throw err;
   }
 
   if (session) {
