@@ -1,0 +1,35 @@
+import { Redis } from "@upstash/redis";
+
+export type GameStats = { votes: number; plays: number };
+
+let client: Redis | null = null;
+
+export function redis(): Redis | null {
+  if (client) return client;
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return null;
+  client = new Redis({ url, token });
+  return client;
+}
+
+export const SLUG_RE = /^[a-z0-9-]{1,60}$/;
+
+export async function statsFor(slugs: string[]): Promise<Map<string, GameStats>> {
+  const out = new Map<string, GameStats>();
+  const r = redis();
+  if (!r || slugs.length === 0) {
+    slugs.forEach((s) => out.set(s, { votes: 0, plays: 0 }));
+    return out;
+  }
+  const keys = slugs.flatMap((s) => [`votes:${s}`, `plays:${s}`]);
+  const values = await r.mget<(number | null)[]>(...keys);
+  slugs.forEach((s, i) => {
+    out.set(s, { votes: values[i * 2] ?? 0, plays: values[i * 2 + 1] ?? 0 });
+  });
+  return out;
+}
+
+export function rankScore(s: GameStats): number {
+  return s.votes * 3 + s.plays;
+}
