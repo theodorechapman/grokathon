@@ -72,7 +72,13 @@ async function repliesToRemixes(r: Redis, result: SyncResult, budget: { left: nu
       // account) — but never the bot's own announcements, which always carry
       // the site link. That also keeps thread-reply announcements from
       // spawning job loops.
-      const isOwnAnnouncement = reply.author_id === botId && reply.text.includes("playgrokgames.vercel.app");
+      // X shortens links to t.co, so a raw URL match misses the bot's own
+      // announcements. Match the announcement prefix and any link instead.
+      const isOwnAnnouncement =
+        reply.author_id === botId &&
+        (/^(NEW GAME|REMIX):/.test(reply.text) ||
+          reply.text.includes("playgrokgames.vercel.app") ||
+          reply.text.includes("t.co/"));
       if (!isOwnAnnouncement && reply.author_handle) {
         const jobSlug = await submitJob({
           prompt: reply.text,
