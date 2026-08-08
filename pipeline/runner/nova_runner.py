@@ -68,8 +68,14 @@ def extract_c(text: str) -> str:
     return (m.group(1) if m else text).strip() + "\n"
 
 
-def patch_source(prompt: str, error: str | None = None) -> str:
+def patch_source(prompt: str, error: str | None = None, parent: str | None = None) -> str:
+    # Remix lineage: start from the parent's shipped source when it exists so a
+    # remix of a remix keeps its parent's changes instead of resetting to base.
     main_c = (BASE_SRC / "main.c").read_text()
+    if parent:
+        parent_src = GAMES / parent / "source.c"
+        if parent_src.exists():
+            main_c = parent_src.read_text()
     assets_h = (BASE_SRC / "assets.h").read_text()
     system = (
         "You modify a GBDK-2020 Game Boy breakout game written in C. Apply the "
@@ -151,7 +157,7 @@ def process_job(job: dict) -> Path | None:
     main_c, rom, err = None, None, None
     for attempt in range(3):
         report(slug, "patching source", f"attempt {attempt + 1}, grok is rewriting the C")
-        main_c = patch_source(job["prompt"], err)
+        main_c = patch_source(job["prompt"], err, job.get("parent"))
         report(slug, "compiling", "gbdk building the rom")
         rom, err = build_rom(main_c, slug)
         if rom:
