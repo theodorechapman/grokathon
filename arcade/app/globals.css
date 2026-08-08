@@ -851,3 +851,97 @@ a.navSegment:hover {
 .bigSignIn:hover {
   background: #fff;
 }
+
+@media (max-width: 600px) {
+  main {
+    padding: 28px 16px;
+  }
+
+  .siteNav {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 0 20px;
+  }
+
+  .siteNavLockup {
+    height: 28px;
+  }
+
+  .siteNavPill,
+  .navPill {
+    font-size: 13px;
+  }
+
+  .siteNavPill a,
+  .navSegment {
+    padding: 7px 12px;
+  }
+
+  .welcome {
+    padding: 24px 20px;
+  }
+
+  .createBox {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .masthead h1 {
+    font-size: 28px;
+  }
+
+  .player iframe {
+    height: clamp(360px, 58vh, 560px);
+  }
+
+  .playerFoot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .highScores {
+    max-width: none;
+  }
+
+  .board {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .board th,
+  .board td {
+    white-space: nowrap;
+  }
+
+  .scoreBanner {
+    width: calc(100vw - 24px);
+    max-width: 440px;
+    flex-wrap: wrap;
+    justify-content: center;
+    bottom: 16px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .createHero {
+    padding: 56px 0 32px;
+  }
+
+  .createHero h1 {
+    font-size: 32px;
+  }
+
+  .gate {
+    padding: 72px 0 48px;
+  }
+
+  .gate h1 {
+    font-size: 28px;
+  }
+
+  .waiting {
+    padding: 64px 16px;
+  }
+}
