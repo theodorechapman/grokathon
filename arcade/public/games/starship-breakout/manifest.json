@@ -8,5 +8,6 @@
   "rom": "starship-breakout.gb",
   "createdAt": "2026-08-08T22:25:00Z",
   "scoring": "time",
-  "players": 1
+  "players": 1,
+  "creator": "henryzhangumich"
 }
