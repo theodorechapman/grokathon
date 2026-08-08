@@ -5,9 +5,9 @@ Ask Grok for a game, play it in your browser in seconds, reshape it live in plai
 ## Layout
 
 ```
-docs/       PRD, pitch script, game bundle contract
-arcade/     the hosted site: home grid + /g/[slug] player (Next.js)
-pipeline/   agent work: ROM reverse engineering, prompt-gen, verify, repair
+docs/       PRD, pitch script, bundle contract, RE writeups
+arcade/     the hosted site: landing, shelf, player, auth, APIs (Next.js)
+pipeline/   agent work: ROM reverse engineering, emulator harness, jobs queue
 .claude/    skills: eng-standards, ship, frontend-design, webapp-testing
 ```
 
