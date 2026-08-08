@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import { HeroArt } from "./hero-art";
-import { NovaMark } from "./nova-mark";
 
 const HOW = [
   {
@@ -27,8 +26,8 @@ export default function LandingPage() {
     <div className={styles.page}>
       <nav className={styles.nav}>
         <span className={styles.wordmark}>
-          <NovaMark size={22} />
-          Nova
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/nova-lockup.png" alt="Nova" className={styles.navLockup} />
         </span>
         <div className={styles.navPill}>
           <Link href="/arcade" className={styles.navActive}>
@@ -41,10 +40,8 @@ export default function LandingPage() {
       <header className={styles.hero}>
         <HeroArt />
         <div className={styles.heroInner}>
-          <div className={styles.heroMark}>
-            <NovaMark size={44} />
-          </div>
-          <h1>Nova</h1>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/nova-lockup.png" alt="Nova" className={styles.lockup} />
           <p className={styles.tagline}>Every game starts as a sentence.</p>
           <p className={styles.sub}>
             Say it, and Nova makes it real: built by Grok, proven playable by a

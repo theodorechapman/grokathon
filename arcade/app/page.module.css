@@ -14,10 +14,11 @@
 .wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.01em;
+}
+
+.navLockup {
+  height: 36px;
+  mix-blend-mode: screen;
 }
 
 .navPill {
@@ -51,32 +52,24 @@
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--line);
-  min-height: 480px;
+  min-height: 500px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
   background: #0a0d18;
 }
 
 .heroInner {
   position: relative;
-  padding: 56px 24px;
+  padding: 56px 48px;
+  max-width: 560px;
 }
 
-.heroMark {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 18px;
-  filter: drop-shadow(0 0 18px rgba(127, 240, 225, 0.45));
-}
-
-.heroInner h1 {
-  font-size: clamp(48px, 7vw, 84px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+.lockup {
+  width: min(420px, 80vw);
+  mix-blend-mode: screen;
+  display: block;
 }
 
 .tagline {
@@ -87,7 +80,7 @@
 }
 
 .sub {
-  margin: 14px auto 0;
+  margin: 14px 0 0;
   font-size: 16px;
   line-height: 1.6;
   color: #aebccb;
