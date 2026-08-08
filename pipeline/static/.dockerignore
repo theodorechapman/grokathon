@@ -1,0 +1,6 @@
+work/
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+docker/*.md
