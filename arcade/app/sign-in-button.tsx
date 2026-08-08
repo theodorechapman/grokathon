@@ -2,6 +2,7 @@
 
 export function SignInButton({ variant = "nav" }: { variant?: "nav" | "big" }) {
   function openPopup(e: React.MouseEvent) {
+    if (window.matchMedia("(pointer: coarse), (max-width: 600px)").matches) return;
     e.preventDefault();
     const w = 500;
     const h = 700;

@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import "./mobile.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const plexMono = IBM_Plex_Mono({
@@ -27,6 +28,12 @@ export const metadata: Metadata = {
     description: "Every game starts as a sentence. Built on Grok.",
     images: ["/og.png"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

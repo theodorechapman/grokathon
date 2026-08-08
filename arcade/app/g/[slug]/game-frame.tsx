@@ -52,16 +52,17 @@ export function GameFrame({
       </div>
       <div className="frameBar">
         <button
+          type="button"
           className="frameBtn"
           onClick={() => {
             if (rom) {
               window.location.reload();
-            } else {
-              setRunId((n) => n + 1);
+              return;
             }
+            setRunId((n) => n + 1);
           }}
         >
-          ↻ Replay
+          ↻ Restart
         </button>
         <Link href={`/leaderboard?g=${slug}`} className="frameBtn frameLink">
           View leaderboard →
