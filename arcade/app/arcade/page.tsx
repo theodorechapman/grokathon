@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listGames, type GameManifest } from "@/lib/games";
+import { listPublicGames, type GameManifest } from "@/lib/games";
 import { rankScore, statsFor, type GameStats } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 import { MyGames } from "./my-games";
@@ -38,7 +38,7 @@ export default async function ArcadePage({
   const { f, sort } = await searchParams;
   const filter = FILTERS[f ?? "all"] ?? FILTERS.all;
   const sortKey: SortKey = sort === "new" ? "new" : "top";
-  const unranked = await listGames();
+  const unranked = await listPublicGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
   const ranked = unranked
     .filter(filter.match)

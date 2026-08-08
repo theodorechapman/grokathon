@@ -9,6 +9,7 @@ type Row = {
   live: boolean;
   stage: string | null;
   parent: string | null;
+  draft: boolean;
 };
 
 export function MyCreations({ titles }: { titles: Record<string, string> }) {
@@ -35,13 +36,18 @@ export function MyCreations({ titles }: { titles: Record<string, string> }) {
       try {
         const res = await fetch(`/games/${slug}/manifest.json`);
         if (res.ok) {
-          const m = (await res.json()) as { title?: string; parent?: string | null };
+          const m = (await res.json()) as {
+            title?: string;
+            parent?: string | null;
+            draft?: boolean;
+          };
           return {
             slug,
             title: m.title ?? slug,
             live: true,
             stage: null,
             parent: m.parent ?? null,
+            draft: m.draft === true,
           };
         }
       } catch {
@@ -57,7 +63,7 @@ export function MyCreations({ titles }: { titles: Record<string, string> }) {
       } catch {
         // status service down; row still shows as building
       }
-      return { slug, title: slug, live: false, stage, parent: null };
+      return { slug, title: slug, live: false, stage, parent: null, draft: false };
     }
 
     async function load() {
@@ -102,7 +108,11 @@ export function MyCreations({ titles }: { titles: Record<string, string> }) {
             </td>
             <td>
               {r.live ? (
-                <span className="statusChip statusLive">live</span>
+                r.draft ? (
+                  <span className="statusChip statusDraft">draft</span>
+                ) : (
+                  <span className="statusChip statusLive">live</span>
+                )
               ) : (
                 <span className="statusChip statusBuilding">
                   building{r.stage ? ` — ${r.stage}` : ""}

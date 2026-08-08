@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listGames } from "@/lib/games";
+import { listPublicGames } from "@/lib/games";
 import { formatScore, playerBoard, topScores } from "@/lib/stats";
 import { readSession } from "@/lib/session";
 import { SiteNav } from "../site-nav";
@@ -14,7 +14,7 @@ export default async function LeaderboardPage({
 }) {
   const session = await readSession().catch(() => null);
   const { g } = await searchParams;
-  const unordered = await listGames();
+  const unordered = await listPublicGames();
   const slugs = new Set(unordered.map((x) => x.slug));
   const rootsList = unordered.filter((x) => !x.parent || !slugs.has(x.parent));
   const selected = unordered.find((game) => game.slug === g) ?? null;

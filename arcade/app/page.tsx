@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import { HeroArt } from "./hero-art";
 import { SiteNav } from "./site-nav";
-import { listGames } from "@/lib/games";
+import { listPublicGames } from "@/lib/games";
 import { statsFor } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +15,7 @@ const STEPS = [
 ];
 
 export default async function LandingPage() {
-  const games = (await listGames()).slice(0, 3);
+  const games = (await listPublicGames()).slice(0, 3);
   const stats = await statsFor(games.map((g) => g.slug));
 
   return (
