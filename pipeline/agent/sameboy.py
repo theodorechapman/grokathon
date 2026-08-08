@@ -24,6 +24,9 @@ SCREEN_WIDTH = 160
 SCREEN_HEIGHT = 144
 FRAME_RGB_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT * 3
 MAX_MEMORY_TRANSFER = 4096
+# Screenshots are nearest-neighbor upscaled so vision models can read them;
+# the native 160x144 frame is too small.
+DEFAULT_SCREENSHOT_SCALE = 3
 
 STOP_REASONS = {
     0: "frame-limit",
@@ -244,17 +247,21 @@ def _png_chunk(kind: bytes, data: bytes) -> bytes:
     return struct.pack(">I", len(data)) + payload + struct.pack(">I", binascii.crc32(payload))
 
 
-def _write_png(path: Path, rgb: bytes) -> None:
+def _write_png(path: Path, rgb: bytes, scale: int = 1) -> None:
     row_size = SCREEN_WIDTH * 3
-    raw = b"".join(
-        b"\0" + rgb[offset : offset + row_size]
-        for offset in range(0, len(rgb), row_size)
+    rows = []
+    for offset in range(0, len(rgb), row_size):
+        row = rgb[offset : offset + row_size]
+        if scale > 1:
+            row = b"".join(row[i : i + 3] * scale for i in range(0, row_size, 3))
+        rows.append((b"\0" + row) * scale)
+    header = struct.pack(
+        ">IIBBBBB", SCREEN_WIDTH * scale, SCREEN_HEIGHT * scale, 8, 2, 0, 0, 0
     )
-    header = struct.pack(">IIBBBBB", SCREEN_WIDTH, SCREEN_HEIGHT, 8, 2, 0, 0, 0)
     path.write_bytes(
         b"\x89PNG\r\n\x1a\n"
         + _png_chunk(b"IHDR", header)
-        + _png_chunk(b"IDAT", zlib.compress(raw, level=1))
+        + _png_chunk(b"IDAT", zlib.compress(b"".join(rows), level=1))
         + _png_chunk(b"IEND", b"")
     )
 
@@ -541,6 +548,7 @@ class SameBoy:
             path_value = request.get("path")
             if not isinstance(path_value, str):
                 raise HarnessError("screenshot requires path")
+            scale = _integer(request.get("scale", DEFAULT_SCREENSHOT_SCALE), "scale", 1, 8)
             frame = (ctypes.c_uint8 * FRAME_RGB_SIZE)()
             self._check(
                 self._library.sb_copy_frame_rgb(
@@ -548,8 +556,13 @@ class SameBoy:
                 )
             )
             path = Path(path_value).resolve()
-            _write_png(path, bytes(frame))
-            return {"ok": True, "path": str(path)}
+            _write_png(path, bytes(frame), scale)
+            return {
+                "ok": True,
+                "path": str(path),
+                "width": SCREEN_WIDTH * scale,
+                "height": SCREEN_HEIGHT * scale,
+            }
 
         if command in {"save-state", "load-state", "load-symbols"}:
             path_value = request.get("path")
@@ -667,9 +680,9 @@ class SameBoy:
     def debug(self, command: str) -> str:
         return self.request({"cmd": "debug", "command": command})["output"]
 
-    def screenshot(self, path: str | Path) -> Path:
+    def screenshot(self, path: str | Path, *, scale: int = DEFAULT_SCREENSHOT_SCALE) -> Path:
         destination = Path(path).resolve()
-        self.request({"cmd": "screenshot", "path": str(destination)})
+        self.request({"cmd": "screenshot", "path": str(destination), "scale": scale})
         return destination
 
     def save_state(self, path: str | Path) -> None:

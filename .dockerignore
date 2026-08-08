@@ -8,6 +8,8 @@
 pipeline/tools
 pipeline/workspaces
 pipeline/static/work
+pipeline/vendor/SameBoy/build
+pipeline/bin
 arcade
 docs
 **/.next
