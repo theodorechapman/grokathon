@@ -87,6 +87,8 @@ export function GameBoyPlayer({
       const gameboy = new Gameboy();
       let drewFirstFrame = false;
       gameboyRef.current = gameboy;
+      // Debug handle for probing WRAM from the console; harmless in prod.
+      (window as unknown as { __novaGb?: Gameboy }).__novaGb = gameboy;
       gameboy.onFrameFinished((imageData: ImageData) => {
         if (cancelled) return;
         context.putImageData(imageData, 0, 0);
