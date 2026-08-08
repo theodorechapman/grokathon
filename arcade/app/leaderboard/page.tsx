@@ -13,51 +13,64 @@ export default async function LeaderboardPage({
   searchParams: Promise<{ g?: string }>;
 }) {
   const session = await readSession().catch(() => null);
-  if (!session) {
-    return (
-      <main>
-        <SiteNav active="leaderboard" />
-        <section className="gate">
-          <h1>The leaderboard is for players</h1>
-          <p>Sign in to see who&apos;s on top and put your own handle up there.</p>
-          <SignInButton variant="big" />
-        </section>
-      </main>
-    );
-  }
-
   const { g } = await searchParams;
   const unordered = await listGames();
   const slugs = new Set(unordered.map((x) => x.slug));
   const rootsList = unordered.filter((x) => !x.parent || !slugs.has(x.parent));
-  const games = rootsList.flatMap((root) => [
-    root,
-    ...unordered.filter((x) => x.parent === root.slug && x.slug !== root.slug),
-  ]);
-  const selected = games.find((game) => game.slug === g) ?? null;
+  const selected = unordered.find((game) => game.slug === g) ?? null;
+  // The family in view: the selected game's root, so remix chips only show in context.
+  const selectedRoot =
+    selected && selected.parent && slugs.has(selected.parent)
+      ? unordered.find((x) => x.slug === selected.parent) ?? null
+      : selected;
+  const familyRemixes = selectedRoot
+    ? unordered.filter((x) => x.parent === selectedRoot.slug && x.slug !== selectedRoot.slug)
+    : [];
 
   return (
     <main>
       <SiteNav active="leaderboard" />
       <header className="masthead" style={{ marginTop: 8 }}>
         <h1>Leaderboard</h1>
-        <p>Who plays, and who tops each game&apos;s board.</p>
+        <p>
+          Every visitor who plays is on the global board. Sign in with 𝕏 to claim
+          your handle and put scores on the game boards.
+        </p>
       </header>
 
       <div className="filterRow" style={{ marginTop: 24 }}>
         <Link href="/leaderboard" className={!selected ? "filterChip filterChipActive" : "filterChip"}>
           All games
         </Link>
-        {games.map((game) => (
+        {rootsList.map((game) => (
           <Link
             key={game.slug}
             href={`/leaderboard?g=${game.slug}`}
-            className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
+            className={selectedRoot?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
           >
-            {game.parent && slugs.has(game.parent) ? `↳ ${game.title}` : game.title}
+            {game.title}
           </Link>
         ))}
       </div>
+      {familyRemixes.length > 0 && (
+        <div className="filterRow" style={{ marginTop: 10 }}>
+          {familyRemixes.map((game) => (
+            <Link
+              key={game.slug}
+              href={`/leaderboard?g=${game.slug}`}
+              className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
+            >
+              ↳ {game.title}
+            </Link>
+          ))}
+        </div>
+      )}
+      {!session && (
+        <div className="boardGate">
+          <span>Playing as a guest. Sign in to claim your plays under your handle.</span>
+          <SignInButton variant="nav" />
+        </div>
+      )}
 
       {selected ? (
         <GameBoard slug={selected.slug} title={selected.title} scoring={selected.scoring} />
@@ -89,14 +102,17 @@ async function OverallBoard() {
         </tr>
       </thead>
       <tbody>
-        {rows.map((row, i) => (
-          <tr key={row.handle}>
-            <td>{i + 1}</td>
-            <td>@{row.handle}</td>
-            <td>{row.plays}</td>
-            <td>{row.games}</td>
-          </tr>
-        ))}
+        {rows.map((row, i) => {
+          const guest = row.handle.startsWith("guest:");
+          return (
+            <tr key={row.handle} className={guest ? "guestRow" : undefined}>
+              <td>{i + 1}</td>
+              <td>{guest ? `guest-${row.handle.slice(6)}` : `@${row.handle}`}</td>
+              <td>{row.plays}</td>
+              <td>{row.games}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
