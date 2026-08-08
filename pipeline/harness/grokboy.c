@@ -88,6 +88,23 @@ struct sb_handle {
 
 static _Thread_local char create_error[256];
 
+static int fail(sb_handle *handle, const char *message);
+
+static int cartridge_model(const char *rom_path, GB_model_t *model)
+{
+    FILE *file = fopen(rom_path, "rb");
+    if (!file) return fail(NULL, "could not open ROM header");
+    if (fseek(file, 0x143, SEEK_SET) != 0) {
+        fclose(file);
+        return fail(NULL, "could not seek to ROM header");
+    }
+    int cgb_flag = fgetc(file);
+    fclose(file);
+    if (cgb_flag == EOF) return fail(NULL, "ROM is too small for a cartridge header");
+    *model = (cgb_flag & 0x80) ? GB_MODEL_CGB_E : GB_MODEL_DMG_B;
+    return 0;
+}
+
 static int fail(sb_handle *handle, const char *message)
 {
     char *destination = handle ? handle->error : create_error;
@@ -317,10 +334,13 @@ SB_EXPORT int sb_create(const char *rom_path, const char *boot_path, sb_handle *
     if (!rom_path || !boot_path || !out) return fail(NULL, "invalid create arguments");
     *out = NULL;
 
+    GB_model_t model;
+    if (cartridge_model(rom_path, &model) != 0) return -1;
+
     sb_handle *handle = calloc(1, sizeof(*handle));
     if (!handle) return fail(NULL, "could not allocate harness");
 
-    handle->gb = GB_init(GB_alloc(), GB_MODEL_DMG_B);
+    handle->gb = GB_init(GB_alloc(), model);
     if (!handle->gb) {
         free(handle);
         return fail(NULL, "could not allocate SameBoy");
@@ -372,6 +392,26 @@ SB_EXPORT int sb_get_title(sb_handle *handle, char *out, size_t capacity)
     if (!handle || !out || capacity < 17) return fail(handle, "title buffer must hold 17 bytes");
     GB_get_rom_title(handle->gb, out);
     out[capacity - 1] = '\0';
+    return 0;
+}
+
+SB_EXPORT int sb_get_hardware_info(sb_handle *handle, sb_hardware_info *out)
+{
+    if (!handle || !out) return fail(handle, "invalid hardware info output");
+    size_t size = 0;
+    uint16_t rom_bank = 0;
+    uint16_t ram_bank = 0;
+    uint16_t vram_bank = 0;
+    GB_get_direct_access(handle->gb, GB_DIRECT_ACCESS_ROM, &size, &rom_bank);
+    GB_get_direct_access(handle->gb, GB_DIRECT_ACCESS_CART_RAM, &size, &ram_bank);
+    GB_get_direct_access(handle->gb, GB_DIRECT_ACCESS_VRAM, &size, &vram_bank);
+    *out = (sb_hardware_info){
+        .model = (uint16_t)GB_get_model(handle->gb),
+        .rom_bank = rom_bank,
+        .ram_bank = ram_bank,
+        .vram_bank = vram_bank,
+        .cgb_mode = GB_is_cgb_in_cgb_mode(handle->gb),
+    };
     return 0;
 }
 

@@ -20,6 +20,7 @@ DEFAULT_LIBRARY = ROOT / "bin" / (
     "libgrokboy.dylib" if sys.platform == "darwin" else "libgrokboy.so"
 )
 DEFAULT_BOOT_ROM = ROOT / "vendor" / "SameBoy" / "build" / "bin" / "BootROMs" / "dmg_boot.bin"
+DEFAULT_CGB_BOOT_ROM = ROOT / "vendor" / "SameBoy" / "build" / "bin" / "BootROMs" / "cgb_boot.bin"
 SCREEN_WIDTH = 160
 SCREEN_HEIGHT = 144
 FRAME_RGB_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT * 3
@@ -108,6 +109,16 @@ class _Watchpoint(ctypes.Structure):
     ]
 
 
+class _HardwareInfo(ctypes.Structure):
+    _fields_ = [
+        ("model", ctypes.c_uint16),
+        ("rom_bank", ctypes.c_uint16),
+        ("ram_bank", ctypes.c_uint16),
+        ("vram_bank", ctypes.c_uint16),
+        ("cgb_mode", ctypes.c_uint8),
+    ]
+
+
 def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
     handle = ctypes.c_void_p
     byte_pointer = ctypes.POINTER(ctypes.c_uint8)
@@ -121,6 +132,8 @@ def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
 
     library.sb_get_title.argtypes = [handle, ctypes.c_void_p, ctypes.c_size_t]
     library.sb_get_title.restype = ctypes.c_int
+    library.sb_get_hardware_info.argtypes = [handle, ctypes.POINTER(_HardwareInfo)]
+    library.sb_get_hardware_info.restype = ctypes.c_int
     library.sb_get_registers.argtypes = [handle, ctypes.POINTER(_Registers)]
     library.sb_get_registers.restype = ctypes.c_int
     library.sb_set_register.argtypes = [handle, ctypes.c_uint32, ctypes.c_uint16]
@@ -290,15 +303,22 @@ class SameBoy:
         rom: str | Path,
         *,
         library: str | Path = DEFAULT_LIBRARY,
-        boot_rom: str | Path = DEFAULT_BOOT_ROM,
+        boot_rom: str | Path | None = None,
         trace: str | Path | None = None,
     ) -> None:
         self.rom = Path(rom).resolve()
+        self._header = self.rom.read_bytes()[0x100:0x150]
+        if len(self._header) != 0x50:
+            raise HarnessError("ROM is too small for a Game Boy cartridge header")
+        self.cgb_capable = bool(self._header[0x43] & 0x80)
+        if boot_rom is None:
+            boot_rom = DEFAULT_CGB_BOOT_ROM if self.cgb_capable else DEFAULT_BOOT_ROM
+        self.boot_rom = Path(boot_rom).resolve()
         self._library = _load_library(str(Path(library).resolve()))
         self._handle = ctypes.c_void_p()
         result = self._library.sb_create(
             str(self.rom).encode(),
-            str(Path(boot_rom).resolve()).encode(),
+            str(self.boot_rom).encode(),
             ctypes.byref(self._handle),
         )
         if result != 0:
@@ -337,6 +357,40 @@ class SameBoy:
         self._check(self._library.sb_get_registers(self._handle, ctypes.byref(registers)))
         return _register_dict(registers)
 
+    def _hardware_info(self) -> dict[str, Any]:
+        value = _HardwareInfo()
+        self._check(self._library.sb_get_hardware_info(self._handle, ctypes.byref(value)))
+        return {
+            "model": "cgb" if value.model & 0x200 else "dmg",
+            "model_id": value.model,
+            "cgb_mode": bool(value.cgb_mode),
+            "rom_bank": value.rom_bank,
+            "ram_bank": value.ram_bank,
+            "vram_bank": value.vram_bank,
+        }
+
+    def _cartridge_info(self) -> dict[str, Any]:
+        rom_size_code = self._header[0x48]
+        ram_size_code = self._header[0x49]
+        rom_banks = {0x52: 72, 0x53: 80, 0x54: 96}.get(
+            rom_size_code, 2 << rom_size_code if rom_size_code <= 8 else 0
+        )
+        ram_bytes = {
+            0x00: 0, 0x01: 2 * 1024, 0x02: 8 * 1024,
+            0x03: 32 * 1024, 0x04: 128 * 1024, 0x05: 64 * 1024,
+        }.get(ram_size_code, 0)
+        cartridge_type = self._header[0x47]
+        return {
+            "cgb_flag": self._header[0x43],
+            "type": cartridge_type,
+            "rom_size_code": rom_size_code,
+            "rom_banks": rom_banks,
+            "rom_bytes": rom_banks * 0x4000,
+            "ram_size_code": ram_size_code,
+            "ram_bytes": ram_bytes,
+            "ram_banks": (ram_bytes + 0x1FFF) // 0x2000,
+        }
+
     def _dispatch(self, request: dict[str, Any]) -> dict[str, Any]:
         command = request.get("cmd")
         if not isinstance(command, str):
@@ -352,6 +406,9 @@ class SameBoy:
                 "ok": True,
                 "rom": str(self.rom),
                 "title": title.value.decode(errors="replace"),
+                "boot_rom": str(self.boot_rom),
+                "hardware": self._hardware_info(),
+                "cartridge": self._cartridge_info(),
                 "frames": int(self._library.sb_get_frames(self._handle)),
                 "instructions": int(self._library.sb_get_instructions(self._handle)),
                 "registers": registers,

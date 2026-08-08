@@ -63,6 +63,8 @@ COPY pipeline/agent /opt/pipeline/agent
 COPY --from=grokboy-build /build/pipeline/bin/libgrokboy.so /opt/pipeline/bin/libgrokboy.so
 COPY --from=grokboy-build /build/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin \
      /opt/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin
+COPY --from=grokboy-build /build/pipeline/vendor/SameBoy/build/bin/BootROMs/cgb_boot.bin \
+     /opt/pipeline/vendor/SameBoy/build/bin/BootROMs/cgb_boot.bin
 
 ENV STATICRE_ROM=/rom.gb
 VOLUME ["/out"]

@@ -92,11 +92,20 @@ typedef struct {
     uint8_t access;
 } sb_watchpoint;
 
+typedef struct {
+    uint16_t model;
+    uint16_t rom_bank;
+    uint16_t ram_bank;
+    uint16_t vram_bank;
+    uint8_t cgb_mode;
+} sb_hardware_info;
+
 SB_EXPORT int sb_create(const char *rom_path, const char *boot_path, sb_handle **out);
 SB_EXPORT void sb_destroy(sb_handle *handle);
 SB_EXPORT const char *sb_last_error(const sb_handle *handle);
 
 SB_EXPORT int sb_get_title(sb_handle *handle, char *out, size_t capacity);
+SB_EXPORT int sb_get_hardware_info(sb_handle *handle, sb_hardware_info *out);
 SB_EXPORT int sb_get_registers(sb_handle *handle, sb_registers *out);
 SB_EXPORT int sb_set_register(sb_handle *handle, uint32_t reg, uint16_t value);
 SB_EXPORT uint64_t sb_get_frames(const sb_handle *handle);
