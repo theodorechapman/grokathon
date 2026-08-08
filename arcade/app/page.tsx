@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import { HeroArt } from "./hero-art";
+import { SiteNav } from "./site-nav";
 
 const HOW = [
   {
@@ -24,18 +25,7 @@ const HOW = [
 export default function LandingPage() {
   return (
     <div className={styles.page}>
-      <nav className={styles.nav}>
-        <span className={styles.wordmark}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/nova-lockup.png" alt="Nova" className={styles.navLockup} />
-        </span>
-        <div className={styles.navPill}>
-          <Link href="/arcade" className={styles.navActive}>
-            Arcade
-          </Link>
-          <a href="#how">How it works</a>
-        </div>
-      </nav>
+      <SiteNav active="home" />
 
       <header className={styles.hero}>
         <HeroArt />
