@@ -122,5 +122,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "failed to queue job" }, { status: 502 });
   }
 
+  if (session) {
+    const r = redis();
+    if (r) {
+      try {
+        await r.sadd(`umade:${session.handle}`, slug);
+      } catch (err) {
+        // job already committed above, so surface the failure without failing the request
+        console.error("umade sadd failed", session.handle, slug, err);
+      }
+    }
+  }
+
   return NextResponse.json({ slug, status: "queued" }, { status: 202 });
 }

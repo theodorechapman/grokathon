@@ -851,3 +851,36 @@ a.navSegment:hover {
 .bigSignIn:hover {
   background: #fff;
 }
+
+/* --- identity-sync: signed-out remix gate (agent/identity-sync) --- */
+.remixGate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+
+.remixGate p {
+  color: var(--dim);
+  font-size: 14px;
+}
+
+.remixGate .navSegment {
+  flex-shrink: 0;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.remixGate .navSegment:hover {
+  background: #fff;
+}
+/* --- end identity-sync additions --- */
