@@ -144,6 +144,13 @@ SB_EXPORT int sb_clear_call_trace(sb_handle *handle);
 SB_EXPORT size_t sb_get_call_targets(
     const sb_handle *handle, uint32_t *out, size_t capacity);
 
+/* Asset trace: records (bank, src, dst, len) runs of ROM data copied into
+   VRAM, to recover and embed original graphics. */
+SB_EXPORT int sb_set_asset_trace(sb_handle *handle, bool on);
+SB_EXPORT int sb_clear_asset_trace(sb_handle *handle);
+SB_EXPORT size_t sb_get_asset_runs(
+    sb_handle *handle, uint16_t *out, size_t capacity);
+
 SB_EXPORT int sb_copy_frame_rgb(sb_handle *handle, uint8_t *out, size_t length);
 SB_EXPORT int sb_save_state(sb_handle *handle, const char *path);
 SB_EXPORT int sb_load_state(sb_handle *handle, const char *path);

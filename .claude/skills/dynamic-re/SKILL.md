@@ -130,6 +130,36 @@ decompile, and reconstruct. The more of the game you exercise before dumping
 seeds, the more of it becomes analyzable. Re-run the trace after reaching new
 areas to pick up newly executed banks.
 
+## Recovering graphics (asset trace)
+
+The call trace recovers *code*; the *data* (tiles, background maps) is copied
+into VRAM at runtime and won't be found that way. To embed the real graphics
+instead of placeholders, trace the copies: while the game draws a screen, the
+asset trace attributes every VRAM write to the ROM byte it came from and
+coalesces straight copy loops into `(bank, src, dst, length)` runs.
+
+```python
+gb.asset_trace(True)
+gb.run(frames=240)          # let the title / a stage draw itself
+runs = gb.asset_runs()      # [{"canonical": "ROM6:5a00", "dst": 0x8000, "length": 4096}, ...]
+```
+
+Two cases, distinguished by a run's length:
+
+- **Uncompressed copy** (a run whose length covers a whole VRAM tile/map
+  region): the ROM bytes ARE the asset. Extract them statically and embed:
+  `extract_data([{"address": r["canonical"], "length": r["length"], "name": "tiles_title"}])`
+  returns a GBDK C array; write it into `src/` and load it instead of a
+  placeholder.
+- **Decompressed copy** (a short source span feeding a long dest region): the
+  ROM source is compressed and not directly usable. Snapshot the *result* from
+  VRAM instead — `gb.read(0x8000, length)` gives the decompressed tiles — and
+  embed those bytes.
+
+Only assets that are actually drawn during your play-through are captured, so
+exercise the screens you want to reproduce. Provenance (which ROM bank/address
+an asset came from) is worth recording in `NOTES.md`.
+
 ## Screenshots
 
 ```python

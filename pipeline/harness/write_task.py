@@ -54,6 +54,13 @@ DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headle
    `create_functions` static tool. Read the "Recovering bank-switched code"
    section of `dynamic_re.md` for the exact loop. Do this early, then annotate
    and reconstruct the now-visible banked functions.
+
+   Recover the real graphics too. Use the emulator's asset trace while the
+   game draws its screens, then embed the actual tiles and maps in your
+   reconstruction instead of placeholder art: `extract_data` for uncompressed
+   ROM->VRAM copies, or a VRAM snapshot for decompressed ones. Read the
+   "Recovering graphics" section of `dynamic_re.md`. The reconstruction should
+   render with the game's own art for whatever screens you exercised.
 """
 
 TASK_FOOTER = """

@@ -209,6 +209,14 @@ def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
         handle, ctypes.POINTER(ctypes.c_uint32), ctypes.c_size_t]
     library.sb_get_call_targets.restype = ctypes.c_size_t
 
+    library.sb_set_asset_trace.argtypes = [handle, ctypes.c_bool]
+    library.sb_set_asset_trace.restype = ctypes.c_int
+    library.sb_clear_asset_trace.argtypes = [handle]
+    library.sb_clear_asset_trace.restype = ctypes.c_int
+    library.sb_get_asset_runs.argtypes = [
+        handle, ctypes.POINTER(ctypes.c_uint16), ctypes.c_size_t]
+    library.sb_get_asset_runs.restype = ctypes.c_size_t
+
     library.sb_copy_frame_rgb.argtypes = [handle, byte_pointer, ctypes.c_size_t]
     library.sb_copy_frame_rgb.restype = ctypes.c_int
     library.sb_save_state.argtypes = [handle, ctypes.c_char_p]
@@ -606,6 +614,28 @@ class SameBoy:
                 return {"ok": True, "count": len(targets), "targets": targets}
             raise HarnessError("call-trace action must be on, off, clear, or dump")
 
+        if command == "asset-trace":
+            action = request.get("action", "dump")
+            if action in {"on", "off"}:
+                self._check(self._library.sb_set_asset_trace(self._handle, action == "on"))
+                return {"ok": True}
+            if action == "clear":
+                self._check(self._library.sb_clear_asset_trace(self._handle))
+                return {"ok": True}
+            if action == "dump":
+                count = self._library.sb_get_asset_runs(self._handle, None, 0)
+                buf = (ctypes.c_uint16 * (count * 4))()
+                n = self._library.sb_get_asset_runs(self._handle, buf, count)
+                runs = [
+                    {"bank": buf[i * 4], "src": buf[i * 4 + 1],
+                     "dst": buf[i * 4 + 2], "length": buf[i * 4 + 3],
+                     "canonical": f"ROM{buf[i * 4]}:{buf[i * 4 + 1]:04x}"}
+                    for i in range(n)
+                ]
+                runs.sort(key=lambda r: (r["bank"], r["src"]))
+                return {"ok": True, "count": len(runs), "runs": runs}
+            raise HarnessError("asset-trace action must be on, off, clear, or dump")
+
         if command == "reset":
             quick = request.get("quick", False)
             if not isinstance(quick, bool):
@@ -734,6 +764,20 @@ class SameBoy:
     def call_targets(self) -> list[dict[str, Any]]:
         """The recorded (bank, offset) seeds, e.g. {"canonical": "ROM5:4c00"}."""
         return self.request({"cmd": "call-trace", "action": "dump"})["targets"]
+
+    def asset_trace(self, on: bool = True) -> None:
+        """Record (bank, src, dst, len) runs of ROM data copied into VRAM —
+        provenance for recovering and embedding original graphics."""
+        self.request({"cmd": "asset-trace", "action": "on" if on else "off"})
+
+    def clear_asset_trace(self) -> None:
+        self.request({"cmd": "asset-trace", "action": "clear"})
+
+    def asset_runs(self) -> list[dict[str, Any]]:
+        """Recorded VRAM-copy runs. A run whose length covers its dest region
+        is an uncompressed copy (extract statically from `canonical`); a short
+        source feeding a long dest span indicates decompression (dump VRAM)."""
+        return self.request({"cmd": "asset-trace", "action": "dump"})["runs"]
 
     def reset(self, *, quick: bool = False) -> None:
         self.request({"cmd": "reset", "quick": quick})

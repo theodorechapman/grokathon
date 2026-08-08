@@ -20,6 +20,7 @@ MAX_INSTRUCTIONS = 200
 MAX_XREFS = 200
 MAX_STRINGS = 100
 MAX_DECOMP_BYTES = 20 * 1024
+MAX_EXTRACT_BYTES = 32 * 1024
 
 _KIND_HINTS = [
     ("vram", "vram"),
@@ -140,8 +141,14 @@ class StaticAnalysis:
         offset = int(str(off), 16) if isinstance(off, str) else int(off)
 
         if space:
+            # A flat (<=32 KB) ROM's fixed bank is named "ROM"; a banked ROM's
+            # is "ROM0". Accept either so emulator-produced "ROM0:...." resolves
+            # on both.
+            aliases = {space.lower()}
+            if space.lower() in ("rom", "rom0"):
+                aliases |= {"rom", "rom0"}
             for block in self.program.getMemory().getBlocks():
-                if block.getName().lower() == space.lower():
+                if block.getName().lower() in aliases:
                     return block.getStart().getAddressSpace().getAddress(offset)
             raise ValueError(f"unknown memory space: {space}")
 
@@ -573,6 +580,47 @@ class StaticAnalysis:
             "function_count_after": fm.getFunctionCount(),
         }
 
+    def extract_data(self, ranges: list) -> dict:
+        """Extract raw ROM bytes into GBDK-ready C arrays. Each range is
+        {"address": "ROMn:hex", "length": N, "name": optional}. Use for
+        assets whose runtime source is an uncompressed ROM->VRAM copy (from
+        the emulator's asset trace): the bytes are embeddable as-is. For
+        decompressed assets, snapshot VRAM from the emulator instead — the ROM
+        source there is compressed, not directly usable. Returns per-range C
+        arrays and a combined header string; nothing is written to disk (the
+        agent writes the returned C into its workspace)."""
+        import hashlib as _hashlib
+
+        mem = self.program.getMemory()
+        arrays, combined = [], []
+        for i, r in enumerate(ranges):
+            addr = self._parse_addr(r.get("address"))
+            length = int(r.get("length", 0))
+            if length <= 0 or length > MAX_EXTRACT_BYTES:
+                raise ValueError(f"length must be 1..{MAX_EXTRACT_BYTES}")
+            raw = bytearray(length)
+            got = 0
+            for j in range(length):
+                try:
+                    raw[j] = mem.getByte(addr.add(j)) & 0xFF
+                    got += 1
+                except Exception:
+                    break  # ran off the end of the block; keep what we read
+            raw = bytes(raw[:got])
+            name = r.get("name") or f"asset_{self._canon(addr).replace(':', '_')}"
+            name = "".join(c if c.isalnum() or c == "_" else "_" for c in name)
+            body = ", ".join(f"0x{b:02x}" for b in raw)
+            c = f"const unsigned char {name}[{got}] = {{ {body} }};"
+            arrays.append({
+                "name": name,
+                "address": self._canon(addr),
+                "length": got,
+                "sha256": _hashlib.sha256(raw).hexdigest(),
+                "c": c,
+            })
+            combined.append(c)
+        return {"arrays": arrays, "combined_c": "\n".join(combined)}
+
     def annotate(self, target: dict, changes: dict, evidence: list | None = None) -> dict:
         kind = target.get("kind", "function")
         addr = self._parse_addr(target["address"])
@@ -658,6 +706,7 @@ class StaticAnalysis:
         "static.list_strings": "list_strings",
         "static.create_function": "create_function",
         "static.create_functions": "create_functions",
+        "static.extract_data": "extract_data",
         "static.annotate": "annotate",
     }
 
