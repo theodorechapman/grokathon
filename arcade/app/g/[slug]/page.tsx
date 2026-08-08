@@ -63,7 +63,12 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <div className="player">
         <iframe src={`/games/${slug}/index.html`} title={game.title} scrolling="no" />
       </div>
-      <p className="controls">{game.controls}</p>
+      <div className="playerFoot">
+        <p className="controls">{game.controls}</p>
+        {!session && (
+          <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
+        )}
+      </div>
       {scores.length > 0 && (
         <div className="highScores">
           <h2>High scores</h2>

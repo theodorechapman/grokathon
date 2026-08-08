@@ -38,7 +38,7 @@ arcade/public/games/<slug>/
 
 Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters).
 
-Score reporting (optional, for high-score boards later): a game may `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")` when a run ends. The arcade ignores unknown messages, so emitting it is always safe.
+Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")`. Score 0 is fine. This drives the end-of-run claim screen and the leaderboards; a game that never emits it never gets players on a board. The verify bot should check the message fires on game over.
 
 ## Adding a game
 

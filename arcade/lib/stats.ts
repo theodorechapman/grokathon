@@ -61,3 +61,24 @@ export async function topScores(slug: string, n = 5): Promise<ScoreRow[]> {
   }
   return rows;
 }
+
+export type PlayerRow = { handle: string; plays: number; games: number };
+
+export async function playerBoard(n = 25): Promise<PlayerRow[]> {
+  const r = redis();
+  if (!r) return [];
+  const raw = await r.zrange<(string | number)[]>("uplays", 0, n - 1, {
+    rev: true,
+    withScores: true,
+  });
+  const rows: PlayerRow[] = [];
+  for (let i = 0; i < raw.length; i += 2) {
+    rows.push({ handle: String(raw[i]), plays: Number(raw[i + 1]), games: 0 });
+  }
+  await Promise.all(
+    rows.map(async (row) => {
+      row.games = (await r!.scard(`ugames:${row.handle}`)) ?? 0;
+    })
+  );
+  return rows;
+}
