@@ -1,0 +1,13 @@
+/breakout-reconstructed.gb
+/web/breakout-reconstructed.gb
+/web/dist/
+/web/node_modules/
+/*.asm
+/*.cdb
+/*.ihx
+/*.lk
+/*.lst
+/*.map
+/*.noi
+/*.o
+/*.sym

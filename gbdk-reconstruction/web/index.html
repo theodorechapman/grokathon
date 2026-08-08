@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <title>Breakout reconstruction</title>
+</head>
+<body>
+  <main class="player">
+    <header>
+      <p class="eyebrow">GBDK reconstruction</p>
+      <h1>Breakout</h1>
+    </header>
+    <div class="screen">
+      <canvas width="160" height="144" aria-label="Breakout game screen">
+        Canvas is required to run the game.
+      </canvas>
+    </div>
+    <p id="status" role="status">Loading ROM…</p>
+    <p class="controls"><kbd>←</kbd> <kbd>→</kbd> Move paddle · Reload to restart</p>
+  </main>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "breakout-reconstruction-web",
+  "version": "1.0.0",
+  "description": "Browser player for the reconstructed Game Boy Breakout ROM.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gameboy-emulator": "^1.1.2"
+  },
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}
