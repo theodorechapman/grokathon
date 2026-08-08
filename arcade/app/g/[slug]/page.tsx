@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { access } from "fs/promises";
+import path from "path";
 import { getGame, listGames } from "@/lib/games";
 import { redis } from "@/lib/stats";
 import { readSession } from "@/lib/session";
@@ -60,6 +62,9 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     ? await r.hget<string>("x:gamepost", slug).catch(() => null)
     : null;
   const tweetId = /^t(\d+)$/.exec(packedTweet ?? "")?.[1] ?? null;
+  const hasSource = await access(path.join(process.cwd(), "public", "games", slug, "source.c"))
+    .then(() => true)
+    .catch(() => false);
 
   return (
     <main>
@@ -124,6 +129,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           passes, and the arcade watches WRAM at runtime to detect wins, losses,
           and your clear time.
         </p>
+        {hasSource && (
+          <p className="sourceLink">
+            <a href={`/games/${slug}/source.c`}>view the C source →</a>
+          </p>
+        )}
         {buildLog && buildLog.stages.length > 0 && (
           <ol className="buildStages buildLogDone">
             {buildLog.stages.map((s, i) => (

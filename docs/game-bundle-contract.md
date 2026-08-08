@@ -12,6 +12,7 @@ arcade/public/games/<slug>/
   index.html      # browser game entry point, or:
   game.gb         # Game Boy ROM loaded by the arcade's shared emulator
   cover.png       # optional, share card + arcade tile
+  source.c        # optional, the Grok-patched C source; the arcade links it as "view the C source"
 ```
 
 Every bundle has a manifest and exactly one playable entry point. Browser games
