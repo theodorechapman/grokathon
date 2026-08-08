@@ -1,0 +1,12 @@
+{
+  "slug": "neon-night-mode-dark-177ccb",
+  "title": "Breakout: Neon night mode: dark background, glow",
+  "description": "neon night mode: dark background, glowing ball trail, faster each brick you break",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": null,
+  "rom": "neon-night-mode-dark-177ccb.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T22:29:39Z"
+}
