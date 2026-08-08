@@ -30,22 +30,27 @@ function byIdAscending(a: Tweet, b: Tweet): number {
 }
 
 /** Posts for real when X_POSTING_ENABLED=true, else logs + queues to x:dryrun. */
-async function postOrDryRun(r: Redis, text: string): Promise<string | null> {
+async function postOrDryRun(r: Redis, text: string, replyToId?: string): Promise<string | null> {
   if (process.env.X_POSTING_ENABLED === "true") {
-    return (await postTweet(text)).id;
+    return (await postTweet(text, replyToId)).id;
   }
-  console.log("[x:dryrun] would post:", text);
-  await r.rpush("x:dryrun", JSON.stringify({ text, at: new Date().toISOString() }));
+  console.log("[x:dryrun] would post:", text, replyToId ? `(reply to ${replyToId})` : "");
+  await r.rpush("x:dryrun", JSON.stringify({ text, replyToId, at: new Date().toISOString() }));
   return null;
 }
 
 async function announceNewGames(r: Redis, result: SyncResult): Promise<void> {
   const games = await listGames();
   const posted = new Set(await r.smembers("x:posted"));
+  const gameposts = (await r.hgetall<Record<string, string>>("x:gamepost")) ?? {};
   for (const game of games) {
     if (posted.has(game.slug)) continue;
-    const text = `NEW GAME: ${game.title} — ${game.description} Play it: ${SITE}/g/${game.slug}`;
-    const tweetId = await postOrDryRun(r, text);
+    // Remixes reply into the parent game's announcement thread when we have a
+    // real tweet id for the parent (dry-run sentinels unpack to null).
+    const parentTweetId = game.parent ? unpackId(gameposts[game.parent]) : null;
+    const prefix = game.parent ? "REMIX" : "NEW GAME";
+    const text = `${prefix}: ${game.title} — ${game.description} Play it: ${SITE}/g/${game.slug}`;
+    const tweetId = await postOrDryRun(r, text, parentTweetId ?? undefined);
     await r.hset("x:gamepost", { [game.slug]: tweetId ? packId(tweetId) : "dryrun" });
     await r.sadd("x:posted", game.slug);
     result.announced.push(game.slug);
@@ -63,7 +68,12 @@ async function repliesToRemixes(r: Redis, result: SyncResult, budget: { left: nu
     const replies = (await getReplies(tweetId, sinceId)).sort(byIdAscending);
     for (const reply of replies) {
       if (budget.left <= 0) break;
-      if (reply.author_id !== botId && reply.author_handle) {
+      // Bot-authored replies count too (the bot is also the owner's personal
+      // account) — but never the bot's own announcements, which always carry
+      // the site link. That also keeps thread-reply announcements from
+      // spawning job loops.
+      const isOwnAnnouncement = reply.author_id === botId && reply.text.includes("playgrokgames.vercel.app");
+      if (!isOwnAnnouncement && reply.author_handle) {
         const jobSlug = await submitJob({
           prompt: reply.text,
           parent: slug,
