@@ -53,8 +53,18 @@ export function GameFrame({
               timeScored={timeScored}
               onRunEnd={setRunEnd}
             />
-            {runEnd && (
+            {runEnd ? (
               <EndScreen slug={slug} end={runEnd} signedIn={signedIn} onReplay={restartGame} />
+            ) : (
+              <button
+                type="button"
+                className="restartFab"
+                title="Restart run"
+                aria-label="Restart run"
+                onClick={restartGame}
+              >
+                ↻
+              </button>
             )}
           </>
         ) : (
