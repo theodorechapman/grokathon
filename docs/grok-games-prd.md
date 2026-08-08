@@ -1,72 +1,85 @@
-# Grok Games — spec
+# Nova spec
 
-Draft. Grokathon, Aug 8. Team: Supratik, Theo, Henry.
+Grokathon, Aug 8. Team: Supratik (consumer surface, integrations), Theo and Henry (pipeline, reverse engineering). Grok Games was the working title. The product shipped as Nova.
 
 ## One-liner
 
-Ask Grok for a game, play it in seconds, reshape it live with the room. It proves the game works before you play.
+Every game starts as a sentence. Built on Grok. Type what you want, the pipeline builds it, verifies it plays, and ships it to the arcade. Live at https://playgrokgames.vercel.app.
 
 ## The problem
 
-Everyone has said "someone should make a game where you..." and nothing happens. The idea dies because building is hard. You can't code, or you can but not in the 5 minutes the idea is alive.
+Everyone has said "someone should make a game where you..." and nothing happens. The idea dies because building is hard. You can't code, or you could but not in the 5 minutes the idea stays alive.
 
-AI game-gen doesn't fix this yet. You prompt a model, you get a blob of code that half-runs, and you can't change it without starting over. There's no play button, no way to tweak it in plain words, no way to hand it to a friend.
+AI game-gen doesn't fix this yet. You prompt a model, you get a blob of code that half-runs, and you can't change it without starting over. There's no play button, no tweaking it in plain words, no handing it to a friend.
 
 Room test: a non-dev hears this and thinks "I've wanted to make or remix a game." That's most people.
 
 ## Who has it
 
-Grok users. Non-technical. People in a group chat, at a party, at a hackathon, a kid who wants a game about their dog. Low floor, high want.
+Non-technical people. A group chat, a party, a hackathon, a kid who wants a game about their dog. Low floor, high want.
 
 ## Input / output
 
-Input: a plain-language ask in Grok. "Make a game where you dodge falling tacos." "Flappy Bird but two players." "Take this game and make gravity low." Optional image or clip as a reference. Optional sign in with Grok to save and own it.
+Input: a sentence on the create page. "Make a game where you dodge falling tacos." "Breakout but gravity flips." Creating requires Sign in with X. Playing never does.
 
-Output: a playable game running in the browser in seconds. Canvas or WASM, no install. A link anyone clicks and plays. Embeds on X, plays inside Grok, saved to your Grok account, open to remix.
+Output: a playable game in the browser. No install. A stable link anyone taps and starts. It joins the arcade shelf, open to remix.
 
 ## Where it lives
 
-Not one surface. Three, each doing one job.
+One site, three jobs.
 
-- Create in Grok. The ask and the auth start here. Sign in with Grok.
-- Play in the browser. Instant, no install, runs in the Grok webview and on an X card.
-- Share on X. Every shared game is a playable card that pulls people back to Grok.
+- Landing. Grok Imagine art. The NOVA lockup uses a black hole as the O, with an animated hero video from grok-imagine-video.
+- Arcade. The shared shelf. Cards show cover, title, source tag, description, play button, upvote, and play count. Filter chips: 1 player, 2 players, reverse-engineered, prompted, remixes. A My games rail collects your own creations.
+- Create. Gated behind Sign in with X. Your sentence becomes a job, the pipeline builds it, and you wait in the waiting room at /g/<slug> until it ships.
 
-Browser is the play surface because it's the only one that's instant and works everywhere. X is the growth loop. Grok is the front door.
+Hosting: one arcade at playgrokgames.vercel.app. Every game is a route, not a new deploy. A GitHub Action auto-deploys on any merge touching arcade/. Stable links, a single deploy target, and the shelf comes free.
 
-Hosting: one Grok Games site, not a new site per game. Every game ships as a route on the same hosted arcade, something like grokgames.app/g/taco-dodge. A new game is a new route, not a new deploy. That keeps one deploy target, stable links for X cards and the Grok webview, and it gives us the arcade page for free: browse what's been made, play it, remix it. Remix culture needs a shared shelf.
+## Auth
+
+Sign in with X. OAuth2 PKCE in a popup, 7-day session, @handle chip in the nav. Create and Leaderboard only appear in the nav when you're signed in. Playing is never gated. The gate exists to attribute creations and scores to a real handle, not to keep anyone out.
 
 ## The arcade ranks
 
-Generation is cheap, so the shelf fills with slop unless something sorts it. The arcade is a marketplace with a ranking system, not a dump.
+Generation is cheap, so the shelf fills with slop unless something sorts it. Shipped ranking: votes times 3 plus plays, default sort. Upvote button and play count on every card.
 
-- Upvotes on every game page. Cheapest signal, ships first.
-- Plays and completions. A game people finish beats a game people bounce off.
-- Remixes as the strongest signal. Someone cared enough to change it. Remixes credit the original, so lineage is visible and a good base game climbs as its remixes spread.
-- X engagement on the shared card feeds back in. A card that gets played on X pushes the game up the arcade.
+- Upvotes. Cheapest signal, already live.
+- Plays. Counted in Redis, attributed to whoever's signed in.
+- Remixes as the strongest evidence. Somebody cared enough to alter it. Remixes credit the original, so a good base game climbs as its remixes spread.
+- X engagement folding back into rank remains future work.
 
-The arcade default sort is ranked, not newest. New games get a short discovery window so they aren't buried at birth, then they live or die on signal. Two gates, two jobs: verification keeps unplayable games out entirely, ranking keeps boring ones down. The machine grades playable, the crowd grades fun.
+Two gates, two jobs: verification keeps unplayable games out entirely, ranking keeps boring ones down. The machine certifies playable, the crowd decides fun.
+
+## Leaderboard
+
+Players ranked by plays and distinct games played. Signed-in plays are attributed to the handle. Filter chips flip over to per-game high-score boards.
+
+Score contract: every game must postMessage {type:"nova:score",score:N} on game over. Redis keeps each player's personal best per title. Signed-out players who finish a game get a claim-your-score banner that prompts sign-in.
 
 ## The loop
 
 Seven stages. Each one is one sentence.
 
-1. Ask. You prompt Grok for a game, or a remix of one that exists.
-2. Spec. The harness turns the ask into a game spec: mechanics, controls, win and lose, assets.
+1. Ask. You type a sentence on the create page, or reply to a game's X post to remix it.
+2. Spec. The harness converts the ask into a blueprint: mechanics, controls, win and lose, assets.
 3. Build. An agent writes the game as browser-runnable code in a sandbox.
 4. Verify. A bot actually plays it. Does it boot, does input work, can you reach a win state, does it crash or soft-lock. This is the gate.
 5. Repair. If verify fails, the agent fixes it and re-runs, up to a cap. Nothing ships unverified.
-6. Ship. Playable link, runs in-browser, embeds to X, plays in Grok.
-7. Customize. You or the room send a change in plain words. The harness patches it and re-verifies live.
+6. Ship. The bundle lands in arcade/public/games/<slug>/, the auto-deploy runs, and the waiting room flips to the game.
+7. Customize. A remix ask goes back through the same pipeline as a new job credited to the remixer.
 
-## Why xAI ships this
+Plumbing: POST /api/create commits a job file to pipeline/jobs/<slug>.json. The repo is the queue. The pipeline picks it up, builds, verifies, and commits the bundle. No job server to babysit.
 
-Usefulness, and it's aimed at their own platform.
+## First game
 
-- It's a Grok-native consumer surface with distribution built in. Every game shared to X is a hook back to Grok. That's a growth loop, not a feature.
-- Sign in with Grok gives them accounts and retention off the back of it.
-- It moves Grok from "gives answers" to "makes things you can use and share." That's platform expansion.
-- The want is common and the output is shareable, so it spreads on its own.
+Breakout, live now. Reverse-engineered from a Game Boy ROM. Theo and Henry's pipeline reconstructed it in GBDK and it runs on a JS gameboy emulator in the browser. That's the reverse-engineered tag on the shelf.
+
+## The X loop (in flight)
+
+- Every finished title auto-posts to X.
+- Replies to that post become remix jobs, credited to the replier.
+- Mentioning the account creates a game.
+
+Every game shared to X is a hook back to Nova. That's a growth loop, not a feature.
 
 ## Technical depth
 
@@ -75,66 +88,50 @@ The moat is not the generation. Any strong model generates game code. The moat i
 - Reliable spin-up across game types, not one lucky prompt.
 - A real verification layer: an agent that plays the game and grades it on checkable signals. Boots. Input responsive. Win state reachable. No crash, no soft-lock. Frame budget met.
 - A bounded self-repair loop driven by what verify caught.
-- Live patch-and-re-verify from plain language, so a human stays in the loop instead of watching a one-shot pipeline.
+- The reverse-engineering track: a ROM goes in, a verified browser port comes out. Harder than codegen and it proves the harness handles code nobody wrote for it.
 
 The verification layer is the hard part and the one that scores. Defining "is this actually playable" as signals a machine can check is RL-environment work, not prompt work. That's the technical spine.
 
 ## Why this beats "Grok already does that"
 
-A raw model hands you code that often doesn't run, and to change it you re-prompt from scratch. Grok Games guarantees it runs, lets you reshape it in words, and makes it playable and shareable the second it's done. The product is the reliability and the loop, not the tokens.
+A raw model hands you code that often doesn't run, and to change it you re-prompt from scratch. Nova guarantees it runs, lets you reshape it in words, and makes it playable and shareable the second it's done. The product is the reliability and the loop, not the tokens.
 
-It also isn't one-shottable. A coding agent can't fake distributed live customization or a verification gate in a single pass. That was the bar from day one.
+It also isn't one-shottable. A coding agent can't fake a verification gate, an attributed leaderboard, and an X remix loop in a single pass. That was the bar from day one.
 
 ## Demo
 
-Audience shouts a game idea. You type it into Grok. It spins up. QR goes on screen. Everyone plays it on their phones in about 60 to 90 seconds. Someone shouts a change. It updates live and they play the new version. Recorded fallback ready in case the live run flakes.
+Open the site. Sign in with X in the popup. Type a sentence on the create page. Show the waiting room. QR goes on screen for Breakout. The room plays on phones and scores hit the leaderboard live. Judging rewards most users, and Vercel Analytics alongside Redis counters measure exactly that.
 
-## Scope for 12 hours
+## Scope, shipped vs not
 
-Core, about 6 hours:
+Shipped:
 
-- Harness: prompt to a browser game, held to one template family so it's reliable. Pick 2D arcade: dodger, breakout, runner, simple shooter.
-- Verification play-test plus bounded self-repair.
-- Playable link.
-- One live customization path.
+- Landing with Grok Imagine art and the animated hero.
+- Arcade shelf with cards, filter chips, ranked sort, My games rail.
+- Sign in with X, PKCE popup, 7-day session.
+- Create flow: sentence to job file to built bundle, waiting room at /g/<slug>.
+- Leaderboard covering player rankings and per-title high scores.
+- Score claim contract and Redis best-score storage.
+- Breakout, reverse-engineered from a Game Boy ROM.
+- Auto-deploy GitHub Action on arcade/ merges.
 
-Integrations, the Grok stack:
+In flight:
 
-- Grok CLI runs the pipeline. Spec, build, verify, repair all execute as Grok CLI agents in the sandbox.
-- Grok 4.5 for spec, code, and repair.
-- Structured outputs for the game spec.
-- Grok Imagine for the art: sprites, backgrounds, and the cover image on the share card. Templates ship with placeholder art so a slow or failed image call never blocks a playable game.
-- Grok Voice (Voice Agent API) only where a game calls for voice. Voice as an input method stays stretch.
-- Sign in with Grok, real or stubbed for the demo.
+- X loop: auto-post on ship, replies as remix jobs, mentions as create.
 
-Stretch, only if core is solid:
-
-- Arcade ranking v0: upvote button plus play count, ranked default sort. Cheap to build, sells the marketplace story.
-- Multiplayer.
-- Image or clip reference.
-- Voice input via the Voice Agent API.
-- X embed card.
-- Wider game types.
+Stretch, honestly not built: multiplayer, image or clip reference input, voice input, X engagement feeding rank, and wider game types. None of these exist yet and we don't claim them.
 
 ## Hard calls
 
-- Browser or WASM, not low-level native. Instant play is the requirement, and native code will flake live in 12 hours.
-- Narrow the game space to one template family for the demo. Breadth is a trap.
-- The verification gate has to be real. Cut it and the whole pitch collapses into "Grok makes game code." No "it plays" claim unless the bot cleared it.
-- Honest framing. It's a generated, verified-playable game. Not AAA.
+- Browser, not native. Instant play is the requirement.
+- The verification gate has to be real. Cut it and the whole pitch collapses into "a model makes game code." No "it plays" claim unless the bot cleared it.
+- Play is never gated. Auth exists for attribution, not access. Judges count users, and a login wall kills that.
+- The repo as the queue. No job infrastructure to stand up or watch during the hackathon.
+- Honest framing. Generated, verified-playable games. Not AAA.
 
 ## Risks
 
-- Generation reliability under time pressure. Mitigate with templates, verification, and a fallback recording.
-- "Grok already does this" read. Lead the pitch with verification and live customization, not generation.
-- Verify can check playable, not fun. Say so. Machine grades playability, the room judges fun through the live remix.
-- Live demo flake. Recorded fallback and pre-warmed examples.
-
-## Open questions, all closed
-
-- Template space: 2D arcade only. Decided in hard calls.
-- Auth: stubbed on the day. Upgrade to real Sign in with Grok only if core lands early.
-- Multiplayer: stretch, out of core.
-- Verify signals: draft stands. Boots, input responsive, win reachable, no crash or soft-lock, frame budget. Henry owns it.
-
-First 30 minutes before code: confirm working keys for Grok 4.5, Grok CLI, and Grok Imagine, and pick who deploys the arcade site so routes exist before the first game generates.
+- Generation reliability under time pressure. Blunted by the verify gate and titles already sitting on the shelf.
+- "Grok already does this" read. Lead with verification and the reverse-engineered Breakout, not generation.
+- Verify can check playable, not fun. Say so. Machine grades playability, the crowd judges fun through votes and plays.
+- Demo flake. Breakout exists today, so the audience beat can't fail even when a fresh build runs long.
