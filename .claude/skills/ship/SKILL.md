@@ -15,4 +15,6 @@ Land the current changes in the active repo as a merged PR, no confirmation stop
 6. Sync mirrored copies. In grokathon, `docs/grok-games-prd.md` in the repo mirrors `~/grokathon/grok-games-prd.md`. Copy whichever is newer over the other so they match.
 7. Reply with the PR link and one line on what landed.
 
+Repo hygiene: root stays clean. Only README.md plus folders (docs/, arcade/, pipeline/, .claude/). New files go in the folder that owns them, never the root.
+
 Merge immediately after creating the PR unless Supratik says he wants review first. If the merge fails on branch protection, say so and leave the PR open instead of forcing.

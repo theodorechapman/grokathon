@@ -36,6 +36,17 @@ Hard rules. Violating one is a bug, fix it before shipping.
 - Strict mode on. No `any` unless quarantined at an API boundary with a comment.
 - Game spec is a typed schema (structured outputs). The spec type is the contract between all stages.
 
+## Repo layout
+
+- Root stays clean: README.md plus folders only (docs/, arcade/, pipeline/, .claude/). No stray files at root.
+- arcade/ is the consumer surface, pipeline/ is the agent work. They meet only at the game bundle contract (docs/game-bundle-contract.md).
+
+## Model strategy
+
+- Fable plans, reviews, and owns cross-cutting calls: architecture, contract changes, anything touching both arcade and pipeline.
+- Implementation fans out to Opus or Sonnet subagents, one module per agent, each told to load this skill and the bundle contract first.
+- No subagent changes the bundle contract. Contract changes are a doc PR both sides see, then code.
+
 ## Review test
 
 Before any PR: does every file do one thing, would a teammate know where a change goes without asking, and does `grep -rn "catch (e) {}"` come back empty.

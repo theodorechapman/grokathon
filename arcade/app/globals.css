@@ -1,0 +1,113 @@
+:root {
+  --bg: #0a0a0f;
+  --panel: #14141d;
+  --edge: #26263a;
+  --text: #e8e8f0;
+  --dim: #8a8aa3;
+  --accent: #7dd3fc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.masthead h1 {
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.masthead p {
+  color: var(--dim);
+  margin-top: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 20px;
+  display: block;
+  transition: border-color 0.15s;
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.card h2 {
+  font-size: 16px;
+}
+
+.card p {
+  color: var(--dim);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.card .tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--accent);
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.player {
+  margin-top: 24px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.player iframe {
+  display: block;
+  width: 100%;
+  height: 70vh;
+  border: 0;
+}
+
+.back {
+  color: var(--dim);
+  font-size: 13px;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+.controls {
+  color: var(--dim);
+  font-size: 13px;
+  margin-top: 12px;
+}
