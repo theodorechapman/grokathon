@@ -4,9 +4,11 @@ Wraps one StaticAnalysis instance (one binary per server). The target ROM
 comes from argv or the STATICRE_ROM env var; the agent never sees the
 original path — only blinded program metadata.
 
-The Ghidra JVM starts lazily on the first tool call (takes ~15-60s the first
-time while auto-analysis runs; instant on later calls). All Ghidra access is
-serialized behind a lock.
+The Ghidra JVM is started eagerly in main() on the true main thread before
+the async MCP loop begins (PyGhidra/JPype deadlocks if the JVM is first
+started from inside an async tool handler on macOS). Startup takes ~1 min the
+first time (mostly JVM boot; analysis of a small ROM is seconds); every tool
+call afterwards is fast. All Ghidra access is serialized behind a lock.
 """
 
 from __future__ import annotations
@@ -168,6 +170,15 @@ def annotate(
 
 
 def main():
+    # Initialize Ghidra eagerly on the true main thread, BEFORE the async MCP
+    # loop starts. PyGhidra/JPype must start the JVM on the main thread; doing
+    # it lazily inside an async tool handler deadlocks on macOS (the JVM
+    # startup thread-join blocks against the event loop). This makes startup
+    # take ~1-2 min once, after which every tool call is fast.
+    print("staticre: initializing Ghidra analysis (first run ~1-2 min)...",
+          file=sys.stderr, flush=True)
+    _api()
+    print("staticre: analysis ready; serving MCP.", file=sys.stderr, flush=True)
     mcp.run()
 
 
