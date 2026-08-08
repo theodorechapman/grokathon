@@ -2,6 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 const REPO = "theodorechapman/grokathon";
 const MAX_PROMPT = 300;
+const MAX_PENDING_JOBS = 30;
+const RATE_LIMIT_PER_MIN = 5;
+
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > RATE_LIMIT_PER_MIN;
+}
 
 function slugify(prompt: string): string {
   const words = prompt
@@ -10,15 +22,35 @@ function slugify(prompt: string): string {
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 4)
-    .join("-");
+    .join("-")
+    .slice(0, 48);
   const suffix = crypto.randomUUID().slice(0, 6);
   return `${words || "game"}-${suffix}`;
+}
+
+function commitSafe(prompt: string): string {
+  return prompt.replace(/[\r\n\t]+/g, " ").replace(/[^\x20-\x7e]/g, "").slice(0, 60);
+}
+
+async function pendingJobCount(token: string): Promise<number> {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/pipeline/jobs`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+    cache: "no-store",
+  });
+  if (!res.ok) return 0;
+  const entries = (await res.json()) as { name: string }[];
+  return entries.filter((e) => e.name.endsWith(".json")).length;
 }
 
 export async function POST(req: NextRequest) {
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
     return NextResponse.json({ error: "job queue not configured" }, { status: 503 });
+  }
+
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (rateLimited(ip)) {
+    return NextResponse.json({ error: "slow down, one game a minute is plenty" }, { status: 429 });
   }
 
   let body: { prompt?: string; parent?: string };
@@ -33,6 +65,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: `prompt must be 3-${MAX_PROMPT} characters` },
       { status: 400 }
+    );
+  }
+
+  if ((await pendingJobCount(token)) >= MAX_PENDING_JOBS) {
+    return NextResponse.json(
+      { error: "the queue is full, try again in a few minutes" },
+      { status: 503 }
     );
   }
 
@@ -57,7 +96,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        message: `job: ${prompt.slice(0, 60)}`,
+        message: `job: ${commitSafe(prompt)}`,
         content,
       }),
     }
