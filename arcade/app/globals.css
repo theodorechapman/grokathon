@@ -356,3 +356,59 @@ main {
     align-items: flex-start;
   }
 }
+
+.welcomeText {
+  flex: 1;
+}
+
+.createBox {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.createBox input {
+  flex: 1;
+  min-width: 220px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.createBox input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.createBox button {
+  background: var(--text);
+  color: var(--bg);
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.createBox button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.createNote {
+  width: 100%;
+  color: var(--dim);
+  font-size: 13px;
+}
+
+.createErr {
+  color: #f87171;
+}

@@ -39,6 +39,23 @@ arcade/public/games/<slug>/
 
 Drop the folder in, done. The arcade scans `public/games/` at build time and lists every folder with a valid manifest. No registry file to update, no code change.
 
+## Jobs: how asks reach the pipeline
+
+The repo is the queue. `POST /api/create` on the arcade commits a job file to `pipeline/jobs/<slug>.json`. The pipeline consumes jobs from that folder and deletes the file when the bundle ships (same commit that adds the bundle, so the queue never lies).
+
+```json
+{
+  "id": "dodge-falling-tacos-a1b2c3",
+  "slug": "dodge-falling-tacos-a1b2c3",
+  "prompt": "dodge falling tacos on a rooftop",
+  "parent": null,
+  "requestedAt": "2026-08-08T12:00:00Z",
+  "source": "site"
+}
+```
+
+`slug` is the folder name the bundle must ship under. `parent` non-null means remix: start from the parent's bundle. `source` says where the ask came from (site, grok, x).
+
 ## Changing this contract
 
 It's the one interface both sides depend on. Change it in this doc first, in a PR both sides see, before changing code.

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listGames } from "@/lib/games";
 import { SiteNav } from "../site-nav";
+import { CreateBox } from "./create-box";
 
 export default async function ArcadePage() {
   const games = await listGames();
@@ -9,16 +10,14 @@ export default async function ArcadePage() {
       <SiteNav active="arcade" />
 
       <section className="welcome">
-        <div>
+        <div className="welcomeText">
           <h1>The arcade</h1>
           <p>
             Every game here started as a sentence and was played by a bot before
-            it shipped. Say a new one in Grok and it lands on this shelf.
+            it shipped. Say a new one and it lands on this shelf.
           </p>
         </div>
-        <Link href="/#how" className="welcomeCta">
-          How it works
-        </Link>
+        <CreateBox />
       </section>
 
       <div className="shelfHead">
