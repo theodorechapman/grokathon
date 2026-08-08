@@ -7,12 +7,6 @@ import { statsFor } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 
-const STEPS = [
-  { title: "Say it", body: "Reply to the thread with the game you want." },
-  { title: "Grok builds it", body: "The pipeline turns your sentence into a playable bundle." },
-  { title: "A bot proves it", body: "An agent plays it end to end before it ships." },
-  { title: "The thread remixes it", body: "Anyone can fork any game with one more reply." },
-];
 
 export default async function LandingPage() {
   const games = (await listPublicGames()).slice(0, 3);
@@ -76,19 +70,6 @@ export default async function LandingPage() {
           </div>
         </section>
       )}
-
-      <section className={styles.section}>
-        <h2 className={styles.stripTitle}>How it works</h2>
-        <ol className={styles.steps}>
-          {STEPS.map((step, i) => (
-            <li key={step.title} className={styles.step}>
-              <span className={styles.stepNum}>{String(i + 1).padStart(2, "0")}</span>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
 
       <footer className={styles.footer}>
         <span>Grokathon · Aug 8 · Supratik, Theo, Henry</span>
