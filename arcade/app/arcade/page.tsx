@@ -111,7 +111,8 @@ export default async function ArcadePage({
         <p className="empty">
           {unranked.length === 0
             ? "No games on the shelf yet. The first one lands when the pipeline ships its first verified bundle."
-            : "Nothing matches this filter yet. Say a game and change that."}
+            : "Nothing matches this filter yet. "}
+          {unranked.length > 0 && <Link href="/create">Say a game and change that →</Link>}
         </p>
       ) : (
         <div className="grid">
