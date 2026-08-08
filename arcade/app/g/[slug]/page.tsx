@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getGame } from "@/lib/games";
-import { formatScore, topScores } from "@/lib/stats";
 import { readSession } from "@/lib/session";
 import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
@@ -46,16 +45,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
     );
   }
 
-  const [scores, session] = await Promise.all([
-    topScores(slug, 5, game.scoring === "time"),
-    readSession().catch(() => null),
-  ]);
+  const session = await readSession().catch(() => null);
 
   return (
     <main>
       <SiteNav active="arcade" />
       <PlayBeacon slug={slug} enabled={statsEnabled} />
-      <ScoreClaim slug={slug} signedIn={session !== null} scoring={game.scoring} />
+      {!game.rom && <ScoreClaim slug={slug} signedIn={session !== null} scoring={game.scoring} />}
       <div className="gameHead">
         <header className="masthead">
           <h1>{game.title}</h1>
@@ -63,26 +59,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
-      <GameFrame slug={slug} title={game.title} rom={game.rom} timeScored={game.scoring === "time"} />
+      <GameFrame slug={slug} title={game.title} rom={game.rom} timeScored={game.scoring === "time"} signedIn={session !== null} />
       <div className="playerFoot">
-        <p className="controls">{game.controls}</p>
+        <p className="controls">Instructions: {game.controls}</p>
         {!session && (
           <p className="controls">Sign in with 𝕏 after your run to save your score.</p>
         )}
       </div>
-      {scores.length > 0 && (
-        <div className="highScores">
-          <h2>{game.scoring === "time" ? "Fastest clears" : "High scores"}</h2>
-          <ol>
-            {scores.map((row) => (
-              <li key={row.handle}>
-                <span>@{row.handle}</span>
-                <span>{formatScore(row.score, game.scoring)}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
       {session ? (
         <RemixBox parent={slug} />
       ) : (
