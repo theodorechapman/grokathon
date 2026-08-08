@@ -1,183 +1,160 @@
 .page {
-  max-width: 1160px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 24px 8px;
 }
 
 .wordmark {
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+.navPill {
+  display: flex;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px;
   font-size: 14px;
 }
 
-.navCta {
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+.navPill a {
+  padding: 7px 16px;
+  border-radius: 999px;
   color: var(--dim);
 }
 
-.navCta:hover {
+.navPill a:hover {
   color: var(--text);
+}
+
+.navActive {
+  background: var(--bg);
+  color: var(--text) !important;
+  border: 1px solid var(--line);
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 64px;
-  align-items: center;
-  padding: 96px 0 80px;
-}
-
-.eyebrow {
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--dim);
-  margin-bottom: 20px;
-}
-
-.hero h1 {
-  font-size: clamp(40px, 6vw, 72px);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-.sub {
-  color: var(--dim);
-  font-size: 17px;
-  line-height: 1.6;
-  margin-top: 24px;
-  max-width: 44ch;
-}
-
-.actions {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  min-height: 440px;
   display: flex;
-  gap: 16px;
-  margin-top: 36px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.primary {
-  background: var(--text);
-  color: var(--bg);
+.heroInner {
+  position: relative;
+  padding: 48px 24px;
+}
+
+.heroInner h1 {
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.heroInner p {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #d5e2ea;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+.heroCta {
+  display: inline-block;
+  margin-top: 28px;
+  background: rgba(10, 16, 22, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 13px 26px;
   font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 14px 28px;
+  font-size: 15px;
 }
 
-.primary:hover {
-  background: #fff;
+.heroCta:hover {
+  background: rgba(10, 16, 22, 0.85);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
-.secondary {
-  border: 1px solid var(--line);
+.section {
+  padding: 72px 8px 0;
+}
+
+.section h2 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sectionSub {
   color: var(--dim);
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 14px 28px;
+  margin-top: 8px;
+  font-size: 16px;
+  max-width: 60ch;
 }
 
-.secondary:hover {
-  color: var(--text);
-  border-color: var(--dim);
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
 }
 
-.telemetry {
-  border: 1px solid var(--line);
+.card {
   background: var(--panel);
-  padding: 24px;
-  font-family: var(--font-mono), monospace;
-  font-size: 13px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px;
 }
 
-.telemetryHead {
+.card h3 {
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.card p {
   color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 11px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 14px;
+  font-size: 15px;
+  line-height: 1.65;
+  margin-top: 10px;
 }
 
-.check {
-  color: var(--text);
-  padding: 4px 0;
-  opacity: 0;
-  animation: reveal 0.3s forwards;
-}
-
-.mark {
-  color: var(--go);
-}
-
-.status {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  color: var(--go);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0;
-  animation: reveal 0.3s forwards;
-}
-
-.telemetryFoot {
-  color: var(--dim);
-  font-size: 11px;
-  margin-top: 6px;
-}
-
-@keyframes reveal {
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .check,
-  .status {
-    animation: none;
-    opacity: 1;
-  }
-}
-
-.pipeline {
+.stages {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: 10px;
+  margin-top: 32px;
 }
 
 .stage,
 .stageGate {
-  background: var(--bg);
-  padding: 18px 14px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .stageGate {
-  background: var(--panel);
-  box-shadow: inset 0 2px 0 var(--go);
+  border-color: rgba(45, 212, 191, 0.5);
+  background: rgba(45, 212, 191, 0.06);
 }
 
 .stageNum {
@@ -187,10 +164,8 @@
 }
 
 .stageName {
-  font-weight: 700;
+  font-weight: 650;
   font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .stageDetail {
@@ -199,58 +174,31 @@
   line-height: 1.4;
 }
 
-.how {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px 64px;
-  padding: 88px 0;
-}
-
-.how h2 {
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  margin-bottom: 12px;
-}
-
-.how p {
-  color: var(--dim);
-  font-size: 15px;
-  line-height: 1.65;
-  max-width: 52ch;
-}
-
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--line);
-  padding: 28px 0 40px;
+  margin-top: 80px;
+  padding: 26px 8px 40px;
   color: var(--dim);
-  font-family: var(--font-mono), monospace;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 14px;
 }
 
-.footerLink:hover {
+.footer a:hover {
   color: var(--text);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 860px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .stages {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .hero {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 56px 0;
-  }
-
-  .pipeline {
-    grid-template-columns: 1fr;
-  }
-
-  .how {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 56px 0;
+    min-height: 360px;
   }
 }
