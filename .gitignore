@@ -14,3 +14,6 @@ pipeline/agent/__pycache__/
 !arcade/**/*.png
 
 pipeline/gbdk-reconstruction/web/node_modules/
+
+# containerized agent run outputs (scratch, mirror of workspaces/)
+out/
