@@ -5,7 +5,7 @@ import { SignInButton } from "./sign-in-button";
 export async function SiteNav({
   active,
 }: {
-  active: "home" | "arcade" | "create" | "leaderboard";
+  active: "home" | "arcade" | "create" | "leaderboard" | "my";
 }) {
   const session = await readSession().catch(() => null);
   return (
@@ -42,6 +42,12 @@ export async function SiteNav({
           ) : (
             <SignInButton />
           )}
+          <Link
+            href="/my"
+            className={active === "my" ? "navSegment navSegmentActive" : "navSegment"}
+          >
+            My games
+          </Link>
         </div>
         {session && (
           <span className="authChip">

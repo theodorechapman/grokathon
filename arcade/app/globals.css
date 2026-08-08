@@ -1316,4 +1316,58 @@ a.navSegment:hover {
 }
 .sourceLink a:hover {
   opacity: 0.8;
+
+/* my creations */
+.myGamesAll {
+  margin-left: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.myGamesAll:hover {
+  text-decoration: underline;
+}
+
+.myCreations td {
+  vertical-align: middle;
+}
+
+.myCreationTitle {
+  font-weight: 600;
+}
+
+.myCreationTitle:hover {
+  color: var(--accent);
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.statusLive {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.statusBuilding {
+  color: var(--dim);
+}
+
+.myCreationParent {
+  color: var(--dim);
+  font-size: 13px;
+}
+
+a.myCreationParent:hover {
+  color: var(--accent);
 }
