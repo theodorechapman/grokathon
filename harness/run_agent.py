@@ -126,28 +126,29 @@ def _grok_cmd(ws: Path, prompt: str, model: str | None) -> list[str]:
 
 
 def _codex_cmd(ws: Path, prompt: str, model: str | None,
-               rom_path: Path, workdir: Path) -> list[str]:
-    # Codex reads MCP servers from config; point it at a TOML we drop in the ws.
-    toml = ws / ".codex" / "config.toml"
-    toml.parent.mkdir(parents=True, exist_ok=True)
+               rom_path: Path, workdir: Path,
+               effort: str | None, tier: str | None) -> list[str]:
+    # Keep the user's real CODEX_HOME (auth + model defaults) and inject the
+    # MCP server plus per-run overrides via inline `-c` TOML paths.
     ghidra_dir = next((REPO / "tools").glob("ghidra_*_PUBLIC"), None)
-    toml.write_text(
-        "[mcp_servers.staticre]\n"
-        f'command = "{_uv_bin()}"\n'
-        f'args = ["run", "--project", "{STATIC_DIR}", "staticre-mcp"]\n'
-        "[mcp_servers.staticre.env]\n"
-        f'STATICRE_ROM = "{rom_path}"\n'
-        f'STATICRE_WORKDIR = "{workdir}"\n'
-        + (f'GHIDRA_INSTALL_DIR = "{ghidra_dir}"\n' if ghidra_dir else "")
-    )
-    # Codex finds config.toml via the CODEX_HOME env var (set at launch time).
+    args_toml = f'["run","--project","{STATIC_DIR}","staticre-mcp"]'
     cmd = [
         shutil.which("codex") or "codex", "exec",
         "--dangerously-bypass-approvals-and-sandbox",
         "-C", str(ws),
+        "-c", f'mcp_servers.staticre.command="{_uv_bin()}"',
+        "-c", f"mcp_servers.staticre.args={args_toml}",
+        "-c", f'mcp_servers.staticre.env.STATICRE_ROM="{rom_path}"',
+        "-c", f'mcp_servers.staticre.env.STATICRE_WORKDIR="{workdir}"',
     ]
+    if ghidra_dir:
+        cmd += ["-c", f'mcp_servers.staticre.env.GHIDRA_INSTALL_DIR="{ghidra_dir}"']
     if model:
         cmd += ["-m", model]
+    if effort:
+        cmd += ["-c", f'model_reasoning_effort="{effort}"']
+    if tier:
+        cmd += ["-c", f'service_tier="{tier}"']
     cmd += [prompt]
     return cmd
 
@@ -158,6 +159,10 @@ def main():
     ap.add_argument("--rom", required=True, help="path to target ROM")
     ap.add_argument("--engine", choices=["grok", "codex"], default="grok")
     ap.add_argument("--model", default=None, help="model id override")
+    ap.add_argument("--effort", default=None,
+                    help="reasoning effort override (e.g. low/medium/high)")
+    ap.add_argument("--tier", default=None,
+                    help="service tier override (codex only, e.g. fast/priority)")
     ap.add_argument("--label", default=None, help="optional workspace name suffix")
     ap.add_argument("--dry-run", action="store_true",
                     help="scaffold the workspace and print the command, but do not launch")
@@ -182,6 +187,8 @@ def main():
                 "created": datetime.now(timezone.utc).isoformat(),
                 "engine": args.engine,
                 "model": args.model,
+                "effort": args.effort,
+                "tier": args.tier,
                 "rom_source": str(rom),
                 "program_id": binfo["program_id"],
                 "sha256": binfo["sha256"],
@@ -196,8 +203,8 @@ def main():
     if args.engine == "grok":
         cmd = _grok_cmd(ws, prompt, args.model)
     else:
-        cmd = _codex_cmd(ws, prompt, args.model, rom_path, workdir)
-        env["CODEX_HOME"] = str(ws / ".codex")
+        cmd = _codex_cmd(ws, prompt, args.model, rom_path, workdir,
+                         args.effort, args.tier)
 
     print(f"workspace: {ws}")
     print(f"program:   {binfo['program_id']}  (blinded from {rom.name})")
