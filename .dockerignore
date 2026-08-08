@@ -1,0 +1,14 @@
+# Build context for the agent image is the repo root, but the Dockerfile only
+# needs pipeline/harness and .claude/skills. Exclude everything heavy/irrelevant.
+**/.git
+**/node_modules
+**/.venv
+**/__pycache__
+**/*.pyc
+pipeline/tools
+pipeline/workspaces
+pipeline/static/work
+arcade
+docs
+**/.next
+**/out
