@@ -53,11 +53,13 @@ function installSilentAudioFallback() {
 export function GameBoyPlayer({
   romUrl,
   title,
+  onRestart,
   timeScored = false,
   onRunEnd,
 }: {
   romUrl: string;
   title: string;
+  onRestart: () => void;
   timeScored?: boolean;
   onRunEnd?: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void;
 }) {
@@ -169,6 +171,7 @@ export function GameBoyPlayer({
         <div className={styles.system} aria-label="System controls">
           <button type="button" aria-label="Select" {...touchProps("select")}>Select</button>
           <button type="button" aria-label="Start" {...touchProps("start")}>Start</button>
+          <button type="button" onClick={onRestart}>Restart</button>
         </div>
         <div className={styles.actions} aria-label="Action buttons">
           <button type="button" className={styles.b} aria-label="B button" {...touchProps("b")}>B</button>

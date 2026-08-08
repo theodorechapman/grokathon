@@ -22,10 +22,14 @@ export function GameFrame({
   const [runId, setRunId] = useState(0);
   const [runEnd, setRunEnd] = useState<RunEnd | null>(null);
 
-  const replay = () => {
+  const restartGame = useCallback(() => {
     setRunEnd(null);
+    if (rom) {
+      window.location.reload();
+      return;
+    }
     setRunId((n) => n + 1);
-  };
+  }, [rom]);
 
   const focusGame = useCallback(() => {
     playerRef.current?.focus();
@@ -45,11 +49,12 @@ export function GameFrame({
               key={runId}
               romUrl={`/games/${slug}/${rom}`}
               title={title}
+              onRestart={restartGame}
               timeScored={timeScored}
               onRunEnd={setRunEnd}
             />
             {runEnd && (
-              <EndScreen slug={slug} end={runEnd} signedIn={signedIn} onReplay={replay} />
+              <EndScreen slug={slug} end={runEnd} signedIn={signedIn} onReplay={restartGame} />
             )}
           </>
         ) : (
