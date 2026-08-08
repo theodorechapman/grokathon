@@ -36,6 +36,17 @@ Browser is the play surface because it's the only one that's instant and works e
 
 Hosting: one Grok Games site, not a new site per game. Every game ships as a route on the same hosted arcade, something like grokgames.app/g/taco-dodge. A new game is a new route, not a new deploy. That keeps one deploy target, stable links for X cards and the Grok webview, and it gives us the arcade page for free: browse what's been made, play it, remix it. Remix culture needs a shared shelf.
 
+## The arcade ranks
+
+Generation is cheap, so the shelf fills with slop unless something sorts it. The arcade is a marketplace with a ranking system, not a dump.
+
+- Upvotes on every game page. Cheapest signal, ships first.
+- Plays and completions. A game people finish beats a game people bounce off.
+- Remixes as the strongest signal. Someone cared enough to change it. Remixes credit the original, so lineage is visible and a good base game climbs as its remixes spread.
+- X engagement on the shared card feeds back in. A card that gets played on X pushes the game up the arcade.
+
+The arcade default sort is ranked, not newest. New games get a short discovery window so they aren't buried at birth, then they live or die on signal. Two gates, two jobs: verification keeps unplayable games out entirely, ranking keeps boring ones down. The machine grades playable, the crowd grades fun.
+
 ## The loop
 
 Seven stages. Each one is one sentence.
@@ -98,6 +109,7 @@ Integrations, the Grok stack:
 
 Stretch, only if core is solid:
 
+- Arcade ranking v0: upvote button plus play count, ranked default sort. Cheap to build, sells the marketplace story.
 - Multiplayer.
 - Image or clip reference.
 - Voice input via the Voice Agent API.
