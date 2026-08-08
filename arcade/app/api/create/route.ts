@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { redis } from "@/lib/stats";
 
 const REPO = "theodorechapman/grokathon";
 const MAX_PROMPT = 300;
@@ -7,7 +8,14 @@ const RATE_LIMIT_PER_MIN = 5;
 
 const hits = new Map<string, number[]>();
 
-function rateLimited(ip: string): boolean {
+async function rateLimited(ip: string): Promise<boolean> {
+  const r = redis();
+  if (r) {
+    const key = `rl:create:${ip}`;
+    const count = await r.incr(key);
+    if (count === 1) await r.expire(key, 60);
+    return count > RATE_LIMIT_PER_MIN;
+  }
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
   recent.push(now);
@@ -49,7 +57,7 @@ export async function POST(req: NextRequest) {
   }
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (rateLimited(ip)) {
+  if (await rateLimited(ip)) {
     return NextResponse.json({ error: "slow down, one game a minute is plenty" }, { status: 429 });
   }
 

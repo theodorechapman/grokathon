@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame, listGames } from "@/lib/games";
 import { SiteNav } from "../../site-nav";
+import { PlayBeacon } from "./play-beacon";
 
 export async function generateStaticParams() {
   const games = await listGames();
@@ -15,6 +16,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   return (
     <main>
       <SiteNav active="arcade" />
+      <PlayBeacon slug={slug} />
       <Link href="/arcade" className="back">
         ← Back to the arcade
       </Link>

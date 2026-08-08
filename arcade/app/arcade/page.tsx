@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { listGames } from "@/lib/games";
+import { rankScore, statsFor } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 import { CreateBox } from "./create-box";
+import { VoteButton } from "./vote-button";
+
+export const dynamic = "force-dynamic";
 
 export default async function ArcadePage() {
-  const games = await listGames();
+  const unranked = await listGames();
+  const stats = await statsFor(unranked.map((g) => g.slug));
+  const games = [...unranked].sort((a, b) => {
+    const diff = rankScore(stats.get(b.slug)!) - rankScore(stats.get(a.slug)!);
+    return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
+  });
   return (
     <main>
       <SiteNav active="arcade" />
@@ -52,7 +61,10 @@ export default async function ArcadePage() {
                   <Link href={`/g/${game.slug}`} className="playBtn">
                     ▶&nbsp; Play
                   </Link>
-                  <span className="gameControls">{game.controls}</span>
+                  <VoteButton slug={game.slug} votes={stats.get(game.slug)!.votes} />
+                  <span className="gameControls">
+                    {stats.get(game.slug)!.plays} plays
+                  </span>
                 </div>
               </div>
             </article>

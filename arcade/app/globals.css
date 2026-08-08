@@ -412,3 +412,26 @@ main {
 .createErr {
   color: #f87171;
 }
+
+.voteBtn {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--dim);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.voteBtn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.voteBtnDone {
+  border-color: var(--accent);
+  color: var(--accent);
+  cursor: default;
+}
