@@ -31,7 +31,7 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label bal
 | `dynamic_re.md` | emulator skill (copied from `.claude/skills/dynamic-re/` when the grokboy bridge is built) |
 | `TASK.md` | the concrete task prompt |
 | `ghidra_work/` | the agent's private Ghidra project + evidence sidecar |
-| `src/` | where the agent writes its TypeScript reimplementation |
+| `src/` | where the agent writes its raw-C (GBDK) reimplementation, built to `src/reconstructed.gb` |
 | `NOTES.md` | (agent-written) recovered memory map + open questions |
 | `run_meta.json` | provenance: engine, model, ROM hashes, program id |
 | `agent.log` | full streaming transcript of the run |
