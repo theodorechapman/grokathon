@@ -107,7 +107,7 @@ async function OverallBoard() {
           return (
             <tr key={row.handle} className={guest ? "guestRow" : undefined}>
               <td>{i + 1}</td>
-              <td>{guest ? `guest-${row.handle.slice(6)}` : `@${row.handle}`}</td>
+              <td>{guest ? `guest-${row.handle.slice(6, 12)}` : `@${row.handle}`}</td>
               <td>{row.plays}</td>
               <td>{row.games}</td>
             </tr>
