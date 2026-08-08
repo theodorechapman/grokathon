@@ -1,0 +1,143 @@
+body {
+  min-height: 100dvh;
+}
+
+@media (max-width: 720px) {
+  .gameHead {
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .qrPanel {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+    padding-left: max(16px, env(safe-area-inset-left));
+  }
+
+  .siteNav {
+    min-width: 0;
+  }
+
+  .siteNavRight,
+  .siteNavPill {
+    min-width: 0;
+  }
+
+  .siteNav:has(.authChip) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  .siteNav:has(.authChip) .siteNavRight {
+    display: contents;
+  }
+
+  .siteNav:has(.authChip) .siteNavPill {
+    grid-area: 2 / 1 / 3 / 3;
+    width: 100%;
+  }
+
+  .siteNav:has(.authChip) .siteNavPill .navSegment {
+    flex: 1;
+    justify-content: center;
+    padding-inline: 8px;
+  }
+
+  .siteNav:has(.authChip) .authChip {
+    justify-self: end;
+  }
+
+  .welcomeCta,
+  .createBox button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .shelfTitleRow {
+    align-items: flex-start;
+  }
+
+  .gameActions,
+  .frameBar {
+    flex-wrap: wrap;
+  }
+
+  .player {
+    margin-top: 18px;
+    border-radius: 12px;
+    outline: none;
+  }
+
+  .player:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .player iframe {
+    height: clamp(320px, 68svh, 560px);
+  }
+
+  .playerFoot {
+    margin-top: 12px;
+  }
+
+  .controls {
+    line-height: 1.5;
+    margin-top: 0;
+  }
+
+  .highScores {
+    padding: 18px;
+  }
+
+  .remixGate {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .remixGate .navSegment {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .scoreBanner {
+    top: calc(12px + env(safe-area-inset-top));
+    bottom: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .siteNavPill {
+    padding: 4px;
+  }
+
+  .siteNavPill .navSegment {
+    padding-inline: 9px;
+    font-size: 12px;
+  }
+
+  .authChip {
+    padding-inline: 12px;
+  }
+
+  .shelfTitleRow {
+    flex-direction: column;
+  }
+
+  .gameTitleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .player iframe {
+    height: calc(100dvh - 24px);
+  }
+}
