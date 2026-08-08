@@ -42,12 +42,6 @@ export async function SiteNav({
           ) : (
             <SignInButton />
           )}
-          <Link
-            href="/my"
-            className={active === "my" ? "navSegment navSegmentActive" : "navSegment"}
-          >
-            My games
-          </Link>
         </div>
         {session && (
           <span className="authChip">

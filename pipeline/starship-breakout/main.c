@@ -169,6 +169,9 @@ static void initialize_game(void) {
     move_sprite(STARSHIP_SPRITE, starship_x, starship_y);
 }
 
+/* Nova arcade protocol: see docs/game-bundle-contract.md. */
+#define NOVA_STATE (*(volatile uint8_t *)0xCF00)
+
 void main(void) {
     uint8_t keys;
 
@@ -176,6 +179,7 @@ void main(void) {
 
     initialize_video();
     initialize_game();
+    NOVA_STATE = 1u;
 
     while (bricks_remaining != 0u) {
         keys = joypad();
@@ -204,6 +208,7 @@ void main(void) {
         wait_vbl_done();
     }
 
+    NOVA_STATE = bricks_remaining == 0u ? 2u : 3u;
     while (true) {
         wait_vbl_done();
     }

@@ -1,7 +1,9 @@
 import { readSession } from "@/lib/session";
+import { listGames } from "@/lib/games";
 import { SiteNav } from "../site-nav";
 import { CreateBox } from "../arcade/create-box";
 import { SignInButton } from "../sign-in-button";
+import { MyCreations } from "../my/my-creations";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +21,10 @@ export default async function CreatePage() {
       </main>
     );
   }
+  const games = await listGames();
+  const titles: Record<string, string> = {};
+  for (const g of games) titles[g.slug] = g.title;
+
   return (
     <main>
       <SiteNav active="create" />
@@ -34,6 +40,10 @@ export default async function CreatePage() {
           pipeline builds it the same way. Reply to any game&apos;s post to remix
           it instead.
         </p>
+      </section>
+      <section className="remixPanel">
+        <h2>Your games</h2>
+        <MyCreations titles={titles} />
       </section>
     </main>
   );
