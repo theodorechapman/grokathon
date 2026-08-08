@@ -15,13 +15,14 @@ export default function LandingPage() {
           <img src="/nova-lockup.png" alt="Nova" className={styles.lockup} />
           <p className={styles.tagline}>Every game starts as a sentence.</p>
           <p className={styles.sub}>
-            Say it, and Nova makes it real: built by Grok, proven playable by a
-            bot, live in your browser in seconds. Then the room remixes it.
+            The open source arcade the X community builds one reply at a time.
+            Say a game, Grok builds it, a bot proves it playable, and it&apos;s
+            live in your browser in seconds. Then the thread remixes it.
           </p>
           <Link href="/arcade" className={styles.heroCta}>
             ▶&nbsp; Enter the arcade
           </Link>
-          <p className={styles.chip}>built on Grok</p>
+          <p className={styles.chip}>X driven · open source · powered by Grok</p>
         </div>
       </header>
 
