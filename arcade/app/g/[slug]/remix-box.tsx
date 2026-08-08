@@ -8,7 +8,7 @@ type Status =
   | { kind: "queued"; slug: string }
   | { kind: "error"; message: string };
 
-export function CreateBox() {
+export function RemixBox({ parent }: { parent: string }) {
   const [prompt, setPrompt] = useState("");
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
@@ -20,7 +20,7 @@ export function CreateBox() {
       const res = await fetch("/api/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, parent }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "something broke");
@@ -32,20 +32,20 @@ export function CreateBox() {
   }
 
   return (
-    <form className="createBox" onSubmit={submit}>
+    <form className="createBox remixBox" onSubmit={submit}>
       <input
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Say a game: dodge falling tacos on a rooftop"
+        placeholder="Remix it: make gravity low, two players, neon everything"
         maxLength={300}
-        aria-label="Describe the game you want"
+        aria-label="Describe your remix"
       />
       <button type="submit" disabled={status.kind === "sending" || prompt.trim().length < 3}>
-        {status.kind === "sending" ? "Queuing…" : "Make it"}
+        {status.kind === "sending" ? "Queuing…" : "Remix"}
       </button>
       {status.kind === "queued" && (
         <p className="createNote">
-          Queued. Watch it get born at <a href={`/g/${status.slug}`}>/g/{status.slug}</a>.
+          Remix queued. Watch it get born at <a href={`/g/${status.slug}`}>/g/{status.slug}</a>.
         </p>
       )}
       {status.kind === "error" && <p className="createNote createErr">{status.message}</p>}

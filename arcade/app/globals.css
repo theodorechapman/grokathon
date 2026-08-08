@@ -459,3 +459,59 @@ main {
   font-size: 12px;
   max-width: 12ch;
 }
+
+.remixBox {
+  margin-top: 28px;
+}
+
+.createNote a {
+  color: var(--accent);
+}
+
+.waiting {
+  text-align: center;
+  padding: 90px 24px;
+}
+
+.waitingPulse {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: #05060a;
+  box-shadow:
+    0 0 20px 5px rgba(127, 240, 225, 0.5),
+    0 0 70px 24px rgba(45, 212, 191, 0.22);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.12); opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waitingPulse { animation: none; }
+}
+
+.waiting h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.waitingStatus {
+  margin-top: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.waitingNote {
+  margin: 16px auto 0;
+  color: var(--dim);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 48ch;
+}

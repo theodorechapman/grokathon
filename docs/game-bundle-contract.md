@@ -56,6 +56,8 @@ The repo is the queue. `POST /api/create` on the arcade commits a job file to `p
 
 `slug` is the folder name the bundle must ship under. `parent` non-null means remix: start from the parent's bundle. `source` says where the ask came from (site, grok, x).
 
+Optional but nice: the pipeline can write a `status` string into the job file as it works ("writing the spec", "bot is playing it", "repairing"). The waiting room at /g/&lt;slug&gt; shows it live to the person who asked. No status means it displays "building".
+
 ## Changing this contract
 
 It's the one interface both sides depend on. Change it in this doc first, in a PR both sides see, before changing code.
