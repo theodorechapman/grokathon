@@ -1,16 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame, listGames } from "@/lib/games";
+import { pendingJob } from "@/lib/jobs";
 import { SiteNav } from "../../site-nav";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
+import { RemixBox } from "./remix-box";
+import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const game = await getGame(slug);
-  if (!game) return {};
+  if (!game) return { title: "Being built — Nova" };
   const image = game.hasCover ? `/games/${slug}/cover.png` : "/og.png";
   const description = `${game.description} Play it in your browser, no install.`;
   return {
@@ -29,7 +32,18 @@ export async function generateStaticParams() {
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const game = await getGame(slug);
-  if (!game) notFound();
+
+  if (!game) {
+    const job = await pendingJob(slug);
+    if (!job) notFound();
+    return (
+      <main>
+        <SiteNav active="arcade" />
+        <WaitingRoom slug={slug} status={job.status} />
+      </main>
+    );
+  }
+
   return (
     <main>
       <SiteNav active="arcade" />
@@ -48,6 +62,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         <p className="controls">{game.controls}</p>
         <QrPanel url={`${SITE}/g/${slug}`} />
       </div>
+      <RemixBox parent={slug} />
     </main>
   );
 }
