@@ -1301,3 +1301,19 @@ a.navSegment:hover {
   font-weight: 800;
   letter-spacing: 0.12em;
 }
+
+/* view source */
+.sourceLink {
+  margin-top: 10px;
+}
+.sourceLink a {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+}
+.sourceLink a:hover {
+  opacity: 0.8;
+}

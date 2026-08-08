@@ -180,6 +180,7 @@ def process_job(job: dict) -> Path | None:
         "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
     }
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (bundle / "source.c").write_text(main_c)
     report(slug, "publishing", "pushing to the arcade")
     log(f"job {slug}: built and bundled")
     return bundle
