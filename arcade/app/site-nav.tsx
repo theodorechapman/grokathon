@@ -11,7 +11,6 @@ export function SiteNav({ active }: { active: "home" | "arcade" }) {
         <Link href="/arcade" className={active === "arcade" ? "siteNavActive" : undefined}>
           Arcade
         </Link>
-        <Link href="/#how">How it works</Link>
       </div>
     </nav>
   );
