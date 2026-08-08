@@ -7,6 +7,7 @@ import argparse
 import binascii
 import ctypes
 import functools
+import hashlib
 import json
 import struct
 import sys
@@ -119,6 +120,25 @@ class _HardwareInfo(ctypes.Structure):
     ]
 
 
+class _BankEvent(ctypes.Structure):
+    _fields_ = [
+        ("bank", ctypes.c_uint16),
+        ("pc", ctypes.c_uint16),
+        ("instruction", ctypes.c_uint64),
+        ("frame", ctypes.c_uint64),
+    ]
+
+
+class _AssetRun(ctypes.Structure):
+    _fields_ = [
+        ("rom_bank", ctypes.c_uint16),
+        ("src", ctypes.c_uint16),
+        ("vram_bank", ctypes.c_uint16),
+        ("dst", ctypes.c_uint16),
+        ("length", ctypes.c_uint32),
+    ]
+
+
 def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
     handle = ctypes.c_void_p
     byte_pointer = ctypes.POINTER(ctypes.c_uint8)
@@ -222,13 +242,31 @@ def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
         handle, ctypes.POINTER(ctypes.c_uint32), ctypes.c_size_t]
     library.sb_get_call_targets.restype = ctypes.c_size_t
 
+    library.sb_set_execution_trace.argtypes = [handle, ctypes.c_bool]
+    library.sb_set_execution_trace.restype = ctypes.c_int
+    library.sb_clear_execution_trace.argtypes = [handle]
+    library.sb_clear_execution_trace.restype = ctypes.c_int
+    library.sb_get_execution_coverage.argtypes = [
+        handle, ctypes.POINTER(ctypes.c_uint32), ctypes.c_size_t]
+    library.sb_get_execution_coverage.restype = ctypes.c_size_t
+    library.sb_get_bank_events.argtypes = [
+        handle, ctypes.POINTER(_BankEvent), ctypes.c_size_t]
+    library.sb_get_bank_events.restype = ctypes.c_size_t
+
     library.sb_set_asset_trace.argtypes = [handle, ctypes.c_bool]
     library.sb_set_asset_trace.restype = ctypes.c_int
     library.sb_clear_asset_trace.argtypes = [handle]
     library.sb_clear_asset_trace.restype = ctypes.c_int
     library.sb_get_asset_runs.argtypes = [
-        handle, ctypes.POINTER(ctypes.c_uint16), ctypes.c_size_t]
+        handle, ctypes.POINTER(_AssetRun), ctypes.c_size_t]
     library.sb_get_asset_runs.restype = ctypes.c_size_t
+
+    library.sb_copy_vram_bank.argtypes = [
+        handle, ctypes.c_uint16, byte_pointer, ctypes.c_size_t]
+    library.sb_copy_vram_bank.restype = ctypes.c_int
+    library.sb_copy_palette.argtypes = [
+        handle, ctypes.c_bool, byte_pointer, ctypes.c_size_t]
+    library.sb_copy_palette.restype = ctypes.c_int
 
     library.sb_copy_frame_rgb.argtypes = [handle, byte_pointer, ctypes.c_size_t]
     library.sb_copy_frame_rgb.restype = ctypes.c_int
@@ -293,6 +331,22 @@ def _write_png(path: Path, rgb: bytes, scale: int = 1) -> None:
         + _png_chunk(b"IDAT", zlib.compress(b"".join(rows), level=1))
         + _png_chunk(b"IEND", b"")
     )
+
+
+def _address_ranges(addresses: list[int]) -> list[dict[str, int]]:
+    """Losslessly compress sorted instruction addresses into inclusive runs."""
+    if not addresses:
+        return []
+    ranges = []
+    start = previous = addresses[0]
+    for address in addresses[1:]:
+        if address == previous + 1:
+            previous = address
+            continue
+        ranges.append({"start": start, "end": previous})
+        start = previous = address
+    ranges.append({"start": start, "end": previous})
+    return ranges
 
 
 class SameBoy:
@@ -671,6 +725,64 @@ class SameBoy:
                 return {"ok": True, "count": len(targets), "targets": targets}
             raise HarnessError("call-trace action must be on, off, clear, or dump")
 
+        if command == "execution-trace":
+            action = request.get("action", "dump")
+            if action in {"on", "off"}:
+                self._check(
+                    self._library.sb_set_execution_trace(
+                        self._handle, action == "on"
+                    )
+                )
+                return {"ok": True}
+            if action == "clear":
+                self._check(self._library.sb_clear_execution_trace(self._handle))
+                return {"ok": True}
+            if action == "dump":
+                count = self._library.sb_get_execution_coverage(
+                    self._handle, None, 0
+                )
+                coverage_buffer = (ctypes.c_uint32 * count)()
+                count = self._library.sb_get_execution_coverage(
+                    self._handle, coverage_buffer, count
+                )
+                by_bank: dict[int, list[int]] = {}
+                for key in coverage_buffer[:count]:
+                    by_bank.setdefault(key >> 16, []).append(key & 0xFFFF)
+                banks = [
+                    {
+                        "bank": bank,
+                        "count": len(addresses),
+                        "ranges": _address_ranges(sorted(addresses)),
+                    }
+                    for bank, addresses in sorted(by_bank.items())
+                ]
+
+                event_count = self._library.sb_get_bank_events(
+                    self._handle, None, 0
+                )
+                event_buffer = (_BankEvent * event_count)()
+                event_count = self._library.sb_get_bank_events(
+                    self._handle, event_buffer, event_count
+                )
+                events = [
+                    {
+                        "bank": event.bank,
+                        "pc": event.pc,
+                        "instruction": event.instruction,
+                        "frame": event.frame,
+                    }
+                    for event in event_buffer[:event_count]
+                ]
+                return {
+                    "ok": True,
+                    "count": count,
+                    "banks": banks,
+                    "bank_events": events,
+                }
+            raise HarnessError(
+                "execution-trace action must be on, off, clear, or dump"
+            )
+
         if command == "asset-trace":
             action = request.get("action", "dump")
             if action in {"on", "off"}:
@@ -681,17 +793,72 @@ class SameBoy:
                 return {"ok": True}
             if action == "dump":
                 count = self._library.sb_get_asset_runs(self._handle, None, 0)
-                buf = (ctypes.c_uint16 * (count * 4))()
+                buf = (_AssetRun * count)()
                 n = self._library.sb_get_asset_runs(self._handle, buf, count)
                 runs = [
-                    {"bank": buf[i * 4], "src": buf[i * 4 + 1],
-                     "dst": buf[i * 4 + 2], "length": buf[i * 4 + 3],
-                     "canonical": f"ROM{buf[i * 4]}:{buf[i * 4 + 1]:04x}"}
-                    for i in range(n)
+                    {
+                        "bank": run.rom_bank,
+                        "src": run.src,
+                        "vram_bank": run.vram_bank,
+                        "dst": run.dst,
+                        "length": run.length,
+                        "canonical": f"ROM{run.rom_bank}:{run.src:04x}",
+                    }
+                    for run in buf[:n]
                 ]
                 runs.sort(key=lambda r: (r["bank"], r["src"]))
                 return {"ok": True, "count": len(runs), "runs": runs}
             raise HarnessError("asset-trace action must be on, off, clear, or dump")
+
+        if command == "video-state":
+            path_value = request.get("path")
+            if path_value is not None and not isinstance(path_value, str):
+                raise HarnessError("video-state path must be a string")
+            destination = Path(path_value).resolve() if path_value else None
+            if destination:
+                destination.mkdir(parents=True, exist_ok=True)
+            cgb_mode = self._hardware_info()["cgb_mode"]
+            artifacts = []
+            for bank in range(2 if cgb_mode else 1):
+                buffer = (ctypes.c_uint8 * 0x2000)()
+                self._check(
+                    self._library.sb_copy_vram_bank(
+                        self._handle, bank, buffer, len(buffer)
+                    )
+                )
+                data = bytes(buffer)
+                item: dict[str, Any] = {
+                    "kind": "vram",
+                    "bank": bank,
+                    "bytes": len(data),
+                    "sha256": hashlib.sha256(data).hexdigest(),
+                }
+                if destination:
+                    path = destination / f"vram{bank}.bin"
+                    path.write_bytes(data)
+                    item["path"] = str(path)
+                artifacts.append(item)
+            if cgb_mode:
+                for object_palette, name in ((False, "bgp"), (True, "obp")):
+                    buffer = (ctypes.c_uint8 * 64)()
+                    self._check(
+                        self._library.sb_copy_palette(
+                            self._handle, object_palette, buffer, len(buffer)
+                        )
+                    )
+                    data = bytes(buffer)
+                    item = {
+                        "kind": "palette",
+                        "name": name,
+                        "bytes": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(),
+                    }
+                    if destination:
+                        path = destination / f"{name}.bin"
+                        path.write_bytes(data)
+                        item["path"] = str(path)
+                    artifacts.append(item)
+            return {"ok": True, "cgb_mode": cgb_mode, "artifacts": artifacts}
 
         if command == "reset":
             quick = request.get("quick", False)
@@ -801,6 +968,16 @@ class SameBoy:
         self.request({"cmd": "screenshot", "path": str(destination), "scale": scale})
         return destination
 
+    def frame_rgb(self) -> bytes:
+        """Return the current native-resolution 160x144 RGB frame."""
+        frame = (ctypes.c_uint8 * FRAME_RGB_SIZE)()
+        self._check(
+            self._library.sb_copy_frame_rgb(
+                self._handle, frame, FRAME_RGB_SIZE
+            )
+        )
+        return bytes(frame)
+
     def save_state(self, path: str | Path) -> None:
         self.request({"cmd": "save-state", "path": str(Path(path).resolve())})
 
@@ -822,9 +999,19 @@ class SameBoy:
         """The recorded (bank, offset) seeds, e.g. {"canonical": "ROM5:4c00"}."""
         return self.request({"cmd": "call-trace", "action": "dump"})["targets"]
 
+    def execution_trace(self, on: bool = True) -> None:
+        """Record distinct physical ROM addresses and switch-bank changes."""
+        self.request({"cmd": "execution-trace", "action": "on" if on else "off"})
+
+    def clear_execution_trace(self) -> None:
+        self.request({"cmd": "execution-trace", "action": "clear"})
+
+    def execution_coverage(self) -> dict[str, Any]:
+        """Return losslessly compressed per-bank coverage and the bank timeline."""
+        return self.request({"cmd": "execution-trace", "action": "dump"})
+
     def asset_trace(self, on: bool = True) -> None:
-        """Record (bank, src, dst, len) runs of ROM data copied into VRAM —
-        provenance for recovering and embedding original graphics."""
+        """Record physical ROM-to-CGB-VRAM copy provenance."""
         self.request({"cmd": "asset-trace", "action": "on" if on else "off"})
 
     def clear_asset_trace(self) -> None:
@@ -835,6 +1022,13 @@ class SameBoy:
         is an uncompressed copy (extract statically from `canonical`); a short
         source feeding a long dest span indicates decompression (dump VRAM)."""
         return self.request({"cmd": "asset-trace", "action": "dump"})["runs"]
+
+    def video_state(self, path: str | Path | None = None) -> dict[str, Any]:
+        """Hash, and optionally dump, both VRAM banks and CGB palettes."""
+        request: dict[str, Any] = {"cmd": "video-state"}
+        if path is not None:
+            request["path"] = str(Path(path).resolve())
+        return self.request(request)
 
     def reset(self, *, quick: bool = False) -> None:
         self.request({"cmd": "reset", "quick": quick})

@@ -100,6 +100,21 @@ typedef struct {
     uint8_t cgb_mode;
 } sb_hardware_info;
 
+typedef struct {
+    uint16_t bank;
+    uint16_t pc;
+    uint64_t instruction;
+    uint64_t frame;
+} sb_bank_event;
+
+typedef struct {
+    uint16_t rom_bank;
+    uint16_t src;
+    uint16_t vram_bank;
+    uint16_t dst;
+    uint32_t length;
+} sb_asset_run;
+
 SB_EXPORT int sb_create(const char *rom_path, const char *boot_path, sb_handle **out);
 SB_EXPORT void sb_destroy(sb_handle *handle);
 SB_EXPORT const char *sb_last_error(const sb_handle *handle);
@@ -153,12 +168,27 @@ SB_EXPORT int sb_clear_call_trace(sb_handle *handle);
 SB_EXPORT size_t sb_get_call_targets(
     const sb_handle *handle, uint32_t *out, size_t capacity);
 
-/* Asset trace: records (bank, src, dst, len) runs of ROM data copied into
-   VRAM, to recover and embed original graphics. */
+/* Execution trace: records every distinct physical (ROM bank, PC) reached,
+   plus a compact timeline of changes to the switchable ROM bank. */
+SB_EXPORT int sb_set_execution_trace(sb_handle *handle, bool on);
+SB_EXPORT int sb_clear_execution_trace(sb_handle *handle);
+SB_EXPORT size_t sb_get_execution_coverage(
+    const sb_handle *handle, uint32_t *out, size_t capacity);
+SB_EXPORT size_t sb_get_bank_events(
+    const sb_handle *handle, sb_bank_event *out, size_t capacity);
+
+/* Asset trace: records ROM-to-VRAM runs including the physical source ROM
+   bank and destination CGB VRAM bank. */
 SB_EXPORT int sb_set_asset_trace(sb_handle *handle, bool on);
 SB_EXPORT int sb_clear_asset_trace(sb_handle *handle);
 SB_EXPORT size_t sb_get_asset_runs(
-    sb_handle *handle, uint16_t *out, size_t capacity);
+    sb_handle *handle, sb_asset_run *out, size_t capacity);
+
+/* Snapshot CGB video memory without changing the emulated machine state. */
+SB_EXPORT int sb_copy_vram_bank(
+    sb_handle *handle, uint16_t bank, uint8_t *out, size_t length);
+SB_EXPORT int sb_copy_palette(
+    sb_handle *handle, bool object_palette, uint8_t *out, size_t length);
 
 SB_EXPORT int sb_copy_frame_rgb(sb_handle *handle, uint8_t *out, size_t length);
 SB_EXPORT int sb_save_state(sb_handle *handle, const char *path);

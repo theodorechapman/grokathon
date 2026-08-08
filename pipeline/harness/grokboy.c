@@ -19,6 +19,8 @@
 #define SB_MAX_WATCHPOINTS 128
 #define SB_LOG_SIZE 65536
 #define SB_CALL_TRACE_CAP 16384  /* power of two; open-addressing set of seeds */
+#define SB_EXEC_TRACE_CAP 131072 /* power of two; distinct physical ROM PCs */
+#define SB_BANK_EVENT_CAP 16384  /* actual switchable-ROM bank transitions */
 #define SB_ASSET_TRACE_CAP 16384  /* max coalesced VRAM-copy runs recorded */
 #define SB_ASSET_MIN_RUN 8  /* shorter streaks are decompression/fill noise, not copies */
 
@@ -35,8 +37,9 @@ typedef struct {
 } native_watchpoint;
 
 typedef struct {
-    uint16_t bank;   /* source ROM bank (0 for 0x0000-0x3fff) */
+    uint16_t rom_bank; /* physical source ROM bank */
     uint16_t src;    /* source ROM address of the run's first byte */
+    uint16_t vram_bank; /* physical CGB VRAM destination bank */
     uint16_t dst;    /* VRAM destination of the run's first byte */
     uint32_t len;    /* bytes in this contiguous 1:1 source->dest run */
 } native_asset_run;
@@ -51,6 +54,7 @@ struct sb_handle {
     size_t log_length;
     uint64_t frames;
     uint64_t instructions;
+    bool cartridge_started;
     native_breakpoint breakpoints[SB_MAX_BREAKPOINTS];
     native_watchpoint watchpoints[SB_MAX_WATCHPOINTS];
     sb_stop_reason stop_reason;
@@ -69,6 +73,15 @@ struct sb_handle {
     bool call_pending;
     uint32_t call_targets[SB_CALL_TRACE_CAP];
     size_t call_target_count;
+    /* Full physical ROM execution coverage. Slots store packed keys + 1 so
+       physical ROM0:0000 remains representable while zero is the sentinel. */
+    bool execution_trace_on;
+    uint32_t execution_coverage[SB_EXEC_TRACE_CAP];
+    size_t execution_coverage_count;
+    bool have_switch_bank;
+    uint16_t switch_bank;
+    sb_bank_event bank_events[SB_BANK_EVENT_CAP];
+    size_t bank_event_count;
     /* Asset trace: provenance for data copied into VRAM. When on, each CPU
        write to 0x8000-0x9fff is attributed to the most recent ROM byte read
        (bank + address), and 1:1-advancing source->dest streaks are coalesced
@@ -115,6 +128,15 @@ static int fail(sb_handle *handle, const char *message)
 static sb_handle *context(GB_gameboy_t *gb)
 {
     return GB_get_user_data(gb);
+}
+
+static void update_cartridge_started(sb_handle *handle)
+{
+    if (handle->cartridge_started) return;
+    bool suppressed = handle->suppress_watchpoints;
+    handle->suppress_watchpoints = true;
+    handle->cartridge_started = (GB_read_memory(handle->gb, 0xff50) & 1) != 0;
+    handle->suppress_watchpoints = suppressed;
 }
 
 static uint32_t encode_rgb(GB_gameboy_t *gb, uint8_t r, uint8_t g, uint8_t b)
@@ -191,20 +213,28 @@ static void asset_record_vram_write(GB_gameboy_t *gb, sb_handle *handle, uint16_
 {
     if (!handle->have_last_rom_read) return;
     uint16_t src = handle->last_rom_read;
-    uint16_t bank = 0;
+    uint16_t rom_bank = 0;
     if (src >= 0x4000) {
         size_t size = 0;
-        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &size, &bank);
+        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &size, &rom_bank);
     }
+    else {
+        size_t size = 0;
+        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM0, &size, &rom_bank);
+    }
+    size_t vram_size = 0;
+    uint16_t vram_bank = 0;
+    GB_get_direct_access(gb, GB_DIRECT_ACCESS_VRAM, &vram_size, &vram_bank);
     native_asset_run *r = &handle->run;
-    if (r->len != 0 && r->bank == bank &&
+    if (r->len != 0 && r->rom_bank == rom_bank && r->vram_bank == vram_bank &&
         src == (uint16_t)(r->src + r->len) && dst == (uint16_t)(r->dst + r->len)) {
         r->len++;
         return;
     }
     asset_run_flush(handle);
-    r->bank = bank;
+    r->rom_bank = rom_bank;
     r->src = src;
+    r->vram_bank = vram_bank;
     r->dst = dst;
     r->len = 1;
 }
@@ -230,6 +260,9 @@ static bool on_memory_write(GB_gameboy_t *gb, uint16_t address, uint8_t value)
 {
     record_watchpoint(gb, address, value, SB_WATCH_WRITE);
     sb_handle *handle = context(gb);
+    if (handle && address == 0xff50 && (value & 1)) {
+        handle->cartridge_started = true;
+    }
     if (handle && handle->asset_trace_on && address >= 0x8000 && address <= 0x9FFF) {
         asset_record_vram_write(gb, handle, address);
     }
@@ -257,6 +290,20 @@ static void call_target_insert(sb_handle *handle, uint32_t key)
     handle->call_target_count++;
 }
 
+static void execution_coverage_insert(sb_handle *handle, uint32_t key)
+{
+    if (handle->execution_coverage_count >= (SB_EXEC_TRACE_CAP * 3) / 4) return;
+    uint32_t stored = key + 1;
+    size_t mask = SB_EXEC_TRACE_CAP - 1;
+    size_t i = (key * 2654435761u) & mask;
+    while (handle->execution_coverage[i] != 0) {
+        if (handle->execution_coverage[i] == stored) return;
+        i = (i + 1) & mask;
+    }
+    handle->execution_coverage[i] = stored;
+    handle->execution_coverage_count++;
+}
+
 static bool opcode_is_call(uint8_t opcode)
 {
     /* CALL a16 / CALL cc,a16 — the SM83 unconditional and conditional calls.
@@ -271,15 +318,39 @@ static void on_execution(GB_gameboy_t *gb, uint16_t address, uint8_t opcode)
     sb_handle *handle = context(gb);
     if (!handle) return;
     handle->cur_pc = address;   /* used by the asset trace to skip fetch reads */
+    uint16_t switch_bank = 0;
+    size_t rom_size = 0;
+    GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &rom_size, &switch_bank);
+    /* Boot-ROM addresses alias the cartridge windows but are not cartridge
+       execution, so do not contaminate physical ROM coverage with them. */
+    if (handle->execution_trace_on && handle->cartridge_started) {
+        uint16_t physical_bank = switch_bank;
+        if (address < 0x4000) {
+            GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM0, &rom_size, &physical_bank);
+        }
+        if (address <= 0x7fff) {
+            execution_coverage_insert(
+                handle, ((uint32_t)physical_bank << 16) | address);
+        }
+        if (!handle->have_switch_bank || handle->switch_bank != switch_bank) {
+            if (handle->bank_event_count < SB_BANK_EVENT_CAP) {
+                handle->bank_events[handle->bank_event_count++] = (sb_bank_event){
+                    .bank = switch_bank,
+                    .pc = address,
+                    .instruction = handle->instructions,
+                    .frame = handle->frames,
+                };
+            }
+            handle->switch_bank = switch_bank;
+            handle->have_switch_bank = true;
+        }
+    }
     if (!handle->call_trace_on) return;
     /* The instruction executed right after a CALL is the callee's entry. If
        it lands in the switchable bank window, record it with the bank mapped
        at that moment (a cross-bank call switches the bank before calling). */
     if (handle->call_pending && address >= 0x4000 && address <= 0x7FFF) {
-        uint16_t bank = 0;
-        size_t size = 0;
-        GB_get_direct_access(gb, GB_DIRECT_ACCESS_ROM, &size, &bank);
-        call_target_insert(handle, ((uint32_t)bank << 16) | address);
+        call_target_insert(handle, ((uint32_t)switch_bank << 16) | address);
     }
     handle->call_pending = opcode_is_call(opcode);
 }
@@ -478,6 +549,7 @@ SB_EXPORT int sb_run(
     handle->stop_value = 0;
 
     while (executed < max_instructions && handle->frames < target_frame) {
+        update_cartridge_started(handle);
         uint16_t pc = GB_get_registers(handle->gb)->pc;
         if (has_until_pc && pc == until_pc) {
             handle->stop_reason = SB_STOP_UNTIL_PC;
@@ -521,6 +593,7 @@ SB_EXPORT int sb_step(sb_handle *handle, sb_stop *out)
     handle->stop_address = 0;
     handle->stop_value = 0;
     handle->skip_breakpoint_once = false;
+    update_cartridge_started(handle);
     GB_run(handle->gb);
     handle->instructions++;
     copy_stop(handle, 1, out);
@@ -754,6 +827,49 @@ SB_EXPORT size_t sb_get_call_targets(const sb_handle *handle, uint32_t *out, siz
     return n;
 }
 
+SB_EXPORT int sb_set_execution_trace(sb_handle *handle, bool on)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    if (on) update_cartridge_started(handle);
+    handle->execution_trace_on = on;
+    if (on) handle->have_switch_bank = false;
+    return 0;
+}
+
+SB_EXPORT int sb_clear_execution_trace(sb_handle *handle)
+{
+    if (!handle) return fail(NULL, "invalid handle");
+    memset(handle->execution_coverage, 0, sizeof(handle->execution_coverage));
+    handle->execution_coverage_count = 0;
+    handle->bank_event_count = 0;
+    handle->have_switch_bank = false;
+    return 0;
+}
+
+SB_EXPORT size_t sb_get_execution_coverage(
+    const sb_handle *handle, uint32_t *out, size_t capacity)
+{
+    if (!handle) return 0;
+    if (!out) return handle->execution_coverage_count;
+    size_t n = 0;
+    for (size_t i = 0; i < SB_EXEC_TRACE_CAP && n < capacity; i++) {
+        if (handle->execution_coverage[i] != 0) {
+            out[n++] = handle->execution_coverage[i] - 1;
+        }
+    }
+    return n;
+}
+
+SB_EXPORT size_t sb_get_bank_events(
+    const sb_handle *handle, sb_bank_event *out, size_t capacity)
+{
+    if (!handle) return 0;
+    if (!out) return handle->bank_event_count;
+    size_t n = handle->bank_event_count < capacity ? handle->bank_event_count : capacity;
+    memcpy(out, handle->bank_events, n * sizeof(*out));
+    return n;
+}
+
 SB_EXPORT int sb_set_asset_trace(sb_handle *handle, bool on)
 {
     if (!handle) return fail(NULL, "invalid handle");
@@ -772,10 +888,9 @@ SB_EXPORT int sb_clear_asset_trace(sb_handle *handle)
     return 0;
 }
 
-/* Copy recorded VRAM-copy runs into out (4 x uint16 per run: bank, src, dst,
-   and length clamped to 0xffff). Flushes the in-progress run first. Returns
-   the number written; pass out=NULL to query the count. */
-SB_EXPORT size_t sb_get_asset_runs(sb_handle *handle, uint16_t *out, size_t capacity)
+/* Copy recorded physical ROM-to-VRAM runs into out. Flushes the in-progress
+   run first. Returns the number written; pass out=NULL to query the count. */
+SB_EXPORT size_t sb_get_asset_runs(sb_handle *handle, sb_asset_run *out, size_t capacity)
 {
     if (!handle) return 0;
     asset_run_flush(handle);
@@ -783,13 +898,48 @@ SB_EXPORT size_t sb_get_asset_runs(sb_handle *handle, uint16_t *out, size_t capa
     size_t n = 0;
     for (size_t i = 0; i < handle->asset_run_count && n < capacity; i++) {
         native_asset_run *r = &handle->asset_runs[i];
-        out[n * 4 + 0] = r->bank;
-        out[n * 4 + 1] = r->src;
-        out[n * 4 + 2] = r->dst;
-        out[n * 4 + 3] = r->len > 0xFFFF ? 0xFFFF : (uint16_t)r->len;
+        out[n] = (sb_asset_run){
+            .rom_bank = r->rom_bank,
+            .src = r->src,
+            .vram_bank = r->vram_bank,
+            .dst = r->dst,
+            .length = r->len,
+        };
         n++;
     }
     return n;
+}
+
+SB_EXPORT int sb_copy_vram_bank(
+    sb_handle *handle, uint16_t bank, uint8_t *out, size_t length)
+{
+    if (!handle || !out || bank > 1 || length < 0x2000) {
+        return fail(handle, "VRAM bank buffer must hold 8192 bytes and bank must be 0 or 1");
+    }
+    size_t size = 0;
+    uint8_t *vram = GB_get_direct_access(
+        handle->gb, GB_DIRECT_ACCESS_VRAM, &size, NULL);
+    size_t offset = (size_t)bank * 0x2000;
+    if (!vram || size < offset + 0x2000) return fail(handle, "VRAM bank is unavailable");
+    memcpy(out, vram + offset, 0x2000);
+    return 0;
+}
+
+SB_EXPORT int sb_copy_palette(
+    sb_handle *handle, bool object_palette, uint8_t *out, size_t length)
+{
+    if (!handle || !out || length < 64) {
+        return fail(handle, "palette buffer must hold 64 bytes");
+    }
+    size_t size = 0;
+    uint8_t *palette = GB_get_direct_access(
+        handle->gb,
+        object_palette ? GB_DIRECT_ACCESS_OBP : GB_DIRECT_ACCESS_BGP,
+        &size,
+        NULL);
+    if (!palette || size < 64) return fail(handle, "CGB palette data is unavailable");
+    memcpy(out, palette, 64);
+    return 0;
 }
 
 SB_EXPORT int sb_load_symbols(sb_handle *handle, const char *path)
@@ -836,6 +986,7 @@ SB_EXPORT int sb_reset(sb_handle *handle, bool quick)
     else GB_reset(handle->gb);
     handle->frames = 0;
     handle->instructions = 0;
+    handle->cartridge_started = false;
     handle->skip_breakpoint_once = false;
     return 0;
 }
@@ -850,6 +1001,7 @@ SB_EXPORT int sb_reload(sb_handle *handle)
     }
     handle->frames = 0;
     handle->instructions = 0;
+    handle->cartridge_started = false;
     handle->skip_breakpoint_once = false;
     return 0;
 }
