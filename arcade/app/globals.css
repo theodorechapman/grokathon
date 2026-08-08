@@ -99,6 +99,7 @@ main {
 }
 
 .player {
+  position: relative;
   margin-top: 24px;
   border: 1px solid var(--line);
   border-radius: 16px;

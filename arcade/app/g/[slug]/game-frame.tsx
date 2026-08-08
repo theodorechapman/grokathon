@@ -1,20 +1,20 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { GameBoyPlayer } from "./game-boy-player";
-import { EndScreen, type RunEnd } from "./end-screen";
+import { EndScreen, type RunEnd, type Scoring } from "./end-screen";
 
 export function GameFrame({
   slug,
   title,
   rom,
-  timeScored = false,
+  scoring = "points",
   signedIn = false,
 }: {
   slug: string;
   title: string;
   rom?: string;
-  timeScored?: boolean;
+  scoring?: Scoring;
   signedIn?: boolean;
 }) {
   const playerRef = useRef<HTMLDivElement>(null);
@@ -40,33 +40,41 @@ export function GameFrame({
     }
   }, []);
 
+  const scrollToRemix = useCallback(() => {
+    const box = document.querySelector<HTMLElement>(".remixBox, .remixGate");
+    box?.scrollIntoView({ behavior: "smooth", block: "center" });
+    box?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
+  }, []);
+
+  // Browser games report runs via the contract's nova:score postMessage.
+  useEffect(() => {
+    if (rom) return;
+    function onMessage(e: MessageEvent) {
+      if (e.origin !== window.location.origin) return;
+      const d = e.data as { type?: string; score?: number; outcome?: string; message?: string };
+      if (d?.type !== "nova:score" || typeof d.score !== "number" || !Number.isFinite(d.score)) return;
+      setRunEnd({
+        outcome: d.outcome === "loss" ? "loss" : "win",
+        score: Math.max(0, Math.floor(d.score)),
+        message: typeof d.message === "string" ? d.message.slice(0, 120) : undefined,
+      });
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [rom]);
+
   return (
     <>
       <div className="player" ref={playerRef} tabIndex={rom ? 0 : -1} onPointerDown={focusGame}>
         {rom ? (
-          <>
-            <GameBoyPlayer
-              key={runId}
-              romUrl={`/games/${slug}/${rom}`}
-              title={title}
-              onRestart={restartGame}
-              timeScored={timeScored}
-              onRunEnd={setRunEnd}
-            />
-            {runEnd ? (
-              <EndScreen slug={slug} end={runEnd} signedIn={signedIn} onReplay={restartGame} />
-            ) : (
-              <button
-                type="button"
-                className="restartFab"
-                title="Restart run"
-                aria-label="Restart run"
-                onClick={restartGame}
-              >
-                ↻
-              </button>
-            )}
-          </>
+          <GameBoyPlayer
+            key={runId}
+            romUrl={`/games/${slug}/${rom}`}
+            title={title}
+            onRestart={restartGame}
+            timeScored={scoring === "time"}
+            onRunEnd={setRunEnd}
+          />
         ) : (
           <iframe
             key={runId}
@@ -77,6 +85,28 @@ export function GameFrame({
             tabIndex={0}
             onLoad={focusGame}
           />
+        )}
+        {runEnd ? (
+          <EndScreen
+            slug={slug}
+            end={runEnd}
+            scoring={scoring}
+            signedIn={signedIn}
+            onReplay={restartGame}
+            onRemix={scrollToRemix}
+          />
+        ) : (
+          rom && (
+            <button
+              type="button"
+              className="restartFab"
+              title="Restart run"
+              aria-label="Restart run"
+              onClick={restartGame}
+            >
+              ↻
+            </button>
+          )
         )}
       </div>
     </>

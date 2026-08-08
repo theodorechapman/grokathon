@@ -2,34 +2,52 @@
 
 import { useState } from "react";
 
-export type RunEnd = { outcome: "win" | "loss"; elapsedMs: number };
+export type RunEnd = { outcome: "win" | "loss"; score: number; message?: string };
+export type Scoring = "time" | "points";
 
-function fmtTime(ms: number): string {
-  const sec = ms / 1000;
+function fmtScore(score: number, scoring: Scoring): string {
+  if (scoring !== "time") return score.toLocaleString();
+  const sec = score / 1000;
   const min = Math.floor(sec / 60);
   return min > 0 ? `${min}:${(sec - min * 60).toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
+}
+
+function outcomeLine(end: RunEnd, scoring: Scoring): string | null {
+  if (end.message) return end.message;
+  if (end.outcome === "loss" && scoring === "time") {
+    return "The run only counts when you finish it.";
+  }
+  return null;
 }
 
 export function EndScreen({
   slug,
   end,
+  scoring,
   signedIn,
   onReplay,
+  onRemix,
 }: {
   slug: string;
   end: RunEnd;
+  scoring: Scoring;
   signedIn: boolean;
   onReplay: () => void;
+  onRemix?: () => void;
 }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Time games only rank finished runs; points games keep the score either way.
+  const claimable = end.outcome === "win" || scoring === "points";
+  const line = outcomeLine(end, scoring);
 
   async function save(): Promise<boolean> {
     try {
       const res = await fetch("/api/score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, score: end.elapsedMs }),
+        body: JSON.stringify({ slug, score: end.score }),
       });
       if (res.ok) {
         setSaved(true);
@@ -61,34 +79,29 @@ export function EndScreen({
 
   return (
     <div className="endScreen">
-      {end.outcome === "loss" ? (
-        <>
-          <h2>Game over</h2>
-          <p>The ball got past you. Runs only count when you clear the board.</p>
-          <button className="endPrimary" onClick={onReplay}>
-            ↻ Retry
+      <h2>{end.outcome === "win" ? "Cleared!" : "Game over"}</h2>
+      {claimable && <p className="endTime">{fmtScore(end.score, scoring)}</p>}
+      {line && <p>{line}</p>}
+      {claimable &&
+        (saved ? (
+          <p>On the board. Better runs overwrite it.</p>
+        ) : signedIn ? (
+          <button className="endPrimary" onClick={() => void save()}>
+            Save to leaderboard
           </button>
-        </>
-      ) : (
-        <>
-          <h2>Cleared!</h2>
-          <p className="endTime">{fmtTime(end.elapsedMs)}</p>
-          {saved ? (
-            <p>On the board. Faster runs overwrite it.</p>
-          ) : signedIn ? (
-            <button className="endPrimary" onClick={() => void save()}>
-              Save to leaderboard
-            </button>
-          ) : (
-            <button className="endPrimary" onClick={signInAndSave}>
-              Sign in with 𝕏 to save your time
-            </button>
-          )}
-          {error && <p className="endErr">{error}</p>}
-          <button className="endGhost" onClick={onReplay}>
-            Play again
+        ) : (
+          <button className="endPrimary" onClick={signInAndSave}>
+            Sign in with 𝕏 to save your {scoring === "time" ? "time" : "score"}
           </button>
-        </>
+        ))}
+      {error && <p className="endErr">{error}</p>}
+      <button className={claimable ? "endGhost" : "endPrimary"} onClick={onReplay}>
+        {end.outcome === "win" ? "Play again" : "↻ Retry"}
+      </button>
+      {onRemix && (
+        <button className="endGhost" onClick={onRemix}>
+          Remix this game
+        </button>
       )}
     </div>
   );
