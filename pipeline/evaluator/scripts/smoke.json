@@ -1,0 +1,19 @@
+{
+  "name": "evaluator-smoke-v1",
+  "steps": [
+    {
+      "name": "boot",
+      "frames": 120
+    },
+    {
+      "name": "left",
+      "frames": 10,
+      "buttons": ["left"]
+    },
+    {
+      "name": "right",
+      "frames": 10,
+      "buttons": ["right"]
+    }
+  ]
+}

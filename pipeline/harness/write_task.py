@@ -39,6 +39,11 @@ DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headle
    gb = SameBoy("{rom_path}")
    ```
 
+   Inspect `gb.status()` first. The target may be CGB-only and its boot
+   animation can last several hundred frames. Do not treat screenshots or
+   traces as target evidence until `gb.read(0xFF50)[0] & 1` proves the boot ROM
+   has unmapped. Run in bounded 60-frame chunks until that happens.
+
    Play the game: drive it with real input sequences, watch the screen, and
    watchpoint the RAM addresses in your recovered memory map. Where the
    runtime behavior and what your C reconstruction would predict disagree,
@@ -55,12 +60,18 @@ DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headle
    section of `dynamic_re.md` for the exact loop. Do this early, then annotate
    and reconstruct the now-visible banked functions.
 
+   Also collect full physical execution coverage with `execution_trace()` and
+   `execution_coverage()`. Use it to identify every ROM bank and code region
+   actually reached, and use the bank-event timeline to design input sequences
+   that expand coverage. Call targets remain the correct function seeds.
+
    Recover the real graphics too. Use the emulator's asset trace while the
    game draws its screens, then embed the actual tiles and maps in your
    reconstruction instead of placeholder art: `extract_data` for uncompressed
-   ROM->VRAM copies, or a VRAM snapshot for decompressed ones. Read the
-   "Recovering graphics" section of `dynamic_re.md`. The reconstruction should
-   render with the game's own art for whatever screens you exercised.
+   ROM->VRAM copies, or `video_state()` snapshots for decompressed/CGB assets.
+   Preserve each run's destination VRAM bank and recover both CGB palettes.
+   Read the "Recovering graphics" section of `dynamic_re.md`. The reconstruction
+   should render with the game's own art for whatever screens you exercised.
 """
 
 TASK_FOOTER = """

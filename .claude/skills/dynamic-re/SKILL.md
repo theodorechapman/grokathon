@@ -22,7 +22,12 @@ sys.path.insert(0, "<agent-dir>")   # directory containing sameboy.py, see TASK.
 from sameboy import SameBoy
 
 with SameBoy("<rom-path>") as gb:   # ROM path from TASK.md
-    gb.run(frames=120)
+    # Do not mistake a long CGB boot animation for cartridge execution.
+    for _ in range(10):
+        gb.run(frames=60)
+        if gb.read(0xFF50)[0] & 1:
+            break
+    assert gb.read(0xFF50)[0] & 1, "boot ROM never unmapped"
     gb.press("left", frames=10)
     print(gb.registers())
     gb.screenshot("frame.png")      # 480x432 PNG, readable by vision
@@ -32,6 +37,12 @@ Write each experiment as a small Python script and run it from the shell. A
 script boots the ROM fresh, so make experiments reproducible from cold:
 deterministic input sequences, and save states for expensive-to-reach points.
 Keep one `SameBoy` instance per script; a new instance reboots the ROM.
+
+Start by calling `gb.status()`. Its `hardware` and `cartridge` objects identify
+DMG versus CGB mode, the currently mapped ROM/RAM/VRAM banks, cartridge type,
+and declared bank counts. The CGB boot animation can take several hundred
+frames. FF50 bit 0 is the authoritative boundary: screenshots, traces, and
+input before it becomes 1 describe the boot ROM, not the target cartridge.
 
 ## Execution
 
@@ -119,6 +130,22 @@ gb.run(frames=240); gb.press("start", frames=60); gb.run(frames=600)
 seeds = gb.call_targets()   # e.g. [{"canonical": "ROM5:4c00", "bank": 5, ...}, ...]
 ```
 
+For complete evidence rather than function-entry seeds, use the physical
+execution trace. It losslessly compresses distinct `(ROM bank, PC)` addresses
+into per-bank ranges and separately records the switchable-bank timeline:
+
+```python
+gb.execution_trace(True)
+# ...boot fully and exercise title, menus, and gameplay...
+gb.execution_trace(False)
+coverage = gb.execution_coverage()
+print(coverage["count"], coverage["banks"], coverage["bank_events"])
+```
+
+Use call targets as `create_functions` seeds; use full coverage to see which
+physical banks and code regions actually ran, to prioritize disassembly, and
+to measure whether a new input sequence reached anything new.
+
 Then, via the staticre tools:
 
 ```
@@ -136,12 +163,13 @@ The call trace recovers *code*; the *data* (tiles, background maps) is copied
 into VRAM at runtime and won't be found that way. To embed the real graphics
 instead of placeholders, trace the copies: while the game draws a screen, the
 asset trace attributes every VRAM write to the ROM byte it came from and
-coalesces straight copy loops into `(bank, src, dst, length)` runs.
+coalesces straight copy loops into
+`(bank, src, vram_bank, dst, length)` runs.
 
 ```python
 gb.asset_trace(True)
 gb.run(frames=240)          # let the title / a stage draw itself
-runs = gb.asset_runs()      # [{"canonical": "ROM6:5a00", "dst": 0x8000, "length": 4096}, ...]
+runs = gb.asset_runs()      # includes physical source ROM and destination VRAM banks
 ```
 
 Two cases, distinguished by a run's length:
@@ -153,8 +181,10 @@ Two cases, distinguished by a run's length:
   placeholder.
 - **Decompressed copy** (a short source span feeding a long dest region): the
   ROM source is compressed and not directly usable. Snapshot the *result* from
-  VRAM instead — `gb.read(0x8000, length)` gives the decompressed tiles — and
-  embed those bytes.
+  VRAM instead. On CGB, do not use a CPU-window read alone because it sees only
+  the currently selected VRAM bank. `gb.video_state("artifacts/video")` dumps
+  `vram0.bin`, `vram1.bin`, `bgp.bin`, and `obp.bin`, with SHA-256 provenance
+  in its return value. Embed the relevant bytes.
 
 Only assets that are actually drawn during your play-through are captured, so
 exercise the screens you want to reproduce. Provenance (which ROM bank/address

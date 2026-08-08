@@ -60,6 +60,7 @@ COPY .claude/skills/dynamic-re /opt/.claude/skills/dynamic-re
 # baked in — a named ROM in the image would unblind the agent's runs; the
 # smoke test bind-mounts its ROM instead (see smoke.sh).
 COPY pipeline/agent /opt/pipeline/agent
+COPY pipeline/evaluator /opt/pipeline/evaluator
 COPY --from=grokboy-build /build/pipeline/bin/libgrokboy.so /opt/pipeline/bin/libgrokboy.so
 COPY --from=grokboy-build /build/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin \
      /opt/pipeline/vendor/SameBoy/build/bin/BootROMs/dmg_boot.bin
