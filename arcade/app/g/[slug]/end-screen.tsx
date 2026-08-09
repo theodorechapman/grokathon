@@ -12,12 +12,8 @@ function fmtScore(score: number, scoring: Scoring): string {
   return min > 0 ? `${min}:${(sec - min * 60).toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
 }
 
-function outcomeLine(end: RunEnd, scoring: Scoring): string | null {
-  if (end.message) return end.message;
-  if (end.outcome === "loss" && scoring === "time") {
-    return "The run only counts when you finish it.";
-  }
-  return null;
+function outcomeLine(end: RunEnd): string | null {
+  return end.message ?? null;
 }
 
 export function EndScreen({
@@ -26,14 +22,12 @@ export function EndScreen({
   scoring,
   signedIn,
   onReplay,
-  onRemix,
 }: {
   slug: string;
   end: RunEnd;
   scoring: Scoring;
   signedIn: boolean;
   onReplay: () => void;
-  onRemix?: () => void;
 }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +56,7 @@ export function EndScreen({
       alive = false;
     };
   }, [claimable, slug, end.score]);
-  const line = outcomeLine(end, scoring);
+  const line = outcomeLine(end);
 
   async function save(): Promise<boolean> {
     try {
@@ -140,11 +134,6 @@ export function EndScreen({
       <button className={!signedIn ? "endGhost" : "endPrimary"} onClick={onReplay}>
         {end.outcome === "win" ? "Play again" : "↻ Retry"}
       </button>
-      {onRemix && (
-        <button className="endGhost" onClick={onRemix}>
-          Remix this game on 𝕏
-        </button>
-      )}
     </div>
   );
 }
