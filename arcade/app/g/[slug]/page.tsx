@@ -12,6 +12,7 @@ import { QrPanel } from "./qr-panel";
 import { GameFrame } from "./game-frame";
 import { DraftPanel } from "./draft-panel";
 import { WaitingRoom } from "./waiting-room";
+import { BuildHistory } from "./build-history";
 
 const SITE = "https://playgrokgames.vercel.app";
 
@@ -165,9 +166,10 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             one file you can read.
           </p>
         )}
-        {/* Breakout is the only game with a real reverse-engineered C source;
-            hide the link elsewhere until the others earn it. */}
-        {slug === "breakout" && hasSource && (
+        <BuildHistory slug={slug} />
+        {/* Every C-first creation ships its full source; the link shows
+            wherever a real source.c exists. */}
+        {hasSource && (
           <p className="sourceLink">
             <a
               className="sourceCta"

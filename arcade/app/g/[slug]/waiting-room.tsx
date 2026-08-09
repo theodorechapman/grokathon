@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toTerminalLines } from "@/lib/build-log";
+import { BuildTerminal, type StageMark } from "../../build-terminal";
 
 type Status = {
   stage: string;
   detail?: string;
-  stages: { name: string; at: number }[];
+  stages: StageMark[];
   startedAt: number;
+  log?: string[];
 };
-
-const KNOWN_STAGES = ["queued", "patching source", "compiling", "verifying", "publishing"];
 
 export function WaitingRoom({ slug, status: initial }: { slug: string; status: string }) {
   const [status, setStatus] = useState<Status>({
@@ -22,16 +23,16 @@ export function WaitingRoom({ slug, status: initial }: { slug: string; status: s
   useEffect(() => {
     const poll = setInterval(async () => {
       try {
-        const res = await fetch(`/api/job-status?slug=${slug}`, { cache: "no-store" });
+        const res = await fetch(`/api/job-status?slug=${slug}&log=1`, { cache: "no-store" });
         if (res.ok) {
           const s = (await res.json()) as Status;
           if (s.stage) setStatus(s);
           if (s.stage === "published") window.location.reload();
         }
       } catch {}
-    }, 3000);
+    }, 2500);
     const clock = setInterval(() => setNow(Date.now()), 1000);
-    const refresh = setInterval(() => window.location.reload(), 60_000);
+    const refresh = setInterval(() => window.location.reload(), 90_000);
     return () => {
       clearInterval(poll);
       clearInterval(clock);
@@ -39,40 +40,28 @@ export function WaitingRoom({ slug, status: initial }: { slug: string; status: s
     };
   }, [slug]);
 
-  const reached = new Set(status.stages.map((s) => s.name));
   const elapsed = status.startedAt > 0 ? Math.floor((now - status.startedAt) / 1000) : null;
 
   return (
-    <div className="waiting">
-      <div className="waitingPulse" />
+    <div className="waiting waitingWide">
       <h1>Your game is being born</h1>
-      {elapsed !== null && (
-        <p className="waitingClock">
-          {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, "0")}
-        </p>
-      )}
-      <ol className="buildStages">
-        {KNOWN_STAGES.map((name) => (
-          <li
-            key={name}
-            className={
-              status.stage === name
-                ? "stageNow"
-                : reached.has(name)
-                  ? "stageDone"
-                  : "stagePending"
-            }
-          >
-            {reached.has(name) && status.stage !== name ? "✓" : status.stage === name ? "●" : "○"}{" "}
-            {name}
-            {status.stage === name && status.detail ? ` — ${status.detail}` : ""}
-          </li>
-        ))}
-      </ol>
+      <p className="waitingStatus">
+        {status.stage}
+        {status.detail ? ` — ${status.detail}` : ""}
+        {elapsed !== null &&
+          ` · ${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`}
+      </p>
+      <BuildTerminal
+        stages={status.stages}
+        currentStage={status.stage}
+        lines={toTerminalLines(status.log ?? [])}
+        live
+      />
       <p className="waitingNote">
-        Grok is rebuilding <strong>{slug}</strong> from real reverse-engineered
-        source. A bot plays it before it ships, and this page becomes the game
-        the moment it passes.
+        This is the real build: the Grok Build CLI working inside a Vercel
+        Sandbox microVM, rewriting reverse-engineered Game Boy C and compiling
+        it with GBDK. This page becomes <strong>{slug}</strong> the moment the
+        ROM ships.
       </p>
     </div>
   );

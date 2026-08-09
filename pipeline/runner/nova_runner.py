@@ -38,9 +38,24 @@ XAI_KEY = os.environ["XAI_API_KEY"]
 MODEL = "grok-4.5"
 STATUS_URL = "https://playgrokgames.vercel.app/api/job-status"
 SYNC_SECRET = os.environ.get("NOVA_X_SYNC_SECRET", "")
+# NOVA_SANDBOX=1 routes GBDK builds through the Grok Build CLI in a Vercel
+# Sandbox microVM (pipeline/sandbox/). Local build stays the fallback.
+SANDBOX_ENABLED = os.environ.get("NOVA_SANDBOX") == "1"
+SANDBOX_SCRIPT = REPO / "pipeline" / "sandbox" / "build-in-sandbox.mjs"
+SANDBOX_TIMEOUT = 1500  # seconds for one full in-sandbox build (3 attempts)
+
+
+# Per-slug stage timeline, persisted into the bundle as build.json so a game
+# page can show how it got made after the transient job-status expires.
+REPORT_TRACE: dict[str, list[dict]] = {}
 
 
 def report(slug: str, stage: str, detail: str = "") -> None:
+    REPORT_TRACE.setdefault(slug, []).append({
+        "at": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "stage": stage,
+        "detail": detail,
+    })
     try:
         body = json.dumps({"slug": slug, "stage": stage, "detail": detail}).encode()
         req = urllib.request.Request(STATUS_URL, body, {
@@ -53,6 +68,45 @@ def report(slug: str, stage: str, detail: str = "") -> None:
 
 def log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+def report_log(slug: str, lines: list[str]) -> None:
+    """Forward humanized build-log lines to the arcade for the live glass-box
+    view. Best-effort: the bundle's build-log.ndjson is the durable copy."""
+    if not lines:
+        return
+    try:
+        body = json.dumps({"slug": slug, "log": lines}).encode()
+        req = urllib.request.Request(STATUS_URL, body, {
+            "Content-Type": "application/json", "x-runner-secret": SYNC_SECRET,
+        })
+        urllib.request.urlopen(req, timeout=10).read()
+    except Exception as e:
+        log(f"log forward failed: {e}")
+
+
+def humanize_grok_event(ev: dict, text_buf: list[str]) -> str | None:
+    """One terminal line per meaningful Grok Build event. Token deltas
+    accumulate in text_buf until a tool call or size flushes them."""
+    kind = ev.get("type")
+    if kind == "text":
+        text_buf.append(str(ev.get("data", "")))
+        if sum(len(t) for t in text_buf) > 240:
+            line, text_buf[:] = "".join(text_buf).strip(), []
+            return line or None
+        return None
+    if kind == "tool_call":
+        raw = ev.get("rawInput") or {}
+        arg = next((str(v) for v in raw.values() if isinstance(v, str) and v), "")
+        flushed = "".join(text_buf).strip()
+        text_buf[:] = []
+        call = f"▸ {ev.get('toolName', 'tool')} {arg[:120]}".rstrip()
+        return f"{flushed}\n{call}" if flushed else call
+    if kind == "end":
+        flushed = "".join(text_buf).strip()
+        text_buf[:] = []
+        return flushed or None
+    return None
 
 
 def grok(messages: list[dict], timeout: int = 240) -> str:
@@ -160,6 +214,138 @@ def patch_source(
     if error:
         user += f"\n\nYour previous attempt failed to compile:\n{error}\nFix it and output the complete corrected main.c."
     return extract_c(grok([{"role": "system", "content": system}, {"role": "user", "content": user}]))
+
+
+AGENT_RULES = (
+    "The game must be winnable and losable, with a clear win players can reach "
+    "in one sitting: the board ranks fastest win, so an unwinnable game never "
+    "scores. CRITICAL: the NOVA_STATE protocol must stay intact exactly — the "
+    "#define at 0xCF00 and the writes NOVA_STATE = 1 when play begins, 2 on "
+    "win, 3 on loss. The arcade polls that byte for the end screen and run "
+    "timing. The source ships APU sound helpers — sound_init(), sfx_beep(), "
+    "sfx_boom(), sfx_jingle() — reuse or retune them instead of raw NRxx code. "
+    "Runs must not be deterministic: seed variation from DIV_REG on the first "
+    "input so spawns or angles differ run to run. Only standard GBDK headers "
+    "are available. The very first three lines of main.c must be comments: "
+    "'// TITLE: <2-4 word game name, max 40 chars; if the ask names a known "
+    "game, keep that name>' then '// DESC: <one short sentence>' then "
+    "'// CONTROLS: <one short line, d-pad and A on a Game Boy>'."
+)
+
+AGENT_WORKFLOW = (
+    "\n\nWorkflow: you are in a build directory containing main.c, assets.c "
+    "and assets.h. Edit main.c in place — do not modify assets.c or assets.h "
+    "(you may define new tile data inside main.c) and do not create other "
+    "files. Compile with: /opt/gbdk/bin/lcc -o game.gb main.c assets.c — "
+    "iterate until it compiles cleanly and game.gb is exactly 32768 bytes. "
+    "You are done when the ROM builds and main.c satisfies every rule above."
+)
+
+
+def agent_task(prompt: str, creating: bool) -> str:
+    """Task prompt for the Grok Build CLI driving an in-sandbox build."""
+    if creating:
+        head = (
+            f"Transform the GBDK-2020 Game Boy breakout game in main.c into "
+            f"this game: {prompt}\n\nKeep the skeleton's structure (init, main "
+            "loop, vblank timing, joypad reads) but rewrite sprites, logic, "
+            "and rules freely — it does NOT have to stay a brick breaker. "
+        )
+    else:
+        head = (
+            f"Apply this remix request to the GBDK-2020 Game Boy game in "
+            f"main.c: {prompt}\n\nApply it faithfully but keep the game "
+            "winnable and recognizable. "
+        )
+    return head + AGENT_RULES + AGENT_WORKFLOW
+
+
+def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
+    """Build in a Vercel Sandbox driven by the Grok Build CLI.
+
+    Streams the script's NDJSON stage events into report() and returns
+    (main_c, rom_path, build_log_path) or None on any failure — the caller
+    falls back to the local build so the loop never dead-ends on sandbox
+    trouble."""
+    src = Path(tempfile.mkdtemp(prefix=f"nova-src-{slug}-"))
+    out = Path(tempfile.mkdtemp(prefix=f"nova-out-{slug}-"))
+    base_main = BASE_SRC / "main.c"
+    if lineage and (GAMES / lineage / "source.c").exists():
+        base_main = GAMES / lineage / "source.c"
+    shutil.copy(base_main, src / "main.c")
+    for f in ("assets.c", "assets.h"):
+        shutil.copy(BASE_SRC / f, src / f)
+    spec = src / "spec.json"
+    spec.write_text(json.dumps({
+        "slug": slug,
+        "task": agent_task(job["prompt"], creating),
+        "srcDir": str(src),
+        "outDir": str(out),
+        "attempts": 3,
+    }))
+    try:
+        proc = subprocess.Popen(
+            ["node", str(SANDBOX_SCRIPT), str(spec)],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+            cwd=SANDBOX_SCRIPT.parent,
+        )
+    except OSError as e:
+        log(f"job {slug}: sandbox spawn failed: {e}")
+        return None
+    deadline = time.time() + SANDBOX_TIMEOUT
+    assert proc.stdout is not None
+    text_buf: list[str] = []
+    pending_lines: list[str] = []
+    last_flush = time.time()
+    for line in proc.stdout:
+        if time.time() > deadline:
+            proc.kill()
+            log(f"job {slug}: sandbox build timed out")
+            return None
+        try:
+            ev = json.loads(line)
+        except ValueError:
+            continue
+        if ev.get("event") == "stage":
+            report_log(slug, pending_lines)
+            pending_lines, last_flush = [], time.time()
+            report(slug, ev["stage"], ev.get("detail", ""))
+        elif ev.get("event") == "error":
+            log(f"job {slug}: sandbox: {ev.get('detail', '')[:300]}")
+        elif ev.get("event") == "log":
+            try:
+                human = humanize_grok_event(json.loads(ev.get("line", "")), text_buf)
+            except ValueError:
+                human = None
+            if human:
+                pending_lines.extend(human.split("\n"))
+            if pending_lines and (len(pending_lines) >= 12 or time.time() - last_flush > 2.5):
+                report_log(slug, pending_lines)
+                pending_lines, last_flush = [], time.time()
+    report_log(slug, pending_lines)
+    if proc.wait() != 0:
+        log(f"job {slug}: sandbox build failed (exit {proc.returncode})")
+        return None
+    rom = out / f"{slug}.gb"
+    main_c = out / "main.c"
+    if not rom.exists() or not main_c.exists():
+        log(f"job {slug}: sandbox build left no artifacts")
+        return None
+    return main_c.read_text(), rom, out / "build-log.ndjson"
+
+
+def write_build_record(bundle: Path, slug: str, job: dict, engine: str, log_src: Path | None = None) -> None:
+    """Persist how the game got built (build.json + raw agent log) so the
+    game page can show its build history."""
+    record = {
+        "engine": engine,
+        "job": {k: job[k] for k in ("prompt", "source", "parent", "creator", "target", "tweet") if job.get(k)},
+        "stages": REPORT_TRACE.pop(slug, []),
+        "finishedAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+    }
+    (bundle / "build.json").write_text(json.dumps(record, indent=2) + "\n")
+    if log_src and log_src.exists():
+        shutil.copy(log_src, bundle / "build-log.ndjson")
 
 
 HTML_SYSTEM = (
@@ -336,6 +522,7 @@ def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None
                 manifest["draft"] = True
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     report(slug, "publishing", "pushing to the arcade")
+    write_build_record(bundle, slug, job, "local")
     log(f"job {slug}: browser game bundled")
     return bundle
 
@@ -369,15 +556,24 @@ def process_job(job: dict) -> Path | None:
         else "transforming the C reverse-engineered out of the original Breakout rom",
     )
     main_c, rom, err = None, None, None
-    for attempt in range(3):
-        report(slug, "patching source", f"attempt {attempt + 1}, {MODEL} rewriting the C")
-        main_c = patch_source(job["prompt"], err, lineage, transform=creating)
-        report(slug, "compiling", "gbdk lcc building a real 32KB .gb rom")
-        rom, err = build_rom(main_c, slug)
-        if rom:
-            report(slug, "verifying", f"NOVA_STATE protocol at WRAM 0xCF00, rom is {rom.stat().st_size} bytes")
-            break
-        log(f"job {slug}: build failed (attempt {attempt + 1}): {err.splitlines()[-1] if err else '?'}")
+    engine, sandbox_log = "local", None
+    if SANDBOX_ENABLED:
+        built = sandbox_build(job, slug, lineage, creating)
+        if built:
+            main_c, rom, sandbox_log = built
+            engine = "sandbox"
+        else:
+            log(f"job {slug}: falling back to the local build")
+    if not rom:
+        for attempt in range(3):
+            report(slug, "patching source", f"attempt {attempt + 1}, {MODEL} rewriting the C")
+            main_c = patch_source(job["prompt"], err, lineage, transform=creating)
+            report(slug, "compiling", "gbdk lcc building a real 32KB .gb rom")
+            rom, err = build_rom(main_c, slug)
+            if rom:
+                report(slug, "verifying", f"NOVA_STATE protocol at WRAM 0xCF00, rom is {rom.stat().st_size} bytes")
+                break
+            log(f"job {slug}: build failed (attempt {attempt + 1}): {err.splitlines()[-1] if err else '?'}")
     if not rom:
         if creating and job.get("source") in ("site", "x"):
             log(f"job {slug}: C path failed 3 attempts, falling back to a browser game")
@@ -424,7 +620,8 @@ def process_job(job: dict) -> Path | None:
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     (bundle / "source.c").write_text(main_c)
     report(slug, "publishing", "pushing to the arcade")
-    log(f"job {slug}: built and bundled")
+    write_build_record(bundle, slug, job, engine, sandbox_log)
+    log(f"job {slug}: built and bundled ({engine})")
     return bundle
 
 

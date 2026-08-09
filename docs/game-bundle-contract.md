@@ -13,6 +13,8 @@ arcade/public/games/<slug>/
   game.gb         # Game Boy ROM loaded by the arcade's shared emulator
   cover.png       # optional, share card + arcade tile
   source.c        # optional, the Grok-patched C source; the arcade links it as "view the C source"
+  build.json      # optional, how the game got built: engine, job echo, stage timeline
+  build-log.ndjson # optional, raw Grok Build CLI action stream from the sandbox build
 ```
 
 Every bundle has a manifest and exactly one playable entry point. Browser games
@@ -60,6 +62,24 @@ Drafts are iterated in place: a job may carry `"target": "<existing-draft-slug>"
 
 Publishing removes the `draft` flag from the manifest (a creator-only action via `POST /api/publish`) and freezes the bundle. After publish a bundle is immutable: it can never be re-targeted, and further changes are remixes under new slugs.
 
+## build.json
+
+Optional build provenance the pipeline writes next to the manifest. The arcade
+renders it as the game's build history; absence is fine (hand-built games).
+
+```json
+{
+  "engine": "sandbox | local",
+  "job": { "prompt": "...", "source": "x", "creator": "handle", "tweet": "123" },
+  "stages": [{ "at": "2026-08-08T12:00:00Z", "stage": "compiling", "detail": "..." }],
+  "finishedAt": "2026-08-08T12:03:00Z"
+}
+```
+
+`engine: "sandbox"` means the build ran via the Grok Build CLI in a Vercel
+Sandbox microVM and `build-log.ndjson` holds its raw action stream (one JSON
+line per agent event). `job` echoes the job file minus internals.
+
 ## Adding a game
 
 Drop the folder in, done. The arcade scans `public/games/` at build time and lists every folder with a valid manifest. No registry file to update, no code change.
@@ -81,7 +101,7 @@ The repo is the queue. `POST /api/create` on the arcade commits a job file to `p
 
 `slug` is the folder name the bundle must ship under. `parent` non-null means remix: start from the parent's bundle. `source` says where the ask came from (site, grok, x).
 
-Optional job fields: `"draft": true` tells the runner to write `"draft": true` into the shipped manifest (fresh site creations by signed-in users). `"target": "<existing-draft-slug>"` means iterate that draft in place — see Drafts above; when `target` is set the job's slug equals the target.
+Optional job fields: `"tweet": "<tweet id>"` records the originating X ask so the bundle's build history can link back to the thread. `"draft": true` tells the runner to write `"draft": true` into the shipped manifest (fresh site creations by signed-in users). `"target": "<existing-draft-slug>"` means iterate that draft in place — see Drafts above; when `target` is set the job's slug equals the target.
 
 Optional but nice: the pipeline can write a `status` string into the job file as it works ("writing the spec", "bot is playing it", "repairing"). The waiting room at /g/&lt;slug&gt; shows it live to the person who asked. No status means it displays "building".
 
