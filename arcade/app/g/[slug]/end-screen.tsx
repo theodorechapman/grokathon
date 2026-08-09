@@ -42,6 +42,13 @@ export function EndScreen({
   // Time games only rank finished runs; points games keep the score either way.
   const claimable = end.outcome === "win" || scoring === "points";
 
+  // Signed-in players save automatically. Theo cleared breakout and never
+  // appeared on the board because he didn't click the save button.
+  useEffect(() => {
+    if (signedIn && claimable) void save();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signedIn, claimable]);
+
   useEffect(() => {
     if (!claimable) return;
     let alive = true;

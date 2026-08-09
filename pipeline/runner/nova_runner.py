@@ -102,6 +102,9 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
         "at boot), sfx_beep() (square blip), sfx_boom() (noise burst), "
         "sfx_jingle() (win arpeggio) — reuse or retune them for any new sound "
         "moment instead of writing raw NRxx register code. "
+        "Runs must not be deterministic: seed variation from DIV_REG (e.g. on "
+        "the first paddle input) so ball angles or spawns differ run to run "
+        "and a memorized perfect run doesn't exist. "
         "Only standard GBDK headers available. Output the "
         "COMPLETE modified main.c and nothing else, in a single ```c code block. "
         "The very first two lines of the code block must be comments naming the "
@@ -126,6 +129,8 @@ HTML_SYSTEM = (
     "a desktop: scale to fit, no scrolling, no overflow, nothing cut off. It "
     "runs in an iframe with scrolling disabled.\n"
     "- No console errors on boot or during play.\n"
+    "- Runs must not be deterministic: use Math.random() so spawns, angles, "
+    "or layouts differ run to run and a memorized perfect run doesn't exist.\n"
     "- REQUIRED: the moment a run ends (win, lose, or game over), post the "
     'score: window.parent.postMessage({type:"nova:score", score:<number>, '
     'outcome:"win"|"loss", message:"<short line in the game\'s voice, max 120 '
