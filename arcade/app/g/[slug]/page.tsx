@@ -100,6 +100,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
               <a
                 href={`https://x.com/suprapan07/status/${tweetId}`}
                 className="filterChip remixJump"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 𝕏 View the thread
               </a>
@@ -174,6 +176,8 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             <a
               className="sourceCta"
               href={`/games/${slug}/source.c`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {"</>"} Read this game&apos;s source code
             </a>
@@ -184,7 +188,11 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         )}
         {tweetId && (
           <p className="xDrive">
-            <a href={`https://x.com/suprapan07/status/${tweetId}`}>
+            <a
+              href={`https://x.com/suprapan07/status/${tweetId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               𝕏 See this game&apos;s thread
             </a>{" "}
             — where it was asked for, announced, and remixed.

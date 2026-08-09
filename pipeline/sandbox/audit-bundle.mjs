@@ -54,7 +54,9 @@ async function audit(sandbox, dir) {
 
   const files = [{ path: "work/task.txt", content: Buffer.from(isRom ? romTask(slug) : htmlTask(slug)) }];
   if (isRom) {
-    const rom = ["game.gb", `${slug}.gb`].map((n) => join(dir, n)).find(existsSync);
+    const manifest = JSON.parse(readFileSync(join(dir, "manifest.json"), "utf8"));
+    const rom = join(dir, manifest.rom);
+    if (!existsSync(rom)) throw new Error(`${slug}: manifest rom ${manifest.rom} missing`);
     files.push(
       { path: "work/main.c", content: readFileSync(join(dir, "source.c")) },
       { path: "work/assets.c", content: readFileSync(join(BASE, "assets.c")) },

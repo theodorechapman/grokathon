@@ -32,21 +32,22 @@ export function GameFrame({
   }, [rom]);
 
   const focusGame = useCallback(() => {
-    playerRef.current?.focus();
+    // preventScroll: focus must never fight the load-time centering scroll.
+    playerRef.current?.focus({ preventScroll: true });
     const frame = frameRef.current;
     if (frame) {
-      frame.focus();
+      frame.focus({ preventScroll: true });
       frame.contentWindow?.focus();
     }
   }, []);
 
-  // On phones the header can still nudge the game partly below the fold
-  // (in-app browsers, small screens): bring the frame into view on load so
-  // the game is the first thing a visitor sees.
+  // The game is the point of the page: center the frame in the viewport on
+  // load, every screen size. block:"center" keeps it fully visible whether
+  // the header pushes it down (phones) or the page is taller than the fold
+  // (desktop).
   useEffect(() => {
-    if (window.innerWidth > 720) return;
     const t = setTimeout(() => {
-      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 150);
     return () => clearTimeout(t);
   }, []);
