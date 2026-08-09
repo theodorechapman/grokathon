@@ -11,13 +11,17 @@ export const PROVISION_STEPS = [
   { label: "install grok cli", cmd: "npm i -g @xai-official/grok >/dev/null 2>&1 && grok --version" },
 ];
 
-export async function provisionSandbox({ credentials, snapshotId, timeoutMs = 900000, onStep }) {
+export async function provisionSandbox({ credentials, snapshotId, name, timeoutMs = 900000, onStep }) {
   if (snapshotId) {
-    return Sandbox.create({
+    const params = {
       ...credentials,
       source: { type: "snapshot", snapshotId },
       timeout: timeoutMs,
-    });
+    };
+    // A name makes the microVM reattachable: prewarm boots it, the build
+    // reconnects via getOrCreate and skips the cold start; if the warm VM
+    // already expired, getOrCreate transparently boots a fresh one.
+    return name ? Sandbox.getOrCreate({ ...params, name }) : Sandbox.create(params);
   }
   const sandbox = await Sandbox.create({ ...credentials, runtime: "node24", timeout: timeoutMs });
   try {
