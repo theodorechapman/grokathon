@@ -31,11 +31,12 @@ export default async function LeaderboardPage({
   const byHeat = (a: { slug: string }, b: { slug: string }) =>
     rankScore(stats.get(b.slug) ?? { votes: 0, plays: 0 }) -
     rankScore(stats.get(a.slug) ?? { votes: 0, plays: 0 });
-  const familyRemixes: { slug: string; title: string; depth: number }[] = [];
+  const familyRemixes: { slug: string; title: string; depth: number; plays: number; votes: number }[] = [];
   function collectRemixes(parentSlug: string, depth: number) {
     if (depth > 4) return;
     for (const child of unordered.filter((x) => x.parent === parentSlug).sort(byHeat)) {
-      familyRemixes.push({ slug: child.slug, title: child.title, depth });
+      const s = stats.get(child.slug) ?? { votes: 0, plays: 0 };
+      familyRemixes.push({ slug: child.slug, title: child.title, depth, plays: s.plays, votes: s.votes });
       collectRemixes(child.slug, depth + 1);
     }
   }
@@ -68,17 +69,22 @@ export default async function LeaderboardPage({
         ))}
       </div>
       {familyRemixes.length > 0 && (
-        <div className="filterRow" style={{ marginTop: 10 }}>
+        <nav className="boardFamList">
           {familyRemixes.map((game) => (
             <Link
               key={game.slug}
               href={`/leaderboard?g=${game.slug}`}
-              className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
+              className={selected?.slug === game.slug ? "boardFamRow boardFamRowActive" : "boardFamRow"}
+              style={{ paddingLeft: 12 + (game.depth - 1) * 18 }}
             >
-              {"↳".repeat(game.depth)} {game.title}
+              <span className="boardFamTitle">↳ {game.title}</span>
+              <span className="boardFamStats">
+                {game.votes > 0 && <>▲ {game.votes} · </>}
+                {game.plays} plays
+              </span>
             </Link>
           ))}
-        </div>
+        </nav>
       )}
       {!session && (
         <>

@@ -142,6 +142,17 @@ export async function getMentions(sinceId?: string): Promise<Tweet[]> {
   return toTweets(page);
 }
 
+/** Ids of the bot account's most recent likes. The like IS the moderation
+ * gate: a mention or reply only becomes a job once @suprapan07 likes it. */
+export async function getLikedTweetIds(): Promise<Set<string>> {
+  const me = await getBotMe();
+  const page = (await xGet(`/users/${me.id}/liked_tweets`, {
+    max_results: "100",
+    "tweet.fields": "id",
+  })) as { data?: { id: string }[] };
+  return new Set((page.data ?? []).map((t) => t.id));
+}
+
 export async function getReplies(conversationId: string, sinceId?: string): Promise<Tweet[]> {
   const params: Record<string, string> = {
     query: `conversation_id:${conversationId}`,

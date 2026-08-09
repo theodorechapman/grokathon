@@ -232,6 +232,15 @@ export default async function ArcadePage({
                                 <span className="gameControls">
                                   {stats.get(remix.slug)!.plays} plays
                                 </span>
+                                {tweetUrl(remix.slug) && (
+                                  <a
+                                    href={tweetUrl(remix.slug)!}
+                                    className="xThreadLink"
+                                    title="View the thread on X"
+                                  >
+                                    𝕏
+                                  </a>
+                                )}
                                 <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
                                   ▶
                                 </Link>

@@ -1420,6 +1420,54 @@ a.navSegment:hover {
   border-bottom-style: solid;
   font-size: 14px;
 }
+.boardFamList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  max-width: 460px;
+}
+.boardFamRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 7px 12px;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+}
+.boardFamRow:hover {
+  border-color: var(--accent);
+}
+.boardFamRowActive {
+  border-color: var(--accent);
+  background: rgba(127, 255, 212, 0.06);
+}
+.boardFamTitle {
+  font-weight: 600;
+}
+.boardFamStats {
+  color: var(--dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.xCta {
+  display: inline-block;
+  margin: 14px 0 4px;
+  padding: 14px 28px;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+}
+.xCta:hover {
+  opacity: 0.9;
+}
 .sourceNote {
   display: block;
   margin-top: 8px;

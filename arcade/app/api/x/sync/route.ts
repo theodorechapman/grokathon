@@ -3,10 +3,43 @@ import type { Redis } from "@upstash/redis";
 import { redis } from "@/lib/stats";
 import { listPublicGames } from "@/lib/games";
 import { submitJob } from "@/lib/submit-job";
-import { getBotMe, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
+import { getBotMe, getLikedTweetIds, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
 
 const SITE = "https://playgrokgames.vercel.app";
 const MAX_JOBS_PER_RUN = 5;
+// A staged ask waits this long for a like before it's dropped.
+const PENDING_TTL_MS = 72 * 3600 * 1000;
+
+// The like is the moderation gate: asks from X stage here and only become
+// jobs once @suprapan07 (the bot account) has liked the tweet.
+type PendingAsk = { prompt: string; parent: string | null; creator: string; at: string };
+
+async function stageAsk(r: Redis, tweetId: string, ask: PendingAsk): Promise<void> {
+  await r.hset("x:pendingjobs", { [tweetId]: JSON.stringify(ask) });
+}
+
+async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: number }): Promise<void> {
+  const pending = (await r.hgetall<Record<string, string | PendingAsk>>("x:pendingjobs")) ?? {};
+  if (Object.keys(pending).length === 0) return;
+  const liked = await getLikedTweetIds();
+  for (const [tweetId, raw] of Object.entries(pending)) {
+    const ask: PendingAsk = typeof raw === "string" ? JSON.parse(raw) : raw;
+    if (liked.has(tweetId)) {
+      if (budget.left <= 0) continue; // stays staged for the next run
+      const jobSlug = await submitJob({
+        prompt: ask.prompt,
+        parent: ask.parent,
+        source: "x",
+        creator: ask.creator,
+      });
+      result.jobs.push(jobSlug);
+      budget.left -= 1;
+      await r.hdel("x:pendingjobs", tweetId);
+    } else if (Date.now() - Date.parse(ask.at) > PENDING_TTL_MS) {
+      await r.hdel("x:pendingjobs", tweetId);
+    }
+  }
+}
 
 type SyncResult = {
   announced: string[];
@@ -80,14 +113,12 @@ async function repliesToRemixes(r: Redis, result: SyncResult, budget: { left: nu
           reply.text.includes("playgrokgames.vercel.app") ||
           reply.text.includes("t.co/"));
       if (!isOwnAnnouncement && reply.author_handle) {
-        const jobSlug = await submitJob({
+        await stageAsk(r, reply.id, {
           prompt: reply.text,
           parent: slug,
-          source: "x",
           creator: reply.author_handle,
+          at: new Date().toISOString(),
         });
-        result.jobs.push(jobSlug);
-        budget.left -= 1;
       }
       await r.set(`x:lastreply:${slug}`, packId(reply.id));
     }
@@ -104,14 +135,12 @@ async function mentionsToCreations(r: Redis, result: SyncResult, budget: { left:
     if (mention.author_id !== botId && mention.author_handle) {
       const prompt = mention.text.replace(/^(?:@\w+[\s,]*)+/, "").trim();
       if (prompt.length >= 3) {
-        const jobSlug = await submitJob({
+        await stageAsk(r, mention.id, {
           prompt,
           parent: null,
-          source: "x",
           creator: mention.author_handle,
+          at: new Date().toISOString(),
         });
-        result.jobs.push(jobSlug);
-        budget.left -= 1;
       }
     }
     await r.set("x:lastmention", packId(mention.id));
