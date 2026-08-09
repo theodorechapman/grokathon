@@ -27,8 +27,7 @@ export default async function CreatePage() {
   return (
     <main>
       <SiteNav active="create" />
-      <section className="createHero">
-        <h1>Say a game.</h1>
+      <section className="createBar">
         <p>
           Post your idea on X and Grok builds it into a real Game Boy ROM you
           can play and share. Reply to any game&apos;s thread to remix it.

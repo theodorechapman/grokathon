@@ -5,7 +5,7 @@
   "controls": "left and right arrows to move the paddle",
   "source": "remix",
   "parent": "breakout",
-  "creator": null,
+  "creator": "suprapan07",
   "rom": "make-the-ball-leave-d5f0e3.gb",
   "scoring": "time",
   "createdAt": "2026-08-09T00:19:23Z"

@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { myGameSlugs } from "@/lib/my-games";
-import { parseGrokStream, toTerminalLines, type TerminalLine } from "@/lib/build-log";
+import { parseGrokStream, toTerminalLines, type BuildRecord, type TerminalLine } from "@/lib/build-log";
 import { BuildTerminal, type StageMark } from "../build-terminal";
 
 export type ShelfGame = {
@@ -56,14 +56,22 @@ function LiveCard({ slug }: { slug: string }) {
 
 function GameCard({ game, mine }: { game: ShelfGame; mine: boolean }) {
   const [lines, setLines] = useState<TerminalLine[] | null>(null);
+  const [record, setRecord] = useState<BuildRecord | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!open || lines !== null) return;
-    fetch(`/games/${game.slug}/build-log.ndjson`)
-      .then((res) => (res.ok ? res.text() : ""))
-      .then((text) => setLines(parseGrokStream(text)))
-      .catch(() => setLines([]));
+    Promise.all([
+      fetch(`/games/${game.slug}/build.json`)
+        .then((res) => (res.ok ? (res.json() as Promise<BuildRecord>) : null))
+        .catch(() => null),
+      fetch(`/games/${game.slug}/build-log.ndjson`)
+        .then((res) => (res.ok ? res.text() : ""))
+        .catch(() => ""),
+    ]).then(([rec, text]) => {
+      setRecord(rec);
+      setLines(parseGrokStream(text));
+    });
   }, [open, lines, game.slug]);
 
   return (
@@ -90,12 +98,21 @@ function GameCard({ game, mine }: { game: ShelfGame; mine: boolean }) {
         )}
       </div>
       {open && (
-        <BuildTerminal
-          stages={[]}
-          currentStage=""
-          lines={lines ?? [{ kind: "say", text: "loading the agent log…" }]}
-          live={false}
-        />
+        <>
+          {record?.audit && (
+            <p className="cardByline">
+              Shipped before build logs existed. This is Grok Build re-verifying
+              the shipped source in a sandbox: recompile, ROM compare, contract
+              check.
+            </p>
+          )}
+          <BuildTerminal
+            stages={(record?.stages ?? []).map((s) => ({ name: s.stage, at: Date.parse(s.at) }))}
+            currentStage=""
+            lines={lines ?? [{ kind: "say", text: "loading the agent log…" }]}
+            live={false}
+          />
+        </>
       )}
     </div>
   );
