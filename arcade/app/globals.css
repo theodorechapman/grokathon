@@ -1038,6 +1038,16 @@ a.navSegment:hover {
   font-weight: 700;
 }
 
+.endRank {
+  color: var(--text) !important;
+  font-size: 16px !important;
+}
+
+.endRank strong {
+  color: var(--accent);
+  font-size: 20px;
+}
+
 .endPrimary {
   background: var(--text);
   color: var(--bg);

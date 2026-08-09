@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type RunEnd = { outcome: "win" | "loss"; score: number; message?: string };
 export type Scoring = "time" | "points";
@@ -37,9 +37,24 @@ export function EndScreen({
 }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [rank, setRank] = useState<{ rank: number; total: number } | null>(null);
 
   // Time games only rank finished runs; points games keep the score either way.
   const claimable = end.outcome === "win" || scoring === "points";
+
+  useEffect(() => {
+    if (!claimable) return;
+    let alive = true;
+    fetch(`/api/score?slug=${encodeURIComponent(slug)}&score=${end.score}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (alive && data && typeof data.rank === "number") setRank(data);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [claimable, slug, end.score]);
   const line = outcomeLine(end, scoring);
 
   async function save(): Promise<boolean> {
@@ -90,6 +105,12 @@ export function EndScreen({
       <h2>{end.outcome === "win" ? "Cleared!" : "Game over"}</h2>
       {claimable && <p className="endTime">{fmtScore(end.score, scoring)}</p>}
       {line && <p>{line}</p>}
+      {claimable && !saved && rank && (
+        <p className="endRank">
+          That run lands at <strong>#{rank.rank}</strong>
+          {rank.total > 0 ? ` of ${rank.total + 1}` : ""} on the board.
+        </p>
+      )}
       {claimable &&
         (saved ? (
           <p>

@@ -7,6 +7,27 @@ const MAX_SCORE = 1_000_000_000;
 // Anything under 10s on a time board is not a human run.
 const MIN_TIME_MS = 10_000;
 
+// Rank preview for the end screen: where would this run land on the board?
+// Read-only, works signed out — it's the sign-in bait.
+export async function GET(req: NextRequest) {
+  const r = redis();
+  if (!r) return NextResponse.json({ error: "scores not configured" }, { status: 503 });
+  const slug = req.nextUrl.searchParams.get("slug") ?? "";
+  const score = Number(req.nextUrl.searchParams.get("score"));
+  const game = SLUG_RE.test(slug) ? await getGame(slug) : null;
+  if (!game) return NextResponse.json({ error: "unknown game" }, { status: 404 });
+  if (!Number.isFinite(score) || score < 0 || score > MAX_SCORE) {
+    return NextResponse.json({ error: "invalid score" }, { status: 400 });
+  }
+  const isTime = game.scoring === "time";
+  const s = Math.floor(score);
+  const [better, total] = await Promise.all([
+    isTime ? r.zcount(`hs:${slug}`, "-inf", `(${s}`) : r.zcount(`hs:${slug}`, `(${s}`, "+inf"),
+    r.zcard(`hs:${slug}`),
+  ]);
+  return NextResponse.json({ rank: better + 1, total });
+}
+
 export async function POST(req: NextRequest) {
   const r = redis();
   if (!r) return NextResponse.json({ error: "scores not configured" }, { status: 503 });
