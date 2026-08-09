@@ -2,7 +2,6 @@ import Link from "next/link";
 import { listPublicGames, type GameManifest } from "@/lib/games";
 import { rankScore, redis, statsFor, type GameStats } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
-import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
 
 export const dynamic = "force-dynamic";
@@ -106,8 +105,6 @@ export default async function ArcadePage({
         <h1>The arcade</h1>
         <p>Pick a game and play. Beat the board, then remix it into your own.</p>
       </header>
-
-      <MyGames />
 
       <div className="shelfLayout">
         <aside className="filterRail">

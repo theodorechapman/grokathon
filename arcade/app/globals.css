@@ -2028,3 +2028,80 @@ a.myCreationParent:hover {
   font-size: 12px;
   font-family: var(--font-mono), monospace;
 }
+
+/* ---- create shelf ---- */
+
+.createLive {
+  margin-top: 28px;
+}
+
+.createLiveHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+}
+
+.createLiveHead a {
+  color: var(--text);
+}
+
+.createGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.createCardOpen {
+  grid-column: 1 / -1;
+}
+
+.createCard .buildTerm {
+  margin-top: 0;
+}
+
+.createCard {
+  display: grid;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  transition: border-color 0.15s;
+}
+
+.createCard:hover {
+  border-color: var(--accent);
+}
+
+.createCardTop {
+  display: grid;
+  gap: 8px;
+}
+
+.createCover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+}
+
+.createCardName {
+  font-weight: 650;
+  font-size: 15.5px;
+}
+
+.createCardActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.createCardActions .buildReplayBtn {
+  margin-top: 0;
+  padding: 6px 12px;
+}
