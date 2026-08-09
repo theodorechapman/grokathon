@@ -48,6 +48,53 @@ static int8_t ball_vx;
 static int8_t ball_vy;
 static uint8_t bricks_remaining;
 
+/*
+ * APU helpers. Reusable one-call sound effects on the Game Boy's channels.
+ * Remixes should call these (retuning register values if a different pitch
+ * or feel is wanted) instead of writing raw NRxx sequences at every new
+ * sound moment. sound_init() must run once, after initialize_video(), which
+ * powers the APU down like the original ROM did.
+ */
+static void sound_init(void) {
+    NR52_REG = 0x80u; /* APU on; must be set before any other register */
+    NR51_REG = 0xFFu; /* every channel to both output terminals */
+    NR50_REG = 0x77u; /* max master volume, VIN off */
+}
+
+/* Short square blip on channel 1: paddle and brick hits. Non-blocking. */
+static void sfx_beep(void) {
+    NR10_REG = 0x00u; /* no sweep */
+    NR11_REG = 0x80u; /* 50% duty */
+    NR12_REG = 0xF1u; /* full volume, fast envelope decay */
+    NR13_REG = 0x83u;
+    NR14_REG = 0x87u; /* trigger, period 0x783 (~1050 Hz) */
+}
+
+/* Noise burst on channel 4: the loss thud. Non-blocking. */
+static void sfx_boom(void) {
+    NR41_REG = 0x00u;
+    NR42_REG = 0xF3u; /* full volume, medium envelope decay */
+    NR43_REG = 0x54u; /* mid-pitch noise */
+    NR44_REG = 0x80u; /* trigger */
+}
+
+/* Rising four-note win arpeggio on channel 2. Blocks about half a second. */
+static void sfx_jingle(void) {
+    static const uint16_t notes[4] = {1797u, 1849u, 1881u, 1923u}; /* C5 E5 G5 C6 */
+    uint8_t i;
+    uint8_t frame;
+
+    for (i = 0u; i < 4u; ++i) {
+        NR21_REG = 0x80u; /* 50% duty */
+        NR22_REG = 0xF2u; /* full volume, gentle decay */
+        NR23_REG = (uint8_t)notes[i];
+        NR24_REG = (uint8_t)(0x80u | (notes[i] >> 8)); /* trigger */
+        for (frame = 0u; frame < 8u; ++frame) {
+            wait_vbl_done();
+        }
+    }
+}
+
 static void draw_paddle(void) {
     move_sprite(PADDLE_LEFT_SPRITE, paddle_x, PADDLE_Y);
     move_sprite(PADDLE_MIDDLE_SPRITE, (uint8_t)(paddle_x + 8u), PADDLE_Y);
@@ -78,6 +125,7 @@ static void remove_brick(uint8_t tile_x, uint8_t tile_y) {
     set_bkg_tile_xy(tile_x, tile_y, TILE_EMPTY);
     set_bkg_tile_xy((uint8_t)(tile_x + 1u), tile_y, TILE_EMPTY);
     --bricks_remaining;
+    sfx_beep();
 }
 
 static bool overlaps_paddle(uint8_t candidate_x, uint8_t candidate_y) {
@@ -116,6 +164,7 @@ static bool collides(int8_t delta_x, int8_t delta_y) {
     candidate_y = (uint8_t)(ball_y + delta_y);
 
     if (overlaps_paddle(candidate_x, candidate_y)) {
+        sfx_beep();
         return true;
     }
 
@@ -211,6 +260,7 @@ void main(void) {
     wait_vbl_done();
 
     initialize_video();
+    sound_init();
     initialize_game();
     NOVA_STATE = 1u;
 
@@ -243,6 +293,11 @@ void main(void) {
 
     /* The original silently idles forever after both a win and a loss. */
     NOVA_STATE = bricks_remaining == 0u ? 2u : 3u;
+    if (bricks_remaining == 0u) {
+        sfx_jingle();
+    } else {
+        sfx_boom();
+    }
     while (true) {
         wait_vbl_done();
     }
