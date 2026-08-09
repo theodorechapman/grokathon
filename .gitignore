@@ -1,6 +1,7 @@
 tools/
 work/
 .venv/
+.env
 __pycache__/
 *.pyc
 workspaces/

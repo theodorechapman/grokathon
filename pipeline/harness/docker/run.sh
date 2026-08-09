@@ -4,6 +4,14 @@
 # Env passthrough: MODEL, EFFORT, TIER, ENGINE, LABEL.
 set -euo pipefail
 
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo="$(cd "$here/../../.." && pwd)"
+if [[ -f "$repo/.env" ]]; then
+    set -a
+    source "$repo/.env"
+    set +a
+fi
+
 rom="${1:?usage: run.sh <rom-path> [out-dir]}"
 out="${2:-$(pwd)/out}"
 rom="$(cd "$(dirname "$rom")" && pwd)/$(basename "$rom")"
