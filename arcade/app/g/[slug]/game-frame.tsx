@@ -24,12 +24,8 @@ export function GameFrame({
 
   const restartGame = useCallback(() => {
     setRunEnd(null);
-    if (rom) {
-      window.location.reload();
-      return;
-    }
     setRunId((n) => n + 1);
-  }, [rom]);
+  }, []);
 
   const focusGame = useCallback(() => {
     playerRef.current?.focus();

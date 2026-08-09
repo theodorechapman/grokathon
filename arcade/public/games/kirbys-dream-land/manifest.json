@@ -1,0 +1,12 @@
+{
+  "slug": "kirbys-dream-land",
+  "title": "Kirby's Dream Land",
+  "description": "A clean-room reconstruction of the Green Greens opening, rebuilt in C from observed Game Boy behavior.",
+  "controls": "D-pad or arrow keys to move, A/X to jump, B/Z to inhale, Up to enter doors, Enter for Start",
+  "source": "rom-re",
+  "parent": null,
+  "rom": "kirbys-dream-land.gb",
+  "createdAt": "2026-08-09T05:01:15Z",
+  "players": 1,
+  "tags": ["platformer", "game-boy", "reconstruction"]
+}

@@ -8,6 +8,8 @@
   background:
     radial-gradient(circle at center, rgb(32 64 72 / 90%), transparent 34rem),
     #0d171c;
+  overscroll-behavior: contain;
+  -webkit-touch-callout: none;
 }
 
 .shell {
@@ -72,6 +74,7 @@
     gap: 16px;
     user-select: none;
     -webkit-user-select: none;
+    touch-action: none;
   }
 
   .touch button {
@@ -182,33 +185,50 @@
   }
 }
 
-@media (max-width: 600px) {
+/* Side rails keep direction + A independently touchable for wall jumps. */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
+  .stage {
+    min-height: 100svh; padding: 10px 148px;
+  }
+  .shell {
+    width: min(calc((100svh - 20px) * 10 / 9), calc(100vw - 296px));
+    min-width: 0; padding: 8px; border-width: 5px;
+  }
+  .touch {
+    inset: 50% 12px auto; transform: translateY(-50%);
+    grid-template-columns: 126px minmax(0, 1fr) 120px;
+    align-items: center; pointer-events: none;
+  }
+  .touch > * { pointer-events: auto; }
+  .system {
+    position: absolute; bottom: -24px; left: 50%;
+    flex-direction: row; padding: 0;
+    transform: translateX(-50%);
+  }
+  .status { inset: auto 8px 6px; }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
   .touch {
     grid-template-columns: 126px minmax(0, 1fr) 120px;
     gap: 6px;
   }
 
   .system {
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 6px;
+    flex-direction: column; gap: 4px; padding-bottom: 6px;
   }
 
-  .system button {
-    width: 44px;
-  }
+  .system button { width: 44px; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 360px) and (orientation: portrait) {
   .touch {
     inset-inline: 10px;
     grid-template-columns: 114px minmax(0, 1fr) 108px;
     gap: 2px;
   }
 
-  .dpad {
-    grid-template: repeat(3, 38px) / repeat(3, 38px);
-  }
+  .dpad { grid-template: repeat(3, 38px) / repeat(3, 38px); }
 
   .dpad button {
     width: 38px;
@@ -224,7 +244,5 @@
     height: 50px;
   }
 
-  .system button {
-    width: 42px;
-  }
+  .system button { width: 42px; }
 }

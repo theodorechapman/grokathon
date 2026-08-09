@@ -1,0 +1,12 @@
+{
+  "slug": "postie",
+  "title": "Postie",
+  "description": "A three-room reconstruction of the wall-jumping Game Boy Color platformer, including throwable balls and instant restarts.",
+  "controls": "D-pad or arrow keys to move, A/X to jump and wall-jump, B/Z to throw, Enter to restart",
+  "source": "rom-re",
+  "parent": null,
+  "rom": "postie.gb",
+  "createdAt": "2026-08-09T05:01:16Z",
+  "players": 1,
+  "tags": ["platformer", "game-boy-color", "reconstruction"]
+}
