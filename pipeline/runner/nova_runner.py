@@ -346,12 +346,9 @@ def playtest(rom: Path, slug: str) -> str:
 
 
 def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
-    """Build in a Vercel Sandbox driven by the Grok Build CLI.
-
-    Streams the script's NDJSON stage events into report() and returns
-    (main_c, rom_path, build_log_path) or None on any failure — the caller
-    falls back to the local build so the loop never dead-ends on sandbox
-    trouble."""
+    """GBDK build in a Vercel Sandbox driven by the Grok Build CLI. Returns
+    (main_c, rom_path, build_log_path) or None; the caller falls back to the
+    local build so the loop never dead-ends on sandbox trouble."""
     src = Path(tempfile.mkdtemp(prefix=f"nova-src-{slug}-"))
     out = Path(tempfile.mkdtemp(prefix=f"nova-out-{slug}-"))
     base_main = BASE_SRC / "main.c"
@@ -360,24 +357,70 @@ def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
     shutil.copy(base_main, src / "main.c")
     for f in ("assets.c", "assets.h"):
         shutil.copy(BASE_SRC / f, src / f)
-    spec = src / "spec.json"
-    spec.write_text(json.dumps({
+    if not run_sandbox_spec(slug, src, {
         "slug": slug,
         "task": agent_task(job["prompt"], creating),
         "srcDir": str(src),
         "outDir": str(out),
         "attempts": 3,
         "sandboxName": take_warm_sandbox(),
-    }))
+    }):
+        return None
+    rom = out / f"{slug}.gb"
+    main_c = out / "main.c"
+    if not rom.exists() or not main_c.exists():
+        log(f"job {slug}: sandbox build left no artifacts")
+        return None
+    return main_c.read_text(), rom, out / "build-log.ndjson"
+
+
+def sandbox_build_html(job: dict, slug: str, base_html: str):
+    """Browser-game remix in a Vercel Sandbox: the Grok Build CLI edits the
+    parent's index.html in place. Returns (html, build_log_path) or None."""
+    src = Path(tempfile.mkdtemp(prefix=f"nova-src-{slug}-"))
+    out = Path(tempfile.mkdtemp(prefix=f"nova-out-{slug}-"))
+    (src / "index.html").write_text(base_html)
+    task = (
+        f"Apply this remix request to the browser game in index.html: "
+        f"{job['prompt']}\n\nEdit index.html in place and keep every contract "
+        "rule it already follows: fully self-contained (no external URLs, no "
+        "CDN, no fetch), keyboard AND touch controls, scales to any viewport "
+        "with no overflow, and the window.parent.postMessage nova:score call "
+        "the moment a run ends. Keep the TITLE / DESC / CONTROLS / SCORING "
+        "header comments at the top of the file, updating TITLE and DESC to "
+        "name the remix. Do not create other files."
+    )
+    if not run_sandbox_spec(slug, src, {
+        "slug": slug,
+        "task": task,
+        "srcDir": str(src),
+        "outDir": str(out),
+        "mode": "html",
+        "attempts": 3,
+        "sandboxName": take_warm_sandbox(),
+    }):
+        return None
+    result = out / "index.html"
+    if not result.exists():
+        log(f"job {slug}: sandbox html build left no artifact")
+        return None
+    return result.read_text(), out / "build-log.ndjson"
+
+
+def run_sandbox_spec(slug: str, src: Path, spec: dict) -> bool:
+    """Run build-in-sandbox.mjs on a spec, streaming its NDJSON stage events
+    into report() and its humanized grok log to the live glass box."""
+    spec_path = src / "spec.json"
+    spec_path.write_text(json.dumps(spec))
     try:
         proc = subprocess.Popen(
-            ["node", str(SANDBOX_SCRIPT), str(spec)],
+            ["node", str(SANDBOX_SCRIPT), str(spec_path)],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
             cwd=SANDBOX_SCRIPT.parent,
         )
     except OSError as e:
         log(f"job {slug}: sandbox spawn failed: {e}")
-        return None
+        return False
     # Watchdog covers silent hangs too (readline would block forever). SIGTERM
     # first so the script's handler can stop the microVM; SIGKILL as backstop.
     timed_out = threading.Event()
@@ -419,16 +462,11 @@ def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
     watchdog.cancel()
     if timed_out.is_set():
         log(f"job {slug}: sandbox build timed out")
-        return None
+        return False
     if exit_code != 0:
         log(f"job {slug}: sandbox build failed (exit {exit_code})")
-        return None
-    rom = out / f"{slug}.gb"
-    main_c = out / "main.c"
-    if not rom.exists() or not main_c.exists():
-        log(f"job {slug}: sandbox build left no artifacts")
-        return None
-    return main_c.read_text(), rom, out / "build-log.ndjson"
+        return False
+    return True
 
 
 def write_build_record(bundle: Path, slug: str, job: dict, engine: str, log_src: Path | None = None) -> None:
@@ -558,31 +596,51 @@ SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,59}$")
 
 def wants_browser_game(job: dict, target: str | None) -> bool:
     """Everything takes the GBDK path first — creations transform the breakout
-    C skeleton, remixes patch their parent's source. The only jobs that start
-    on the html path are iterations of drafts that already shipped as html."""
-    if job.get("parent") or job.get("source") not in ("site", "x"):
+    C skeleton, remixes patch their parent's source. The html path handles
+    iterations of html drafts AND remixes of html games (a parent with an
+    index.html and no C source has nothing for GBDK to patch)."""
+    parent = job.get("parent")
+    if parent and SLUG_RE.match(parent) and (GAMES / parent / "index.html").exists() \
+            and not (GAMES / parent / "source.c").exists():
+        return True
+    if parent or job.get("source") not in ("site", "x"):
         return False
     return bool(target) and (GAMES / target / "index.html").exists()
 
 
 def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None:
     base_html = None
-    if target and (GAMES / target / "index.html").exists():
-        base_html = (GAMES / target / "index.html").read_text()
+    base_slug = target or job.get("parent")
+    if base_slug and (GAMES / base_slug / "index.html").exists():
+        base_html = (GAMES / base_slug / "index.html").read_text()
     html, err = None, None
-    for attempt in range(3):
-        report(slug, "writing the game", f"attempt {attempt + 1}, {MODEL} writing a self-contained index.html")
-        try:
-            html = generate_html(job["prompt"], err, base_html)
-        except Exception as e:
-            err = f"generation call failed: {e}"
-            log(f"job {slug}: {err} (attempt {attempt + 1})")
-            continue
-        report(slug, "verifying", "contract checks: self-contained, nova:score wired, fits any viewport")
-        err = validate_html(html)
-        if not err:
-            break
-        log(f"job {slug}: html rejected (attempt {attempt + 1}): {err}")
+    engine, sandbox_log = "local", None
+    if SANDBOX_ENABLED and base_html:
+        built = sandbox_build_html(job, slug, base_html)
+        if built:
+            candidate, sandbox_log = built
+            err = validate_html(candidate)
+            if not err:
+                html, engine = candidate, "sandbox"
+            else:
+                log(f"job {slug}: sandbox html failed validation ({err}), falling back")
+        else:
+            log(f"job {slug}: falling back to the local html build")
+    if html is None:
+        err = None
+        for attempt in range(3):
+            report(slug, "writing the game", f"attempt {attempt + 1}, {MODEL} writing a self-contained index.html")
+            try:
+                html = generate_html(job["prompt"], err, base_html)
+            except Exception as e:
+                err = f"generation call failed: {e}"
+                log(f"job {slug}: {err} (attempt {attempt + 1})")
+                continue
+            report(slug, "verifying", "contract checks: self-contained, nova:score wired, fits any viewport")
+            err = validate_html(html)
+            if not err:
+                break
+            log(f"job {slug}: html rejected (attempt {attempt + 1}): {err}")
     if html is None or err:
         log(f"job {slug}: giving up after 3 attempts")
         return None
@@ -598,8 +656,8 @@ def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None
         "title": title,
         "description": desc,
         "controls": header_tag(html, "CONTROLS")[:120] or "arrows or touch to play",
-        "source": job.get("source", "site"),
-        "parent": None,
+        "source": "remix" if job.get("parent") else job.get("source", "site"),
+        "parent": job.get("parent"),
         "creator": job.get("creator"),
         "scoring": "time" if header_tag(html, "SCORING").lower() == "time" else "points",
         "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
@@ -619,7 +677,7 @@ def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None
                 manifest["draft"] = True
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     report(slug, "publishing", "pushing to the arcade")
-    write_build_record(bundle, slug, job, "local")
+    write_build_record(bundle, slug, job, engine, sandbox_log)
     log(f"job {slug}: browser game bundled")
     return bundle
 
