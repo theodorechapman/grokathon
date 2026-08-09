@@ -818,6 +818,10 @@ a.navSegment:hover {
   .gameHead {
     flex-direction: column;
   }
+  /* On phones the QR panel just pushes the game below the fold. */
+  .gameHead .qrPanel {
+    display: none;
+  }
 }
 
 .gate {
@@ -949,8 +953,32 @@ a.navSegment:hover {
     font-size: 28px;
   }
 
+  /* The game must land inside the first screen on a phone: tighten the
+     header, drop the description, and size the frame off the real visible
+     viewport (dvh tracks in-app browser chrome like Instagram's). */
+  .gameHead {
+    margin-top: 0;
+  }
+
+  .gameHead .masthead {
+    margin-top: 0;
+  }
+
+  .gameHead .masthead h1 {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .gameHead .masthead p {
+    display: none;
+  }
+
+  .player {
+    margin-top: 12px;
+  }
+
   .player iframe {
-    height: clamp(360px, 58vh, 560px);
+    height: clamp(320px, calc(100dvh - 210px), 620px);
   }
 
   .playerFoot {
