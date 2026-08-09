@@ -7,7 +7,12 @@ import { VoteButton } from "./vote-button";
 
 export const dynamic = "force-dynamic";
 
-const VIEWS = { all: "All", top: "Community favorites", new: "New" } as const;
+const VIEWS = {
+  top: "Top games",
+  favorites: "Community favorites",
+  all: "All",
+  new: "New",
+} as const;
 type ViewKey = keyof typeof VIEWS;
 
 const PLAYER_OPTIONS: { value: string; label: string; match: (g: GameManifest) => boolean }[] = [
@@ -44,7 +49,10 @@ export default async function ArcadePage({
   const { view: viewParam, p, sort } = await searchParams;
   // Old ?sort=top|new links keep working as aliases for the view param.
   const requested = viewParam ?? sort;
-  const view: ViewKey = requested === "top" || requested === "new" ? requested : "all";
+  const view: ViewKey =
+    requested === "all" || requested === "new" || requested === "favorites"
+      ? requested
+      : "top";
   const players = (p ?? "")
     .split(",")
     .filter((v) => PLAYER_OPTIONS.some((o) => o.value === v));
@@ -74,10 +82,12 @@ export default async function ArcadePage({
     root,
     remixes: ranked.filter((g) => g.parent === root.slug && g.slug !== root.slug),
   }));
-  // All and New are flat: every game, remixes included, its own card.
-  // Community favorites shows one winner per family — the thread's best game.
+  // Top games (default) is family-stacked: one card per unique game, remixes
+  // folded in. All and New are flat. Community favorites is one winner per
+  // family — the thread's best game by votes and plays.
+  families.sort((a, b) => familyRank(b, stats) - familyRank(a, stats));
   let cards: GameManifest[];
-  if (view === "top") {
+  if (view === "favorites") {
     cards = families
       .filter((fam) => familyHasActivity(fam, stats))
       .map((fam) =>
@@ -164,7 +174,77 @@ export default async function ArcadePage({
             </p>
           ) : (
             <div className="grid">
-              {cards.map((game) => (
+              {view === "top" &&
+                families.map(({ root, remixes }) => (
+                  <article key={root.slug} className="gameCard">
+                    <Link href={`/g/${root.slug}`} className="gameCover">
+                      {root.hasCover ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={`/games/${root.slug}/cover.png`} alt="" />
+                      ) : (
+                        <span className="gameCoverFallback">{root.title.charAt(0)}</span>
+                      )}
+                    </Link>
+                    <div className="gameBody">
+                      <div className="gameTitleRow">
+                        <h3>{root.title}</h3>
+                        {root.slug === topSlug ? (
+                          <span className="badgeFav">★ community favorite</span>
+                        ) : (
+                          isNew(root) && <span className="badgeNew">NEW</span>
+                        )}
+                      </div>
+                      <p className="cardByline">by {root.creator ? `@${root.creator}` : "Nova"}</p>
+                      <p>{root.description}</p>
+                      <div className="gameActions">
+                        <Link href={`/g/${root.slug}`} className="playBtn">
+                          ▶&nbsp; Play
+                        </Link>
+                        <VoteButton slug={root.slug} votes={stats.get(root.slug)!.votes} />
+                        <span className="gameControls">{stats.get(root.slug)!.plays} plays</span>
+                        {tweetUrl(root.slug) && (
+                          <a
+                            href={tweetUrl(root.slug)!}
+                            className="xThreadLink"
+                            title="View the thread on X"
+                          >
+                            𝕏 thread
+                          </a>
+                        )}
+                      </div>
+                      {remixes.length > 0 && (
+                        <details className="familyFold">
+                          <summary>
+                            {remixes.length} {remixes.length === 1 ? "remix" : "remixes"}
+                          </summary>
+                          <ul className="remixList">
+                            {remixes.map((remix) => (
+                              <li key={remix.slug} className="remixRow">
+                                <span className="remixMain">
+                                  <Link href={`/g/${remix.slug}`} className="remixTitle">
+                                    {remix.title}
+                                  </Link>
+                                  <span className="cardByline">
+                                    by {remix.creator ? `@${remix.creator}` : "Nova"}
+                                  </span>
+                                </span>
+                                {isNew(remix) && <span className="badgeNew">NEW</span>}
+                                <span className="gameControls">
+                                  {stats.get(remix.slug)!.plays} plays
+                                </span>
+                                <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
+                                  ▶
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              {view !== "top" &&
+                cards.map((game) => (
                 <article key={game.slug} className="gameCard">
                   <Link href={`/g/${game.slug}`} className="gameCover">
                     {game.hasCover ? (
