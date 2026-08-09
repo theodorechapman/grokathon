@@ -1038,6 +1038,31 @@ a.navSegment:hover {
   font-weight: 700;
 }
 
+.endBoardWrap {
+  position: relative;
+  width: min(340px, 86%);
+}
+.endBoard {
+  width: 100%;
+  margin: 0;
+  font-size: 14px;
+}
+.endBoard td {
+  padding: 6px 10px;
+}
+.endBoardBlur {
+  filter: blur(5px);
+  pointer-events: none;
+  user-select: none;
+}
+.endBoardGate {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  width: fit-content;
+  max-width: 95%;
+}
 .endRank {
   color: var(--text) !important;
   font-size: 16px !important;

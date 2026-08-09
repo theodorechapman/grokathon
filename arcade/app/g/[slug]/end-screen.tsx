@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 export type RunEnd = { outcome: "win" | "loss"; score: number; message?: string };
 export type Scoring = "time" | "points";
 
+type BoardRow = { handle: string; score: number };
+type RankInfo = { rank: number; total: number; top: BoardRow[] };
+
 function fmtScore(score: number, scoring: Scoring): string {
   if (scoring !== "time") return score.toLocaleString();
   const sec = score / 1000;
   const min = Math.floor(sec / 60);
   return min > 0 ? `${min}:${(sec - min * 60).toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
-}
-
-function outcomeLine(end: RunEnd): string | null {
-  return end.message ?? null;
 }
 
 export function EndScreen({
@@ -31,32 +30,10 @@ export function EndScreen({
 }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [rank, setRank] = useState<{ rank: number; total: number } | null>(null);
+  const [info, setInfo] = useState<RankInfo | null>(null);
 
   // Time games only rank finished runs; points games keep the score either way.
   const claimable = end.outcome === "win" || scoring === "points";
-
-  // Signed-in players save automatically. Theo cleared breakout and never
-  // appeared on the board because he didn't click the save button.
-  useEffect(() => {
-    if (signedIn && claimable) void save();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [signedIn, claimable]);
-
-  useEffect(() => {
-    if (!claimable) return;
-    let alive = true;
-    fetch(`/api/score?slug=${encodeURIComponent(slug)}&score=${end.score}`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (alive && data && typeof data.rank === "number") setRank(data);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, [claimable, slug, end.score]);
-  const line = outcomeLine(end);
 
   async function save(): Promise<boolean> {
     try {
@@ -79,6 +56,27 @@ export function EndScreen({
     return false;
   }
 
+  // Signed-in players save automatically, no button.
+  useEffect(() => {
+    if (signedIn && claimable) void save();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signedIn, claimable]);
+
+  // The board is the end screen. Refetch after the save lands so the
+  // player's own row shows up in it.
+  useEffect(() => {
+    let alive = true;
+    fetch(`/api/score?slug=${encodeURIComponent(slug)}&score=${end.score}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (alive && data && Array.isArray(data.top)) setInfo(data);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [slug, end.score, saved]);
+
   function openLogin(onClosed?: () => void) {
     const popup = window.open("/api/auth/login", "nova-x-auth", "width=500,height=700");
     if (!popup) {
@@ -94,44 +92,44 @@ export function EndScreen({
   }
 
   function signInAndSave() {
-    openLogin(() => void save());
-  }
-
-  function signIn() {
-    openLogin(() => window.location.reload());
+    openLogin(() => {
+      if (claimable) void save();
+      else window.location.reload();
+    });
   }
 
   return (
     <div className="endScreen">
       <h2>{end.outcome === "win" ? "Cleared!" : "Game over"}</h2>
       {claimable && <p className="endTime">{fmtScore(end.score, scoring)}</p>}
-      {line && <p>{line}</p>}
-      {claimable && !saved && rank && (
+      {claimable && info && !saved && (
         <p className="endRank">
-          That run lands at <strong>#{rank.rank}</strong>
-          {rank.total > 0 ? ` of ${rank.total + 1}` : ""} on the board.
+          That run lands at <strong>#{info.rank}</strong>
+          {info.total > 0 ? ` of ${info.total + 1}` : ""} on the board.
         </p>
       )}
-      {claimable &&
-        (saved ? (
-          <p>
-            On the board. Better runs overwrite it.{" "}
-            <a className="endBoardLink" href={`/leaderboard?g=${slug}`}>
-              See the leaderboard →
-            </a>
-          </p>
-        ) : signedIn ? null : (
-          <button className="endPrimary" onClick={signInAndSave}>
-            Sign in with 𝕏 to see where you land on the board
-          </button>
-        ))}
-      {!claimable && !signedIn && (
-        <button className="endPrimary" onClick={signIn}>
-          Sign in with 𝕏 so your next run counts
-        </button>
+      {info && info.top.length > 0 && (
+        <div className="endBoardWrap">
+          <table className={signedIn ? "board endBoard" : "board endBoard endBoardBlur"}>
+            <tbody>
+              {info.top.map((row, i) => (
+                <tr key={row.handle}>
+                  <td>{i + 1}</td>
+                  <td>@{row.handle}</td>
+                  <td>{fmtScore(row.score, scoring)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {!signedIn && (
+            <button className="endPrimary endBoardGate" onClick={signInAndSave}>
+              Sign in with 𝕏 to see the board{claimable ? " and claim your run" : ""}
+            </button>
+          )}
+        </div>
       )}
       {error && <p className="endErr">{error}</p>}
-      <button className={!signedIn ? "endGhost" : "endPrimary"} onClick={onReplay}>
+      <button className="endPrimary" onClick={onReplay}>
         {end.outcome === "win" ? "Play again" : "↻ Retry"}
       </button>
     </div>
