@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listPublicGames } from "@/lib/games";
-import { formatScore, playerBoard, redis, topScores } from "@/lib/stats";
+import { formatScore, playerBoard, rankScore, redis, statsFor, topScores } from "@/lib/stats";
 import { guestDisplayName } from "@/lib/guest-name";
 import { GuestNameBox } from "./guest-name-box";
 import { readSession } from "@/lib/session";
@@ -25,9 +25,22 @@ export default async function LeaderboardPage({
     selected && selected.parent && slugs.has(selected.parent)
       ? unordered.find((x) => x.slug === selected.parent) ?? null
       : selected;
-  const familyRemixes = selectedRoot
-    ? unordered.filter((x) => x.parent === selectedRoot.slug && x.slug !== selectedRoot.slug)
-    : [];
+  // Full remix tree under the selected root, hottest branches first at every
+  // level, remix-of-remix indented one arrow deeper.
+  const stats = await statsFor(unordered.map((x) => x.slug));
+  const byHeat = (a: { slug: string }, b: { slug: string }) =>
+    rankScore(stats.get(b.slug) ?? { votes: 0, plays: 0 }) -
+    rankScore(stats.get(a.slug) ?? { votes: 0, plays: 0 });
+  const familyRemixes: { slug: string; title: string; depth: number }[] = [];
+  function collectRemixes(parentSlug: string, depth: number) {
+    if (depth > 4) return;
+    for (const child of unordered.filter((x) => x.parent === parentSlug).sort(byHeat)) {
+      familyRemixes.push({ slug: child.slug, title: child.title, depth });
+      collectRemixes(child.slug, depth + 1);
+    }
+  }
+  if (selectedRoot) collectRemixes(selectedRoot.slug, 1);
+  rootsList.sort(byHeat);
 
   return (
     <main>
@@ -62,7 +75,7 @@ export default async function LeaderboardPage({
               href={`/leaderboard?g=${game.slug}`}
               className={selected?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
             >
-              ↳ {game.title}
+              {"↳".repeat(game.depth)} {game.title}
             </Link>
           ))}
         </div>
