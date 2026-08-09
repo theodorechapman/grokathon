@@ -54,53 +54,66 @@ export default async function LeaderboardPage({
         </p>
       </header>
 
-      <div className="filterRow" style={{ marginTop: 24 }}>
-        <Link href="/leaderboard" className={!selected ? "filterChip filterChipActive" : "filterChip"}>
-          All games
-        </Link>
-        {rootsList.map((game) => (
-          <Link
-            key={game.slug}
-            href={`/leaderboard?g=${game.slug}`}
-            className={selectedRoot?.slug === game.slug ? "filterChip filterChipActive" : "filterChip"}
-          >
-            {game.title}
-          </Link>
-        ))}
-      </div>
-      {familyRemixes.length > 0 && (
-        <nav className="boardFamList">
-          {familyRemixes.map((game) => (
+      <div className="shelfLayout" style={{ marginTop: 24 }}>
+        <aside className="filterRail">
+          <div className="railGroup">
+            <h4 className="railLabel">Game</h4>
             <Link
-              key={game.slug}
-              href={`/leaderboard?g=${game.slug}`}
-              className={selected?.slug === game.slug ? "boardFamRow boardFamRowActive" : "boardFamRow"}
-              style={{ paddingLeft: 12 + (game.depth - 1) * 18 }}
+              href="/leaderboard"
+              className={!selected ? "railCheck railCheckOn" : "railCheck"}
             >
-              <span className="boardFamTitle">↳ {game.title}</span>
-              <span className="boardFamStats">
-                {game.votes > 0 && <>▲ {game.votes} · </>}
-                {game.plays} plays
-              </span>
+              All games
             </Link>
-          ))}
-        </nav>
-      )}
-      {!session && (
-        <>
-          <div className="boardGate">
-            <span>Playing as a guest. Sign in to claim your plays under your handle.</span>
-            <SignInButton variant="nav" />
+            {rootsList.map((game) => (
+              <div key={game.slug}>
+                <Link
+                  href={`/leaderboard?g=${game.slug}`}
+                  className={selected?.slug === game.slug ? "railCheck railCheckOn" : "railCheck"}
+                >
+                  {game.title}
+                </Link>
+                {selectedRoot?.slug === game.slug && familyRemixes.length > 0 && (
+                  <nav className="boardFamList">
+                    {familyRemixes.map((remix) => (
+                      <Link
+                        key={remix.slug}
+                        href={`/leaderboard?g=${remix.slug}`}
+                        className={
+                          selected?.slug === remix.slug
+                            ? "boardFamRow boardFamRowActive"
+                            : "boardFamRow"
+                        }
+                        style={{ paddingLeft: 12 + (remix.depth - 1) * 14 }}
+                      >
+                        <span className="boardFamTitle">↳ {remix.title}</span>
+                        <span className="boardFamStats">{remix.plays} plays</span>
+                      </Link>
+                    ))}
+                  </nav>
+                )}
+              </div>
+            ))}
           </div>
-          <GuestNameBox />
-        </>
-      )}
+        </aside>
 
-      {selected ? (
-        <GameBoard slug={selected.slug} title={selected.title} scoring={selected.scoring} />
-      ) : (
-        <OverallBoard />
-      )}
+        <div className="shelfMain">
+          {!session && (
+            <>
+              <div className="boardGate">
+                <span>Playing as a guest. Sign in to claim your plays under your handle.</span>
+                <SignInButton variant="nav" />
+              </div>
+              <GuestNameBox />
+            </>
+          )}
+
+          {selected ? (
+            <GameBoard slug={selected.slug} title={selected.title} scoring={selected.scoring} />
+          ) : (
+            <OverallBoard />
+          )}
+        </div>
+      </div>
     </main>
   );
 }
