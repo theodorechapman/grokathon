@@ -86,7 +86,10 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
         "The arcade polls that byte to detect the end of a run; a game that "
         "drops those writes never shows an end screen and never gets scores. "
         "Only standard GBDK headers available. Output the "
-        "COMPLETE modified main.c and nothing else, in a single ```c code block."
+        "COMPLETE modified main.c and nothing else, in a single ```c code block. "
+        "The very first two lines of the code block must be comments naming the "
+        "remix: '// TITLE: <punchy 2-4 word game name, max 40 chars, no "
+        "Breakout prefix>' then '// DESC: <one short sentence>'."
     )
     user = f"Remix request: {prompt}\n\nassets.h for reference:\n```c\n{assets_h}\n```\n\nCurrent main.c:\n```c\n{main_c}\n```"
     if error:
@@ -132,18 +135,15 @@ def make_cover(prompt: str, dest: Path) -> None:
             shutil.copy(parent_cover, dest)
 
 
-def title_for(prompt: str) -> tuple[str, str]:
-    fallback = (re.sub(r"\s+", " ", prompt).strip().rstrip(".")[:40] or "Remix", prompt[:120])
-    try:
-        raw = grok([
-            {"role": "system", "content": "Name a breakout-game remix. Reply with ONLY JSON: {\"title\": \"2-4 punchy words, no Breakout prefix\", \"description\": \"one short sentence\"}"},
-            {"role": "user", "content": prompt},
-        ], timeout=60)
-        m = re.search(r"\{.*\}", raw, re.S)
-        d = json.loads(m.group(0))
-        return d["title"][:32], d["description"][:120]
-    except Exception:
-        return fallback
+def title_for(prompt: str, main_c: str) -> tuple[str, str]:
+    # Grok names the remix in // TITLE: / // DESC: header comments of the C it
+    # returns (same call that patches the source). Raw prompt is the fallback.
+    def header(tag: str) -> str:
+        m = re.search(rf"^\s*//\s*{tag}:\s*(.+)$", main_c[:600], re.M)
+        return re.sub(r"\s+", " ", m.group(1)).strip().strip("\"'") if m else ""
+
+    title = header("TITLE")[:40].rstrip(".") or re.sub(r"\s+", " ", prompt).strip().rstrip(".")[:40] or "Remix"
+    return title, (header("DESC")[:120] or prompt[:120])
 
 
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,59}$")
@@ -178,7 +178,7 @@ def process_job(job: dict) -> Path | None:
         log(f"job {slug}: giving up after 3 attempts")
         return None
 
-    title, desc = title_for(job["prompt"])
+    title, desc = title_for(job["prompt"], main_c)
     bundle = GAMES / slug
     bundle.mkdir(parents=True, exist_ok=True)
     shutil.copy(rom, bundle / f"{slug}.gb")
