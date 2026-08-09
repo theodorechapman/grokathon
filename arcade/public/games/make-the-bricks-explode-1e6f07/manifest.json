@@ -1,0 +1,12 @@
+{
+  "slug": "make-the-bricks-explode-1e6f07",
+  "title": "Spark Brick Breakout",
+  "description": "Bricks explode into flying sparks when the ball smashes them.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": null,
+  "rom": "make-the-bricks-explode-1e6f07.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T01:03:43Z"
+}
