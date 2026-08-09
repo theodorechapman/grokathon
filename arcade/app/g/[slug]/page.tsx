@@ -10,9 +10,7 @@ import { SiteNav } from "../../site-nav";
 import { PlayBeacon } from "./play-beacon";
 import { QrPanel } from "./qr-panel";
 import { GameFrame } from "./game-frame";
-import { RemixBox } from "./remix-box";
 import { DraftPanel } from "./draft-panel";
-import { SignInButton } from "../../sign-in-button";
 import { WaitingRoom } from "./waiting-room";
 
 const SITE = "https://playgrokgames.vercel.app";
@@ -71,11 +69,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   const parent = game.parent ? all.find((g) => g.slug === game.parent) : null;
   const remixes = all.filter((g) => g.parent === slug && !g.draft);
 
-  type BuildLog = { stages: { name: string; at: number }[]; startedAt: number };
   const r = redis();
-  const buildLog = r
-    ? await r.get<BuildLog>(`jobstatus:${slug}`).catch(() => null)
-    : null;
   const packedTweet = r
     ? await r.hget<string>("x:gamepost", slug).catch(() => null)
     : null;
@@ -100,19 +94,14 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             {game.draft && <span className="draftBadge">DRAFT</span>}
           </h1>
           <p>{game.description}</p>
-          {!game.draft && (
+          {!game.draft && tweetId && (
             <span className="headActions">
-              <a href="#remix" className="filterChip remixJump">
-                ↳ Remix this game
+              <a
+                href={`https://x.com/suprapan07/status/${tweetId}`}
+                className="filterChip remixJump"
+              >
+                𝕏 View the thread
               </a>
-              {tweetId && (
-                <a
-                  href={`https://x.com/suprapan07/status/${tweetId}`}
-                  className="filterChip remixJump"
-                >
-                  𝕏 View the thread
-                </a>
-              )}
             </span>
           )}
         </header>
@@ -133,44 +122,55 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <section id="remix" className="remixPanel">
         <h2>Want to remix {game.title}?</h2>
         <p>
-          Say a sentence and a new version ships in about 90 seconds. Try &quot;make the
-          paddle tiny and the ball twice as fast&quot;.
+          Remixing happens on X. Reply to this game&apos;s post with a sentence,
+          like &quot;make the paddle tiny and the ball twice as fast&quot;, and a
+          new version ships in about 90 seconds, announced in the thread.
         </p>
-        {session ? (
-          <RemixBox parent={slug} />
+        {tweetId ? (
+          <a
+            className="xCta"
+            href={`https://x.com/intent/post?in_reply_to=${tweetId}&text=${encodeURIComponent("remix: ")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            𝕏 Reply with your remix idea
+          </a>
         ) : (
-          <div className="remixGate">
-            <p>Sign in with 𝕏 to remix this game</p>
-            <SignInButton variant="nav" />
-          </div>
+          <p className="xDrive">
+            Reply to this game&apos;s post from @suprapan07 with your idea and the
+            pipeline builds it.
+          </p>
         )}
         <p className="xDrive">
-          Or do it from X:{" "}
-          {tweetId ? (
-            <a href={`https://x.com/suprapan07/status/${tweetId}`}>
-              reply to this game&apos;s post
-            </a>
-          ) : (
-            <>reply to this game&apos;s post from @suprapan07</>
-          )}{" "}
-          with your idea and the pipeline builds it. Mention @suprapan07 with any
-          sentence to start a brand new game.
+          Mention @suprapan07 with any sentence to start a brand new game instead.
         </p>
       </section>
       )}
 
       <section className="remixPanel">
         <h2>How this game was built</h2>
-        <p>
-          No human wrote this bundle. The original Breakout was reverse-engineered
-          from a Game Boy ROM into C. Grok patches that source for every ask, GBDK
-          compiles it back into a real .gb ROM, a bot plays the build until it
-          passes, and the arcade watches WRAM at runtime to detect wins, losses,
-          and your clear time.
-        </p>
-        {hasSource && (
+        {game.rom ? (
+          <p>
+            No human wrote this bundle. The original Breakout was reverse-engineered
+            from a Game Boy ROM into C. Grok patches that source for every ask, GBDK
+            compiles it back into a real .gb ROM, a bot plays the build until it
+            passes, and the arcade watches WRAM at runtime to detect wins, losses,
+            and your clear time.
+          </p>
+        ) : (
+          <p>
+            No human wrote this game. Grok wrote it as a single self-contained
+            page from one sentence, the pipeline checked it against the arcade
+            contract, and it shipped straight to this shelf. The whole game is
+            one file you can read.
+          </p>
+        )}
+        {(hasSource || !game.rom) && (
           <p className="sourceLink">
-            <a className="sourceCta" href={`/games/${slug}/source.c`}>
+            <a
+              className="sourceCta"
+              href={`/games/${slug}/${game.rom ? "source.c" : "index.html"}`}
+            >
               {"</>"} Read this game&apos;s source code
             </a>
             <span className="sourceNote">
@@ -178,18 +178,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             </span>
           </p>
         )}
-        {buildLog && buildLog.stages.length > 0 && (
-          <ol className="buildStages buildLogDone">
-            {buildLog.stages.map((s, i) => (
-              <li key={`${s.name}-${s.at}`} className="stageDone">
-                ✓ {s.name}
-                <span className="stageTime">
-                  {" "}
-                  +{((s.at - (i === 0 ? buildLog.startedAt : buildLog.stages[i - 1].at)) / 1000).toFixed(1)}s
-                </span>
-              </li>
-            ))}
-          </ol>
+        {tweetId && (
+          <p className="xDrive">
+            <a href={`https://x.com/suprapan07/status/${tweetId}`}>
+              𝕏 See this game&apos;s thread
+            </a>{" "}
+            — where it was asked for, announced, and remixed.
+          </p>
         )}
       </section>
 

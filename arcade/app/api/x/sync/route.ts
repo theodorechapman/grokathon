@@ -168,6 +168,7 @@ export async function POST(req: NextRequest) {
     ["announce", () => announceNewGames(r, result)],
     ["replies", () => repliesToRemixes(r, result, budget)],
     ["mentions", () => mentionsToCreations(r, result, budget)],
+    ["pending", () => pendingToJobs(r, result, budget)],
   ];
   for (const [name, step] of steps) {
     try {
