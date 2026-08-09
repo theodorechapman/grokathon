@@ -1091,6 +1091,18 @@ a.navSegment:hover {
   font-size: 14px;
 }
 
+/* Chips sit over the grid with air below; the rail starts level with the
+   first game card, not the chips row. */
+.shelfMain > .filterRow {
+  margin-bottom: 24px;
+}
+
+@media (min-width: 700px) {
+  .filterRail {
+    margin-top: 60px;
+  }
+}
+
 .guestNameBox {
   margin-top: 14px;
   display: flex;
