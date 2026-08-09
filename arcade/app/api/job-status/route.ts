@@ -37,6 +37,9 @@ export async function POST(req: NextRequest) {
     await r.rpush(logKey, ...lines);
     await r.ltrim(logKey, -LOG_CAP, -1);
     await r.expire(logKey, 3600);
+    // Keep the status record alive as long as the log streams, or a long
+    // build's waiting room goes dark when the status key expires first.
+    await r.expire(`jobstatus:${slug}`, 3600);
   }
   if (body.stage) {
     const key = `jobstatus:${slug}`;
@@ -47,8 +50,9 @@ export async function POST(req: NextRequest) {
     status.stages.push({ name: body.stage, at: now });
     await r.set(key, status, { ex: 3600 });
   }
-  // Live-build index for the /create glass box.
+  // Live-build index for the /create glass box; trim entries past the window.
   await r.zadd("jobstatus:active", { score: now, member: slug });
+  await r.zremrangebyscore("jobstatus:active", 0, now - ACTIVE_WINDOW_MS);
   return NextResponse.json({ ok: true });
 }
 
@@ -59,9 +63,14 @@ export async function GET(req: NextRequest) {
   if (req.nextUrl.searchParams.get("active") === "1") {
     const cutoff = Date.now() - ACTIVE_WINDOW_MS;
     const slugs = await r.zrange<string[]>("jobstatus:active", cutoff, "+inf", { byScore: true });
+    // zrange byScore is oldest-first: filter finished builds before capping,
+    // keep the 6 newest, newest on top.
     const statuses = (
-      await Promise.all(slugs.slice(0, 6).map((s) => r.get<JobStatus>(`jobstatus:${s}`)))
-    ).filter((s): s is JobStatus => s !== null && s.stage !== "published");
+      await Promise.all(slugs.slice(-12).map((s) => r.get<JobStatus>(`jobstatus:${s}`)))
+    )
+      .filter((s): s is JobStatus => s !== null && s.stage !== "published")
+      .slice(-6)
+      .reverse();
     return NextResponse.json({ builds: statuses });
   }
 

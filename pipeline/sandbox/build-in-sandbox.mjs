@@ -19,18 +19,19 @@ function emit(event) {
   process.stdout.write(JSON.stringify(event) + "\n");
 }
 
-function grokCommand(task) {
-  // bypassPermissions + always-approve: the microVM is the security boundary.
-  const flags =
-    "--permission-mode bypassPermissions --always-approve -m grok-4.5 " +
-    "--output-format streaming-json --max-turns 80 --no-subagents --disable-web-search";
-  return `cd ${WORK} && grok -p ${JSON.stringify(task)} ${flags}`;
-}
+// bypassPermissions + always-approve: the microVM is the security boundary.
+// The task reaches grok via --prompt-file, never through shell interpolation —
+// X prompts are attacker-controlled and $(...) in an sh -c string would run.
+const GROK_CMD =
+  `cd ${WORK} && grok --prompt-file task.txt ` +
+  "--permission-mode bypassPermissions --always-approve -m grok-4.5 " +
+  "--output-format streaming-json --max-turns 80 --no-subagents --disable-web-search";
 
 async function streamGrok(sandbox, task, logPath) {
+  await sandbox.writeFiles([{ path: `${WORK}/task.txt`, content: Buffer.from(task) }]);
   const cmd = await sandbox.runCommand({
     cmd: "sh",
-    args: ["-c", grokCommand(task)],
+    args: ["-c", GROK_CMD],
     env: { XAI_API_KEY: process.env.XAI_API_KEY ?? "" },
     detached: true,
   });
@@ -70,6 +71,11 @@ async function main() {
     credentials: getVercelCredentials(),
     snapshotId: process.env.NOVA_SANDBOX_SNAPSHOT_ID,
     onStep: (label) => emit({ event: "stage", stage: "sandbox up", detail: label }),
+  });
+  // The runner terminates us on timeout; stop the microVM before dying so it
+  // doesn't burn compute until its own lifetime cap.
+  process.on("SIGTERM", () => {
+    sandbox.stop().catch(() => {}).finally(() => process.exit(1));
   });
 
   try {

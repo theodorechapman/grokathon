@@ -23,6 +23,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -42,7 +43,7 @@ SYNC_SECRET = os.environ.get("NOVA_X_SYNC_SECRET", "")
 # Sandbox microVM (pipeline/sandbox/). Local build stays the fallback.
 SANDBOX_ENABLED = os.environ.get("NOVA_SANDBOX") == "1"
 SANDBOX_SCRIPT = REPO / "pipeline" / "sandbox" / "build-in-sandbox.mjs"
-SANDBOX_TIMEOUT = 1500  # seconds for one full in-sandbox build (3 attempts)
+SANDBOX_TIMEOUT = 960  # just past the microVM's 900s lifetime cap
 
 
 # Per-slug stage timeline, persisted into the bundle as build.json so a game
@@ -292,16 +293,22 @@ def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
     except OSError as e:
         log(f"job {slug}: sandbox spawn failed: {e}")
         return None
-    deadline = time.time() + SANDBOX_TIMEOUT
+    # Watchdog covers silent hangs too (readline would block forever). SIGTERM
+    # first so the script's handler can stop the microVM; SIGKILL as backstop.
+    timed_out = threading.Event()
+
+    def _expire() -> None:
+        timed_out.set()
+        proc.terminate()
+        threading.Timer(30, proc.kill).start()
+
+    watchdog = threading.Timer(SANDBOX_TIMEOUT, _expire)
+    watchdog.start()
     assert proc.stdout is not None
     text_buf: list[str] = []
     pending_lines: list[str] = []
     last_flush = time.time()
     for line in proc.stdout:
-        if time.time() > deadline:
-            proc.kill()
-            log(f"job {slug}: sandbox build timed out")
-            return None
         try:
             ev = json.loads(line)
         except ValueError:
@@ -323,8 +330,13 @@ def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
                 report_log(slug, pending_lines)
                 pending_lines, last_flush = [], time.time()
     report_log(slug, pending_lines)
-    if proc.wait() != 0:
-        log(f"job {slug}: sandbox build failed (exit {proc.returncode})")
+    exit_code = proc.wait()
+    watchdog.cancel()
+    if timed_out.is_set():
+        log(f"job {slug}: sandbox build timed out")
+        return None
+    if exit_code != 0:
+        log(f"job {slug}: sandbox build failed (exit {exit_code})")
         return None
     rom = out / f"{slug}.gb"
     main_c = out / "main.c"
@@ -541,6 +553,7 @@ def process_job(job: dict) -> Path | None:
             return None
         slug = target
     log(f"job {slug}: '{job['prompt'][:60]}'")
+    REPORT_TRACE.pop(slug, None)  # a failed earlier run must not pollute this build's timeline
     report(slug, "queued")
     # From-scratch prompts (no parent) from the site or X build browser games;
     # remixes and GBDK draft iterations keep the breakout patch path below.

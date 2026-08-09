@@ -116,6 +116,10 @@ async function OverallBoard() {
   const rows = await playerBoard(100);
   const r = redis();
   const totalPlayers = (await r?.zcard("uplays").catch(() => null)) ?? rows.length;
+  // Site-wide plays, not just the top 100 rows shown below.
+  const allScores = (await r?.zrange<(string | number)[]>("uplays", 0, -1, { withScores: true }).catch(() => null)) ?? [];
+  let totalPlays = 0;
+  for (let i = 1; i < allScores.length; i += 2) totalPlays += Number(allScores[i]);
   const customNames =
     (await r?.hgetall<Record<string, string>>("guest:names").catch(() => null)) ?? {};
   if (rows.length === 0) {
@@ -126,7 +130,6 @@ async function OverallBoard() {
       </p>
     );
   }
-  const totalPlays = rows.reduce((sum, row) => sum + row.plays, 0);
   return (
     <>
     <p className="boardTotals">
