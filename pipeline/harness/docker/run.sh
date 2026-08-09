@@ -9,10 +9,18 @@ out="${2:-$(pwd)/out}"
 rom="$(cd "$(dirname "$rom")" && pwd)/$(basename "$rom")"
 mkdir -p "$out"
 
+# API-key runs must not inherit the host's ChatGPT/Codex login. When no key is
+# supplied, retain the convenient local-login mount used by interactive runs.
+if [[ -n "${OPENAI_API_KEY:-}" ]]; then
+    auth_args=(-e OPENAI_API_KEY)
+else
+    auth_args=(-v "$HOME/.codex:/root/.codex")
+fi
+
 exec docker run --rm \
     -v "$rom:/rom.gb:ro" \
     -v "$out:/out" \
-    -v "$HOME/.codex:/root/.codex" \
+    "${auth_args[@]}" \
     -e "MODEL=${MODEL:-gpt-5.6-sol}" \
     -e "EFFORT=${EFFORT:-medium}" \
     -e "TIER=${TIER:-fast}" \
