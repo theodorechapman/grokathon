@@ -165,11 +165,13 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             one file you can read.
           </p>
         )}
-        {(hasSource || !game.rom) && (
+        {/* Breakout is the only game with a real reverse-engineered C source;
+            hide the link elsewhere until the others earn it. */}
+        {slug === "breakout" && hasSource && (
           <p className="sourceLink">
             <a
               className="sourceCta"
-              href={`/games/${slug}/${game.rom ? "source.c" : "index.html"}`}
+              href={`/games/${slug}/source.c`}
             >
               {"</>"} Read this game&apos;s source code
             </a>
