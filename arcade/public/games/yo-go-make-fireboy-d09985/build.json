@@ -1,0 +1,67 @@
+{
+  "engine": "sandbox",
+  "job": {
+    "prompt": "yo go make fireboy water girl",
+    "source": "x",
+    "creator": "henryzhangumich",
+    "tweet": "2086259203489034724"
+  },
+  "stages": [
+    {
+      "at": "2026-08-09T04:35:32Z",
+      "stage": "queued",
+      "detail": ""
+    },
+    {
+      "at": "2026-08-09T04:35:33Z",
+      "stage": "forking source",
+      "detail": "transforming the C reverse-engineered out of the original Breakout rom"
+    },
+    {
+      "at": "2026-08-09T04:35:33Z",
+      "stage": "sandbox up",
+      "detail": "booting a Vercel Sandbox microVM with GBDK + Grok Build CLI"
+    },
+    {
+      "at": "2026-08-09T04:35:36Z",
+      "stage": "grok cli",
+      "detail": "attempt 1: Grok Build rewriting main.c in the sandbox"
+    },
+    {
+      "at": "2026-08-09T04:39:22Z",
+      "stage": "compiling",
+      "detail": "verifying: fresh lcc build, 32KB ROM, NOVA_STATE intact"
+    },
+    {
+      "at": "2026-08-09T04:39:23Z",
+      "stage": "compiling",
+      "detail": "verification failed: NOVA_STATE protocol writes are missing from main.c"
+    },
+    {
+      "at": "2026-08-09T04:39:23Z",
+      "stage": "grok cli",
+      "detail": "attempt 2: Grok Build rewriting main.c in the sandbox"
+    },
+    {
+      "at": "2026-08-09T04:39:51Z",
+      "stage": "compiling",
+      "detail": "verifying: fresh lcc build, 32KB ROM, NOVA_STATE intact"
+    },
+    {
+      "at": "2026-08-09T04:39:53Z",
+      "stage": "sandbox done",
+      "detail": "artifacts downloaded, microVM shut down"
+    },
+    {
+      "at": "2026-08-09T04:39:57Z",
+      "stage": "cover art",
+      "detail": "grok-imagine drawing the cover"
+    },
+    {
+      "at": "2026-08-09T04:40:05Z",
+      "stage": "publishing",
+      "detail": "pushing to the arcade"
+    }
+  ],
+  "finishedAt": "2026-08-09T04:40:06Z"
+}
