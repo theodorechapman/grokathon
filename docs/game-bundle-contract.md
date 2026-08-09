@@ -56,7 +56,7 @@ A manifest may carry `"draft": true`. Draft bundles are invisible: the shelf, th
 
 New creations from the site by signed-in users start as drafts. X-sourced creations publish instantly (the thread is the point), and remixes of published games publish instantly too.
 
-Drafts are iterated in place: a job may carry `"target": "<existing-draft-slug>"`, which means re-patch that draft instead of minting a new slug. The runner starts from the target bundle's existing `source.c`, applies the prompt as an edit, and overwrites the same bundle folder. The manifest keeps its original `createdAt`, `creator`, `parent`, and `draft` flag. The runner validates `target` against the slug regex, same as `parent`. Only one pending iteration per draft: the job file is `pipeline/jobs/<target>.json`, so a second ask while one is queued is rejected.
+Drafts are iterated in place: a job may carry `"target": "<existing-draft-slug>"`, which means re-patch that draft instead of minting a new slug. The runner starts from the target bundle's existing source (`source.c` for Game Boy bundles, `index.html` for browser bundles), applies the prompt as an edit, and overwrites the same bundle folder. The manifest keeps its original `createdAt`, `creator`, `parent`, and `draft` flag. The runner validates `target` against the slug regex, same as `parent`. Only one pending iteration per draft: the job file is `pipeline/jobs/<target>.json`, so a second ask while one is queued is rejected.
 
 Publishing removes the `draft` flag from the manifest (a creator-only action via `POST /api/publish`) and freezes the bundle. After publish a bundle is immutable: it can never be re-targeted, and further changes are remixes under new slugs.
 
