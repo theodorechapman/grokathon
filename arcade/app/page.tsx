@@ -9,8 +9,23 @@ export const dynamic = "force-dynamic";
 
 
 export default async function LandingPage() {
-  const games = (await listPublicGames()).slice(0, 3);
-  const stats = await statsFor(games.map((g) => g.slug));
+  // Top 3 unique games: one per family, ranked by votes then plays.
+  const all = await listPublicGames();
+  const stats = await statsFor(all.map((g) => g.slug));
+  const slugs = new Set(all.map((g) => g.slug));
+  const score = (slug: string) => {
+    const s = stats.get(slug)!;
+    return s.votes * 1000 + s.plays;
+  };
+  const roots = all.filter((g) => !g.parent || !slugs.has(g.parent));
+  const games = roots
+    .map((root) =>
+      [root, ...all.filter((g) => g.parent === root.slug)].reduce((best, g) =>
+        score(g.slug) > score(best.slug) ? g : best
+      )
+    )
+    .sort((a, b) => score(b.slug) - score(a.slug))
+    .slice(0, 3);
 
   return (
     <div className={styles.page}>
@@ -37,7 +52,7 @@ export default async function LandingPage() {
       {games.length > 0 && (
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <h2>Fresh from the pipeline</h2>
+            <h2>Top games</h2>
             <Link href="/arcade" className={styles.sectionLink}>
               See all games
             </Link>
