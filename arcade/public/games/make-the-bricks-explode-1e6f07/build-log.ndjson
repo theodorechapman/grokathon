@@ -1,0 +1,765 @@
+{"type":"available_commands","tools":["run_terminal_command","read_file","search_replace","list_dir","grep","kill_command_or_subagent","todo_write","get_command_or_subagent_output","spawn_subagent","scheduler_create","scheduler_delete","scheduler_list","monitor","search_tool","use_tool","workflow","enter_plan_mode","exit_plan_mode","ask_user_question","image_gen","image_edit","image_to_video","reference_to_video","write"],"commands":["compact","always-approve","context","session-info","feedback","deep-research","workflow","goal","loop"]}
+{"type":"available_commands","tools":["run_terminal_command","read_file","search_replace","list_dir","grep","kill_command_or_subagent","todo_write","get_command_or_subagent_output","spawn_subagent","scheduler_create","scheduler_delete","scheduler_list","monitor","search_tool","use_tool","workflow","enter_plan_mode","exit_plan_mode","ask_user_question","image_gen","image_edit","image_to_video","reference_to_video","write"],"commands":["compact","always-approve","context","session-info","feedback","deep-research","workflow","goal","loop"]}
+{"type":"thought","data":"The"}
+{"type":"thought","data":" user"}
+{"type":"thought","data":" wants"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" provenance"}
+{"type":"thought","data":" audit"}
+{"type":"thought","data":" of"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" Game"}
+{"type":"thought","data":" Boy"}
+{"type":"thought","data":" game"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" I"}
+{"type":"thought","data":" need"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":":\n"}
+{"type":"text","data":"I'll"}
+{"type":"text","data":" run"}
+{"type":"text","data":" the"}
+{"type":"text","data":" build"}
+{"type":"text","data":" and"}
+{"type":"text","data":" comparison"}
+{"type":"text","data":","}
+{"type":"text","data":" then"}
+{"type":"text","data":" inspect"}
+{"type":"text","data":" the"}
+{"type":"text","data":" NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" protocol"}
+{"type":"text","data":" and"}
+{"type":"text","data":" `"}
+{"type":"text","data":"main"}
+{"type":"text","data":".c"}
+{"type":"text","data":"`"}
+{"type":"text","data":" without"}
+{"type":"text","data":" changing"}
+{"type":"text","data":" any"}
+{"type":"text","data":" files"}
+{"type":"text","data":"."}
+{"type":"available_commands","tools":["run_terminal_command","read_file","search_replace","list_dir","grep","kill_command_or_subagent","todo_write","get_command_or_subagent_output","spawn_subagent","scheduler_create","scheduler_delete","scheduler_list","monitor","search_tool","use_tool","workflow","enter_plan_mode","exit_plan_mode","ask_user_question","image_gen","image_edit","image_to_video","reference_to_video","write"],"commands":["compact","always-approve","context","session-info","feedback","deep-research","workflow","goal","loop"]}
+{"type":"usage","usage":{"input_tokens":9947,"output_tokens":287,"cache_read_input_tokens":128,"cache_creation_input_tokens":0,"reasoning_tokens":98},"signature":"5ZoRkmbNev/7eHY0Fp5Mm3IRoiOoUlZ1DeJpaTPuPNPEStEAIyFcRZ3xIUlkNGH2FBtJtS+LayQmgCIZMIIWHrE3Fq1JIJ3pQmky/krNGDWDNepKZp9Q7c5IqZrWzxLr2iPKQekWgVypgmn+n+eKKwQJUO29OMgs/pcBCq7QGZJ+0AStmCI6vDmymSeW/mVlwYV+O7gKL6ARN1eUwskQBQHWUjm0Lv83qz+OgZsIQ3uRzMN43vkWyT2UECKJGVn2Bt48H30nY+f4q5ruMVT9J9G1qPRTN9IMcxCweccwvCsZwy+D1cLj+YPulOXRGo8v2hPZ1Ji5HFlQCJVsI3DIyT74UUQUwrIOOPI+SoXNrgppH3WXMJwu37raHbYrXmrveBIWQ1cF3fpRGhpp40TksLUJI2EeaL1aZ81GDwv1+0f3dhqh0gZAhmbaANGb1da15lCBdvM33wcmGxD+eFZ72VMCBaehPgjcgfIcvG1sonYLPFj8fLpuOcWWBQlprI2Z5pJO/YCPbg"}
+{"type":"tool_call","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","title":"run_terminal_command","kind":"execute","status":"pending","toolName":"run_terminal_command","rawInput":{"command":"/opt/gbdk/bin/lcc -o rebuilt.gb main.c assets.c 2>&1; ls -la rebuilt.gb shipped.gb 2>&1; cmp -l rebuilt.gb shipped.gb 2>&1 | head -20; cmp rebuilt.gb shipped.gb && echo \"IDENTICAL\" || echo \"DIFFER\"; wc -c rebuilt.gb shipped.gb","description":"Build ROM and compare to shipped"},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","status":null,"content":[{"type":"content","content":{"type":"text","text":"Build ROM and compare to shipped"}}],"rawOutput":null,"locations":[]}
+{"type":"tool_call","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-1","title":"grep","kind":"search","status":"pending","toolName":"grep","rawInput":{"pattern":"NOVA_STATE|#define.*0xCF00|CF00","glob":"*.{c,h}"},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-1","status":null,"content":[],"rawOutput":null,"locations":[]}
+{"type":"tool_call","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-2","title":"read_file","kind":"read","status":"pending","toolName":"read_file","rawInput":{"target_file":"/vercel/sandbox/work/main.c"},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-2","status":null,"content":[],"rawOutput":null,"locations":[{"path":"/vercel/sandbox/work/main.c"}]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":""}}],"rawOutput":{"type":"Bash","output":[],"output_for_prompt":"","exit_code":0,"command":"/opt/gbdk/bin/lcc -o rebuilt.gb main.c assets.c 2>&1; ls -la rebuilt.gb shipped.gb 2>&1; cmp -l rebuilt.gb shipped.gb 2>&1 | head -20; cmp rebuilt.gb shipped.gb && echo \"IDENTICAL\" || echo \"DIFFER\"; wc -c rebuilt.gb shipped.gb","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":0},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-2","status":"completed","content":[{"type":"content","content":{"type":"text","text":"1→// TITLE: Spark Brick Breakout\n// DESC: Bricks explode into flying sparks when the ball smashes them.\n#include <gb/gb.h>\n#include <stdbool.h>\n#include <stdint.h>\n#include <rand.h>\n\n#include \"assets.h\"\n\n10→enum {\n    TILE_EMPTY = 0x80u,\n    TILE_BRICK_LEFT = 0x88u,\n    TILE_BRICK_RIGHT = 0x89u,\n    TILE_PADDLE_LEFT = 0x8Cu,\n    TILE_PADDLE_MIDDLE = 0x8Du,\n    TILE_PADDLE_RIGHT = 0x8Eu,\n    TILE_BALL = 0x8Fu,\n\n    BALL_SPRITE = 0u,\n20→    PADDLE_LEFT_SPRITE = 1u,\n    PADDLE_MIDDLE_SPRITE = 2u,\n    PADDLE_RIGHT_SPRITE = 3u,\n    SPARK_SPRITE_BASE = 4u,\n    MAX_SPARKS = 8u,\n\n    PADDLE_Y = 0x98u,\n    PADDLE_MIN_X = 0x08u,\n    PADDLE_MAX_X = 0x90u,\n    PADDLE_INITIAL_X = 0x4Cu,\n30→    BALL_INITIAL_X = 0x32u,\n    BALL_INITIAL_Y = 0x78u,\n    BALL_LOSS_Y = 0x9Au,\n    INITIAL_BRICK_COUNT = 39u,\n\n    SPARK_LIFE = 12u\n};\n\n/*\n * Nova arcade protocol: one byte at a fixed WRAM address the arcade polls to\n40→ * detect run state. The linker can't move it because it's an absolute pointer,\n * not a variable. 1 = run started, 2 = won, 3 = lost. Every game the pipeline\n * ships MUST keep these three writes intact.\n */\n#define NOVA_STATE (*(volatile uint8_t *)0xCF00)\n\n/*\n * These six values correspond to the original ROM's globals at $C0A0-$C0A5.\n * Positions use Game Boy OAM coordinates: visible X is X - 8 and visible Y\n * is Y - 16.\n50→ */\nstatic uint8_t paddle_x;\nstatic uint8_t ball_x;\nstatic uint8_t ball_y;\nstatic int8_t ball_vx;\nstatic int8_t ball_vy;\nstatic uint8_t bricks_remaining;\nstatic bool rng_seeded;\n\ntypedef struct {\n60→    uint8_t x;\n    uint8_t y;\n    int8_t vx;\n    int8_t vy;\n    uint8_t life;\n} spark_t;\n\nstatic spark_t sparks[MAX_SPARKS];\n\nstatic void sound_init(void) {\n70→    NR52_REG = 0x80u;\n    NR50_REG = 0x77u;\n    NR51_REG = 0xFFu;\n    NR10_REG = 0x00u;\n}\n\nstatic void sfx_beep(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF1u;\n    NR23_REG = 0x9Cu;\n80→    NR24_REG = 0x86u;\n}\n\nstatic void sfx_boom(void) {\n    NR41_REG = 0x01u;\n    NR42_REG = 0xF2u;\n    NR43_REG = 0x55u;\n    NR44_REG = 0x80u;\n}\n\n90→static void sfx_jingle(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF3u;\n    NR23_REG = 0x73u;\n    NR24_REG = 0x87u;\n}\n\nstatic void hide_spark_sprites(void) {\n    uint8_t i;\n\n100→    for (i = 0u; i < MAX_SPARKS; i++) {\n        sparks[i].life = 0u;\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n    }\n}\n\nstatic void spawn_sparks(uint8_t origin_x, uint8_t origin_y) {\n    static const int8_t dirs_x[8] = { -2, -1, 1, 2, -2, 2, -1, 1 };\n    static const int8_t dirs_y[8] = { -2, -2, -2, -1, 1, 1, 2, 2 };\n    uint8_t i;\n110→    uint8_t slot;\n    uint8_t base;\n\n    base = (uint8_t)(rand() & 7u);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        slot = i;\n        sparks[slot].x = origin_x;\n        sparks[slot].y = origin_y;\n        sparks[slot].vx = dirs_x[(base + i) & 7u];\n120→        sparks[slot].vy = dirs_y[(base + i) & 7u];\n        /* Slight life jitter so the burst feels less uniform */\n        sparks[slot].life = (uint8_t)(SPARK_LIFE - (rand() & 3u));\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + slot), origin_x, origin_y);\n    }\n}\n\nstatic void update_sparks(void) {\n    uint8_t i;\n\n130→    for (i = 0u; i < MAX_SPARKS; i++) {\n        if (sparks[i].life == 0u) {\n            move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n            continue;\n        }\n\n        sparks[i].x = (uint8_t)((int16_t)sparks[i].x + sparks[i].vx);\n        sparks[i].y = (uint8_t)((int16_t)sparks[i].y + sparks[i].vy);\n        /* Gravity tug on sparks */\n        if ((sparks[i].life & 1u) == 0u) {\n140→            sparks[i].vy += 1;\n        }\n        sparks[i].life--;\n        move_sprite(\n            (uint8_t)(SPARK_SPRITE_BASE + i),\n            sparks[i].x,\n            sparks[i].y\n        );\n    }\n}\n150→\nstatic void draw_paddle(void) {\n    move_sprite(PADDLE_LEFT_SPRITE, paddle_x, PADDLE_Y);\n    move_sprite(PADDLE_MIDDLE_SPRITE, (uint8_t)(paddle_x + 8u), PADDLE_Y);\n    move_sprite(PADDLE_RIGHT_SPRITE, (uint8_t)(paddle_x + 16u), PADDLE_Y);\n}\n\nstatic void move_paddle(int8_t delta) {\n    int16_t next_x;\n\n160→    if (delta == 0) {\n        paddle_x = PADDLE_INITIAL_X;\n    } else {\n        next_x = (int16_t)paddle_x + delta;\n\n        if (next_x < PADDLE_MIN_X) {\n            next_x = PADDLE_MIN_X;\n        } else if (next_x > PADDLE_MAX_X) {\n            next_x = PADDLE_MAX_X;\n        }\n170→\n        paddle_x = (uint8_t)next_x;\n    }\n\n    draw_paddle();\n}\n\nstatic void remove_brick(uint8_t tile_x, uint8_t tile_y) {\n    uint8_t spark_x;\n    uint8_t spark_y;\n180→\n    set_bkg_tile_xy(tile_x, tile_y, TILE_EMPTY);\n    set_bkg_tile_xy((uint8_t)(tile_x + 1u), tile_y, TILE_EMPTY);\n    --bricks_remaining;\n\n    /* Convert brick tile coords to approximate OAM center for the burst */\n    spark_x = (uint8_t)((tile_x << 3) + 16u);\n    spark_y = (uint8_t)((tile_y << 3) + 24u);\n    spawn_sparks(spark_x, spark_y);\n    sfx_boom();\n190→}\n\nstatic bool overlaps_paddle(uint8_t candidate_x, uint8_t candidate_y) {\n    int16_t ball_left;\n    int16_t ball_right;\n    int16_t paddle_left;\n    int16_t paddle_right;\n\n    if ((uint16_t)candidate_y + 5u < PADDLE_Y) {\n        return false;\n200→    }\n\n    ball_left = candidate_x;\n    ball_right = ball_left + 5;\n    paddle_left = paddle_x;\n    paddle_right = paddle_left + 24;\n\n    /*\n     * This intentionally preserves the ROM's slightly asymmetric right edge:\n     * the ball's left sample is inclusive, while its right sample is strict.\n210→     */\n    return ((ball_left >= paddle_left) && (ball_left <= paddle_right)) ||\n           ((ball_right >= paddle_left) && (ball_right < paddle_right));\n}\n\nstatic bool collides(int8_t delta_x, int8_t delta_y) {\n    uint8_t candidate_x;\n    uint8_t candidate_y;\n    int16_t sample_x;\n    int16_t sample_y;\n220→    uint8_t tile_x;\n    uint8_t tile_y;\n    uint8_t tile;\n\n    candidate_x = (uint8_t)(ball_x + delta_x);\n    candidate_y = (uint8_t)(ball_y + delta_y);\n\n    if (overlaps_paddle(candidate_x, candidate_y)) {\n        sfx_beep();\n        return true;\n230→    }\n\n    /*\n     * The original uses a six-pixel collision span and chooses the leading\n     * edge from the current global velocity. The X velocity may already have\n     * been reversed by the horizontal probe earlier in this frame.\n     */\n    sample_x = candidate_x;\n    sample_y = candidate_y;\n\n240→    if (ball_vx > 0) {\n        sample_x += 5;\n    }\n    if (ball_vy > 0) {\n        sample_y += 5;\n    }\n\n    tile_x = (uint8_t)((sample_x - 8) >> 3);\n    tile_y = (uint8_t)((sample_y - 16) >> 3);\n    tile = get_bkg_tile_xy(tile_x, tile_y);\n250→\n    if (tile == TILE_BRICK_LEFT) {\n        remove_brick(tile_x, tile_y);\n    } else if (tile == TILE_BRICK_RIGHT) {\n        remove_brick((uint8_t)(tile_x - 1u), tile_y);\n    }\n\n    return tile != TILE_EMPTY;\n}\n\n260→static void seed_rng_from_div(void) {\n    uint16_t seed;\n\n    seed = (uint16_t)DIV_REG;\n    seed |= (uint16_t)((uint16_t)DIV_REG << 8);\n    if (seed == 0u) {\n        seed = 1u;\n    }\n    initrand(seed);\n    rng_seeded = true;\n270→\n    /* Nudge initial ball angle from the seed so runs diverge */\n    if ((rand() & 1u) != 0u) {\n        ball_vx = (int8_t)-ball_vx;\n    }\n}\n\nstatic void initialize_video(void) {\n    uint8_t i;\n\n280→    DISPLAY_OFF;\n\n    SCX_REG = 0u;\n    SCY_REG = 0u;\n    WY_REG = 0u;\n    WX_REG = 7u;\n    STAT_REG = 0u;\n\n    BGP_REG = 0xE4u;\n    OBP0_REG = 0xE4u;\n290→    OBP1_REG = 0x1Bu;\n\n    /*\n     * Bit 4 remains clear so background tile IDs $80-$FF use the signed\n     * $8800 tile-data region. SHOW_BKG, SHOW_SPRITES, and DISPLAY_ON below\n     * turn this into the original final LCDC value, $C3.\n     */\n    LCDC_REG = 0x40u;\n\n    set_bkg_data(0x80u, BREAKOUT_TILE_COUNT, breakout_tile_data);\n300→    set_bkg_tiles(\n        0u,\n        0u,\n        BREAKOUT_MAP_WIDTH,\n        BREAKOUT_MAP_HEIGHT,\n        breakout_background_map\n    );\n\n    set_sprite_tile(BALL_SPRITE, TILE_BALL);\n    set_sprite_tile(PADDLE_LEFT_SPRITE, TILE_PADDLE_LEFT);\n310→    set_sprite_tile(PADDLE_MIDDLE_SPRITE, TILE_PADDLE_MIDDLE);\n    set_sprite_tile(PADDLE_RIGHT_SPRITE, TILE_PADDLE_RIGHT);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        set_sprite_tile((uint8_t)(SPARK_SPRITE_BASE + i), TILE_BALL);\n        set_sprite_prop((uint8_t)(SPARK_SPRITE_BASE + i), 0x10u);\n    }\n\n    SPRITES_8x8;\n    SHOW_BKG;\n320→    SHOW_SPRITES;\n    DISPLAY_ON;\n}\n\nstatic void initialize_game(void) {\n    paddle_x = PADDLE_INITIAL_X;\n    ball_x = BALL_INITIAL_X;\n    ball_y = BALL_INITIAL_Y;\n    ball_vx = 1;\n    ball_vy = -1;\n330→    bricks_remaining = INITIAL_BRICK_COUNT;\n    rng_seeded = false;\n\n    hide_spark_sprites();\n    move_paddle(0);\n    move_sprite(BALL_SPRITE, ball_x, ball_y);\n}\n\nvoid main(void) {\n    uint8_t keys;\n340→\n    /*\n     * The recovered CRT clears a larger runtime area than modern GBDK does.\n     * Waiting one VBlank here aligns the first active gameplay frame with the\n     * original ROM (frame 90 after reset in the deterministic SameBoy boot).\n     */\n    wait_vbl_done();\n\n    initialize_video();\n    sound_init();\n350→    initialize_game();\n    NOVA_STATE = 1u;\n\n    while (bricks_remaining != 0u) {\n        keys = joypad();\n\n        if ((keys & J_LEFT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n360→            move_paddle(-2);\n        } else if ((keys & J_RIGHT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n            move_paddle(2);\n        }\n\n        if (ball_y >= BALL_LOSS_Y) {\n            break;\n370→        }\n\n        if (collides(ball_vx, 0)) {\n            ball_vx = (int8_t)-ball_vx;\n        }\n\n        if (collides(0, ball_vy)) {\n            ball_vy = (int8_t)-ball_vy;\n        }\n\n380→        ball_x = (uint8_t)(ball_x + ball_vx);\n        ball_y = (uint8_t)(ball_y + ball_vy);\n        move_sprite(BALL_SPRITE, ball_x, ball_y);\n        update_sparks();\n        wait_vbl_done();\n    }\n\n    if (bricks_remaining == 0u) {\n        sfx_jingle();\n        NOVA_STATE = 2u;\n390→    } else {\n        sfx_boom();\n        NOVA_STATE = 3u;\n    }\n\n    /* Drain remaining spark animation briefly, then idle forever. */\n    {\n        uint8_t drain;\n\n        for (drain = 0u; drain < SPARK_LIFE; drain++) {\n400→            update_sparks();\n            wait_vbl_done();\n        }\n    }\n\n    while (true) {\n        wait_vbl_done();\n    }\n}\n"}}],"rawOutput":{"type":"ReadFile","FileContent":{"content":"1→// TITLE: Spark Brick Breakout\n// DESC: Bricks explode into flying sparks when the ball smashes them.\n#include <gb/gb.h>\n#include <stdbool.h>\n#include <stdint.h>\n#include <rand.h>\n\n#include \"assets.h\"\n\n10→enum {\n    TILE_EMPTY = 0x80u,\n    TILE_BRICK_LEFT = 0x88u,\n    TILE_BRICK_RIGHT = 0x89u,\n    TILE_PADDLE_LEFT = 0x8Cu,\n    TILE_PADDLE_MIDDLE = 0x8Du,\n    TILE_PADDLE_RIGHT = 0x8Eu,\n    TILE_BALL = 0x8Fu,\n\n    BALL_SPRITE = 0u,\n20→    PADDLE_LEFT_SPRITE = 1u,\n    PADDLE_MIDDLE_SPRITE = 2u,\n    PADDLE_RIGHT_SPRITE = 3u,\n    SPARK_SPRITE_BASE = 4u,\n    MAX_SPARKS = 8u,\n\n    PADDLE_Y = 0x98u,\n    PADDLE_MIN_X = 0x08u,\n    PADDLE_MAX_X = 0x90u,\n    PADDLE_INITIAL_X = 0x4Cu,\n30→    BALL_INITIAL_X = 0x32u,\n    BALL_INITIAL_Y = 0x78u,\n    BALL_LOSS_Y = 0x9Au,\n    INITIAL_BRICK_COUNT = 39u,\n\n    SPARK_LIFE = 12u\n};\n\n/*\n * Nova arcade protocol: one byte at a fixed WRAM address the arcade polls to\n40→ * detect run state. The linker can't move it because it's an absolute pointer,\n * not a variable. 1 = run started, 2 = won, 3 = lost. Every game the pipeline\n * ships MUST keep these three writes intact.\n */\n#define NOVA_STATE (*(volatile uint8_t *)0xCF00)\n\n/*\n * These six values correspond to the original ROM's globals at $C0A0-$C0A5.\n * Positions use Game Boy OAM coordinates: visible X is X - 8 and visible Y\n * is Y - 16.\n50→ */\nstatic uint8_t paddle_x;\nstatic uint8_t ball_x;\nstatic uint8_t ball_y;\nstatic int8_t ball_vx;\nstatic int8_t ball_vy;\nstatic uint8_t bricks_remaining;\nstatic bool rng_seeded;\n\ntypedef struct {\n60→    uint8_t x;\n    uint8_t y;\n    int8_t vx;\n    int8_t vy;\n    uint8_t life;\n} spark_t;\n\nstatic spark_t sparks[MAX_SPARKS];\n\nstatic void sound_init(void) {\n70→    NR52_REG = 0x80u;\n    NR50_REG = 0x77u;\n    NR51_REG = 0xFFu;\n    NR10_REG = 0x00u;\n}\n\nstatic void sfx_beep(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF1u;\n    NR23_REG = 0x9Cu;\n80→    NR24_REG = 0x86u;\n}\n\nstatic void sfx_boom(void) {\n    NR41_REG = 0x01u;\n    NR42_REG = 0xF2u;\n    NR43_REG = 0x55u;\n    NR44_REG = 0x80u;\n}\n\n90→static void sfx_jingle(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF3u;\n    NR23_REG = 0x73u;\n    NR24_REG = 0x87u;\n}\n\nstatic void hide_spark_sprites(void) {\n    uint8_t i;\n\n100→    for (i = 0u; i < MAX_SPARKS; i++) {\n        sparks[i].life = 0u;\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n    }\n}\n\nstatic void spawn_sparks(uint8_t origin_x, uint8_t origin_y) {\n    static const int8_t dirs_x[8] = { -2, -1, 1, 2, -2, 2, -1, 1 };\n    static const int8_t dirs_y[8] = { -2, -2, -2, -1, 1, 1, 2, 2 };\n    uint8_t i;\n110→    uint8_t slot;\n    uint8_t base;\n\n    base = (uint8_t)(rand() & 7u);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        slot = i;\n        sparks[slot].x = origin_x;\n        sparks[slot].y = origin_y;\n        sparks[slot].vx = dirs_x[(base + i) & 7u];\n120→        sparks[slot].vy = dirs_y[(base + i) & 7u];\n        /* Slight life jitter so the burst feels less uniform */\n        sparks[slot].life = (uint8_t)(SPARK_LIFE - (rand() & 3u));\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + slot), origin_x, origin_y);\n    }\n}\n\nstatic void update_sparks(void) {\n    uint8_t i;\n\n130→    for (i = 0u; i < MAX_SPARKS; i++) {\n        if (sparks[i].life == 0u) {\n            move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n            continue;\n        }\n\n        sparks[i].x = (uint8_t)((int16_t)sparks[i].x + sparks[i].vx);\n        sparks[i].y = (uint8_t)((int16_t)sparks[i].y + sparks[i].vy);\n        /* Gravity tug on sparks */\n        if ((sparks[i].life & 1u) == 0u) {\n140→            sparks[i].vy += 1;\n        }\n        sparks[i].life--;\n        move_sprite(\n            (uint8_t)(SPARK_SPRITE_BASE + i),\n            sparks[i].x,\n            sparks[i].y\n        );\n    }\n}\n150→\nstatic void draw_paddle(void) {\n    move_sprite(PADDLE_LEFT_SPRITE, paddle_x, PADDLE_Y);\n    move_sprite(PADDLE_MIDDLE_SPRITE, (uint8_t)(paddle_x + 8u), PADDLE_Y);\n    move_sprite(PADDLE_RIGHT_SPRITE, (uint8_t)(paddle_x + 16u), PADDLE_Y);\n}\n\nstatic void move_paddle(int8_t delta) {\n    int16_t next_x;\n\n160→    if (delta == 0) {\n        paddle_x = PADDLE_INITIAL_X;\n    } else {\n        next_x = (int16_t)paddle_x + delta;\n\n        if (next_x < PADDLE_MIN_X) {\n            next_x = PADDLE_MIN_X;\n        } else if (next_x > PADDLE_MAX_X) {\n            next_x = PADDLE_MAX_X;\n        }\n170→\n        paddle_x = (uint8_t)next_x;\n    }\n\n    draw_paddle();\n}\n\nstatic void remove_brick(uint8_t tile_x, uint8_t tile_y) {\n    uint8_t spark_x;\n    uint8_t spark_y;\n180→\n    set_bkg_tile_xy(tile_x, tile_y, TILE_EMPTY);\n    set_bkg_tile_xy((uint8_t)(tile_x + 1u), tile_y, TILE_EMPTY);\n    --bricks_remaining;\n\n    /* Convert brick tile coords to approximate OAM center for the burst */\n    spark_x = (uint8_t)((tile_x << 3) + 16u);\n    spark_y = (uint8_t)((tile_y << 3) + 24u);\n    spawn_sparks(spark_x, spark_y);\n    sfx_boom();\n190→}\n\nstatic bool overlaps_paddle(uint8_t candidate_x, uint8_t candidate_y) {\n    int16_t ball_left;\n    int16_t ball_right;\n    int16_t paddle_left;\n    int16_t paddle_right;\n\n    if ((uint16_t)candidate_y + 5u < PADDLE_Y) {\n        return false;\n200→    }\n\n    ball_left = candidate_x;\n    ball_right = ball_left + 5;\n    paddle_left = paddle_x;\n    paddle_right = paddle_left + 24;\n\n    /*\n     * This intentionally preserves the ROM's slightly asymmetric right edge:\n     * the ball's left sample is inclusive, while its right sample is strict.\n210→     */\n    return ((ball_left >= paddle_left) && (ball_left <= paddle_right)) ||\n           ((ball_right >= paddle_left) && (ball_right < paddle_right));\n}\n\nstatic bool collides(int8_t delta_x, int8_t delta_y) {\n    uint8_t candidate_x;\n    uint8_t candidate_y;\n    int16_t sample_x;\n    int16_t sample_y;\n220→    uint8_t tile_x;\n    uint8_t tile_y;\n    uint8_t tile;\n\n    candidate_x = (uint8_t)(ball_x + delta_x);\n    candidate_y = (uint8_t)(ball_y + delta_y);\n\n    if (overlaps_paddle(candidate_x, candidate_y)) {\n        sfx_beep();\n        return true;\n230→    }\n\n    /*\n     * The original uses a six-pixel collision span and chooses the leading\n     * edge from the current global velocity. The X velocity may already have\n     * been reversed by the horizontal probe earlier in this frame.\n     */\n    sample_x = candidate_x;\n    sample_y = candidate_y;\n\n240→    if (ball_vx > 0) {\n        sample_x += 5;\n    }\n    if (ball_vy > 0) {\n        sample_y += 5;\n    }\n\n    tile_x = (uint8_t)((sample_x - 8) >> 3);\n    tile_y = (uint8_t)((sample_y - 16) >> 3);\n    tile = get_bkg_tile_xy(tile_x, tile_y);\n250→\n    if (tile == TILE_BRICK_LEFT) {\n        remove_brick(tile_x, tile_y);\n    } else if (tile == TILE_BRICK_RIGHT) {\n        remove_brick((uint8_t)(tile_x - 1u), tile_y);\n    }\n\n    return tile != TILE_EMPTY;\n}\n\n260→static void seed_rng_from_div(void) {\n    uint16_t seed;\n\n    seed = (uint16_t)DIV_REG;\n    seed |= (uint16_t)((uint16_t)DIV_REG << 8);\n    if (seed == 0u) {\n        seed = 1u;\n    }\n    initrand(seed);\n    rng_seeded = true;\n270→\n    /* Nudge initial ball angle from the seed so runs diverge */\n    if ((rand() & 1u) != 0u) {\n        ball_vx = (int8_t)-ball_vx;\n    }\n}\n\nstatic void initialize_video(void) {\n    uint8_t i;\n\n280→    DISPLAY_OFF;\n\n    SCX_REG = 0u;\n    SCY_REG = 0u;\n    WY_REG = 0u;\n    WX_REG = 7u;\n    STAT_REG = 0u;\n\n    BGP_REG = 0xE4u;\n    OBP0_REG = 0xE4u;\n290→    OBP1_REG = 0x1Bu;\n\n    /*\n     * Bit 4 remains clear so background tile IDs $80-$FF use the signed\n     * $8800 tile-data region. SHOW_BKG, SHOW_SPRITES, and DISPLAY_ON below\n     * turn this into the original final LCDC value, $C3.\n     */\n    LCDC_REG = 0x40u;\n\n    set_bkg_data(0x80u, BREAKOUT_TILE_COUNT, breakout_tile_data);\n300→    set_bkg_tiles(\n        0u,\n        0u,\n        BREAKOUT_MAP_WIDTH,\n        BREAKOUT_MAP_HEIGHT,\n        breakout_background_map\n    );\n\n    set_sprite_tile(BALL_SPRITE, TILE_BALL);\n    set_sprite_tile(PADDLE_LEFT_SPRITE, TILE_PADDLE_LEFT);\n310→    set_sprite_tile(PADDLE_MIDDLE_SPRITE, TILE_PADDLE_MIDDLE);\n    set_sprite_tile(PADDLE_RIGHT_SPRITE, TILE_PADDLE_RIGHT);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        set_sprite_tile((uint8_t)(SPARK_SPRITE_BASE + i), TILE_BALL);\n        set_sprite_prop((uint8_t)(SPARK_SPRITE_BASE + i), 0x10u);\n    }\n\n    SPRITES_8x8;\n    SHOW_BKG;\n320→    SHOW_SPRITES;\n    DISPLAY_ON;\n}\n\nstatic void initialize_game(void) {\n    paddle_x = PADDLE_INITIAL_X;\n    ball_x = BALL_INITIAL_X;\n    ball_y = BALL_INITIAL_Y;\n    ball_vx = 1;\n    ball_vy = -1;\n330→    bricks_remaining = INITIAL_BRICK_COUNT;\n    rng_seeded = false;\n\n    hide_spark_sprites();\n    move_paddle(0);\n    move_sprite(BALL_SPRITE, ball_x, ball_y);\n}\n\nvoid main(void) {\n    uint8_t keys;\n340→\n    /*\n     * The recovered CRT clears a larger runtime area than modern GBDK does.\n     * Waiting one VBlank here aligns the first active gameplay frame with the\n     * original ROM (frame 90 after reset in the deterministic SameBoy boot).\n     */\n    wait_vbl_done();\n\n    initialize_video();\n    sound_init();\n350→    initialize_game();\n    NOVA_STATE = 1u;\n\n    while (bricks_remaining != 0u) {\n        keys = joypad();\n\n        if ((keys & J_LEFT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n360→            move_paddle(-2);\n        } else if ((keys & J_RIGHT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n            move_paddle(2);\n        }\n\n        if (ball_y >= BALL_LOSS_Y) {\n            break;\n370→        }\n\n        if (collides(ball_vx, 0)) {\n            ball_vx = (int8_t)-ball_vx;\n        }\n\n        if (collides(0, ball_vy)) {\n            ball_vy = (int8_t)-ball_vy;\n        }\n\n380→        ball_x = (uint8_t)(ball_x + ball_vx);\n        ball_y = (uint8_t)(ball_y + ball_vy);\n        move_sprite(BALL_SPRITE, ball_x, ball_y);\n        update_sparks();\n        wait_vbl_done();\n    }\n\n    if (bricks_remaining == 0u) {\n        sfx_jingle();\n        NOVA_STATE = 2u;\n390→    } else {\n        sfx_boom();\n        NOVA_STATE = 3u;\n    }\n\n    /* Drain remaining spark animation briefly, then idle forever. */\n    {\n        uint8_t drain;\n\n        for (drain = 0u; drain < SPARK_LIFE; drain++) {\n400→            update_sparks();\n            wait_vbl_done();\n        }\n    }\n\n    while (true) {\n        wait_vbl_done();\n    }\n}\n","content_concise":"1→// TITLE: Spark Brick Breakout\n// DESC: Bricks explode into flying sparks when the ball smashes them.\n#include <gb/gb.h>\n#include <stdbool.h>\n#include <stdint.h>\n#include <rand.h>\n\n#include \"assets.h\"\n\n10→enum {\n    TILE_EMPTY = 0x80u,\n    TILE_BRICK_LEFT = 0x88u,\n    TILE_BRICK_RIGHT = 0x89u,\n    TILE_PADDLE_LEFT = 0x8Cu,\n    TILE_PADDLE_MIDDLE = 0x8Du,\n    TILE_PADDLE_RIGHT = 0x8Eu,\n    TILE_BALL = 0x8Fu,\n\n    BALL_SPRITE = 0u,\n20→    PADDLE_LEFT_SPRITE = 1u,\n    PADDLE_MIDDLE_SPRITE = 2u,\n    PADDLE_RIGHT_SPRITE = 3u,\n    SPARK_SPRITE_BASE = 4u,\n    MAX_SPARKS = 8u,\n\n    PADDLE_Y = 0x98u,\n    PADDLE_MIN_X = 0x08u,\n    PADDLE_MAX_X = 0x90u,\n    PADDLE_INITIAL_X = 0x4Cu,\n30→    BALL_INITIAL_X = 0x32u,\n    BALL_INITIAL_Y = 0x78u,\n    BALL_LOSS_Y = 0x9Au,\n    INITIAL_BRICK_COUNT = 39u,\n\n    SPARK_LIFE = 12u\n};\n\n/*\n * Nova arcade protocol: one byte at a fixed WRAM address the arcade polls to\n40→ * detect run state. The linker can't move it because it's an absolute pointer,\n * not a variable. 1 = run started, 2 = won, 3 = lost. Every game the pipeline\n * ships MUST keep these three writes intact.\n */\n#define NOVA_STATE (*(volatile uint8_t *)0xCF00)\n\n/*\n * These six values correspond to the original ROM's globals at $C0A0-$C0A5.\n * Positions use Game Boy OAM coordinates: visible X is X - 8 and visible Y\n * is Y - 16.\n50→ */\nstatic uint8_t paddle_x;\nstatic uint8_t ball_x;\nstatic uint8_t ball_y;\nstatic int8_t ball_vx;\nstatic int8_t ball_vy;\nstatic uint8_t bricks_remaining;\nstatic bool rng_seeded;\n\ntypedef struct {\n60→    uint8_t x;\n    uint8_t y;\n    int8_t vx;\n    int8_t vy;\n    uint8_t life;\n} spark_t;\n\nstatic spark_t sparks[MAX_SPARKS];\n\nstatic void sound_init(void) {\n70→    NR52_REG = 0x80u;\n    NR50_REG = 0x77u;\n    NR51_REG = 0xFFu;\n    NR10_REG = 0x00u;\n}\n\nstatic void sfx_beep(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF1u;\n    NR23_REG = 0x9Cu;\n80→    NR24_REG = 0x86u;\n}\n\nstatic void sfx_boom(void) {\n    NR41_REG = 0x01u;\n    NR42_REG = 0xF2u;\n    NR43_REG = 0x55u;\n    NR44_REG = 0x80u;\n}\n\n90→static void sfx_jingle(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF3u;\n    NR23_REG = 0x73u;\n    NR24_REG = 0x87u;\n}\n\nstatic void hide_spark_sprites(void) {\n    uint8_t i;\n\n100→    for (i = 0u; i < MAX_SPARKS; i++) {\n        sparks[i].life = 0u;\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n    }\n}\n\nstatic void spawn_sparks(uint8_t origin_x, uint8_t origin_y) {\n    static const int8_t dirs_x[8] = { -2, -1, 1, 2, -2, 2, -1, 1 };\n    static const int8_t dirs_y[8] = { -2, -2, -2, -1, 1, 1, 2, 2 };\n    uint8_t i;\n110→    uint8_t slot;\n    uint8_t base;\n\n    base = (uint8_t)(rand() & 7u);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        slot = i;\n        sparks[slot].x = origin_x;\n        sparks[slot].y = origin_y;\n        sparks[slot].vx = dirs_x[(base + i) & 7u];\n120→        sparks[slot].vy = dirs_y[(base + i) & 7u];\n        /* Slight life jitter so the burst feels less uniform */\n        sparks[slot].life = (uint8_t)(SPARK_LIFE - (rand() & 3u));\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + slot), origin_x, origin_y);\n    }\n}\n\nstatic void update_sparks(void) {\n    uint8_t i;\n\n130→    for (i = 0u; i < MAX_SPARKS; i++) {\n        if (sparks[i].life == 0u) {\n            move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n            continue;\n        }\n\n        sparks[i].x = (uint8_t)((int16_t)sparks[i].x + sparks[i].vx);\n        sparks[i].y = (uint8_t)((int16_t)sparks[i].y + sparks[i].vy);\n        /* Gravity tug on sparks */\n        if ((sparks[i].life & 1u) == 0u) {\n140→            sparks[i].vy += 1;\n        }\n        sparks[i].life--;\n        move_sprite(\n            (uint8_t)(SPARK_SPRITE_BASE + i),\n            sparks[i].x,\n            sparks[i].y\n        );\n    }\n}\n150→\nstatic void draw_paddle(void) {\n    move_sprite(PADDLE_LEFT_SPRITE, paddle_x, PADDLE_Y);\n    move_sprite(PADDLE_MIDDLE_SPRITE, (uint8_t)(paddle_x + 8u), PADDLE_Y);\n    move_sprite(PADDLE_RIGHT_SPRITE, (uint8_t)(paddle_x + 16u), PADDLE_Y);\n}\n\nstatic void move_paddle(int8_t delta) {\n    int16_t next_x;\n\n160→    if (delta == 0) {\n        paddle_x = PADDLE_INITIAL_X;\n    } else {\n        next_x = (int16_t)paddle_x + delta;\n\n        if (next_x < PADDLE_MIN_X) {\n            next_x = PADDLE_MIN_X;\n        } else if (next_x > PADDLE_MAX_X) {\n            next_x = PADDLE_MAX_X;\n        }\n170→\n        paddle_x = (uint8_t)next_x;\n    }\n\n    draw_paddle();\n}\n\nstatic void remove_brick(uint8_t tile_x, uint8_t tile_y) {\n    uint8_t spark_x;\n    uint8_t spark_y;\n180→\n    set_bkg_tile_xy(tile_x, tile_y, TILE_EMPTY);\n    set_bkg_tile_xy((uint8_t)(tile_x + 1u), tile_y, TILE_EMPTY);\n    --bricks_remaining;\n\n    /* Convert brick tile coords to approximate OAM center for the burst */\n    spark_x = (uint8_t)((tile_x << 3) + 16u);\n    spark_y = (uint8_t)((tile_y << 3) + 24u);\n    spawn_sparks(spark_x, spark_y);\n    sfx_boom();\n190→}\n\nstatic bool overlaps_paddle(uint8_t candidate_x, uint8_t candidate_y) {\n    int16_t ball_left;\n    int16_t ball_right;\n    int16_t paddle_left;\n    int16_t paddle_right;\n\n    if ((uint16_t)candidate_y + 5u < PADDLE_Y) {\n        return false;\n200→    }\n\n    ball_left = candidate_x;\n    ball_right = ball_left + 5;\n    paddle_left = paddle_x;\n    paddle_right = paddle_left + 24;\n\n    /*\n     * This intentionally preserves the ROM's slightly asymmetric right edge:\n     * the ball's left sample is inclusive, while its right sample is strict.\n210→     */\n    return ((ball_left >= paddle_left) && (ball_left <= paddle_right)) ||\n           ((ball_right >= paddle_left) && (ball_right < paddle_right));\n}\n\nstatic bool collides(int8_t delta_x, int8_t delta_y) {\n    uint8_t candidate_x;\n    uint8_t candidate_y;\n    int16_t sample_x;\n    int16_t sample_y;\n220→    uint8_t tile_x;\n    uint8_t tile_y;\n    uint8_t tile;\n\n    candidate_x = (uint8_t)(ball_x + delta_x);\n    candidate_y = (uint8_t)(ball_y + delta_y);\n\n    if (overlaps_paddle(candidate_x, candidate_y)) {\n        sfx_beep();\n        return true;\n230→    }\n\n    /*\n     * The original uses a six-pixel collision span and chooses the leading\n     * edge from the current global velocity. The X velocity may already have\n     * been reversed by the horizontal probe earlier in this frame.\n     */\n    sample_x = candidate_x;\n    sample_y = candidate_y;\n\n240→    if (ball_vx > 0) {\n        sample_x += 5;\n    }\n    if (ball_vy > 0) {\n        sample_y += 5;\n    }\n\n    tile_x = (uint8_t)((sample_x - 8) >> 3);\n    tile_y = (uint8_t)((sample_y - 16) >> 3);\n    tile = get_bkg_tile_xy(tile_x, tile_y);\n250→\n    if (tile == TILE_BRICK_LEFT) {\n        remove_brick(tile_x, tile_y);\n    } else if (tile == TILE_BRICK_RIGHT) {\n        remove_brick((uint8_t)(tile_x - 1u), tile_y);\n    }\n\n    return tile != TILE_EMPTY;\n}\n\n260→static void seed_rng_from_div(void) {\n    uint16_t seed;\n\n    seed = (uint16_t)DIV_REG;\n    seed |= (uint16_t)((uint16_t)DIV_REG << 8);\n    if (seed == 0u) {\n        seed = 1u;\n    }\n    initrand(seed);\n    rng_seeded = true;\n270→\n    /* Nudge initial ball angle from the seed so runs diverge */\n    if ((rand() & 1u) != 0u) {\n        ball_vx = (int8_t)-ball_vx;\n    }\n}\n\nstatic void initialize_video(void) {\n    uint8_t i;\n\n280→    DISPLAY_OFF;\n\n    SCX_REG = 0u;\n    SCY_REG = 0u;\n    WY_REG = 0u;\n    WX_REG = 7u;\n    STAT_REG = 0u;\n\n    BGP_REG = 0xE4u;\n    OBP0_REG = 0xE4u;\n290→    OBP1_REG = 0x1Bu;\n\n    /*\n     * Bit 4 remains clear so background tile IDs $80-$FF use the signed\n     * $8800 tile-data region. SHOW_BKG, SHOW_SPRITES, and DISPLAY_ON below\n     * turn this into the original final LCDC value, $C3.\n     */\n    LCDC_REG = 0x40u;\n\n    set_bkg_data(0x80u, BREAKOUT_TILE_COUNT, breakout_tile_data);\n300→    set_bkg_tiles(\n        0u,\n        0u,\n        BREAKOUT_MAP_WIDTH,\n        BREAKOUT_MAP_HEIGHT,\n        breakout_background_map\n    );\n\n    set_sprite_tile(BALL_SPRITE, TILE_BALL);\n    set_sprite_tile(PADDLE_LEFT_SPRITE, TILE_PADDLE_LEFT);\n310→    set_sprite_tile(PADDLE_MIDDLE_SPRITE, TILE_PADDLE_MIDDLE);\n    set_sprite_tile(PADDLE_RIGHT_SPRITE, TILE_PADDLE_RIGHT);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        set_sprite_tile((uint8_t)(SPARK_SPRITE_BASE + i), TILE_BALL);\n        set_sprite_prop((uint8_t)(SPARK_SPRITE_BASE + i), 0x10u);\n    }\n\n    SPRITES_8x8;\n    SHOW_BKG;\n320→    SHOW_SPRITES;\n    DISPLAY_ON;\n}\n\nstatic void initialize_game(void) {\n    paddle_x = PADDLE_INITIAL_X;\n    ball_x = BALL_INITIAL_X;\n    ball_y = BALL_INITIAL_Y;\n    ball_vx = 1;\n    ball_vy = -1;\n330→    bricks_remaining = INITIAL_BRICK_COUNT;\n    rng_seeded = false;\n\n    hide_spark_sprites();\n    move_paddle(0);\n    move_sprite(BALL_SPRITE, ball_x, ball_y);\n}\n\nvoid main(void) {\n    uint8_t keys;\n340→\n    /*\n     * The recovered CRT clears a larger runtime area than modern GBDK does.\n     * Waiting one VBlank here aligns the first active gameplay frame with the\n     * original ROM (frame 90 after reset in the deterministic SameBoy boot).\n     */\n    wait_vbl_done();\n\n    initialize_video();\n    sound_init();\n350→    initialize_game();\n    NOVA_STATE = 1u;\n\n    while (bricks_remaining != 0u) {\n        keys = joypad();\n\n        if ((keys & J_LEFT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n360→            move_paddle(-2);\n        } else if ((keys & J_RIGHT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n            move_paddle(2);\n        }\n\n        if (ball_y >= BALL_LOSS_Y) {\n            break;\n370→        }\n\n        if (collides(ball_vx, 0)) {\n            ball_vx = (int8_t)-ball_vx;\n        }\n\n        if (collides(0, ball_vy)) {\n            ball_vy = (int8_t)-ball_vy;\n        }\n\n380→        ball_x = (uint8_t)(ball_x + ball_vx);\n        ball_y = (uint8_t)(ball_y + ball_vy);\n        move_sprite(BALL_SPRITE, ball_x, ball_y);\n        update_sparks();\n        wait_vbl_done();\n    }\n\n    if (bricks_remaining == 0u) {\n        sfx_jingle();\n        NOVA_STATE = 2u;\n390→    } else {\n        sfx_boom();\n        NOVA_STATE = 3u;\n    }\n\n    /* Drain remaining spark animation briefly, then idle forever. */\n    {\n        uint8_t drain;\n\n        for (drain = 0u; drain < SPARK_LIFE; drain++) {\n400→            update_sparks();\n            wait_vbl_done();\n        }\n    }\n\n    while (true) {\n        wait_vbl_done();\n    }\n}\n","absolute_path":"/vercel/sandbox/work/main.c","offset":null,"raw_output":"// TITLE: Spark Brick Breakout\n// DESC: Bricks explode into flying sparks when the ball smashes them.\n#include <gb/gb.h>\n#include <stdbool.h>\n#include <stdint.h>\n#include <rand.h>\n\n#include \"assets.h\"\n\nenum {\n    TILE_EMPTY = 0x80u,\n    TILE_BRICK_LEFT = 0x88u,\n    TILE_BRICK_RIGHT = 0x89u,\n    TILE_PADDLE_LEFT = 0x8Cu,\n    TILE_PADDLE_MIDDLE = 0x8Du,\n    TILE_PADDLE_RIGHT = 0x8Eu,\n    TILE_BALL = 0x8Fu,\n\n    BALL_SPRITE = 0u,\n    PADDLE_LEFT_SPRITE = 1u,\n    PADDLE_MIDDLE_SPRITE = 2u,\n    PADDLE_RIGHT_SPRITE = 3u,\n    SPARK_SPRITE_BASE = 4u,\n    MAX_SPARKS = 8u,\n\n    PADDLE_Y = 0x98u,\n    PADDLE_MIN_X = 0x08u,\n    PADDLE_MAX_X = 0x90u,\n    PADDLE_INITIAL_X = 0x4Cu,\n    BALL_INITIAL_X = 0x32u,\n    BALL_INITIAL_Y = 0x78u,\n    BALL_LOSS_Y = 0x9Au,\n    INITIAL_BRICK_COUNT = 39u,\n\n    SPARK_LIFE = 12u\n};\n\n/*\n * Nova arcade protocol: one byte at a fixed WRAM address the arcade polls to\n * detect run state. The linker can't move it because it's an absolute pointer,\n * not a variable. 1 = run started, 2 = won, 3 = lost. Every game the pipeline\n * ships MUST keep these three writes intact.\n */\n#define NOVA_STATE (*(volatile uint8_t *)0xCF00)\n\n/*\n * These six values correspond to the original ROM's globals at $C0A0-$C0A5.\n * Positions use Game Boy OAM coordinates: visible X is X - 8 and visible Y\n * is Y - 16.\n */\nstatic uint8_t paddle_x;\nstatic uint8_t ball_x;\nstatic uint8_t ball_y;\nstatic int8_t ball_vx;\nstatic int8_t ball_vy;\nstatic uint8_t bricks_remaining;\nstatic bool rng_seeded;\n\ntypedef struct {\n    uint8_t x;\n    uint8_t y;\n    int8_t vx;\n    int8_t vy;\n    uint8_t life;\n} spark_t;\n\nstatic spark_t sparks[MAX_SPARKS];\n\nstatic void sound_init(void) {\n    NR52_REG = 0x80u;\n    NR50_REG = 0x77u;\n    NR51_REG = 0xFFu;\n    NR10_REG = 0x00u;\n}\n\nstatic void sfx_beep(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF1u;\n    NR23_REG = 0x9Cu;\n    NR24_REG = 0x86u;\n}\n\nstatic void sfx_boom(void) {\n    NR41_REG = 0x01u;\n    NR42_REG = 0xF2u;\n    NR43_REG = 0x55u;\n    NR44_REG = 0x80u;\n}\n\nstatic void sfx_jingle(void) {\n    NR21_REG = 0x80u;\n    NR22_REG = 0xF3u;\n    NR23_REG = 0x73u;\n    NR24_REG = 0x87u;\n}\n\nstatic void hide_spark_sprites(void) {\n    uint8_t i;\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        sparks[i].life = 0u;\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n    }\n}\n\nstatic void spawn_sparks(uint8_t origin_x, uint8_t origin_y) {\n    static const int8_t dirs_x[8] = { -2, -1, 1, 2, -2, 2, -1, 1 };\n    static const int8_t dirs_y[8] = { -2, -2, -2, -1, 1, 1, 2, 2 };\n    uint8_t i;\n    uint8_t slot;\n    uint8_t base;\n\n    base = (uint8_t)(rand() & 7u);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        slot = i;\n        sparks[slot].x = origin_x;\n        sparks[slot].y = origin_y;\n        sparks[slot].vx = dirs_x[(base + i) & 7u];\n        sparks[slot].vy = dirs_y[(base + i) & 7u];\n        /* Slight life jitter so the burst feels less uniform */\n        sparks[slot].life = (uint8_t)(SPARK_LIFE - (rand() & 3u));\n        move_sprite((uint8_t)(SPARK_SPRITE_BASE + slot), origin_x, origin_y);\n    }\n}\n\nstatic void update_sparks(void) {\n    uint8_t i;\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        if (sparks[i].life == 0u) {\n            move_sprite((uint8_t)(SPARK_SPRITE_BASE + i), 0u, 0u);\n            continue;\n        }\n\n        sparks[i].x = (uint8_t)((int16_t)sparks[i].x + sparks[i].vx);\n        sparks[i].y = (uint8_t)((int16_t)sparks[i].y + sparks[i].vy);\n        /* Gravity tug on sparks */\n        if ((sparks[i].life & 1u) == 0u) {\n            sparks[i].vy += 1;\n        }\n        sparks[i].life--;\n        move_sprite(\n            (uint8_t)(SPARK_SPRITE_BASE + i),\n            sparks[i].x,\n            sparks[i].y\n        );\n    }\n}\n\nstatic void draw_paddle(void) {\n    move_sprite(PADDLE_LEFT_SPRITE, paddle_x, PADDLE_Y);\n    move_sprite(PADDLE_MIDDLE_SPRITE, (uint8_t)(paddle_x + 8u), PADDLE_Y);\n    move_sprite(PADDLE_RIGHT_SPRITE, (uint8_t)(paddle_x + 16u), PADDLE_Y);\n}\n\nstatic void move_paddle(int8_t delta) {\n    int16_t next_x;\n\n    if (delta == 0) {\n        paddle_x = PADDLE_INITIAL_X;\n    } else {\n        next_x = (int16_t)paddle_x + delta;\n\n        if (next_x < PADDLE_MIN_X) {\n            next_x = PADDLE_MIN_X;\n        } else if (next_x > PADDLE_MAX_X) {\n            next_x = PADDLE_MAX_X;\n        }\n\n        paddle_x = (uint8_t)next_x;\n    }\n\n    draw_paddle();\n}\n\nstatic void remove_brick(uint8_t tile_x, uint8_t tile_y) {\n    uint8_t spark_x;\n    uint8_t spark_y;\n\n    set_bkg_tile_xy(tile_x, tile_y, TILE_EMPTY);\n    set_bkg_tile_xy((uint8_t)(tile_x + 1u), tile_y, TILE_EMPTY);\n    --bricks_remaining;\n\n    /* Convert brick tile coords to approximate OAM center for the burst */\n    spark_x = (uint8_t)((tile_x << 3) + 16u);\n    spark_y = (uint8_t)((tile_y << 3) + 24u);\n    spawn_sparks(spark_x, spark_y);\n    sfx_boom();\n}\n\nstatic bool overlaps_paddle(uint8_t candidate_x, uint8_t candidate_y) {\n    int16_t ball_left;\n    int16_t ball_right;\n    int16_t paddle_left;\n    int16_t paddle_right;\n\n    if ((uint16_t)candidate_y + 5u < PADDLE_Y) {\n        return false;\n    }\n\n    ball_left = candidate_x;\n    ball_right = ball_left + 5;\n    paddle_left = paddle_x;\n    paddle_right = paddle_left + 24;\n\n    /*\n     * This intentionally preserves the ROM's slightly asymmetric right edge:\n     * the ball's left sample is inclusive, while its right sample is strict.\n     */\n    return ((ball_left >= paddle_left) && (ball_left <= paddle_right)) ||\n           ((ball_right >= paddle_left) && (ball_right < paddle_right));\n}\n\nstatic bool collides(int8_t delta_x, int8_t delta_y) {\n    uint8_t candidate_x;\n    uint8_t candidate_y;\n    int16_t sample_x;\n    int16_t sample_y;\n    uint8_t tile_x;\n    uint8_t tile_y;\n    uint8_t tile;\n\n    candidate_x = (uint8_t)(ball_x + delta_x);\n    candidate_y = (uint8_t)(ball_y + delta_y);\n\n    if (overlaps_paddle(candidate_x, candidate_y)) {\n        sfx_beep();\n        return true;\n    }\n\n    /*\n     * The original uses a six-pixel collision span and chooses the leading\n     * edge from the current global velocity. The X velocity may already have\n     * been reversed by the horizontal probe earlier in this frame.\n     */\n    sample_x = candidate_x;\n    sample_y = candidate_y;\n\n    if (ball_vx > 0) {\n        sample_x += 5;\n    }\n    if (ball_vy > 0) {\n        sample_y += 5;\n    }\n\n    tile_x = (uint8_t)((sample_x - 8) >> 3);\n    tile_y = (uint8_t)((sample_y - 16) >> 3);\n    tile = get_bkg_tile_xy(tile_x, tile_y);\n\n    if (tile == TILE_BRICK_LEFT) {\n        remove_brick(tile_x, tile_y);\n    } else if (tile == TILE_BRICK_RIGHT) {\n        remove_brick((uint8_t)(tile_x - 1u), tile_y);\n    }\n\n    return tile != TILE_EMPTY;\n}\n\nstatic void seed_rng_from_div(void) {\n    uint16_t seed;\n\n    seed = (uint16_t)DIV_REG;\n    seed |= (uint16_t)((uint16_t)DIV_REG << 8);\n    if (seed == 0u) {\n        seed = 1u;\n    }\n    initrand(seed);\n    rng_seeded = true;\n\n    /* Nudge initial ball angle from the seed so runs diverge */\n    if ((rand() & 1u) != 0u) {\n        ball_vx = (int8_t)-ball_vx;\n    }\n}\n\nstatic void initialize_video(void) {\n    uint8_t i;\n\n    DISPLAY_OFF;\n\n    SCX_REG = 0u;\n    SCY_REG = 0u;\n    WY_REG = 0u;\n    WX_REG = 7u;\n    STAT_REG = 0u;\n\n    BGP_REG = 0xE4u;\n    OBP0_REG = 0xE4u;\n    OBP1_REG = 0x1Bu;\n\n    /*\n     * Bit 4 remains clear so background tile IDs $80-$FF use the signed\n     * $8800 tile-data region. SHOW_BKG, SHOW_SPRITES, and DISPLAY_ON below\n     * turn this into the original final LCDC value, $C3.\n     */\n    LCDC_REG = 0x40u;\n\n    set_bkg_data(0x80u, BREAKOUT_TILE_COUNT, breakout_tile_data);\n    set_bkg_tiles(\n        0u,\n        0u,\n        BREAKOUT_MAP_WIDTH,\n        BREAKOUT_MAP_HEIGHT,\n        breakout_background_map\n    );\n\n    set_sprite_tile(BALL_SPRITE, TILE_BALL);\n    set_sprite_tile(PADDLE_LEFT_SPRITE, TILE_PADDLE_LEFT);\n    set_sprite_tile(PADDLE_MIDDLE_SPRITE, TILE_PADDLE_MIDDLE);\n    set_sprite_tile(PADDLE_RIGHT_SPRITE, TILE_PADDLE_RIGHT);\n\n    for (i = 0u; i < MAX_SPARKS; i++) {\n        set_sprite_tile((uint8_t)(SPARK_SPRITE_BASE + i), TILE_BALL);\n        set_sprite_prop((uint8_t)(SPARK_SPRITE_BASE + i), 0x10u);\n    }\n\n    SPRITES_8x8;\n    SHOW_BKG;\n    SHOW_SPRITES;\n    DISPLAY_ON;\n}\n\nstatic void initialize_game(void) {\n    paddle_x = PADDLE_INITIAL_X;\n    ball_x = BALL_INITIAL_X;\n    ball_y = BALL_INITIAL_Y;\n    ball_vx = 1;\n    ball_vy = -1;\n    bricks_remaining = INITIAL_BRICK_COUNT;\n    rng_seeded = false;\n\n    hide_spark_sprites();\n    move_paddle(0);\n    move_sprite(BALL_SPRITE, ball_x, ball_y);\n}\n\nvoid main(void) {\n    uint8_t keys;\n\n    /*\n     * The recovered CRT clears a larger runtime area than modern GBDK does.\n     * Waiting one VBlank here aligns the first active gameplay frame with the\n     * original ROM (frame 90 after reset in the deterministic SameBoy boot).\n     */\n    wait_vbl_done();\n\n    initialize_video();\n    sound_init();\n    initialize_game();\n    NOVA_STATE = 1u;\n\n    while (bricks_remaining != 0u) {\n        keys = joypad();\n\n        if ((keys & J_LEFT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n            move_paddle(-2);\n        } else if ((keys & J_RIGHT) != 0u) {\n            if (!rng_seeded) {\n                seed_rng_from_div();\n            }\n            move_paddle(2);\n        }\n\n        if (ball_y >= BALL_LOSS_Y) {\n            break;\n        }\n\n        if (collides(ball_vx, 0)) {\n            ball_vx = (int8_t)-ball_vx;\n        }\n\n        if (collides(0, ball_vy)) {\n            ball_vy = (int8_t)-ball_vy;\n        }\n\n        ball_x = (uint8_t)(ball_x + ball_vx);\n        ball_y = (uint8_t)(ball_y + ball_vy);\n        move_sprite(BALL_SPRITE, ball_x, ball_y);\n        update_sparks();\n        wait_vbl_done();\n    }\n\n    if (bricks_remaining == 0u) {\n        sfx_jingle();\n        NOVA_STATE = 2u;\n    } else {\n        sfx_boom();\n        NOVA_STATE = 3u;\n    }\n\n    /* Drain remaining spark animation briefly, then idle forever. */\n    {\n        uint8_t drain;\n\n        for (drain = 0u; drain < SPARK_LIFE; drain++) {\n            update_sparks();\n            wait_vbl_done();\n        }\n    }\n\n    while (true) {\n        wait_vbl_done();\n    }\n}\n","total_lines":409}},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-1","status":"completed","content":[{"type":"content","content":{"type":"text","text":"found 4 matches"}}],"rawOutput":{"type":"GrepSearch","stdout":[60,119,111,114,107,115,112,97,99,101,95,114,101,115,117,108,116,32,119,111,114,107,115,112,97,99,101,95,112,97,116,104,61,34,47,118,101,114,99,101,108,47,115,97,110,100,98,111,120,47,119,111,114,107,34,62,10,70,111,117,110,100,32,52,32,109,97,116,99,104,105,110,103,32,108,105,110,101,115,10,47,118,101,114,99,101,108,47,115,97,110,100,98,111,120,47,119,111,114,107,47,109,97,105,110,46,99,10,52,52,58,35,100,101,102,105,110,101,32,78,79,86,65,95,83,84,65,84,69,32,40,42,40,118,111,108,97,116,105,108,101,32,117,105,110,116,56,95,116,32,42,41,48,120,67,70,48,48,41,10,51,53,49,58,32,32,32,32,78,79,86,65,95,83,84,65,84,69,32,61,32,49,117,59,10,51,56,57,58,32,32,32,32,32,32,32,32,78,79,86,65,95,83,84,65,84,69,32,61,32,50,117,59,10,51,57,50,58,32,32,32,32,32,32,32,32,78,79,86,65,95,83,84,65,84,69,32,61,32,51,117,59,10,60,47,119,111,114,107,115,112,97,99,101,95,114,101,115,117,108,116,62],"stderr":[],"exit_code":0,"match_count":4,"file_matches":[{"path":"/vercel/sandbox/work/main.c","matches":[{"line_number":44,"content":"#define NOVA_STATE (*(volatile uint8_t *)0xCF00)"},{"line_number":351,"content":"    NOVA_STATE = 1u;"},{"line_number":389,"content":"        NOVA_STATE = 2u;"},{"line_number":392,"content":"        NOVA_STATE = 3u;"}]}]},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":"main.c:\n"}}],"rawOutput":{"type":"Bash","output":[109,97,105,110,46,99,58,10],"output_for_prompt":"main.c:\n","exit_code":0,"command":"/opt/gbdk/bin/lcc -o rebuilt.gb main.c assets.c 2>&1; ls -la rebuilt.gb shipped.gb 2>&1; cmp -l rebuilt.gb shipped.gb 2>&1 | head -20; cmp rebuilt.gb shipped.gb && echo \"IDENTICAL\" || echo \"DIFFER\"; wc -c rebuilt.gb shipped.gb","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":8},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":"main.c:\nassets.c:\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 rebuilt.gb\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 shipped.gb\n--: line 1: cmp: command not found\n--: line 1: cmp: command not found\nDIFFER\n32768 rebuilt.gb\n32768 shipped.gb\n65536 total\n"}}],"rawOutput":{"type":"Bash","output":[109,97,105,110,46,99,58,10,97,115,115,101,116,115,46,99,58,10,45,114,119,45,114,45,45,114,45,45,32,49,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,51,50,55,54,56,32,65,117,103,32,32,57,32,48,51,58,52,51,32,114,101,98,117,105,108,116,46,103,98,10,45,114,119,45,114,45,45,114,45,45,32,49,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,51,50,55,54,56,32,65,117,103,32,32,57,32,48,51,58,52,51,32,115,104,105,112,112,101,100,46,103,98,10,45,45,58,32,108,105,110,101,32,49,58,32,99,109,112,58,32,99,111,109,109,97,110,100,32,110,111,116,32,102,111,117,110,100,10,45,45,58,32,108,105,110,101,32,49,58,32,99,109,112,58,32,99,111,109,109,97,110,100,32,110,111,116,32,102,111,117,110,100,10,68,73,70,70,69,82,10,51,50,55,54,56,32,114,101,98,117,105,108,116,46,103,98,10,51,50,55,54,56,32,115,104,105,112,112,101,100,46,103,98,10,54,53,53,51,54,32,116,111,116,97,108,10],"output_for_prompt":"main.c:\nassets.c:\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 rebuilt.gb\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 shipped.gb\n--: line 1: cmp: command not found\n--: line 1: cmp: command not found\nDIFFER\n32768 rebuilt.gb\n32768 shipped.gb\n65536 total\n","exit_code":0,"command":"/opt/gbdk/bin/lcc -o rebuilt.gb main.c assets.c 2>&1; ls -la rebuilt.gb shipped.gb 2>&1; cmp -l rebuilt.gb shipped.gb 2>&1 | head -20; cmp rebuilt.gb shipped.gb && echo \"IDENTICAL\" || echo \"DIFFER\"; wc -c rebuilt.gb shipped.gb","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":287},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-33da9987-c367-471b-a783-48ae9cd01acd-0","status":"completed","content":[{"type":"content","content":{"type":"text","text":"main.c:\nassets.c:\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 rebuilt.gb\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 shipped.gb\n--: line 1: cmp: command not found\n--: line 1: cmp: command not found\nDIFFER\n32768 rebuilt.gb\n32768 shipped.gb\n65536 total\n"}}],"rawOutput":{"type":"Bash","output":[109,97,105,110,46,99,58,10,97,115,115,101,116,115,46,99,58,10,45,114,119,45,114,45,45,114,45,45,32,49,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,51,50,55,54,56,32,65,117,103,32,32,57,32,48,51,58,52,51,32,114,101,98,117,105,108,116,46,103,98,10,45,114,119,45,114,45,45,114,45,45,32,49,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,118,101,114,99,101,108,45,115,97,110,100,98,111,120,32,51,50,55,54,56,32,65,117,103,32,32,57,32,48,51,58,52,51,32,115,104,105,112,112,101,100,46,103,98,10,45,45,58,32,108,105,110,101,32,49,58,32,99,109,112,58,32,99,111,109,109,97,110,100,32,110,111,116,32,102,111,117,110,100,10,45,45,58,32,108,105,110,101,32,49,58,32,99,109,112,58,32,99,111,109,109,97,110,100,32,110,111,116,32,102,111,117,110,100,10,68,73,70,70,69,82,10,51,50,55,54,56,32,114,101,98,117,105,108,116,46,103,98,10,51,50,55,54,56,32,115,104,105,112,112,101,100,46,103,98,10,54,53,53,51,54,32,116,111,116,97,108,10],"output_for_prompt":"exit: 0\nmain.c:\nassets.c:\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 rebuilt.gb\n-rw-r--r-- 1 vercel-sandbox vercel-sandbox 32768 Aug  9 03:43 shipped.gb\n--: line 1: cmp: command not found\n--: line 1: cmp: command not found\nDIFFER\n32768 rebuilt.gb\n32768 shipped.gb\n65536 total\n","exit_code":0,"command":"/opt/gbdk/bin/lcc -o rebuilt.gb main.c assets.c 2>&1; ls -la rebuilt.gb shipped.gb 2>&1; cmp -l rebuilt.gb shipped.gb 2>&1 | head -20; cmp rebuilt.gb shipped.gb && echo \"IDENTICAL\" || echo \"DIFFER\"; wc -c rebuilt.gb shipped.gb","truncated":false,"signal":null,"timed_out":false,"description":"Build ROM and compare to shipped","current_dir":"/vercel/sandbox/work","output_file":"/home/vercel-sandbox/.grok/sessions/%2Fvercel%2Fsandbox%2Fwork/019fe49e-55a1-7352-b057-229cb1e677d3/terminal/call-33da9987-c367-471b-a783-48ae9cd01acd-0.log","total_bytes":287},"locations":[]}
+{"type":"thought","data":"cmp"}
+{"type":"thought","data":" is"}
+{"type":"thought","data":" not"}
+{"type":"thought","data":" found"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" I"}
+{"type":"thought","data":" need"}
+{"type":"thought","data":" to"}
+{"type":"thought","data":" compare"}
+{"type":"thought","data":" the"}
+{"type":"thought","data":" files"}
+{"type":"thought","data":" another"}
+{"type":"thought","data":" way"}
+{"type":"thought","data":" -"}
+{"type":"thought","data":" maybe"}
+{"type":"thought","data":" with"}
+{"type":"thought","data":" diff"}
+{"type":"thought","data":" or"}
+{"type":"thought","data":" md"}
+{"type":"thought","data":"5"}
+{"type":"thought","data":"sum"}
+{"type":"thought","data":" or"}
+{"type":"thought","data":" python"}
+{"type":"thought","data":"."}
+{"type":"text","data":"`"}
+{"type":"text","data":"cmp"}
+{"type":"text","data":"`"}
+{"type":"text","data":" isn't"}
+{"type":"text","data":" available"}
+{"type":"text","data":" here"}
+{"type":"text","data":";"}
+{"type":"text","data":" I'll"}
+{"type":"text","data":" compare"}
+{"type":"text","data":" the"}
+{"type":"text","data":" RO"}
+{"type":"text","data":"Ms"}
+{"type":"text","data":" another"}
+{"type":"text","data":" way"}
+{"type":"text","data":"."}
+{"type":"available_commands","tools":["run_terminal_command","read_file","search_replace","list_dir","grep","kill_command_or_subagent","todo_write","get_command_or_subagent_output","spawn_subagent","scheduler_create","scheduler_delete","scheduler_list","monitor","search_tool","use_tool","workflow","enter_plan_mode","exit_plan_mode","ask_user_question","image_gen","image_edit","image_to_video","reference_to_video","write"],"commands":["compact","always-approve","context","session-info","feedback","deep-research","workflow","goal","loop"]}
+{"type":"usage","usage":{"input_tokens":10528,"output_tokens":235,"cache_read_input_tokens":3840,"cache_creation_input_tokens":0,"reasoning_tokens":24},"signature":"n9P2cL+aMEk1E50Bdj1ePSErhLqIuo1/kKAHFIw2vaGuzHCF2X6Msj3jumWo1komT+Y1vNtMJF93bcgTeoZNBVm2IRUHf/SC0NzEsOqEqncKJR49qnWt6Q5AG2tE+wid6RS1oS8vNzqAPecPpk+AkiEWTPcaBEjpT3EqKQ"}
+{"type":"tool_call","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","title":"run_terminal_command","kind":"execute","status":"pending","toolName":"run_terminal_command","rawInput":{"command":"md5sum rebuilt.gb shipped.gb; python3 -c \"\nimport pathlib\na=pathlib.Path('rebuilt.gb').read_bytes()\nb=pathlib.Path('shipped.gb').read_bytes()\nprint('sizes', len(a), len(b))\nif a==b:\n    print('IDENTICAL')\nelse:\n    diffs=[i for i,(x,y) in enumerate(zip(a,b)) if x!=y]\n    print('DIFFER at', len(diffs), 'bytes')\n    for i in diffs[:20]:\n        print(f'  offset 0x{i:04X}: rebuilt=0x{a[i]:02X} shipped=0x{b[i]:02X}')\n\"","description":"Byte-compare rebuilt vs shipped ROMs"},"content":[],"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","status":null,"content":[{"type":"content","content":{"type":"text","text":"Byte-compare rebuilt vs shipped ROMs"}}],"rawOutput":null,"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":""}}],"rawOutput":{"type":"Bash","output":[],"output_for_prompt":"","exit_code":0,"command":"md5sum rebuilt.gb shipped.gb; python3 -c \"\nimport pathlib\na=pathlib.Path('rebuilt.gb').read_bytes()\nb=pathlib.Path('shipped.gb').read_bytes()\nprint('sizes', len(a), len(b))\nif a==b:\n    print('IDENTICAL')\nelse:\n    diffs=[i for i,(x,y) in enumerate(zip(a,b)) if x!=y]\n    print('DIFFER at', len(diffs), 'bytes')\n    for i in diffs[:20]:\n        print(f'  offset 0x{i:04X}: rebuilt=0x{a[i]:02X} shipped=0x{b[i]:02X}')\n\"","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":0},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":"bab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\n"}}],"rawOutput":{"type":"Bash","output":[98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,114,101,98,117,105,108,116,46,103,98,10,98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,115,104,105,112,112,101,100,46,103,98,10],"output_for_prompt":"bab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\n","exit_code":0,"command":"md5sum rebuilt.gb shipped.gb; python3 -c \"\nimport pathlib\na=pathlib.Path('rebuilt.gb').read_bytes()\nb=pathlib.Path('shipped.gb').read_bytes()\nprint('sizes', len(a), len(b))\nif a==b:\n    print('IDENTICAL')\nelse:\n    diffs=[i for i,(x,y) in enumerate(zip(a,b)) if x!=y]\n    print('DIFFER at', len(diffs), 'bytes')\n    for i in diffs[:20]:\n        print(f'  offset 0x{i:04X}: rebuilt=0x{a[i]:02X} shipped=0x{b[i]:02X}')\n\"","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":90},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","status":"in_progress","content":[{"type":"content","content":{"type":"text","text":"bab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\nsizes 32768 32768\nIDENTICAL\n"}}],"rawOutput":{"type":"Bash","output":[98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,114,101,98,117,105,108,116,46,103,98,10,98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,115,104,105,112,112,101,100,46,103,98,10,115,105,122,101,115,32,51,50,55,54,56,32,51,50,55,54,56,10,73,68,69,78,84,73,67,65,76,10],"output_for_prompt":"bab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\nsizes 32768 32768\nIDENTICAL\n","exit_code":0,"command":"md5sum rebuilt.gb shipped.gb; python3 -c \"\nimport pathlib\na=pathlib.Path('rebuilt.gb').read_bytes()\nb=pathlib.Path('shipped.gb').read_bytes()\nprint('sizes', len(a), len(b))\nif a==b:\n    print('IDENTICAL')\nelse:\n    diffs=[i for i,(x,y) in enumerate(zip(a,b)) if x!=y]\n    print('DIFFER at', len(diffs), 'bytes')\n    for i in diffs[:20]:\n        print(f'  offset 0x{i:04X}: rebuilt=0x{a[i]:02X} shipped=0x{b[i]:02X}')\n\"","truncated":false,"signal":null,"timed_out":false,"description":null,"current_dir":"/vercel/sandbox/work","output_file":"","total_bytes":118},"locations":[]}
+{"type":"tool_call_update","toolCallId":"call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3","status":"completed","content":[{"type":"content","content":{"type":"text","text":"bab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\nsizes 32768 32768\nIDENTICAL\n"}}],"rawOutput":{"type":"Bash","output":[98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,114,101,98,117,105,108,116,46,103,98,10,98,97,98,49,55,51,98,49,57,98,97,50,53,56,51,55,99,51,49,97,99,100,97,49,102,100,50,99,98,52,57,55,32,32,115,104,105,112,112,101,100,46,103,98,10,115,105,122,101,115,32,51,50,55,54,56,32,51,50,55,54,56,10,73,68,69,78,84,73,67,65,76,10],"output_for_prompt":"exit: 0\nbab173b19ba25837c31acda1fd2cb497  rebuilt.gb\nbab173b19ba25837c31acda1fd2cb497  shipped.gb\nsizes 32768 32768\nIDENTICAL\n","exit_code":0,"command":"md5sum rebuilt.gb shipped.gb; python3 -c \"\nimport pathlib\na=pathlib.Path('rebuilt.gb').read_bytes()\nb=pathlib.Path('shipped.gb').read_bytes()\nprint('sizes', len(a), len(b))\nif a==b:\n    print('IDENTICAL')\nelse:\n    diffs=[i for i,(x,y) in enumerate(zip(a,b)) if x!=y]\n    print('DIFFER at', len(diffs), 'bytes')\n    for i in diffs[:20]:\n        print(f'  offset 0x{i:04X}: rebuilt=0x{a[i]:02X} shipped=0x{b[i]:02X}')\n\"","truncated":false,"signal":null,"timed_out":false,"description":"Byte-compare rebuilt vs shipped ROMs","current_dir":"/vercel/sandbox/work","output_file":"/home/vercel-sandbox/.grok/sessions/%2Fvercel%2Fsandbox%2Fwork/019fe49e-55a1-7352-b057-229cb1e677d3/terminal/call-c21805de-d49c-42cd-b62f-db9d5d4ba153-3.log","total_bytes":118},"locations":[]}
+{"type":"thought","data":"All"}
+{"type":"thought","data":" checks"}
+{"type":"thought","data":" complete"}
+{"type":"thought","data":"."}
+{"type":"thought","data":" I"}
+{"type":"thought","data":" can"}
+{"type":"thought","data":" write"}
+{"type":"thought","data":" a"}
+{"type":"thought","data":" clear"}
+{"type":"thought","data":" provenance"}
+{"type":"thought","data":" audit"}
+{"type":"thought","data":" report"}
+{"type":"thought","data":"."}
+{"type":"text","data":"##"}
+{"type":"text","data":" Proven"}
+{"type":"text","data":"ance"}
+{"type":"text","data":" audit"}
+{"type":"text","data":":"}
+{"type":"text","data":" `"}
+{"type":"text","data":"make"}
+{"type":"text","data":"-"}
+{"type":"text","data":"the"}
+{"type":"text","data":"-"}
+{"type":"text","data":"br"}
+{"type":"text","data":"icks"}
+{"type":"text","data":"-"}
+{"type":"text","data":"explode"}
+{"type":"text","data":"-"}
+{"type":"text","data":"1"}
+{"type":"text","data":"e"}
+{"type":"text","data":"6"}
+{"type":"text","data":"f"}
+{"type":"text","data":"07"}
+{"type":"text","data":"`\n\n"}
+{"type":"text","data":"###"}
+{"type":"text","data":" "}
+{"type":"text","data":"1"}
+{"type":"text","data":")"}
+{"type":"text","data":" Build"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"```"}
+{"type":"text","data":"text"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"/"}
+{"type":"text","data":"opt"}
+{"type":"text","data":"/"}
+{"type":"text","data":"gb"}
+{"type":"text","data":"dk"}
+{"type":"text","data":"/"}
+{"type":"text","data":"bin"}
+{"type":"text","data":"/"}
+{"type":"text","data":"l"}
+{"type":"text","data":"cc"}
+{"type":"text","data":" -"}
+{"type":"text","data":"o"}
+{"type":"text","data":" rebuilt"}
+{"type":"text","data":"."}
+{"type":"text","data":"gb"}
+{"type":"text","data":" main"}
+{"type":"text","data":".c"}
+{"type":"text","data":" assets"}
+{"type":"text","data":".c"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"```"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"-"}
+{"type":"text","data":" Build"}
+{"type":"text","data":" completed"}
+{"type":"text","data":" with"}
+{"type":"text","data":" no"}
+{"type":"text","data":" errors"}
+{"type":"text","data":" ("}
+{"type":"text","data":"compiler"}
+{"type":"text","data":" only"}
+{"type":"text","data":" printed"}
+{"type":"text","data":" the"}
+{"type":"text","data":" usual"}
+{"type":"text","data":" `"}
+{"type":"text","data":"main"}
+{"type":"text","data":".c"}
+{"type":"text","data":":`"}
+{"type":"text","data":" /"}
+{"type":"text","data":" `"}
+{"type":"text","data":"assets"}
+{"type":"text","data":".c"}
+{"type":"text","data":":`"}
+{"type":"text","data":" banners"}
+{"type":"text","data":")."}
+{"type":"text","data":"\n"}
+{"type":"text","data":"-"}
+{"type":"text","data":" `"}
+{"type":"text","data":"re"}
+{"type":"text","data":"built"}
+{"type":"text","data":"."}
+{"type":"text","data":"gb"}
+{"type":"text","data":"`"}
+{"type":"text","data":" is"}
+{"type":"text","data":" **"}
+{"type":"text","data":"327"}
+{"type":"text","data":"68"}
+{"type":"text","data":" bytes"}
+{"type":"text","data":"**."}
+{"type":"text","data":"\n\n"}
+{"type":"text","data":"###"}
+{"type":"text","data":" "}
+{"type":"text","data":"2"}
+{"type":"text","data":")"}
+{"type":"text","data":" Sh"}
+{"type":"text","data":"ipped"}
+{"type":"text","data":" vs"}
+{"type":"text","data":" rebuilt"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" File"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Size"}
+{"type":"text","data":" |"}
+{"type":"text","data":" MD"}
+{"type":"text","data":"5"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|------"}
+{"type":"text","data":"|------"}
+{"type":"text","data":"|"}
+{"type":"text","data":"-----"}
+{"type":"text","data":"|\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" `"}
+{"type":"text","data":"re"}
+{"type":"text","data":"built"}
+{"type":"text","data":"."}
+{"type":"text","data":"gb"}
+{"type":"text","data":"`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" "}
+{"type":"text","data":"327"}
+{"type":"text","data":"68"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `"}
+{"type":"text","data":"bab"}
+{"type":"text","data":"173"}
+{"type":"text","data":"b"}
+{"type":"text","data":"19"}
+{"type":"text","data":"ba"}
+{"type":"text","data":"258"}
+{"type":"text","data":"37"}
+{"type":"text","data":"c"}
+{"type":"text","data":"31"}
+{"type":"text","data":"ac"}
+{"type":"text","data":"da"}
+{"type":"text","data":"1"}
+{"type":"text","data":"fd"}
+{"type":"text","data":"2"}
+{"type":"text","data":"cb"}
+{"type":"text","data":"497"}
+{"type":"text","data":"`"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" `"}
+{"type":"text","data":"ship"}
+{"type":"text","data":"ped"}
+{"type":"text","data":"."}
+{"type":"text","data":"gb"}
+{"type":"text","data":"`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" "}
+{"type":"text","data":"327"}
+{"type":"text","data":"68"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `"}
+{"type":"text","data":"bab"}
+{"type":"text","data":"173"}
+{"type":"text","data":"b"}
+{"type":"text","data":"19"}
+{"type":"text","data":"ba"}
+{"type":"text","data":"258"}
+{"type":"text","data":"37"}
+{"type":"text","data":"c"}
+{"type":"text","data":"31"}
+{"type":"text","data":"ac"}
+{"type":"text","data":"da"}
+{"type":"text","data":"1"}
+{"type":"text","data":"fd"}
+{"type":"text","data":"2"}
+{"type":"text","data":"cb"}
+{"type":"text","data":"497"}
+{"type":"text","data":"`"}
+{"type":"text","data":" |\n\n"}
+{"type":"text","data":"**"}
+{"type":"text","data":"Result"}
+{"type":"text","data":":"}
+{"type":"text","data":" byte"}
+{"type":"text","data":"-"}
+{"type":"text","data":"identical"}
+{"type":"text","data":".**"}
+{"type":"text","data":" The"}
+{"type":"text","data":" shipped"}
+{"type":"text","data":" ROM"}
+{"type":"text","data":" matches"}
+{"type":"text","data":" what"}
+{"type":"text","data":" this"}
+{"type":"text","data":" source"}
+{"type":"text","data":" produces"}
+{"type":"text","data":"."}
+{"type":"text","data":" (`"}
+{"type":"text","data":"cmp"}
+{"type":"text","data":"`"}
+{"type":"text","data":" was"}
+{"type":"text","data":" not"}
+{"type":"text","data":" installed"}
+{"type":"text","data":" on"}
+{"type":"text","data":" the"}
+{"type":"text","data":" host"}
+{"type":"text","data":";"}
+{"type":"text","data":" equality"}
+{"type":"text","data":" was"}
+{"type":"text","data":" confirmed"}
+{"type":"text","data":" with"}
+{"type":"text","data":" a"}
+{"type":"text","data":" full"}
+{"type":"text","data":" byte"}
+{"type":"text","data":" compare"}
+{"type":"text","data":" and"}
+{"type":"text","data":" matching"}
+{"type":"text","data":" MD"}
+{"type":"text","data":"5"}
+{"type":"text","data":".)"}
+{"type":"text","data":"\n\n"}
+{"type":"text","data":"###"}
+{"type":"text","data":" "}
+{"type":"text","data":"3"}
+{"type":"text","data":")"}
+{"type":"text","data":" NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" protocol"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"Intact"}
+{"type":"text","data":" in"}
+{"type":"text","data":" `"}
+{"type":"text","data":"main"}
+{"type":"text","data":".c"}
+{"type":"text","data":"`:"}
+{"type":"text","data":"\n\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" Location"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Code"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Meaning"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|----------"}
+{"type":"text","data":"|------"}
+{"type":"text","data":"|---------|"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" L"}
+{"type":"text","data":"44"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `#"}
+{"type":"text","data":"define"}
+{"type":"text","data":" NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" (*("}
+{"type":"text","data":"volatile"}
+{"type":"text","data":" uint"}
+{"type":"text","data":"8"}
+{"type":"text","data":"_"}
+{"type":"text","data":"t"}
+{"type":"text","data":" *)"}
+{"type":"text","data":"0"}
+{"type":"text","data":"x"}
+{"type":"text","data":"CF"}
+{"type":"text","data":"00"}
+{"type":"text","data":")`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Fixed"}
+{"type":"text","data":" WR"}
+{"type":"text","data":"AM"}
+{"type":"text","data":" poll"}
+{"type":"text","data":" address"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" L"}
+{"type":"text","data":"351"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `"}
+{"type":"text","data":"NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" ="}
+{"type":"text","data":" "}
+{"type":"text","data":"1"}
+{"type":"text","data":"u"}
+{"type":"text","data":";`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Run"}
+{"type":"text","data":" started"}
+{"type":"text","data":" ("}
+{"type":"text","data":"after"}
+{"type":"text","data":" init"}
+{"type":"text","data":")"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" L"}
+{"type":"text","data":"389"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `"}
+{"type":"text","data":"NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" ="}
+{"type":"text","data":" "}
+{"type":"text","data":"2"}
+{"type":"text","data":"u"}
+{"type":"text","data":";`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Won"}
+{"type":"text","data":" ("}
+{"type":"text","data":"all"}
+{"type":"text","data":" bricks"}
+{"type":"text","data":" cleared"}
+{"type":"text","data":")"}
+{"type":"text","data":" |\n"}
+{"type":"text","data":"|"}
+{"type":"text","data":" L"}
+{"type":"text","data":"392"}
+{"type":"text","data":" |"}
+{"type":"text","data":" `"}
+{"type":"text","data":"NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" ="}
+{"type":"text","data":" "}
+{"type":"text","data":"3"}
+{"type":"text","data":"u"}
+{"type":"text","data":";`"}
+{"type":"text","data":" |"}
+{"type":"text","data":" Lost"}
+{"type":"text","data":" ("}
+{"type":"text","data":"ball"}
+{"type":"text","data":" fell"}
+{"type":"text","data":")"}
+{"type":"text","data":" |\n\n"}
+{"type":"text","data":"Comment"}
+{"type":"text","data":" block"}
+{"type":"text","data":" at"}
+{"type":"text","data":" L"}
+{"type":"text","data":"38"}
+{"type":"text","data":"–"}
+{"type":"text","data":"43"}
+{"type":"text","data":" documents"}
+{"type":"text","data":" the"}
+{"type":"text","data":" arcade"}
+{"type":"text","data":" contract"}
+{"type":"text","data":":"}
+{"type":"text","data":" absolute"}
+{"type":"text","data":" pointer"}
+{"type":"text","data":" at"}
+{"type":"text","data":" `"}
+{"type":"text","data":"0"}
+{"type":"text","data":"x"}
+{"type":"text","data":"CF"}
+{"type":"text","data":"00"}
+{"type":"text","data":"`,"}
+{"type":"text","data":" values"}
+{"type":"text","data":" "}
+{"type":"text","data":"1"}
+{"type":"text","data":"/"}
+{"type":"text","data":"2"}
+{"type":"text","data":"/"}
+{"type":"text","data":"3"}
+{"type":"text","data":".\n\n"}
+{"type":"text","data":"###"}
+{"type":"text","data":" "}
+{"type":"text","data":"4"}
+{"type":"text","data":")"}
+{"type":"text","data":" What"}
+{"type":"text","data":" the"}
+{"type":"text","data":" game"}
+{"type":"text","data":" is"}
+{"type":"text","data":"\n"}
+{"type":"text","data":"**"}
+{"type":"text","data":"Spark"}
+{"type":"text","data":" Brick"}
+{"type":"text","data":" Break"}
+{"type":"text","data":"out"}
+{"type":"text","data":"**"}
+{"type":"text","data":" —"}
+{"type":"text","data":" a"}
+{"type":"text","data":" Break"}
+{"type":"text","data":"out"}
+{"type":"text","data":"/"}
+{"type":"text","data":"Ar"}
+{"type":"text","data":"kan"}
+{"type":"text","data":"oid"}
+{"type":"text","data":"-"}
+{"type":"text","data":"style"}
+{"type":"text","data":" game"}
+{"type":"text","data":"."}
+{"type":"text","data":" You"}
+{"type":"text","data":" move"}
+{"type":"text","data":" a"}
+{"type":"text","data":" "}
+{"type":"text","data":"3"}
+{"type":"text","data":"-"}
+{"type":"text","data":"sprite"}
+{"type":"text","data":" paddle"}
+{"type":"text","data":" left"}
+{"type":"text","data":"/"}
+{"type":"text","data":"right"}
+{"type":"text","data":";"}
+{"type":"text","data":" a"}
+{"type":"text","data":" ball"}
+{"type":"text","data":" b"}
+{"type":"text","data":"ounces"}
+{"type":"text","data":" and"}
+{"type":"text","data":" clears"}
+{"type":"text","data":" "}
+{"type":"text","data":"39"}
+{"type":"text","data":" background"}
+{"type":"text","data":" bricks"}
+{"type":"text","data":"."}
+{"type":"text","data":" Hitting"}
+{"type":"text","data":" a"}
+{"type":"text","data":" brick"}
+{"type":"text","data":" er"}
+{"type":"text","data":"ases"}
+{"type":"text","data":" its"}
+{"type":"text","data":" two"}
+{"type":"text","data":" tiles"}
+{"type":"text","data":","}
+{"type":"text","data":" decre"}
+{"type":"text","data":"ments"}
+{"type":"text","data":" the"}
+{"type":"text","data":" counter"}
+{"type":"text","data":","}
+{"type":"text","data":" plays"}
+{"type":"text","data":" a"}
+{"type":"text","data":" boom"}
+{"type":"text","data":" S"}
+{"type":"text","data":"FX"}
+{"type":"text","data":","}
+{"type":"text","data":" and"}
+{"type":"text","data":" sp"}
+{"type":"text","data":"awns"}
+{"type":"text","data":" up"}
+{"type":"text","data":" to"}
+{"type":"text","data":" "}
+{"type":"text","data":"8"}
+{"type":"text","data":" short"}
+{"type":"text","data":"-"}
+{"type":"text","data":"lived"}
+{"type":"text","data":" spark"}
+{"type":"text","data":" sprites"}
+{"type":"text","data":" that"}
+{"type":"text","data":" fly"}
+{"type":"text","data":" outward"}
+{"type":"text","data":" with"}
+{"type":"text","data":" a"}
+{"type":"text","data":" bit"}
+{"type":"text","data":" of"}
+{"type":"text","data":" gravity"}
+{"type":"text","data":".\n\n"}
+{"type":"text","data":"**"}
+{"type":"text","data":"Core"}
+{"type":"text","data":" mechanic"}
+{"type":"text","data":":**"}
+{"type":"text","data":" each"}
+{"type":"text","data":" frame"}
+{"type":"text","data":" the"}
+{"type":"text","data":" ball"}
+{"type":"text","data":" is"}
+{"type":"text","data":" collision"}
+{"type":"text","data":"-"}
+{"type":"text","data":"pro"}
+{"type":"text","data":"bed"}
+{"type":"text","data":" on"}
+{"type":"text","data":" X"}
+{"type":"text","data":" then"}
+{"type":"text","data":" Y"}
+{"type":"text","data":" separately"}
+{"type":"text","data":" (`"}
+{"type":"text","data":"coll"}
+{"type":"text","data":"ides"}
+{"type":"text","data":"`)."}
+{"type":"text","data":" That"}
+{"type":"text","data":" samples"}
+{"type":"text","data":" background"}
+{"type":"text","data":" tiles"}
+{"type":"text","data":" ("}
+{"type":"text","data":"and"}
+{"type":"text","data":" the"}
+{"type":"text","data":" paddle"}
+{"type":"text","data":" AABB"}
+{"type":"text","data":");"}
+{"type":"text","data":" brick"}
+{"type":"text","data":" left"}
+{"type":"text","data":"/"}
+{"type":"text","data":"right"}
+{"type":"text","data":" tiles"}
+{"type":"text","data":" call"}
+{"type":"text","data":" `"}
+{"type":"text","data":"remove"}
+{"type":"text","data":"_"}
+{"type":"text","data":"brick"}
+{"type":"text","data":"`,"}
+{"type":"text","data":" which"}
+{"type":"text","data":" clears"}
+{"type":"text","data":" tiles"}
+{"type":"text","data":" and"}
+{"type":"text","data":" `"}
+{"type":"text","data":"spawn"}
+{"type":"text","data":"_"}
+{"type":"text","data":"spar"}
+{"type":"text","data":"ks"}
+{"type":"text","data":"`."}
+{"type":"text","data":" Velocity"}
+{"type":"text","data":" is"}
+{"type":"text","data":" inverted"}
+{"type":"text","data":" on"}
+{"type":"text","data":" hit"}
+{"type":"text","data":","}
+{"type":"text","data":" then"}
+{"type":"text","data":" position"}
+{"type":"text","data":" is"}
+{"type":"text","data":" advanced"}
+{"type":"text","data":"."}
+{"type":"text","data":" Clear"}
+{"type":"text","data":" all"}
+{"type":"text","data":" bricks"}
+{"type":"text","data":" →"}
+{"type":"text","data":" win"}
+{"type":"text","data":" (`"}
+{"type":"text","data":"NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" ="}
+{"type":"text","data":" "}
+{"type":"text","data":"2"}
+{"type":"text","data":"`);"}
+{"type":"text","data":" ball"}
+{"type":"text","data":" past"}
+{"type":"text","data":" `"}
+{"type":"text","data":"BALL"}
+{"type":"text","data":"_"}
+{"type":"text","data":"LOSS"}
+{"type":"text","data":"_"}
+{"type":"text","data":"Y"}
+{"type":"text","data":"`"}
+{"type":"text","data":" →"}
+{"type":"text","data":" lose"}
+{"type":"text","data":" (`"}
+{"type":"text","data":"NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" ="}
+{"type":"text","data":" "}
+{"type":"text","data":"3"}
+{"type":"text","data":"`)."}
+{"type":"text","data":" RNG"}
+{"type":"text","data":" is"}
+{"type":"text","data":" seeded"}
+{"type":"text","data":" from"}
+{"type":"text","data":" `"}
+{"type":"text","data":"DIV"}
+{"type":"text","data":"_"}
+{"type":"text","data":"REG"}
+{"type":"text","data":"`"}
+{"type":"text","data":" on"}
+{"type":"text","data":" first"}
+{"type":"text","data":" paddle"}
+{"type":"text","data":" input"}
+{"type":"text","data":" so"}
+{"type":"text","data":" spark"}
+{"type":"text","data":" bursts"}
+{"type":"text","data":" and"}
+{"type":"text","data":" initial"}
+{"type":"text","data":" angle"}
+{"type":"text","data":" vary"}
+{"type":"text","data":".\n\n"}
+{"type":"text","data":"---"}
+{"type":"text","data":"\n\n"}
+{"type":"text","data":"**"}
+{"type":"text","data":"Summary"}
+{"type":"text","data":":**"}
+{"type":"text","data":" Source"}
+{"type":"text","data":" builds"}
+{"type":"text","data":" clean"}
+{"type":"text","data":" to"}
+{"type":"text","data":" "}
+{"type":"text","data":"32"}
+{"type":"text","data":" KB"}
+{"type":"text","data":";"}
+{"type":"text","data":" shipped"}
+{"type":"text","data":" ROM"}
+{"type":"text","data":" is"}
+{"type":"text","data":" a"}
+{"type":"text","data":" perfect"}
+{"type":"text","data":" rebuild"}
+{"type":"text","data":";"}
+{"type":"text","data":" NO"}
+{"type":"text","data":"VA"}
+{"type":"text","data":"_"}
+{"type":"text","data":"STATE"}
+{"type":"text","data":" "}
+{"type":"text","data":"1"}
+{"type":"text","data":"/"}
+{"type":"text","data":"2"}
+{"type":"text","data":"/"}
+{"type":"text","data":"3"}
+{"type":"text","data":" at"}
+{"type":"text","data":" `"}
+{"type":"text","data":"0"}
+{"type":"text","data":"x"}
+{"type":"text","data":"CF"}
+{"type":"text","data":"00"}
+{"type":"text","data":"`"}
+{"type":"text","data":" is"}
+{"type":"text","data":" present"}
+{"type":"text","data":";"}
+{"type":"text","data":" game"}
+{"type":"text","data":" is"}
+{"type":"text","data":" Break"}
+{"type":"text","data":"out"}
+{"type":"text","data":" with"}
+{"type":"text","data":" spark"}
+{"type":"text","data":" explosions"}
+{"type":"text","data":" on"}
+{"type":"text","data":" brick"}
+{"type":"text","data":" hits"}
+{"type":"text","data":"."}
+{"type":"text","data":" No"}
+{"type":"text","data":" files"}
+{"type":"text","data":" were"}
+{"type":"text","data":" modified"}
+{"type":"text","data":" ("}
+{"type":"text","data":"only"}
+{"type":"text","data":" `"}
+{"type":"text","data":"re"}
+{"type":"text","data":"built"}
+{"type":"text","data":"."}
+{"type":"text","data":"gb"}
+{"type":"text","data":"`"}
+{"type":"text","data":" was"}
+{"type":"text","data":" produced"}
+{"type":"text","data":" as"}
+{"type":"text","data":" a"}
+{"type":"text","data":" build"}
+{"type":"text","data":" artifact"}
+{"type":"text","data":")."}
+{"type":"available_commands","tools":["run_terminal_command","read_file","search_replace","list_dir","grep","kill_command_or_subagent","todo_write","get_command_or_subagent_output","spawn_subagent","scheduler_create","scheduler_delete","scheduler_list","monitor","search_tool","use_tool","workflow","enter_plan_mode","exit_plan_mode","ask_user_question","image_gen","image_edit","image_to_video","reference_to_video","write"],"commands":["compact","always-approve","context","session-info","feedback","deep-research","workflow","goal","loop"]}
+{"type":"usage","usage":{"input_tokens":333,"output_tokens":658,"cache_read_input_tokens":14336,"cache_creation_input_tokens":0,"reasoning_tokens":13},"signature":"8kNkMEq/e3QsdnXS6h3wtYAG5cAiT4sKnCTvfYYclMULMBHm9J3FWaHVDAYwgrA4P3YV7Xtnm7DGOiAx8mCxRGjDlz8SlUkCwsN3DL1VAG/iLT+Nx2va8bgDkbX3"}
+{"type":"end","stopReason":"end_turn","sessionId":"019fe49e-55a1-7352-b057-229cb1e677d3","requestId":"761c861e-4d49-443f-b499-43a5b4a4cd15","usage":{"input_tokens":20808,"cache_read_input_tokens":18304,"cache_creation_input_tokens":0,"output_tokens":1180,"reasoning_tokens":135,"total_tokens":40292},"num_turns":3,"total_cost_usd":0.0541872,"total_cost_usd_ticks":541872000,"modelUsage":{"grok-4.5":{"inputTokens":20808,"outputTokens":1180,"cacheReadInputTokens":18304,"cacheCreationInputTokens":0,"modelCalls":3,"costUSD":0.0541872}}}
