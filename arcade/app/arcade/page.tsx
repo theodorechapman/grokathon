@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listPublicGames, type GameManifest } from "@/lib/games";
-import { rankScore, redis, statsFor } from "@/lib/stats";
+import { rankScore, redis, statsFor, type GameStats } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
@@ -16,6 +16,12 @@ type ViewKey = keyof typeof VIEWS;
 
 // Hand-picked shelf headliners. They get the star badge and the favorites tab.
 const FAVORITES = new Set(["breakout", "snake", "yo-can-you-make-20ebef"]);
+
+type Family = { root: GameManifest; remixes: GameManifest[] };
+
+function familyPlays(fam: Family, stats: Map<string, GameStats>): number {
+  return Math.max(...[fam.root, ...fam.remixes].map((g) => stats.get(g.slug)!.plays));
+}
 
 const PLAYER_OPTIONS: { value: string; label: string; match: (g: GameManifest) => boolean }[] = [
   { value: "1", label: "1 player", match: (g) => (g.players ?? 1) === 1 },
@@ -56,17 +62,25 @@ export default async function ArcadePage({
       return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
     });
   const bySlug = new Map(ranked.map((g) => [g.slug, g]));
-  // Favorites is the hand-picked set, All is every game by plays, New is newest first.
+  // Favorites is the hand-picked set, New is flat newest first. All is
+  // family-stacked: one card per root game ranked by plays, remixes folded in.
+  const roots = ranked.filter((g) => !g.parent || !bySlug.has(g.parent));
+  const families: Family[] = roots.map((root) => ({
+    root,
+    remixes: ranked.filter((g) => g.parent === root.slug && g.slug !== root.slug),
+  }));
+  families.sort((a, b) => {
+    const diff = familyPlays(b, stats) - familyPlays(a, stats);
+    return diff !== 0 ? diff : b.root.createdAt.localeCompare(a.root.createdAt);
+  });
+  const remixesOf = new Map(families.map((f) => [f.root.slug, f.remixes]));
   let cards: GameManifest[];
   if (view === "favorites") {
     cards = ranked.filter((g) => FAVORITES.has(g.slug));
   } else if (view === "new") {
     cards = [...ranked].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   } else {
-    cards = [...ranked].sort((a, b) => {
-      const diff = stats.get(b.slug)!.plays - stats.get(a.slug)!.plays;
-      return diff !== 0 ? diff : b.createdAt.localeCompare(a.createdAt);
-    });
+    cards = families.map((f) => f.root);
   }
   const isNew = (g: GameManifest) =>
     Date.now() - new Date(g.createdAt).getTime() < 2 * 60 * 60 * 1000;
@@ -183,6 +197,44 @@ export default async function ArcadePage({
                         </a>
                       )}
                     </div>
+                    {view === "all" && (remixesOf.get(game.slug) ?? []).length > 0 && (
+                      <details className="familyFold">
+                        <summary>
+                          {remixesOf.get(game.slug)!.length}{" "}
+                          {remixesOf.get(game.slug)!.length === 1 ? "remix" : "remixes"}
+                        </summary>
+                        <ul className="remixList">
+                          {remixesOf.get(game.slug)!.map((remix) => (
+                            <li key={remix.slug} className="remixRow">
+                              <span className="remixMain">
+                                <Link href={`/g/${remix.slug}`} className="remixTitle">
+                                  {remix.title}
+                                </Link>
+                                <span className="cardByline">
+                                  by {remix.creator ? `@${remix.creator}` : "Nova"}
+                                </span>
+                              </span>
+                              {isNew(remix) && <span className="badgeNew">NEW</span>}
+                              <span className="gameControls">
+                                {stats.get(remix.slug)!.plays} plays
+                              </span>
+                              {tweetUrl(remix.slug) && (
+                                <a
+                                  href={tweetUrl(remix.slug)!}
+                                  className="xThreadLink"
+                                  title="View the thread on X"
+                                >
+                                  𝕏
+                                </a>
+                              )}
+                              <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
+                                ▶
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
                   </div>
                 </article>
               ))}
