@@ -1,14 +1,13 @@
 "use client";
 
-// How this game got made: stage timeline + the agent's action stream, replayed
-// from the bundle's build.json and build-log.ndjson (both static files).
+// How this game got made: one line of provenance from build.json plus a
+// button that opens the full agent log in the fullscreen modal.
 import { useEffect, useState } from "react";
-import { parseGrokStream, type BuildRecord, type TerminalLine } from "@/lib/build-log";
-import { BuildTerminal, type StageMark } from "../../build-terminal";
+import type { BuildRecord } from "@/lib/build-log";
+import { BuildLogModal } from "../../build-log-modal";
 
-export function BuildHistory({ slug }: { slug: string }) {
+export function BuildHistory({ slug, title }: { slug: string; title?: string }) {
   const [record, setRecord] = useState<BuildRecord | null>(null);
-  const [lines, setLines] = useState<TerminalLine[] | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -18,19 +17,11 @@ export function BuildHistory({ slug }: { slug: string }) {
       .catch(() => setRecord(null));
   }, [slug]);
 
-  useEffect(() => {
-    if (!open || lines !== null) return;
-    fetch(`/games/${slug}/build-log.ndjson`)
-      .then((res) => (res.ok ? res.text() : ""))
-      .then((text) => setLines(parseGrokStream(text)))
-      .catch(() => setLines([]));
-  }, [open, lines, slug]);
-
   if (!record) return null;
 
-  const stages: StageMark[] = record.stages.map((s) => ({ name: s.stage, at: Date.parse(s.at) }));
-  const first = stages[0]?.at;
-  const total = first ? Math.round((Date.parse(record.finishedAt) - first) / 1000) : null;
+  const first = record.stages[0]?.at;
+  const total =
+    first && !record.audit ? Math.round((Date.parse(record.finishedAt) - Date.parse(first)) / 1000) : null;
 
   return (
     <div className="buildHistory">
@@ -52,21 +43,20 @@ export function BuildHistory({ slug }: { slug: string }) {
         {record.job.tweet && (
           <>
             {" "}
-            <a href={`https://x.com/i/web/status/${record.job.tweet}`}>𝕏 the original ask</a>
+            <a
+              href={`https://x.com/i/web/status/${record.job.tweet}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              𝕏 the original ask
+            </a>
           </>
         )}
       </p>
-      <button className="buildReplayBtn" onClick={() => setOpen(!open)}>
-        {open ? "Hide the build log" : "Watch how it was built"}
+      <button className="buildReplayBtn" onClick={() => setOpen(true)}>
+        Watch how it was built
       </button>
-      {open && (
-        <BuildTerminal
-          stages={stages}
-          currentStage=""
-          lines={lines ?? [{ kind: "say", text: "loading the agent log…" }]}
-          live={false}
-        />
-      )}
+      {open && <BuildLogModal slug={slug} title={title ?? slug} onClose={() => setOpen(false)} />}
     </div>
   );
 }
