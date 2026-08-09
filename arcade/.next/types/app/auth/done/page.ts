@@ -1,4 +1,4 @@
-// File: /Users/matcha/Code/grokathon/arcade/app/auth/done/page.tsx
+// File: /Users/supratikpanuganti/grokathon/nova-wt/arcade/app/auth/done/page.tsx
 import * as entry from '../../../../../app/auth/done/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

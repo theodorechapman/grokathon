@@ -1,4 +1,4 @@
-// File: /Users/matcha/Code/grokathon/arcade/app/api/x/sync/route.ts
+// File: /Users/supratikpanuganti/grokathon/nova-wt/arcade/app/api/x/sync/route.ts
 import * as entry from '../../../../../../app/api/x/sync/route.js'
 import type { NextRequest } from 'next/server.js'
 
