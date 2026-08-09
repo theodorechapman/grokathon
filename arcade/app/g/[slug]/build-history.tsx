@@ -35,7 +35,9 @@ export function BuildHistory({ slug }: { slug: string }) {
   return (
     <div className="buildHistory">
       <p className="buildMeta">
-        {record.engine === "sandbox" ? (
+        {record.audit ? (
+          <>Shipped before build logs existed, then re-verified by the Grok Build CLI in a Vercel Sandbox microVM: recompile, ROM compare, contract check.</>
+        ) : record.engine === "sandbox" ? (
           <>Built by the Grok Build CLI in a Vercel Sandbox microVM{total !== null && <> in {total}s</>}.</>
         ) : (
           <>Built by Grok on the Nova pipeline{total !== null && <> in {total}s</>}.</>

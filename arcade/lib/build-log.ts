@@ -6,6 +6,8 @@ export type BuildStage = { at: string; stage: string; detail: string };
 
 export type BuildRecord = {
   engine: "sandbox" | "local";
+  /** True when the log is a post-ship provenance audit, not the original build. */
+  audit?: boolean;
   job: { prompt?: string; source?: string; parent?: string; creator?: string; tweet?: string };
   stages: BuildStage[];
   finishedAt: string;
