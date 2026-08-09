@@ -1,12 +1,14 @@
 // Build one Nova game inside a Vercel Sandbox by driving the official Grok
-// Build CLI as the coding agent: it rewrites main.c, compiles with GBDK's lcc,
-// and iterates until a clean 32KB ROM builds. Stage + log events stream to
-// stdout as NDJSON for the runner to forward and persist.
+// Build CLI as the coding agent. Two modes: "rom" (default) rewrites main.c
+// and compiles with GBDK's lcc until a clean 32KB ROM builds; "html" edits a
+// self-contained index.html (browser-game remixes). Stage + log events stream
+// to stdout as NDJSON for the runner to forward and persist.
 //
 // Usage: node build-in-sandbox.mjs <spec.json>
-// Spec: { slug, task, srcDir, outDir, attempts? } — srcDir holds main.c,
-// assets.c, assets.h; artifacts land in outDir (main.c, <slug>.gb,
-// build-log.ndjson). Exit 0 = verified ROM in outDir.
+// Spec: { slug, task, srcDir, outDir, mode?, attempts? } — rom srcDir holds
+// main.c/assets.c/assets.h and outDir gets main.c + <slug>.gb; html srcDir
+// holds index.html and outDir gets index.html. Both get build-log.ndjson.
+// Exit 0 = verified artifact in outDir.
 import { readFileSync, writeFileSync, appendFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { getVercelCredentials } from "./vercel-auth.mjs";
@@ -54,6 +56,15 @@ async function streamGrok(sandbox, task, logPath) {
   return done.exitCode;
 }
 
+async function verifyHtml(sandbox) {
+  // Cheap in-sandbox contract check; the runner re-validates after download.
+  const check = await sandbox.runCommand("sh", [
+    "-c",
+    `cd ${WORK} && test -s index.html && grep -q "nova:score" index.html`,
+  ]);
+  return check.exitCode === 0 ? "" : "index.html is missing or lost the nova:score contract call";
+}
+
 async function verifyBuild(sandbox, slug) {
   // Never trust the agent's word for it: recompile fresh and check the contract.
   const check = await sandbox.runCommand("sh", [
@@ -70,6 +81,7 @@ async function verifyBuild(sandbox, slug) {
 async function main() {
   const spec = JSON.parse(readFileSync(process.argv[2], "utf8"));
   const { slug, task, srcDir, outDir } = spec;
+  const html = spec.mode === "html";
   const attempts = spec.attempts ?? 3;
   mkdirSync(outDir, { recursive: true });
   const logPath = join(outDir, "build-log.ndjson");
@@ -95,8 +107,9 @@ async function main() {
   });
 
   try {
+    const sources = html ? ["index.html"] : ["main.c", "assets.c", "assets.h"];
     await sandbox.writeFiles(
-      ["main.c", "assets.c", "assets.h"].map((name) => ({
+      sources.map((name) => ({
         path: `${WORK}/${name}`,
         content: readFileSync(join(srcDir, name)),
       })),
@@ -113,17 +126,23 @@ async function main() {
         emit({ event: "stage", stage: "grok cli", detail: err });
         continue;
       }
-      emit({ event: "stage", stage: "compiling", detail: "verifying: fresh lcc build, 32KB ROM, NOVA_STATE intact" });
-      err = await verifyBuild(sandbox, slug);
+      emit({
+        event: "stage",
+        stage: "compiling",
+        detail: html
+          ? "verifying: index.html intact, nova:score contract wired"
+          : "verifying: fresh lcc build, 32KB ROM, NOVA_STATE intact",
+      });
+      err = html ? await verifyHtml(sandbox) : await verifyBuild(sandbox, slug);
       if (!err) break;
       emit({ event: "stage", stage: "compiling", detail: `verification failed: ${err.split("\n").at(-1)}` });
     }
     if (err) throw new Error(`build failed after ${attempts} attempts: ${err}`);
 
-    for (const name of ["main.c", `${slug}.gb`]) {
+    for (const name of html ? ["index.html"] : ["main.c", `${slug}.gb`]) {
       const got = await sandbox.downloadFile(
         { path: `${WORK}/${name}` },
-        { path: join(outDir, name === "main.c" ? "main.c" : `${slug}.gb`) },
+        { path: join(outDir, name) },
         { mkdirRecursive: true },
       );
       if (!got) throw new Error(`artifact missing from sandbox: ${name}`);
