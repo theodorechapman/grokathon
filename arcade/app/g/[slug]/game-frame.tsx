@@ -40,6 +40,17 @@ export function GameFrame({
     }
   }, []);
 
+  // On phones the header can still nudge the game partly below the fold
+  // (in-app browsers, small screens): bring the frame into view on load so
+  // the game is the first thing a visitor sees.
+  useEffect(() => {
+    if (window.innerWidth > 720) return;
+    const t = setTimeout(() => {
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => clearTimeout(t);
+  }, []);
+
   // Every finished run tallies its outcome, signed in or not. Completion
   // rate per game is the signal for what to build next.
   useEffect(() => {
