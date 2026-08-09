@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { redis } from "@/lib/stats";
 
 const CALLBACK_URI = "https://playgrokgames.vercel.app/api/x/authorize/callback";
-const SCOPES = "tweet.read tweet.write users.read offline.access";
+const SCOPES = "tweet.read tweet.write users.read like.read offline.access";
 
 /** One-time admin flow: redirects to X to mint the bot's user token (PKCE). */
 export async function GET(req: NextRequest) {

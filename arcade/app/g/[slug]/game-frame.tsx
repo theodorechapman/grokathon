@@ -107,17 +107,15 @@ export function GameFrame({
             onRemix={scrollToRemix}
           />
         ) : (
-          rom && (
-            <button
-              type="button"
-              className="restartFab"
-              title="Restart run"
-              aria-label="Restart run"
-              onClick={restartGame}
-            >
-              ↻
-            </button>
-          )
+          <button
+            type="button"
+            className="restartFab"
+            title="Restart run"
+            aria-label="Restart run"
+            onClick={restartGame}
+          >
+            ↻
+          </button>
         )}
       </div>
     </>

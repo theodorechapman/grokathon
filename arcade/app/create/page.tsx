@@ -1,8 +1,6 @@
 import { readSession } from "@/lib/session";
 import { listGames } from "@/lib/games";
 import { SiteNav } from "../site-nav";
-import { CreateBox } from "../arcade/create-box";
-import { SignInButton } from "../sign-in-button";
 import { MyCreations } from "../my/my-creations";
 
 export const dynamic = "force-dynamic";
@@ -30,17 +28,10 @@ export default async function CreatePage() {
         <a className="xCta" href={X_INTENT} target="_blank" rel="noopener noreferrer">
           𝕏 Post your game idea
         </a>
-        {session ? (
-          <>
-            <p className="xDrive">Or build it from here instead:</p>
-            <CreateBox signedIn />
-          </>
-        ) : (
-          <p className="xDrive">
-            Building from the site instead needs a name on it.{" "}
-            <SignInButton variant="nav" />
-          </p>
-        )}
+        <p className="xDrive">
+          That&apos;s the whole flow. Creating lives on X so every game starts
+          in public, with a thread anyone can remix from.
+        </p>
       </section>
       {session && (
         <section className="remixPanel">

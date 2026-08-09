@@ -126,13 +126,9 @@ export function EndScreen({
               See the leaderboard →
             </a>
           </p>
-        ) : signedIn ? (
-          <button className="endPrimary" onClick={() => void save()}>
-            Save to leaderboard
-          </button>
-        ) : (
+        ) : signedIn ? null : (
           <button className="endPrimary" onClick={signInAndSave}>
-            Sign in with 𝕏 to claim your spot on the board
+            Sign in with 𝕏 to see where you land on the board
           </button>
         ))}
       {!claimable && !signedIn && (
@@ -141,12 +137,12 @@ export function EndScreen({
         </button>
       )}
       {error && <p className="endErr">{error}</p>}
-      <button className={claimable || !signedIn ? "endGhost" : "endPrimary"} onClick={onReplay}>
+      <button className={!signedIn ? "endGhost" : "endPrimary"} onClick={onReplay}>
         {end.outcome === "win" ? "Play again" : "↻ Retry"}
       </button>
       {onRemix && (
         <button className="endGhost" onClick={onRemix}>
-          Remix this game
+          Remix this game on 𝕏
         </button>
       )}
     </div>
