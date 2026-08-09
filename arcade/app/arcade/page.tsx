@@ -14,7 +14,9 @@ const VIEWS = {
 type ViewKey = keyof typeof VIEWS;
 
 // Hand-picked shelf headliners. They get the star badge and the favorites tab.
-const FAVORITES = new Set(["breakout", "snake", "yo-can-you-make-20ebef"]);
+// Order here is the shelf order on the favorites tab.
+const FAVORITES_ORDER = ["postie", "kirbys-dream-land", "breakout"];
+const FAVORITES = new Set(FAVORITES_ORDER);
 
 type Family = { root: GameManifest; remixes: GameManifest[] };
 
@@ -75,7 +77,9 @@ export default async function ArcadePage({
   const remixesOf = new Map(families.map((f) => [f.root.slug, f.remixes]));
   let cards: GameManifest[];
   if (view === "favorites") {
-    cards = ranked.filter((g) => FAVORITES.has(g.slug));
+    cards = ranked
+      .filter((g) => FAVORITES.has(g.slug))
+      .sort((a, b) => FAVORITES_ORDER.indexOf(a.slug) - FAVORITES_ORDER.indexOf(b.slug));
   } else if (view === "new") {
     cards = [...ranked].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   } else {
