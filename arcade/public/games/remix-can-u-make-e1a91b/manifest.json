@@ -1,0 +1,12 @@
+{
+  "slug": "remix-can-u-make-e1a91b",
+  "title": "Postie",
+  "description": "Three-room wall-jump mail run with throwable balls on a red field.",
+  "controls": "D-pad move, A jump/wall-jump, Down pick up/throw ball",
+  "source": "remix",
+  "parent": "postie",
+  "creator": "suprapan07",
+  "rom": "remix-can-u-make-e1a91b.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T06:04:58Z"
+}
