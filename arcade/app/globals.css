@@ -1050,18 +1050,20 @@ a.navSegment:hover {
 .endBoard td {
   padding: 6px 10px;
 }
-.endBoardBlur {
+.endBoardWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.endRowBlur td:not(:first-child) {
   filter: blur(5px);
   pointer-events: none;
   user-select: none;
 }
-.endBoardGate {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  height: fit-content;
-  width: fit-content;
-  max-width: 95%;
+.endRowYou td {
+  color: var(--accent);
+  font-weight: 800;
 }
 .endRank {
   color: var(--text) !important;
