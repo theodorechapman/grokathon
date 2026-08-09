@@ -3,15 +3,16 @@ import type { Redis } from "@upstash/redis";
 import { redis } from "@/lib/stats";
 import { listPublicGames } from "@/lib/games";
 import { submitJob } from "@/lib/submit-job";
-import { getBotMe, getLikedTweetIds, getMentions, getReplies, postTweet, sendDm, type Tweet } from "@/lib/x-client";
+import { getBotMe, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
 
 const SITE = "https://playgrokgames.vercel.app";
 const MAX_JOBS_PER_RUN = 5;
-// A staged ask waits this long for a like before it's dropped.
+// An overflow ask waits this long for job budget before it's dropped.
 const PENDING_TTL_MS = 72 * 3600 * 1000;
 
-// The like is the moderation gate: asks from X stage here and only become
-// jobs once @suprapan07 (the bot account) has liked the tweet.
+// No like gate: every ask stages here and converts to a job on the next
+// sync pass, gated only by the per-run job budget. authorId is kept for the
+// record but nobody gets DMed.
 type PendingAsk = { prompt: string; parent: string | null; creator: string; authorId?: string; at: string };
 
 async function stageAsk(r: Redis, tweetId: string, ask: PendingAsk): Promise<void> {
@@ -21,11 +22,9 @@ async function stageAsk(r: Redis, tweetId: string, ask: PendingAsk): Promise<voi
 async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: number }): Promise<void> {
   const pending = (await r.hgetall<Record<string, string | PendingAsk>>("x:pendingjobs")) ?? {};
   if (Object.keys(pending).length === 0) return;
-  const liked = await getLikedTweetIds();
   for (const [tweetId, raw] of Object.entries(pending)) {
     const ask: PendingAsk = typeof raw === "string" ? JSON.parse(raw) : raw;
-    if (liked.has(tweetId)) {
-      if (budget.left <= 0) continue; // stays staged for the next run
+    if (budget.left > 0) {
       const jobSlug = await submitJob({
         prompt: ask.prompt,
         parent: ask.parent,
@@ -37,14 +36,6 @@ async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: numbe
       budget.left -= 1;
       // The ask lands in the creator's tab immediately, building included.
       await r.sadd(`umade:${ask.creator}`, jobSlug);
-      if (ask.authorId) {
-        // Remember who to DM when the bundle publishes.
-        await r.hset("x:asker", { [jobSlug]: ask.authorId });
-        await sendDm(
-          ask.authorId,
-          `Nova is building your game right now. Watch it happen live: ${SITE}/g/${jobSlug} — sign in with X there and it lands in your games tab.`
-        ).catch((err) => console.error("[x:sync] build DM failed:", err));
-      }
       await r.hdel("x:pendingjobs", tweetId);
     } else if (Date.now() - Date.parse(ask.at) > PENDING_TTL_MS) {
       await r.hdel("x:pendingjobs", tweetId);
@@ -97,14 +88,6 @@ async function announceNewGames(r: Redis, result: SyncResult): Promise<void> {
     const tweetId = await postOrDryRun(r, text, parentTweetId ?? undefined);
     await r.hset("x:gamepost", { [game.slug]: tweetId ? packId(tweetId) : "dryrun" });
     await r.sadd("x:posted", game.slug);
-    const askerId = await r.hget<string>("x:asker", game.slug);
-    if (askerId) {
-      await sendDm(
-        askerId,
-        `Your game is up: ${SITE}/g/${game.slug} — play it, share the thread, and reply to it with any sentence to remix.`
-      ).catch((err) => console.error("[x:sync] publish DM failed:", err));
-      await r.hdel("x:asker", game.slug);
-    }
     result.announced.push(game.slug);
   }
 }
