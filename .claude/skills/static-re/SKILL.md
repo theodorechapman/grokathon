@@ -68,9 +68,16 @@ behavior from code and state your reasoning as evidence.
 
 ## Goal shape
 
-The end state is a program where every reachable function has an
-evidence-backed name and the important RAM addresses are named data — enough
-for someone (or a later agent) to reimplement the program's logic in another
-language without reading raw bytes. Uncertain hypotheses about RAM addresses
-are valuable output too: annotate them with low confidence and evidence, so
-they can be tested later against a live run of the program.
+Static analysis should produce a causal map, not only a list of named helpers.
+Prioritize the top-level loop, interrupts, state/mode dispatch, input sampling,
+and the writers/readers that establish per-frame update order. For each dynamic
+subsystem, recover the state variables and transition routine well enough to
+describe its rule in `RECONSTRUCTION.md`. A sprite coordinate observed in RAM
+is a clue; the routine and conditions that change it are the model.
+
+The end state is a program where behavior-critical reachable functions have
+evidence-backed names and important RAM addresses are named data—enough to
+implement the program's transitions, not merely a sampled trace. Do not spend the run
+annotating uncertain functions merely to maximize annotation count. Uncertain
+hypotheses about RAM addresses remain valuable: annotate them with low
+confidence and evidence so they can be tested against a live run.

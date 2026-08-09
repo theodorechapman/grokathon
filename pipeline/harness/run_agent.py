@@ -26,6 +26,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shutil
 import subprocess
@@ -38,6 +39,8 @@ REPO = PIPELINE.parent                               # .../grokathon
 STATIC_DIR = PIPELINE / "static"
 SKILL = REPO / ".claude" / "skills" / "static-re" / "SKILL.md"
 DYNAMIC_SKILL = REPO / ".claude" / "skills" / "dynamic-re" / "SKILL.md"
+RECONSTRUCTION_TEMPLATE = Path(__file__).resolve().parent / "RECONSTRUCTION_TEMPLATE.md"
+BUILD_SCRIPT = Path(__file__).resolve().parent / "build_rom.sh"
 EMULATOR_LIB = PIPELINE / "bin" / (
     "libgrokboy.dylib" if sys.platform == "darwin" else "libgrokboy.so"
 )
@@ -114,16 +117,21 @@ def _make_workspace(base: Path, label: str | None) -> Path:
     return ws
 
 
-def _grok_cmd(ws: Path, prompt: str, model: str | None) -> list[str]:
+def _grok_cmd(ws: Path, prompt: str, model: str | None,
+              effort: str | None) -> list[str]:
     cmd = [
         shutil.which("grok") or "grok",
+        "--trust",
         "--cwd", str(ws),
         "--permission-mode", "bypassPermissions",
         "--output-format", "streaming-json",
         "--disable-web-search",
+        "--no-auto-update",
     ]
     if model:
         cmd += ["--model", model]
+    if effort:
+        cmd += ["--reasoning-effort", effort]
     cmd += ["-p", prompt]
     return cmd
 
@@ -152,6 +160,148 @@ def _codex_cmd(ws: Path, prompt: str, model: str | None,
     return cmd
 
 
+INITIAL_PROMPT = (
+    "Read TASK.md, static_re.md, and RECONSTRUCTION.md in this workspace, "
+    "then carry out the task. Continue until you can write a justified "
+    "terminal RUN_STATUS.json as specified by the task."
+)
+
+
+def _continuation_prompt(previous: dict) -> str:
+    priority = str(previous.get("next_priority") or "the highest-impact open ledger item")
+    return (
+        "A previous pass left this causal reconstruction incomplete. Continue in "
+        "the existing workspace; preserve and use its source, experiments, notes, "
+        "Ghidra database, and emulator artifacts. Do not summarize the prior pass "
+        "and do not restart broad reconnaissance. Attack this recorded priority "
+        f"immediately: {priority}\n\n"
+        "Then continue the evidence-model-implementation-comparison loop through "
+        "the remaining reachable core behavior. Read TASK.md and RECONSTRUCTION.md "
+        "for the stopping contract. Before yielding, replace RUN_STATUS.json."
+    )
+
+
+def _read_run_status(path: Path) -> dict:
+    """Read the agent-owned status declaration, normalizing malformed output."""
+    if not path.exists():
+        return {
+            "status": "incomplete",
+            "summary": "agent pass ended without RUN_STATUS.json",
+            "next_priority": "audit the existing ledger and continue its highest-impact open item",
+            "blockers": [],
+        }
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        return {
+            "status": "incomplete",
+            "summary": f"invalid RUN_STATUS.json: {exc}",
+            "next_priority": "repair the status file, then continue the highest-impact open item",
+            "blockers": [],
+        }
+    if not isinstance(data, dict) or data.get("status") not in {
+        "complete", "hard_blocked", "incomplete"
+    }:
+        return {
+            "status": "incomplete",
+            "summary": "RUN_STATUS.json has an unrecognized status",
+            "next_priority": "audit the existing ledger and continue its highest-impact open item",
+            "blockers": [],
+        }
+    data.setdefault("summary", "")
+    data.setdefault("next_priority", "")
+    data.setdefault("blockers", [])
+    return data
+
+
+def _agent_cmd(engine: str, ws: Path, prompt: str, model: str | None,
+               command: str, args: list[str], env: dict,
+               effort: str | None, tier: str | None) -> list[str]:
+    if engine == "grok":
+        return _grok_cmd(ws, prompt, model, effort)
+    return _codex_cmd(ws, prompt, model, command, args, env, effort, tier)
+
+
+def _write_meta(path: Path, meta: dict) -> None:
+    path.write_text(json.dumps(meta, indent=2) + "\n")
+
+
+def _run_passes(*, ws: Path, engine: str, model: str | None,
+                mcp_command: str, mcp_args: list[str], mcp_env: dict,
+                effort: str | None, tier: str | None, max_passes: int,
+                env: dict, meta_path: Path, meta: dict) -> int:
+    """Continue fresh agent passes until the agent declares a terminal state."""
+    log = ws / "agent.log"
+    status_path = ws / "RUN_STATUS.json"
+    previous: dict | None = None
+    pass_number = 0
+
+    print(f"log:       {log}\n")
+    with log.open("w") as lf:
+        while max_passes == 0 or pass_number < max_passes:
+            pass_number += 1
+            prompt = INITIAL_PROMPT if previous is None else _continuation_prompt(previous)
+            cmd = _agent_cmd(
+                engine, ws, prompt, model, mcp_command, mcp_args, mcp_env,
+                effort, tier,
+            )
+            if status_path.exists():
+                status_path.unlink()
+
+            started = datetime.now(timezone.utc)
+            banner = f"\n===== agent pass {pass_number} started {started.isoformat()} =====\n"
+            print(banner, end="")
+            lf.write(banner)
+            lf.flush()
+
+            proc = subprocess.Popen(
+                cmd, cwd=ws, env=env, stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT, text=True,
+            )
+            assert proc.stdout is not None
+            for line in proc.stdout:
+                sys.stdout.write(line)
+                lf.write(line)
+                lf.flush()
+            rc = proc.wait()
+            finished = datetime.now(timezone.utc)
+            status = _read_run_status(status_path)
+            record = {
+                "pass": pass_number,
+                "started": started.isoformat(),
+                "finished": finished.isoformat(),
+                "duration_seconds": (finished - started).total_seconds(),
+                "exit_code": rc,
+                "declaration": status,
+            }
+            meta.setdefault("passes", []).append(record)
+            _write_meta(meta_path, meta)
+
+            result = status["status"]
+            tail = (
+                f"===== agent pass {pass_number} exited {rc}; "
+                f"declared {result} =====\n"
+            )
+            print(tail, end="")
+            lf.write(tail)
+            lf.flush()
+
+            if rc != 0:
+                return rc
+            if result == "complete":
+                return 0
+            if result == "hard_blocked":
+                return 3
+            previous = status
+
+    message = (
+        f"agent reached the {max_passes}-pass safety ceiling without declaring "
+        "complete or hard_blocked"
+    )
+    print(message, file=sys.stderr)
+    return 2
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -162,6 +312,8 @@ def main():
                     help="reasoning effort override (e.g. low/medium/high)")
     ap.add_argument("--tier", default=None,
                     help="service tier override (codex only, e.g. fast/priority)")
+    ap.add_argument("--max-passes", type=int, default=8,
+                    help="agent-pass safety ceiling; 0 continues without a ceiling (default: 8)")
     ap.add_argument("--label", default=None, help="optional workspace name suffix")
     ap.add_argument("--workspaces-dir", default=str(PIPELINE / "workspaces"),
                     help="root dir for run workspaces (mount this in the container)")
@@ -172,6 +324,9 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                     help="scaffold the workspace and print the command, but do not launch")
     args = ap.parse_args()
+
+    if args.max_passes < 0:
+        ap.error("--max-passes must be zero or greater")
 
     rom = Path(args.rom).resolve()
     if not rom.exists():
@@ -186,6 +341,10 @@ def main():
         args.mcp, args.image, rom_path, workdir)
 
     shutil.copy(SKILL, ws / "static_re.md")
+    shutil.copy(RECONSTRUCTION_TEMPLATE, ws / "RECONSTRUCTION.md")
+    build_script = ws / "build_rom.sh"
+    shutil.copy(BUILD_SCRIPT, build_script)
+    build_script.chmod(0o755)
     _write_grok_config(ws, mcp_command, mcp_args, mcp_env)
     emulator = EMULATOR_LIB.exists()
     if emulator:
@@ -195,33 +354,30 @@ def main():
     else:
         write_task(ws, binfo["program_id"])
 
-    (ws / "run_meta.json").write_text(
-        __import__("json").dumps(
-            {
-                "created": datetime.now(timezone.utc).isoformat(),
-                "engine": args.engine,
-                "model": args.model,
-                "effort": args.effort,
-                "tier": args.tier,
-                "mcp": args.mcp,
-                "emulator": emulator,
-                "image": args.image if args.mcp == "docker" else None,
-                "rom_source": str(rom),
-                "program_id": binfo["program_id"],
-                "sha256": binfo["sha256"],
-                "sha256_original": binfo["sha256_original"],
-            },
-            indent=2,
-        )
-    )
+    meta_path = ws / "run_meta.json"
+    meta = {
+        "created": datetime.now(timezone.utc).isoformat(),
+        "engine": args.engine,
+        "model": args.model,
+        "effort": args.effort,
+        "tier": args.tier,
+        "max_passes": args.max_passes,
+        "mcp": args.mcp,
+        "emulator": emulator,
+        "image": args.image if args.mcp == "docker" else None,
+        "rom_source": str(rom),
+        "program_id": binfo["program_id"],
+        "sha256": binfo["sha256"],
+        "sha256_original": binfo["sha256_original"],
+        "passes": [],
+    }
+    _write_meta(meta_path, meta)
 
-    prompt = "Read TASK.md and static_re.md in this workspace, then carry out the task."
     env = os.environ.copy()
-    if args.engine == "grok":
-        cmd = _grok_cmd(ws, prompt, args.model)
-    else:
-        cmd = _codex_cmd(ws, prompt, args.model, mcp_command, mcp_args, mcp_env,
-                         args.effort, args.tier)
+    cmd = _agent_cmd(
+        args.engine, ws, INITIAL_PROMPT, args.model, mcp_command, mcp_args,
+        mcp_env, args.effort, args.tier,
+    )
 
     print(f"workspace: {ws}")
     print(f"program:   {binfo['program_id']}  (blinded from {rom.name})")
@@ -232,17 +388,21 @@ def main():
         print("\n[dry-run] workspace scaffolded; not launching agent.")
         return
 
-    log = ws / "agent.log"
-    print(f"log:       {log}\n")
-    with log.open("w") as lf:
-        proc = subprocess.Popen(cmd, cwd=ws, env=env, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, text=True)
-        for line in proc.stdout:
-            sys.stdout.write(line)
-            lf.write(line)
-            lf.flush()
-        rc = proc.wait()
-    print(f"\nagent exited with code {rc}")
+    rc = _run_passes(
+        ws=ws,
+        engine=args.engine,
+        model=args.model,
+        mcp_command=mcp_command,
+        mcp_args=mcp_args,
+        mcp_env=mcp_env,
+        effort=args.effort,
+        tier=args.tier,
+        max_passes=args.max_passes,
+        env=env,
+        meta_path=meta_path,
+        meta=meta,
+    )
+    print(f"\nagent run exited with code {rc}")
     sys.exit(rc)
 
 

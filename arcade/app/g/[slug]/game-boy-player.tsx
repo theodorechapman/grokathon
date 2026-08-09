@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Gameboy } from "gameboy-emulator";
+import { BrowserGameBoy, type GameBoyControl } from "./binjgb-core";
 import styles from "./game-boy-player.module.css";
-
-type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "select";
 
 // Nova arcade protocol (docs/game-bundle-contract.md): every pipeline ROM
 // writes one byte at 0xCF00 — 1 run started, 2 won, 3 lost. It's an absolute
@@ -13,7 +11,7 @@ type InputControl = "up" | "down" | "left" | "right" | "a" | "b" | "start" | "se
 const NOVA_STATE_ADDR = 0xcf00;
 
 function watchRun(
-  gameboy: Gameboy,
+  gameboy: BrowserGameBoy,
   onRunEnd: (end: { outcome: "win" | "loss"; score: number }) => void,
   isCancelled: () => boolean
 ) {
@@ -23,7 +21,7 @@ function watchRun(
       clearInterval(timer);
       return;
     }
-    const state = gameboy.memory.readByte(NOVA_STATE_ADDR);
+    const state = gameboy.readByte(NOVA_STATE_ADDR);
     if (startedAt === 0) {
       if (state === 1) startedAt = performance.now();
       return;
@@ -39,13 +37,18 @@ function watchRun(
 }
 type PlayerStatus = "loading" | "running" | "error";
 
-function installSilentAudioFallback() {
-  if (typeof SharedArrayBuffer !== "undefined") return;
-  Object.defineProperty(globalThis, "SharedArrayBuffer", {
-    configurable: true,
-    value: ArrayBuffer,
-  });
-}
+const KEYBOARD_CONTROLS: Partial<Record<string, GameBoyControl>> = {
+  ArrowUp: "up",
+  ArrowDown: "down",
+  ArrowLeft: "left",
+  ArrowRight: "right",
+  KeyA: "a",
+  KeyX: "a",
+  KeyB: "b",
+  KeyZ: "b",
+  Enter: "start",
+  ShiftRight: "select",
+};
 
 export function GameBoyPlayer({
   romUrl,
@@ -61,7 +64,7 @@ export function GameBoyPlayer({
   onRunEnd?: (end: { outcome: "win" | "loss"; score: number }) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const gameboyRef = useRef<Gameboy | null>(null);
+  const gameboyRef = useRef<BrowserGameBoy | null>(null);
   const [status, setStatus] = useState<PlayerStatus>("loading");
 
   useEffect(() => {
@@ -71,41 +74,36 @@ export function GameBoyPlayer({
       const canvas = canvasRef.current;
       if (!canvas) throw new Error("Game canvas is unavailable");
 
-      installSilentAudioFallback();
-      const [{ Gameboy }, response] = await Promise.all([
-        import("gameboy-emulator"),
-        fetch(romUrl),
-      ]);
+      const response = await fetch(romUrl);
       if (!response.ok) throw new Error(`ROM request failed with status ${response.status}`);
       if (cancelled) return;
 
-      const context = canvas.getContext("2d", { alpha: false });
-      if (!context) throw new Error("Canvas rendering is unavailable");
-
-      const gameboy = new Gameboy();
-      let drewFirstFrame = false;
-      gameboyRef.current = gameboy;
-      // Debug handle for probing WRAM from the console; harmless in prod.
-      (window as unknown as { __novaGb?: Gameboy }).__novaGb = gameboy;
-      gameboy.onFrameFinished((imageData: ImageData) => {
-        if (cancelled) return;
-        context.putImageData(imageData, 0, 0);
-        if (!drewFirstFrame) {
-          drewFirstFrame = true;
-          setStatus("running");
-        }
+      const gameboy = await BrowserGameBoy.create(await response.arrayBuffer(), canvas, () => {
+        if (!cancelled) setStatus("running");
       });
-      gameboy.loadGame(await response.arrayBuffer());
-      gameboy.run();
+      if (cancelled) {
+        gameboy.destroy();
+        return;
+      }
+      gameboyRef.current = gameboy;
+      gameboy.start();
 
       if (timeScored && onRunEnd) watchRun(gameboy, onRunEnd, () => cancelled);
     }
 
-    function preventArrowScroll(event: KeyboardEvent) {
-      if (event.code.startsWith("Arrow")) event.preventDefault();
+    function handleKey(event: KeyboardEvent, pressed: boolean) {
+      const control = KEYBOARD_CONTROLS[event.code];
+      if (!control) return;
+      event.preventDefault();
+      gameboyRef.current?.setControl(control, pressed);
     }
+    const keyDown = (event: KeyboardEvent) => handleKey(event, true);
+    const keyUp = (event: KeyboardEvent) => handleKey(event, false);
+    const releaseKeys = () => gameboyRef.current?.releaseAllControls();
 
-    document.addEventListener("keydown", preventArrowScroll);
+    window.addEventListener("keydown", keyDown);
+    window.addEventListener("keyup", keyUp);
+    window.addEventListener("blur", releaseKeys);
     start().catch((error: unknown) => {
       if (!cancelled) {
         console.error(error);
@@ -115,25 +113,19 @@ export function GameBoyPlayer({
 
     return () => {
       cancelled = true;
+      gameboyRef.current?.destroy();
       gameboyRef.current = null;
-      document.removeEventListener("keydown", preventArrowScroll);
+      window.removeEventListener("keydown", keyDown);
+      window.removeEventListener("keyup", keyUp);
+      window.removeEventListener("blur", releaseKeys);
     };
-  }, [romUrl, timeScored]);
+  }, [romUrl, timeScored, onRunEnd]);
 
-  function setControl(control: InputControl, pressed: boolean) {
-    const input = gameboyRef.current?.input;
-    if (!input) return;
-    if (control === "up") input.isPressingUp = pressed;
-    if (control === "down") input.isPressingDown = pressed;
-    if (control === "left") input.isPressingLeft = pressed;
-    if (control === "right") input.isPressingRight = pressed;
-    if (control === "a") input.isPressingA = pressed;
-    if (control === "b") input.isPressingB = pressed;
-    if (control === "start") input.isPressingStart = pressed;
-    if (control === "select") input.isPressingSelect = pressed;
+  function setControl(control: GameBoyControl, pressed: boolean) {
+    gameboyRef.current?.setControl(control, pressed);
   }
 
-  function touchProps(control: InputControl) {
+  function touchProps(control: GameBoyControl) {
     const release = (event: React.PointerEvent<HTMLButtonElement>) => {
       event.currentTarget.classList.remove(styles.pressed);
       setControl(control, false);
@@ -175,7 +167,7 @@ export function GameBoyPlayer({
         <div className={styles.system} aria-label="System controls">
           <button type="button" aria-label="Select" {...touchProps("select")}>Select</button>
           <button type="button" aria-label="Start" {...touchProps("start")}>Start</button>
-          <button type="button" onClick={onRestart}>Restart</button>
+          <button type="button" aria-label="Restart game" onClick={onRestart}>Restart</button>
         </div>
         <div className={styles.actions} aria-label="Action buttons">
           <button type="button" className={styles.b} aria-label="B button" {...touchProps("b")}>B</button>

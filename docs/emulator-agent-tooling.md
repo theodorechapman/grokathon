@@ -23,11 +23,11 @@ make smoke
 
 - `bin/libgrokboy.dylib` on macOS;
 - `bin/libgrokboy.so` on Linux; and
-- SameBoy's DMG boot ROM under `vendor/SameBoy/build/`.
+- SameBoy's DMG and CGB boot ROMs under `vendor/SameBoy/build/`.
 
-The smoke test boots Breakout, stops at a known breakpoint, triggers a
-watchpoint, reads and writes memory, restores a save state, captures a
-screenshot, and runs a SameBoy disassembly command.
+The smoke tests exercise that control surface with Breakout and also prove
+that the CGB-only, MBC5 Postie benchmark leaves its boot ROM, executes banked
+cartridge code, and exposes both VRAM banks and palettes.
 
 ## Which interface should an agent use?
 
@@ -52,6 +52,45 @@ python3 agent/sameboy.py raw_rom/breakout.gb
 
 Then send one JSON object per line on stdin. Keep this process alive for the
 whole debugging session because emulator state is held in memory.
+
+Use `SameBoyPair` after a reconstruction builds. It owns two isolated emulator
+instances, aligns them after their boot ROMs unmap, drives the same input/frame
+timeline, and compares visible and machine state:
+
+```python
+from agent.compareboy import SameBoyPair
+
+with SameBoyPair(
+    "workspaces/run/rom/program.gb",
+    "workspaces/run/src/reconstructed.gb",
+    artifacts="workspaces/run/artifacts/compare",
+) as pair:
+    pair.boot()
+    pair.run(60)
+    pair.checkpoint("title")
+    pair.press("start", frames=10)
+    pair.run(120)
+    pair.checkpoint("gameplay")
+    pair.write_report("workspaces/run/artifacts/compare/report.json")
+```
+
+Checkpoints compare native RGB, both VRAM banks, CGB palettes, direct OAM, and
+optional semantic memory mappings. Each produces separate lossless original,
+candidate, and difference PNGs plus a left-to-right overview triptych. Use the
+overview for quick visual review and the separate images/JSON as exact evidence.
+Use several checkpoints around inputs and transitions; video is useful for a
+human overview, but temporal alignment and encoding make it a poor exact oracle.
+
+The JSON CLI form accepts reusable timelines:
+
+```bash
+python3 agent/compareboy.py \
+  --original path/to/original.gb \
+  --candidate path/to/reconstructed.gb \
+  --script agent/compare_scripts/postie-first-room.json \
+  --artifacts artifacts/compare \
+  --output artifacts/compare/report.json
+```
 
 Use `harness/grokboy.h` only when integrating another language directly. It is
 the low-level C ABI, not the recommended agent interface.
@@ -538,6 +577,9 @@ Recommended tool set:
 - `emulator_screenshot`
 - `emulator_save_state`
 - `emulator_load_state`
+- `emulator_execution_coverage`
+- `emulator_asset_runs`
+- `emulator_video_state`
 - `emulator_reset`
 - `emulator_reload`
 - `emulator_close`
@@ -559,8 +601,8 @@ The following can be included in an agent system prompt:
 
 ## Current limitations
 
-- The bridge currently initializes SameBoy as a DMG-B Game Boy. CGB, SGB, and
-  other models are not selectable through the Python API yet.
+- The bridge automatically selects DMG-B or CGB-E from the cartridge header.
+  SGB and explicit model selection are not exposed through the Python API.
 - There is no graphical emulator window; observation is through screenshots and
   state inspection.
 - Audio capture is not exposed.
@@ -575,6 +617,7 @@ The following can be included in an agent system prompt:
 
 - `agent/sameboy.py`: recommended Python and JSON interfaces
 - `agent/breakout_smoke.py`: complete executable example
+- `agent/postie_smoke.py`: CGB/MBC5, bank coverage, and video-memory example
 - `harness/grokboy.h`: exported C ABI
 - `harness/grokboy.c`: native SameBoy bridge
 - `Makefile`: native build and smoke-test targets

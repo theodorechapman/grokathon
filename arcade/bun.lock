@@ -7,7 +7,6 @@
       "dependencies": {
         "@upstash/redis": "^1.38.2",
         "@vercel/analytics": "^2.0.1",
-        "gameboy-emulator": "^1.1.2",
         "next": "^15.4.0",
         "qrcode": "^1.5.4",
         "react": "^19.1.0",
@@ -131,8 +130,6 @@
     "emoji-regex": ["emoji-regex@8.0.0", "", {}, "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="],
 
     "find-up": ["find-up@4.1.0", "", { "dependencies": { "locate-path": "^5.0.0", "path-exists": "^4.0.0" } }, "sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw=="],
-
-    "gameboy-emulator": ["gameboy-emulator@1.1.2", "", {}, "sha512-T6h+J4yX4OpQsuQgWuDR5uk772qpnDiPtm1Pdp3Y1LdsEdTDqnhvqKm/ChbvJO6XxCanL7hm2MXlHD/PFJMvVA=="],
 
     "get-caller-file": ["get-caller-file@2.0.5", "", {}, "sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg=="],
 

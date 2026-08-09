@@ -22,7 +22,12 @@ sys.path.insert(0, "<agent-dir>")   # directory containing sameboy.py, see TASK.
 from sameboy import SameBoy
 
 with SameBoy("<rom-path>") as gb:   # ROM path from TASK.md
-    gb.run(frames=120)
+    # Do not mistake a long CGB boot animation for cartridge execution.
+    for _ in range(10):
+        gb.run(frames=60)
+        if gb.read(0xFF50)[0] & 1:
+            break
+    assert gb.read(0xFF50)[0] & 1, "boot ROM never unmapped"
     gb.press("left", frames=10)
     print(gb.registers())
     gb.screenshot("frame.png")      # 480x432 PNG, readable by vision
@@ -32,6 +37,12 @@ Write each experiment as a small Python script and run it from the shell. A
 script boots the ROM fresh, so make experiments reproducible from cold:
 deterministic input sequences, and save states for expensive-to-reach points.
 Keep one `SameBoy` instance per script; a new instance reboots the ROM.
+
+Start by calling `gb.status()`. Its `hardware` and `cartridge` objects identify
+DMG versus CGB mode, the currently mapped ROM/RAM/VRAM banks, cartridge type,
+and declared bank counts. The CGB boot animation can take several hundred
+frames. FF50 bit 0 is the authoritative boundary: screenshots, traces, and
+input before it becomes 1 describe the boot ROM, not the target cartridge.
 
 ## Execution
 
@@ -119,6 +130,22 @@ gb.run(frames=240); gb.press("start", frames=60); gb.run(frames=600)
 seeds = gb.call_targets()   # e.g. [{"canonical": "ROM5:4c00", "bank": 5, ...}, ...]
 ```
 
+For complete evidence rather than function-entry seeds, use the physical
+execution trace. It losslessly compresses distinct `(ROM bank, PC)` addresses
+into per-bank ranges and separately records the switchable-bank timeline:
+
+```python
+gb.execution_trace(True)
+# ...boot fully and exercise title, menus, and gameplay...
+gb.execution_trace(False)
+coverage = gb.execution_coverage()
+print(coverage["count"], coverage["banks"], coverage["bank_events"])
+```
+
+Use call targets as `create_functions` seeds; use full coverage to see which
+physical banks and code regions actually ran, to prioritize disassembly, and
+to measure whether a new input sequence reached anything new.
+
 Then, via the staticre tools:
 
 ```
@@ -136,12 +163,13 @@ The call trace recovers *code*; the *data* (tiles, background maps) is copied
 into VRAM at runtime and won't be found that way. To embed the real graphics
 instead of placeholders, trace the copies: while the game draws a screen, the
 asset trace attributes every VRAM write to the ROM byte it came from and
-coalesces straight copy loops into `(bank, src, dst, length)` runs.
+coalesces straight copy loops into
+`(bank, src, vram_bank, dst, length)` runs.
 
 ```python
 gb.asset_trace(True)
 gb.run(frames=240)          # let the title / a stage draw itself
-runs = gb.asset_runs()      # [{"canonical": "ROM6:5a00", "dst": 0x8000, "length": 4096}, ...]
+runs = gb.asset_runs()      # includes physical source ROM and destination VRAM banks
 ```
 
 Two cases, distinguished by a run's length:
@@ -153,8 +181,10 @@ Two cases, distinguished by a run's length:
   placeholder.
 - **Decompressed copy** (a short source span feeding a long dest region): the
   ROM source is compressed and not directly usable. Snapshot the *result* from
-  VRAM instead — `gb.read(0x8000, length)` gives the decompressed tiles — and
-  embed those bytes.
+  VRAM instead. On CGB, do not use a CPU-window read alone because it sees only
+  the currently selected VRAM bank. `gb.video_state("artifacts/video")` dumps
+  `vram0.bin`, `vram1.bin`, `bgp.bin`, and `obp.bin`, with SHA-256 provenance
+  in its return value. Embed the relevant bytes.
 
 Only assets that are actually drawn during your play-through are captured, so
 exercise the screens you want to reproduce. Provenance (which ROM bank/address
@@ -169,6 +199,98 @@ gb.screenshot("frame.png", scale=1)      # native 160x144
 
 Run at least one frame first. View screenshots to check what the game is
 actually showing — they are sized for vision models.
+
+## Comparing the reconstruction (second emulator)
+
+Once `src/reconstructed.gb` builds, run it in a separate SameBoy instance and
+drive both ROMs with the same cartridge-relative timeline. `SameBoyPair` is a
+differential debugger and evidence-gathering instrument, not a grader. It boots
+each ROM independently past `FF50`, then compares lossless native RGB, VRAM,
+CGB palettes, direct OAM, and selected CPU state:
+
+```python
+import sys
+sys.path.insert(0, "/opt/pipeline/agent")
+from compareboy import SameBoyPair
+
+with SameBoyPair(
+    "rom/program-....gb",
+    "src/reconstructed.gb",
+    artifacts="artifacts/compare",
+) as pair:
+    print(pair.boot())
+    print(pair.trace("title-idle", 60))
+    pair.press("start", frames=10)
+    pair.save_pair("room-start")
+    print(pair.trace(
+        "room-idle", 118,
+        probes=[{
+            "name": "player-x",
+            "original_address": 0xc4ec,
+            "candidate_address": 0xc100,
+            "type": "u8",
+        }],
+    ))
+    pair.load_pair("room-start")
+    print(pair.trace("room-right", 118, buttons=["right"]))
+    pair.write_report("artifacts/compare/report.json")
+```
+
+`trace()` observes every frame by default and stops on the first requested
+channel divergence, preserving the exact frame and localized evidence. Named
+semantic probes decode corresponding state even when the two ROMs use
+different addresses. `save_pair()` / `load_pair()` make alternate input and
+timing experiments start from precisely corresponding states. Use
+`capture_every=N` to retain a PNG sequence at an intentional cadence; leave it
+unset when the first-divergence PNG is enough. `reload_pair()` reopens both ROMs
+after rebuilding the candidate so the next experiment starts cleanly.
+
+The divergence record decodes differing OAM entries into sprite coordinates,
+classifies VRAM offsets as tile data or tilemaps, identifies palette entries,
+and gives absolute addresses for mapped-memory differences. Once a semantic
+original address looks causal, connect it back to code:
+
+```python
+writer = pair.find_original_writer(0xc4ec, frames=600, buttons=["right"])
+print(writer.get("writer_pc"), writer.get("disassembly"), writer.get("backtrace"))
+```
+
+For alternate branches, `with pair.branch("before-jump"):` automatically
+restores both ROMs afterward. `bisect_persistent_divergence()` is faster when a
+mismatch is known to persist; use `trace()` for transient differences because
+binary search cannot safely find a mismatch that later reconverges.
+
+Each recorded checkpoint writes separate lossless `.original.png`, `.candidate.png`, and
+amplified `.diff.png` files, plus one `.overview.png` triptych ordered
+original/candidate/difference from left to right. The separate files remain the
+exact visual evidence; the overview saves vision-tool calls. A single moment
+can conceal timing and behavior errors. Prefer per-frame traces around dynamic
+behavior and sparse checkpoints for stable screens. Video is useful as a human
+overview, but exact PNG frames plus machine state are more useful for
+attribution: video encoding and temporal alignment obscure the first causal
+mismatch.
+
+For a reusable timeline, run the CLI with a JSON script. See
+`/opt/pipeline/agent/compare_scripts/postie-first-room.json` for the format:
+
+```sh
+python /opt/pipeline/agent/compareboy.py \
+  --original rom/program-....gb \
+  --candidate src/reconstructed.gb \
+  --script experiments/compare.json \
+  --artifacts artifacts/compare \
+  --output artifacts/compare/report.json
+```
+
+Map semantic state explicitly: `original_address` comes from reverse
+engineering, while `candidate_address` comes from the reconstruction's map or
+symbol file. The `address` shorthand is only appropriate when both layouts are
+intentionally identical. A candidate mismatch falsifies the reconstruction; a
+candidate match does not prove untested behavior. Probe types include `u8`,
+`s8`, `u16le`, `s16le`, and `hex`; optional `mask` and `shift` expose packed
+state. Actively branch from save states with different idle lengths, tap/hold
+durations, chords, boundaries, failures, and restarts. Record exact matches,
+divergences, causal explanations, and untested scope in `RECONSTRUCTION.md`.
 
 ## Save states
 
@@ -204,13 +326,11 @@ hit = gb.run(frames=3600)
 print(hit["registers"]["pc"], gb.debug("disassemble/10 pc"), gb.debug("backtrace"))
 ```
 
-Check your reconstruction against reality: drive the original ROM with a fixed
-input sequence, log the RAM addresses from your recovered memory map each
-frame, and check that your C logic predicts the same state transitions.
-Disagreements are either a bug in your reconstruction or a wrong hypothesis —
-investigate both ways, and record the outcome in `NOTES.md` with the trace as
-evidence. Only the original program runs in the emulator; never load your own
-build into it.
+Check your reconstruction against reality with `SameBoyPair`: drive the
+original and candidate with a fixed input sequence and compare the RAM
+addresses from your recovered memory map at multiple frames. Disagreements are
+either a bug in the reconstruction or a wrong hypothesis—investigate both ways
+and record the outcome in `NOTES.md` with the comparison report as evidence.
 
 ## Discipline
 
