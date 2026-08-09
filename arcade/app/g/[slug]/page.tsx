@@ -150,6 +150,29 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       </section>
       )}
 
+      {remixes.length > 0 && (
+        <section className="remixPanel">
+          <h2>Remixes of {game.title}</h2>
+          <ul className="remixList">
+            {remixes.map((remix) => (
+              <li key={remix.slug} className="remixRow">
+                <span className="remixMain">
+                  <Link href={`/g/${remix.slug}`} className="remixTitle">
+                    {remix.title}
+                  </Link>
+                  <span className="cardByline">
+                    by {remix.creator ? `@${remix.creator}` : "Nova"}
+                  </span>
+                </span>
+                <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
+                  ▶
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="remixPanel">
         <h2>How this game was built</h2>
         {game.rom ? (
@@ -199,29 +222,6 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           </p>
         )}
       </section>
-
-      {remixes.length > 0 && (
-        <section className="remixPanel">
-          <h2>Remixes of {game.title}</h2>
-          <ul className="remixList">
-            {remixes.map((remix) => (
-              <li key={remix.slug} className="remixRow">
-                <span className="remixMain">
-                  <Link href={`/g/${remix.slug}`} className="remixTitle">
-                    {remix.title}
-                  </Link>
-                  <span className="cardByline">
-                    by {remix.creator ? `@${remix.creator}` : "Nova"}
-                  </span>
-                </span>
-                <Link href={`/g/${remix.slug}`} className="playBtn playBtnSm">
-                  ▶
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
     </main>
   );
 }
