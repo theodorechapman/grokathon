@@ -26,7 +26,7 @@ import tempfile
 import threading
 import time
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -44,6 +44,16 @@ SYNC_SECRET = os.environ.get("NOVA_X_SYNC_SECRET", "")
 SANDBOX_ENABLED = os.environ.get("NOVA_SANDBOX") == "1"
 SANDBOX_SCRIPT = REPO / "pipeline" / "sandbox" / "build-in-sandbox.mjs"
 SANDBOX_TIMEOUT = 960  # just past the microVM's 900s lifetime cap
+PREWARM_SCRIPT = REPO / "pipeline" / "sandbox" / "prewarm-sandbox.mjs"
+PLAYTEST_SCRIPT = REPO / "pipeline" / "verify" / "playtest-rom.mjs"
+# Builds run concurrently (they're grok sessions in remote microVMs; the Mac
+# just streams logs). Ships are serialized behind GIT_LOCK.
+CONCURRENCY = int(os.environ.get("NOVA_CONCURRENCY", "6"))
+POLL_SECONDS = 15
+# NOVA_PREWARM=1 keeps one microVM booted ahead of demand so the next build
+# skips the cold start. Costs an idling VM; off unless asked for.
+PREWARM_ENABLED = SANDBOX_ENABLED and os.environ.get("NOVA_PREWARM") == "1"
+WARM_MAX_AGE = 180  # past this the VM's remaining lifetime can't cover a build
 
 
 # Per-slug stage timeline, persisted into the bundle as build.json so a game
@@ -261,6 +271,80 @@ def agent_task(prompt: str, creating: bool) -> str:
     return head + AGENT_RULES + AGENT_WORKFLOW
 
 
+# One microVM kept booted ahead of demand (NOVA_PREWARM=1). take/ensure are
+# called from different threads; WARM_LOCK guards the handoff.
+WARM_LOCK = threading.Lock()
+_warm: dict | None = None
+_prewarming = False
+
+
+def take_warm_sandbox() -> str | None:
+    """Claim the standing warm microVM's name, or None if there isn't a fresh
+    one. Stale VMs are dropped: their remaining lifetime can't cover a build."""
+    global _warm
+    with WARM_LOCK:
+        warm, _warm = _warm, None
+    if warm and time.time() - warm["at"] <= WARM_MAX_AGE:
+        return warm["name"]
+    return None
+
+
+def _prewarm() -> None:
+    global _warm, _prewarming
+    name = f"nova-warm-{int(time.time())}"
+    try:
+        proc = subprocess.run(
+            ["node", str(PREWARM_SCRIPT), name],
+            capture_output=True, text=True, timeout=300, cwd=PREWARM_SCRIPT.parent,
+        )
+        if proc.returncode == 0:
+            with WARM_LOCK:
+                _warm = {"name": name, "at": time.time()}
+            log(f"prewarmed sandbox {name}")
+        else:
+            log(f"prewarm failed: {(proc.stderr + proc.stdout)[-200:]}")
+    except subprocess.TimeoutExpired:
+        log("prewarm timed out")
+    finally:
+        with WARM_LOCK:
+            _prewarming = False
+
+
+def ensure_warm_sandbox() -> None:
+    """Keep one warm microVM standing (best effort, one prewarm at a time)."""
+    global _warm, _prewarming
+    if not PREWARM_ENABLED:
+        return
+    with WARM_LOCK:
+        if _warm and time.time() - _warm["at"] > WARM_MAX_AGE:
+            _warm = None
+        if _warm or _prewarming:
+            return
+        _prewarming = True
+    threading.Thread(target=_prewarm, daemon=True).start()
+
+
+def playtest(rom: Path, slug: str) -> str:
+    """Boot the ROM headless in the arcade's own emulator and prove it plays:
+    screen renders, NOVA_STATE leaves 0. Empty string = pass. Any harness
+    error is a failure — this gate never soft-passes."""
+    try:
+        proc = subprocess.run(
+            ["node", str(PLAYTEST_SCRIPT), str(rom)],
+            capture_output=True, text=True, timeout=120,
+        )
+    except (subprocess.TimeoutExpired, OSError) as e:
+        return f"playtest could not run: {e}"
+    # The emulator prints cartridge info first; the verdict is the last line.
+    try:
+        verdict = json.loads(proc.stdout.strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return f"playtest produced no verdict: {(proc.stderr or proc.stdout)[-300:]}"
+    if verdict.get("ok"):
+        return ""
+    return "; ".join(verdict.get("problems") or ["playtest failed"])
+
+
 def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
     """Build in a Vercel Sandbox driven by the Grok Build CLI.
 
@@ -283,6 +367,7 @@ def sandbox_build(job: dict, slug: str, lineage: str | None, creating: bool):
         "srcDir": str(src),
         "outDir": str(out),
         "attempts": 3,
+        "sandboxName": take_warm_sandbox(),
     }))
     try:
         proc = subprocess.Popen(
@@ -562,6 +647,18 @@ def process_job(job: dict) -> Path | None:
     lineage = target or job.get("parent")
     # A from-scratch creation: no lineage to patch, so the skeleton transforms.
     creating = lineage is None
+    # Cover art only needs the prompt, so grok-imagine draws it during the
+    # build instead of after it. make_cover never raises (parent cover is its
+    # internal fallback); the join at bundle time picks up whatever it made.
+    cover_tmp = Path(tempfile.mkdtemp(prefix=f"nova-cover-{slug}-")) / "cover.png"
+    cover_thread = threading.Thread(
+        target=make_cover,
+        args=(job["prompt"], cover_tmp,
+              "Retro Game Boy game cover art" if creating
+              else "Retro Game Boy game cover art for a breakout remix"),
+        daemon=True,
+    )
+    cover_thread.start()
     report(
         slug,
         "forking source",
@@ -574,8 +671,15 @@ def process_job(job: dict) -> Path | None:
         built = sandbox_build(job, slug, lineage, creating)
         if built:
             main_c, rom, sandbox_log = built
-            engine = "sandbox"
-        else:
+            report(slug, "playtesting", "booting the rom headless in the arcade's emulator")
+            err = playtest(rom, slug)
+            if err:
+                log(f"job {slug}: sandbox rom failed playtest: {err}")
+                report(slug, "playtesting", f"failed: {err[:140]} — rebuilding")
+                main_c, rom, sandbox_log = None, None, None
+            else:
+                engine = "sandbox"
+        if not rom:
             log(f"job {slug}: falling back to the local build")
     if not rom:
         for attempt in range(3):
@@ -585,7 +689,13 @@ def process_job(job: dict) -> Path | None:
             rom, err = build_rom(main_c, slug)
             if rom:
                 report(slug, "verifying", f"NOVA_STATE protocol at WRAM 0xCF00, rom is {rom.stat().st_size} bytes")
-                break
+                err = playtest(rom, slug)
+                if not err:
+                    break
+                rom = None
+                log(f"job {slug}: rom failed playtest (attempt {attempt + 1}): {err}")
+                report(slug, "playtesting", f"failed: {err[:140]} — rebuilding")
+                continue
             log(f"job {slug}: build failed (attempt {attempt + 1}): {err.splitlines()[-1] if err else '?'}")
     if not rom:
         if creating and job.get("source") in ("site", "x"):
@@ -598,12 +708,13 @@ def process_job(job: dict) -> Path | None:
     bundle = GAMES / slug
     bundle.mkdir(parents=True, exist_ok=True)
     shutil.copy(rom, bundle / f"{slug}.gb")
-    report(slug, "cover art", "grok-imagine drawing the cover")
-    make_cover(
-        job["prompt"], bundle / "cover.png",
-        art="Retro Game Boy game cover art" if creating
-        else "Retro Game Boy game cover art for a breakout remix",
-    )
+    report(slug, "cover art", "grok-imagine drew the cover during the build")
+    cover_thread.join(timeout=150)
+    if cover_tmp.exists():
+        shutil.copy(cover_tmp, bundle / "cover.png")
+    elif (GAMES / "breakout" / "cover.png").exists():
+        # Cover thread hung or died without its own fallback landing.
+        shutil.copy(GAMES / "breakout" / "cover.png", bundle / "cover.png")
     manifest = {
         "slug": slug,
         "title": title,
@@ -638,38 +749,42 @@ def process_job(job: dict) -> Path | None:
     return bundle
 
 
-def cycle() -> int:
-    subprocess.run(["git", "pull", "-q", "--no-rebase"], cwd=REPO, check=True)
-    job_files = sorted(JOBS.glob("*.json"))[:3]
-    if not job_files:
-        return 0
-    jobs = [json.loads(f.read_text()) for f in job_files]
-    with ThreadPoolExecutor(3) as pool:
-        bundles = list(pool.map(process_job, jobs))
+# All git operations serialize behind this lock: builds run concurrently but
+# the repo mutates one commit at a time.
+GIT_LOCK = threading.Lock()
 
-    shipped = []
-    for f, bundle in zip(job_files, bundles):
+
+def git(*args: str, check: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", *args], cwd=REPO, check=check)
+
+
+def ship(job_file: Path, bundle: Path | None) -> None:
+    """Commit and push one finished job — bundle in, job file out — the moment
+    it lands, so a slow build never holds a finished game hostage."""
+    with GIT_LOCK:
         if bundle:
-            subprocess.run(["git", "add", str(bundle)], cwd=REPO, check=True)
-            subprocess.run(["git", "rm", "-q", str(f)], cwd=REPO, check=True)
-            shipped.append(bundle.name)
+            git("add", str(bundle))
+            git("rm", "-q", "--ignore-unmatch", str(job_file))
+            msg = f"runner: ship {bundle.name}"
         else:
-            f.rename(f.with_suffix(".failed"))
-            subprocess.run(["git", "add", "-A", str(JOBS)], cwd=REPO, check=True)
-    if shipped or any(b is None for b in bundles):
-        msg = f"runner: ship {', '.join(shipped) if shipped else 'nothing'} ({len(job_files)} jobs)"
-        subprocess.run(["git", "commit", "-q", "-m", msg], cwd=REPO, check=True)
-        for attempt in range(4):
-            pushed = subprocess.run(["git", "push", "-q"], cwd=REPO).returncode == 0
-            if pushed:
-                break
-            subprocess.run(["git", "pull", "-q", "--no-rebase"], cwd=REPO, check=True)
-        else:
-            raise RuntimeError("push failed after retries")
-        log(f"pushed: {msg}")
-        for name in shipped:
-            report(name, "published")
-    return len(shipped)
+            if job_file.exists():
+                job_file.rename(job_file.with_suffix(".failed"))
+            git("add", "-A", str(JOBS))
+            msg = f"runner: fail {job_file.stem}"
+        staged = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"], cwd=REPO,
+        ).returncode != 0
+        if not staged:
+            return  # job vanished upstream and nothing else changed
+        git("commit", "-q", "-m", msg)
+        for _ in range(4):
+            if subprocess.run(["git", "push", "-q"], cwd=REPO).returncode == 0:
+                log(f"pushed: {msg}")
+                if bundle:
+                    report(bundle.name, "published")
+                return
+            git("pull", "-q", "--no-rebase")
+        raise RuntimeError(f"push failed after retries ({msg})")
 
 
 def poke_sync() -> None:
@@ -692,19 +807,42 @@ def poke_sync() -> None:
 
 def main() -> None:
     once = "--once" in sys.argv
-    log(f"nova runner up (base={BASE_SRC.name}, model={MODEL})")
+    log(f"nova runner up (base={BASE_SRC.name}, model={MODEL}, "
+        f"concurrency={CONCURRENCY}, prewarm={'on' if PREWARM_ENABLED else 'off'})")
+    pool = ThreadPoolExecutor(CONCURRENCY)
+    in_flight: dict[Path, Future] = {}
     last_sync = 0.0
     while True:
         try:
-            cycle()
+            with GIT_LOCK:
+                git("pull", "-q", "--no-rebase")
+            for f in sorted(JOBS.glob("*.json")):
+                if f in in_flight or len(in_flight) >= CONCURRENCY:
+                    continue
+                try:
+                    job = json.loads(f.read_text())
+                except ValueError as e:
+                    log(f"job {f.name}: unreadable json ({e})")
+                    ship(f, None)
+                    continue
+                in_flight[f] = pool.submit(process_job, job)
+            for f in [f for f, fut in in_flight.items() if fut.done()]:
+                fut = in_flight.pop(f)
+                try:
+                    bundle = fut.result()
+                except Exception as e:
+                    log(f"job {f.stem}: crashed: {e}")
+                    bundle = None
+                ship(f, bundle)
+            ensure_warm_sandbox()
         except Exception as e:
-            log(f"cycle error: {e}")
-        if once:
+            log(f"loop error: {e}")
+        if once and not in_flight and not list(JOBS.glob("*.json")):
             break
         if time.time() - last_sync >= 120:
             poke_sync()
             last_sync = time.time()
-        time.sleep(45)
+        time.sleep(POLL_SECONDS)
 
 
 if __name__ == "__main__":

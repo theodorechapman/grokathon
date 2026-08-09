@@ -75,10 +75,17 @@ async function main() {
   const logPath = join(outDir, "build-log.ndjson");
   writeFileSync(logPath, "");
 
-  emit({ event: "stage", stage: "sandbox up", detail: "booting a Vercel Sandbox microVM with GBDK + Grok Build CLI" });
+  emit({
+    event: "stage",
+    stage: "sandbox up",
+    detail: spec.sandboxName
+      ? "attaching to a prewarmed Vercel Sandbox microVM (GBDK + Grok Build CLI ready)"
+      : "booting a Vercel Sandbox microVM with GBDK + Grok Build CLI",
+  });
   const sandbox = await provisionSandbox({
     credentials: getVercelCredentials(),
     snapshotId: process.env.NOVA_SANDBOX_SNAPSHOT_ID,
+    name: spec.sandboxName,
     onStep: (label) => emit({ event: "stage", stage: "sandbox up", detail: label }),
   });
   // The runner terminates us on timeout; stop the microVM before dying so it
