@@ -1,9 +1,9 @@
 # harness — headless RE agent runner
 
 Launches a headless coding agent in an isolated, timestamped workspace with
-access to the `staticre` (Ghidra) MCP server plus normal file tools
-(read/write/search/shell). Later runs will add MCP servers for computer-use of
-the running game and live memory inspection.
+access to the `staticre` (Ghidra) MCP server, the original-ROM `SameBoy`
+controller, a dual-ROM `SameBoyPair` comparison interface, plus normal file
+tools (read/write/search/shell).
 
 ## Usage
 
@@ -62,3 +62,10 @@ pipeline/harness/docker/run.sh rom.gb   # one containerized agent run
 
 Screenshots from the emulator bridge are PNGs upscaled 3x by default
 (480x432) so vision models can read them; pass `scale` (1..8) to override.
+
+After the reconstruction builds, `agent/compareboy.py` runs the original and
+candidate in independent emulator instances, aligns them after their boot ROMs
+unmap, replays identical inputs, and compares frames, VRAM, palettes, OAM, and
+selected memory. It writes separate lossless original/candidate/difference PNGs,
+a single side-by-side overview PNG per checkpoint, and a structured JSON report. See
+`agent/compare_scripts/postie-first-room.json` for the script format.

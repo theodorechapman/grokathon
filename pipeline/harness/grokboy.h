@@ -189,6 +189,7 @@ SB_EXPORT int sb_copy_vram_bank(
     sb_handle *handle, uint16_t bank, uint8_t *out, size_t length);
 SB_EXPORT int sb_copy_palette(
     sb_handle *handle, bool object_palette, uint8_t *out, size_t length);
+SB_EXPORT int sb_copy_oam(sb_handle *handle, uint8_t *out, size_t length);
 
 SB_EXPORT int sb_copy_frame_rgb(sb_handle *handle, uint8_t *out, size_t length);
 SB_EXPORT int sb_save_state(sb_handle *handle, const char *path);

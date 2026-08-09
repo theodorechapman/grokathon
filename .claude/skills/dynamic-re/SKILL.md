@@ -200,6 +200,69 @@ gb.screenshot("frame.png", scale=1)      # native 160x144
 Run at least one frame first. View screenshots to check what the game is
 actually showing — they are sized for vision models.
 
+## Comparing the reconstruction (second emulator)
+
+Once `src/reconstructed.gb` builds, run it in a separate SameBoy instance and
+drive both ROMs with the same cartridge-relative timeline. `SameBoyPair` boots
+each ROM independently past `FF50`, then compares lossless native RGB, VRAM,
+CGB palettes, direct OAM, and selected CPU memory ranges:
+
+```python
+import sys
+sys.path.insert(0, "/opt/pipeline/agent")
+from compareboy import SameBoyPair
+
+with SameBoyPair(
+    "rom/program-....gb",
+    "src/reconstructed.gb",
+    artifacts="artifacts/compare",
+) as pair:
+    print(pair.boot())
+    pair.run(60)
+    print(pair.checkpoint("title"))
+    pair.press("start", frames=10)
+    pair.run(118)
+    print(pair.checkpoint(
+        "room",
+        memory=[{
+            "name": "player-x",
+            "original_address": 0xc4ec,
+            "candidate_address": 0xc100,
+            "length": 2,
+        }],
+    ))
+    pair.write_report("artifacts/compare/report.json")
+```
+
+Each checkpoint writes separate lossless `.original.png`, `.candidate.png`, and
+amplified `.diff.png` files, plus one `.overview.png` triptych ordered
+original/candidate/difference from left to right. The separate files remain the
+exact visual evidence; the overview saves vision-tool calls. A single moment
+can conceal timing and behavior errors, so use multiple checkpoints at
+meaningful transitions and during motion. Video is useful as a human overview,
+but not as the exact oracle: encoding and temporal alignment make it harder to
+attribute a mismatch to a specific input and machine state.
+
+For a reusable timeline, run the CLI with a JSON script. See
+`/opt/pipeline/agent/compare_scripts/postie-first-room.json` for the format:
+
+```sh
+python /opt/pipeline/agent/compareboy.py \
+  --original rom/program-....gb \
+  --candidate src/reconstructed.gb \
+  --script experiments/compare.json \
+  --artifacts artifacts/compare \
+  --output artifacts/compare/report.json
+```
+
+Map semantic state explicitly: `original_address` comes from reverse
+engineering, while `candidate_address` comes from the reconstruction's map or
+symbol file. The `address` shorthand is only appropriate when both layouts are
+intentionally identical. A candidate mismatch falsifies the reconstruction; a
+candidate match does not prove untested behavior. Rebuild and replay until the
+tested checkpoints converge, then record exact matches, divergences, and
+untested scope in `NOTES.md`.
+
 ## Save states
 
 ```python
@@ -234,13 +297,11 @@ hit = gb.run(frames=3600)
 print(hit["registers"]["pc"], gb.debug("disassemble/10 pc"), gb.debug("backtrace"))
 ```
 
-Check your reconstruction against reality: drive the original ROM with a fixed
-input sequence, log the RAM addresses from your recovered memory map each
-frame, and check that your C logic predicts the same state transitions.
-Disagreements are either a bug in your reconstruction or a wrong hypothesis —
-investigate both ways, and record the outcome in `NOTES.md` with the trace as
-evidence. Only the original program runs in the emulator; never load your own
-build into it.
+Check your reconstruction against reality with `SameBoyPair`: drive the
+original and candidate with a fixed input sequence and compare the RAM
+addresses from your recovered memory map at multiple frames. Disagreements are
+either a bug in the reconstruction or a wrong hypothesis—investigate both ways
+and record the outcome in `NOTES.md` with the comparison report as evidence.
 
 ## Discipline
 

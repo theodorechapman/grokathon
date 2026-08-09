@@ -68,9 +68,9 @@ behavior from code and state your reasoning as evidence.
 
 ## Goal shape
 
-The end state is a program where every reachable function has an
-evidence-backed name and the important RAM addresses are named data — enough
-for someone (or a later agent) to reimplement the program's logic in another
-language without reading raw bytes. Uncertain hypotheses about RAM addresses
-are valuable output too: annotate them with low confidence and evidence, so
-they can be tested later against a live run of the program.
+The end state is a program where behavior-critical reachable functions have
+evidence-backed names and important RAM addresses are named data—enough to
+implement and test the behavior currently in scope. Do not spend the run
+annotating uncertain functions merely to maximize annotation count. Uncertain
+hypotheses about RAM addresses remain valuable: annotate them with low
+confidence and evidence so they can be tested against a live run.

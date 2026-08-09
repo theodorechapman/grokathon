@@ -942,6 +942,19 @@ SB_EXPORT int sb_copy_palette(
     return 0;
 }
 
+SB_EXPORT int sb_copy_oam(sb_handle *handle, uint8_t *out, size_t length)
+{
+    if (!handle || !out || length < 160) {
+        return fail(handle, "OAM buffer must hold 160 bytes");
+    }
+    size_t size = 0;
+    uint8_t *oam = GB_get_direct_access(
+        handle->gb, GB_DIRECT_ACCESS_OAM, &size, NULL);
+    if (!oam || size < 160) return fail(handle, "OAM data is unavailable");
+    memcpy(out, oam, 160);
+    return 0;
+}
+
 SB_EXPORT int sb_load_symbols(sb_handle *handle, const char *path)
 {
     if (!handle || !path) return fail(handle, "invalid symbol path");

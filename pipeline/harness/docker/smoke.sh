@@ -15,3 +15,6 @@ docker run --rm -v "$rom:/opt/pipeline/raw_rom/breakout.gb:ro" \
 docker run --rm -v "$postie:/opt/pipeline/raw_rom/postie.gbc:ro" \
     --entrypoint python3 "$image" \
     /opt/pipeline/agent/postie_smoke.py
+docker run --rm -v "$postie:/opt/pipeline/raw_rom/postie.gbc:ro" \
+    --entrypoint python3 "$image" \
+    /opt/pipeline/agent/compareboy_smoke.py

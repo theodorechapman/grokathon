@@ -14,22 +14,13 @@ Read `static_re.md` in this workspace first; it documents the tools and the
 workflow. Then:
 
 1. Map the program: entry point, memory regions, functions.
-2. Work function by function. For each, form an evidence-backed hypothesis
-   about what it does, and record it with the `annotate` tool (name, comment,
-   tags, confidence, and evidence statements).
-3. As your understanding solidifies, write a faithful reimplementation of the
-   program in raw C under `src/` in this workspace, targeting the Game Boy
-   with GBDK-2020 (`lcc` is at `/opt/gbdk/bin/lcc`), and build it to a real
-   ROM: `src/` gets a Makefile whose default target produces
-   `src/reconstructed.gb`. Keep game logic separable from hardware access.
-   Prefer clear, evidence-traceable code over cleverness; cite the source
-   addresses (e.g. `/* ROM:0150 */`) in comments.
-4. Keep a running `NOTES.md` in this workspace summarizing the memory map you
-   have recovered (which RAM addresses hold what) and open questions. These
-   open questions are the handoff to later dynamic analysis.
+2. Keep a running `NOTES.md` summarizing the recovered memory map, behavioral
+   evidence, confidence, and open questions. Annotate behavior-critical
+   functions and data as evidence supports them; annotation count is not a
+   completion target.
 """
 
-DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headless emulator and
+DYNAMIC_TASK = """3. Discovery gate. Execute the original program in a headless emulator and
    observe it while it runs — read `dynamic_re.md` in this workspace for the
    full API and discipline. Control it from Python:
 
@@ -44,34 +35,73 @@ DYNAMIC_TASK = """5. Dynamically verify. You can execute the program in a headle
    traces as target evidence until `gb.read(0xFF50)[0] & 1` proves the boot ROM
    has unmapped. Run in bounded 60-frame chunks until that happens.
 
-   Play the game: drive it with real input sequences, watch the screen, and
-   watchpoint the RAM addresses in your recovered memory map. Where the
-   runtime behavior and what your C reconstruction would predict disagree,
-   investigate and fix the C — and raise or lower annotation confidence based
-   on what you observe. Only ever run the original program in the emulator,
-   never your own build.
+   Drive the original with deterministic input sequences, inspect screenshots,
+   and watchpoint RAM addresses in your recovered memory map. Before writing C,
+   record at least one reproducible title/gameplay timeline and its relevant
+   frame, video, OAM, and memory checkpoints.
 
-   If the program uses more than one ROM bank (see `memory_map`: ROM1, ROM2,
-   … exist and static analysis found few or no functions in them), you MUST
-   recover the banked code before reconstructing — that is where most of the
-   game lives. Turn on the emulator's call-target trace, play through as much
-   of the game as you can, collect the seeds, and pass them to the
-   `create_functions` static tool. Read the "Recovering bank-switched code"
-   section of `dynamic_re.md` for the exact loop. Do this early, then annotate
-   and reconstruct the now-visible banked functions.
+4. Recover banked code before reconstruction. If `memory_map` contains ROM1,
+   ROM2, or later banks and static analysis found few functions in them, turn
+   on the emulator's call-target and execution traces, exercise the program,
+   collect seeds, and pass them to `create_functions`. If an indirect far-call
+   trampoline defeats the generic CALL tracer, breakpoint it and record its
+   logical bank/address arguments. Read the "Recovering bank-switched code"
+   section of `dynamic_re.md`.
 
-   Also collect full physical execution coverage with `execution_trace()` and
+   Collect physical execution coverage with `execution_trace()` and
    `execution_coverage()`. Use it to identify every ROM bank and code region
    actually reached, and use the bank-event timeline to design input sequences
    that expand coverage. Call targets remain the correct function seeds.
 
-   Recover the real graphics too. Use the emulator's asset trace while the
-   game draws its screens, then embed the actual tiles and maps in your
-   reconstruction instead of placeholder art: `extract_data` for uncompressed
-   ROM->VRAM copies, or `video_state()` snapshots for decompressed/CGB assets.
-   Preserve each run's destination VRAM bank and recover both CGB palettes.
-   Read the "Recovering graphics" section of `dynamic_re.md`. The reconstruction
-   should render with the game's own art for whatever screens you exercised.
+5. Implement the behavior supported by your evidence in raw C under `src/`,
+   targeting the Game Boy with GBDK-2020 (`lcc` is at `/opt/gbdk/bin/lcc`).
+   `src/Makefile` must build a real `src/reconstructed.gb`. Keep game logic
+   separable from hardware access and cite source addresses in comments.
+
+   Recover the real graphics for exercised screens. Use asset tracing for
+   direct copies and `video_state()` for post-decompression CGB state. Preserve
+   both VRAM banks and both CGB palette memories where applicable.
+
+6. Candidate comparison gate. You MUST run the compiled reconstruction in a
+   second, independent emulator and compare it with the original on the same
+   input timeline. Use the comparison interface documented in `dynamic_re.md`:
+
+   ```python
+   import sys; sys.path.insert(0, "{agent_dir}")
+   from compareboy import SameBoyPair
+
+   with SameBoyPair(
+       "{rom_path}",
+       "src/reconstructed.gb",
+       artifacts="artifacts/compare",
+   ) as pair:
+       pair.boot()
+       pair.run(60)
+       pair.checkpoint("title")
+       pair.press("start", frames=10)
+       pair.run(118)
+       pair.checkpoint("gameplay")
+       pair.write_report("artifacts/compare/report.json")
+   ```
+
+   Add semantic memory mappings where useful; original and candidate variables
+   may live at different addresses. Rebuild, replay, inspect the
+   original/candidate/difference PNGs and structured
+   state deltas, and repair the C. The candidate is never evidence about what
+   the original does; it is how you falsify your reconstruction.
+
+7. Completion is evidence-based. A clean build or matching static screen is not
+   enough. Do not call the reconstruction faithful or complete unless the
+   comparison report supports that claim across the exercised behaviors.
+   Report the first divergent checkpoint, exact scope tested, and all untested
+   or known-divergent behavior in `NOTES.md`.
+"""
+
+STATIC_IMPLEMENT_TASK = """3. Reimplement the evidence-supported program in raw C under `src/`,
+targeting the Game Boy with GBDK-2020. `src/Makefile` must build a real
+`src/reconstructed.gb`. Keep game logic separable from hardware access and cite
+source addresses in comments. Without dynamic comparison, state the resulting
+fidelity limits explicitly and do not claim unverified behavioral completeness.
 """
 
 TASK_FOOTER = """
@@ -91,6 +121,8 @@ def write_task(
     task = STATIC_TASK.format(program_id=program_id)
     if agent_dir is not None and rom_path is not None:
         task += "\n" + DYNAMIC_TASK.format(agent_dir=agent_dir, rom_path=rom_path)
+    else:
+        task += "\n" + STATIC_IMPLEMENT_TASK
     task += TASK_FOOTER
     path = ws / "TASK.md"
     path.write_text(task)

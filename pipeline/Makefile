@@ -19,7 +19,7 @@ CFLAGS += -I$(SAMEBOY_BUILD)/include
 LDFLAGS += -flto
 LDLIBS += -lm -ldl
 
-.PHONY: all sameboy clean smoke
+.PHONY: all sameboy clean test smoke
 
 all: $(NATIVE)
 
@@ -35,8 +35,13 @@ $(NATIVE): harness/grokboy.c harness/grokboy.h $(SAMEBOY_LIB) $(SAMEBOY_BOOT)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(SHARED_FLAGS) harness/grokboy.c \
 		$(SAMEBOY_LIB) $(LDLIBS) -o $@
 
-smoke: $(NATIVE)
+test:
+	python3 -m unittest discover -s agent/tests -v
+
+smoke: $(NATIVE) test
 	python3 agent/breakout_smoke.py
+	python3 agent/postie_smoke.py
+	python3 agent/compareboy_smoke.py
 
 clean:
 	rm -f bin/sameboy-harness bin/libgrokboy.dylib bin/libgrokboy.so

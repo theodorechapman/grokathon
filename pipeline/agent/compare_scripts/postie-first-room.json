@@ -1,0 +1,41 @@
+{
+  "name": "postie-first-room-v1",
+  "steps": [
+    {
+      "name": "title",
+      "frames": 60
+    },
+    {
+      "name": "press-start",
+      "frames": 10,
+      "buttons": ["start"],
+      "checkpoint": false
+    },
+    {
+      "name": "room-initial",
+      "frames": 118
+    },
+    {
+      "name": "move-right",
+      "frames": 90,
+      "buttons": ["right"]
+    },
+    {
+      "name": "settle-after-right",
+      "frames": 60
+    },
+    {
+      "name": "jump",
+      "frames": 1,
+      "buttons": ["a"]
+    },
+    {
+      "name": "jump-ascending",
+      "frames": 12
+    },
+    {
+      "name": "jump-settled",
+      "frames": 90
+    }
+  ]
+}

@@ -53,6 +53,45 @@ python3 agent/sameboy.py raw_rom/breakout.gb
 Then send one JSON object per line on stdin. Keep this process alive for the
 whole debugging session because emulator state is held in memory.
 
+Use `SameBoyPair` after a reconstruction builds. It owns two isolated emulator
+instances, aligns them after their boot ROMs unmap, drives the same input/frame
+timeline, and compares visible and machine state:
+
+```python
+from agent.compareboy import SameBoyPair
+
+with SameBoyPair(
+    "workspaces/run/rom/program.gb",
+    "workspaces/run/src/reconstructed.gb",
+    artifacts="workspaces/run/artifacts/compare",
+) as pair:
+    pair.boot()
+    pair.run(60)
+    pair.checkpoint("title")
+    pair.press("start", frames=10)
+    pair.run(120)
+    pair.checkpoint("gameplay")
+    pair.write_report("workspaces/run/artifacts/compare/report.json")
+```
+
+Checkpoints compare native RGB, both VRAM banks, CGB palettes, direct OAM, and
+optional semantic memory mappings. Each produces separate lossless original,
+candidate, and difference PNGs plus a left-to-right overview triptych. Use the
+overview for quick visual review and the separate images/JSON as exact evidence.
+Use several checkpoints around inputs and transitions; video is useful for a
+human overview, but temporal alignment and encoding make it a poor exact oracle.
+
+The JSON CLI form accepts reusable timelines:
+
+```bash
+python3 agent/compareboy.py \
+  --original path/to/original.gb \
+  --candidate path/to/reconstructed.gb \
+  --script agent/compare_scripts/postie-first-room.json \
+  --artifacts artifacts/compare \
+  --output artifacts/compare/report.json
+```
+
 Use `harness/grokboy.h` only when integrating another language directly. It is
 the low-level C ABI, not the recommended agent interface.
 

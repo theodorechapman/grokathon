@@ -267,6 +267,8 @@ def _configure_library(library: ctypes.CDLL) -> ctypes.CDLL:
     library.sb_copy_palette.argtypes = [
         handle, ctypes.c_bool, byte_pointer, ctypes.c_size_t]
     library.sb_copy_palette.restype = ctypes.c_int
+    library.sb_copy_oam.argtypes = [handle, byte_pointer, ctypes.c_size_t]
+    library.sb_copy_oam.restype = ctypes.c_int
 
     library.sb_copy_frame_rgb.argtypes = [handle, byte_pointer, ctypes.c_size_t]
     library.sb_copy_frame_rgb.restype = ctypes.c_int
@@ -314,8 +316,15 @@ def _png_chunk(kind: bytes, data: bytes) -> bytes:
     return struct.pack(">I", len(data)) + payload + struct.pack(">I", binascii.crc32(payload))
 
 
-def _write_png(path: Path, rgb: bytes, scale: int = 1) -> None:
-    row_size = SCREEN_WIDTH * 3
+def _write_png(
+    path: Path,
+    rgb: bytes,
+    scale: int = 1,
+    *,
+    width: int = SCREEN_WIDTH,
+    height: int = SCREEN_HEIGHT,
+) -> None:
+    row_size = width * 3
     rows = []
     for offset in range(0, len(rgb), row_size):
         row = rgb[offset : offset + row_size]
@@ -323,7 +332,7 @@ def _write_png(path: Path, rgb: bytes, scale: int = 1) -> None:
             row = b"".join(row[i : i + 3] * scale for i in range(0, row_size, 3))
         rows.append((b"\0" + row) * scale)
     header = struct.pack(
-        ">IIBBBBB", SCREEN_WIDTH * scale, SCREEN_HEIGHT * scale, 8, 2, 0, 0, 0
+        ">IIBBBBB", width * scale, height * scale, 8, 2, 0, 0, 0
     )
     path.write_bytes(
         b"\x89PNG\r\n\x1a\n"
@@ -331,6 +340,25 @@ def _write_png(path: Path, rgb: bytes, scale: int = 1) -> None:
         + _png_chunk(b"IDAT", zlib.compress(b"".join(rows), level=1))
         + _png_chunk(b"IEND", b"")
     )
+
+
+def write_rgb_png(
+    path: str | Path,
+    rgb: bytes,
+    *,
+    scale: int = 1,
+    width: int = SCREEN_WIDTH,
+    height: int = SCREEN_HEIGHT,
+) -> Path:
+    """Write a packed RGB image as a lossless PNG without external packages."""
+    if len(rgb) != width * height * 3:
+        raise HarnessError(f"RGB image must contain exactly {width * height * 3} bytes")
+    if isinstance(scale, bool) or not isinstance(scale, int) or not 1 <= scale <= 8:
+        raise HarnessError("screenshot scale must be an integer from 1 to 8")
+    destination = Path(path).resolve()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    _write_png(destination, rgb, scale, width=width, height=height)
+    return destination
 
 
 def _address_ranges(addresses: list[int]) -> list[dict[str, int]]:
@@ -977,6 +1005,33 @@ class SameBoy:
             )
         )
         return bytes(frame)
+
+    def vram_bank(self, bank: int) -> bytes:
+        """Return one physical 8 KiB VRAM bank without changing VBK."""
+        bank = _integer(bank, "VRAM bank", 0, 1)
+        buffer = (ctypes.c_uint8 * 0x2000)()
+        self._check(
+            self._library.sb_copy_vram_bank(
+                self._handle, bank, buffer, len(buffer)
+            )
+        )
+        return bytes(buffer)
+
+    def palette(self, *, objects: bool = False) -> bytes:
+        """Return the 64-byte CGB background or object palette memory."""
+        buffer = (ctypes.c_uint8 * 64)()
+        self._check(
+            self._library.sb_copy_palette(
+                self._handle, objects, buffer, len(buffer)
+            )
+        )
+        return bytes(buffer)
+
+    def oam(self) -> bytes:
+        """Return all 40 raw OAM entries without LCD access restrictions."""
+        buffer = (ctypes.c_uint8 * 160)()
+        self._check(self._library.sb_copy_oam(self._handle, buffer, len(buffer)))
+        return bytes(buffer)
 
     def save_state(self, path: str | Path) -> None:
         self.request({"cmd": "save-state", "path": str(Path(path).resolve())})
