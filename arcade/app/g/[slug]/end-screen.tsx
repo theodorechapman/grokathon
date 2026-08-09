@@ -108,22 +108,40 @@ export function EndScreen({
           {info.total > 0 ? ` of ${info.total + 1}` : ""} on the board.
         </p>
       )}
-      {info && info.top.length > 0 && (
+      {info && (signedIn ? info.top.length > 0 : claimable) && (
         <div className="endBoardWrap">
-          <table className={signedIn ? "board endBoard" : "board endBoard endBoardBlur"}>
+          <table className="board endBoard">
             <tbody>
-              {info.top.map((row, i) => (
-                <tr key={row.handle}>
-                  <td>{i + 1}</td>
-                  <td>@{row.handle}</td>
-                  <td>{fmtScore(row.score, scoring)}</td>
-                </tr>
-              ))}
+              {(() => {
+                // Signed out: your row sits sharp at its real rank, the
+                // players and times around it are blurred. Curiosity does
+                // the rest.
+                if (signedIn) {
+                  return info.top.slice(0, 5).map((row, i) => (
+                    <tr key={row.handle}>
+                      <td>{i + 1}</td>
+                      <td>@{row.handle}</td>
+                      <td>{fmtScore(row.score, scoring)}</td>
+                    </tr>
+                  ));
+                }
+                const youIdx = Math.min(info.rank - 1, info.top.length);
+                const rows: (BoardRow & { you?: boolean })[] = [...info.top];
+                rows.splice(youIdx, 0, { handle: "you", score: Math.floor(end.score), you: true });
+                const start = Math.max(0, Math.min(youIdx - 2, rows.length - 5));
+                return rows.slice(start, start + 5).map((row, i) => (
+                  <tr key={`${row.handle}-${i}`} className={row.you ? "endRowYou" : "endRowBlur"}>
+                    <td>{start + i + 1}</td>
+                    <td>{row.you ? "you" : `@${row.handle}`}</td>
+                    <td>{fmtScore(row.score, scoring)}</td>
+                  </tr>
+                ));
+              })()}
             </tbody>
           </table>
           {!signedIn && (
-            <button className="endPrimary endBoardGate" onClick={signInAndSave}>
-              Sign in with 𝕏 to see the board{claimable ? " and claim your run" : ""}
+            <button className="endPrimary" onClick={signInAndSave}>
+              Sign in with 𝕏 to see who&apos;s around you
             </button>
           )}
         </div>

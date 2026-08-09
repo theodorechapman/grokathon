@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   const [better, total, top] = await Promise.all([
     isTime ? r.zcount(`hs:${slug}`, "-inf", `(${s}`) : r.zcount(`hs:${slug}`, `(${s}`, "+inf"),
     r.zcard(`hs:${slug}`),
-    topScores(slug, 5, isTime),
+    topScores(slug, 10, isTime),
   ]);
   return NextResponse.json({ rank: better + 1, total, top });
 }
