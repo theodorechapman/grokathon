@@ -1,0 +1,543 @@
+<!-- TITLE: Fleeing Feast -->
+<!-- DESC: Classic snake—but every bite sprints away. Catch 12 to win. -->
+<!-- CONTROLS: Arrows/WASD or swipe to steer -->
+<!-- SCORING: points -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Fleeing Feast</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #0d1b12;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #wrap {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  #hud {
+    width: min(100%, 92vmin);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: #b8f0c8;
+    font-size: clamp(12px, 3.2vmin, 18px);
+    letter-spacing: 0.04em;
+    padding: 0 4px 6px;
+    flex-shrink: 0;
+  }
+  #hud b { color: #7CFF9A; font-weight: 700; }
+  #stage {
+    position: relative;
+    width: min(100%, 92vmin);
+    flex: 1 1 auto;
+    max-height: calc(100% - 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: #13281c;
+    box-shadow: 0 0 0 2px #1e3d2a, 0 8px 28px rgba(0,0,0,.45);
+  }
+  #hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    color: rgba(184,240,200,.9);
+    font-size: clamp(14px, 3.8vmin, 22px);
+    text-align: center;
+    padding: 16px;
+    text-shadow: 0 2px 8px #000;
+    transition: opacity .35s;
+  }
+  #hint.hide { opacity: 0; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="hud">
+    <span>SCORE <b id="scoreEl">0</b></span>
+    <span>GOAL <b id="goalEl">0/12</b></span>
+  </div>
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="hint">Steer into the runaway bites<br>Catch 12 to feast · Don't crash</div>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+
+  var COLS = 18;
+  var ROWS = 18;
+  var GOAL = 12;
+  var TICK_MS = 115;
+  var FOOD_EVERY = 2; // food steps every N snake ticks
+
+  var canvas = document.getElementById("c");
+  var ctx = canvas.getContext("2d");
+  var scoreEl = document.getElementById("scoreEl");
+  var goalEl = document.getElementById("goalEl");
+  var hint = document.getElementById("hint");
+
+  var cell = 20;
+  var pad = 0;
+  var dpr = 1;
+
+  var snake, dir, nextDir, food, score, eaten, tickN, alive, won, ended, acc, lastTs;
+  var flash = 0;
+  var particles = [];
+
+  function resize() {
+    var stage = document.getElementById("stage");
+    var w = stage.clientWidth;
+    var h = stage.clientHeight;
+    var side = Math.max(40, Math.min(w, h));
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(side * dpr);
+    canvas.height = Math.floor(side * dpr);
+    canvas.style.width = side + "px";
+    canvas.style.height = side + "px";
+    cell = (side * dpr) / COLS;
+    pad = 0;
+  }
+
+  function randEmpty() {
+    var occupied = {};
+    for (var i = 0; i < snake.length; i++) occupied[snake[i].x + "," + snake[i].y] = 1;
+    if (food) occupied[food.x + "," + food.y] = 1;
+    var spots = [];
+    for (var y = 0; y < ROWS; y++) {
+      for (var x = 0; x < COLS; x++) {
+        if (!occupied[x + "," + y]) spots.push({ x: x, y: y });
+      }
+    }
+    if (!spots.length) return null;
+    return spots[(Math.random() * spots.length) | 0];
+  }
+
+  function spawnFood() {
+    var p = randEmpty();
+    if (!p) return null;
+    return { x: p.x, y: p.y };
+  }
+
+  function reset() {
+    var cx = (COLS / 2) | 0;
+    var cy = (ROWS / 2) | 0;
+    snake = [
+      { x: cx, y: cy },
+      { x: cx - 1, y: cy },
+      { x: cx - 2, y: cy }
+    ];
+    dir = { x: 1, y: 0 };
+    nextDir = { x: 1, y: 0 };
+    food = spawnFood();
+    score = 0;
+    eaten = 0;
+    tickN = 0;
+    alive = true;
+    won = false;
+    ended = false;
+    acc = 0;
+    lastTs = 0;
+    flash = 0;
+    particles = [];
+    scoreEl.textContent = "0";
+    goalEl.textContent = "0/" + GOAL;
+    hint.classList.remove("hide");
+    hint.innerHTML = "Steer into the runaway bites<br>Catch " + GOAL + " to feast · Don't crash";
+  }
+
+  function endRun(outcome, message) {
+    if (ended) return;
+    ended = true;
+    alive = false;
+    try {
+      window.parent.postMessage({
+        type: "nova:score",
+        score: score,
+        outcome: outcome,
+        message: message.slice(0, 120)
+      }, "*");
+    } catch (e) {}
+  }
+
+  function dist2(a, b) {
+    var dx = a.x - b.x, dy = a.y - b.y;
+    return dx * dx + dy * dy;
+  }
+
+  function cellBlocked(x, y, ignoreTail) {
+    if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return true;
+    var limit = snake.length - (ignoreTail ? 1 : 0);
+    for (var i = 0; i < limit; i++) {
+      if (snake[i].x === x && snake[i].y === y) return true;
+    }
+    return false;
+  }
+
+  function moveFood() {
+    if (!food) return;
+    var head = snake[0];
+    var dirs = [
+      { x: 1, y: 0 }, { x: -1, y: 0 },
+      { x: 0, y: 1 }, { x: 0, y: -1 }
+    ];
+    // shuffle slightly for variety
+    for (var i = dirs.length - 1; i > 0; i--) {
+      var j = (Math.random() * (i + 1)) | 0;
+      var t = dirs[i]; dirs[i] = dirs[j]; dirs[j] = t;
+    }
+    var best = null;
+    var bestD = -1;
+    var curD = dist2(food, head);
+    for (var k = 0; k < dirs.length; k++) {
+      var nx = food.x + dirs[k].x;
+      var ny = food.y + dirs[k].y;
+      if (cellBlocked(nx, ny, true)) continue;
+      var d = dist2({ x: nx, y: ny }, head);
+      // prefer farther; if equal to current, still ok as flee
+      if (d > bestD) {
+        bestD = d;
+        best = { x: nx, y: ny };
+      }
+    }
+    // only move if it helps (or any free cell if trapped closer)
+    if (best && bestD >= curD) {
+      food.x = best.x;
+      food.y = best.y;
+    } else if (best) {
+      // desperate: still take the least-bad free step
+      food.x = best.x;
+      food.y = best.y;
+    }
+  }
+
+  function burst(cx, cy, color) {
+    for (var i = 0; i < 14; i++) {
+      var a = Math.random() * Math.PI * 2;
+      var sp = 0.8 + Math.random() * 2.2;
+      particles.push({
+        x: cx, y: cy,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp,
+        life: 18 + (Math.random() * 12) | 0,
+        color: color
+      });
+    }
+  }
+
+  function step() {
+    if (!alive || ended) return;
+
+    dir = nextDir;
+    var head = snake[0];
+    var nx = head.x + dir.x;
+    var ny = head.y + dir.y;
+
+    // wall / self
+    if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) {
+      flash = 10;
+      endRun("loss", "Splat on the wall. The feast got away with " + eaten + " bites left hungry.");
+      return;
+    }
+    for (var i = 0; i < snake.length; i++) {
+      if (snake[i].x === nx && snake[i].y === ny) {
+        flash = 10;
+        endRun("loss", "Tied yourself in knots at " + score + " pts. Food laughs in the distance.");
+        return;
+      }
+    }
+
+    snake.unshift({ x: nx, y: ny });
+
+    var ate = food && food.x === nx && food.y === ny;
+    if (ate) {
+      eaten++;
+      score += 10 + Math.min(20, eaten * 2);
+      scoreEl.textContent = String(score);
+      goalEl.textContent = eaten + "/" + GOAL;
+      burst((nx + 0.5) * cell, (ny + 0.5) * cell, "#ff6b8a");
+      flash = 6;
+      if (eaten >= GOAL) {
+        // keep growth, then win
+        food = null;
+        won = true;
+        endRun("win", "Feast complete! " + score + " pts — every runaway bite finally caught.");
+        return;
+      }
+      food = spawnFood();
+      if (!food) {
+        won = true;
+        endRun("win", "Board full of you! " + score + " pts of pure serpentine glory.");
+        return;
+      }
+    } else {
+      snake.pop();
+    }
+
+    tickN++;
+    if (tickN % FOOD_EVERY === 0) moveFood();
+
+    // food can step onto head after move? rare — treat as eat next frame; also flee might land on body: nudge
+    if (food && cellBlocked(food.x, food.y, true)) {
+      var p = randEmpty();
+      if (p) { food.x = p.x; food.y = p.y; }
+    }
+  }
+
+  function setDir(dx, dy) {
+    if (ended) return;
+    // no instant reverse
+    if (dx === -dir.x && dy === -dir.y) return;
+    if (dx === 0 && dy === 0) return;
+    nextDir = { x: dx, y: dy };
+    if (!hint.classList.contains("hide")) hint.classList.add("hide");
+  }
+
+  // keyboard
+  window.addEventListener("keydown", function (e) {
+    var k = e.key;
+    if (k === "ArrowUp" || k === "w" || k === "W") { e.preventDefault(); setDir(0, -1); }
+    else if (k === "ArrowDown" || k === "s" || k === "S") { e.preventDefault(); setDir(0, 1); }
+    else if (k === "ArrowLeft" || k === "a" || k === "A") { e.preventDefault(); setDir(-1, 0); }
+    else if (k === "ArrowRight" || k === "d" || k === "D") { e.preventDefault(); setDir(1, 0); }
+  }, { passive: false });
+
+  // touch swipe
+  var tx = 0, ty = 0, touching = false;
+  canvas.addEventListener("touchstart", function (e) {
+    if (e.changedTouches.length) {
+      touching = true;
+      tx = e.changedTouches[0].clientX;
+      ty = e.changedTouches[0].clientY;
+    }
+    e.preventDefault();
+  }, { passive: false });
+  canvas.addEventListener("touchmove", function (e) { e.preventDefault(); }, { passive: false });
+  canvas.addEventListener("touchend", function (e) {
+    if (!touching || !e.changedTouches.length) return;
+    touching = false;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    var adx = Math.abs(dx), ady = Math.abs(dy);
+    if (Math.max(adx, ady) < 18) return;
+    if (adx > ady) setDir(dx > 0 ? 1 : -1, 0);
+    else setDir(0, dy > 0 ? 1 : -1);
+    e.preventDefault();
+  }, { passive: false });
+
+  // mouse drag as swipe (desktop)
+  var md = false, mx = 0, my = 0;
+  canvas.addEventListener("mousedown", function (e) {
+    md = true; mx = e.clientX; my = e.clientY;
+  });
+  window.addEventListener("mouseup", function (e) {
+    if (!md) return;
+    md = false;
+    var dx = e.clientX - mx, dy = e.clientY - my;
+    var adx = Math.abs(dx), ady = Math.abs(dy);
+    if (Math.max(adx, ady) < 16) return;
+    if (adx > ady) setDir(dx > 0 ? 1 : -1, 0);
+    else setDir(0, dy > 0 ? 1 : -1);
+  });
+
+  function drawGrid() {
+    ctx.fillStyle = "#13281c";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // subtle cells
+    ctx.strokeStyle = "rgba(40,90,60,0.35)";
+    ctx.lineWidth = Math.max(1, dpr * 0.5);
+    for (var x = 0; x <= COLS; x++) {
+      ctx.beginPath();
+      ctx.moveTo(x * cell + 0.5, 0);
+      ctx.lineTo(x * cell + 0.5, ROWS * cell);
+      ctx.stroke();
+    }
+    for (var y = 0; y <= ROWS; y++) {
+      ctx.beginPath();
+      ctx.moveTo(0, y * cell + 0.5);
+      ctx.lineTo(COLS * cell, y * cell + 0.5);
+      ctx.stroke();
+    }
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function draw() {
+    drawGrid();
+
+    // food
+    if (food) {
+      var fx = food.x * cell;
+      var fy = food.y * cell;
+      var m = cell * 0.18;
+      var bob = Math.sin(performance.now() / 140) * cell * 0.04;
+      // glow
+      ctx.fillStyle = "rgba(255,80,120,0.22)";
+      ctx.beginPath();
+      ctx.arc(fx + cell / 2, fy + cell / 2 + bob, cell * 0.48, 0, Math.PI * 2);
+      ctx.fill();
+      // body
+      ctx.fillStyle = "#ff4d6d";
+      roundRect(fx + m, fy + m + bob, cell - m * 2, cell - m * 2, cell * 0.28);
+      ctx.fill();
+      // eyes looking away from head
+      var hx = snake[0].x + 0.5, hy = snake[0].y + 0.5;
+      var ex = food.x + 0.5, ey = food.y + 0.5;
+      var ang = Math.atan2(ey - hy, ex - hx); // away
+      var eyeOff = cell * 0.12;
+      var e1x = fx + cell / 2 + Math.cos(ang + 0.5) * eyeOff;
+      var e1y = fy + cell / 2 + bob + Math.sin(ang + 0.5) * eyeOff;
+      var e2x = fx + cell / 2 + Math.cos(ang - 0.5) * eyeOff;
+      var e2y = fy + cell / 2 + bob + Math.sin(ang - 0.5) * eyeOff;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath(); ctx.arc(e1x, e1y, cell * 0.09, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(e2x, e2y, cell * 0.09, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#1a1020";
+      var px = Math.cos(ang) * cell * 0.03;
+      var py = Math.sin(ang) * cell * 0.03;
+      ctx.beginPath(); ctx.arc(e1x + px, e1y + py, cell * 0.045, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(e2x + px, e2y + py, cell * 0.045, 0, Math.PI * 2); ctx.fill();
+      // little legs scramble
+      ctx.strokeStyle = "#ff8fab";
+      ctx.lineWidth = Math.max(1, cell * 0.06);
+      var t = performance.now() / 80;
+      for (var L = 0; L < 4; L++) {
+        var side = L < 2 ? -1 : 1;
+        var ly = (L % 2 === 0 ? 0.35 : 0.65);
+        var kick = Math.sin(t + L) * cell * 0.08;
+        ctx.beginPath();
+        ctx.moveTo(fx + cell / 2 + side * cell * 0.22, fy + cell * ly + bob);
+        ctx.lineTo(fx + cell / 2 + side * cell * 0.38, fy + cell * ly + bob + kick);
+        ctx.stroke();
+      }
+    }
+
+    // snake
+    for (var i = snake.length - 1; i >= 0; i--) {
+      var s = snake[i];
+      var sx = s.x * cell;
+      var sy = s.y * cell;
+      var t2 = i / Math.max(1, snake.length - 1);
+      var g = Math.floor(120 + (1 - t2) * 100);
+      var r = Math.floor(40 + t2 * 30);
+      var b = Math.floor(90 + (1 - t2) * 40);
+      ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+      var inset = cell * (0.08 + t2 * 0.06);
+      roundRect(sx + inset, sy + inset, cell - inset * 2, cell - inset * 2, cell * 0.22);
+      ctx.fill();
+      if (i === 0) {
+        // head shine + eyes in move dir
+        ctx.fillStyle = "rgba(200,255,210,0.35)";
+        roundRect(sx + inset + cell * 0.08, sy + inset + cell * 0.08, cell * 0.35, cell * 0.22, cell * 0.1);
+        ctx.fill();
+        var ox = dir.x * cell * 0.12;
+        var oy = dir.y * cell * 0.12;
+        var cx = sx + cell / 2 + ox;
+        var cy = sy + cell / 2 + oy;
+        var perpX = -dir.y;
+        var perpY = dir.x;
+        ctx.fillStyle = "#0a1a10";
+        ctx.beginPath();
+        ctx.arc(cx + perpX * cell * 0.14, cy + perpY * cell * 0.14, cell * 0.08, 0, Math.PI * 2);
+        ctx.arc(cx - perpX * cell * 0.14, cy - perpY * cell * 0.14, cell * 0.08, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#7CFF9A";
+        ctx.beginPath();
+        ctx.arc(cx + perpX * cell * 0.14 + ox * 0.15, cy + perpY * cell * 0.14 + oy * 0.15, cell * 0.035, 0, Math.PI * 2);
+        ctx.arc(cx - perpX * cell * 0.14 + ox * 0.15, cy - perpY * cell * 0.14 + oy * 0.15, cell * 0.035, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // particles
+    for (var p = particles.length - 1; p >= 0; p--) {
+      var pt = particles[p];
+      pt.x += pt.vx * dpr;
+      pt.y += pt.vy * dpr;
+      pt.vx *= 0.96;
+      pt.vy *= 0.96;
+      pt.life--;
+      if (pt.life <= 0) { particles.splice(p, 1); continue; }
+      ctx.globalAlpha = Math.min(1, pt.life / 12);
+      ctx.fillStyle = pt.color;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, cell * 0.08, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    if (flash > 0) {
+      ctx.fillStyle = won ? "rgba(124,255,154," + (flash / 14) + ")" : "rgba(255,60,80," + (flash / 16) + ")";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      flash--;
+    }
+
+    if (ended) {
+      ctx.fillStyle = "rgba(8,16,12,0.35)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  function loop(ts) {
+    if (!lastTs) lastTs = ts;
+    var dt = ts - lastTs;
+    lastTs = ts;
+    if (!ended) {
+      acc += dt;
+      // soft speed-up as you eat
+      var speed = Math.max(72, TICK_MS - eaten * 3);
+      while (acc >= speed) {
+        acc -= speed;
+        step();
+        if (ended) break;
+      }
+    } else {
+      // still animate particles a bit while frozen
+      for (var p = particles.length - 1; p >= 0; p--) {
+        particles[p].life--;
+        if (particles[p].life <= 0) particles.splice(p, 1);
+      }
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+  reset();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
