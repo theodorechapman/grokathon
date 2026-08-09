@@ -1,0 +1,80 @@
+bit-us 104
+byte 20000 06 good # startup byte proven at CODE:774f
+byte 24000 7e good # complement of ECU keyword 0x81
+byte 28000 f2 good # identifier block 0 echo 0
+byte 32000 fe good # identifier block 0 echo 1
+byte 36000 09 good # identifier block 0 echo 2
+byte 40000 ca good # identifier block 0 echo 3
+byte 44000 c8 good # identifier block 0 echo 4
+byte 48000 ce good # identifier block 0 echo 5
+byte 52000 cf good # identifier block 0 echo 6
+byte 56000 cf good # identifier block 0 echo 7
+byte 60000 cd good # identifier block 0 echo 8
+byte 64000 ce good # identifier block 0 echo 9
+byte 68000 c9 good # identifier block 0 echo 10
+byte 72000 cd good # identifier block 0 echo 11
+byte 76000 cf good # identifier block 0 echo 12
+byte 80000 fc good # identifier block 0 echo 13
+byte 84000 03 good # continue block 0
+byte 88000 02 good # continue block 0
+byte 92000 09 good # continue block 0
+byte 96000 03 good # continue block 0
+byte 100000 f2 good # identifier block 1 echo 0
+byte 104000 fc good # identifier block 1 echo 1
+byte 108000 09 good # identifier block 1 echo 2
+byte 112000 c7 good # identifier block 1 echo 3
+byte 116000 c8 good # identifier block 1 echo 4
+byte 120000 cc good # identifier block 1 echo 5
+byte 124000 c9 good # identifier block 1 echo 6
+byte 128000 ca good # identifier block 1 echo 7
+byte 132000 cc good # identifier block 1 echo 8
+byte 136000 c8 good # identifier block 1 echo 9
+byte 140000 c9 good # identifier block 1 echo 10
+byte 144000 cd good # identifier block 1 echo 11
+byte 148000 ce good # identifier block 1 echo 12
+byte 152000 fc good # identifier block 1 echo 13
+byte 156000 03 good # continue block 1
+byte 160000 04 good # continue block 1
+byte 164000 09 good # continue block 1
+byte 168000 03 good # continue block 1
+byte 172000 f5 good # identifier block 2 echo 0
+byte 176000 fa good # identifier block 2 echo 1
+byte 180000 09 good # identifier block 2 echo 2
+byte 184000 ce good # identifier block 2 echo 3
+byte 188000 cc good # identifier block 2 echo 4
+byte 192000 ce good # identifier block 2 echo 5
+byte 196000 cb good # identifier block 2 echo 6
+byte 200000 cc good # identifier block 2 echo 7
+byte 204000 c8 good # identifier block 2 echo 8
+byte 208000 ce good # identifier block 2 echo 9
+byte 212000 fc good # identifier block 2 echo 10
+byte 216000 03 good # continue block 2
+byte 220000 06 good # continue block 2
+byte 224000 09 good # continue block 2
+byte 228000 03 good # continue block 2
+byte 232000 f9 good # identifier block 3 echo 0
+byte 236000 f8 good # identifier block 3 echo 1
+byte 240000 09 good # identifier block 3 echo 2
+byte 244000 ce good # identifier block 3 echo 3
+byte 248000 cf good # identifier block 3 echo 4
+byte 252000 cf good # identifier block 3 echo 5
+byte 256000 fc good # identifier block 3 echo 6
+byte 260000 03 good # continue block 3
+byte 264000 08 good # continue block 3
+byte 268000 09 good # continue block 3
+byte 272000 03 good # continue block 3
+byte 276000 f9 good # identifier block 4 echo 0
+byte 280000 f6 good # identifier block 4 echo 1
+byte 284000 09 good # identifier block 4 echo 2
+byte 288000 cf good # identifier block 4 echo 3
+byte 292000 c8 good # identifier block 4 echo 4
+byte 296000 cd good # identifier block 4 echo 5
+byte 300000 fc good # identifier block 4 echo 6
+byte 304000 03 good # continue block 4
+byte 308000 0a good # continue block 4
+byte 312000 09 good # continue block 4
+byte 316000 03 good # continue block 4
+byte 320000 fc good # ready acknowledgement echo 0
+byte 324000 f4 good # ready acknowledgement echo 1
+byte 328000 f6 good # ready acknowledgement echo 2
+byte 332000 fc good # ready acknowledgement echo 3

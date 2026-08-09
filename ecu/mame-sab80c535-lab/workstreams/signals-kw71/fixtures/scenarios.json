@@ -1,0 +1,68 @@
+{
+  "bit_period_us": 104,
+  "request_services": {
+    "actuator-test": "04",
+    "disconnect": "06",
+    "identifier-continue": "09",
+    "read-memory-sfr": "01"
+  },
+  "response_services": {
+    "identifier": "f6",
+    "read-memory": "fe"
+  },
+  "scenarios": {
+    "actuator-test": {
+      "request": [
+        "04",
+        "0c",
+        "04",
+        "03",
+        "03"
+      ]
+    },
+    "disconnect": {
+      "request": [
+        "03",
+        "0c",
+        "06",
+        "03"
+      ]
+    },
+    "framing-error": {
+      "meaning": "0x06 with low stop bit"
+    },
+    "identifier-transfer": {
+      "last_sequence": "0b"
+    },
+    "malformed-checksum": {
+      "expected": "f2",
+      "injected": "f3",
+      "meaning": "bad complement; firmware has no additive checksum field"
+    },
+    "no-tester": {
+      "outcome": "idle high; no received byte"
+    },
+    "read-memory-sfr": {
+      "request": [
+        "06",
+        "0c",
+        "01",
+        "01",
+        "01",
+        "90",
+        "03"
+      ]
+    },
+    "timeout": {
+      "meaning": "length received, body withheld"
+    },
+    "valid-session-start": {
+      "rx_bytes": [
+        "06",
+        "7e"
+      ]
+    }
+  },
+  "schema": "motronic-kw71-stimuli/v1",
+  "timing_class": "protocol-family assumption"
+}

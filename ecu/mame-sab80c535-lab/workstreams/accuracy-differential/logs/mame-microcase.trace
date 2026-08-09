@@ -1,0 +1,40 @@
+N=0 CYC=0 PC=0000 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+N=0 CYC=2 PC=0100 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+0100: mov   sp,#$30
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2,"pc":"0103","address":"0081","data":"30"}
+N=0 CYC=4 PC=0103 A=00 B=00 PSW=00 SP=30 DPTR=0000 IE=00 IP=00
+0103: mov   a,#$7F
+N=0 CYC=5 PC=0105 A=7F B=00 PSW=01 SP=30 DPTR=0000 IE=00 IP=00
+0105: add   a,#$01
+N=0 CYC=6 PC=0107 A=80 B=00 PSW=45 SP=30 DPTR=0000 IE=00 IP=00
+0107: setb  c
+N=0 CYC=7 PC=0108 A=80 B=00 PSW=C5 SP=30 DPTR=0000 IE=00 IP=00
+0108: subb  a,#$01
+N=0 CYC=8 PC=010A A=7E B=00 PSW=44 SP=30 DPTR=0000 IE=00 IP=00
+010A: push  acc
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":8,"pc":"010C","address":"00E0","data":"7E"}
+N=0 CYC=10 PC=010C A=7E B=00 PSW=44 SP=31 DPTR=0000 IE=00 IP=00
+010C: clr   a
+N=0 CYC=11 PC=010D A=00 B=00 PSW=44 SP=31 DPTR=0000 IE=00 IP=00
+010D: pop   b
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":11,"pc":"010F","address":"00F0","data":"7E"}
+N=0 CYC=13 PC=010F A=00 B=7E PSW=44 SP=30 DPTR=0000 IE=00 IP=00
+010F: mov   dptr,#$0140
+N=0 CYC=15 PC=0112 A=00 B=7E PSW=44 SP=30 DPTR=0140 IE=00 IP=00
+0112: mov   a,#$02
+N=0 CYC=16 PC=0114 A=02 B=7E PSW=45 SP=30 DPTR=0140 IE=00 IP=00
+0114: movc  a,@a+dptr
+N=0 CYC=18 PC=0115 A=BE B=7E PSW=44 SP=30 DPTR=0140 IE=00 IP=00
+0115: mov   dptr,#$A055
+N=0 CYC=20 PC=0118 A=BE B=7E PSW=44 SP=30 DPTR=A055 IE=00 IP=00
+0118: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":20,"pc":"0119","address":"A055","data":"BE"}
+N=0 CYC=22 PC=0119 A=BE B=7E PSW=44 SP=30 DPTR=A055 IE=00 IP=00
+0119: clr   $24.0
+N=0 CYC=23 PC=011B A=BE B=7E PSW=44 SP=30 DPTR=A055 IE=00 IP=00
+011B: setb  $24.0
+N=0 CYC=24 PC=011D A=BE B=7E PSW=44 SP=30 DPTR=A055 IE=00 IP=00
+011D: jb    $24.0,$0122
+N=0 CYC=26 PC=0122 A=BE B=7E PSW=44 SP=30 DPTR=A055 IE=00 IP=00
+0122: sjmp  $0122
+[:] EVT {"kind":"input","interface":"generic-int0","cycles":502,"pc":"0122","state":1}

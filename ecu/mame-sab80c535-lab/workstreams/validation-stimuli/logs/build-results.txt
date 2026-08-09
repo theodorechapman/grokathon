@@ -1,0 +1,6 @@
+MAME commit: a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e
+Command:
+make SUBTARGET=motronicvalid SOURCES=src/mame/skeleton/motronic-validation.cpp REGENIE=1 SYMBOLS=0 IGNORE_GIT=1 OSD=sdl USE_LIBSDL=1 OVERRIDE_CC=/usr/bin/clang OVERRIDE_CXX=/usr/bin/clang++ -j4
+Result: PASS (exit 0, elapsed 7452 ms incremental; initial clean build also passed)
+Binary: /tmp/mame-motronic-validation/motronicvalid
+Binary SHA-256: 21a87d2bfd803436359f40332cdef79ce1c6d0ec96dde89cdceaba8fc1964b65

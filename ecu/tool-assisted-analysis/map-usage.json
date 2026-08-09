@@ -1,0 +1,3790 @@
+{
+  "master_lookup": "CODE:0400",
+  "table_address": 17856,
+  "table_address_hex": "0x45c0",
+  "pointer_count": 132,
+  "unique_target_count": 128,
+  "duplicate_targets": {
+    "0x4835": 5
+  },
+  "resolved_call_count": 57,
+  "unresolved_call_count": 19,
+  "unresolved_calls": [
+    {
+      "call_address": "CODE:3435",
+      "function": "CODE:33a0"
+    },
+    {
+      "call_address": "CODE:3446",
+      "function": "CODE:33a0"
+    },
+    {
+      "call_address": "CODE:3640",
+      "function": "CODE:3610"
+    },
+    {
+      "call_address": "CODE:3759",
+      "function": "CODE:3723"
+    },
+    {
+      "call_address": "CODE:37c2",
+      "function": "CODE:3723"
+    },
+    {
+      "call_address": "CODE:3831",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:3835",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:383d",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:384f",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:3858",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:385d",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:3862",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:388f",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:389b",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:38e7",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:3917",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:392c",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:3931",
+      "function": "CODE:3800"
+    },
+    {
+      "call_address": "CODE:7619",
+      "function": "CODE:75f5"
+    }
+  ],
+  "used_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    16,
+    17,
+    19,
+    20,
+    21,
+    24
+  ],
+  "pointers": [
+    {
+      "index": 0,
+      "index_hex": "0x00",
+      "table_offset": 17856,
+      "table_offset_hex": "0x45c0",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "target_bytes": "380264528080040c03060e1a2a2e201b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -293
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 20
+      },
+      "immediate_call_count": 21,
+      "call_addresses": [
+        "CODE:33ef",
+        "CODE:3572",
+        "CODE:3725",
+        "CODE:3729",
+        "CODE:3805",
+        "CODE:39be",
+        "CODE:3b62",
+        "CODE:608c",
+        "CODE:632f",
+        "CODE:633b",
+        "CODE:653c",
+        "CODE:6b68",
+        "CODE:6b6f",
+        "CODE:6b74",
+        "CODE:6c47",
+        "CODE:71e2",
+        "CODE:75f7",
+        "CODE:7c8b",
+        "CODE:9e47",
+        "CODE:9eb3",
+        "CODE:9ebc"
+      ],
+      "functions": [
+        "CODE:33a0",
+        "CODE:3530",
+        "CODE:3723",
+        "CODE:3800",
+        "CODE:39b3",
+        "CODE:3ab2",
+        "CODE:6083",
+        "CODE:6327",
+        "CODE:6501",
+        "CODE:6b66",
+        "CODE:6bb7",
+        "CODE:71b6",
+        "CODE:75f5",
+        "CODE:7c22",
+        "CODE:9e43",
+        "CODE:9e88"
+      ]
+    },
+    {
+      "index": 1,
+      "index_hex": "0x01",
+      "table_offset": 17858,
+      "table_offset_hex": "0x45c2",
+      "target": 18491,
+      "target_hex": "0x483b",
+      "target_bytes": "040c03060e1a2a2e201b12060815000b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -299
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 14
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:6c5b",
+        "CODE:7d0c"
+      ],
+      "functions": [
+        "CODE:6bb7",
+        "CODE:7cf6"
+      ]
+    },
+    {
+      "index": 2,
+      "index_hex": "0x02",
+      "table_offset": 17860,
+      "table_offset_hex": "0x45c4",
+      "target": 18517,
+      "target_hex": "0x4855",
+      "target_bytes": "370410100f7f070706063806101f1f20",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -12
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 54
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:3ad7",
+        "CODE:7c99"
+      ],
+      "functions": [
+        "CODE:3ab2",
+        "CODE:7c92"
+      ]
+    },
+    {
+      "index": 3,
+      "index_hex": "0x03",
+      "table_offset": 17862,
+      "table_offset_hex": "0x45c6",
+      "target": 18527,
+      "target_hex": "0x485f",
+      "target_bytes": "3806101f1f203e501414141412123802",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -22
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 44
+      },
+      "immediate_call_count": 4,
+      "call_addresses": [
+        "CODE:3ac1",
+        "CODE:3ac5",
+        "CODE:6b7c",
+        "CODE:6bde"
+      ],
+      "functions": [
+        "CODE:3ab2",
+        "CODE:6b66",
+        "CODE:6bb7"
+      ]
+    },
+    {
+      "index": 4,
+      "index_hex": "0x04",
+      "table_offset": 17864,
+      "table_offset_hex": "0x45c8",
+      "target": 18541,
+      "target_hex": "0x486d",
+      "target_bytes": "38025c8e0a0a3a033f3f336080a03b04",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -36
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 30
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:6b83"
+      ],
+      "functions": [
+        "CODE:6b66"
+      ]
+    },
+    {
+      "index": 5,
+      "index_hex": "0x05",
+      "table_offset": 17866,
+      "table_offset_hex": "0x45ca",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "target_bytes": "380264528080040c03060e1a2a2e201b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -293
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 20
+      },
+      "immediate_call_count": 3,
+      "call_addresses": [
+        "CODE:3b17",
+        "CODE:6cf1",
+        "CODE:6f79"
+      ],
+      "functions": [
+        "CODE:3ab2",
+        "CODE:6bb7",
+        "CODE:6f57"
+      ]
+    },
+    {
+      "index": 6,
+      "index_hex": "0x06",
+      "table_offset": 17868,
+      "table_offset_hex": "0x45cc",
+      "target": 18547,
+      "target_hex": "0x4873",
+      "target_bytes": "3a033f3f336080a03b040f1216b59098",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -42
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 24
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:3b0a",
+        "CODE:717d"
+      ],
+      "functions": [
+        "CODE:3ab2",
+        "CODE:7163"
+      ]
+    },
+    {
+      "index": 7,
+      "index_hex": "0x07",
+      "table_offset": 17870,
+      "table_offset_hex": "0x45ce",
+      "target": 18555,
+      "target_hex": "0x487b",
+      "target_bytes": "3b040f1216b590988c983604491e1d15",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -50
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 16
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:6d02",
+        "CODE:7167"
+      ],
+      "functions": [
+        "CODE:6bb7",
+        "CODE:7163"
+      ]
+    },
+    {
+      "index": 8,
+      "index_hex": "0x08",
+      "table_offset": 17872,
+      "table_offset_hex": "0x45d0",
+      "target": 18565,
+      "target_hex": "0x4885",
+      "target_bytes": "3604491e1d15fa55352d3b0601071919",
+      "nearest_xdf_before": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": -60
+      },
+      "nearest_xdf_after": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": 6
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:6d30"
+      ],
+      "functions": [
+        "CODE:6bb7"
+      ]
+    },
+    {
+      "index": 9,
+      "index_hex": "0x09",
+      "table_offset": 17874,
+      "table_offset_hex": "0x45d2",
+      "target": 18575,
+      "target_hex": "0x488f",
+      "target_bytes": "3b0601071919199c20304080a0d03b06",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -4
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 162
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:6d45"
+      ],
+      "functions": [
+        "CODE:6bb7"
+      ]
+    },
+    {
+      "index": 10,
+      "index_hex": "0x0a",
+      "table_offset": 17876,
+      "table_offset_hex": "0x45d4",
+      "target": 18589,
+      "target_hex": "0x489d",
+      "target_bytes": "3b060305020508da4040404040403b06",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -18
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 148
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:38ae",
+        "CODE:38b7"
+      ],
+      "functions": [
+        "CODE:3800"
+      ]
+    },
+    {
+      "index": 11,
+      "index_hex": "0x0b",
+      "table_offset": 17878,
+      "table_offset_hex": "0x45d6",
+      "target": 18603,
+      "target_hex": "0x48ab",
+      "target_bytes": "3b060303020805df4028282828403b03",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -32
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 134
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:35ef"
+      ],
+      "functions": [
+        "CODE:3585"
+      ]
+    },
+    {
+      "index": 12,
+      "index_hex": "0x0c",
+      "table_offset": 17880,
+      "table_offset_hex": "0x45d8",
+      "target": 18617,
+      "target_hex": "0x48b9",
+      "target_bytes": "3b0319329c4004142840703060a0b038",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -46
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 120
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:3607"
+      ],
+      "functions": [
+        "CODE:3585"
+      ]
+    },
+    {
+      "index": 13,
+      "index_hex": "0x0d",
+      "table_offset": 17882,
+      "table_offset_hex": "0x45da",
+      "target": 18640,
+      "target_hex": "0x48d0",
+      "target_bytes": "3806101f1f203e50b5936a4a3a073806",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -69
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 97
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:35b1",
+        "CODE:35ba"
+      ],
+      "functions": [
+        "CODE:3585"
+      ]
+    },
+    {
+      "index": 14,
+      "index_hex": "0x0e",
+      "table_offset": 17884,
+      "table_offset_hex": "0x45dc",
+      "target": 18654,
+      "target_hex": "0x48de",
+      "target_bytes": "3806101f1f203e50f0c0957d4e1a3806",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -83
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 83
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 15,
+      "index_hex": "0x0f",
+      "table_offset": 17886,
+      "table_offset_hex": "0x45de",
+      "target": 18668,
+      "target_hex": "0x48ec",
+      "target_bytes": "3806101f1f203e5003060806070606db",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -97
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 69
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 16,
+      "index_hex": "0x10",
+      "table_offset": 17888,
+      "table_offset_hex": "0x45e0",
+      "target": 18720,
+      "target_hex": "0x4920",
+      "target_bytes": "3b08050f0d141117197637052f1f2824",
+      "nearest_xdf_before": {
+        "title": "Injector Lag vs. Battery voltage",
+        "address": 18571,
+        "address_hex": "0x488b",
+        "distance": -149
+      },
+      "nearest_xdf_after": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": 17
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:35d0",
+        "CODE:3967"
+      ],
+      "functions": [
+        "CODE:3585",
+        "CODE:3800"
+      ]
+    },
+    {
+      "index": 17,
+      "index_hex": "0x11",
+      "table_offset": 17890,
+      "table_offset_hex": "0x45e2",
+      "target": 18777,
+      "target_hex": "0x4959",
+      "target_bytes": "a302cd3380803806101f1f203e507368",
+      "nearest_xdf_before": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": -40
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temperature enrichment",
+        "address": 18791,
+        "address_hex": "0x4967",
+        "distance": 14
+      },
+      "immediate_call_count": 3,
+      "call_addresses": [
+        "CODE:3679",
+        "CODE:3981",
+        "CODE:3986"
+      ],
+      "functions": [
+        "CODE:3610",
+        "CODE:3800"
+      ]
+    },
+    {
+      "index": 18,
+      "index_hex": "0x12",
+      "table_offset": 17892,
+      "table_offset_hex": "0x45e4",
+      "target": 18783,
+      "target_hex": "0x495f",
+      "target_bytes": "3806101f1f203e5073684d311a003b03",
+      "nearest_xdf_before": {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "distance": -46
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temperature enrichment",
+        "address": 18791,
+        "address_hex": "0x4967",
+        "distance": 8
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 19,
+      "index_hex": "0x13",
+      "table_offset": 17894,
+      "table_offset_hex": "0x45e6",
+      "target": 18797,
+      "target_hex": "0x496d",
+      "target_bytes": "3b031919b5400322328a80cdfe80dae6",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment",
+        "address": 18791,
+        "address_hex": "0x4967",
+        "distance": -6
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Acceleration enrichment",
+        "address": 18807,
+        "address_hex": "0x4977",
+        "distance": 10
+      },
+      "immediate_call_count": 1,
+      "call_addresses": [
+        "CODE:3713"
+      ],
+      "functions": [
+        "CODE:3711"
+      ]
+    },
+    {
+      "index": 20,
+      "index_hex": "0x14",
+      "table_offset": 17896,
+      "table_offset_hex": "0x45e8",
+      "target": 18816,
+      "target_hex": "0x4980",
+      "target_bytes": "3806101f1f203e508066402612004002",
+      "nearest_xdf_before": {
+        "title": "Fuel Acceleration enrichment",
+        "address": 18807,
+        "address_hex": "0x4977",
+        "distance": -9
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": 8
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:3a8e",
+        "CODE:3a9c"
+      ],
+      "functions": [
+        "CODE:3a83"
+      ]
+    },
+    {
+      "index": 21,
+      "index_hex": "0x15",
+      "table_offset": 17898,
+      "table_offset_hex": "0x45ea",
+      "target": 18830,
+      "target_hex": "0x498e",
+      "target_bytes": "4002469c4dff3806101f1f203e50fecd",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": -6
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": 51
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:38d1",
+        "CODE:38e1"
+      ],
+      "functions": [
+        "CODE:3800"
+      ]
+    },
+    {
+      "index": 22,
+      "index_hex": "0x16",
+      "table_offset": 17900,
+      "table_offset_hex": "0x45ec",
+      "target": 18836,
+      "target_hex": "0x4994",
+      "target_bytes": "3806101f1f203e50fecd804d26003704",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": -12
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": 45
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 23,
+      "index_hex": "0x17",
+      "table_offset": 17902,
+      "table_offset_hex": "0x45ee",
+      "target": 18850,
+      "target_hex": "0x49a2",
+      "target_bytes": "3704310e0a19101000009d040c0804dc",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": -26
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": 31
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 24,
+      "index_hex": "0x18",
+      "table_offset": 17904,
+      "table_offset_hex": "0x45f0",
+      "target": 18860,
+      "target_hex": "0x49ac",
+      "target_bytes": "9d040c0804dc004040003b04050708e0",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": -36
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": 21
+      },
+      "immediate_call_count": 2,
+      "call_addresses": [
+        "CODE:3901",
+        "CODE:3911"
+      ],
+      "functions": [
+        "CODE:3800"
+      ]
+    },
+    {
+      "index": 25,
+      "index_hex": "0x19",
+      "table_offset": 17906,
+      "table_offset_hex": "0x45f2",
+      "target": 18870,
+      "target_hex": "0x49b6",
+      "target_bytes": "3b04050708e040030e27b08080807f7f",
+      "nearest_xdf_before": {
+        "title": "Engine temperature enrichment2",
+        "address": 18824,
+        "address_hex": "0x4988",
+        "distance": -46
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": 11
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 26,
+      "index_hex": "0x1a",
+      "table_offset": 17908,
+      "table_offset_hex": "0x45f4",
+      "target": 18893,
+      "target_hex": "0x49cd",
+      "target_bytes": "3b10050a030a0a070803070c0d041217",
+      "nearest_xdf_before": {
+        "title": "Fuel Idle Map",
+        "address": 18881,
+        "address_hex": "0x49c1",
+        "distance": -12
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": 18
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 27,
+      "index_hex": "0x1b",
+      "table_offset": 17910,
+      "table_offset_hex": "0x45f6",
+      "target": 18927,
+      "target_hex": "0x49ef",
+      "target_bytes": "3806101f1f203e504028180f0a085a02",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -16
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 64
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 28,
+      "index_hex": "0x1c",
+      "table_offset": 17912,
+      "table_offset_hex": "0x45f8",
+      "target": 18941,
+      "target_hex": "0x49fd",
+      "target_bytes": "5a0244b8fe803b020cecff803704200e",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -30
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 50
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 29,
+      "index_hex": "0x1d",
+      "table_offset": 17914,
+      "table_offset_hex": "0x45fa",
+      "target": 18947,
+      "target_hex": "0x4a03",
+      "target_bytes": "3b020cecff803704200e0a191d1d1d1d",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -36
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 44
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 30,
+      "index_hex": "0x1e",
+      "table_offset": 17916,
+      "table_offset_hex": "0x45fc",
+      "target": 18953,
+      "target_hex": "0x4a09",
+      "target_bytes": "3704200e0a191d1d1d1d9d04100804dc",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -42
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 38
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 31,
+      "index_hex": "0x1f",
+      "table_offset": 17918,
+      "table_offset_hex": "0x45fe",
+      "target": 18963,
+      "target_hex": "0x4a13",
+      "target_bytes": "9d04100804dc101010103b1005050505",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -52
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 28
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 32,
+      "index_hex": "0x20",
+      "table_offset": 17920,
+      "table_offset_hex": "0x4600",
+      "target": 18973,
+      "target_hex": "0x4a1d",
+      "target_bytes": "3b1005050505070d0505050a080a110f",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map1",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "distance": -62
+      },
+      "nearest_xdf_after": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": 18
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 33,
+      "index_hex": "0x21",
+      "table_offset": 17922,
+      "table_offset_hex": "0x4602",
+      "target": 19007,
+      "target_hex": "0x4a3f",
+      "target_bytes": "3a033f3f338080803b040a05469c9098",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -16
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 259
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 34,
+      "index_hex": "0x22",
+      "table_offset": 17924,
+      "table_offset_hex": "0x4604",
+      "target": 19015,
+      "target_hex": "0x4a47",
+      "target_bytes": "3b040a05469c90988c983b0319329c40",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -24
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 251
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 35,
+      "index_hex": "0x23",
+      "table_offset": 17926,
+      "table_offset_hex": "0x4606",
+      "target": 19025,
+      "target_hex": "0x4a51",
+      "target_bytes": "3b0319329c4004142840703366a0b038",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -34
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 241
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 36,
+      "index_hex": "0x24",
+      "table_offset": 17928,
+      "table_offset_hex": "0x4608",
+      "target": 19048,
+      "target_hex": "0x4a68",
+      "target_bytes": "3806101f1f203e50a57b6a7360073b08",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -57
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 218
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 37,
+      "index_hex": "0x25",
+      "table_offset": 17930,
+      "table_offset_hex": "0x460a",
+      "target": 19062,
+      "target_hex": "0x4a76",
+      "target_bytes": "3b08050f0d141117197637052f1f2824",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -71
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 204
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 38,
+      "index_hex": "0x26",
+      "table_offset": 17932,
+      "table_offset_hex": "0x460c",
+      "target": 19119,
+      "target_hex": "0x4aaf",
+      "target_bytes": "3806101f1f203e507368461000003b03",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -128
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 147
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 39,
+      "index_hex": "0x27",
+      "table_offset": 17934,
+      "table_offset_hex": "0x460e",
+      "target": 19133,
+      "target_hex": "0x4abd",
+      "target_bytes": "3b031919b5400322328a80cdfe80b3e6",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -142
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 133
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 40,
+      "index_hex": "0x28",
+      "table_offset": 17936,
+      "table_offset_hex": "0x4610",
+      "target": 19152,
+      "target_hex": "0x4ad0",
+      "target_bytes": "3806101f1f203e508066402612004002",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -161
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 114
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 41,
+      "index_hex": "0x29",
+      "table_offset": 17938,
+      "table_offset_hex": "0x4612",
+      "target": 19166,
+      "target_hex": "0x4ade",
+      "target_bytes": "4002469c4dff3806101f1f203e50fecd",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -175
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 100
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 42,
+      "index_hex": "0x2a",
+      "table_offset": 17940,
+      "table_offset_hex": "0x4614",
+      "target": 19172,
+      "target_hex": "0x4ae4",
+      "target_bytes": "3806101f1f203e50fecd804d26003b04",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -181
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 94
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 43,
+      "index_hex": "0x2b",
+      "table_offset": 17942,
+      "table_offset_hex": "0x4616",
+      "target": 19186,
+      "target_hex": "0x4af2",
+      "target_bytes": "3b04050708e040030e21c4728080707e",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -195
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 80
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 44,
+      "index_hex": "0x2c",
+      "table_offset": 17944,
+      "table_offset_hex": "0x4618",
+      "target": 19209,
+      "target_hex": "0x4b09",
+      "target_bytes": "3b10050a0508070a0805050c0d041217",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -218
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 57
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 45,
+      "index_hex": "0x2d",
+      "table_offset": 17946,
+      "table_offset_hex": "0x461a",
+      "target": 19243,
+      "target_hex": "0x4b2b",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "Fuel WOT Map 2",
+        "address": 18991,
+        "address_hex": "0x4a2f",
+        "distance": -252
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 46,
+      "index_hex": "0x2e",
+      "table_offset": 17948,
+      "table_offset_hex": "0x461c",
+      "target": 19350,
+      "target_hex": "0x4b96",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4006",
+      "nearest_xdf_before": {
+        "title": "High part throttle fuel map ",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Low Throttle Fuel map ",
+        "address": 19372,
+        "address_hex": "0x4bac",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 47,
+      "index_hex": "0x2f",
+      "table_offset": 17950,
+      "table_offset_hex": "0x461e",
+      "target": 19444,
+      "target_hex": "0x4bf4",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map ",
+        "address": 19372,
+        "address_hex": "0x4bac",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map2",
+        "address": 19668,
+        "address_hex": "0x4cd4",
+        "distance": 224
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 48,
+      "index_hex": "0x30",
+      "table_offset": 17952,
+      "table_offset_hex": "0x4620",
+      "target": 19551,
+      "target_hex": "0x4c5f",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map ",
+        "address": 19372,
+        "address_hex": "0x4bac",
+        "distance": -179
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map2",
+        "address": 19668,
+        "address_hex": "0x4cd4",
+        "distance": 117
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 49,
+      "index_hex": "0x31",
+      "table_offset": 17954,
+      "table_offset_hex": "0x4622",
+      "target": 19645,
+      "target_hex": "0x4cbd",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map ",
+        "address": 19372,
+        "address_hex": "0x4bac",
+        "distance": -273
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map2",
+        "address": 19668,
+        "address_hex": "0x4cd4",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 50,
+      "index_hex": "0x32",
+      "table_offset": 17956,
+      "table_offset_hex": "0x4624",
+      "target": 19752,
+      "target_hex": "0x4d28",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "High part throttle fuel map2",
+        "address": 19668,
+        "address_hex": "0x4cd4",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Low Throttle Fuel map2",
+        "address": 19774,
+        "address_hex": "0x4d3e",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 51,
+      "index_hex": "0x33",
+      "table_offset": 17958,
+      "table_offset_hex": "0x4626",
+      "target": 19846,
+      "target_hex": "0x4d86",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map2",
+        "address": 19774,
+        "address_hex": "0x4d3e",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map3",
+        "address": 20070,
+        "address_hex": "0x4e66",
+        "distance": 224
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 52,
+      "index_hex": "0x34",
+      "table_offset": 17960,
+      "table_offset_hex": "0x4628",
+      "target": 19953,
+      "target_hex": "0x4df1",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map2",
+        "address": 19774,
+        "address_hex": "0x4d3e",
+        "distance": -179
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map3",
+        "address": 20070,
+        "address_hex": "0x4e66",
+        "distance": 117
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 53,
+      "index_hex": "0x35",
+      "table_offset": 17962,
+      "table_offset_hex": "0x462a",
+      "target": 20047,
+      "target_hex": "0x4e4f",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map2",
+        "address": 19774,
+        "address_hex": "0x4d3e",
+        "distance": -273
+      },
+      "nearest_xdf_after": {
+        "title": "High part throttle fuel map3",
+        "address": 20070,
+        "address_hex": "0x4e66",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 54,
+      "index_hex": "0x36",
+      "table_offset": 17964,
+      "table_offset_hex": "0x462c",
+      "target": 20154,
+      "target_hex": "0x4eba",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4006",
+      "nearest_xdf_before": {
+        "title": "High part throttle fuel map3",
+        "address": 20070,
+        "address_hex": "0x4e66",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 55,
+      "index_hex": "0x37",
+      "table_offset": 17966,
+      "table_offset_hex": "0x462e",
+      "target": 20248,
+      "target_hex": "0x4f18",
+      "target_bytes": "3806101f1f203e50644b3228231b9f04",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 467
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 56,
+      "index_hex": "0x38",
+      "table_offset": 17968,
+      "table_offset_hex": "0x4630",
+      "target": 20262,
+      "target_hex": "0x4f26",
+      "target_bytes": "9f0409120cd000050a193b0419193283",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -86
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 453
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 57,
+      "index_hex": "0x39",
+      "table_offset": 17970,
+      "table_offset_hex": "0x4632",
+      "target": 20272,
+      "target_hex": "0x4f30",
+      "target_bytes": "3b0419193283080808083b0419193283",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -96
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 443
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 58,
+      "index_hex": "0x3a",
+      "table_offset": 17972,
+      "table_offset_hex": "0x4634",
+      "target": 20282,
+      "target_hex": "0x4f3a",
+      "target_bytes": "3b0419193283140a00003806101f1f20",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -106
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 433
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 59,
+      "index_hex": "0x3b",
+      "table_offset": 17974,
+      "table_offset_hex": "0x4636",
+      "target": 20292,
+      "target_hex": "0x4f44",
+      "target_bytes": "3806101f1f203e50644b3c3c321b3b04",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -116
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 423
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 60,
+      "index_hex": "0x3c",
+      "table_offset": 17976,
+      "table_offset_hex": "0x4638",
+      "target": 20306,
+      "target_hex": "0x4f52",
+      "target_bytes": "3b0419193283080808083b0419193283",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -130
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 409
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 61,
+      "index_hex": "0x3d",
+      "table_offset": 17978,
+      "table_offset_hex": "0x463a",
+      "target": 20316,
+      "target_hex": "0x4f5c",
+      "target_bytes": "3b0419193283140a00003b042e26326a",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -140
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 399
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 62,
+      "index_hex": "0x3e",
+      "table_offset": 17980,
+      "table_offset_hex": "0x463c",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "target_bytes": "380264528080040c03060e1a2a2e201b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -293
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 20
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 63,
+      "index_hex": "0x3f",
+      "table_offset": 17982,
+      "table_offset_hex": "0x463e",
+      "target": 20326,
+      "target_hex": "0x4f66",
+      "target_bytes": "3b042e26326a1e1f20223b0208f0323a",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -150
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 389
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 64,
+      "index_hex": "0x40",
+      "table_offset": 17984,
+      "table_offset_hex": "0x4640",
+      "target": 20336,
+      "target_hex": "0x4f70",
+      "target_bytes": "3b0208f0323a38027b511e0d3b041414",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -160
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 379
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 65,
+      "index_hex": "0x41",
+      "table_offset": 17986,
+      "table_offset_hex": "0x4642",
+      "target": 20342,
+      "target_hex": "0x4f76",
+      "target_bytes": "38027b511e0d3b04141414921e1e1e2a",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -166
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 373
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 66,
+      "index_hex": "0x42",
+      "table_offset": 17988,
+      "table_offset_hex": "0x4644",
+      "target": 20348,
+      "target_hex": "0x4f7c",
+      "target_bytes": "3b04141414921e1e1e2a3803305b712b",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -172
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 367
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 67,
+      "index_hex": "0x43",
+      "table_offset": 17990,
+      "table_offset_hex": "0x4646",
+      "target": 20358,
+      "target_hex": "0x4f86",
+      "target_bytes": "3803305b712b201e3b0804020707080b",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -182
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 357
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 68,
+      "index_hex": "0x44",
+      "table_offset": 17992,
+      "table_offset_hex": "0x4648",
+      "target": 20366,
+      "target_hex": "0x4f8e",
+      "target_bytes": "3b0804020707080b1fae40031111bc35",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -190
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 349
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 69,
+      "index_hex": "0x45",
+      "table_offset": 17994,
+      "table_offset_hex": "0x464a",
+      "target": 20405,
+      "target_hex": "0x4fb5",
+      "target_bytes": "3b101005110c080905080604040b0f0f",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -229
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 310
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 70,
+      "index_hex": "0x46",
+      "table_offset": 17996,
+      "table_offset_hex": "0x464c",
+      "target": 20439,
+      "target_hex": "0x4fd7",
+      "target_bytes": "370410362d52201e1e1e38061f0f0827",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -263
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 276
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 71,
+      "index_hex": "0x47",
+      "table_offset": 17998,
+      "table_offset_hex": "0x464e",
+      "target": 20449,
+      "target_hex": "0x4fe1",
+      "target_bytes": "38061f0f08270d6224242412121e3803",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -273
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 266
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 72,
+      "index_hex": "0x48",
+      "table_offset": 18000,
+      "table_offset_hex": "0x4650",
+      "target": 20463,
+      "target_hex": "0x4fef",
+      "target_bytes": "3803121d1937041010177f0000010900",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -287
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 252
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 73,
+      "index_hex": "0x49",
+      "table_offset": 18002,
+      "table_offset_hex": "0x4652",
+      "target": 20486,
+      "target_hex": "0x5006",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -310
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 229
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 74,
+      "index_hex": "0x4a",
+      "table_offset": 18004,
+      "table_offset_hex": "0x4654",
+      "target": 20593,
+      "target_hex": "0x5071",
+      "target_bytes": "3b101005110c080905080604040b0f0f",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -417
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 122
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 75,
+      "index_hex": "0x4b",
+      "table_offset": 18006,
+      "table_offset_hex": "0x4656",
+      "target": 20627,
+      "target_hex": "0x5093",
+      "target_bytes": "3b06080c0d0c0c5e4005140c0f0e7714",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -451
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 88
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 76,
+      "index_hex": "0x4c",
+      "table_offset": 18008,
+      "table_offset_hex": "0x4658",
+      "target": 20672,
+      "target_hex": "0x50c0",
+      "target_bytes": "030402060aec1e1e2124030402060aec",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -496
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 43
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 77,
+      "index_hex": "0x4d",
+      "table_offset": 18010,
+      "table_offset_hex": "0x465a",
+      "target": 20682,
+      "target_hex": "0x50ca",
+      "target_bytes": "030402060aec1e1e1c193b0c03040408",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -506
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 33
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 78,
+      "index_hex": "0x4e",
+      "table_offset": 18012,
+      "table_offset_hex": "0x465c",
+      "target": 20692,
+      "target_hex": "0x50d4",
+      "target_bytes": "3b0c03040408050e101a18192d513607",
+      "nearest_xdf_before": {
+        "title": "Low Throttle Fuel map3",
+        "address": 20176,
+        "address_hex": "0x4ed0",
+        "distance": -516
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 79,
+      "index_hex": "0x4f",
+      "table_offset": 18014,
+      "table_offset_hex": "0x465e",
+      "target": 20799,
+      "target_hex": "0x513f",
+      "target_bytes": "3b040a120fa31e1e1e1e3b041b1c1b79",
+      "nearest_xdf_before": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition WOT Map 1",
+        "address": 20837,
+        "address_hex": "0x5165",
+        "distance": 38
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 80,
+      "index_hex": "0x50",
+      "table_offset": 18016,
+      "table_offset_hex": "0x4660",
+      "target": 20809,
+      "target_hex": "0x5149",
+      "target_bytes": "3b041b1c1b791e1e1e1e3b10050a0805",
+      "nearest_xdf_before": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": -94
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition WOT Map 1",
+        "address": 20837,
+        "address_hex": "0x5165",
+        "distance": 28
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 81,
+      "index_hex": "0x51",
+      "table_offset": 18018,
+      "table_offset_hex": "0x4662",
+      "target": 20819,
+      "target_hex": "0x5153",
+      "target_bytes": "3b10050a0805110a20080805070a0507",
+      "nearest_xdf_before": {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "distance": -104
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition WOT Map 1",
+        "address": 20837,
+        "address_hex": "0x5165",
+        "distance": 18
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 82,
+      "index_hex": "0x52",
+      "table_offset": 18020,
+      "table_offset_hex": "0x4664",
+      "target": 20853,
+      "target_hex": "0x5175",
+      "target_bytes": "3803305b712b201e3b0804020707080b",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 1",
+        "address": 20837,
+        "address_hex": "0x5165",
+        "distance": -16
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Idle Timing map",
+        "address": 20876,
+        "address_hex": "0x518c",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 83,
+      "index_hex": "0x53",
+      "table_offset": 18022,
+      "table_offset_hex": "0x4666",
+      "target": 20861,
+      "target_hex": "0x517d",
+      "target_bytes": "3b0804020707080b1fae40031111bc35",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 1",
+        "address": 20837,
+        "address_hex": "0x5165",
+        "distance": -24
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition Idle Timing map",
+        "address": 20876,
+        "address_hex": "0x518c",
+        "distance": 15
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 84,
+      "index_hex": "0x54",
+      "table_offset": 18024,
+      "table_offset_hex": "0x4668",
+      "target": 20900,
+      "target_hex": "0x51a4",
+      "target_bytes": "3b101005110c080905080604040b0f0f",
+      "nearest_xdf_before": {
+        "title": "Ignition Idle Timing map",
+        "address": 20876,
+        "address_hex": "0x518c",
+        "distance": -24
+      },
+      "nearest_xdf_after": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": 18
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 85,
+      "index_hex": "0x55",
+      "table_offset": 18026,
+      "table_offset_hex": "0x466a",
+      "target": 20934,
+      "target_hex": "0x51c6",
+      "target_bytes": "3803121d1937041010177f0000010900",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -16
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 252
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 86,
+      "index_hex": "0x56",
+      "table_offset": 18028,
+      "table_offset_hex": "0x466c",
+      "target": 20957,
+      "target_hex": "0x51dd",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -39
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 229
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 87,
+      "index_hex": "0x57",
+      "table_offset": 18030,
+      "table_offset_hex": "0x466e",
+      "target": 21064,
+      "target_hex": "0x5248",
+      "target_bytes": "3b101005110c080905080604040b0f0f",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -146
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 122
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 88,
+      "index_hex": "0x58",
+      "table_offset": 18032,
+      "table_offset_hex": "0x4670",
+      "target": 21098,
+      "target_hex": "0x526a",
+      "target_bytes": "3b06080c0d0c0c5e4005140c0f0e7710",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -180
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 88
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 89,
+      "index_hex": "0x59",
+      "table_offset": 18034,
+      "table_offset_hex": "0x4672",
+      "target": 21143,
+      "target_hex": "0x5297",
+      "target_bytes": "030402060aec1e1e2124030402060aec",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -225
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 43
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 90,
+      "index_hex": "0x5a",
+      "table_offset": 18036,
+      "table_offset_hex": "0x4674",
+      "target": 21153,
+      "target_hex": "0x52a1",
+      "target_bytes": "030402060aec1e1e1c193b0c050a050d",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -235
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 33
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 91,
+      "index_hex": "0x5b",
+      "table_offset": 18038,
+      "table_offset_hex": "0x4676",
+      "target": 21163,
+      "target_hex": "0x52ab",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "Ignition WOT Map 2",
+        "address": 20918,
+        "address_hex": "0x51b6",
+        "distance": -245
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 92,
+      "index_hex": "0x5c",
+      "table_offset": 18040,
+      "table_offset_hex": "0x4678",
+      "target": 21270,
+      "target_hex": "0x5316",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4006",
+      "nearest_xdf_before": {
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "address": 21186,
+        "address_hex": "0x52c2",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Low part Throttle Ignition Map",
+        "address": 21292,
+        "address_hex": "0x532c",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 93,
+      "index_hex": "0x5d",
+      "table_offset": 18042,
+      "table_offset_hex": "0x467a",
+      "target": 21364,
+      "target_hex": "0x5374",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map",
+        "address": 21292,
+        "address_hex": "0x532c",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map2",
+        "address": 21387,
+        "address_hex": "0x538b",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 94,
+      "index_hex": "0x5e",
+      "table_offset": 18044,
+      "table_offset_hex": "0x467c",
+      "target": 21471,
+      "target_hex": "0x53df",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "High part Throttle Ignition map2",
+        "address": 21387,
+        "address_hex": "0x538b",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Low part Throttle Ignition Map2",
+        "address": 21493,
+        "address_hex": "0x53f5",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 95,
+      "index_hex": "0x5f",
+      "table_offset": 18046,
+      "table_offset_hex": "0x467e",
+      "target": 21565,
+      "target_hex": "0x543d",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map2",
+        "address": 21493,
+        "address_hex": "0x53f5",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map3",
+        "address": 21694,
+        "address_hex": "0x54be",
+        "distance": 129
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 96,
+      "index_hex": "0x60",
+      "table_offset": 18048,
+      "table_offset_hex": "0x4680",
+      "target": 21672,
+      "target_hex": "0x54a8",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map2",
+        "address": 21493,
+        "address_hex": "0x53f5",
+        "distance": -179
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map3",
+        "address": 21694,
+        "address_hex": "0x54be",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 97,
+      "index_hex": "0x61",
+      "table_offset": 18050,
+      "table_offset_hex": "0x4682",
+      "target": 21766,
+      "target_hex": "0x5506",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4007",
+      "nearest_xdf_before": {
+        "title": "High part Throttle Ignition map3",
+        "address": 21694,
+        "address_hex": "0x54be",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "Low part Throttle Ignition Map3",
+        "address": 21789,
+        "address_hex": "0x551d",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 98,
+      "index_hex": "0x62",
+      "table_offset": 18052,
+      "table_offset_hex": "0x4684",
+      "target": 21873,
+      "target_hex": "0x5571",
+      "target_bytes": "3b0c050a050d0a1b0f080c14115e4006",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map3",
+        "address": 21789,
+        "address_hex": "0x551d",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "High part Throttle Ignition map4",
+        "address": 21895,
+        "address_hex": "0x5587",
+        "distance": 22
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 99,
+      "index_hex": "0x63",
+      "table_offset": 18054,
+      "table_offset_hex": "0x4686",
+      "target": 21967,
+      "target_hex": "0x55cf",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4007",
+      "nearest_xdf_before": {
+        "title": "High part Throttle Ignition map4",
+        "address": 21895,
+        "address_hex": "0x5587",
+        "distance": -72
+      },
+      "nearest_xdf_after": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": 23
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 100,
+      "index_hex": "0x64",
+      "table_offset": 18056,
+      "table_offset_hex": "0x4688",
+      "target": 22074,
+      "target_hex": "0x563a",
+      "target_bytes": "3b0c050a050d0a0a110f0819185e4006",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 437
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 101,
+      "index_hex": "0x65",
+      "table_offset": 18058,
+      "table_offset_hex": "0x468a",
+      "target": 22168,
+      "target_hex": "0x5698",
+      "target_bytes": "3b04141414921e1e1e1e3704203d3b16",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -178
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 343
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 102,
+      "index_hex": "0x66",
+      "table_offset": 18060,
+      "table_offset_hex": "0x468c",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "target_bytes": "380264528080040c03060e1a2a2e201b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -293
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 20
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 103,
+      "index_hex": "0x67",
+      "table_offset": 18062,
+      "table_offset_hex": "0x468e",
+      "target": 22178,
+      "target_hex": "0x56a2",
+      "target_bytes": "3704203d3b16380410203e8e435db9f8",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -188
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 333
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 104,
+      "index_hex": "0x68",
+      "table_offset": 18064,
+      "table_offset_hex": "0x4690",
+      "target": 22206,
+      "target_hex": "0x56be",
+      "target_bytes": "3704203d3b16380410203e8e435db9f8",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -216
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 305
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 105,
+      "index_hex": "0x69",
+      "table_offset": 18066,
+      "table_offset_hex": "0x4692",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "target_bytes": "380264528080040c03060e1a2a2e201b",
+      "nearest_xdf_before": {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "distance": -293
+      },
+      "nearest_xdf_after": {
+        "title": "Engine temp sensor transfer map",
+        "address": 18505,
+        "address_hex": "0x4849",
+        "distance": 20
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 106,
+      "index_hex": "0x6a",
+      "table_offset": 18068,
+      "table_offset_hex": "0x4694",
+      "target": 22234,
+      "target_hex": "0x56da",
+      "target_bytes": "3b04070a469c251c1c4b3b04050a14ce",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -244
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 277
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 107,
+      "index_hex": "0x6b",
+      "table_offset": 18070,
+      "table_offset_hex": "0x4696",
+      "target": 22244,
+      "target_hex": "0x56e4",
+      "target_bytes": "3b04050a14ce3806101f1f205539faaa",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -254
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 267
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 108,
+      "index_hex": "0x6c",
+      "table_offset": 18072,
+      "table_offset_hex": "0x4698",
+      "target": 22282,
+      "target_hex": "0x570a",
+      "target_bytes": "3b04050a3c9c3806101f1f203e50c896",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -292
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 229
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 109,
+      "index_hex": "0x6d",
+      "table_offset": 18074,
+      "table_offset_hex": "0x469a",
+      "target": 22320,
+      "target_hex": "0x5730",
+      "target_bytes": "3806101f1f203e50feb46e554b463b03",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -330
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 191
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 110,
+      "index_hex": "0x6e",
+      "table_offset": 18076,
+      "table_offset_hex": "0x469c",
+      "target": 22334,
+      "target_hex": "0x573e",
+      "target_bytes": "3b03060de746050038061f1f4b000261",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -344
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 177
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 111,
+      "index_hex": "0x6f",
+      "table_offset": 18078,
+      "table_offset_hex": "0x469e",
+      "target": 22342,
+      "target_hex": "0x5746",
+      "target_bytes": "38061f1f4b0002610000000000003806",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -352
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 169
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 112,
+      "index_hex": "0x70",
+      "table_offset": 18080,
+      "table_offset_hex": "0x46a0",
+      "target": 22356,
+      "target_hex": "0x5754",
+      "target_bytes": "3806101f1f203e504a4a4a4a4a4a3b04",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -366
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 155
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 113,
+      "index_hex": "0x71",
+      "table_offset": 18082,
+      "table_offset_hex": "0x46a2",
+      "target": 22370,
+      "target_hex": "0x5762",
+      "target_bytes": "3b04070a469c251c1c4b3b04050a14ce",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -380
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 141
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 114,
+      "index_hex": "0x72",
+      "table_offset": 18084,
+      "table_offset_hex": "0x46a4",
+      "target": 22380,
+      "target_hex": "0x576c",
+      "target_bytes": "3b04050a14ce3806101f1f205539c8aa",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -390
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 131
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 115,
+      "index_hex": "0x73",
+      "table_offset": 18086,
+      "table_offset_hex": "0x46a6",
+      "target": 22418,
+      "target_hex": "0x5792",
+      "target_bytes": "38061f1f4b0002610000000000003b04",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -428
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 93
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 116,
+      "index_hex": "0x74",
+      "table_offset": 18088,
+      "table_offset_hex": "0x46a8",
+      "target": 22432,
+      "target_hex": "0x57a0",
+      "target_bytes": "3b04191932838874605040050a0a141e",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -442
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 79
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 117,
+      "index_hex": "0x75",
+      "table_offset": 18090,
+      "table_offset_hex": "0x46aa",
+      "target": 22442,
+      "target_hex": "0x57aa",
+      "target_bytes": "40050a0a141e9cf0f0e0a0a03b05050d",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -452
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 69
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 118,
+      "index_hex": "0x76",
+      "table_offset": 18092,
+      "table_offset_hex": "0x46ac",
+      "target": 22454,
+      "target_hex": "0x57b6",
+      "target_bytes": "3b05050d0c19b5320504040a14d8005a",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -464
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 57
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 119,
+      "index_hex": "0x77",
+      "table_offset": 18094,
+      "table_offset_hex": "0x46ae",
+      "target": 22493,
+      "target_hex": "0x57dd",
+      "target_bytes": "38041f1f5d511815110c3806101f1f20",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -503
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 18
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 120,
+      "index_hex": "0x78",
+      "table_offset": 18096,
+      "table_offset_hex": "0x46b0",
+      "target": 22503,
+      "target_hex": "0x57e7",
+      "target_bytes": "3806101f1f203e5078705a5050503804",
+      "nearest_xdf_before": {
+        "title": "Low part Throttle Ignition Map4",
+        "address": 21990,
+        "address_hex": "0x55e6",
+        "distance": -513
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": 8
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 121,
+      "index_hex": "0x79",
+      "table_offset": 18098,
+      "table_offset_hex": "0x46b2",
+      "target": 22517,
+      "target_hex": "0x57f5",
+      "target_bytes": "38043f3f2d51785a555538043f3f2d51",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "address": 22511,
+        "address_hex": "0x57ef",
+        "distance": -6
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in D or R with A/C on)",
+        "address": 22523,
+        "address_hex": "0x57fb",
+        "distance": 6
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 122,
+      "index_hex": "0x7a",
+      "table_offset": 18100,
+      "table_offset_hex": "0x46b4",
+      "target": 22527,
+      "target_hex": "0x57ff",
+      "target_bytes": "38043f3f2d5178645f5f38043e402d51",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with A/C on)",
+        "address": 22523,
+        "address_hex": "0x57fb",
+        "distance": -4
+      },
+      "nearest_xdf_after": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": 6
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 123,
+      "index_hex": "0x7b",
+      "table_offset": 18102,
+      "table_offset_hex": "0x46b6",
+      "target": 22537,
+      "target_hex": "0x5809",
+      "target_bytes": "38043e402d51785f5555030401080aec",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -4
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10228
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 124,
+      "index_hex": "0x7c",
+      "table_offset": 18104,
+      "table_offset_hex": "0x46b8",
+      "target": 22547,
+      "target_hex": "0x5813",
+      "target_bytes": "030401080aec000101000304011214d8",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -14
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10218
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 125,
+      "index_hex": "0x7d",
+      "table_offset": 18106,
+      "table_offset_hex": "0x46ba",
+      "target": 22557,
+      "target_hex": "0x581d",
+      "target_bytes": "0304011214d8000101010304060a1cd0",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -24
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10208
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 126,
+      "index_hex": "0x7e",
+      "table_offset": 18108,
+      "table_offset_hex": "0x46bc",
+      "target": 22567,
+      "target_hex": "0x5827",
+      "target_bytes": "0304060a1cd00014283c38042f3f5e30",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -34
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10198
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 127,
+      "index_hex": "0x7f",
+      "table_offset": 18110,
+      "table_offset_hex": "0x46be",
+      "target": 22577,
+      "target_hex": "0x5831",
+      "target_bytes": "38042f3f5e30291e19143b041919199c",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -44
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10188
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 128,
+      "index_hex": "0x80",
+      "table_offset": 18112,
+      "table_offset_hex": "0x46c0",
+      "target": 22587,
+      "target_hex": "0x583b",
+      "target_bytes": "3b041919199c64646464030401080aec",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -54
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10178
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 129,
+      "index_hex": "0x81",
+      "table_offset": 18114,
+      "table_offset_hex": "0x46c2",
+      "target": 22597,
+      "target_hex": "0x5845",
+      "target_bytes": "030401080aec000101000304011214d8",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -64
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10168
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 130,
+      "index_hex": "0x82",
+      "table_offset": 18116,
+      "table_offset_hex": "0x46c4",
+      "target": 22607,
+      "target_hex": "0x584f",
+      "target_bytes": "0304011214d8000101010304060a1cd0",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -74
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10158
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    },
+    {
+      "index": 131,
+      "index_hex": "0x83",
+      "table_offset": 18118,
+      "table_offset_hex": "0x46c6",
+      "target": 22617,
+      "target_hex": "0x5859",
+      "target_bytes": "0304060a1cd00014283c36052c1d1e1d",
+      "nearest_xdf_before": {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "address": 22533,
+        "address_hex": "0x5805",
+        "distance": -84
+      },
+      "nearest_xdf_after": {
+        "title": "Checksum 16bit",
+        "address": 32765,
+        "address_hex": "0x7ffd",
+        "distance": 10148
+      },
+      "immediate_call_count": 0,
+      "call_addresses": [],
+      "functions": []
+    }
+  ],
+  "xdf_pointer_links": [
+    {
+      "title": "Idle speed(AT in P or N, AC on or off)",
+      "xdf_address": 22511,
+      "xdf_address_hex": "0x57ef",
+      "pointer_index": 120,
+      "pointer_target": 22503,
+      "pointer_target_hex": "0x57e7",
+      "payload_offset": 8,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Idle speed(AT in D or R with A/C on)",
+      "xdf_address": 22523,
+      "xdf_address_hex": "0x57fb",
+      "pointer_index": 121,
+      "pointer_target": 22517,
+      "pointer_target_hex": "0x57f5",
+      "payload_offset": 6,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Idle speed(AT in D or R with AC off)",
+      "xdf_address": 22533,
+      "xdf_address_hex": "0x5805",
+      "pointer_index": 122,
+      "pointer_target": 22527,
+      "pointer_target_hex": "0x57ff",
+      "payload_offset": 6,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Fuel Idle Map",
+      "xdf_address": 18881,
+      "xdf_address_hex": "0x49c1",
+      "pointer_index": 25,
+      "pointer_target": 18870,
+      "pointer_target_hex": "0x49b6",
+      "payload_offset": 11,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Fuel WOT Map1",
+      "xdf_address": 18911,
+      "xdf_address_hex": "0x49df",
+      "pointer_index": 26,
+      "pointer_target": 18893,
+      "pointer_target_hex": "0x49cd",
+      "payload_offset": 18,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Fuel WOT Map1(AFR example)",
+      "xdf_address": 18911,
+      "xdf_address_hex": "0x49df",
+      "pointer_index": 26,
+      "pointer_target": 18893,
+      "pointer_target_hex": "0x49cd",
+      "payload_offset": 18,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Fuel WOT Map 2",
+      "xdf_address": 18991,
+      "xdf_address_hex": "0x4a2f",
+      "pointer_index": 32,
+      "pointer_target": 18973,
+      "pointer_target_hex": "0x4a1d",
+      "payload_offset": 18,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Fuel Acceleration enrichment",
+      "xdf_address": 18807,
+      "xdf_address_hex": "0x4977",
+      "pointer_index": 19,
+      "pointer_target": 18797,
+      "pointer_target_hex": "0x496d",
+      "payload_offset": 10,
+      "immediate_call_count": 1,
+      "functions": [
+        "CODE:3711"
+      ]
+    },
+    {
+      "title": "High part throttle fuel map ",
+      "xdf_address": 19266,
+      "xdf_address_hex": "0x4b42",
+      "pointer_index": 45,
+      "pointer_target": 19243,
+      "pointer_target_hex": "0x4b2b",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part throttle fuel map(in AFR example)",
+      "xdf_address": 19266,
+      "xdf_address_hex": "0x4b42",
+      "pointer_index": 45,
+      "pointer_target": 19243,
+      "pointer_target_hex": "0x4b2b",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part throttle fuel map2",
+      "xdf_address": 19668,
+      "xdf_address_hex": "0x4cd4",
+      "pointer_index": 49,
+      "pointer_target": 19645,
+      "pointer_target_hex": "0x4cbd",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part throttle fuel map3",
+      "xdf_address": 20070,
+      "xdf_address_hex": "0x4e66",
+      "pointer_index": 53,
+      "pointer_target": 20047,
+      "pointer_target_hex": "0x4e4f",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low Throttle Fuel map ",
+      "xdf_address": 19372,
+      "xdf_address_hex": "0x4bac",
+      "pointer_index": 46,
+      "pointer_target": 19350,
+      "pointer_target_hex": "0x4b96",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low Throttle Fuel map2",
+      "xdf_address": 19774,
+      "xdf_address_hex": "0x4d3e",
+      "pointer_index": 50,
+      "pointer_target": 19752,
+      "pointer_target_hex": "0x4d28",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low Throttle Fuel map3",
+      "xdf_address": 20176,
+      "xdf_address_hex": "0x4ed0",
+      "pointer_index": 54,
+      "pointer_target": 20154,
+      "pointer_target_hex": "0x4eba",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Injector trim(Air temp/battery voltage)",
+      "xdf_address": 18737,
+      "xdf_address_hex": "0x4931",
+      "pointer_index": 16,
+      "pointer_target": 18720,
+      "pointer_target_hex": "0x4920",
+      "payload_offset": 17,
+      "immediate_call_count": 2,
+      "functions": [
+        "CODE:3585",
+        "CODE:3800"
+      ]
+    },
+    {
+      "title": "Engine temperature enrichment",
+      "xdf_address": 18791,
+      "xdf_address_hex": "0x4967",
+      "pointer_index": 18,
+      "pointer_target": 18783,
+      "pointer_target_hex": "0x495f",
+      "payload_offset": 8,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Engine temperature enrichment2",
+      "xdf_address": 18824,
+      "xdf_address_hex": "0x4988",
+      "pointer_index": 20,
+      "pointer_target": 18816,
+      "pointer_target_hex": "0x4980",
+      "payload_offset": 8,
+      "immediate_call_count": 2,
+      "functions": [
+        "CODE:3a83"
+      ]
+    },
+    {
+      "title": "Injector Lag vs. Battery voltage",
+      "xdf_address": 18571,
+      "xdf_address_hex": "0x488b",
+      "pointer_index": 8,
+      "pointer_target": 18565,
+      "pointer_target_hex": "0x4885",
+      "payload_offset": 6,
+      "immediate_call_count": 1,
+      "functions": [
+        "CODE:6bb7"
+      ]
+    },
+    {
+      "title": "Ignition Idle Timing map",
+      "xdf_address": 20876,
+      "xdf_address_hex": "0x518c",
+      "pointer_index": 83,
+      "pointer_target": 20861,
+      "pointer_target_hex": "0x517d",
+      "payload_offset": 15,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Ignition WOT Map 1",
+      "xdf_address": 20837,
+      "xdf_address_hex": "0x5165",
+      "pointer_index": 81,
+      "pointer_target": 20819,
+      "pointer_target_hex": "0x5153",
+      "payload_offset": 18,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Ignition WOT Map 2",
+      "xdf_address": 20918,
+      "xdf_address_hex": "0x51b6",
+      "pointer_index": 84,
+      "pointer_target": 20900,
+      "pointer_target_hex": "0x51a4",
+      "payload_offset": 18,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part Throttle Ignition map(in real BTDC)",
+      "xdf_address": 21186,
+      "xdf_address_hex": "0x52c2",
+      "pointer_index": 91,
+      "pointer_target": 21163,
+      "pointer_target_hex": "0x52ab",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part Throttle Ignition map2",
+      "xdf_address": 21387,
+      "xdf_address_hex": "0x538b",
+      "pointer_index": 93,
+      "pointer_target": 21364,
+      "pointer_target_hex": "0x5374",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part Throttle Ignition map3",
+      "xdf_address": 21694,
+      "xdf_address_hex": "0x54be",
+      "pointer_index": 96,
+      "pointer_target": 21672,
+      "pointer_target_hex": "0x54a8",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "High part Throttle Ignition map4",
+      "xdf_address": 21895,
+      "xdf_address_hex": "0x5587",
+      "pointer_index": 98,
+      "pointer_target": 21873,
+      "pointer_target_hex": "0x5571",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low part Throttle Ignition Map",
+      "xdf_address": 21292,
+      "xdf_address_hex": "0x532c",
+      "pointer_index": 92,
+      "pointer_target": 21270,
+      "pointer_target_hex": "0x5316",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low part Throttle Ignition Map2",
+      "xdf_address": 21493,
+      "xdf_address_hex": "0x53f5",
+      "pointer_index": 94,
+      "pointer_target": 21471,
+      "pointer_target_hex": "0x53df",
+      "payload_offset": 22,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low part Throttle Ignition Map3",
+      "xdf_address": 21789,
+      "xdf_address_hex": "0x551d",
+      "pointer_index": 97,
+      "pointer_target": 21766,
+      "pointer_target_hex": "0x5506",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Low part Throttle Ignition Map4",
+      "xdf_address": 21990,
+      "xdf_address_hex": "0x55e6",
+      "pointer_index": 99,
+      "pointer_target": 21967,
+      "pointer_target_hex": "0x55cf",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Ignition Dwell (battery voltage vs. RPM)",
+      "xdf_address": 20715,
+      "xdf_address_hex": "0x50eb",
+      "pointer_index": 78,
+      "pointer_target": 20692,
+      "pointer_target_hex": "0x50d4",
+      "payload_offset": 23,
+      "immediate_call_count": 0,
+      "functions": []
+    },
+    {
+      "title": "Engine temp sensor transfer map",
+      "xdf_address": 18505,
+      "xdf_address_hex": "0x4849",
+      "pointer_index": 1,
+      "pointer_target": 18491,
+      "pointer_target_hex": "0x483b",
+      "payload_offset": 14,
+      "immediate_call_count": 2,
+      "functions": [
+        "CODE:6bb7",
+        "CODE:7cf6"
+      ]
+    }
+  ]
+}

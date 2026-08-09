@@ -1,0 +1,57 @@
+{"command": "/tmp/mame-motronic-validation/motronicvalid motronicvalid -rompath /tmp/mame-motronic-validation-run/roms -cfg_directory /tmp/mame-motronic-validation-run/cfg -debug -debugger osx -debugscript /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/validation-stimuli/fixtures/trace-reset.cmd -sound none -nothrottle -nosleep -nowriteconfig -skip_gameinfo -oslog", "kind": "provenance", "mame_commit": "a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e", "profile": "canonical-reset", "rom_path": "/Users/matcha/Code/grokathon/ecu/analysis/TotalCombinedROM.bin", "rom_sha256": "e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33", "rom_size": 40960, "runtime": true}
+{"cycles": 0, "kind": "pc", "pc": "0000", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 0}
+{"bound_us": 50, "cycles": 0, "kind": "run", "profile": "canonical-reset", "runtime": true, "source": "mame-driver-runtime", "source_index": 1}
+{"access": "write", "address": "0003", "cycles": 0, "data": "FD", "kind": "access", "pc": "0000", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 3, "space": "port"}
+{"access": "write", "address": "0001", "cycles": 0, "data": "FF", "kind": "access", "pc": "0000", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 5, "space": "port"}
+{"cycles": 2, "kind": "pc", "pc": "0073", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 1}
+{"access": "read", "address": "00A9", "cycles": 2, "data": "00", "kind": "access", "pc": "0075", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 8, "space": "sfr"}
+{"cycles": 3, "kind": "pc", "pc": "0075", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 2}
+{"access": "read", "address": "00E0", "cycles": 3, "data": "00", "kind": "access", "pc": "0077", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 9, "space": "sfr"}
+{"cycles": 4, "kind": "pc", "pc": "0077", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 3}
+{"access": "read", "address": "00D0", "cycles": 4, "data": "00", "kind": "access", "pc": "0079", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 10, "space": "sfr"}
+{"access": "write", "address": "00D0", "cycles": 4, "data": "00", "kind": "access", "pc": "0079", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 11, "space": "sfr"}
+{"cycles": 6, "kind": "pc", "pc": "0079", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 4}
+{"access": "read", "address": "00B8", "cycles": 6, "data": "00", "kind": "access", "pc": "007B", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 12, "space": "sfr"}
+{"access": "write", "address": "00B8", "cycles": 6, "data": "40", "kind": "access", "pc": "007B", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 13, "space": "sfr"}
+{"cycles": 7, "kind": "pc", "pc": "007b", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 5}
+{"cycles": 9, "kind": "pc", "pc": "20e0", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 6}
+{"cycles": 11, "kind": "pc", "pc": "5c00", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 7}
+{"access": "read", "address": "00B8", "cycles": 11, "data": "40", "kind": "access", "pc": "5C02", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 14, "space": "sfr"}
+{"access": "write", "address": "00B8", "cycles": 11, "data": "40", "kind": "access", "pc": "5C02", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 15, "space": "sfr"}
+{"cycles": 12, "kind": "pc", "pc": "5c02", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 8}
+{"access": "read", "address": "00D8", "cycles": 12, "data": "00", "kind": "access", "pc": "5C04", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 16, "space": "sfr"}
+{"access": "write", "address": "00D8", "cycles": 12, "data": "40", "kind": "access", "pc": "5C04", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 17, "space": "sfr"}
+{"cycles": 13, "kind": "pc", "pc": "5c04", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 9}
+{"access": "write", "address": "0083", "cycles": 13, "data": "A0", "kind": "access", "pc": "5C07", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 18, "space": "sfr"}
+{"cycles": 15, "kind": "pc", "pc": "5c07", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 10}
+{"access": "write", "address": "0082", "cycles": 15, "data": "81", "kind": "access", "pc": "5C0A", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 19, "space": "sfr"}
+{"cycles": 17, "kind": "pc", "pc": "5c0a", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 11}
+{"cycles": 18, "kind": "pc", "pc": "5c0c", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 12}
+{"access": "write", "address": "A081", "cycles": 18, "data": "01", "kind": "access", "pc": "5C0D", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 20, "space": "xdata"}
+{"cycles": 20, "kind": "pc", "pc": "5c0d", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 13}
+{"access": "write", "address": "0082", "cycles": 20, "data": "10", "kind": "access", "pc": "5C10", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 22, "space": "sfr"}
+{"cycles": 22, "kind": "pc", "pc": "5c10", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 14}
+{"cycles": 23, "kind": "pc", "pc": "5c12", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 15}
+{"access": "write", "address": "A010", "cycles": 23, "data": "81", "kind": "access", "pc": "5C13", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 23, "space": "xdata"}
+{"cycles": 25, "kind": "pc", "pc": "5c13", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 16}
+{"cycles": 27, "kind": "pc", "pc": "5c14", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 17}
+{"cycles": 28, "kind": "pc", "pc": "5c16", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 18}
+{"access": "write", "address": "A011", "cycles": 28, "data": "81", "kind": "access", "pc": "5C17", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 25, "space": "xdata"}
+{"cycles": 30, "kind": "pc", "pc": "5c17", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 19}
+{"access": "write", "address": "0082", "cycles": 30, "data": "40", "kind": "access", "pc": "5C1A", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 27, "space": "sfr"}
+{"cycles": 32, "kind": "pc", "pc": "5c1a", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 20}
+{"cycles": 33, "kind": "pc", "pc": "5c1c", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 21}
+{"access": "write", "address": "A040", "cycles": 33, "data": "FF", "kind": "access", "pc": "5C1D", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 28, "space": "xdata"}
+{"cycles": 35, "kind": "pc", "pc": "5c1d", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 22}
+{"cycles": 37, "kind": "pc", "pc": "5c1e", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 23}
+{"cycles": 38, "kind": "pc", "pc": "5c20", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 24}
+{"access": "write", "address": "A041", "cycles": 38, "data": "FF", "kind": "access", "pc": "5C21", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 29, "space": "xdata"}
+{"cycles": 40, "kind": "pc", "pc": "5c21", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 25}
+{"access": "write", "address": "0082", "cycles": 40, "data": "02", "kind": "access", "pc": "5C24", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 30, "space": "sfr"}
+{"cycles": 42, "kind": "pc", "pc": "5c24", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 26}
+{"cycles": 43, "kind": "pc", "pc": "5c26", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 27}
+{"access": "write", "address": "A002", "cycles": 43, "data": "00", "kind": "access", "pc": "5C27", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 31, "space": "xdata"}
+{"cycles": 45, "kind": "pc", "pc": "5c27", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 28}
+{"cycles": 47, "kind": "pc", "pc": "5c28", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 29}
+{"cycles": 48, "kind": "pc", "pc": "5c2a", "profile": "canonical-reset", "source": "mame-debugger-runtime", "source_index": 30}
+{"access": "write", "address": "A003", "cycles": 48, "data": "00", "kind": "access", "pc": "5C2B", "profile": "canonical-reset", "source": "mame-driver-runtime", "source_index": 33, "space": "xdata"}

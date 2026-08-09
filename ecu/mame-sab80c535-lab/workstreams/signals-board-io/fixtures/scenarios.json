@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "timebase": "SAB80C515 machine cycles",
+  "provider_environment": {
+    "scenario": "MOTRONIC_SIGNAL_SCENARIO",
+    "script": "MOTRONIC_SIGNAL_SCRIPT",
+    "script_grammar": "cycle:target=hex-byte[,cycle:target=hex-byte...]",
+    "targets": ["a040", "a041", "p3", "p5", "p6"]
+  },
+  "common_boundaries": [
+    "A040/A041 values are raw bytes before firmware XOR and mask operations",
+    "P3/P5 values are external pin levels and are combined with MCU output latches by the MCU core",
+    "P6 is digital-only in the validated core; analog ADC values require another provider",
+    "cycle 4096 release timing is an explicit deterministic assumption",
+    "capture edges and ADC values are outside this board-I/O provider"
+  ],
+  "scenarios": [
+    {
+      "name": "key-on",
+      "qualification": "binary-shaped assumption",
+      "defaults": {"a040": "01", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [{"cycle": 4096, "target": "a040", "value": "00"}],
+      "proven_effect": "A040.0 high exercises the 5ce5 wait loop; low releases to 5d0a",
+      "assumption": "the wait input changes once after key-on; no physical label or real delay is claimed"
+    },
+    {
+      "name": "crank",
+      "qualification": "binary-shaped composition envelope",
+      "defaults": {"a040": "01", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [
+        {"cycle": 4096, "target": "a040", "value": "00"},
+        {"cycle": 8192, "target": "p3", "value": "ef"},
+        {"cycle": 12288, "target": "p3", "value": "ff"}
+      ],
+      "proven_effect": "P3.4 low can set BITS 5d when sampled in crank capture/scheduling routines",
+      "assumption": "the low window is a branch stimulus, not a claimed crank or cam waveform",
+      "requires": "external-3/CC0 capture events from a separate engine-position provider"
+    },
+    {
+      "name": "idle",
+      "qualification": "domain-corroborated composition envelope",
+      "defaults": {"a040": "41", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [{"cycle": 4096, "target": "a040", "value": "40"}],
+      "proven_effect": "after release, enabled input-mask bits 4 and 6 normalize high and select idle logical entry 3",
+      "corroborated": "logical entry 3 is the D/R A/C-off idle-target payload",
+      "boundary": "this does not prove raw pin polarity or create idle speed/load"
+    },
+    {
+      "name": "part-load",
+      "qualification": "neutral board-I/O composition envelope",
+      "defaults": {"a040": "41", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [{"cycle": 4096, "target": "a040", "value": "40"}],
+      "boundary": "part-load is selected from speed/load and calibration state, not a proven board-digital bit"
+    },
+    {
+      "name": "wot",
+      "qualification": "neutral board-I/O composition envelope",
+      "defaults": {"a040": "41", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [{"cycle": 4096, "target": "a040", "value": "40"}],
+      "boundary": "WOT tables are proven, but no A040/A041/P3/P5/P6 bit is proven to request WOT"
+    },
+    {
+      "name": "overrun",
+      "qualification": "neutral board-I/O composition envelope",
+      "defaults": {"a040": "41", "a041": "00", "p3": "ff", "p5": "ff", "p6": "ff"},
+      "events": [{"cycle": 4096, "target": "a040", "value": "40"}],
+      "boundary": "overrun is speed/load/temperature qualified; these bytes deliberately do not invent a switch"
+    },
+    {
+      "name": "fault-inputs",
+      "qualification": "independent raw fault injections",
+      "defaults": {"a040": "01", "a041": "ff", "p3": "ef", "p5": "e7", "p6": "00"},
+      "events": [],
+      "proven_effect": "stuck A040.0 prevents startup release; low P3.4/P5.3/P5.4 and P6 rail values remain separately inspectable",
+      "boundary": "the combined byte pattern is not claimed to be one physical vehicle fault"
+    }
+  ]
+}

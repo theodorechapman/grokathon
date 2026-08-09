@@ -1,0 +1,504 @@
+{
+  "schema": 1,
+  "baseline": {
+    "pc_observations": 31,
+    "startup_frontier": "5c00",
+    "last_cycle": 48
+  },
+  "cases": {
+    "model": {
+      "pc_observations": 241,
+      "last_observed_cycle": 3742,
+      "execution": {
+        "reason": "timer2-interrupt-storm",
+        "instructions": "2408",
+        "cycles": "3848",
+        "exit_cycles": "16670",
+        "deepest_pc": "9015",
+        "last_pc": "002b",
+        "startup_frontier": "5cd3",
+        "init_entries": "1",
+        "timer2_entries": "16",
+        "foreground_entries": "0",
+        "foreground_instruction": "0"
+      },
+      "xdata": {
+        "distinct": "405",
+        "unknown_reads": "0",
+        "first_unknown_read_pc": "ffff",
+        "overflow": "0",
+        "out_a040": "ff",
+        "out_a041": "ff"
+      },
+      "distinct_access_records": 405,
+      "early_accesses": [
+        {
+          "op": "W",
+          "address": "a081",
+          "pc": "5c0c",
+          "value": "01",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a010",
+          "pc": "5c12",
+          "value": "81",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a011",
+          "pc": "5c16",
+          "value": "81",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a040",
+          "pc": "5c1c",
+          "value": "ff",
+          "classification": "output-latch",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a041",
+          "pc": "5c20",
+          "value": "ff",
+          "classification": "output-latch",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a002",
+          "pc": "5c26",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a003",
+          "pc": "5c2a",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a004",
+          "pc": "5c2e",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a005",
+          "pc": "5c32",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a008",
+          "pc": "5c38",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a009",
+          "pc": "5c3c",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a021",
+          "pc": "5c42",
+          "value": "d7",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a020",
+          "pc": "5c48",
+          "value": "ff",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0162",
+          "pc": "5c4e",
+          "value": "d7",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "R",
+          "address": "0000",
+          "pc": "5c54",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "015b",
+          "pc": "5c78",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "R",
+          "address": "015b",
+          "pc": "5c81",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "020b",
+          "pc": "5c8a",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "020c",
+          "pc": "5c8f",
+          "value": "aa",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00f1",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00f0",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00ef",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00ee",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00ed",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00ec",
+          "pc": "8fa6",
+          "value": "00",
+          "classification": "retained-xram-approx",
+          "unknown": false
+        }
+      ],
+      "first_unknown_dependency": null,
+      "artifacts": {
+        "trace": {
+          "path": "runtime-model-trace.log",
+          "bytes": 46533,
+          "sha256": "48ff98c4e8ee68d8b116baa22ac04d861aaf0256b76ed7f5452da8006e7626e6"
+        },
+        "console": {
+          "path": "runtime-model-console.log",
+          "bytes": 40383,
+          "sha256": "6539f78ac71c74d23b34f154b006d82071a88ad1fee670087c8c0b82b95dc5d8"
+        }
+      }
+    },
+    "no-xram": {
+      "pc_observations": 198,
+      "last_observed_cycle": 323,
+      "execution": {
+        "reason": "timer2-interrupt-storm",
+        "instructions": "251",
+        "cycles": "429",
+        "exit_cycles": "16670",
+        "deepest_pc": "9015",
+        "last_pc": "002b",
+        "startup_frontier": "5cd3",
+        "init_entries": "1",
+        "timer2_entries": "16",
+        "foreground_entries": "0",
+        "foreground_instruction": "0"
+      },
+      "xdata": {
+        "distinct": "44",
+        "unknown_reads": "5",
+        "first_unknown_read_pc": "5c54",
+        "overflow": "0",
+        "out_a040": "ff",
+        "out_a041": "ff"
+      },
+      "distinct_access_records": 44,
+      "early_accesses": [
+        {
+          "op": "W",
+          "address": "a081",
+          "pc": "5c0c",
+          "value": "01",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a010",
+          "pc": "5c12",
+          "value": "81",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a011",
+          "pc": "5c16",
+          "value": "81",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a040",
+          "pc": "5c1c",
+          "value": "ff",
+          "classification": "output-latch",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a041",
+          "pc": "5c20",
+          "value": "ff",
+          "classification": "output-latch",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a002",
+          "pc": "5c26",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a003",
+          "pc": "5c2a",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a004",
+          "pc": "5c2e",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a005",
+          "pc": "5c32",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a008",
+          "pc": "5c38",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a009",
+          "pc": "5c3c",
+          "value": "00",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a021",
+          "pc": "5c42",
+          "value": "d7",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "a020",
+          "pc": "5c48",
+          "value": "ff",
+          "classification": "asic-register-unknown",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0162",
+          "pc": "5c4e",
+          "value": "d7",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "R",
+          "address": "0000",
+          "pc": "5c54",
+          "value": "ff",
+          "classification": "xram-disabled",
+          "unknown": true
+        },
+        {
+          "op": "W",
+          "address": "015b",
+          "pc": "5c78",
+          "value": "00",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "R",
+          "address": "015b",
+          "pc": "5c81",
+          "value": "ff",
+          "classification": "xram-disabled",
+          "unknown": true
+        },
+        {
+          "op": "R",
+          "address": "020c",
+          "pc": "5c97",
+          "value": "ff",
+          "classification": "xram-disabled",
+          "unknown": true
+        },
+        {
+          "op": "W",
+          "address": "0080",
+          "pc": "8182",
+          "value": "00",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0081",
+          "pc": "8188",
+          "value": "01",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0082",
+          "pc": "818c",
+          "value": "0a",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0083",
+          "pc": "818f",
+          "value": "00",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0084",
+          "pc": "8191",
+          "value": "00",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "0085",
+          "pc": "8196",
+          "value": "14",
+          "classification": "xram-disabled",
+          "unknown": false
+        },
+        {
+          "op": "W",
+          "address": "00c3",
+          "pc": "8fda",
+          "value": "b4",
+          "classification": "xram-disabled",
+          "unknown": false
+        }
+      ],
+      "first_unknown_dependency": {
+        "read_pc": "5c54",
+        "decision_pc": "5c55",
+        "value": "ff"
+      },
+      "artifacts": {
+        "trace": {
+          "path": "runtime-no-xram-trace.log",
+          "bytes": 12417,
+          "sha256": "30ac22fd5c3391a5674a127a995b30827e595be1edc3f552000a81fe0398dd75"
+        },
+        "console": {
+          "path": "runtime-no-xram-console.log",
+          "bytes": 7635,
+          "sha256": "20cc8e50395370fd7c502019efe5f2cff99a4244de068ec569ce423a9021d0b0"
+        }
+      }
+    }
+  },
+  "xram_sensitivity": {
+    "first_trace_divergence": {
+      "observation_index": 65,
+      "model_pc": "5c84",
+      "no_xram_pc": "5c92"
+    },
+    "interpretation": "storage read-after-write selects cold initialization; disabling storage takes the alternate marker path"
+  }
+}

@@ -1,0 +1,27 @@
+Warning: -video none doesn't make much sense without -seconds_to_run
+[:xdata] XMODEL reset=0 unknown_policy=0 unknown_value=00 configured_inputs=0 output_readback=disabled stop_after_taint=0
+Soft reset
+[:maincpu] write of un-hooked port 3 fd
+[:maincpu] write of un-hooked port 2 ff
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 0 ff
+[:xdata] XEV seq=1 op=W addr=a081 pc=5c0c value=01 class=unknown-write taint=0
+[:xdata] XEV seq=2 op=W addr=a010 pc=5c12 value=81 class=unknown-write taint=0
+[:xdata] XEV seq=3 op=W addr=a011 pc=5c16 value=81 class=unknown-write taint=0
+[:xdata] XEV seq=4 op=W addr=a040 pc=5c1c value=ff class=output-latch taint=0
+[:xdata] XEV seq=5 op=W addr=a041 pc=5c20 value=ff class=output-latch taint=0
+[:xdata] XEV seq=6 op=W addr=a002 pc=5c26 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=7 op=W addr=a003 pc=5c2a value=00 class=unknown-write taint=0
+[:xdata] XEV seq=8 op=W addr=a004 pc=5c2e value=00 class=unknown-write taint=0
+[:xdata] XEV seq=9 op=W addr=a005 pc=5c32 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=10 op=W addr=a008 pc=5c38 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=11 op=W addr=a009 pc=5c3c value=00 class=unknown-write taint=0
+[:xdata] XEV seq=12 op=W addr=a021 pc=5c42 value=d7 class=unknown-write taint=0
+[:xdata] XEV seq=13 op=W addr=a020 pc=5c48 value=ff class=unknown-write taint=0
+[:xdata] XEV seq=14 op=W addr=0162 pc=5c4e value=d7 class=storage taint=0
+[:maincpu] write of un-hooked port 2 00
+[:xdata] UNKNOWN read addr=0000 pc=5c54 value=00 kind=storage-unknown source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=15 op=R addr=0000 pc=5c54 value=00 class=storage-unknown taint=1
+[:xdata] XMODEL stop=unknown-read
+[:xdata] XSUMMARY events=15 read_addresses=1 write_addresses=14 unknown_reads=1 first_unknown_addr=0000 first_unknown_pc=5c54 overflow=0 out40_written=1 out41_written=1 out40=ff out41=ff
+[:] ESUMMARY reason=external-stop instructions=55 cycles=0 exit_cycles=16668 last_pc=5c54 deepest_pc=5c54 startup_frontier=5c54 init_entries=1 foreground_entries=0 timer2_entries=0 pc_hash=a29e96cf02ec6db3

@@ -1,0 +1,110 @@
+diff --git a/src/devices/cpu/mcs51/sab80c535.h b/src/devices/cpu/mcs51/sab80c535.h
+--- a/src/devices/cpu/mcs51/sab80c535.h
++++ b/src/devices/cpu/mcs51/sab80c535.h
+@@ -7,6 +7,11 @@
+ 
+ #include "i80c52.h"
+ 
++enum
++{
++	SAB80C515_CC0_LINE = DS5002FP_PFI_LINE + 1
++};
++
+ class sab80c535_device : public i8052_device
+ {
+ public:
+@@ -49,6 +54,7 @@ private:
+ 		IP0_WDTS = 6,
+ 		IRCON_TF2 = 6,
+-		IRCON_EXF2 = 7
++		IRCON_EXF2 = 7,
++		T2CON_I3FR = 6
+ 	};
+ 
+ 	u8 m_p4 = 0;
+@@ -61,6 +67,7 @@ private:
+ 	u8 m_ccen = 0;
+ 	u8 m_cc[6]{};
+ 	u8 m_capture_pending = 0;
++	u8 m_capture_irq_pending = 0;
+ 	u8 m_timer2_prescaler = 0;
+ 	u8 m_wdt_clear_cycles = 0;
+ 	u8 m_swdt_clear_cycles = 0;
+@@ -95,7 +102,7 @@ private:
+ 	void tick_strobes();
+ 	void increment_timer2();
+ 	void compare_timer2();
+-	void request_capture(u8 channel);
++	void request_capture(u8 channel, bool interrupt_request = false);
+ };
+ 
+ DECLARE_DEVICE_TYPE(SAB80C535, sab80c535_device)
+diff --git a/src/devices/cpu/mcs51/sab80c535.cpp b/src/devices/cpu/mcs51/sab80c535.cpp
+--- a/src/devices/cpu/mcs51/sab80c535.cpp
++++ b/src/devices/cpu/mcs51/sab80c535.cpp
+@@ -196,6 +196,7 @@ void sab80c535_device::device_start()
+ 	save_item(NAME(m_ccen));
+ 	save_item(NAME(m_cc));
+ 	save_item(NAME(m_capture_pending));
++	save_item(NAME(m_capture_irq_pending));
+ 	save_item(NAME(m_timer2_prescaler));
+ 	save_item(NAME(m_wdt_clear_cycles));
+ 	save_item(NAME(m_swdt_clear_cycles));
+@@ -218,6 +219,7 @@ void sab80c535_device::device_reset()
+ 	m_ccen = 0;
+ 	std::fill(std::begin(m_cc), std::end(m_cc), 0);
+ 	m_capture_pending = 0;
++	m_capture_irq_pending = 0;
+ 	m_timer2_prescaler = 0;
+ 	m_wdt_clear_cycles = 0;
+ 	m_swdt_clear_cycles = 0;
+diff --git a/src/devices/cpu/mcs51/sab80c535_peripherals.cpp b/src/devices/cpu/mcs51/sab80c535_peripherals.cpp
+--- a/src/devices/cpu/mcs51/sab80c535_peripherals.cpp
++++ b/src/devices/cpu/mcs51/sab80c535_peripherals.cpp
+@@ -4,10 +4,14 @@
+ #include "emu.h"
+ #include "sab80c535.h"
+ 
+-void sab80c535_device::request_capture(u8 channel)
++void sab80c535_device::request_capture(u8 channel, bool interrupt_request)
+ {
+ 	m_capture_pending |= 1 << channel;
+-	m_capture_cycles = m_inst_cycles + 1;
++	if (interrupt_request)
++		m_capture_irq_pending |= 1 << channel;
++	const u8 delay = m_inst_cycles + 1;
++	if (!m_capture_cycles || delay < m_capture_cycles)
++		m_capture_cycles = delay;
+ }
+ 
+ void sab80c535_device::tick_capture()
+@@ -26,7 +30,9 @@ void sab80c535_device::tick_capture()
+ 			m_cc[(channel - 1) * 2 + 1] = u8(m_t2 >> 8);
+ 		}
+ 	}
++	m_ircon |= m_capture_irq_pending << 2;
+ 	m_capture_pending = 0;
++	m_capture_irq_pending = 0;
+ }
+ 
+ void sab80c535_device::tick_adc()
+@@ -112,6 +118,19 @@ void sab80c535_device::handle_irq(int irqline, int state, u32 new_state, u32 tr
+ {
++	if (irqline == SAB80C515_CC0_LINE)
++	{
++		const bool was_high = BIT(m_last_line_state, irqline);
++		const bool high = state != CLEAR_LINE;
++		const bool rising = !was_high && high;
++		const bool falling = was_high && !high;
++		const bool selected_edge =
++				BIT(m_t2con, T2CON_I3FR) ? rising : falling;
++		if (BIT(m_ccen, 0, 2) == 1 && BIT(m_p1, 0) && selected_edge)
++			request_capture(0, true);
++		return;
++	}
++
+ 	if (irqline == MCS51_T2_LINE)
+ 	{
+ 		if (BIT(tr_state, MCS51_T2_LINE))
+ 			m_t2_cnt++;
+ 		return;

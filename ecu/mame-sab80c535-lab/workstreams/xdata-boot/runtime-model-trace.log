@@ -1,0 +1,708 @@
+CYC=0 0000: debugger-start
+CYC=2 0073: mov   a,ip0
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+CYC=3 0075: mov   c,acc.6
+CYC=4 0077: mov   f0,c
+CYC=6 0079: setb  swdt
+CYC=7 007B: ljmp  $20E0
+CYC=9 20E0: ljmp  $5C00
+CYC=11 5C00: setb  swdt
+CYC=12 5C02: setb  clk
+CYC=13 5C04: mov   dph,#$A0
+CYC=15 5C07: mov   dpl,#$81
+CYC=17 5C0A: mov   a,#$01
+CYC=18 5C0C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a081 pc=5c0c value=01 class=asic-register-unknown unknown=0
+CYC=20 5C0D: mov   dpl,#$10
+CYC=22 5C10: mov   a,#$81
+CYC=23 5C12: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a010 pc=5c12 value=81 class=asic-register-unknown unknown=0
+CYC=25 5C13: inc   dptr
+CYC=27 5C14: mov   a,#$81
+CYC=28 5C16: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a011 pc=5c16 value=81 class=asic-register-unknown unknown=0
+CYC=30 5C17: mov   dpl,#$40
+CYC=32 5C1A: mov   a,#$FF
+CYC=33 5C1C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a040 pc=5c1c value=ff class=output-latch unknown=0
+CYC=35 5C1D: inc   dptr
+CYC=37 5C1E: mov   a,#$FF
+CYC=38 5C20: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a041 pc=5c20 value=ff class=output-latch unknown=0
+CYC=40 5C21: mov   dpl,#$02
+CYC=42 5C24: mov   a,#$00
+CYC=43 5C26: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a002 pc=5c26 value=00 class=asic-register-unknown unknown=0
+CYC=45 5C27: inc   dptr
+CYC=47 5C28: mov   a,#$00
+CYC=48 5C2A: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a003 pc=5c2a value=00 class=asic-register-unknown unknown=0
+CYC=50 5C2B: inc   dptr
+CYC=52 5C2C: mov   a,#$00
+CYC=53 5C2E: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a004 pc=5c2e value=00 class=asic-register-unknown unknown=0
+CYC=55 5C2F: inc   dptr
+CYC=57 5C30: mov   a,#$00
+CYC=58 5C32: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a005 pc=5c32 value=00 class=asic-register-unknown unknown=0
+CYC=60 5C33: mov   dpl,#$08
+CYC=62 5C36: mov   a,#$00
+CYC=63 5C38: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a008 pc=5c38 value=00 class=asic-register-unknown unknown=0
+CYC=65 5C39: inc   dptr
+CYC=67 5C3A: mov   a,#$00
+CYC=68 5C3C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a009 pc=5c3c value=00 class=asic-register-unknown unknown=0
+CYC=70 5C3D: mov   dpl,#$21
+CYC=72 5C40: mov   a,#$D7
+CYC=73 5C42: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a021 pc=5c42 value=d7 class=asic-register-unknown unknown=0
+CYC=75 5C43: mov   dpl,#$20
+CYC=77 5C46: mov   a,#$FF
+CYC=78 5C48: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a020 pc=5c48 value=ff class=asic-register-unknown unknown=0
+CYC=80 5C49: mov   dptr,#$0162
+CYC=82 5C4C: mov   a,#$D7
+CYC=83 5C4E: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0162 pc=5c4e value=d7 class=retained-xram-approx unknown=0
+CYC=85 5C4F: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=87 5C52: mov   r0,#$00
+CYC=88 5C54: movx  a,@r0
+[:xdata] XDATA first op=R addr=0000 pc=5c54 value=00 class=retained-xram-approx unknown=0
+CYC=90 5C55: cjne  a,#$55,$5C72
+CYC=92 5C72: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=94 5C75: mov   r0,#$5B
+CYC=95 5C77: clr   a
+CYC=96 5C78: movx  @r0,a
+[:xdata] XDATA first op=W addr=015b pc=5c78 value=00 class=retained-xram-approx unknown=0
+CYC=98 5C79: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=100 5C7C: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=102 5C7F: mov   r0,#$5B
+CYC=103 5C81: movx  a,@r0
+[:xdata] XDATA first op=R addr=015b pc=5c81 value=00 class=retained-xram-approx unknown=0
+CYC=105 5C82: jnz   $5C92
+CYC=107 5C84: mov   p2,#$02
+[:maincpu] write of un-hooked port 2 02
+CYC=109 5C87: mov   r0,#$0B
+CYC=110 5C89: clr   a
+CYC=111 5C8A: movx  @r0,a
+[:xdata] XDATA first op=W addr=020b pc=5c8a value=00 class=retained-xram-approx unknown=0
+CYC=113 5C8B: mov   r0,#$0C
+CYC=114 5C8D: mov   a,#$AA
+CYC=115 5C8F: movx  @r0,a
+[:xdata] XDATA first op=W addr=020c pc=5c8f value=aa class=retained-xram-approx unknown=0
+CYC=117 5C90: sjmp  $5C98
+CYC=119 5C98: cjne  a,#$55,$5C9F
+CYC=121 5C9F: setb  p5.2
+[:maincpu] read of un-hooked port 5 (PC=5C9F)
+[:maincpu] write of un-hooked port 5 ff
+CYC=122 5CA1: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=124 5CA4: lcall $20E8
+CYC=126 20E8: ljmp  $8F97
+CYC=128 8F97: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=130 8F9A: mov   r0,#$5B
+CYC=131 8F9C: movx  a,@r0
+CYC=133 8F9D: jnz   $8FD2
+CYC=135 8F9F: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=137 8FA2: mov   r0,#$F2
+CYC=138 8FA4: clr   a
+CYC=139 8FA5: dec   r0
+CYC=140 8FA6: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+CYC=142 8FA7: cjne  r0,#$80,$8FA5
+CYC=144 8FA5: dec   r0
+CYC=145 8FA6: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+CYC=147 8FA7: cjne  r0,#$80,$8FA5
+[:xdata] XDATA first op=W addr=00ef pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ee pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ed pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ec pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00eb pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ea pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e9 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e8 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e7 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e6 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e5 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e4 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e3 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e2 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00e0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00df pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00de pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00dd pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00dc pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00db pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00da pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d9 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d8 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d7 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d6 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d5 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d4 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d3 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d2 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00d0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00cf pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ce pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00cd pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00cc pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00cb pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ca pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c9 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c8 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c7 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c6 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c5 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c4 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c3 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c2 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00c0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00bf pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00be pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00bd pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00bc pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00bb pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ba pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b9 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b8 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b7 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b6 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b5 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b4 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b3 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b2 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00b0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00af pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ae pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ad pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ac pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00ab pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00aa pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a9 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a8 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a7 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a6 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a5 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a4 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a3 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a2 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a1 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=00a0 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009f pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009e pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009d pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009c pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009b pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=009a pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0099 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0098 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0097 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0096 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0095 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0094 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0093 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0092 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0091 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0090 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008f pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008e pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008d pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008c pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008b pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=008a pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0089 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0088 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0087 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0086 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0085 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0084 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0083 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0082 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0081 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0080 pc=8fa6 value=00 class=retained-xram-approx unknown=0
+
+   (loops for 336 instructions)
+
+CYC=709 8FAA: mov   dptr,#$02FF
+CYC=711 8FAD: clr   a
+CYC=712 8FAE: inc   dptr
+CYC=714 8FAF: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0300 pc=8faf value=00 class=retained-xram-approx unknown=0
+CYC=716 8FB0: mov   a,dph
+CYC=717 8FB2: cjne  a,#$03,$8FAD
+CYC=719 8FB5: mov   a,dpl
+CYC=720 8FB7: cjne  a,#$FF,$8FAD
+CYC=722 8FAD: clr   a
+CYC=723 8FAE: inc   dptr
+CYC=725 8FAF: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0301 pc=8faf value=00 class=retained-xram-approx unknown=0
+CYC=727 8FB0: mov   a,dph
+CYC=728 8FB2: cjne  a,#$03,$8FAD
+CYC=730 8FB5: mov   a,dpl
+CYC=731 8FB7: cjne  a,#$FF,$8FAD
+[:xdata] XDATA first op=W addr=0302 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0303 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0304 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0305 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0306 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0307 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0308 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0309 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=030f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0310 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0311 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0312 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0313 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0314 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0315 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0316 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0317 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0318 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0319 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=031f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0320 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0321 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0322 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0323 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0324 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0325 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0326 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0327 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0328 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0329 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=032f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0330 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0331 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0332 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0333 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0334 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0335 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0336 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0337 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0338 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0339 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=033f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0340 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0341 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0342 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0343 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0344 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0345 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0346 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0347 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0348 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0349 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=034f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0350 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0351 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0352 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0353 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0354 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0355 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0356 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0357 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0358 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0359 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=035f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0360 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0361 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0362 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0363 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0364 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0365 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0366 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0367 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0368 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0369 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=036f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0370 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0371 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0372 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0373 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0374 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0375 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0376 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0377 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0378 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0379 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=037f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0380 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0381 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0382 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0383 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0384 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0385 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0386 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0387 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0388 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0389 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=038f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0390 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0391 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0392 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0393 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0394 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0395 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0396 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0397 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0398 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=0399 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039a pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039b pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039c pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039d pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039e pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=039f pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03a9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03aa pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ab pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ac pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ad pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ae pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03af pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03b9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ba pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03bb pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03bc pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03bd pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03be pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03bf pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03c9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ca pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03cb pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03cc pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03cd pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ce pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03cf pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03d9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03da pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03db pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03dc pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03dd pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03de pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03df pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03e9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ea pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03eb pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ec pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ed pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ee pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ef pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f0 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f1 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f2 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f3 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f4 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f5 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f6 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f7 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f8 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03f9 pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03fa pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03fb pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03fc pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03fd pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03fe pc=8faf value=00 class=retained-xram-approx unknown=0
+[:xdata] XDATA first op=W addr=03ff pc=8faf value=00 class=retained-xram-approx unknown=0
+
+   (loops for 1778 instructions)
+
+CYC=3527 8FBA: mov   r0,#$F2
+CYC=3528 8FBC: mov   a,#$03
+CYC=3529 8FBE: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f2 pc=8fbe value=03 class=retained-xram-approx unknown=0
+CYC=3531 8FBF: inc   r0
+CYC=3532 8FC0: mov   a,#$00
+CYC=3533 8FC2: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f3 pc=8fc2 value=00 class=retained-xram-approx unknown=0
+CYC=3535 8FC3: clr   a
+CYC=3536 8FC4: mov   r0,#$2F
+CYC=3537 8FC6: movx  @r0,a
+[:xdata] XDATA first op=W addr=002f pc=8fc6 value=00 class=retained-xram-approx unknown=0
+CYC=3539 8FC7: mov   p2,#$02
+[:maincpu] write of un-hooked port 2 02
+CYC=3541 8FCA: mov   r0,#$25
+CYC=3542 8FCC: mov   a,#$55
+CYC=3543 8FCE: movx  @r0,a
+[:xdata] XDATA first op=W addr=0225 pc=8fce value=55 class=retained-xram-approx unknown=0
+CYC=3545 8FCF: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=3547 8FD2: lcall $8171
+CYC=3549 8171: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=3551 8174: mov   dptr,#$44F5
+CYC=3553 8177: lcall $817E
+CYC=3555 817E: mov   r0,#$80
+CYC=3556 8180: mov   a,#$00
+CYC=3557 8182: movx  @r0,a
+CYC=3559 8183: ret
+CYC=3561 817A: lcall $8184
+CYC=3563 8184: mov   r0,#$81
+CYC=3564 8186: mov   a,#$01
+CYC=3565 8188: movx  @r0,a
+CYC=3567 8189: inc   r0
+CYC=3568 818A: mov   a,#$0A
+CYC=3569 818C: movx  @r0,a
+CYC=3571 818D: inc   r0
+CYC=3572 818E: clr   a
+CYC=3573 818F: movx  @r0,a
+CYC=3575 8190: inc   r0
+CYC=3576 8191: movx  @r0,a
+CYC=3578 8192: inc   r0
+CYC=3579 8193: mov   a,#$28
+CYC=3580 8195: movc  a,@a+dptr
+CYC=3582 8196: movx  @r0,a
+CYC=3584 8197: ret
+CYC=3586 817D: ret
+CYC=3588 8FD5: mov   r0,#$C3
+CYC=3589 8FD7: mov   a,#$7B
+CYC=3590 8FD9: movc  a,@a+dptr
+CYC=3592 8FDA: movx  @r0,a
+CYC=3594 8FDB: mov   a,#$64
+CYC=3595 8FDD: inc   r0
+CYC=3596 8FDE: movx  @r0,a
+CYC=3598 8FDF: inc   r0
+CYC=3599 8FE0: movx  @r0,a
+CYC=3601 8FE1: mov   r0,#$C2
+CYC=3602 8FE3: movx  a,@r0
+[:xdata] XDATA first op=R addr=00c2 pc=8fe3 value=00 class=retained-xram-approx unknown=0
+CYC=3604 8FE4: clr   acc.0
+CYC=3605 8FE6: clr   acc.7
+CYC=3606 8FE8: clr   acc.6
+CYC=3607 8FEA: clr   acc.3
+CYC=3608 8FEC: movx  @r0,a
+CYC=3610 8FED: mov   r0,#$8C
+CYC=3611 8FEF: clr   a
+CYC=3612 8FF0: movx  @r0,a
+CYC=3614 8FF1: mov   r0,#$DB
+CYC=3615 8FF3: mov   a,#$6F
+CYC=3616 8FF5: movc  a,@a+dptr
+CYC=3618 8FF6: movx  @r0,a
+CYC=3620 8FF7: mov   a,#$64
+CYC=3621 8FF9: inc   r0
+CYC=3622 8FFA: movx  @r0,a
+CYC=3624 8FFB: inc   r0
+CYC=3625 8FFC: movx  @r0,a
+CYC=3627 8FFD: mov   r0,#$F7
+CYC=3628 8FFF: mov   a,#$6A
+CYC=3629 9001: movc  a,@a+dptr
+CYC=3631 9002: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f7 pc=9002 value=01 class=retained-xram-approx unknown=0
+CYC=3633 9003: mov   a,#$0A
+CYC=3634 9005: inc   r0
+CYC=3635 9006: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f8 pc=9006 value=0a class=retained-xram-approx unknown=0
+CYC=3637 9007: inc   r0
+CYC=3638 9008: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f9 pc=9008 value=0a class=retained-xram-approx unknown=0
+CYC=3640 9009: mov   r0,#$F4
+CYC=3641 900B: mov   a,#$69
+CYC=3642 900D: movc  a,@a+dptr
+CYC=3644 900E: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f4 pc=900e value=01 class=retained-xram-approx unknown=0
+CYC=3646 900F: mov   a,#$0A
+CYC=3647 9011: inc   r0
+CYC=3648 9012: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f5 pc=9012 value=0a class=retained-xram-approx unknown=0
+CYC=3650 9013: inc   r0
+CYC=3651 9014: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f6 pc=9014 value=0a class=retained-xram-approx unknown=0
+CYC=3653 9015: ret
+CYC=3655 5CA7: lcall $78A8
+CYC=3657 78A8: push  rb0r0
+CYC=3659 78AA: push  dph
+CYC=3661 78AC: push  dpl
+CYC=3663 78AE: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=3665 78B1: clr   $29.1
+CYC=3666 78B3: clr   $23.6
+CYC=3667 78B5: clr   $29.0
+CYC=3668 78B7: mov   r0,#$10
+CYC=3669 78B9: clr   a
+CYC=3670 78BA: movx  @r0,a
+[:xdata] XDATA first op=W addr=0110 pc=78ba value=00 class=retained-xram-approx unknown=0
+CYC=3672 78BB: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=3674 78BE: mov   dptr,#$0111
+CYC=3676 78C1: mov   a,#$1E
+CYC=3677 78C3: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0111 pc=78c3 value=1e class=retained-xram-approx unknown=0
+CYC=3679 78C4: mov   dptr,#$0112
+CYC=3681 78C7: mov   a,#$80
+CYC=3682 78C9: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0112 pc=78c9 value=80 class=retained-xram-approx unknown=0
+CYC=3684 78CA: inc   dptr
+CYC=3686 78CB: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0113 pc=78cb value=80 class=retained-xram-approx unknown=0
+CYC=3688 78CC: inc   dptr
+CYC=3690 78CD: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0114 pc=78cd value=80 class=retained-xram-approx unknown=0
+CYC=3692 78CE: pop   dpl
+CYC=3694 78D0: pop   dph
+CYC=3696 78D2: pop   rb0r0
+CYC=3698 78D4: ret
+CYC=3700 5CAA: mov   ien0,#$A0
+CYC=3702 5CAD: mov   ien1,#$00
+CYC=3704 5CB0: mov   p1,#$FF
+[:maincpu] write of un-hooked port 1 ff
+CYC=3706 5CB3: mov   p3,#$FF
+[:maincpu] write of un-hooked port 3 ff
+CYC=3708 5CB6: mov   p4,#$FF
+[:maincpu] write of un-hooked port 4 ff
+CYC=3710 5CB9: jnb   p5.2,$5CC1
+[:maincpu] read of un-hooked port 5 (PC=5CB9)
+CYC=3712 5CBC: mov   p5,#$FF
+[:maincpu] write of un-hooked port 5 ff
+CYC=3714 5CBF: sjmp  $5CC4
+CYC=3716 5CC4: mov   ip0,#$3A
+[:maincpu] ':maincpu' (5CC7): unmapped sfr memory write to A9 = 3A & FF
+CYC=3718 5CC7: mov   ip1,#$26
+[:maincpu] ':maincpu' (5CCA): unmapped sfr memory write to B9 = 26 & FF
+CYC=3720 5CCA: mov   ircon,#$00
+[:maincpu] ':maincpu' (5CCD): unmapped sfr memory write to C0 = 00 & FF
+CYC=3722 5CCD: mov   tmod,#$11
+CYC=3724 5CD0: mov   tcon,#$05
+CYC=3726 5CD3: mov   t2con,#$85
+CYC=3728 002B: ljmp  $2070
+CYC=3732 2070: inc   $3F
+CYC=3733 2072: clr   tf2
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+CYC=3734 2074: reti
+CYC=3736 002B: ljmp  $2070
+CYC=3740 2070: inc   $3F
+CYC=3741 2072: clr   tf2
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+CYC=3742 2074: reti
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:xdata] XDATA summary distinct=405 unknown_reads=0 first_unknown_read_pc=ffff overflow=0 out_a040=ff out_a041=ff
+[:] EXEC summary reason=timer2-interrupt-storm instructions=2408 cycles=3848 exit_cycles=16670 deepest_pc=9015 last_pc=002b startup_frontier=5cd3 init_entries=1 timer2_entries=16 foreground_entries=0 foreground_instruction=0

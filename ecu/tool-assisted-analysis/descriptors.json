@@ -1,0 +1,3669 @@
+{
+  "format": {
+    "descriptor_types": [
+      "0x04",
+      "0x36",
+      "0x37",
+      "0x38",
+      "0x39",
+      "0x3a",
+      "0x3b"
+    ],
+    "column_marker": "0x40",
+    "layout": "type rows row_axis [40 cols col_axis] payload"
+  },
+  "decoded_descriptor_count": 110,
+  "exact_descriptor_match_count": 28,
+  "dimension_mismatches": [],
+  "one_dimensional_orientation_differences": [
+    {
+      "title": "Injector Lag vs. Battery voltage",
+      "descriptor_target": "0x4885",
+      "descriptor_dimensions": [
+        4,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        4
+      ]
+    },
+    {
+      "title": "Engine temperature enrichment",
+      "descriptor_target": "0x495f",
+      "descriptor_dimensions": [
+        6,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        6
+      ]
+    },
+    {
+      "title": "Engine temperature enrichment2",
+      "descriptor_target": "0x4980",
+      "descriptor_dimensions": [
+        6,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        6
+      ]
+    },
+    {
+      "title": "Idle speed(AT in P or N, AC on or off)",
+      "descriptor_target": "0x57e7",
+      "descriptor_dimensions": [
+        6,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        6
+      ]
+    },
+    {
+      "title": "Idle speed(AT in D or R with A/C on)",
+      "descriptor_target": "0x57f5",
+      "descriptor_dimensions": [
+        4,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        4
+      ]
+    },
+    {
+      "title": "Idle speed(AT in D or R with AC off)",
+      "descriptor_target": "0x57ff",
+      "descriptor_dimensions": [
+        4,
+        1
+      ],
+      "xdf_dimensions": [
+        1,
+        4
+      ]
+    }
+  ],
+  "xdf_tables_without_exact_descriptor": [
+    {
+      "title": "Injector trim(Air temp/battery voltage)",
+      "address": 18737,
+      "address_hex": "0x4931",
+      "rows": 8,
+      "cols": 5
+    },
+    {
+      "title": "Ignition Dwell (battery voltage vs. RPM)",
+      "address": 20715,
+      "address_hex": "0x50eb",
+      "rows": 12,
+      "cols": 7
+    },
+    {
+      "title": "Map Address INDEX in the code",
+      "address": 17856,
+      "address_hex": "0x45c0",
+      "rows": 132,
+      "cols": 2
+    },
+    {
+      "title": "AFM voltage transfer map",
+      "address": 18192,
+      "address_hex": "0x4710",
+      "rows": 32,
+      "cols": 1
+    },
+    {
+      "title": "AFM map scale factors (injector size adjusting)",
+      "address": 18176,
+      "address_hex": "0x4700",
+      "rows": 1,
+      "cols": 8
+    }
+  ],
+  "descriptors": [
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18485,
+      "target_hex": "0x4835",
+      "rows": 2,
+      "cols": 1,
+      "row_axis_raw": [
+        100,
+        82
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18489,
+      "payload_address_hex": "0x4839",
+      "payload_size": 2,
+      "payload_end": 18491,
+      "payload_hex": "8080",
+      "pointer_indices": [
+        0,
+        5,
+        62,
+        102,
+        105
+      ],
+      "immediate_call_count": 24,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 4,
+      "descriptor_type_hex": "0x04",
+      "target": 18491,
+      "target_hex": "0x483b",
+      "rows": 12,
+      "cols": 1,
+      "row_axis_raw": [
+        3,
+        6,
+        14,
+        26,
+        42,
+        46,
+        32,
+        27,
+        18,
+        6,
+        8,
+        21
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18505,
+      "payload_address_hex": "0x4849",
+      "payload_size": 12,
+      "payload_end": 18517,
+      "payload_hex": "000b182d4665859dbddaeaeb",
+      "pointer_indices": [
+        1
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": [
+        {
+          "title": "Engine temp sensor transfer map",
+          "address": 18505,
+          "address_hex": "0x4849",
+          "rows": 12,
+          "cols": 1
+        }
+      ]
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 18517,
+      "target_hex": "0x4855",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        16,
+        15,
+        127
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18523,
+      "payload_address_hex": "0x485b",
+      "payload_size": 4,
+      "payload_end": 18527,
+      "payload_hex": "07070606",
+      "pointer_indices": [
+        2
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18527,
+      "target_hex": "0x485f",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18535,
+      "payload_address_hex": "0x4867",
+      "payload_size": 6,
+      "payload_end": 18541,
+      "payload_hex": "141414141212",
+      "pointer_indices": [
+        3
+      ],
+      "immediate_call_count": 4,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18541,
+      "target_hex": "0x486d",
+      "rows": 2,
+      "cols": 1,
+      "row_axis_raw": [
+        92,
+        142
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18545,
+      "payload_address_hex": "0x4871",
+      "payload_size": 2,
+      "payload_end": 18547,
+      "payload_hex": "0a0a",
+      "pointer_indices": [
+        4
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 58,
+      "descriptor_type_hex": "0x3a",
+      "target": 18547,
+      "target_hex": "0x4873",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        63,
+        63,
+        51
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18552,
+      "payload_address_hex": "0x4878",
+      "payload_size": 3,
+      "payload_end": 18555,
+      "payload_hex": "6080a0",
+      "pointer_indices": [
+        6
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18555,
+      "target_hex": "0x487b",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        15,
+        18,
+        22,
+        181
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18561,
+      "payload_address_hex": "0x4881",
+      "payload_size": 4,
+      "payload_end": 18565,
+      "payload_hex": "90988c98",
+      "pointer_indices": [
+        7
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 54,
+      "descriptor_type_hex": "0x36",
+      "target": 18565,
+      "target_hex": "0x4885",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        73,
+        30,
+        29,
+        21
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18571,
+      "payload_address_hex": "0x488b",
+      "payload_size": 4,
+      "payload_end": 18575,
+      "payload_hex": "fa55352d",
+      "pointer_indices": [
+        8
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": [
+        {
+          "title": "Injector Lag vs. Battery voltage",
+          "address": 18571,
+          "address_hex": "0x488b",
+          "rows": 1,
+          "cols": 4
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18575,
+      "target_hex": "0x488f",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        1,
+        7,
+        25,
+        25,
+        25,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18583,
+      "payload_address_hex": "0x4897",
+      "payload_size": 6,
+      "payload_end": 18589,
+      "payload_hex": "20304080a0d0",
+      "pointer_indices": [
+        9
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18589,
+      "target_hex": "0x489d",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        3,
+        5,
+        2,
+        5,
+        8,
+        218
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18597,
+      "payload_address_hex": "0x48a5",
+      "payload_size": 6,
+      "payload_end": 18603,
+      "payload_hex": "404040404040",
+      "pointer_indices": [
+        10
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18603,
+      "target_hex": "0x48ab",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        3,
+        3,
+        2,
+        8,
+        5,
+        223
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18611,
+      "payload_address_hex": "0x48b3",
+      "payload_size": 6,
+      "payload_end": 18617,
+      "payload_hex": "402828282840",
+      "pointer_indices": [
+        11
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18617,
+      "target_hex": "0x48b9",
+      "rows": 3,
+      "cols": 4,
+      "row_axis_raw": [
+        25,
+        50,
+        156
+      ],
+      "col_axis_raw": [
+        20,
+        40,
+        64,
+        112
+      ],
+      "payload_address": 18628,
+      "payload_address_hex": "0x48c4",
+      "payload_size": 12,
+      "payload_end": 18640,
+      "payload_hex": "3060a0b03880a0d020404d4d",
+      "pointer_indices": [
+        12
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18640,
+      "target_hex": "0x48d0",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18648,
+      "payload_address_hex": "0x48d8",
+      "payload_size": 6,
+      "payload_end": 18654,
+      "payload_hex": "b5936a4a3a07",
+      "pointer_indices": [
+        13
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18654,
+      "target_hex": "0x48de",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18662,
+      "payload_address_hex": "0x48e6",
+      "payload_size": 6,
+      "payload_end": 18668,
+      "payload_hex": "f0c0957d4e1a",
+      "pointer_indices": [
+        14
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18668,
+      "target_hex": "0x48ec",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18676,
+      "payload_address_hex": "0x48f4",
+      "payload_size": 6,
+      "payload_end": 18682,
+      "payload_hex": "030608060706",
+      "pointer_indices": [
+        15
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18720,
+      "target_hex": "0x4920",
+      "rows": 8,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        15,
+        13,
+        20,
+        17,
+        23,
+        25,
+        118
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18730,
+      "payload_address_hex": "0x492a",
+      "payload_size": 8,
+      "payload_end": 18738,
+      "payload_hex": "37052f1f2824628d",
+      "pointer_indices": [
+        16
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18783,
+      "target_hex": "0x495f",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18791,
+      "payload_address_hex": "0x4967",
+      "payload_size": 6,
+      "payload_end": 18797,
+      "payload_hex": "73684d311a00",
+      "pointer_indices": [
+        18
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Engine temperature enrichment",
+          "address": 18791,
+          "address_hex": "0x4967",
+          "rows": 1,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18797,
+      "target_hex": "0x496d",
+      "rows": 3,
+      "cols": 3,
+      "row_axis_raw": [
+        25,
+        25,
+        181
+      ],
+      "col_axis_raw": [
+        34,
+        50,
+        138
+      ],
+      "payload_address": 18807,
+      "payload_address_hex": "0x4977",
+      "payload_size": 9,
+      "payload_end": 18816,
+      "payload_hex": "80cdfe80dae680fdda",
+      "pointer_indices": [
+        19
+      ],
+      "immediate_call_count": 1,
+      "xdf_matches": [
+        {
+          "title": "Fuel Acceleration enrichment",
+          "address": 18807,
+          "address_hex": "0x4977",
+          "rows": 3,
+          "cols": 3
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18816,
+      "target_hex": "0x4980",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18824,
+      "payload_address_hex": "0x4988",
+      "payload_size": 6,
+      "payload_end": 18830,
+      "payload_hex": "806640261200",
+      "pointer_indices": [
+        20
+      ],
+      "immediate_call_count": 2,
+      "xdf_matches": [
+        {
+          "title": "Engine temperature enrichment2",
+          "address": 18824,
+          "address_hex": "0x4988",
+          "rows": 1,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18836,
+      "target_hex": "0x4994",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18844,
+      "payload_address_hex": "0x499c",
+      "payload_size": 6,
+      "payload_end": 18850,
+      "payload_hex": "fecd804d2600",
+      "pointer_indices": [
+        22
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 18850,
+      "target_hex": "0x49a2",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        49,
+        14,
+        10,
+        25
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18856,
+      "payload_address_hex": "0x49a8",
+      "payload_size": 4,
+      "payload_end": 18860,
+      "payload_hex": "10100000",
+      "pointer_indices": [
+        23
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18870,
+      "target_hex": "0x49b6",
+      "rows": 4,
+      "cols": 3,
+      "row_axis_raw": [
+        5,
+        7,
+        8,
+        224
+      ],
+      "col_axis_raw": [
+        14,
+        39,
+        176
+      ],
+      "payload_address": 18881,
+      "payload_address_hex": "0x49c1",
+      "payload_size": 12,
+      "payload_end": 18893,
+      "payload_hex": "8080807f7f807f7f80828080",
+      "pointer_indices": [
+        25
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Fuel Idle Map",
+          "address": 18881,
+          "address_hex": "0x49c1",
+          "rows": 4,
+          "cols": 3
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18893,
+      "target_hex": "0x49cd",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        3,
+        10,
+        10,
+        7,
+        8,
+        3,
+        7,
+        12,
+        13,
+        4,
+        18,
+        23,
+        9,
+        94
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18911,
+      "payload_address_hex": "0x49df",
+      "payload_size": 16,
+      "payload_end": 18927,
+      "payload_hex": "6b666a808c8a7371737d83848c888480",
+      "pointer_indices": [
+        26
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Fuel WOT Map1",
+          "address": 18911,
+          "address_hex": "0x49df",
+          "rows": 16,
+          "cols": 1
+        },
+        {
+          "title": "Fuel WOT Map1(AFR example)",
+          "address": 18911,
+          "address_hex": "0x49df",
+          "rows": 16,
+          "cols": 1
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 18927,
+      "target_hex": "0x49ef",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18935,
+      "payload_address_hex": "0x49f7",
+      "payload_size": 6,
+      "payload_end": 18941,
+      "payload_hex": "4028180f0a08",
+      "pointer_indices": [
+        27
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18947,
+      "target_hex": "0x4a03",
+      "rows": 2,
+      "cols": 1,
+      "row_axis_raw": [
+        12,
+        236
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18951,
+      "payload_address_hex": "0x4a07",
+      "payload_size": 2,
+      "payload_end": 18953,
+      "payload_hex": "ff80",
+      "pointer_indices": [
+        29
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 18953,
+      "target_hex": "0x4a09",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        32,
+        14,
+        10,
+        25
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18959,
+      "payload_address_hex": "0x4a0f",
+      "payload_size": 4,
+      "payload_end": 18963,
+      "payload_hex": "1d1d1d1d",
+      "pointer_indices": [
+        30
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 18973,
+      "target_hex": "0x4a1d",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        5,
+        5,
+        5,
+        7,
+        13,
+        5,
+        5,
+        5,
+        10,
+        8,
+        10,
+        17,
+        15,
+        27,
+        94
+      ],
+      "col_axis_raw": null,
+      "payload_address": 18991,
+      "payload_address_hex": "0x4a2f",
+      "payload_size": 16,
+      "payload_end": 19007,
+      "payload_hex": "67665f617683867c7775808283888681",
+      "pointer_indices": [
+        32
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Fuel WOT Map 2",
+          "address": 18991,
+          "address_hex": "0x4a2f",
+          "rows": 16,
+          "cols": 1
+        }
+      ]
+    },
+    {
+      "descriptor_type": 58,
+      "descriptor_type_hex": "0x3a",
+      "target": 19007,
+      "target_hex": "0x4a3f",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        63,
+        63,
+        51
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19012,
+      "payload_address_hex": "0x4a44",
+      "payload_size": 3,
+      "payload_end": 19015,
+      "payload_hex": "808080",
+      "pointer_indices": [
+        33
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19015,
+      "target_hex": "0x4a47",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        10,
+        5,
+        70,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19021,
+      "payload_address_hex": "0x4a4d",
+      "payload_size": 4,
+      "payload_end": 19025,
+      "payload_hex": "90988c98",
+      "pointer_indices": [
+        34
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19025,
+      "target_hex": "0x4a51",
+      "rows": 3,
+      "cols": 4,
+      "row_axis_raw": [
+        25,
+        50,
+        156
+      ],
+      "col_axis_raw": [
+        20,
+        40,
+        64,
+        112
+      ],
+      "payload_address": 19036,
+      "payload_address_hex": "0x4a5c",
+      "payload_size": 12,
+      "payload_end": 19048,
+      "payload_hex": "3366a0b03880a0d020404d4d",
+      "pointer_indices": [
+        35
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 19048,
+      "target_hex": "0x4a68",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19056,
+      "payload_address_hex": "0x4a70",
+      "payload_size": 6,
+      "payload_end": 19062,
+      "payload_hex": "a57b6a736007",
+      "pointer_indices": [
+        36
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19062,
+      "target_hex": "0x4a76",
+      "rows": 8,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        15,
+        13,
+        20,
+        17,
+        23,
+        25,
+        118
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19072,
+      "payload_address_hex": "0x4a80",
+      "payload_size": 8,
+      "payload_end": 19080,
+      "payload_hex": "37052f1f2824628d",
+      "pointer_indices": [
+        37
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 19119,
+      "target_hex": "0x4aaf",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19127,
+      "payload_address_hex": "0x4ab7",
+      "payload_size": 6,
+      "payload_end": 19133,
+      "payload_hex": "736846100000",
+      "pointer_indices": [
+        38
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19133,
+      "target_hex": "0x4abd",
+      "rows": 3,
+      "cols": 3,
+      "row_axis_raw": [
+        25,
+        25,
+        181
+      ],
+      "col_axis_raw": [
+        34,
+        50,
+        138
+      ],
+      "payload_address": 19143,
+      "payload_address_hex": "0x4ac7",
+      "payload_size": 9,
+      "payload_end": 19152,
+      "payload_hex": "80cdfe80b3e68099b3",
+      "pointer_indices": [
+        39
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 19152,
+      "target_hex": "0x4ad0",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19160,
+      "payload_address_hex": "0x4ad8",
+      "payload_size": 6,
+      "payload_end": 19166,
+      "payload_hex": "806640261200",
+      "pointer_indices": [
+        40
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 19172,
+      "target_hex": "0x4ae4",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19180,
+      "payload_address_hex": "0x4aec",
+      "payload_size": 6,
+      "payload_end": 19186,
+      "payload_hex": "fecd804d2600",
+      "pointer_indices": [
+        42
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19186,
+      "target_hex": "0x4af2",
+      "rows": 4,
+      "cols": 3,
+      "row_axis_raw": [
+        5,
+        7,
+        8,
+        224
+      ],
+      "col_axis_raw": [
+        14,
+        33,
+        196
+      ],
+      "payload_address": 19197,
+      "payload_address_hex": "0x4afd",
+      "payload_size": 12,
+      "payload_end": 19209,
+      "payload_hex": "728080707e80707e80708080",
+      "pointer_indices": [
+        43
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19209,
+      "target_hex": "0x4b09",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        8,
+        7,
+        10,
+        8,
+        5,
+        5,
+        12,
+        13,
+        4,
+        18,
+        23,
+        9,
+        94
+      ],
+      "col_axis_raw": null,
+      "payload_address": 19227,
+      "payload_address_hex": "0x4b1b",
+      "payload_size": 16,
+      "payload_end": 19243,
+      "payload_hex": "6f6a697f878a756c747e81828d848981",
+      "pointer_indices": [
+        44
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19243,
+      "target_hex": "0x4b2b",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 19266,
+      "payload_address_hex": "0x4b42",
+      "payload_size": 84,
+      "payload_end": 19350,
+      "payload_hex": "767a808585796d797c828587776a74787a828077656e75787d828074697275788086866464656970757d646166676c746f616263686d76775e5e6469707d815f6061667181856061616670808260616166707c7b",
+      "pointer_indices": [
+        45
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part throttle fuel map ",
+          "address": 19266,
+          "address_hex": "0x4b42",
+          "rows": 12,
+          "cols": 7
+        },
+        {
+          "title": "High part throttle fuel map(in AFR example)",
+          "address": 19266,
+          "address_hex": "0x4b42",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19350,
+      "target_hex": "0x4b96",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 19372,
+      "payload_address_hex": "0x4bac",
+      "payload_size": 72,
+      "payload_end": 19444,
+      "payload_hex": "7676767676767676767778797778787a7a7478787873736e73736d6d6d69736d6d686864736d686464646d686864646168646262625e66625e5e5e5f5f5f5f5f5f605f5f5f5f5f60",
+      "pointer_indices": [
+        46
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low Throttle Fuel map ",
+          "address": 19372,
+          "address_hex": "0x4bac",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19444,
+      "target_hex": "0x4bf4",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 19467,
+      "payload_address_hex": "0x4c0b",
+      "payload_size": 84,
+      "payload_end": 19551,
+      "payload_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "pointer_indices": [
+        47
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19551,
+      "target_hex": "0x4c5f",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 19573,
+      "payload_address_hex": "0x4c75",
+      "payload_size": 72,
+      "payload_end": 19645,
+      "payload_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "pointer_indices": [
+        48
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19645,
+      "target_hex": "0x4cbd",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 19668,
+      "payload_address_hex": "0x4cd4",
+      "payload_size": 84,
+      "payload_end": 19752,
+      "payload_hex": "79797b76706e6f797976767468696f7070756e67666a6e6d6c6f707569696c747d868669696a74797a7a68696c71777c7c68696c70797b81696969717781876c6d6c74777d876a6c6d71777d836a6c6a73767e86",
+      "pointer_indices": [
+        49
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part throttle fuel map2",
+          "address": 19668,
+          "address_hex": "0x4cd4",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19752,
+      "target_hex": "0x4d28",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 19774,
+      "payload_address_hex": "0x4d3e",
+      "payload_size": 72,
+      "payload_end": 19846,
+      "payload_hex": "7e7e7b77777977777977777977747074736f716f6c6e6c6a6e6d6a6a69696e6c696a6a696d69666667686d6c696a67686e68686a6a696e6e6c6a6a6c706c696a6c6a68686866686a",
+      "pointer_indices": [
+        50
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low Throttle Fuel map2",
+          "address": 19774,
+          "address_hex": "0x4d3e",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19846,
+      "target_hex": "0x4d86",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 19869,
+      "payload_address_hex": "0x4d9d",
+      "payload_size": 84,
+      "payload_end": 19953,
+      "payload_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "pointer_indices": [
+        51
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 19953,
+      "target_hex": "0x4df1",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 19975,
+      "payload_address_hex": "0x4e07",
+      "payload_size": 72,
+      "payload_end": 20047,
+      "payload_hex": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "pointer_indices": [
+        52
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20047,
+      "target_hex": "0x4e4f",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 20070,
+      "payload_address_hex": "0x4e66",
+      "payload_size": 84,
+      "payload_end": 20154,
+      "payload_hex": "797a808585796d7b7c828587776a7a7b80828077657b7c7c7d8280747b7d7b7d7d7b7a7c7d807d8077807d7d7f807f746f7d7f7f80817a7d80808181817f817f8082838483858081828282808481828281818080",
+      "pointer_indices": [
+        53
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part throttle fuel map3",
+          "address": 20070,
+          "address_hex": "0x4e66",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20154,
+      "target_hex": "0x4eba",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        17,
+        10,
+        10,
+        10,
+        10,
+        189
+      ],
+      "payload_address": 20176,
+      "payload_address_hex": "0x4ed0",
+      "payload_size": 72,
+      "payload_end": 20248,
+      "payload_hex": "657777787879657778797a7b65797a7a7a7a65797a7b7a7b657a7a7b7a7b657b7d7d7b7c657b7c7c7c7d7a7a7b7c7d7d7a7c7c7c7e807a7b7c7d7e7f7a7b7c7d7f807b7b7c7d8081",
+      "pointer_indices": [
+        54
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low Throttle Fuel map3",
+          "address": 20176,
+          "address_hex": "0x4ed0",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20248,
+      "target_hex": "0x4f18",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20256,
+      "payload_address_hex": "0x4f20",
+      "payload_size": 6,
+      "payload_end": 20262,
+      "payload_hex": "644b3228231b",
+      "pointer_indices": [
+        55
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20272,
+      "target_hex": "0x4f30",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        50,
+        131
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20278,
+      "payload_address_hex": "0x4f36",
+      "payload_size": 4,
+      "payload_end": 20282,
+      "payload_hex": "08080808",
+      "pointer_indices": [
+        57
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20282,
+      "target_hex": "0x4f3a",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        50,
+        131
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20288,
+      "payload_address_hex": "0x4f40",
+      "payload_size": 4,
+      "payload_end": 20292,
+      "payload_hex": "140a0000",
+      "pointer_indices": [
+        58
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20292,
+      "target_hex": "0x4f44",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20300,
+      "payload_address_hex": "0x4f4c",
+      "payload_size": 6,
+      "payload_end": 20306,
+      "payload_hex": "644b3c3c321b",
+      "pointer_indices": [
+        59
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20306,
+      "target_hex": "0x4f52",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        50,
+        131
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20312,
+      "payload_address_hex": "0x4f58",
+      "payload_size": 4,
+      "payload_end": 20316,
+      "payload_hex": "08080808",
+      "pointer_indices": [
+        60
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20316,
+      "target_hex": "0x4f5c",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        50,
+        131
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20322,
+      "payload_address_hex": "0x4f62",
+      "payload_size": 4,
+      "payload_end": 20326,
+      "payload_hex": "140a0000",
+      "pointer_indices": [
+        61
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20326,
+      "target_hex": "0x4f66",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        46,
+        38,
+        50,
+        106
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20332,
+      "payload_address_hex": "0x4f6c",
+      "payload_size": 4,
+      "payload_end": 20336,
+      "payload_hex": "1e1f2022",
+      "pointer_indices": [
+        63
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20336,
+      "target_hex": "0x4f70",
+      "rows": 2,
+      "cols": 1,
+      "row_axis_raw": [
+        8,
+        240
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20340,
+      "payload_address_hex": "0x4f74",
+      "payload_size": 2,
+      "payload_end": 20342,
+      "payload_hex": "323a",
+      "pointer_indices": [
+        64
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20342,
+      "target_hex": "0x4f76",
+      "rows": 2,
+      "cols": 1,
+      "row_axis_raw": [
+        123,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20346,
+      "payload_address_hex": "0x4f7a",
+      "payload_size": 2,
+      "payload_end": 20348,
+      "payload_hex": "1e0d",
+      "pointer_indices": [
+        65
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20348,
+      "target_hex": "0x4f7c",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        20,
+        20,
+        20,
+        146
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20354,
+      "payload_address_hex": "0x4f82",
+      "payload_size": 4,
+      "payload_end": 20358,
+      "payload_hex": "1e1e1e2a",
+      "pointer_indices": [
+        66
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20358,
+      "target_hex": "0x4f86",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        48,
+        91,
+        113
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20363,
+      "payload_address_hex": "0x4f8b",
+      "payload_size": 3,
+      "payload_end": 20366,
+      "payload_hex": "2b201e",
+      "pointer_indices": [
+        67
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20366,
+      "target_hex": "0x4f8e",
+      "rows": 8,
+      "cols": 3,
+      "row_axis_raw": [
+        4,
+        2,
+        7,
+        7,
+        8,
+        11,
+        31,
+        174
+      ],
+      "col_axis_raw": [
+        17,
+        17,
+        188
+      ],
+      "payload_address": 20381,
+      "payload_address_hex": "0x4f9d",
+      "payload_size": 24,
+      "payload_end": 20405,
+      "payload_hex": "353226322f262d2d2d2d2d2d2d2d2d2d2d2d39322d39322d",
+      "pointer_indices": [
+        68
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20405,
+      "target_hex": "0x4fb5",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        5,
+        17,
+        12,
+        8,
+        9,
+        5,
+        8,
+        6,
+        4,
+        4,
+        11,
+        15,
+        15,
+        10,
+        91
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20423,
+      "payload_address_hex": "0x4fc7",
+      "payload_size": 16,
+      "payload_end": 20439,
+      "payload_hex": "1b2b2b34343b3d383934333637353538",
+      "pointer_indices": [
+        69
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 20439,
+      "target_hex": "0x4fd7",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        54,
+        45,
+        82
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20445,
+      "payload_address_hex": "0x4fdd",
+      "payload_size": 4,
+      "payload_end": 20449,
+      "payload_hex": "201e1e1e",
+      "pointer_indices": [
+        70
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20449,
+      "target_hex": "0x4fe1",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        31,
+        15,
+        8,
+        39,
+        13,
+        98
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20457,
+      "payload_address_hex": "0x4fe9",
+      "payload_size": 6,
+      "payload_end": 20463,
+      "payload_hex": "24242412121e",
+      "pointer_indices": [
+        71
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20463,
+      "target_hex": "0x4fef",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        18,
+        29,
+        25
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20468,
+      "payload_address_hex": "0x4ff4",
+      "payload_size": 3,
+      "payload_end": 20471,
+      "payload_hex": "370410",
+      "pointer_indices": [
+        72
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20486,
+      "target_hex": "0x5006",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        9,
+        11,
+        12,
+        15,
+        133
+      ],
+      "payload_address": 20509,
+      "payload_address_hex": "0x501d",
+      "payload_size": 84,
+      "payload_end": 20593,
+      "payload_hex": "5a374c507950505a27506060706000295a6050505000297050505067000030808078770000278080806700000033a9a9a00000000020305000000030607050000000808077800000004070a0700000008090a080",
+      "pointer_indices": [
+        73
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20593,
+      "target_hex": "0x5071",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        5,
+        17,
+        12,
+        8,
+        9,
+        5,
+        8,
+        6,
+        4,
+        4,
+        11,
+        15,
+        15,
+        10,
+        91
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20611,
+      "payload_address_hex": "0x5083",
+      "payload_size": 16,
+      "payload_end": 20627,
+      "payload_hex": "50506060807060508050508070707060",
+      "pointer_indices": [
+        74
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20627,
+      "target_hex": "0x5093",
+      "rows": 6,
+      "cols": 5,
+      "row_axis_raw": [
+        8,
+        12,
+        13,
+        12,
+        12,
+        94
+      ],
+      "col_axis_raw": [
+        20,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 20642,
+      "payload_address_hex": "0x50a2",
+      "payload_size": 30,
+      "payload_end": 20672,
+      "payload_hex": "141414141414141414141414141414141414141414141414141414141414",
+      "pointer_indices": [
+        75
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20692,
+      "target_hex": "0x50d4",
+      "rows": 12,
+      "cols": 1,
+      "row_axis_raw": [
+        3,
+        4,
+        4,
+        8,
+        5,
+        14,
+        16,
+        26,
+        24,
+        25,
+        45,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20706,
+      "payload_address_hex": "0x50e2",
+      "payload_size": 12,
+      "payload_end": 20718,
+      "payload_hex": "36071d1e1d1e1d070e32180f",
+      "pointer_indices": [
+        78
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20799,
+      "target_hex": "0x513f",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        10,
+        18,
+        15,
+        163
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20805,
+      "payload_address_hex": "0x5145",
+      "payload_size": 4,
+      "payload_end": 20809,
+      "payload_hex": "1e1e1e1e",
+      "pointer_indices": [
+        79
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20809,
+      "target_hex": "0x5149",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        27,
+        28,
+        27,
+        121
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20815,
+      "payload_address_hex": "0x514f",
+      "payload_size": 4,
+      "payload_end": 20819,
+      "payload_hex": "1e1e1e1e",
+      "pointer_indices": [
+        80
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20819,
+      "target_hex": "0x5153",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        8,
+        5,
+        17,
+        10,
+        32,
+        8,
+        8,
+        5,
+        7,
+        10,
+        5,
+        7,
+        5,
+        94
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20837,
+      "payload_address_hex": "0x5165",
+      "payload_size": 16,
+      "payload_end": 20853,
+      "payload_hex": "20222d2f34393b3a3a3d3b393a3c3e3f",
+      "pointer_indices": [
+        81
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Ignition WOT Map 1",
+          "address": 20837,
+          "address_hex": "0x5165",
+          "rows": 16,
+          "cols": 1
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20853,
+      "target_hex": "0x5175",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        48,
+        91,
+        113
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20858,
+      "payload_address_hex": "0x517a",
+      "payload_size": 3,
+      "payload_end": 20861,
+      "payload_hex": "2b201e",
+      "pointer_indices": [
+        82
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20861,
+      "target_hex": "0x517d",
+      "rows": 8,
+      "cols": 3,
+      "row_axis_raw": [
+        4,
+        2,
+        7,
+        7,
+        8,
+        11,
+        31,
+        174
+      ],
+      "col_axis_raw": [
+        17,
+        17,
+        188
+      ],
+      "payload_address": 20876,
+      "payload_address_hex": "0x518c",
+      "payload_size": 24,
+      "payload_end": 20900,
+      "payload_hex": "353226322f262d2d2d2d2d2d2d2d2d2d2d2d39322d39322d",
+      "pointer_indices": [
+        83
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Ignition Idle Timing map",
+          "address": 20876,
+          "address_hex": "0x518c",
+          "rows": 8,
+          "cols": 3
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20900,
+      "target_hex": "0x51a4",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        5,
+        17,
+        12,
+        8,
+        9,
+        5,
+        8,
+        6,
+        4,
+        4,
+        11,
+        15,
+        15,
+        10,
+        91
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20918,
+      "payload_address_hex": "0x51b6",
+      "payload_size": 16,
+      "payload_end": 20934,
+      "payload_hex": "1b2b2b34343a3c383933333737353638",
+      "pointer_indices": [
+        84
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Ignition WOT Map 2",
+          "address": 20918,
+          "address_hex": "0x51b6",
+          "rows": 16,
+          "cols": 1
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 20934,
+      "target_hex": "0x51c6",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        18,
+        29,
+        25
+      ],
+      "col_axis_raw": null,
+      "payload_address": 20939,
+      "payload_address_hex": "0x51cb",
+      "payload_size": 3,
+      "payload_end": 20942,
+      "payload_hex": "370410",
+      "pointer_indices": [
+        85
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 20957,
+      "target_hex": "0x51dd",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        9,
+        11,
+        12,
+        15,
+        133
+      ],
+      "payload_address": 20980,
+      "payload_address_hex": "0x51f4",
+      "payload_size": 84,
+      "payload_end": 21064,
+      "payload_hex": "5a364a71794b515a152c31464d51002740403f6250001a202c4243510000577b7b6060000080b0a1717c00000080b6d0ae00000031519780000040717b52800071c0c0b19180002772b180808000005f97919171",
+      "pointer_indices": [
+        86
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21064,
+      "target_hex": "0x5248",
+      "rows": 16,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        5,
+        17,
+        12,
+        8,
+        9,
+        5,
+        8,
+        6,
+        4,
+        4,
+        11,
+        15,
+        15,
+        10,
+        91
+      ],
+      "col_axis_raw": null,
+      "payload_address": 21082,
+      "payload_address_hex": "0x525a",
+      "payload_size": 16,
+      "payload_end": 21098,
+      "payload_hex": "604e51677c8091719760608c71717171",
+      "pointer_indices": [
+        87
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21098,
+      "target_hex": "0x526a",
+      "rows": 6,
+      "cols": 5,
+      "row_axis_raw": [
+        8,
+        12,
+        13,
+        12,
+        12,
+        94
+      ],
+      "col_axis_raw": [
+        20,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21113,
+      "payload_address_hex": "0x5279",
+      "payload_size": 30,
+      "payload_end": 21143,
+      "payload_hex": "1010100e0d10100e0b09100f0c0807100d0802040f0a0200011009010000",
+      "pointer_indices": [
+        88
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21163,
+      "target_hex": "0x52ab",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21186,
+      "payload_address_hex": "0x52c2",
+      "payload_size": 84,
+      "payload_end": 21270,
+      "payload_hex": "2e26201c1a1a1a302e272321201f3a35302c2a29293d38332d2a2928424240383330304c4a48403a343454524e4942393656545149433a385c5953484136345d5852474035335958544a4237355958544a443836",
+      "pointer_indices": [
+        91
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part Throttle Ignition map(in real BTDC)",
+          "address": 21186,
+          "address_hex": "0x52c2",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21270,
+      "target_hex": "0x5316",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 21292,
+      "payload_address_hex": "0x532c",
+      "payload_size": 72,
+      "payload_end": 21364,
+      "payload_hex": "30303030302e30323234343038393b3c3c3a393a3c3d3d3d3f3f414142424f4f4c4c4c4c5a58585857545a58585856565e5c5c5c5c5c5e5e5e5e5e5d5f5e5e5e5c595f5e5e5e5c59",
+      "pointer_indices": [
+        92
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low part Throttle Ignition Map",
+          "address": 21292,
+          "address_hex": "0x532c",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21364,
+      "target_hex": "0x5374",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21387,
+      "payload_address_hex": "0x538b",
+      "payload_size": 84,
+      "payload_end": 21471,
+      "payload_hex": "2f2923201e1e1d322f2b262322213e3c37322e2c2c413e3a34312d2d494645403b363649484c433f3a38504c4b473f3b39514e4b47423a3954534f4d453d395a59544d453f3a5e5a554b463e3a5a56534d49423f",
+      "pointer_indices": [
+        93
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part Throttle Ignition map2",
+          "address": 21387,
+          "address_hex": "0x538b",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21471,
+      "target_hex": "0x53df",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 21493,
+      "payload_address_hex": "0x53f5",
+      "payload_size": 72,
+      "payload_end": 21565,
+      "payload_hex": "36363636342f36403e3c3b323b4242403f3e4b4946454341565251504e49575752504f495453515151505959565554515d5d5d5958546060605f5c5a60606060605e6060605f5c5a",
+      "pointer_indices": [
+        94
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low part Throttle Ignition Map2",
+          "address": 21493,
+          "address_hex": "0x53f5",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21565,
+      "target_hex": "0x543d",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21588,
+      "payload_address_hex": "0x5454",
+      "payload_size": 84,
+      "payload_end": 21672,
+      "payload_hex": "362e2a24221e1d39332e2a262522413e3b342f2c2b47433d38332d2c4f4a4841383634504d4d433b3937504f49453f3a38504c4d45413c3952505048423c395b58504b453e3b5f5d534c453f3a5a56534d47403d",
+      "pointer_indices": [
+        95
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21672,
+      "target_hex": "0x54a8",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 21694,
+      "payload_address_hex": "0x54be",
+      "payload_size": 72,
+      "payload_end": 21766,
+      "payload_hex": "313f3b3a38363144403d3c393b48484443414f4f4d4b4b4758585756514f5c5c5b575450585655545250535252515150595958555552606060605d5b63636262615f6161605f5c5a",
+      "pointer_indices": [
+        96
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part Throttle Ignition map3",
+          "address": 21694,
+          "address_hex": "0x54be",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21766,
+      "target_hex": "0x5506",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21789,
+      "payload_address_hex": "0x551d",
+      "payload_size": 84,
+      "payload_end": 21873,
+      "payload_hex": "362e2a24221e1d39332e2a262522413e3b342f2c2b47433d38332d2c4f4a4841383634504d4d433b3937504f49453f3a38504c4d45413c3952505048423c395b58504b453e3b5f5d534c453f3a5a56534d47403d",
+      "pointer_indices": [
+        97
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low part Throttle Ignition Map3",
+          "address": 21789,
+          "address_hex": "0x551d",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21873,
+      "target_hex": "0x5571",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        27,
+        15,
+        8,
+        12,
+        20,
+        17,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 21895,
+      "payload_address_hex": "0x5587",
+      "payload_size": 72,
+      "payload_end": 21967,
+      "payload_hex": "313f3b3a38363144403d3c393b48484443414f4f4d4b4b4758585756514f5c5c5b575450585655545250535252515150595958555552606060605d5b63636262615f6161605f5c5a",
+      "pointer_indices": [
+        98
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "High part Throttle Ignition map4",
+          "address": 21895,
+          "address_hex": "0x5587",
+          "rows": 12,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 21967,
+      "target_hex": "0x55cf",
+      "rows": 12,
+      "cols": 7,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        9,
+        11,
+        12,
+        15,
+        14,
+        119
+      ],
+      "payload_address": 21990,
+      "payload_address_hex": "0x55e6",
+      "payload_size": 84,
+      "payload_end": 22074,
+      "payload_hex": "2e28221c1a1a1a322d2823221f1f3a35302d2b29293a34302c2929283b3e3d373131313d413f3b3634344344433e3a38364342413e3b383845423e3c38353345423e3b3734334544403b3935334544423d3a3635",
+      "pointer_indices": [
+        99
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Low part Throttle Ignition Map4",
+          "address": 21990,
+          "address_hex": "0x55e6",
+          "rows": 12,
+          "cols": 7
+        }
+      ]
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22074,
+      "target_hex": "0x563a",
+      "rows": 12,
+      "cols": 6,
+      "row_axis_raw": [
+        5,
+        10,
+        5,
+        13,
+        10,
+        10,
+        17,
+        15,
+        8,
+        25,
+        24,
+        94
+      ],
+      "col_axis_raw": [
+        9,
+        6,
+        5,
+        6,
+        9,
+        189
+      ],
+      "payload_address": 22096,
+      "payload_address_hex": "0x5650",
+      "payload_size": 72,
+      "payload_end": 22168,
+      "payload_hex": "30313233312e3233353634323436383a3a3a36383a3c3b3a363637383a3b38393b3d3d3d3a3c3e4042434e4b484645434f4d4b4846454f4b4a4846454f4b494847454f4b4a474645",
+      "pointer_indices": [
+        100
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22168,
+      "target_hex": "0x5698",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        20,
+        20,
+        20,
+        146
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22174,
+      "payload_address_hex": "0x569e",
+      "payload_size": 4,
+      "payload_end": 22178,
+      "payload_hex": "1e1e1e1e",
+      "pointer_indices": [
+        101
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 22178,
+      "target_hex": "0x56a2",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        32,
+        61,
+        59,
+        22
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22184,
+      "payload_address_hex": "0x56a8",
+      "payload_size": 4,
+      "payload_end": 22188,
+      "payload_hex": "38041020",
+      "pointer_indices": [
+        103
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 55,
+      "descriptor_type_hex": "0x37",
+      "target": 22206,
+      "target_hex": "0x56be",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        32,
+        61,
+        59,
+        22
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22212,
+      "payload_address_hex": "0x56c4",
+      "payload_size": 4,
+      "payload_end": 22216,
+      "payload_hex": "38041020",
+      "pointer_indices": [
+        104
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22234,
+      "target_hex": "0x56da",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        7,
+        10,
+        70,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22240,
+      "payload_address_hex": "0x56e0",
+      "payload_size": 4,
+      "payload_end": 22244,
+      "payload_hex": "251c1c4b",
+      "pointer_indices": [
+        106
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22244,
+      "target_hex": "0x56e4",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        20,
+        206
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22250,
+      "payload_address_hex": "0x56ea",
+      "payload_size": 4,
+      "payload_end": 22254,
+      "payload_hex": "3806101f",
+      "pointer_indices": [
+        107
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22282,
+      "target_hex": "0x570a",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        60,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22288,
+      "payload_address_hex": "0x5710",
+      "payload_size": 4,
+      "payload_end": 22292,
+      "payload_hex": "3806101f",
+      "pointer_indices": [
+        108
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22320,
+      "target_hex": "0x5730",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22328,
+      "payload_address_hex": "0x5738",
+      "payload_size": 6,
+      "payload_end": 22334,
+      "payload_hex": "feb46e554b46",
+      "pointer_indices": [
+        109
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22334,
+      "target_hex": "0x573e",
+      "rows": 3,
+      "cols": 1,
+      "row_axis_raw": [
+        6,
+        13,
+        231
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22339,
+      "payload_address_hex": "0x5743",
+      "payload_size": 3,
+      "payload_end": 22342,
+      "payload_hex": "460500",
+      "pointer_indices": [
+        110
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22342,
+      "target_hex": "0x5746",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        31,
+        31,
+        75,
+        0,
+        2,
+        97
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22350,
+      "payload_address_hex": "0x574e",
+      "payload_size": 6,
+      "payload_end": 22356,
+      "payload_hex": "000000000000",
+      "pointer_indices": [
+        111
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22356,
+      "target_hex": "0x5754",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22364,
+      "payload_address_hex": "0x575c",
+      "payload_size": 6,
+      "payload_end": 22370,
+      "payload_hex": "4a4a4a4a4a4a",
+      "pointer_indices": [
+        112
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22370,
+      "target_hex": "0x5762",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        7,
+        10,
+        70,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22376,
+      "payload_address_hex": "0x5768",
+      "payload_size": 4,
+      "payload_end": 22380,
+      "payload_hex": "251c1c4b",
+      "pointer_indices": [
+        113
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22380,
+      "target_hex": "0x576c",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        10,
+        20,
+        206
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22386,
+      "payload_address_hex": "0x5772",
+      "payload_size": 4,
+      "payload_end": 22390,
+      "payload_hex": "3806101f",
+      "pointer_indices": [
+        114
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22418,
+      "target_hex": "0x5792",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        31,
+        31,
+        75,
+        0,
+        2,
+        97
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22426,
+      "payload_address_hex": "0x579a",
+      "payload_size": 6,
+      "payload_end": 22432,
+      "payload_hex": "000000000000",
+      "pointer_indices": [
+        115
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22432,
+      "target_hex": "0x57a0",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        50,
+        131
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22438,
+      "payload_address_hex": "0x57a6",
+      "payload_size": 4,
+      "payload_end": 22442,
+      "payload_hex": "88746050",
+      "pointer_indices": [
+        116
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22454,
+      "target_hex": "0x57b6",
+      "rows": 5,
+      "cols": 1,
+      "row_axis_raw": [
+        5,
+        13,
+        12,
+        25,
+        181
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22461,
+      "payload_address_hex": "0x57bd",
+      "payload_size": 5,
+      "payload_end": 22466,
+      "payload_hex": "320504040a",
+      "pointer_indices": [
+        118
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22493,
+      "target_hex": "0x57dd",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        31,
+        31,
+        93,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22499,
+      "payload_address_hex": "0x57e3",
+      "payload_size": 4,
+      "payload_end": 22503,
+      "payload_hex": "1815110c",
+      "pointer_indices": [
+        119
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22503,
+      "target_hex": "0x57e7",
+      "rows": 6,
+      "cols": 1,
+      "row_axis_raw": [
+        16,
+        31,
+        31,
+        32,
+        62,
+        80
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22511,
+      "payload_address_hex": "0x57ef",
+      "payload_size": 6,
+      "payload_end": 22517,
+      "payload_hex": "78705a505050",
+      "pointer_indices": [
+        120
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Idle speed(AT in P or N, AC on or off)",
+          "address": 22511,
+          "address_hex": "0x57ef",
+          "rows": 1,
+          "cols": 6
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22517,
+      "target_hex": "0x57f5",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        63,
+        63,
+        45,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22523,
+      "payload_address_hex": "0x57fb",
+      "payload_size": 4,
+      "payload_end": 22527,
+      "payload_hex": "785a5555",
+      "pointer_indices": [
+        121
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Idle speed(AT in D or R with A/C on)",
+          "address": 22523,
+          "address_hex": "0x57fb",
+          "rows": 1,
+          "cols": 4
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22527,
+      "target_hex": "0x57ff",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        63,
+        63,
+        45,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22533,
+      "payload_address_hex": "0x5805",
+      "payload_size": 4,
+      "payload_end": 22537,
+      "payload_hex": "78645f5f",
+      "pointer_indices": [
+        122
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": [
+        {
+          "title": "Idle speed(AT in D or R with AC off)",
+          "address": 22533,
+          "address_hex": "0x5805",
+          "rows": 1,
+          "cols": 4
+        }
+      ]
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22537,
+      "target_hex": "0x5809",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        62,
+        64,
+        45,
+        81
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22543,
+      "payload_address_hex": "0x580f",
+      "payload_size": 4,
+      "payload_end": 22547,
+      "payload_hex": "785f5555",
+      "pointer_indices": [
+        123
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 56,
+      "descriptor_type_hex": "0x38",
+      "target": 22577,
+      "target_hex": "0x5831",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        47,
+        63,
+        94,
+        48
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22583,
+      "payload_address_hex": "0x5837",
+      "payload_size": 4,
+      "payload_end": 22587,
+      "payload_hex": "291e1914",
+      "pointer_indices": [
+        127
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    },
+    {
+      "descriptor_type": 59,
+      "descriptor_type_hex": "0x3b",
+      "target": 22587,
+      "target_hex": "0x583b",
+      "rows": 4,
+      "cols": 1,
+      "row_axis_raw": [
+        25,
+        25,
+        25,
+        156
+      ],
+      "col_axis_raw": null,
+      "payload_address": 22593,
+      "payload_address_hex": "0x5841",
+      "payload_size": 4,
+      "payload_end": 22597,
+      "payload_hex": "64646464",
+      "pointer_indices": [
+        128
+      ],
+      "immediate_call_count": 0,
+      "xdf_matches": []
+    }
+  ]
+}

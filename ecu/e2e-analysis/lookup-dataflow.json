@@ -1,0 +1,546 @@
+{
+  "call_count": 76,
+  "resolved_set_count": 75,
+  "calls": {
+    "CODE:33ef": {
+      "function": "CODE:33a0",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3435": {
+      "function": "CODE:33a0",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3446": {
+      "function": "CODE:33a0",
+      "possible_indices": [
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3572": {
+      "function": "CODE:3530",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:35b1": {
+      "function": "CODE:3585",
+      "possible_indices": [
+        13
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:35ba": {
+      "function": "CODE:3585",
+      "possible_indices": [
+        14,
+        15
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:35d0": {
+      "function": "CODE:3585",
+      "possible_indices": [
+        16
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:35ef": {
+      "function": "CODE:3585",
+      "possible_indices": [
+        11
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3607": {
+      "function": "CODE:3585",
+      "possible_indices": [
+        12
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3640": {
+      "function": "CODE:3610",
+      "possible_indices": null,
+      "status": "dynamic",
+      "unresolved_dependency": "R2 is live on entry to CODE:3610 through the CODE:3585 -> CODE:212a wrapper chain. The call is a descriptor-probing loop; CODE:040f increments R2 after each probe. Intraprocedural proof cannot bound the initial value without modeling the custom ABI."
+    },
+    "CODE:3679": {
+      "function": "CODE:3610",
+      "possible_indices": [
+        17,
+        18
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3713": {
+      "function": "CODE:3711",
+      "possible_indices": [
+        19
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3725": {
+      "function": "CODE:3723",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3729": {
+      "function": "CODE:3723",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3759": {
+      "function": "CODE:3723",
+      "possible_indices": [
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:37c2": {
+      "function": "CODE:3723",
+      "possible_indices": [
+        3
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3805": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3831": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3835": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:383d": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        3
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:385d": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        6
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:384f": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        4
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3858": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        5
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3862": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        7
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:388f": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        8
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:389b": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        9
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:38ae": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        10
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:38b7": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        11
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:392c": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        12,
+        14
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3931": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        13,
+        15
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:38d1": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        21
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3901": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        24
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:38e1": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        22
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3911": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        25
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:38e7": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        23
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3917": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        26
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3967": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        16
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3981": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        17
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3986": {
+      "function": "CODE:3800",
+      "possible_indices": [
+        18
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:39be": {
+      "function": "CODE:39b3",
+      "possible_indices": [
+        0,
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3a8e": {
+      "function": "CODE:3a83",
+      "possible_indices": [
+        20
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3a9c": {
+      "function": "CODE:3a83",
+      "possible_indices": [
+        21
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3ac1": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        3
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3ad7": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        1,
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3ac5": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        4
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3b0a": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        6
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3b17": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        5
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:3b62": {
+      "function": "CODE:3ab2",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:608c": {
+      "function": "CODE:6083",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:632f": {
+      "function": "CODE:6327",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:633b": {
+      "function": "CODE:6327",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:653c": {
+      "function": "CODE:6501",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6b68": {
+      "function": "CODE:6b66",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6b6f": {
+      "function": "CODE:6b66",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6b74": {
+      "function": "CODE:6b66",
+      "possible_indices": [
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6b7c": {
+      "function": "CODE:6b66",
+      "possible_indices": [
+        3
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6b83": {
+      "function": "CODE:6b66",
+      "possible_indices": [
+        4
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6bde": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        2,
+        3,
+        4
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6c47": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6c5b": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6d45": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        9
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6d02": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        7
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6cf1": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        5,
+        6
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6d30": {
+      "function": "CODE:6bb7",
+      "possible_indices": [
+        8
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:6f79": {
+      "function": "CODE:6f57",
+      "possible_indices": [
+        5
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:7167": {
+      "function": "CODE:7163",
+      "possible_indices": [
+        7
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:717d": {
+      "function": "CODE:7163",
+      "possible_indices": [
+        6
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:71e2": {
+      "function": "CODE:71b6",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:75f7": {
+      "function": "CODE:75f5",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:7619": {
+      "function": "CODE:75f5",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:7c8b": {
+      "function": "CODE:7c22",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:7c99": {
+      "function": "CODE:7c92",
+      "possible_indices": [
+        2
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:7d0c": {
+      "function": "CODE:7cf6",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:9e47": {
+      "function": "CODE:9e43",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:9eb3": {
+      "function": "CODE:9e88",
+      "possible_indices": [
+        0
+      ],
+      "status": "resolved_set"
+    },
+    "CODE:9ebc": {
+      "function": "CODE:9e88",
+      "possible_indices": [
+        1
+      ],
+      "status": "resolved_set"
+    }
+  }
+}

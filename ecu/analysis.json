@@ -1,0 +1,9987 @@
+{
+  "binary": {
+    "path": "ecu/318i_175_soft1267356378.bin",
+    "size": 32768,
+    "dme": "0261200175",
+    "software": "1267356378",
+    "complete_rom": "ecu/analysis/TotalCombinedROM.bin",
+    "complete_rom_size": 40960
+  },
+  "xdf": {
+    "path": "ecu/BMW_175_318i_soft378.xdf",
+    "block_count": 46,
+    "entry_count": 40
+  },
+  "checksum": {
+    "xdf_claim_offset": 32765,
+    "xdf_claim_be": 65535,
+    "xdf_claim_le": 65535,
+    "runtime_offset": 7936,
+    "runtime_stored_be": 32559,
+    "runtime_cpu_range": "0000-9eff",
+    "runtime_calculated": 32559,
+    "runtime_verified": true,
+    "complete_rom_mapping_valid": true,
+    "mask_rom_sum16": 46367,
+    "last_byte": 255,
+    "last_non_ff": 32052,
+    "non_ff_sum16": 31925,
+    "candidate_sums": {
+      "0000-7ffc": {
+        "sum8": 159,
+        "sum16": 35231,
+        "crc16_ccitt_0": 29503,
+        "crc16_ccitt_ffff": 63472,
+        "crc32": 2431526512,
+        "word_sum_be": 55864
+      },
+      "2000-7ffc": {
+        "sum8": 172,
+        "sum16": 14252,
+        "crc16_ccitt_0": 16028,
+        "crc16_ccitt_ffff": 54199,
+        "crc32": 3136408213,
+        "word_sum_be": 55448
+      },
+      "0000-7fff": {
+        "sum8": 156,
+        "sum16": 35996,
+        "crc16_ccitt_0": 18079,
+        "crc16_ccitt_ffff": 42863,
+        "crc32": 795007899,
+        "word_sum_be": 55862
+      }
+    }
+  },
+  "pointer_index": [
+    {
+      "index": 0,
+      "offset": 17856,
+      "target": 18485
+    },
+    {
+      "index": 1,
+      "offset": 17858,
+      "target": 18491
+    },
+    {
+      "index": 2,
+      "offset": 17860,
+      "target": 18517
+    },
+    {
+      "index": 3,
+      "offset": 17862,
+      "target": 18527
+    },
+    {
+      "index": 4,
+      "offset": 17864,
+      "target": 18541
+    },
+    {
+      "index": 5,
+      "offset": 17866,
+      "target": 18485
+    },
+    {
+      "index": 6,
+      "offset": 17868,
+      "target": 18547
+    },
+    {
+      "index": 7,
+      "offset": 17870,
+      "target": 18555
+    },
+    {
+      "index": 8,
+      "offset": 17872,
+      "target": 18565
+    },
+    {
+      "index": 9,
+      "offset": 17874,
+      "target": 18575
+    },
+    {
+      "index": 10,
+      "offset": 17876,
+      "target": 18589
+    },
+    {
+      "index": 11,
+      "offset": 17878,
+      "target": 18603
+    },
+    {
+      "index": 12,
+      "offset": 17880,
+      "target": 18617
+    },
+    {
+      "index": 13,
+      "offset": 17882,
+      "target": 18640
+    },
+    {
+      "index": 14,
+      "offset": 17884,
+      "target": 18654
+    },
+    {
+      "index": 15,
+      "offset": 17886,
+      "target": 18668
+    },
+    {
+      "index": 16,
+      "offset": 17888,
+      "target": 18720
+    },
+    {
+      "index": 17,
+      "offset": 17890,
+      "target": 18777
+    },
+    {
+      "index": 18,
+      "offset": 17892,
+      "target": 18783
+    },
+    {
+      "index": 19,
+      "offset": 17894,
+      "target": 18797
+    },
+    {
+      "index": 20,
+      "offset": 17896,
+      "target": 18816
+    },
+    {
+      "index": 21,
+      "offset": 17898,
+      "target": 18830
+    },
+    {
+      "index": 22,
+      "offset": 17900,
+      "target": 18836
+    },
+    {
+      "index": 23,
+      "offset": 17902,
+      "target": 18850
+    },
+    {
+      "index": 24,
+      "offset": 17904,
+      "target": 18860
+    },
+    {
+      "index": 25,
+      "offset": 17906,
+      "target": 18870
+    },
+    {
+      "index": 26,
+      "offset": 17908,
+      "target": 18893
+    },
+    {
+      "index": 27,
+      "offset": 17910,
+      "target": 18927
+    },
+    {
+      "index": 28,
+      "offset": 17912,
+      "target": 18941
+    },
+    {
+      "index": 29,
+      "offset": 17914,
+      "target": 18947
+    },
+    {
+      "index": 30,
+      "offset": 17916,
+      "target": 18953
+    },
+    {
+      "index": 31,
+      "offset": 17918,
+      "target": 18963
+    },
+    {
+      "index": 32,
+      "offset": 17920,
+      "target": 18973
+    },
+    {
+      "index": 33,
+      "offset": 17922,
+      "target": 19007
+    },
+    {
+      "index": 34,
+      "offset": 17924,
+      "target": 19015
+    },
+    {
+      "index": 35,
+      "offset": 17926,
+      "target": 19025
+    },
+    {
+      "index": 36,
+      "offset": 17928,
+      "target": 19048
+    },
+    {
+      "index": 37,
+      "offset": 17930,
+      "target": 19062
+    },
+    {
+      "index": 38,
+      "offset": 17932,
+      "target": 19119
+    },
+    {
+      "index": 39,
+      "offset": 17934,
+      "target": 19133
+    },
+    {
+      "index": 40,
+      "offset": 17936,
+      "target": 19152
+    },
+    {
+      "index": 41,
+      "offset": 17938,
+      "target": 19166
+    },
+    {
+      "index": 42,
+      "offset": 17940,
+      "target": 19172
+    },
+    {
+      "index": 43,
+      "offset": 17942,
+      "target": 19186
+    },
+    {
+      "index": 44,
+      "offset": 17944,
+      "target": 19209
+    },
+    {
+      "index": 45,
+      "offset": 17946,
+      "target": 19243
+    },
+    {
+      "index": 46,
+      "offset": 17948,
+      "target": 19350
+    },
+    {
+      "index": 47,
+      "offset": 17950,
+      "target": 19444
+    },
+    {
+      "index": 48,
+      "offset": 17952,
+      "target": 19551
+    },
+    {
+      "index": 49,
+      "offset": 17954,
+      "target": 19645
+    },
+    {
+      "index": 50,
+      "offset": 17956,
+      "target": 19752
+    },
+    {
+      "index": 51,
+      "offset": 17958,
+      "target": 19846
+    },
+    {
+      "index": 52,
+      "offset": 17960,
+      "target": 19953
+    },
+    {
+      "index": 53,
+      "offset": 17962,
+      "target": 20047
+    },
+    {
+      "index": 54,
+      "offset": 17964,
+      "target": 20154
+    },
+    {
+      "index": 55,
+      "offset": 17966,
+      "target": 20248
+    },
+    {
+      "index": 56,
+      "offset": 17968,
+      "target": 20262
+    },
+    {
+      "index": 57,
+      "offset": 17970,
+      "target": 20272
+    },
+    {
+      "index": 58,
+      "offset": 17972,
+      "target": 20282
+    },
+    {
+      "index": 59,
+      "offset": 17974,
+      "target": 20292
+    },
+    {
+      "index": 60,
+      "offset": 17976,
+      "target": 20306
+    },
+    {
+      "index": 61,
+      "offset": 17978,
+      "target": 20316
+    },
+    {
+      "index": 62,
+      "offset": 17980,
+      "target": 18485
+    },
+    {
+      "index": 63,
+      "offset": 17982,
+      "target": 20326
+    },
+    {
+      "index": 64,
+      "offset": 17984,
+      "target": 20336
+    },
+    {
+      "index": 65,
+      "offset": 17986,
+      "target": 20342
+    },
+    {
+      "index": 66,
+      "offset": 17988,
+      "target": 20348
+    },
+    {
+      "index": 67,
+      "offset": 17990,
+      "target": 20358
+    },
+    {
+      "index": 68,
+      "offset": 17992,
+      "target": 20366
+    },
+    {
+      "index": 69,
+      "offset": 17994,
+      "target": 20405
+    },
+    {
+      "index": 70,
+      "offset": 17996,
+      "target": 20439
+    },
+    {
+      "index": 71,
+      "offset": 17998,
+      "target": 20449
+    },
+    {
+      "index": 72,
+      "offset": 18000,
+      "target": 20463
+    },
+    {
+      "index": 73,
+      "offset": 18002,
+      "target": 20486
+    },
+    {
+      "index": 74,
+      "offset": 18004,
+      "target": 20593
+    },
+    {
+      "index": 75,
+      "offset": 18006,
+      "target": 20627
+    },
+    {
+      "index": 76,
+      "offset": 18008,
+      "target": 20672
+    },
+    {
+      "index": 77,
+      "offset": 18010,
+      "target": 20682
+    },
+    {
+      "index": 78,
+      "offset": 18012,
+      "target": 20692
+    },
+    {
+      "index": 79,
+      "offset": 18014,
+      "target": 20799
+    },
+    {
+      "index": 80,
+      "offset": 18016,
+      "target": 20809
+    },
+    {
+      "index": 81,
+      "offset": 18018,
+      "target": 20819
+    },
+    {
+      "index": 82,
+      "offset": 18020,
+      "target": 20853
+    },
+    {
+      "index": 83,
+      "offset": 18022,
+      "target": 20861
+    },
+    {
+      "index": 84,
+      "offset": 18024,
+      "target": 20900
+    },
+    {
+      "index": 85,
+      "offset": 18026,
+      "target": 20934
+    },
+    {
+      "index": 86,
+      "offset": 18028,
+      "target": 20957
+    },
+    {
+      "index": 87,
+      "offset": 18030,
+      "target": 21064
+    },
+    {
+      "index": 88,
+      "offset": 18032,
+      "target": 21098
+    },
+    {
+      "index": 89,
+      "offset": 18034,
+      "target": 21143
+    },
+    {
+      "index": 90,
+      "offset": 18036,
+      "target": 21153
+    },
+    {
+      "index": 91,
+      "offset": 18038,
+      "target": 21163
+    },
+    {
+      "index": 92,
+      "offset": 18040,
+      "target": 21270
+    },
+    {
+      "index": 93,
+      "offset": 18042,
+      "target": 21364
+    },
+    {
+      "index": 94,
+      "offset": 18044,
+      "target": 21471
+    },
+    {
+      "index": 95,
+      "offset": 18046,
+      "target": 21565
+    },
+    {
+      "index": 96,
+      "offset": 18048,
+      "target": 21672
+    },
+    {
+      "index": 97,
+      "offset": 18050,
+      "target": 21766
+    },
+    {
+      "index": 98,
+      "offset": 18052,
+      "target": 21873
+    },
+    {
+      "index": 99,
+      "offset": 18054,
+      "target": 21967
+    },
+    {
+      "index": 100,
+      "offset": 18056,
+      "target": 22074
+    },
+    {
+      "index": 101,
+      "offset": 18058,
+      "target": 22168
+    },
+    {
+      "index": 102,
+      "offset": 18060,
+      "target": 18485
+    },
+    {
+      "index": 103,
+      "offset": 18062,
+      "target": 22178
+    },
+    {
+      "index": 104,
+      "offset": 18064,
+      "target": 22206
+    },
+    {
+      "index": 105,
+      "offset": 18066,
+      "target": 18485
+    },
+    {
+      "index": 106,
+      "offset": 18068,
+      "target": 22234
+    },
+    {
+      "index": 107,
+      "offset": 18070,
+      "target": 22244
+    },
+    {
+      "index": 108,
+      "offset": 18072,
+      "target": 22282
+    },
+    {
+      "index": 109,
+      "offset": 18074,
+      "target": 22320
+    },
+    {
+      "index": 110,
+      "offset": 18076,
+      "target": 22334
+    },
+    {
+      "index": 111,
+      "offset": 18078,
+      "target": 22342
+    },
+    {
+      "index": 112,
+      "offset": 18080,
+      "target": 22356
+    },
+    {
+      "index": 113,
+      "offset": 18082,
+      "target": 22370
+    },
+    {
+      "index": 114,
+      "offset": 18084,
+      "target": 22380
+    },
+    {
+      "index": 115,
+      "offset": 18086,
+      "target": 22418
+    },
+    {
+      "index": 116,
+      "offset": 18088,
+      "target": 22432
+    },
+    {
+      "index": 117,
+      "offset": 18090,
+      "target": 22442
+    },
+    {
+      "index": 118,
+      "offset": 18092,
+      "target": 22454
+    },
+    {
+      "index": 119,
+      "offset": 18094,
+      "target": 22493
+    },
+    {
+      "index": 120,
+      "offset": 18096,
+      "target": 22503
+    },
+    {
+      "index": 121,
+      "offset": 18098,
+      "target": 22517
+    },
+    {
+      "index": 122,
+      "offset": 18100,
+      "target": 22527
+    },
+    {
+      "index": 123,
+      "offset": 18102,
+      "target": 22537
+    },
+    {
+      "index": 124,
+      "offset": 18104,
+      "target": 22547
+    },
+    {
+      "index": 125,
+      "offset": 18106,
+      "target": 22557
+    },
+    {
+      "index": 126,
+      "offset": 18108,
+      "target": 22567
+    },
+    {
+      "index": 127,
+      "offset": 18110,
+      "target": 22577
+    },
+    {
+      "index": 128,
+      "offset": 18112,
+      "target": 22587
+    },
+    {
+      "index": 129,
+      "offset": 18114,
+      "target": 22597
+    },
+    {
+      "index": 130,
+      "offset": 18116,
+      "target": 22607
+    },
+    {
+      "index": 131,
+      "offset": 18118,
+      "target": 22617
+    },
+    {
+      "index": 132,
+      "offset": 18120,
+      "target": 22627
+    },
+    {
+      "index": 133,
+      "offset": 18122,
+      "target": 22639
+    },
+    {
+      "index": 134,
+      "offset": 18124,
+      "target": 22649
+    },
+    {
+      "index": 135,
+      "offset": 18126,
+      "target": 18485
+    },
+    {
+      "index": 136,
+      "offset": 18128,
+      "target": 22659
+    },
+    {
+      "index": 137,
+      "offset": 18130,
+      "target": 22718
+    },
+    {
+      "index": 138,
+      "offset": 18132,
+      "target": 22756
+    },
+    {
+      "index": 139,
+      "offset": 18134,
+      "target": 22794
+    },
+    {
+      "index": 140,
+      "offset": 18136,
+      "target": 22808
+    },
+    {
+      "index": 141,
+      "offset": 18138,
+      "target": 22836
+    },
+    {
+      "index": 142,
+      "offset": 18140,
+      "target": 22846
+    },
+    {
+      "index": 143,
+      "offset": 18142,
+      "target": 22860
+    },
+    {
+      "index": 144,
+      "offset": 18144,
+      "target": 22912
+    },
+    {
+      "index": 145,
+      "offset": 18146,
+      "target": 22926
+    },
+    {
+      "index": 146,
+      "offset": 18148,
+      "target": 22978
+    },
+    {
+      "index": 147,
+      "offset": 18150,
+      "target": 23016
+    },
+    {
+      "index": 148,
+      "offset": 18152,
+      "target": 23034
+    },
+    {
+      "index": 149,
+      "offset": 18154,
+      "target": 23042
+    }
+  ],
+  "indexed_maps": [
+    {
+      "header": 18485,
+      "end": 18491,
+      "data": 18489,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "6452",
+          "internal_values": [
+            74,
+            174
+          ]
+        }
+      ],
+      "values": [
+        128,
+        128
+      ]
+    },
+    {
+      "header": 18491,
+      "end": 18517,
+      "data": 18505,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 4,
+          "deltas": "03060e1a2a2e201b12060815",
+          "internal_values": [
+            7,
+            10,
+            16,
+            30,
+            56,
+            98,
+            144,
+            176,
+            203,
+            221,
+            227,
+            235
+          ]
+        }
+      ],
+      "values": [
+        0,
+        11,
+        24,
+        45,
+        70,
+        101,
+        133,
+        157,
+        189,
+        218,
+        234,
+        235
+      ]
+    },
+    {
+      "header": 18517,
+      "end": 18527,
+      "data": 18523,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "10100f7f",
+          "internal_values": [
+            82,
+            98,
+            114,
+            129
+          ]
+        }
+      ],
+      "values": [
+        7,
+        7,
+        6,
+        6
+      ]
+    },
+    {
+      "header": 18527,
+      "end": 18541,
+      "data": 18535,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        20,
+        20,
+        20,
+        20,
+        18,
+        18
+      ]
+    },
+    {
+      "header": 18541,
+      "end": 18547,
+      "data": 18545,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "5c8e",
+          "internal_values": [
+            22,
+            114
+          ]
+        }
+      ],
+      "values": [
+        10,
+        10
+      ]
+    },
+    {
+      "header": 18547,
+      "end": 18555,
+      "data": 18552,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 58,
+          "deltas": "3f3f33",
+          "internal_values": [
+            79,
+            142,
+            205
+          ]
+        }
+      ],
+      "values": [
+        96,
+        128,
+        160
+      ]
+    },
+    {
+      "header": 18555,
+      "end": 18565,
+      "data": 18561,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0f1216b5",
+          "internal_values": [
+            20,
+            35,
+            53,
+            75
+          ]
+        }
+      ],
+      "values": [
+        144,
+        152,
+        140,
+        152
+      ]
+    },
+    {
+      "header": 18565,
+      "end": 18575,
+      "data": 18571,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 54,
+          "deltas": "491e1d15",
+          "internal_values": [
+            103,
+            176,
+            206,
+            235
+          ]
+        }
+      ],
+      "values": [
+        250,
+        85,
+        53,
+        45
+      ]
+    },
+    {
+      "header": 18575,
+      "end": 18589,
+      "data": 18583,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "01071919199c",
+          "internal_values": [
+            17,
+            18,
+            25,
+            50,
+            75,
+            100
+          ]
+        }
+      ],
+      "values": [
+        32,
+        48,
+        64,
+        128,
+        160,
+        208
+      ]
+    },
+    {
+      "header": 18589,
+      "end": 18603,
+      "data": 18597,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0305020508da",
+          "internal_values": [
+            15,
+            18,
+            23,
+            25,
+            30,
+            38
+          ]
+        }
+      ],
+      "values": [
+        64,
+        64,
+        64,
+        64,
+        64,
+        64
+      ]
+    },
+    {
+      "header": 18603,
+      "end": 18617,
+      "data": 18611,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0303020805df",
+          "internal_values": [
+            12,
+            15,
+            18,
+            20,
+            28,
+            33
+          ]
+        }
+      ],
+      "values": [
+        64,
+        40,
+        40,
+        40,
+        40,
+        64
+      ]
+    },
+    {
+      "header": 18617,
+      "end": 18640,
+      "data": 18628,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19329c",
+          "internal_values": [
+            25,
+            50,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "14284070",
+          "internal_values": [
+            20,
+            40,
+            80,
+            144
+          ]
+        }
+      ],
+      "values": [
+        48,
+        96,
+        160,
+        176,
+        56,
+        128,
+        160,
+        208,
+        32,
+        64,
+        77,
+        77
+      ]
+    },
+    {
+      "header": 18640,
+      "end": 18654,
+      "data": 18648,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        181,
+        147,
+        106,
+        74,
+        58,
+        7
+      ]
+    },
+    {
+      "header": 18654,
+      "end": 18668,
+      "data": 18662,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        240,
+        192,
+        149,
+        125,
+        78,
+        26
+      ]
+    },
+    {
+      "header": 18668,
+      "end": 18720,
+      "data": 18684,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        },
+        {
+          "ram": 3,
+          "deltas": "0806070606db",
+          "internal_values": [
+            4,
+            12,
+            18,
+            25,
+            31,
+            37
+          ]
+        }
+      ],
+      "values": [
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        52,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26,
+        26
+      ]
+    },
+    {
+      "header": 18720,
+      "end": 18777,
+      "data": 18737,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050f0d1411171976",
+          "internal_values": [
+            20,
+            25,
+            40,
+            53,
+            73,
+            90,
+            113,
+            138
+          ]
+        },
+        {
+          "ram": 55,
+          "deltas": "2f1f282462",
+          "internal_values": [
+            4,
+            51,
+            82,
+            122,
+            158
+          ]
+        }
+      ],
+      "values": [
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        124,
+        121,
+        141,
+        133,
+        128,
+        125,
+        122
+      ]
+    },
+    {
+      "header": 18777,
+      "end": 18783,
+      "data": 18781,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 163,
+          "deltas": "cd33",
+          "internal_values": [
+            0,
+            205
+          ]
+        }
+      ],
+      "values": [
+        128,
+        128
+      ]
+    },
+    {
+      "header": 18783,
+      "end": 18797,
+      "data": 18791,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        115,
+        104,
+        77,
+        49,
+        26,
+        0
+      ]
+    },
+    {
+      "header": 18797,
+      "end": 18816,
+      "data": 18807,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1919b5",
+          "internal_values": [
+            25,
+            50,
+            75
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "22328a",
+          "internal_values": [
+            34,
+            68,
+            118
+          ]
+        }
+      ],
+      "values": [
+        128,
+        205,
+        254,
+        128,
+        218,
+        230,
+        128,
+        253,
+        218
+      ]
+    },
+    {
+      "header": 18816,
+      "end": 18830,
+      "data": 18824,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        128,
+        102,
+        64,
+        38,
+        18,
+        0
+      ]
+    },
+    {
+      "header": 18830,
+      "end": 18836,
+      "data": 18834,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 64,
+          "deltas": "469c",
+          "internal_values": [
+            30,
+            100
+          ]
+        }
+      ],
+      "values": [
+        77,
+        255
+      ]
+    },
+    {
+      "header": 18836,
+      "end": 18850,
+      "data": 18844,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        254,
+        205,
+        128,
+        77,
+        38,
+        0
+      ]
+    },
+    {
+      "header": 18850,
+      "end": 18860,
+      "data": 18856,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "310e0a19",
+          "internal_values": [
+            158,
+            207,
+            221,
+            231
+          ]
+        }
+      ],
+      "values": [
+        16,
+        16,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 18860,
+      "end": 18870,
+      "data": 18866,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 157,
+          "deltas": "0c0804dc",
+          "internal_values": [
+            12,
+            24,
+            32,
+            36
+          ]
+        }
+      ],
+      "values": [
+        0,
+        64,
+        64,
+        0
+      ]
+    },
+    {
+      "header": 18870,
+      "end": 18893,
+      "data": 18881,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050708e0",
+          "internal_values": [
+            12,
+            17,
+            24,
+            32
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0e27b0",
+          "internal_values": [
+            27,
+            41,
+            80
+          ]
+        }
+      ],
+      "values": [
+        128,
+        128,
+        128,
+        127,
+        127,
+        128,
+        127,
+        127,
+        128,
+        130,
+        128,
+        128
+      ]
+    },
+    {
+      "header": 18893,
+      "end": 18927,
+      "data": 18911,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a030a0a070803070c0d041217095e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            38,
+            48,
+            58,
+            65,
+            73,
+            76,
+            83,
+            95,
+            108,
+            112,
+            130,
+            153,
+            162
+          ]
+        }
+      ],
+      "values": [
+        107,
+        102,
+        106,
+        128,
+        140,
+        138,
+        115,
+        113,
+        115,
+        125,
+        131,
+        132,
+        140,
+        136,
+        132,
+        128
+      ]
+    },
+    {
+      "header": 18927,
+      "end": 18941,
+      "data": 18935,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        64,
+        40,
+        24,
+        15,
+        10,
+        8
+      ]
+    },
+    {
+      "header": 18941,
+      "end": 18947,
+      "data": 18945,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 90,
+          "deltas": "44b8",
+          "internal_values": [
+            4,
+            72
+          ]
+        }
+      ],
+      "values": [
+        254,
+        128
+      ]
+    },
+    {
+      "header": 18947,
+      "end": 18953,
+      "data": 18951,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0cec",
+          "internal_values": [
+            8,
+            20
+          ]
+        }
+      ],
+      "values": [
+        255,
+        128
+      ]
+    },
+    {
+      "header": 18953,
+      "end": 18963,
+      "data": 18959,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "200e0a19",
+          "internal_values": [
+            175,
+            207,
+            221,
+            231
+          ]
+        }
+      ],
+      "values": [
+        29,
+        29,
+        29,
+        29
+      ]
+    },
+    {
+      "header": 18963,
+      "end": 18973,
+      "data": 18969,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 157,
+          "deltas": "100804dc",
+          "internal_values": [
+            8,
+            24,
+            32,
+            36
+          ]
+        }
+      ],
+      "values": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "header": 18973,
+      "end": 19007,
+      "data": 18991,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "05050505070d0505050a080a110f1b5e",
+          "internal_values": [
+            20,
+            25,
+            30,
+            35,
+            40,
+            47,
+            60,
+            65,
+            70,
+            75,
+            85,
+            93,
+            103,
+            120,
+            135,
+            162
+          ]
+        }
+      ],
+      "values": [
+        103,
+        102,
+        95,
+        97,
+        118,
+        131,
+        134,
+        124,
+        119,
+        117,
+        128,
+        130,
+        131,
+        136,
+        134,
+        129
+      ]
+    },
+    {
+      "header": 19007,
+      "end": 19015,
+      "data": 19012,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 58,
+          "deltas": "3f3f33",
+          "internal_values": [
+            79,
+            142,
+            205
+          ]
+        }
+      ],
+      "values": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "header": 19015,
+      "end": 19025,
+      "data": 19021,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0a05469c",
+          "internal_values": [
+            15,
+            25,
+            30,
+            100
+          ]
+        }
+      ],
+      "values": [
+        144,
+        152,
+        140,
+        152
+      ]
+    },
+    {
+      "header": 19025,
+      "end": 19048,
+      "data": 19036,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19329c",
+          "internal_values": [
+            25,
+            50,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "14284070",
+          "internal_values": [
+            20,
+            40,
+            80,
+            144
+          ]
+        }
+      ],
+      "values": [
+        51,
+        102,
+        160,
+        176,
+        56,
+        128,
+        160,
+        208,
+        32,
+        64,
+        77,
+        77
+      ]
+    },
+    {
+      "header": 19048,
+      "end": 19062,
+      "data": 19056,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        165,
+        123,
+        106,
+        115,
+        96,
+        7
+      ]
+    },
+    {
+      "header": 19062,
+      "end": 19119,
+      "data": 19079,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050f0d1411171976",
+          "internal_values": [
+            20,
+            25,
+            40,
+            53,
+            73,
+            90,
+            113,
+            138
+          ]
+        },
+        {
+          "ram": 55,
+          "deltas": "2f1f282462",
+          "internal_values": [
+            4,
+            51,
+            82,
+            122,
+            158
+          ]
+        }
+      ],
+      "values": [
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        124,
+        121,
+        141,
+        133,
+        128,
+        125,
+        122
+      ]
+    },
+    {
+      "header": 19119,
+      "end": 19133,
+      "data": 19127,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        115,
+        104,
+        70,
+        16,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 19133,
+      "end": 19152,
+      "data": 19143,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1919b5",
+          "internal_values": [
+            25,
+            50,
+            75
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "22328a",
+          "internal_values": [
+            34,
+            68,
+            118
+          ]
+        }
+      ],
+      "values": [
+        128,
+        205,
+        254,
+        128,
+        179,
+        230,
+        128,
+        153,
+        179
+      ]
+    },
+    {
+      "header": 19152,
+      "end": 19166,
+      "data": 19160,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        128,
+        102,
+        64,
+        38,
+        18,
+        0
+      ]
+    },
+    {
+      "header": 19166,
+      "end": 19172,
+      "data": 19170,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 64,
+          "deltas": "469c",
+          "internal_values": [
+            30,
+            100
+          ]
+        }
+      ],
+      "values": [
+        77,
+        255
+      ]
+    },
+    {
+      "header": 19172,
+      "end": 19186,
+      "data": 19180,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        254,
+        205,
+        128,
+        77,
+        38,
+        0
+      ]
+    },
+    {
+      "header": 19186,
+      "end": 19209,
+      "data": 19197,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050708e0",
+          "internal_values": [
+            12,
+            17,
+            24,
+            32
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0e21c4",
+          "internal_values": [
+            13,
+            27,
+            60
+          ]
+        }
+      ],
+      "values": [
+        114,
+        128,
+        128,
+        112,
+        126,
+        128,
+        112,
+        126,
+        128,
+        112,
+        128,
+        128
+      ]
+    },
+    {
+      "header": 19209,
+      "end": 19243,
+      "data": 19227,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a0508070a0805050c0d041217095e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            48,
+            55,
+            65,
+            73,
+            78,
+            83,
+            95,
+            108,
+            112,
+            130,
+            153,
+            162
+          ]
+        }
+      ],
+      "values": [
+        111,
+        106,
+        105,
+        127,
+        135,
+        138,
+        117,
+        108,
+        116,
+        126,
+        129,
+        130,
+        141,
+        132,
+        137,
+        129
+      ]
+    },
+    {
+      "header": 19243,
+      "end": 19350,
+      "data": 19266,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        118,
+        122,
+        128,
+        133,
+        133,
+        121,
+        109,
+        121,
+        124,
+        130,
+        133,
+        135,
+        119,
+        106,
+        116,
+        120,
+        122,
+        130,
+        128,
+        119,
+        101,
+        110,
+        117,
+        120,
+        125,
+        130,
+        128,
+        116,
+        105,
+        114,
+        117,
+        120,
+        128,
+        134,
+        134,
+        100,
+        100,
+        101,
+        105,
+        112,
+        117,
+        125,
+        100,
+        97,
+        102,
+        103,
+        108,
+        116,
+        111,
+        97,
+        98,
+        99,
+        104,
+        109,
+        118,
+        119,
+        94,
+        94,
+        100,
+        105,
+        112,
+        125,
+        129,
+        95,
+        96,
+        97,
+        102,
+        113,
+        129,
+        133,
+        96,
+        97,
+        97,
+        102,
+        112,
+        128,
+        130,
+        96,
+        97,
+        97,
+        102,
+        112,
+        124,
+        123
+      ]
+    },
+    {
+      "header": 19350,
+      "end": 19444,
+      "data": 19372,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        119,
+        120,
+        121,
+        119,
+        120,
+        120,
+        122,
+        122,
+        116,
+        120,
+        120,
+        120,
+        115,
+        115,
+        110,
+        115,
+        115,
+        109,
+        109,
+        109,
+        105,
+        115,
+        109,
+        109,
+        104,
+        104,
+        100,
+        115,
+        109,
+        104,
+        100,
+        100,
+        100,
+        109,
+        104,
+        104,
+        100,
+        100,
+        97,
+        104,
+        100,
+        98,
+        98,
+        98,
+        94,
+        102,
+        98,
+        94,
+        94,
+        94,
+        95,
+        95,
+        95,
+        95,
+        95,
+        95,
+        96,
+        95,
+        95,
+        95,
+        95,
+        95,
+        96
+      ]
+    },
+    {
+      "header": 19444,
+      "end": 19551,
+      "data": 19467,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 19551,
+      "end": 19645,
+      "data": 19573,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 19645,
+      "end": 19752,
+      "data": 19668,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        121,
+        121,
+        123,
+        118,
+        112,
+        110,
+        111,
+        121,
+        121,
+        118,
+        118,
+        116,
+        104,
+        105,
+        111,
+        112,
+        112,
+        117,
+        110,
+        103,
+        102,
+        106,
+        110,
+        109,
+        108,
+        111,
+        112,
+        117,
+        105,
+        105,
+        108,
+        116,
+        125,
+        134,
+        134,
+        105,
+        105,
+        106,
+        116,
+        121,
+        122,
+        122,
+        104,
+        105,
+        108,
+        113,
+        119,
+        124,
+        124,
+        104,
+        105,
+        108,
+        112,
+        121,
+        123,
+        129,
+        105,
+        105,
+        105,
+        113,
+        119,
+        129,
+        135,
+        108,
+        109,
+        108,
+        116,
+        119,
+        125,
+        135,
+        106,
+        108,
+        109,
+        113,
+        119,
+        125,
+        131,
+        106,
+        108,
+        106,
+        115,
+        118,
+        126,
+        134
+      ]
+    },
+    {
+      "header": 19752,
+      "end": 19846,
+      "data": 19774,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        126,
+        126,
+        123,
+        119,
+        119,
+        121,
+        119,
+        119,
+        121,
+        119,
+        119,
+        121,
+        119,
+        116,
+        112,
+        116,
+        115,
+        111,
+        113,
+        111,
+        108,
+        110,
+        108,
+        106,
+        110,
+        109,
+        106,
+        106,
+        105,
+        105,
+        110,
+        108,
+        105,
+        106,
+        106,
+        105,
+        109,
+        105,
+        102,
+        102,
+        103,
+        104,
+        109,
+        108,
+        105,
+        106,
+        103,
+        104,
+        110,
+        104,
+        104,
+        106,
+        106,
+        105,
+        110,
+        110,
+        108,
+        106,
+        106,
+        108,
+        112,
+        108,
+        105,
+        106,
+        108,
+        106,
+        104,
+        104,
+        104,
+        102,
+        104,
+        106
+      ]
+    },
+    {
+      "header": 19846,
+      "end": 19953,
+      "data": 19869,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 19953,
+      "end": 20047,
+      "data": 19975,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 20047,
+      "end": 20154,
+      "data": 20070,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        121,
+        122,
+        128,
+        133,
+        133,
+        121,
+        109,
+        123,
+        124,
+        130,
+        133,
+        135,
+        119,
+        106,
+        122,
+        123,
+        128,
+        130,
+        128,
+        119,
+        101,
+        123,
+        124,
+        124,
+        125,
+        130,
+        128,
+        116,
+        123,
+        125,
+        123,
+        125,
+        125,
+        123,
+        122,
+        124,
+        125,
+        128,
+        125,
+        128,
+        119,
+        128,
+        125,
+        125,
+        127,
+        128,
+        127,
+        116,
+        111,
+        125,
+        127,
+        127,
+        128,
+        129,
+        122,
+        125,
+        128,
+        128,
+        129,
+        129,
+        129,
+        127,
+        129,
+        127,
+        128,
+        130,
+        131,
+        132,
+        131,
+        133,
+        128,
+        129,
+        130,
+        130,
+        130,
+        128,
+        132,
+        129,
+        130,
+        130,
+        129,
+        129,
+        128,
+        128
+      ]
+    },
+    {
+      "header": 20154,
+      "end": 20248,
+      "data": 20176,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "110a0a0a0abd",
+          "internal_values": [
+            10,
+            27,
+            37,
+            47,
+            57,
+            67
+          ]
+        }
+      ],
+      "values": [
+        101,
+        119,
+        119,
+        120,
+        120,
+        121,
+        101,
+        119,
+        120,
+        121,
+        122,
+        123,
+        101,
+        121,
+        122,
+        122,
+        122,
+        122,
+        101,
+        121,
+        122,
+        123,
+        122,
+        123,
+        101,
+        122,
+        122,
+        123,
+        122,
+        123,
+        101,
+        123,
+        125,
+        125,
+        123,
+        124,
+        101,
+        123,
+        124,
+        124,
+        124,
+        125,
+        122,
+        122,
+        123,
+        124,
+        125,
+        125,
+        122,
+        124,
+        124,
+        124,
+        126,
+        128,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        122,
+        123,
+        124,
+        125,
+        127,
+        128,
+        123,
+        123,
+        124,
+        125,
+        128,
+        129
+      ]
+    },
+    {
+      "header": 20248,
+      "end": 20262,
+      "data": 20256,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        100,
+        75,
+        50,
+        40,
+        35,
+        27
+      ]
+    },
+    {
+      "header": 20262,
+      "end": 20272,
+      "data": 20268,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 159,
+          "deltas": "09120cd0",
+          "internal_values": [
+            9,
+            18,
+            36,
+            48
+          ]
+        }
+      ],
+      "values": [
+        0,
+        5,
+        10,
+        25
+      ]
+    },
+    {
+      "header": 20272,
+      "end": 20282,
+      "data": 20278,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19193283",
+          "internal_values": [
+            25,
+            50,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "header": 20282,
+      "end": 20292,
+      "data": 20288,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19193283",
+          "internal_values": [
+            25,
+            50,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        20,
+        10,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 20292,
+      "end": 20306,
+      "data": 20300,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        100,
+        75,
+        60,
+        60,
+        50,
+        27
+      ]
+    },
+    {
+      "header": 20306,
+      "end": 20316,
+      "data": 20312,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19193283",
+          "internal_values": [
+            25,
+            50,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "header": 20316,
+      "end": 20326,
+      "data": 20322,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19193283",
+          "internal_values": [
+            25,
+            50,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        20,
+        10,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 20326,
+      "end": 20336,
+      "data": 20332,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "2e26326a",
+          "internal_values": [
+            16,
+            62,
+            100,
+            150
+          ]
+        }
+      ],
+      "values": [
+        30,
+        31,
+        32,
+        34
+      ]
+    },
+    {
+      "header": 20336,
+      "end": 20342,
+      "data": 20340,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "08f0",
+          "internal_values": [
+            8,
+            16
+          ]
+        }
+      ],
+      "values": [
+        50,
+        58
+      ]
+    },
+    {
+      "header": 20342,
+      "end": 20348,
+      "data": 20346,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "7b51",
+          "internal_values": [
+            52,
+            175
+          ]
+        }
+      ],
+      "values": [
+        30,
+        13
+      ]
+    },
+    {
+      "header": 20348,
+      "end": 20358,
+      "data": 20354,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "14141492",
+          "internal_values": [
+            50,
+            70,
+            90,
+            110
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        30,
+        42
+      ]
+    },
+    {
+      "header": 20358,
+      "end": 20366,
+      "data": 20363,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "305b71",
+          "internal_values": [
+            4,
+            52,
+            143
+          ]
+        }
+      ],
+      "values": [
+        43,
+        32,
+        30
+      ]
+    },
+    {
+      "header": 20366,
+      "end": 20405,
+      "data": 20381,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "04020707080b1fae",
+          "internal_values": [
+            12,
+            16,
+            18,
+            25,
+            32,
+            40,
+            51,
+            82
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "1111bc",
+          "internal_values": [
+            34,
+            51,
+            68
+          ]
+        }
+      ],
+      "values": [
+        53,
+        50,
+        38,
+        50,
+        47,
+        38,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        57,
+        50,
+        45,
+        57,
+        50,
+        45
+      ]
+    },
+    {
+      "header": 20405,
+      "end": 20439,
+      "data": 20423,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1005110c080905080604040b0f0f0a5b",
+          "internal_values": [
+            20,
+            36,
+            41,
+            58,
+            70,
+            78,
+            87,
+            92,
+            100,
+            106,
+            110,
+            114,
+            125,
+            140,
+            155,
+            165
+          ]
+        }
+      ],
+      "values": [
+        27,
+        43,
+        43,
+        52,
+        52,
+        59,
+        61,
+        56,
+        57,
+        52,
+        51,
+        54,
+        55,
+        53,
+        53,
+        56
+      ]
+    },
+    {
+      "header": 20439,
+      "end": 20449,
+      "data": 20445,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "10362d52",
+          "internal_values": [
+            59,
+            75,
+            129,
+            174
+          ]
+        }
+      ],
+      "values": [
+        32,
+        30,
+        30,
+        30
+      ]
+    },
+    {
+      "header": 20449,
+      "end": 20463,
+      "data": 20457,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "1f0f08270d62",
+          "internal_values": [
+            52,
+            83,
+            98,
+            106,
+            145,
+            158
+          ]
+        }
+      ],
+      "values": [
+        36,
+        36,
+        36,
+        18,
+        18,
+        30
+      ]
+    },
+    {
+      "header": 20463,
+      "end": 20486,
+      "data": 20474,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "121d19",
+          "internal_values": [
+            184,
+            202,
+            231
+          ]
+        },
+        {
+          "ram": 55,
+          "deltas": "1010177f",
+          "internal_values": [
+            74,
+            90,
+            106,
+            129
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        1,
+        9,
+        0,
+        0,
+        4,
+        12,
+        0,
+        4,
+        9,
+        17
+      ]
+    },
+    {
+      "header": 20486,
+      "end": 20593,
+      "data": 20509,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0909090b0c0f85",
+          "internal_values": [
+            58,
+            67,
+            76,
+            85,
+            96,
+            108,
+            123
+          ]
+        }
+      ],
+      "values": [
+        90,
+        55,
+        76,
+        80,
+        121,
+        80,
+        80,
+        90,
+        39,
+        80,
+        96,
+        96,
+        112,
+        96,
+        0,
+        41,
+        90,
+        96,
+        80,
+        80,
+        80,
+        0,
+        41,
+        112,
+        80,
+        80,
+        80,
+        103,
+        0,
+        0,
+        48,
+        128,
+        128,
+        120,
+        119,
+        0,
+        0,
+        39,
+        128,
+        128,
+        128,
+        103,
+        0,
+        0,
+        0,
+        51,
+        169,
+        169,
+        160,
+        0,
+        0,
+        0,
+        0,
+        32,
+        48,
+        80,
+        0,
+        0,
+        0,
+        48,
+        96,
+        112,
+        80,
+        0,
+        0,
+        0,
+        128,
+        128,
+        119,
+        128,
+        0,
+        0,
+        0,
+        64,
+        112,
+        160,
+        112,
+        0,
+        0,
+        0,
+        128,
+        144,
+        160,
+        128
+      ]
+    },
+    {
+      "header": 20593,
+      "end": 20627,
+      "data": 20611,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1005110c080905080604040b0f0f0a5b",
+          "internal_values": [
+            20,
+            36,
+            41,
+            58,
+            70,
+            78,
+            87,
+            92,
+            100,
+            106,
+            110,
+            114,
+            125,
+            140,
+            155,
+            165
+          ]
+        }
+      ],
+      "values": [
+        80,
+        80,
+        96,
+        96,
+        128,
+        112,
+        96,
+        80,
+        128,
+        80,
+        80,
+        128,
+        112,
+        112,
+        112,
+        96
+      ]
+    },
+    {
+      "header": 20627,
+      "end": 20672,
+      "data": 20642,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "080c0d0c0c5e",
+          "internal_values": [
+            105,
+            113,
+            125,
+            138,
+            150,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "140c0f0e77",
+          "internal_values": [
+            76,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "header": 20672,
+      "end": 20682,
+      "data": 20678,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "02060aec",
+          "internal_values": [
+            2,
+            4,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        33,
+        36
+      ]
+    },
+    {
+      "header": 20682,
+      "end": 20692,
+      "data": 20688,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "02060aec",
+          "internal_values": [
+            2,
+            4,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        28,
+        25
+      ]
+    },
+    {
+      "header": 20692,
+      "end": 20799,
+      "data": 20715,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "03040408050e101a18192d51",
+          "internal_values": [
+            1,
+            4,
+            8,
+            12,
+            20,
+            25,
+            39,
+            55,
+            81,
+            105,
+            130,
+            175
+          ]
+        },
+        {
+          "ram": 54,
+          "deltas": "1d1e1d1e1d070e",
+          "internal_values": [
+            88,
+            117,
+            147,
+            176,
+            206,
+            235,
+            242
+          ]
+        }
+      ],
+      "values": [
+        50,
+        24,
+        15,
+        11,
+        9,
+        8,
+        6,
+        55,
+        27,
+        16,
+        12,
+        10,
+        8,
+        6,
+        68,
+        33,
+        20,
+        15,
+        12,
+        10,
+        8,
+        85,
+        41,
+        26,
+        19,
+        16,
+        13,
+        10,
+        126,
+        61,
+        38,
+        28,
+        23,
+        19,
+        15,
+        152,
+        74,
+        46,
+        34,
+        28,
+        23,
+        18,
+        223,
+        111,
+        69,
+        51,
+        42,
+        35,
+        27,
+        223,
+        153,
+        95,
+        70,
+        58,
+        48,
+        37,
+        223,
+        223,
+        140,
+        104,
+        86,
+        70,
+        54,
+        223,
+        223,
+        181,
+        134,
+        111,
+        91,
+        71,
+        223,
+        223,
+        223,
+        166,
+        137,
+        112,
+        87,
+        223,
+        223,
+        223,
+        223,
+        185,
+        151,
+        118
+      ]
+    },
+    {
+      "header": 20799,
+      "end": 20809,
+      "data": 20805,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0a120fa3",
+          "internal_values": [
+            50,
+            60,
+            78,
+            93
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    {
+      "header": 20809,
+      "end": 20819,
+      "data": 20815,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1b1c1b79",
+          "internal_values": [
+            53,
+            80,
+            108,
+            135
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    {
+      "header": 20819,
+      "end": 20853,
+      "data": 20837,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a0805110a20080805070a0507055e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            43,
+            48,
+            65,
+            75,
+            107,
+            115,
+            123,
+            128,
+            135,
+            145,
+            150,
+            157,
+            162
+          ]
+        }
+      ],
+      "values": [
+        32,
+        34,
+        45,
+        47,
+        52,
+        57,
+        59,
+        58,
+        58,
+        61,
+        59,
+        57,
+        58,
+        60,
+        62,
+        63
+      ]
+    },
+    {
+      "header": 20853,
+      "end": 20861,
+      "data": 20858,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "305b71",
+          "internal_values": [
+            4,
+            52,
+            143
+          ]
+        }
+      ],
+      "values": [
+        43,
+        32,
+        30
+      ]
+    },
+    {
+      "header": 20861,
+      "end": 20900,
+      "data": 20876,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "04020707080b1fae",
+          "internal_values": [
+            12,
+            16,
+            18,
+            25,
+            32,
+            40,
+            51,
+            82
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "1111bc",
+          "internal_values": [
+            34,
+            51,
+            68
+          ]
+        }
+      ],
+      "values": [
+        53,
+        50,
+        38,
+        50,
+        47,
+        38,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        57,
+        50,
+        45,
+        57,
+        50,
+        45
+      ]
+    },
+    {
+      "header": 20900,
+      "end": 20934,
+      "data": 20918,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1005110c080905080604040b0f0f0a5b",
+          "internal_values": [
+            20,
+            36,
+            41,
+            58,
+            70,
+            78,
+            87,
+            92,
+            100,
+            106,
+            110,
+            114,
+            125,
+            140,
+            155,
+            165
+          ]
+        }
+      ],
+      "values": [
+        27,
+        43,
+        43,
+        52,
+        52,
+        58,
+        60,
+        56,
+        57,
+        51,
+        51,
+        55,
+        55,
+        53,
+        54,
+        56
+      ]
+    },
+    {
+      "header": 20934,
+      "end": 20957,
+      "data": 20945,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "121d19",
+          "internal_values": [
+            184,
+            202,
+            231
+          ]
+        },
+        {
+          "ram": 55,
+          "deltas": "1010177f",
+          "internal_values": [
+            74,
+            90,
+            106,
+            129
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        1,
+        9,
+        0,
+        0,
+        4,
+        12,
+        0,
+        4,
+        9,
+        17
+      ]
+    },
+    {
+      "header": 20957,
+      "end": 21064,
+      "data": 20980,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0909090b0c0f85",
+          "internal_values": [
+            58,
+            67,
+            76,
+            85,
+            96,
+            108,
+            123
+          ]
+        }
+      ],
+      "values": [
+        90,
+        54,
+        74,
+        113,
+        121,
+        75,
+        81,
+        90,
+        21,
+        44,
+        49,
+        70,
+        77,
+        81,
+        0,
+        39,
+        64,
+        64,
+        63,
+        98,
+        80,
+        0,
+        26,
+        32,
+        44,
+        66,
+        67,
+        81,
+        0,
+        0,
+        87,
+        123,
+        123,
+        96,
+        96,
+        0,
+        0,
+        128,
+        176,
+        161,
+        113,
+        124,
+        0,
+        0,
+        0,
+        128,
+        182,
+        208,
+        174,
+        0,
+        0,
+        0,
+        49,
+        81,
+        151,
+        128,
+        0,
+        0,
+        64,
+        113,
+        123,
+        82,
+        128,
+        0,
+        113,
+        192,
+        192,
+        177,
+        145,
+        128,
+        0,
+        39,
+        114,
+        177,
+        128,
+        128,
+        128,
+        0,
+        0,
+        95,
+        151,
+        145,
+        145,
+        113
+      ]
+    },
+    {
+      "header": 21064,
+      "end": 21098,
+      "data": 21082,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1005110c080905080604040b0f0f0a5b",
+          "internal_values": [
+            20,
+            36,
+            41,
+            58,
+            70,
+            78,
+            87,
+            92,
+            100,
+            106,
+            110,
+            114,
+            125,
+            140,
+            155,
+            165
+          ]
+        }
+      ],
+      "values": [
+        96,
+        78,
+        81,
+        103,
+        124,
+        128,
+        145,
+        113,
+        151,
+        96,
+        96,
+        140,
+        113,
+        113,
+        113,
+        113
+      ]
+    },
+    {
+      "header": 21098,
+      "end": 21143,
+      "data": 21113,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "080c0d0c0c5e",
+          "internal_values": [
+            105,
+            113,
+            125,
+            138,
+            150,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "140c0f0e77",
+          "internal_values": [
+            76,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        16,
+        16,
+        16,
+        14,
+        13,
+        16,
+        16,
+        14,
+        11,
+        9,
+        16,
+        15,
+        12,
+        8,
+        7,
+        16,
+        13,
+        8,
+        2,
+        4,
+        15,
+        10,
+        2,
+        0,
+        1,
+        16,
+        9,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 21143,
+      "end": 21153,
+      "data": 21149,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "02060aec",
+          "internal_values": [
+            2,
+            4,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        33,
+        36
+      ]
+    },
+    {
+      "header": 21153,
+      "end": 21163,
+      "data": 21159,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "02060aec",
+          "internal_values": [
+            2,
+            4,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        28,
+        25
+      ]
+    },
+    {
+      "header": 21163,
+      "end": 21270,
+      "data": 21186,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        46,
+        38,
+        32,
+        28,
+        26,
+        26,
+        26,
+        48,
+        46,
+        39,
+        35,
+        33,
+        32,
+        31,
+        58,
+        53,
+        48,
+        44,
+        42,
+        41,
+        41,
+        61,
+        56,
+        51,
+        45,
+        42,
+        41,
+        40,
+        66,
+        66,
+        64,
+        56,
+        51,
+        48,
+        48,
+        76,
+        74,
+        72,
+        64,
+        58,
+        52,
+        52,
+        84,
+        82,
+        78,
+        73,
+        66,
+        57,
+        54,
+        86,
+        84,
+        81,
+        73,
+        67,
+        58,
+        56,
+        92,
+        89,
+        83,
+        72,
+        65,
+        54,
+        52,
+        93,
+        88,
+        82,
+        71,
+        64,
+        53,
+        51,
+        89,
+        88,
+        84,
+        74,
+        66,
+        55,
+        53,
+        89,
+        88,
+        84,
+        74,
+        68,
+        56,
+        54
+      ]
+    },
+    {
+      "header": 21270,
+      "end": 21364,
+      "data": 21292,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        48,
+        48,
+        48,
+        48,
+        48,
+        46,
+        48,
+        50,
+        50,
+        52,
+        52,
+        48,
+        56,
+        57,
+        59,
+        60,
+        60,
+        58,
+        57,
+        58,
+        60,
+        61,
+        61,
+        61,
+        63,
+        63,
+        65,
+        65,
+        66,
+        66,
+        79,
+        79,
+        76,
+        76,
+        76,
+        76,
+        90,
+        88,
+        88,
+        88,
+        87,
+        84,
+        90,
+        88,
+        88,
+        88,
+        86,
+        86,
+        94,
+        92,
+        92,
+        92,
+        92,
+        92,
+        94,
+        94,
+        94,
+        94,
+        94,
+        93,
+        95,
+        94,
+        94,
+        94,
+        92,
+        89,
+        95,
+        94,
+        94,
+        94,
+        92,
+        89
+      ]
+    },
+    {
+      "header": 21364,
+      "end": 21471,
+      "data": 21387,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        47,
+        41,
+        35,
+        32,
+        30,
+        30,
+        29,
+        50,
+        47,
+        43,
+        38,
+        35,
+        34,
+        33,
+        62,
+        60,
+        55,
+        50,
+        46,
+        44,
+        44,
+        65,
+        62,
+        58,
+        52,
+        49,
+        45,
+        45,
+        73,
+        70,
+        69,
+        64,
+        59,
+        54,
+        54,
+        73,
+        72,
+        76,
+        67,
+        63,
+        58,
+        56,
+        80,
+        76,
+        75,
+        71,
+        63,
+        59,
+        57,
+        81,
+        78,
+        75,
+        71,
+        66,
+        58,
+        57,
+        84,
+        83,
+        79,
+        77,
+        69,
+        61,
+        57,
+        90,
+        89,
+        84,
+        77,
+        69,
+        63,
+        58,
+        94,
+        90,
+        85,
+        75,
+        70,
+        62,
+        58,
+        90,
+        86,
+        83,
+        77,
+        73,
+        66,
+        63
+      ]
+    },
+    {
+      "header": 21471,
+      "end": 21565,
+      "data": 21493,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        54,
+        54,
+        54,
+        54,
+        52,
+        47,
+        54,
+        64,
+        62,
+        60,
+        59,
+        50,
+        59,
+        66,
+        66,
+        64,
+        63,
+        62,
+        75,
+        73,
+        70,
+        69,
+        67,
+        65,
+        86,
+        82,
+        81,
+        80,
+        78,
+        73,
+        87,
+        87,
+        82,
+        80,
+        79,
+        73,
+        84,
+        83,
+        81,
+        81,
+        81,
+        80,
+        89,
+        89,
+        86,
+        85,
+        84,
+        81,
+        93,
+        93,
+        93,
+        89,
+        88,
+        84,
+        96,
+        96,
+        96,
+        95,
+        92,
+        90,
+        96,
+        96,
+        96,
+        96,
+        96,
+        94,
+        96,
+        96,
+        96,
+        95,
+        92,
+        90
+      ]
+    },
+    {
+      "header": 21565,
+      "end": 21672,
+      "data": 21588,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        54,
+        46,
+        42,
+        36,
+        34,
+        30,
+        29,
+        57,
+        51,
+        46,
+        42,
+        38,
+        37,
+        34,
+        65,
+        62,
+        59,
+        52,
+        47,
+        44,
+        43,
+        71,
+        67,
+        61,
+        56,
+        51,
+        45,
+        44,
+        79,
+        74,
+        72,
+        65,
+        56,
+        54,
+        52,
+        80,
+        77,
+        77,
+        67,
+        59,
+        57,
+        55,
+        80,
+        79,
+        73,
+        69,
+        63,
+        58,
+        56,
+        80,
+        76,
+        77,
+        69,
+        65,
+        60,
+        57,
+        82,
+        80,
+        80,
+        72,
+        66,
+        60,
+        57,
+        91,
+        88,
+        80,
+        75,
+        69,
+        62,
+        59,
+        95,
+        93,
+        83,
+        76,
+        69,
+        63,
+        58,
+        90,
+        86,
+        83,
+        77,
+        71,
+        64,
+        61
+      ]
+    },
+    {
+      "header": 21672,
+      "end": 21766,
+      "data": 21694,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        49,
+        63,
+        59,
+        58,
+        56,
+        54,
+        49,
+        68,
+        64,
+        61,
+        60,
+        57,
+        59,
+        72,
+        72,
+        68,
+        67,
+        65,
+        79,
+        79,
+        77,
+        75,
+        75,
+        71,
+        88,
+        88,
+        87,
+        86,
+        81,
+        79,
+        92,
+        92,
+        91,
+        87,
+        84,
+        80,
+        88,
+        86,
+        85,
+        84,
+        82,
+        80,
+        83,
+        82,
+        82,
+        81,
+        81,
+        80,
+        89,
+        89,
+        88,
+        85,
+        85,
+        82,
+        96,
+        96,
+        96,
+        96,
+        93,
+        91,
+        99,
+        99,
+        98,
+        98,
+        97,
+        95,
+        97,
+        97,
+        96,
+        95,
+        92,
+        90
+      ]
+    },
+    {
+      "header": 21766,
+      "end": 21873,
+      "data": 21789,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        54,
+        46,
+        42,
+        36,
+        34,
+        30,
+        29,
+        57,
+        51,
+        46,
+        42,
+        38,
+        37,
+        34,
+        65,
+        62,
+        59,
+        52,
+        47,
+        44,
+        43,
+        71,
+        67,
+        61,
+        56,
+        51,
+        45,
+        44,
+        79,
+        74,
+        72,
+        65,
+        56,
+        54,
+        52,
+        80,
+        77,
+        77,
+        67,
+        59,
+        57,
+        55,
+        80,
+        79,
+        73,
+        69,
+        63,
+        58,
+        56,
+        80,
+        76,
+        77,
+        69,
+        65,
+        60,
+        57,
+        82,
+        80,
+        80,
+        72,
+        66,
+        60,
+        57,
+        91,
+        88,
+        80,
+        75,
+        69,
+        62,
+        59,
+        95,
+        93,
+        83,
+        76,
+        69,
+        63,
+        58,
+        90,
+        86,
+        83,
+        77,
+        71,
+        64,
+        61
+      ]
+    },
+    {
+      "header": 21873,
+      "end": 21967,
+      "data": 21895,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a1b0f080c14115e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            90,
+            105,
+            113,
+            125,
+            145,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        49,
+        63,
+        59,
+        58,
+        56,
+        54,
+        49,
+        68,
+        64,
+        61,
+        60,
+        57,
+        59,
+        72,
+        72,
+        68,
+        67,
+        65,
+        79,
+        79,
+        77,
+        75,
+        75,
+        71,
+        88,
+        88,
+        87,
+        86,
+        81,
+        79,
+        92,
+        92,
+        91,
+        87,
+        84,
+        80,
+        88,
+        86,
+        85,
+        84,
+        82,
+        80,
+        83,
+        82,
+        82,
+        81,
+        81,
+        80,
+        89,
+        89,
+        88,
+        85,
+        85,
+        82,
+        96,
+        96,
+        96,
+        96,
+        93,
+        91,
+        99,
+        99,
+        98,
+        98,
+        97,
+        95,
+        97,
+        97,
+        96,
+        95,
+        92,
+        90
+      ]
+    },
+    {
+      "header": 21967,
+      "end": 22074,
+      "data": 21990,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "09090b0c0f0e77",
+          "internal_values": [
+            67,
+            76,
+            85,
+            96,
+            108,
+            123,
+            137
+          ]
+        }
+      ],
+      "values": [
+        46,
+        40,
+        34,
+        28,
+        26,
+        26,
+        26,
+        50,
+        45,
+        40,
+        35,
+        34,
+        31,
+        31,
+        58,
+        53,
+        48,
+        45,
+        43,
+        41,
+        41,
+        58,
+        52,
+        48,
+        44,
+        41,
+        41,
+        40,
+        59,
+        62,
+        61,
+        55,
+        49,
+        49,
+        49,
+        61,
+        65,
+        63,
+        59,
+        54,
+        52,
+        52,
+        67,
+        68,
+        67,
+        62,
+        58,
+        56,
+        54,
+        67,
+        66,
+        65,
+        62,
+        59,
+        56,
+        56,
+        69,
+        66,
+        62,
+        60,
+        56,
+        53,
+        51,
+        69,
+        66,
+        62,
+        59,
+        55,
+        52,
+        51,
+        69,
+        68,
+        64,
+        59,
+        57,
+        53,
+        51,
+        69,
+        68,
+        66,
+        61,
+        58,
+        54,
+        53
+      ]
+    },
+    {
+      "header": 22074,
+      "end": 22168,
+      "data": 22096,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a050d0a0a110f0819185e",
+          "internal_values": [
+            20,
+            25,
+            35,
+            40,
+            53,
+            63,
+            73,
+            90,
+            105,
+            113,
+            138,
+            162
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0906050609bd",
+          "internal_values": [
+            32,
+            41,
+            47,
+            52,
+            58,
+            67
+          ]
+        }
+      ],
+      "values": [
+        48,
+        49,
+        50,
+        51,
+        49,
+        46,
+        50,
+        51,
+        53,
+        54,
+        52,
+        50,
+        52,
+        54,
+        56,
+        58,
+        58,
+        58,
+        54,
+        56,
+        58,
+        60,
+        59,
+        58,
+        54,
+        54,
+        55,
+        56,
+        58,
+        59,
+        56,
+        57,
+        59,
+        61,
+        61,
+        61,
+        58,
+        60,
+        62,
+        64,
+        66,
+        67,
+        78,
+        75,
+        72,
+        70,
+        69,
+        67,
+        79,
+        77,
+        75,
+        72,
+        70,
+        69,
+        79,
+        75,
+        74,
+        72,
+        70,
+        69,
+        79,
+        75,
+        73,
+        72,
+        71,
+        69,
+        79,
+        75,
+        74,
+        71,
+        70,
+        69
+      ]
+    },
+    {
+      "header": 22168,
+      "end": 22178,
+      "data": 22174,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "14141492",
+          "internal_values": [
+            50,
+            70,
+            90,
+            110
+          ]
+        }
+      ],
+      "values": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    {
+      "header": 22178,
+      "end": 22206,
+      "data": 22190,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "203d3b16",
+          "internal_values": [
+            82,
+            114,
+            175,
+            234
+          ]
+        },
+        {
+          "ram": 56,
+          "deltas": "10203e8e",
+          "internal_values": [
+            4,
+            20,
+            52,
+            114
+          ]
+        }
+      ],
+      "values": [
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248
+      ]
+    },
+    {
+      "header": 22206,
+      "end": 22234,
+      "data": 22218,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "203d3b16",
+          "internal_values": [
+            82,
+            114,
+            175,
+            234
+          ]
+        },
+        {
+          "ram": 56,
+          "deltas": "10203e8e",
+          "internal_values": [
+            4,
+            20,
+            52,
+            114
+          ]
+        }
+      ],
+      "values": [
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248,
+        67,
+        93,
+        185,
+        248
+      ]
+    },
+    {
+      "header": 22234,
+      "end": 22244,
+      "data": 22240,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "070a469c",
+          "internal_values": [
+            13,
+            20,
+            30,
+            100
+          ]
+        }
+      ],
+      "values": [
+        37,
+        28,
+        28,
+        75
+      ]
+    },
+    {
+      "header": 22244,
+      "end": 22282,
+      "data": 22258,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a14ce",
+          "internal_values": [
+            15,
+            20,
+            30,
+            50
+          ]
+        },
+        {
+          "ram": 56,
+          "deltas": "101f1f205539",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            199
+          ]
+        }
+      ],
+      "values": [
+        250,
+        170,
+        125,
+        95,
+        85,
+        70,
+        225,
+        150,
+        110,
+        80,
+        70,
+        52,
+        225,
+        150,
+        110,
+        80,
+        70,
+        52,
+        240,
+        180,
+        130,
+        95,
+        85,
+        70
+      ]
+    },
+    {
+      "header": 22282,
+      "end": 22320,
+      "data": 22296,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a3c9c",
+          "internal_values": [
+            25,
+            30,
+            40,
+            100
+          ]
+        },
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        200,
+        150,
+        110,
+        80,
+        70,
+        55,
+        200,
+        150,
+        110,
+        80,
+        70,
+        55,
+        200,
+        165,
+        110,
+        85,
+        70,
+        60,
+        240,
+        240,
+        185,
+        145,
+        130,
+        110
+      ]
+    },
+    {
+      "header": 22320,
+      "end": 22334,
+      "data": 22328,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        254,
+        180,
+        110,
+        85,
+        75,
+        70
+      ]
+    },
+    {
+      "header": 22334,
+      "end": 22342,
+      "data": 22339,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "060de7",
+          "internal_values": [
+            6,
+            12,
+            25
+          ]
+        }
+      ],
+      "values": [
+        70,
+        5,
+        0
+      ]
+    },
+    {
+      "header": 22342,
+      "end": 22356,
+      "data": 22350,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "1f1f4b000261",
+          "internal_values": [
+            20,
+            51,
+            82,
+            157,
+            157,
+            159
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 22356,
+      "end": 22370,
+      "data": 22364,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        74,
+        74,
+        74,
+        74,
+        74,
+        74
+      ]
+    },
+    {
+      "header": 22370,
+      "end": 22380,
+      "data": 22376,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "070a469c",
+          "internal_values": [
+            13,
+            20,
+            30,
+            100
+          ]
+        }
+      ],
+      "values": [
+        37,
+        28,
+        28,
+        75
+      ]
+    },
+    {
+      "header": 22380,
+      "end": 22418,
+      "data": 22394,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050a14ce",
+          "internal_values": [
+            15,
+            20,
+            30,
+            50
+          ]
+        },
+        {
+          "ram": 56,
+          "deltas": "101f1f205539",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            199
+          ]
+        }
+      ],
+      "values": [
+        200,
+        170,
+        125,
+        95,
+        85,
+        70,
+        200,
+        150,
+        110,
+        80,
+        70,
+        52,
+        200,
+        150,
+        110,
+        80,
+        70,
+        52,
+        240,
+        180,
+        130,
+        95,
+        85,
+        70
+      ]
+    },
+    {
+      "header": 22418,
+      "end": 22432,
+      "data": 22426,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "1f1f4b000261",
+          "internal_values": [
+            20,
+            51,
+            82,
+            157,
+            157,
+            159
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 22432,
+      "end": 22442,
+      "data": 22438,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "19193283",
+          "internal_values": [
+            25,
+            50,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        136,
+        116,
+        96,
+        80
+      ]
+    },
+    {
+      "header": 22442,
+      "end": 22454,
+      "data": 22449,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 64,
+          "deltas": "0a0a141e9c",
+          "internal_values": [
+            30,
+            40,
+            50,
+            70,
+            100
+          ]
+        }
+      ],
+      "values": [
+        240,
+        240,
+        224,
+        160,
+        160
+      ]
+    },
+    {
+      "header": 22454,
+      "end": 22493,
+      "data": 22468,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050d0c19b5",
+          "internal_values": [
+            20,
+            25,
+            38,
+            50,
+            75
+          ]
+        },
+        {
+          "ram": 50,
+          "deltas": "04040a14d8",
+          "internal_values": [
+            2,
+            6,
+            10,
+            20,
+            40
+          ]
+        }
+      ],
+      "values": [
+        0,
+        90,
+        101,
+        143,
+        154,
+        0,
+        90,
+        128,
+        148,
+        182,
+        0,
+        80,
+        96,
+        138,
+        187,
+        0,
+        64,
+        96,
+        128,
+        208,
+        0,
+        54,
+        64,
+        128,
+        230
+      ]
+    },
+    {
+      "header": 22493,
+      "end": 22503,
+      "data": 22499,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "1f1f5d51",
+          "internal_values": [
+            20,
+            51,
+            82,
+            175
+          ]
+        }
+      ],
+      "values": [
+        24,
+        21,
+        17,
+        12
+      ]
+    },
+    {
+      "header": 22503,
+      "end": 22517,
+      "data": 22511,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "101f1f203e50",
+          "internal_values": [
+            4,
+            20,
+            51,
+            82,
+            114,
+            176
+          ]
+        }
+      ],
+      "values": [
+        120,
+        112,
+        90,
+        80,
+        80,
+        80
+      ]
+    },
+    {
+      "header": 22517,
+      "end": 22527,
+      "data": 22523,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "3f3f2d51",
+          "internal_values": [
+            4,
+            67,
+            130,
+            175
+          ]
+        }
+      ],
+      "values": [
+        120,
+        90,
+        85,
+        85
+      ]
+    },
+    {
+      "header": 22527,
+      "end": 22537,
+      "data": 22533,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "3f3f2d51",
+          "internal_values": [
+            4,
+            67,
+            130,
+            175
+          ]
+        }
+      ],
+      "values": [
+        120,
+        100,
+        95,
+        95
+      ]
+    },
+    {
+      "header": 22537,
+      "end": 22547,
+      "data": 22543,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "3e402d51",
+          "internal_values": [
+            4,
+            66,
+            130,
+            175
+          ]
+        }
+      ],
+      "values": [
+        120,
+        95,
+        85,
+        85
+      ]
+    },
+    {
+      "header": 22547,
+      "end": 22557,
+      "data": 22553,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "01080aec",
+          "internal_values": [
+            1,
+            2,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "header": 22557,
+      "end": 22567,
+      "data": 22563,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "011214d8",
+          "internal_values": [
+            1,
+            2,
+            20,
+            40
+          ]
+        }
+      ],
+      "values": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "header": 22567,
+      "end": 22577,
+      "data": 22573,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "060a1cd0",
+          "internal_values": [
+            4,
+            10,
+            20,
+            48
+          ]
+        }
+      ],
+      "values": [
+        0,
+        20,
+        40,
+        60
+      ]
+    },
+    {
+      "header": 22577,
+      "end": 22587,
+      "data": 22583,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "2f3f5e30",
+          "internal_values": [
+            4,
+            51,
+            114,
+            208
+          ]
+        }
+      ],
+      "values": [
+        41,
+        30,
+        25,
+        20
+      ]
+    },
+    {
+      "header": 22587,
+      "end": 22597,
+      "data": 22593,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "1919199c",
+          "internal_values": [
+            25,
+            50,
+            75,
+            100
+          ]
+        }
+      ],
+      "values": [
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "header": 22597,
+      "end": 22607,
+      "data": 22603,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "01080aec",
+          "internal_values": [
+            1,
+            2,
+            10,
+            20
+          ]
+        }
+      ],
+      "values": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "header": 22607,
+      "end": 22617,
+      "data": 22613,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "011214d8",
+          "internal_values": [
+            1,
+            2,
+            20,
+            40
+          ]
+        }
+      ],
+      "values": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "header": 22617,
+      "end": 22627,
+      "data": 22623,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 3,
+          "deltas": "060a1cd0",
+          "internal_values": [
+            4,
+            10,
+            20,
+            48
+          ]
+        }
+      ],
+      "values": [
+        0,
+        20,
+        40,
+        60
+      ]
+    },
+    {
+      "header": 22627,
+      "end": 22639,
+      "data": 22634,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 54,
+          "deltas": "2c1d1e1d15",
+          "internal_values": [
+            103,
+            147,
+            176,
+            206,
+            235
+          ]
+        }
+      ],
+      "values": [
+        218,
+        154,
+        128,
+        110,
+        96
+      ]
+    },
+    {
+      "header": 22639,
+      "end": 22649,
+      "data": 22645,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 55,
+          "deltas": "17574d41",
+          "internal_values": [
+            4,
+            27,
+            114,
+            191
+          ]
+        }
+      ],
+      "values": [
+        90,
+        68,
+        96,
+        124
+      ]
+    },
+    {
+      "header": 22649,
+      "end": 22659,
+      "data": 22655,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 56,
+          "deltas": "2f3f3d51",
+          "internal_values": [
+            4,
+            51,
+            114,
+            175
+          ]
+        }
+      ],
+      "values": [
+        175,
+        150,
+        112,
+        100
+      ]
+    },
+    {
+      "header": 22659,
+      "end": 22718,
+      "data": 22676,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "050606081e199c",
+          "internal_values": [
+            20,
+            25,
+            31,
+            37,
+            45,
+            75,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0e0b101c1888",
+          "internal_values": [
+            27,
+            41,
+            52,
+            68,
+            96,
+            120
+          ]
+        }
+      ],
+      "values": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        3,
+        4,
+        4,
+        4,
+        4,
+        5,
+        9,
+        10,
+        10,
+        13,
+        18,
+        20,
+        10,
+        13,
+        16,
+        19,
+        25,
+        26,
+        21,
+        22,
+        32,
+        37,
+        44,
+        52,
+        32,
+        48,
+        64,
+        74,
+        76,
+        76,
+        49,
+        63,
+        76,
+        76,
+        76,
+        76
+      ]
+    },
+    {
+      "header": 22718,
+      "end": 22756,
+      "data": 22732,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "161e199c",
+          "internal_values": [
+            23,
+            45,
+            75,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0e0b101c1888",
+          "internal_values": [
+            27,
+            41,
+            52,
+            68,
+            96,
+            120
+          ]
+        }
+      ],
+      "values": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61,
+        61
+      ]
+    },
+    {
+      "header": 22756,
+      "end": 22794,
+      "data": 22770,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "161e199c",
+          "internal_values": [
+            23,
+            45,
+            75,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0e0b101c1888",
+          "internal_values": [
+            27,
+            41,
+            52,
+            68,
+            96,
+            120
+          ]
+        }
+      ],
+      "values": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        27,
+        27,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
+        55,
+        55,
+        55,
+        55
+      ]
+    },
+    {
+      "header": 22794,
+      "end": 22808,
+      "data": 22802,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "32191923025e",
+          "internal_values": [
+            25,
+            75,
+            100,
+            125,
+            160,
+            162
+          ]
+        }
+      ],
+      "values": [
+        132,
+        128,
+        120,
+        120,
+        122,
+        60
+      ]
+    },
+    {
+      "header": 22808,
+      "end": 22836,
+      "data": 22820,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0f0f19b5",
+          "internal_values": [
+            20,
+            35,
+            50,
+            75
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "1111229a",
+          "internal_values": [
+            34,
+            51,
+            68,
+            102
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 22836,
+      "end": 22846,
+      "data": 22842,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "32191983",
+          "internal_values": [
+            25,
+            75,
+            100,
+            125
+          ]
+        }
+      ],
+      "values": [
+        118,
+        118,
+        118,
+        118
+      ]
+    },
+    {
+      "header": 22846,
+      "end": 22860,
+      "data": 22854,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0a0d19190c9c",
+          "internal_values": [
+            15,
+            25,
+            38,
+            63,
+            88,
+            100
+          ]
+        }
+      ],
+      "values": [
+        59,
+        47,
+        21,
+        21,
+        21,
+        21
+      ]
+    },
+    {
+      "header": 22860,
+      "end": 22912,
+      "data": 22876,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "05050c0d19ab",
+          "internal_values": [
+            25,
+            30,
+            35,
+            47,
+            60,
+            85
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "161509191f7b",
+          "internal_values": [
+            25,
+            47,
+            68,
+            77,
+            102,
+            133
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 22912,
+      "end": 22926,
+      "data": 22920,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0a1919191983",
+          "internal_values": [
+            15,
+            25,
+            50,
+            75,
+            100,
+            125
+          ]
+        }
+      ],
+      "values": [
+        116,
+        116,
+        116,
+        114,
+        112,
+        112
+      ]
+    },
+    {
+      "header": 22926,
+      "end": 22978,
+      "data": 22942,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "04050a1419ab",
+          "internal_values": [
+            21,
+            25,
+            30,
+            40,
+            60,
+            85
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "161509191f7b",
+          "internal_values": [
+            25,
+            47,
+            68,
+            77,
+            102,
+            133
+          ]
+        }
+      ],
+      "values": [
+        11,
+        11,
+        11,
+        15,
+        23,
+        31,
+        11,
+        11,
+        11,
+        20,
+        31,
+        64,
+        11,
+        11,
+        20,
+        31,
+        64,
+        128,
+        32,
+        64,
+        90,
+        102,
+        128,
+        192,
+        64,
+        128,
+        192,
+        192,
+        205,
+        255,
+        253,
+        253,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "header": 22978,
+      "end": 23016,
+      "data": 22992,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "161e199c",
+          "internal_values": [
+            23,
+            45,
+            75,
+            100
+          ]
+        },
+        {
+          "ram": 64,
+          "deltas": "0d0e12131e79",
+          "internal_values": [
+            41,
+            54,
+            68,
+            86,
+            105,
+            135
+          ]
+        }
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "header": 23016,
+      "end": 23034,
+      "data": 23026,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "030f0f1211151580",
+          "internal_values": [
+            18,
+            21,
+            36,
+            51,
+            69,
+            86,
+            107,
+            128
+          ]
+        }
+      ],
+      "values": [
+        40,
+        40,
+        40,
+        45,
+        45,
+        45,
+        45,
+        45
+      ]
+    },
+    {
+      "header": 23034,
+      "end": 23042,
+      "data": 23039,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "0a329c",
+          "internal_values": [
+            40,
+            50,
+            100
+          ]
+        }
+      ],
+      "values": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "header": 23042,
+      "end": 23050,
+      "data": 23047,
+      "exact_size": true,
+      "axes": [
+        {
+          "ram": 59,
+          "deltas": "253283",
+          "internal_values": [
+            38,
+            75,
+            125
+          ]
+        }
+      ],
+      "values": [
+        154,
+        154,
+        154
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "kind": "table",
+      "title": "Idle speed(AT in P or N, AC on or off)",
+      "address": 22511,
+      "end": 22517,
+      "rows": 1,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "4c,35c,99c,144c",
+      "y_labels": "idle",
+      "raw_hex": "78705a505050",
+      "values": [
+        120,
+        112,
+        90,
+        80,
+        80,
+        80
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Idle speed(AT in D or R with A/C on)",
+      "address": 22523,
+      "end": 22527,
+      "rows": 1,
+      "cols": 4,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "4c,35c,99c,144c",
+      "y_labels": "idle",
+      "raw_hex": "785a5555",
+      "values": [
+        120,
+        90,
+        85,
+        85
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Idle speed(AT in D or R with AC off)",
+      "address": 22533,
+      "end": 22537,
+      "rows": 1,
+      "cols": 4,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "4c,35c,99c,144c",
+      "y_labels": "idle",
+      "raw_hex": "78645f5f",
+      "values": [
+        120,
+        100,
+        95,
+        95
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Fuel Idle Map",
+      "address": 18881,
+      "end": 18893,
+      "rows": 4,
+      "cols": 3,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "16,24,64",
+      "y_labels": "520,600,640,920",
+      "raw_hex": "8080807f7f807f7f80828080",
+      "values": [
+        128,
+        128,
+        128,
+        127,
+        127,
+        128,
+        127,
+        127,
+        128,
+        130,
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Fuel WOT Map1",
+      "address": 18911,
+      "end": 18927,
+      "rows": 16,
+      "cols": 1,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240,5600,5840,6000,6320",
+      "raw_hex": "6b666a808c8a7371737d83848c888480",
+      "values": [
+        107,
+        102,
+        106,
+        128,
+        140,
+        138,
+        115,
+        113,
+        115,
+        125,
+        131,
+        132,
+        140,
+        136,
+        132,
+        128
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Fuel WOT Map1(AFR example)",
+      "address": 18911,
+      "end": 18927,
+      "rows": 16,
+      "cols": 1,
+      "width": 1,
+      "equation": "1881.6/X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240,5600,5840,6000,6320",
+      "raw_hex": "6b666a808c8a7371737d83848c888480",
+      "values": [
+        17.58504672897196,
+        18.44705882352941,
+        17.750943396226415,
+        14.7,
+        13.44,
+        13.634782608695652,
+        16.36173913043478,
+        16.651327433628317,
+        16.36173913043478,
+        15.0528,
+        14.363358778625953,
+        14.254545454545454,
+        13.44,
+        13.835294117647058,
+        14.254545454545454,
+        14.7
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Fuel WOT Map 2",
+      "address": 18991,
+      "end": 19007,
+      "rows": 16,
+      "cols": 1,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "880,1040,1400,1720,2000,2200,2800,3200,3920,4400,4800,5200,5480,6000,6120,6400",
+      "raw_hex": "67665f617683867c7775808283888681",
+      "values": [
+        103,
+        102,
+        95,
+        97,
+        118,
+        131,
+        134,
+        124,
+        119,
+        117,
+        128,
+        130,
+        131,
+        136,
+        134,
+        129
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Fuel Acceleration enrichment",
+      "address": 18807,
+      "end": 18816,
+      "rows": 3,
+      "cols": 3,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "10,40,60",
+      "y_labels": "1000,1800,2000",
+      "raw_hex": "80cdfe80dae680fdda",
+      "values": [
+        128,
+        205,
+        254,
+        128,
+        218,
+        230,
+        128,
+        253,
+        218
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part throttle fuel map ",
+      "address": 19266,
+      "end": 19350,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190,200",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "767a808585796d797c828587776a74787a828077656e75787d828074697275788086866464656970757d646166676c746f616263686d76775e5e6469707d815f6061667181856061616670808260616166707c7b",
+      "values": [
+        118,
+        122,
+        128,
+        133,
+        133,
+        121,
+        109,
+        121,
+        124,
+        130,
+        133,
+        135,
+        119,
+        106,
+        116,
+        120,
+        122,
+        130,
+        128,
+        119,
+        101,
+        110,
+        117,
+        120,
+        125,
+        130,
+        128,
+        116,
+        105,
+        114,
+        117,
+        120,
+        128,
+        134,
+        134,
+        100,
+        100,
+        101,
+        105,
+        112,
+        117,
+        125,
+        100,
+        97,
+        102,
+        103,
+        108,
+        116,
+        111,
+        97,
+        98,
+        99,
+        104,
+        109,
+        118,
+        119,
+        94,
+        94,
+        100,
+        105,
+        112,
+        125,
+        129,
+        95,
+        96,
+        97,
+        102,
+        113,
+        129,
+        133,
+        96,
+        97,
+        97,
+        102,
+        112,
+        128,
+        130,
+        96,
+        97,
+        97,
+        102,
+        112,
+        124,
+        123
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part throttle fuel map(in AFR example)",
+      "address": 19266,
+      "end": 19350,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "1881.6/X,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190,200",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "767a808585796d797c828587776a74787a828077656e75787d828074697275788086866464656970757d646166676c746f616263686d76775e5e6469707d815f6061667181856061616670808260616166707c7b",
+      "values": [
+        15.945762711864406,
+        15.422950819672131,
+        14.7,
+        14.147368421052631,
+        14.147368421052631,
+        15.550413223140495,
+        17.262385321100915,
+        15.550413223140495,
+        15.174193548387096,
+        14.473846153846154,
+        14.147368421052631,
+        13.937777777777777,
+        15.811764705882352,
+        17.750943396226415,
+        16.220689655172414,
+        15.68,
+        15.422950819672131,
+        14.473846153846154,
+        14.7,
+        15.811764705882352,
+        18.62970297029703,
+        17.105454545454545,
+        16.08205128205128,
+        15.68,
+        15.0528,
+        14.473846153846154,
+        14.7,
+        16.220689655172414,
+        17.919999999999998,
+        16.505263157894735,
+        16.08205128205128,
+        15.68,
+        14.7,
+        14.041791044776119,
+        14.041791044776119,
+        18.816,
+        18.816,
+        18.62970297029703,
+        17.919999999999998,
+        16.8,
+        16.08205128205128,
+        15.0528,
+        18.816,
+        19.397938144329895,
+        18.44705882352941,
+        18.267961165048543,
+        17.42222222222222,
+        16.220689655172414,
+        16.951351351351352,
+        19.397938144329895,
+        19.2,
+        19.006060606060604,
+        18.092307692307692,
+        17.262385321100915,
+        15.945762711864406,
+        15.811764705882352,
+        20.017021276595745,
+        20.017021276595745,
+        18.816,
+        17.919999999999998,
+        16.8,
+        15.0528,
+        14.586046511627906,
+        19.806315789473683,
+        19.599999999999998,
+        19.397938144329895,
+        18.44705882352941,
+        16.651327433628317,
+        14.586046511627906,
+        14.147368421052631,
+        19.599999999999998,
+        19.397938144329895,
+        19.397938144329895,
+        18.44705882352941,
+        16.8,
+        14.7,
+        14.473846153846154,
+        19.599999999999998,
+        19.397938144329895,
+        19.397938144329895,
+        18.44705882352941,
+        16.8,
+        15.174193548387096,
+        15.297560975609755
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part throttle fuel map2",
+      "address": 19668,
+      "end": 19752,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200",
+      "raw_hex": "79797b76706e6f797976767468696f7070756e67666a6e6d6c6f707569696c747d868669696a74797a7a68696c71777c7c68696c70797b81696969717781876c6d6c74777d876a6c6d71777d836a6c6a73767e86",
+      "values": [
+        121,
+        121,
+        123,
+        118,
+        112,
+        110,
+        111,
+        121,
+        121,
+        118,
+        118,
+        116,
+        104,
+        105,
+        111,
+        112,
+        112,
+        117,
+        110,
+        103,
+        102,
+        106,
+        110,
+        109,
+        108,
+        111,
+        112,
+        117,
+        105,
+        105,
+        108,
+        116,
+        125,
+        134,
+        134,
+        105,
+        105,
+        106,
+        116,
+        121,
+        122,
+        122,
+        104,
+        105,
+        108,
+        113,
+        119,
+        124,
+        124,
+        104,
+        105,
+        108,
+        112,
+        121,
+        123,
+        129,
+        105,
+        105,
+        105,
+        113,
+        119,
+        129,
+        135,
+        108,
+        109,
+        108,
+        116,
+        119,
+        125,
+        135,
+        106,
+        108,
+        109,
+        113,
+        119,
+        125,
+        131,
+        106,
+        108,
+        106,
+        115,
+        118,
+        126,
+        134
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part throttle fuel map3",
+      "address": 20070,
+      "end": 20154,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "797a808585796d7b7c828587776a7a7b80828077657b7c7c7d8280747b7d7b7d7d7b7a7c7d807d8077807d7d7f807f746f7d7f7f80817a7d80808181817f817f8082838483858081828282808481828281818080",
+      "values": [
+        121,
+        122,
+        128,
+        133,
+        133,
+        121,
+        109,
+        123,
+        124,
+        130,
+        133,
+        135,
+        119,
+        106,
+        122,
+        123,
+        128,
+        130,
+        128,
+        119,
+        101,
+        123,
+        124,
+        124,
+        125,
+        130,
+        128,
+        116,
+        123,
+        125,
+        123,
+        125,
+        125,
+        123,
+        122,
+        124,
+        125,
+        128,
+        125,
+        128,
+        119,
+        128,
+        125,
+        125,
+        127,
+        128,
+        127,
+        116,
+        111,
+        125,
+        127,
+        127,
+        128,
+        129,
+        122,
+        125,
+        128,
+        128,
+        129,
+        129,
+        129,
+        127,
+        129,
+        127,
+        128,
+        130,
+        131,
+        132,
+        131,
+        133,
+        128,
+        129,
+        130,
+        130,
+        130,
+        128,
+        132,
+        129,
+        130,
+        130,
+        129,
+        129,
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low Throttle Fuel map ",
+      "address": 19372,
+      "end": 19444,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "7676767676767676767778797778787a7a7478787873736e73736d6d6d69736d6d686864736d686464646d686864646168646262625e66625e5e5e5f5f5f5f5f5f605f5f5f5f5f60",
+      "values": [
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        118,
+        119,
+        120,
+        121,
+        119,
+        120,
+        120,
+        122,
+        122,
+        116,
+        120,
+        120,
+        120,
+        115,
+        115,
+        110,
+        115,
+        115,
+        109,
+        109,
+        109,
+        105,
+        115,
+        109,
+        109,
+        104,
+        104,
+        100,
+        115,
+        109,
+        104,
+        100,
+        100,
+        100,
+        109,
+        104,
+        104,
+        100,
+        100,
+        97,
+        104,
+        100,
+        98,
+        98,
+        98,
+        94,
+        102,
+        98,
+        94,
+        94,
+        94,
+        95,
+        95,
+        95,
+        95,
+        95,
+        95,
+        96,
+        95,
+        95,
+        95,
+        95,
+        95,
+        96
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low Throttle Fuel map2",
+      "address": 19774,
+      "end": 19846,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "7e7e7b77777977777977777977747074736f716f6c6e6c6a6e6d6a6a69696e6c696a6a696d69666667686d6c696a67686e68686a6a696e6e6c6a6a6c706c696a6c6a68686866686a",
+      "values": [
+        126,
+        126,
+        123,
+        119,
+        119,
+        121,
+        119,
+        119,
+        121,
+        119,
+        119,
+        121,
+        119,
+        116,
+        112,
+        116,
+        115,
+        111,
+        113,
+        111,
+        108,
+        110,
+        108,
+        106,
+        110,
+        109,
+        106,
+        106,
+        105,
+        105,
+        110,
+        108,
+        105,
+        106,
+        106,
+        105,
+        109,
+        105,
+        102,
+        102,
+        103,
+        104,
+        109,
+        108,
+        105,
+        106,
+        103,
+        104,
+        110,
+        104,
+        104,
+        106,
+        106,
+        105,
+        110,
+        110,
+        108,
+        106,
+        106,
+        108,
+        112,
+        108,
+        105,
+        106,
+        108,
+        106,
+        104,
+        104,
+        104,
+        102,
+        104,
+        106
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low Throttle Fuel map3",
+      "address": 20176,
+      "end": 20248,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200",
+      "raw_hex": "657777787879657778797a7b65797a7a7a7a65797a7b7a7b657a7a7b7a7b657b7d7d7b7c657b7c7c7c7d7a7a7b7c7d7d7a7c7c7c7e807a7b7c7d7e7f7a7b7c7d7f807b7b7c7d8081",
+      "values": [
+        101,
+        119,
+        119,
+        120,
+        120,
+        121,
+        101,
+        119,
+        120,
+        121,
+        122,
+        123,
+        101,
+        121,
+        122,
+        122,
+        122,
+        122,
+        101,
+        121,
+        122,
+        123,
+        122,
+        123,
+        101,
+        122,
+        122,
+        123,
+        122,
+        123,
+        101,
+        123,
+        125,
+        125,
+        123,
+        124,
+        101,
+        123,
+        124,
+        124,
+        124,
+        125,
+        122,
+        122,
+        123,
+        124,
+        125,
+        125,
+        122,
+        124,
+        124,
+        124,
+        126,
+        128,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        122,
+        123,
+        124,
+        125,
+        127,
+        128,
+        123,
+        123,
+        124,
+        125,
+        128,
+        129
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Injector trim(Air temp/battery voltage)",
+      "address": 18737,
+      "end": 18777,
+      "rows": 8,
+      "cols": 5,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "10.7v,11.4,12.2v,13.1v,14.0v",
+      "y_labels": "50c,30c,10c,0c,-5c,-10c,-20c,-30c",
+      "raw_hex": "8d85807b788d85807b788d85807b788d85807b788d85807b788d85807b788d85807c798d85807d7a",
+      "values": [
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        123,
+        120,
+        141,
+        133,
+        128,
+        124,
+        121,
+        141,
+        133,
+        128,
+        125,
+        122
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Engine temperature enrichment",
+      "address": 18791,
+      "end": 18797,
+      "rows": 1,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "-20c,-10c,0c,30c,80c,110c",
+      "y_labels": "enrich",
+      "raw_hex": "73684d311a00",
+      "values": [
+        115,
+        104,
+        77,
+        49,
+        26,
+        0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Engine temperature enrichment2",
+      "address": 18824,
+      "end": 18830,
+      "rows": 1,
+      "cols": 6,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "-20c,-10c,0c,30c,80c,110c",
+      "y_labels": "enrich",
+      "raw_hex": "806640261200",
+      "values": [
+        128,
+        102,
+        64,
+        38,
+        18,
+        0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Injector Lag vs. Battery voltage",
+      "address": 18571,
+      "end": 18575,
+      "rows": 1,
+      "cols": 4,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "8.50,12.7,13.8,14.9",
+      "y_labels": "lag",
+      "raw_hex": "fa55352d",
+      "values": [
+        250,
+        85,
+        53,
+        45
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Ignition Idle Timing map",
+      "address": 20876,
+      "end": 20900,
+      "rows": 8,
+      "cols": 3,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "10,20,30",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4200",
+      "raw_hex": "353226322f262d2d2d2d2d2d2d2d2d2d2d2d39322d39322d",
+      "values": [
+        17.25,
+        15.0,
+        6.0,
+        15.0,
+        12.75,
+        6.0,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        11.25,
+        20.25,
+        15.0,
+        11.25,
+        20.25,
+        15.0,
+        11.25
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Ignition WOT Map 1",
+      "address": 20837,
+      "end": 20853,
+      "rows": 16,
+      "cols": 1,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "880,1040,1400,1720,2000,2200,2800,3200,3920,4400,4800,5200,5480,6000,6120,6400",
+      "raw_hex": "20222d2f34393b3a3a3d3b393a3c3e3f",
+      "values": [
+        1.5,
+        3.0,
+        11.25,
+        12.75,
+        16.5,
+        20.25,
+        21.75,
+        21.0,
+        21.0,
+        23.25,
+        21.75,
+        20.25,
+        21.0,
+        22.5,
+        24.0,
+        24.75
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Ignition WOT Map 2",
+      "address": 20918,
+      "end": 20934,
+      "rows": 16,
+      "cols": 1,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "880,1040,1400,1720,2000,2200,2800,3200,3920,4400,4800,5200,5480,6000,6120,6400",
+      "raw_hex": "1b2b2b34343a3c383933333737353638",
+      "values": [
+        -2.25,
+        9.75,
+        9.75,
+        16.5,
+        16.5,
+        21.0,
+        22.5,
+        19.5,
+        20.25,
+        15.75,
+        15.75,
+        18.75,
+        18.75,
+        17.25,
+        18.0,
+        19.5
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part Throttle Ignition map(in real BTDC)",
+      "address": 21186,
+      "end": 21270,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "2e26201c1a1a1a302e272321201f3a35302c2a29293d38332d2a2928424240383330304c4a48403a343454524e4942393656545149433a385c5953484136345d5852474035335958544a4237355958544a443836",
+      "values": [
+        12.0,
+        6.0,
+        1.5,
+        -1.5,
+        -3.0,
+        -3.0,
+        -3.0,
+        13.5,
+        12.0,
+        6.75,
+        3.75,
+        2.25,
+        1.5,
+        0.75,
+        21.0,
+        17.25,
+        13.5,
+        10.5,
+        9.0,
+        8.25,
+        8.25,
+        23.25,
+        19.5,
+        15.75,
+        11.25,
+        9.0,
+        8.25,
+        7.5,
+        27.0,
+        27.0,
+        25.5,
+        19.5,
+        15.75,
+        13.5,
+        13.5,
+        34.5,
+        33.0,
+        31.5,
+        25.5,
+        21.0,
+        16.5,
+        16.5,
+        40.5,
+        39.0,
+        36.0,
+        32.25,
+        27.0,
+        20.25,
+        18.0,
+        42.0,
+        40.5,
+        38.25,
+        32.25,
+        27.75,
+        21.0,
+        19.5,
+        46.5,
+        44.25,
+        39.75,
+        31.5,
+        26.25,
+        18.0,
+        16.5,
+        47.25,
+        43.5,
+        39.0,
+        30.75,
+        25.5,
+        17.25,
+        15.75,
+        44.25,
+        43.5,
+        40.5,
+        33.0,
+        27.0,
+        18.75,
+        17.25,
+        44.25,
+        43.5,
+        40.5,
+        33.0,
+        28.5,
+        19.5,
+        18.0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part Throttle Ignition map2",
+      "address": 21387,
+      "end": 21471,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "2f2923201e1e1d322f2b262322213e3c37322e2c2c413e3a34312d2d494645403b363649484c433f3a38504c4b473f3b39514e4b47423a3954534f4d453d395a59544d453f3a5e5a554b463e3a5a56534d49423f",
+      "values": [
+        12.75,
+        8.25,
+        3.75,
+        1.5,
+        0.0,
+        0.0,
+        -0.75,
+        15.0,
+        12.75,
+        9.75,
+        6.0,
+        3.75,
+        3.0,
+        2.25,
+        24.0,
+        22.5,
+        18.75,
+        15.0,
+        12.0,
+        10.5,
+        10.5,
+        26.25,
+        24.0,
+        21.0,
+        16.5,
+        14.25,
+        11.25,
+        11.25,
+        32.25,
+        30.0,
+        29.25,
+        25.5,
+        21.75,
+        18.0,
+        18.0,
+        32.25,
+        31.5,
+        34.5,
+        27.75,
+        24.75,
+        21.0,
+        19.5,
+        37.5,
+        34.5,
+        33.75,
+        30.75,
+        24.75,
+        21.75,
+        20.25,
+        38.25,
+        36.0,
+        33.75,
+        30.75,
+        27.0,
+        21.0,
+        20.25,
+        40.5,
+        39.75,
+        36.75,
+        35.25,
+        29.25,
+        23.25,
+        20.25,
+        45.0,
+        44.25,
+        40.5,
+        35.25,
+        29.25,
+        24.75,
+        21.0,
+        48.0,
+        45.0,
+        41.25,
+        33.75,
+        30.0,
+        24.0,
+        21.0,
+        45.0,
+        42.0,
+        39.75,
+        35.25,
+        32.25,
+        27.0,
+        24.75
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part Throttle Ignition map3",
+      "address": 21694,
+      "end": 21766,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "313f3b3a38363144403d3c393b48484443414f4f4d4b4b4758585756514f5c5c5b575450585655545250535252515150595958555552606060605d5b63636262615f6161605f5c5a",
+      "values": [
+        14.25,
+        24.75,
+        21.75,
+        21.0,
+        19.5,
+        18.0,
+        14.25,
+        28.5,
+        25.5,
+        23.25,
+        22.5,
+        20.25,
+        21.75,
+        31.5,
+        31.5,
+        28.5,
+        27.75,
+        26.25,
+        36.75,
+        36.75,
+        35.25,
+        33.75,
+        33.75,
+        30.75,
+        43.5,
+        43.5,
+        42.75,
+        42.0,
+        38.25,
+        36.75,
+        46.5,
+        46.5,
+        45.75,
+        42.75,
+        40.5,
+        37.5,
+        43.5,
+        42.0,
+        41.25,
+        40.5,
+        39.0,
+        37.5,
+        39.75,
+        39.0,
+        39.0,
+        38.25,
+        38.25,
+        37.5,
+        44.25,
+        44.25,
+        43.5,
+        41.25,
+        41.25,
+        39.0,
+        49.5,
+        49.5,
+        49.5,
+        49.5,
+        47.25,
+        45.75,
+        51.75,
+        51.75,
+        51.0,
+        51.0,
+        50.25,
+        48.75,
+        50.25,
+        50.25,
+        49.5,
+        48.75,
+        46.5,
+        45.0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "High part Throttle Ignition map4",
+      "address": 21895,
+      "end": 21967,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "130,150,170,175,180,190",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "313f3b3a38363144403d3c393b48484443414f4f4d4b4b4758585756514f5c5c5b575450585655545250535252515150595958555552606060605d5b63636262615f6161605f5c5a",
+      "values": [
+        14.25,
+        24.75,
+        21.75,
+        21.0,
+        19.5,
+        18.0,
+        14.25,
+        28.5,
+        25.5,
+        23.25,
+        22.5,
+        20.25,
+        21.75,
+        31.5,
+        31.5,
+        28.5,
+        27.75,
+        26.25,
+        36.75,
+        36.75,
+        35.25,
+        33.75,
+        33.75,
+        30.75,
+        43.5,
+        43.5,
+        42.75,
+        42.0,
+        38.25,
+        36.75,
+        46.5,
+        46.5,
+        45.75,
+        42.75,
+        40.5,
+        37.5,
+        43.5,
+        42.0,
+        41.25,
+        40.5,
+        39.0,
+        37.5,
+        39.75,
+        39.0,
+        39.0,
+        38.25,
+        38.25,
+        37.5,
+        44.25,
+        44.25,
+        43.5,
+        41.25,
+        41.25,
+        39.0,
+        49.5,
+        49.5,
+        49.5,
+        49.5,
+        47.25,
+        45.75,
+        51.75,
+        51.75,
+        51.0,
+        51.0,
+        50.25,
+        48.75,
+        50.25,
+        50.25,
+        49.5,
+        48.75,
+        46.5,
+        45.0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low part Throttle Ignition Map",
+      "address": 21292,
+      "end": 21364,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": "800,1200,1800,2400,3000,3800,4200,4360,4520,4800,5040,5240",
+      "raw_hex": "30303030302e30323234343038393b3c3c3a393a3c3d3d3d3f3f414142424f4f4c4c4c4c5a58585857545a58585856565e5c5c5c5c5c5e5e5e5e5e5d5f5e5e5e5c595f5e5e5e5c59",
+      "values": [
+        13.5,
+        13.5,
+        13.5,
+        13.5,
+        13.5,
+        12.0,
+        13.5,
+        15.0,
+        15.0,
+        16.5,
+        16.5,
+        13.5,
+        19.5,
+        20.25,
+        21.75,
+        22.5,
+        22.5,
+        21.0,
+        20.25,
+        21.0,
+        22.5,
+        23.25,
+        23.25,
+        23.25,
+        24.75,
+        24.75,
+        26.25,
+        26.25,
+        27.0,
+        27.0,
+        36.75,
+        36.75,
+        34.5,
+        34.5,
+        34.5,
+        34.5,
+        45.0,
+        43.5,
+        43.5,
+        43.5,
+        42.75,
+        40.5,
+        45.0,
+        43.5,
+        43.5,
+        43.5,
+        42.0,
+        42.0,
+        48.0,
+        46.5,
+        46.5,
+        46.5,
+        46.5,
+        46.5,
+        48.0,
+        48.0,
+        48.0,
+        48.0,
+        48.0,
+        47.25,
+        48.75,
+        48.0,
+        48.0,
+        48.0,
+        46.5,
+        44.25,
+        48.75,
+        48.0,
+        48.0,
+        48.0,
+        46.5,
+        44.25
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low part Throttle Ignition Map2",
+      "address": 21493,
+      "end": 21565,
+      "rows": 12,
+      "cols": 6,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": 680,
+      "raw_hex": "36363636342f36403e3c3b323b4242403f3e4b4946454341565251504e49575752504f495453515151505959565554515d5d5d5958546060605f5c5a60606060605e6060605f5c5a",
+      "values": [
+        18.0,
+        18.0,
+        18.0,
+        18.0,
+        16.5,
+        12.75,
+        18.0,
+        25.5,
+        24.0,
+        22.5,
+        21.75,
+        15.0,
+        21.75,
+        27.0,
+        27.0,
+        25.5,
+        24.75,
+        24.0,
+        33.75,
+        32.25,
+        30.0,
+        29.25,
+        27.75,
+        26.25,
+        42.0,
+        39.0,
+        38.25,
+        37.5,
+        36.0,
+        32.25,
+        42.75,
+        42.75,
+        39.0,
+        37.5,
+        36.75,
+        32.25,
+        40.5,
+        39.75,
+        38.25,
+        38.25,
+        38.25,
+        37.5,
+        44.25,
+        44.25,
+        42.0,
+        41.25,
+        40.5,
+        38.25,
+        47.25,
+        47.25,
+        47.25,
+        44.25,
+        43.5,
+        40.5,
+        49.5,
+        49.5,
+        49.5,
+        48.75,
+        46.5,
+        45.0,
+        49.5,
+        49.5,
+        49.5,
+        49.5,
+        49.5,
+        48.0,
+        49.5,
+        49.5,
+        49.5,
+        48.75,
+        46.5,
+        45.0
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low part Throttle Ignition Map3",
+      "address": 21789,
+      "end": 21873,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": 680,
+      "raw_hex": "362e2a24221e1d39332e2a262522413e3b342f2c2b47433d38332d2c4f4a4841383634504d4d433b3937504f49453f3a38504c4d45413c3952505048423c395b58504b453e3b5f5d534c453f3a5a56534d47403d",
+      "values": [
+        18.0,
+        12.0,
+        9.0,
+        4.5,
+        3.0,
+        0.0,
+        -0.75,
+        20.25,
+        15.75,
+        12.0,
+        9.0,
+        6.0,
+        5.25,
+        3.0,
+        26.25,
+        24.0,
+        21.75,
+        16.5,
+        12.75,
+        10.5,
+        9.75,
+        30.75,
+        27.75,
+        23.25,
+        19.5,
+        15.75,
+        11.25,
+        10.5,
+        36.75,
+        33.0,
+        31.5,
+        26.25,
+        19.5,
+        18.0,
+        16.5,
+        37.5,
+        35.25,
+        35.25,
+        27.75,
+        21.75,
+        20.25,
+        18.75,
+        37.5,
+        36.75,
+        32.25,
+        29.25,
+        24.75,
+        21.0,
+        19.5,
+        37.5,
+        34.5,
+        35.25,
+        29.25,
+        26.25,
+        22.5,
+        20.25,
+        39.0,
+        37.5,
+        37.5,
+        31.5,
+        27.0,
+        22.5,
+        20.25,
+        45.75,
+        43.5,
+        37.5,
+        33.75,
+        29.25,
+        24.0,
+        21.75,
+        48.75,
+        47.25,
+        39.75,
+        34.5,
+        29.25,
+        24.75,
+        21.0,
+        45.0,
+        42.0,
+        39.75,
+        35.25,
+        30.75,
+        25.5,
+        23.25
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Low part Throttle Ignition Map4",
+      "address": 21990,
+      "end": 22074,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "(X*0.75)-22.5,TH|0|0|0|0|",
+      "x_labels": "14,38,48,60,74,90",
+      "y_labels": 680,
+      "raw_hex": "2e28221c1a1a1a322d2823221f1f3a35302d2b29293a34302c2929283b3e3d373131313d413f3b3634344344433e3a38364342413e3b383845423e3c38353345423e3b3734334544403b3935334544423d3a3635",
+      "values": [
+        12.0,
+        7.5,
+        3.0,
+        -1.5,
+        -3.0,
+        -3.0,
+        -3.0,
+        15.0,
+        11.25,
+        7.5,
+        3.75,
+        3.0,
+        0.75,
+        0.75,
+        21.0,
+        17.25,
+        13.5,
+        11.25,
+        9.75,
+        8.25,
+        8.25,
+        21.0,
+        16.5,
+        13.5,
+        10.5,
+        8.25,
+        8.25,
+        7.5,
+        21.75,
+        24.0,
+        23.25,
+        18.75,
+        14.25,
+        14.25,
+        14.25,
+        23.25,
+        26.25,
+        24.75,
+        21.75,
+        18.0,
+        16.5,
+        16.5,
+        27.75,
+        28.5,
+        27.75,
+        24.0,
+        21.0,
+        19.5,
+        18.0,
+        27.75,
+        27.0,
+        26.25,
+        24.0,
+        21.75,
+        19.5,
+        19.5,
+        29.25,
+        27.0,
+        24.0,
+        22.5,
+        19.5,
+        17.25,
+        15.75,
+        29.25,
+        27.0,
+        24.0,
+        21.75,
+        18.75,
+        16.5,
+        15.75,
+        29.25,
+        28.5,
+        25.5,
+        21.75,
+        20.25,
+        17.25,
+        15.75,
+        29.25,
+        28.5,
+        27.0,
+        23.25,
+        21.0,
+        18.0,
+        17.25
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Ignition Dwell (battery voltage vs. RPM)",
+      "address": 20715,
+      "end": 20799,
+      "rows": 12,
+      "cols": 7,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "6.00,8.00,10.00,12.00,14.00,16.00,16.50",
+      "y_labels": "40,160,320,440,640,880,1040,2200,3520,4760,5760,6200",
+      "raw_hex": "32180f0b090806371b100c0a08064421140f0c0a0855291a13100d0a7e3d261c17130f984a2e221c1712df6f45332a231bdf995f463a3025dfdf8c68564636dfdfb5866f5b47dfdfdfa6897057dfdfdfdfb99776",
+      "values": [
+        50,
+        24,
+        15,
+        11,
+        9,
+        8,
+        6,
+        55,
+        27,
+        16,
+        12,
+        10,
+        8,
+        6,
+        68,
+        33,
+        20,
+        15,
+        12,
+        10,
+        8,
+        85,
+        41,
+        26,
+        19,
+        16,
+        13,
+        10,
+        126,
+        61,
+        38,
+        28,
+        23,
+        19,
+        15,
+        152,
+        74,
+        46,
+        34,
+        28,
+        23,
+        18,
+        223,
+        111,
+        69,
+        51,
+        42,
+        35,
+        27,
+        223,
+        153,
+        95,
+        70,
+        58,
+        48,
+        37,
+        223,
+        223,
+        140,
+        104,
+        86,
+        70,
+        54,
+        223,
+        223,
+        181,
+        134,
+        111,
+        91,
+        71,
+        223,
+        223,
+        223,
+        166,
+        137,
+        112,
+        87,
+        223,
+        223,
+        223,
+        223,
+        185,
+        151,
+        118
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Engine temp sensor transfer map",
+      "address": 18505,
+      "end": 18517,
+      "rows": 12,
+      "cols": 1,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "air",
+      "y_labels": "-40F,-20F,0F,30F,50F,80F,100F,110F,120F,130F,140F,150F",
+      "raw_hex": "000b182d4665859dbddaeaeb",
+      "values": [
+        0,
+        11,
+        24,
+        45,
+        70,
+        101,
+        133,
+        157,
+        189,
+        218,
+        234,
+        235
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "Map Address INDEX in the code",
+      "address": 17856,
+      "end": 18120,
+      "rows": 132,
+      "cols": 2,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "hex,adr",
+      "y_labels": "1st map",
+      "raw_hex": "4835483b4855485f486d48354873487b4885488f489d48ab48b948d048de48ec49204959495f496d4980498e499449a249ac49b649cd49ef49fd4a034a094a134a1d4a3f4a474a514a684a764aaf4abd4ad04ade4ae44af24b094b2b4b964bf44c5f4cbd4d284d864df14e4f4eba4f184f264f304f3a4f444f524f5c48354f664f704f764f7c4f864f8e4fb54fd74fe14fef50065071509350c050ca50d4513f514951535175517d51a451c651dd5248526a529752a152ab5316537453df543d54a85506557155cf563a5698483556a256be483556da56e4570a5730573e574657545762576c579257a057aa57b657dd57e757f557ff58095813581d58275831583b5845584f5859",
+      "values": [
+        72,
+        53,
+        72,
+        59,
+        72,
+        85,
+        72,
+        95,
+        72,
+        109,
+        72,
+        53,
+        72,
+        115,
+        72,
+        123,
+        72,
+        133,
+        72,
+        143,
+        72,
+        157,
+        72,
+        171,
+        72,
+        185,
+        72,
+        208,
+        72,
+        222,
+        72,
+        236,
+        73,
+        32,
+        73,
+        89,
+        73,
+        95,
+        73,
+        109,
+        73,
+        128,
+        73,
+        142,
+        73,
+        148,
+        73,
+        162,
+        73,
+        172,
+        73,
+        182,
+        73,
+        205,
+        73,
+        239,
+        73,
+        253,
+        74,
+        3,
+        74,
+        9,
+        74,
+        19,
+        74,
+        29,
+        74,
+        63,
+        74,
+        71,
+        74,
+        81,
+        74,
+        104,
+        74,
+        118,
+        74,
+        175,
+        74,
+        189,
+        74,
+        208,
+        74,
+        222,
+        74,
+        228,
+        74,
+        242,
+        75,
+        9,
+        75,
+        43,
+        75,
+        150,
+        75,
+        244,
+        76,
+        95,
+        76,
+        189,
+        77,
+        40,
+        77,
+        134,
+        77,
+        241,
+        78,
+        79,
+        78,
+        186,
+        79,
+        24,
+        79,
+        38,
+        79,
+        48,
+        79,
+        58,
+        79,
+        68,
+        79,
+        82,
+        79,
+        92,
+        72,
+        53,
+        79,
+        102,
+        79,
+        112,
+        79,
+        118,
+        79,
+        124,
+        79,
+        134,
+        79,
+        142,
+        79,
+        181,
+        79,
+        215,
+        79,
+        225,
+        79,
+        239,
+        80,
+        6,
+        80,
+        113,
+        80,
+        147,
+        80,
+        192,
+        80,
+        202,
+        80,
+        212,
+        81,
+        63,
+        81,
+        73,
+        81,
+        83,
+        81,
+        117,
+        81,
+        125,
+        81,
+        164,
+        81,
+        198,
+        81,
+        221,
+        82,
+        72,
+        82,
+        106,
+        82,
+        151,
+        82,
+        161,
+        82,
+        171,
+        83,
+        22,
+        83,
+        116,
+        83,
+        223,
+        84,
+        61,
+        84,
+        168,
+        85,
+        6,
+        85,
+        113,
+        85,
+        207,
+        86,
+        58,
+        86,
+        152,
+        72,
+        53,
+        86,
+        162,
+        86,
+        190,
+        72,
+        53,
+        86,
+        218,
+        86,
+        228,
+        87,
+        10,
+        87,
+        48,
+        87,
+        62,
+        87,
+        70,
+        87,
+        84,
+        87,
+        98,
+        87,
+        108,
+        87,
+        146,
+        87,
+        160,
+        87,
+        170,
+        87,
+        182,
+        87,
+        221,
+        87,
+        231,
+        87,
+        245,
+        87,
+        255,
+        88,
+        9,
+        88,
+        19,
+        88,
+        29,
+        88,
+        39,
+        88,
+        49,
+        88,
+        59,
+        88,
+        69,
+        88,
+        79,
+        88,
+        89
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "AFM voltage transfer map",
+      "address": 18192,
+      "end": 18224,
+      "rows": 32,
+      "cols": 1,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": "3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72,75,78,81,84,87,90,93,96",
+      "raw_hex": "818486888b8d909395989b9ea0a3a6a9acb0b3b6b9bdc0c4c7cbcfd2d6dadee2",
+      "values": [
+        129,
+        132,
+        134,
+        136,
+        139,
+        141,
+        144,
+        147,
+        149,
+        152,
+        155,
+        158,
+        160,
+        163,
+        166,
+        169,
+        172,
+        176,
+        179,
+        182,
+        185,
+        189,
+        192,
+        196,
+        199,
+        203,
+        207,
+        210,
+        214,
+        218,
+        222,
+        226
+      ]
+    },
+    {
+      "kind": "table",
+      "title": "AFM map scale factors (injector size adjusting)",
+      "address": 18176,
+      "end": 18184,
+      "rows": 1,
+      "cols": 8,
+      "width": 1,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": "0.5v,1.0v,1.5v,2.0v,2.5v,3.0v,3.5v,4.0v",
+      "y_labels": "calcul",
+      "raw_hex": "a49282e8cfb8a492",
+      "values": [
+        164,
+        146,
+        130,
+        232,
+        207,
+        184,
+        164,
+        146
+      ]
+    },
+    {
+      "kind": "constant",
+      "title": "Rev Limit(primary)",
+      "address": 17109,
+      "end": 17110,
+      "rows": 1,
+      "cols": 1,
+      "width": 1,
+      "equation": "912500/X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": null,
+      "raw_hex": "90",
+      "values": [
+        6336.805555555556
+      ]
+    },
+    {
+      "kind": "constant",
+      "title": "Rev Limit(secondary)",
+      "address": 17171,
+      "end": 17172,
+      "rows": 1,
+      "cols": 1,
+      "width": 1,
+      "equation": "912500/X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": null,
+      "raw_hex": "90",
+      "values": [
+        6336.805555555556
+      ]
+    },
+    {
+      "kind": "constant",
+      "title": "Rev Limit buffer(primary)",
+      "address": 17110,
+      "end": 17111,
+      "rows": 1,
+      "cols": 1,
+      "width": 1,
+      "equation": "X*40,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": null,
+      "raw_hex": "03",
+      "values": [
+        120
+      ]
+    },
+    {
+      "kind": "constant",
+      "title": "Rev Limit buffer(secondary)",
+      "address": 17172,
+      "end": 17173,
+      "rows": 1,
+      "cols": 1,
+      "width": 1,
+      "equation": "X*40,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": null,
+      "raw_hex": "03",
+      "values": [
+        120
+      ]
+    },
+    {
+      "kind": "constant",
+      "title": "Checksum 16bit",
+      "address": 32765,
+      "end": 32767,
+      "rows": 1,
+      "cols": 1,
+      "width": 2,
+      "equation": "X,TH|0|0|0|0|",
+      "x_labels": null,
+      "y_labels": null,
+      "raw_hex": "ffff",
+      "values": [
+        65535
+      ]
+    }
+  ]
+}

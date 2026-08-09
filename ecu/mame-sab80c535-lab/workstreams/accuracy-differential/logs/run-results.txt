@@ -1,0 +1,15 @@
+COMMAND: cd /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/accuracy-differential
+COMMAND: bash run.sh
+RESULT: PASS; pinned MAME commit a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e
+RESULT: fresh Ghidra lookups 100/100 passed
+RESULT: MAME/static canonical exact agreement 31 events; agreement=True
+RESULT: canonical three-way exact prefix 12 events; ordinal=12 field=registers.psw category=cpu_semantics values={"ghidra": 0, "mame": 1, "static": 1}
+RESULT: canonical parity-masked prefix 31 events; ordinal=31 field=event_presence category=unavailable_evidence values={"ghidra": 64, "mame": 31, "static": 31}
+RESULT: MAME/static microcase exact agreement 18 events; agreement=True
+RESULT: microcase three-way exact prefix 2 events; ordinal=2 field=registers.sp category=cpu_semantics values={"ghidra": 7, "mame": 48, "static": 48}
+RESULT: 8 negative gates passed
+LOG-SHA256: mame-reset.trace dfff33d919fe12f742d04590c370952b139d979efaefa50f95c9265ef55bfb40
+LOG-SHA256: mame-reset-console.log 9aaada72b7a8f6aad7573958f5f34ab6d8afa86a3d575c0223d051db1c5dc5a6
+LOG-SHA256: ghidra-canonical-run.log 3f7f71218e85841bd8a8b7e04c23c0e3510042768d73b65fa3036512a00f70e5
+LOG-SHA256: mame-microcase.trace e86715c3fc3fc9ba29340813bed80cfb9be3123a2873a306b7547ba01a1b9c5b
+LOG-SHA256: ghidra-microcase-run.log 029c510db0f4faf6d26e5f24c50ca84a7283b4c0779ac8da393c2206383c0fdc

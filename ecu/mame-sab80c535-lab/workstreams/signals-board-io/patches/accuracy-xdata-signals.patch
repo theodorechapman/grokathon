@@ -1,0 +1,196 @@
+diff --git a/build.sh b/build.sh
+--- a/build.sh
++++ b/build.sh
+@@ -5,6 +5,7 @@ readonly COMMIT="a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e"
+ readonly ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ readonly MAME_DIR="${MAME_DIR:-/tmp/mame-motronic-accuracy-xdata}"
+ readonly CORE_PATCH="$ROOT/../mcu-core/mame-sab80c515.patch"
++readonly SIGNAL_ROOT="$ROOT/../signals-board-io"
+ readonly JOBS="${JOBS:-4}"
+ 
+ for tool in git make patch rg sdl2-config; do
+@@ -51,10 +52,11 @@ if ! rg -q "instruction_cb" "$MAME_DIR/src/devices/cpu/mcs51/i8051.h"; then
+ 	fi
+ fi
+ install -m 0644 "$ROOT"/src/* "$MAME_DIR/src/mame/skeleton/"
++install -m 0644 "$SIGNAL_ROOT"/src/* "$MAME_DIR/src/mame/skeleton/"
+ 
+ make -C "$MAME_DIR" \
+ 	SUBTARGET=motronic175 \
+-	SOURCES=src/mame/skeleton/motronic175.cpp,src/mame/skeleton/motronic175-xdata.cpp,src/mame/skeleton/motronic175-xdata-config.cpp,src/mame/skeleton/sab80c515test.cpp \
++	SOURCES=src/mame/skeleton/motronic175.cpp,src/mame/skeleton/motronic175-xdata.cpp,src/mame/skeleton/motronic175-xdata-config.cpp,src/mame/skeleton/motronic175-signal-provider.cpp,src/mame/skeleton/sab80c515test.cpp \
+ 	REGENIE=1 SYMBOLS=0 IGNORE_GIT=1 OSD=sdl USE_LIBSDL=1 \
+ 	OVERRIDE_CC=/usr/bin/clang OVERRIDE_CXX=/usr/bin/clang++ "-j$JOBS"
+ test -x "$MAME_DIR/motronic175"
+diff --git a/src/motronic175.cpp b/src/motronic175.cpp
+--- a/src/motronic175.cpp
++++ b/src/motronic175.cpp
+@@ -32,6 +32,9 @@ private:
+ 	void code_map(address_map &map) ATTR_COLD;
+ 	void instruction(u16 pc);
+ 	void p1_w(u8 data);
++	u8 p3_r();
++	u8 p5_r();
++	u8 p6_r();
+ 	void report();
+ 	void request_stop(const char *reason);
+ 	void xdata_map(address_map &map) ATTR_COLD;
+@@ -103,6 +106,21 @@ void motronic175_state::p1_w(u8 data)
+ 	m_p1_last = data;
+ }
+ 
++u8 motronic175_state::p3_r()
++{
++	return m_xdata->read_port(3);
++}
++
++u8 motronic175_state::p5_r()
++{
++	return m_xdata->read_port(5);
++}
++
++u8 motronic175_state::p6_r()
++{
++	return m_xdata->read_port(6);
++}
++
+ void motronic175_state::request_stop(const char *reason)
+ {
+ 	if (m_stopping)
+@@ -120,7 +138,7 @@ void motronic175_state::instruction(u16 pc)
+ 	m_deepest_pc = std::max(m_deepest_pc, pc);
+ 	m_pc_hash ^= pc;
+ 	m_pc_hash *= 0x100000001b3ULL;
+-	m_xdata->begin_instruction(pc);
++	m_xdata->begin_instruction(pc, m_maincpu->total_cycles());
+ 	if (pc >= 0x5c00 && pc <= 0x5d0f)
+ 		m_startup_frontier = std::max(m_startup_frontier, pc);
+ 	if (pc == 0x5c00)
+@@ -174,9 +192,9 @@ void motronic175_state::motronic175(machine_config &config)
+ 	m_maincpu->set_addrmap(AS_PROGRAM, &motronic175_state::code_map);
+ 	m_maincpu->set_addrmap(AS_DATA, &motronic175_state::xdata_map);
+ 	m_maincpu->instruction_cb().set(FUNC(motronic175_state::instruction));
+-	m_maincpu->port_in_cb<3>().set_constant(0xff);
+-	m_maincpu->port_in_cb<5>().set_constant(0xff);
+-	m_maincpu->port_in_cb<6>().set_constant(0xff);
++	m_maincpu->port_in_cb<3>().set(FUNC(motronic175_state::p3_r));
++	m_maincpu->port_in_cb<5>().set(FUNC(motronic175_state::p5_r));
++	m_maincpu->port_in_cb<6>().set(FUNC(motronic175_state::p6_r));
+ 	m_maincpu->port_out_cb<0>().set_nop();
+ 	m_maincpu->port_out_cb<1>().set(FUNC(motronic175_state::p1_w));
+ 	m_maincpu->port_out_cb<2>().set_nop();
+diff --git a/src/motronic175-xdata.h b/src/motronic175-xdata.h
+--- a/src/motronic175-xdata.h
++++ b/src/motronic175-xdata.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include "emu.h"
++#include "motronic175-signal-provider.h"
+ 
+ #include <array>
+ #include <bitset>
+@@ -20,8 +21,9 @@ public:
+ 			device_t *owner,
+ 			u32 clock = 0);
+ 
+-	void begin_instruction(u16 pc);
++	void begin_instruction(u16 pc, u64 cycle);
+ 	u8 read(offs_t offset);
++	u8 read_port(u8 port) const;
+ 	void report();
+ 	void write(offs_t offset, u8 data);
+ 
+@@ -54,9 +56,11 @@ private:
+ 	std::array<u8, 2> m_output_latches{};
+ 	std::array<u8, 2> m_output_written{};
+ 	std::bitset<0x10000> m_seen_reads;
+ 	std::bitset<0x10000> m_seen_writes;
++	motronic175_signal_provider m_signals;
+ 	u64 m_events = 0;
+ 	u64 m_unknown_reads = 0;
++	u64 m_cycle = 0;
+ 	u16 m_instruction_pc = 0;
+ 	u16 m_first_unknown_address = 0xffff;
+ 	u16 m_first_unknown_pc = 0xffff;
+diff --git a/src/motronic175-xdata.cpp b/src/motronic175-xdata.cpp
+--- a/src/motronic175-xdata.cpp
++++ b/src/motronic175-xdata.cpp
+@@ -30,9 +30,10 @@ u16 motronic175_xdata_device::branch_dependency(u16 read_pc) const
+ 	}
+ }
+ 
+-void motronic175_xdata_device::begin_instruction(u16 pc)
++void motronic175_xdata_device::begin_instruction(u16 pc, u64 cycle)
+ {
+ 	m_instruction_pc = pc;
++	m_cycle = cycle;
+ 	if (m_taint_branch_seen)
+ 	{
+ 		logerror(
+@@ -117,5 +118,15 @@ u8 motronic175_xdata_device::read(offs_t offset)
+ {
+ 	const u16 address = u16(offset);
++	const bool explicit_input =
++			(address & 0xff00) == 0xa000 && m_input_configured[address & 0xff];
++	if (!explicit_input && m_signals.enabled()
++			&& (address == 0xa040 || address == 0xa041))
++	{
++		const u8 value = m_signals.read_xdata(address, m_cycle);
++		if (!machine().side_effects_disabled())
++			observe(address, value, false, false, read_class(address, true));
++		return value;
++	}
+ 	if (address <= 0x03ff && m_storage_known[address])
+ 	{
+ 		const u8 value = m_storage[address];
+@@ -137,6 +148,11 @@ u8 motronic175_xdata_device::read(offs_t offset)
+ 	return value;
+ }
+ 
++u8 motronic175_xdata_device::read_port(u8 port) const
++{
++	return m_signals.enabled() ? m_signals.read_port(port, m_cycle) : 0xff;
++}
++
+ void motronic175_xdata_device::write(offs_t offset, u8 data)
+ {
+ 	const u16 address = u16(offset);
+diff --git a/src/motronic175-xdata-config.cpp b/src/motronic175-xdata-config.cpp
+--- a/src/motronic175-xdata-config.cpp
++++ b/src/motronic175-xdata-config.cpp
+@@ -67,6 +67,18 @@ void motronic175_xdata_device::configure()
+ 		m_unknown_value = u8(parsed);
+ 	}
+ 	parse_inputs(std::getenv("MOTRONIC_INPUTS"));
++	const char *scenario = std::getenv("MOTRONIC_SIGNAL_SCENARIO");
++	const char *script = std::getenv("MOTRONIC_SIGNAL_SCRIPT");
++	std::string signal_error;
++	if (!m_signals.configure(
++			scenario ? scenario : "off",
++			script ? script : "",
++			signal_error))
++	{
++		fatalerror(
++				"invalid board-I/O signal configuration: %s\n",
++				signal_error.c_str());
++	}
+ 	if (const char *stop = std::getenv("MOTRONIC_STOP_AFTER_TAINT"))
+ 	{
+ 		if (std::strcmp(stop, "0") && std::strcmp(stop, "1"))
+@@ -84,6 +96,7 @@ void motronic175_xdata_device::device_start()
+ 	save_item(NAME(m_storage_known));
+ 	save_item(NAME(m_output_latches));
+ 	save_item(NAME(m_output_written));
++	save_item(NAME(m_cycle));
+ 	logerror(
+ 			"XMODEL reset=%u unknown_policy=%u unknown_value=%02x "
+ 			"configured_inputs=%u output_readback=disabled stop_after_taint=%u\n",
+@@ -119,6 +132,7 @@ void motronic175_xdata_device::device_reset()
+ 	m_seen_writes.reset();
+ 	m_events = 0;
+ 	m_unknown_reads = 0;
++	m_cycle = 0;
+ 	m_instruction_pc = 0;
+ 	m_first_unknown_address = 0xffff;
+ 	m_first_unknown_pc = 0xffff;

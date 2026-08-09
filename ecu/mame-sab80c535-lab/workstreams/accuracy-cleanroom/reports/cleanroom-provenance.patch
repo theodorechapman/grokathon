@@ -1,0 +1,159 @@
+diff --git a/cleanroom/src/kernel/vector-table.ts b/cleanroom/src/kernel/vector-table.ts
+--- a/cleanroom/src/kernel/vector-table.ts
++++ b/cleanroom/src/kernel/vector-table.ts
+@@ -37,8 +37,8 @@ export const VECTOR_TABLE: readonly VectorEntry[] = [
+   { source: 'timer1', vector: 0x001b, wrapper: 0x2050, worker: 0x257d, stub: false, provenance: 'spec' },
+   { source: 'serial', vector: 0x0023, wrapper: 0x2060, worker: 0x8960, stub: false, provenance: 'spec' },
+   { source: 'timer2', vector: 0x002b, wrapper: 0x2070, worker: null, stub: false, provenance: 'spec' },
+-  { source: 'adc', vector: 0x0033, wrapper: 0x2080, worker: null, stub: true, provenance: 'spec' },
+-  { source: 'ext2', vector: 0x003b, wrapper: 0x2090, worker: null, stub: true, provenance: 'assumed' },
++  { source: 'adc', vector: 0x0043, wrapper: 0x2080, worker: null, stub: true, provenance: 'spec' },
++  { source: 'ext2', vector: 0x004b, wrapper: 0x2090, worker: null, stub: true, provenance: 'spec' },
+   { source: 'ext3cc0', vector: 0x0053, wrapper: 0x20a0, worker: null, stub: false, provenance: 'spec' },
+   { source: 'ext4', vector: 0x005b, wrapper: 0x20b0, worker: null, stub: true, provenance: 'assumed' },
+   { source: 'ext5', vector: 0x0063, wrapper: 0x20c0, worker: null, stub: true, provenance: 'assumed' },
+diff --git a/cleanroom/src/memory-map.ts b/cleanroom/src/memory-map.ts
+--- a/cleanroom/src/memory-map.ts
++++ b/cleanroom/src/memory-map.ts
+@@ -148,15 +148,15 @@ export const SFR = {
+   IEN1: 0xb8,
+   IRCON: 0xc0,
+   CCEN: 0xc1,
+-  CRCL: 0xc2,
+-  CRCH: 0xc3,
+-  CCL1: 0xc4,
+-  CCH1: 0xc5,
+-  CCL2: 0xc6,
+-  CCH2: 0xc7,
+-  CCL3: 0xc8,
+-  CCH3: 0xc9,
++  CCL1: 0xc2,
++  CCH1: 0xc3,
++  CCL2: 0xc4,
++  CCH2: 0xc5,
++  CCL3: 0xc6,
++  CCH3: 0xc7,
+   T2CON: 0xc8,
++  CRCL: 0xca,
++  CRCH: 0xcb,
+   TL2: 0xcc,
+   TH2: 0xcd,
+   TL1: 0x8b,
+diff --git a/cleanroom/src/calibration/calibration-image.ts b/cleanroom/src/calibration/calibration-image.ts
+--- a/cleanroom/src/calibration/calibration-image.ts
++++ b/cleanroom/src/calibration/calibration-image.ts
+@@ -21,7 +21,7 @@ import { spanAxis, synthesizePayload } from './payload-shapes.ts';
+ export const CALIBRATION_BASE = 0x4000;
+ export const CALIBRATION_END = 0x6000;
+ /** SPECS: "the 150-entry master directory". */
+-export const MASTER_DIRECTORY_BASE = 0x4700;
++export const MASTER_DIRECTORY_BASE = 0x45c0;
+ export const MASTER_DIRECTORY_ENTRIES = 150;
+ /** Directory entries are a 2-byte descriptor address; the top bit carries the
+  *  one/two-axis flag, which the descriptor itself does not encode. */
+diff --git a/cleanroom/src/calibration/selector-tables.ts b/cleanroom/src/calibration/selector-tables.ts
+--- a/cleanroom/src/calibration/selector-tables.ts
++++ b/cleanroom/src/calibration/selector-tables.ts
+@@ -47,7 +47,7 @@ export const selectorBaseForModeBits = (modeBits: number): number =>
+ /** Pointer windows into the master directory. */
+ export const POINTER_WINDOWS = {
+-  /** CODE:7921 — the primary 4700 family. */
+-  primary: 0x4700,
++  /** CODE:7930 — primary pointer base recovered from the binary. */
++  primary: 0x45c0,
+   /** CODE:790d — alternate curves. */
+   alternateA: 0x4730,
+   alternateB: 0x4750,
+diff --git a/cleanroom/src/subsystems/sensor-state.ts b/cleanroom/src/subsystems/sensor-state.ts
+--- a/cleanroom/src/subsystems/sensor-state.ts
++++ b/cleanroom/src/subsystems/sensor-state.ts
+@@ -67,5 +67,5 @@ export class SensorState {
+       value: (raw / 0xff) * adcReferenceVolts * supplyDividerRatio,
+       unit: 'V',
+-      confidence: 'medium',
++      confidence: 'unknown',
+     };
+   }
+@@ -76,6 +76,6 @@ export class SensorState {
+       raw,
+       value: raw * this.assumptions.coolantDegCPerCount + this.assumptions.coolantDegCOffset,
+       unit: 'degC',
+-      confidence: 'medium',
++      confidence: 'unknown',
+     };
+   }
+@@ -86,6 +86,6 @@ export class SensorState {
+       raw,
+       value: raw * this.assumptions.intakeAirDegCPerCount + this.assumptions.intakeAirDegCOffset,
+       unit: 'degC',
+-      confidence: 'medium',
++      confidence: 'unknown',
+     };
+   }
+@@ -97,6 +97,6 @@ export class SensorState {
+       raw,
+       value: raw * this.assumptions.rpmPerSpeedCount,
+       unit: 'rpm',
+-      confidence: 'medium',
++      confidence: 'unknown',
+     };
+   }
+@@ -109,5 +109,5 @@ export class SensorState {
+   /** INTMEM:0040. SPECS: "does not prove percent or RPM units". */
+   normalizedLoad(): Scaled {
+     const raw = this.raw(IDATA.normalizedLoad);
+-    return { raw, value: (raw * 100) / 0xff, unit: '% of calibrated span', confidence: 'medium' };
++    return { raw, value: (raw * 100) / 0xff, unit: '% of calibrated span', confidence: 'unknown' };
+   }
+diff --git a/cleanroom/src/diagnostics/kw71-services.ts b/cleanroom/src/diagnostics/kw71-services.ts
+--- a/cleanroom/src/diagnostics/kw71-services.ts
++++ b/cleanroom/src/diagnostics/kw71-services.ts
+@@ -87,7 +87,7 @@ export const handleService = (
+         // Addresses at or above 0x80 in the low page are read as SFRs, matching
+         // the "memory/SFR read" description; everything else is XRAM.
+         bytes.push(address < 0x0100 && address >= 0x80
+-          ? machine.sfr.read(address)
++          ? machine.sfr.read(address + i)
+           : machine.xram.read(address + i));
+       }
+       return { service, payload: bytes };
+diff --git a/cleanroom/test/calibration.test.ts b/cleanroom/test/calibration.test.ts
+--- a/cleanroom/test/calibration.test.ts
++++ b/cleanroom/test/calibration.test.ts
+@@ -98,7 +98,7 @@ describe('lookup service', () => {
+     ecu.powerOn();
+     ecu.context.lookup.configure(LOOKUP_CONFIGURATIONS.fuelPartLoad);
+ 
+-    assert.equal(ecu.machine.idata.readWord(IDATA.pointerWindowLow), 0x4700);
++    assert.equal(ecu.machine.idata.readWord(IDATA.pointerWindowLow), 0x45c0);
+     assert.equal(ecu.machine.idata.readWord(IDATA.selectorTableLow), 0x4000);
+   });
+ 
+@@ -160,7 +160,7 @@ describe('selector variants', () => {
+     for (const entry of unconsumed) {
+       assert.equal(referenced.has(entry.slot), false, `slot ${entry.slot} has no selector`);
+       const image = buildCalibrationImage();
+-      assert.ok(image.directoryEntry(0x4700, entry.slot), 'but is still in the directory');
++      assert.ok(image.directoryEntry(0x45c0, entry.slot), 'but is still in the directory');
+     }
+   });
+ });
+diff --git a/cleanroom/test/disclosure.test.ts b/cleanroom/test/disclosure.test.ts
+--- a/cleanroom/test/disclosure.test.ts
++++ b/cleanroom/test/disclosure.test.ts
+@@ -80,13 +80,13 @@ describe('confidence travels with the value', () => {
+-  it('marks scaled sensor readings as medium, never high', () => {
++  it('marks assumption-scaled sensor readings as unknown', () => {
+     const ecu = createEcu();
+     ecu.powerOn();
+     for (const scaled of [
+       ecu.parts.sensors.supplyVolts(),
+       ecu.parts.sensors.coolantDegC(),
+       ecu.parts.sensors.engineSpeedRpm(),
+       ecu.parts.sensors.normalizedLoad(),
+     ]) {
+-      assert.equal(scaled.confidence, 'medium');
++      assert.equal(scaled.confidence, 'unknown');
+       assert.ok(scaled.unit.length > 0);
+     }
+   });

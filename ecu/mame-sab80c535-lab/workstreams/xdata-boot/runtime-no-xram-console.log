@@ -1,0 +1,106 @@
+RUN case=no-xram mame_commit=a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e
+RUN rom_sha256=e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33
+[:xdata] XDATA model storage=disabled unknown_read=open-bus-ff xram_approx=0000-03ff
+Soft reset
+[:maincpu] write of un-hooked port 3 fd
+[:maincpu] write of un-hooked port 2 ff
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 0 ff
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+[:xdata] XDATA first op=W addr=a081 pc=5c0c value=01 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a010 pc=5c12 value=81 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a011 pc=5c16 value=81 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a040 pc=5c1c value=ff class=output-latch unknown=0
+[:xdata] XDATA first op=W addr=a041 pc=5c20 value=ff class=output-latch unknown=0
+[:xdata] XDATA first op=W addr=a002 pc=5c26 value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a003 pc=5c2a value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a004 pc=5c2e value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a005 pc=5c32 value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a008 pc=5c38 value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a009 pc=5c3c value=00 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a021 pc=5c42 value=d7 class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=a020 pc=5c48 value=ff class=asic-register-unknown unknown=0
+[:xdata] XDATA first op=W addr=0162 pc=5c4e value=d7 class=xram-disabled unknown=0
+[:maincpu] write of un-hooked port 2 00
+[:xdata] XDATA first op=R addr=0000 pc=5c54 value=ff class=xram-disabled unknown=1
+[:xdata] XDATA dependency first_unknown_read_pc=5c54 decision_pc=5c55 value=ff
+[:maincpu] write of un-hooked port 2 01
+[:xdata] XDATA first op=W addr=015b pc=5c78 value=00 class=xram-disabled unknown=0
+[:maincpu] write of un-hooked port 2 00
+[:maincpu] write of un-hooked port 2 01
+[:xdata] XDATA first op=R addr=015b pc=5c81 value=ff class=xram-disabled unknown=1
+[:maincpu] write of un-hooked port 2 02
+[:xdata] XDATA first op=R addr=020c pc=5c97 value=ff class=xram-disabled unknown=1
+[:maincpu] read of un-hooked port 5 (PC=5C9F)
+[:maincpu] write of un-hooked port 5 ff
+[:maincpu] write of un-hooked port 2 00
+[:maincpu] write of un-hooked port 2 01
+[:maincpu] write of un-hooked port 2 00
+[:xdata] XDATA first op=W addr=0080 pc=8182 value=00 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0081 pc=8188 value=01 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0082 pc=818c value=0a class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0083 pc=818f value=00 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0084 pc=8191 value=00 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0085 pc=8196 value=14 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00c3 pc=8fda value=b4 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00c4 pc=8fde value=64 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00c5 pc=8fe0 value=64 class=xram-disabled unknown=0
+[:xdata] XDATA first op=R addr=00c2 pc=8fe3 value=ff class=xram-disabled unknown=1
+[:xdata] XDATA first op=W addr=00c2 pc=8fec value=36 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=008c pc=8ff0 value=00 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00db pc=8ff6 value=1e class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00dc pc=8ffa value=64 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00dd pc=8ffc value=64 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f7 pc=9002 value=01 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f8 pc=9006 value=0a class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f9 pc=9008 value=0a class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f4 pc=900e value=01 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f5 pc=9012 value=0a class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=00f6 pc=9014 value=0a class=xram-disabled unknown=0
+[:maincpu] write of un-hooked port 2 01
+[:xdata] XDATA first op=W addr=0110 pc=78ba value=00 class=xram-disabled unknown=0
+[:maincpu] write of un-hooked port 2 00
+[:xdata] XDATA first op=W addr=0111 pc=78c3 value=1e class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0112 pc=78c9 value=80 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0113 pc=78cb value=80 class=xram-disabled unknown=0
+[:xdata] XDATA first op=W addr=0114 pc=78cd value=80 class=xram-disabled unknown=0
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 3 ff
+[:maincpu] write of un-hooked port 4 ff
+[:maincpu] read of un-hooked port 5 (PC=5CB9)
+[:maincpu] write of un-hooked port 5 ff
+[:maincpu] ':maincpu' (5CC7): unmapped sfr memory write to A9 = 3A & FF
+[:maincpu] ':maincpu' (5CCA): unmapped sfr memory write to B9 = 26 & FF
+[:maincpu] ':maincpu' (5CCD): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:xdata] XDATA summary distinct=44 unknown_reads=5 first_unknown_read_pc=5c54 overflow=0 out_a040=ff out_a041=ff
+[:] EXEC summary reason=timer2-interrupt-storm instructions=251 cycles=429 exit_cycles=16670 deepest_pc=9015 last_pc=002b startup_frontier=5cd3 init_entries=1 timer2_entries=16 foreground_entries=0 foreground_instruction=0

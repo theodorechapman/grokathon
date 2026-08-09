@@ -1,0 +1,42 @@
+{
+  "profile": "canonical-reset",
+  "mame_commit": "a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e",
+  "rom_size": 40960,
+  "rom_sha256": "e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33",
+  "minimum_pc_events": 8,
+  "maximum_cycle": 64,
+  "pc_order": "prefix",
+  "ordered_pcs": [
+    "0000",
+    "0073",
+    "0075",
+    "0077",
+    "0079",
+    "007b",
+    "20e0",
+    "5c00"
+  ],
+  "require_pc_cycles": [
+    {
+      "pc": "0000",
+      "cycles": 0
+    },
+    {
+      "pc": "5c00",
+      "cycles": 11
+    }
+  ],
+  "require_accesses": [
+    {
+      "space": "sfr",
+      "access": "read",
+      "address": "00a9"
+    },
+    {
+      "space": "xdata",
+      "access": "write",
+      "address": "a081",
+      "data": "01"
+    }
+  ]
+}

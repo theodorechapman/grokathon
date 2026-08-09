@@ -1,0 +1,1832 @@
+{
+  "reset": {
+    "passed": true,
+    "expected": [
+      "CODE:0000",
+      "CODE:0073",
+      "CODE:0075",
+      "CODE:0077",
+      "CODE:0079",
+      "CODE:007b",
+      "CODE:20e0",
+      "CODE:5c00"
+    ],
+    "actual": [
+      "CODE:0000",
+      "CODE:0073",
+      "CODE:0075",
+      "CODE:0077",
+      "CODE:0079",
+      "CODE:007b",
+      "CODE:20e0",
+      "CODE:5c00"
+    ]
+  },
+  "lookup_trace_count": 100,
+  "lookup_pass_count": 100,
+  "lookup_failure_count": 0,
+  "independent_check": "Raw selector/pointer/descriptor bytes and expected control-flow branches are decoded without using Ghidra's decompiler.",
+  "failures": [],
+  "results": [
+    {
+      "logical_index": 0,
+      "synthetic_input": 0,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 1,
+      "synthetic_input": 0,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 2,
+      "synthetic_input": 0,
+      "selector": "0x00",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c0",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 3,
+      "synthetic_input": 0,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 4,
+      "synthetic_input": 0,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 5,
+      "synthetic_input": 0,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 6,
+      "synthetic_input": 0,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 7,
+      "synthetic_input": 0,
+      "selector": "0x06",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c6",
+      "target": "CODE:485f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4867",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 8,
+      "synthetic_input": 0,
+      "selector": "0x08",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c8",
+      "target": "CODE:486d",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4871",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 9,
+      "synthetic_input": 0,
+      "selector": "0x0a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45ca",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 10,
+      "synthetic_input": 0,
+      "selector": "0x0c",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45cc",
+      "target": "CODE:4873",
+      "descriptor": {
+        "first_state": "INTMEM:003a",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4878",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 11,
+      "synthetic_input": 0,
+      "selector": "0x0f",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45ce",
+      "target": "CODE:487b",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0090",
+        "rows": 4,
+        "cols": 152,
+        "payload": "CODE:491b",
+        "payload_size": 608
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 12,
+      "synthetic_input": 0,
+      "selector": "0x10",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d0",
+      "target": "CODE:4885",
+      "descriptor": {
+        "first_state": "INTMEM:0036",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:488b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 13,
+      "synthetic_input": 0,
+      "selector": "0x12",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d2",
+      "target": "CODE:488f",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4897",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 14,
+      "synthetic_input": 0,
+      "selector": "0x15",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d4",
+      "target": "CODE:489d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 64,
+        "payload": "CODE:48e7",
+        "payload_size": 384
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 15,
+      "synthetic_input": 0,
+      "selector": "0x17",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d6",
+      "target": "CODE:48ab",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 40,
+        "payload": "CODE:48dd",
+        "payload_size": 240
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 16,
+      "synthetic_input": 0,
+      "selector": "0x18",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d8",
+      "target": "CODE:48b9",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:48be",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 17,
+      "synthetic_input": 0,
+      "selector": "0x1a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45da",
+      "target": "CODE:48d0",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48d8",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 18,
+      "synthetic_input": 0,
+      "selector": "0x1d",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45dc",
+      "target": "CODE:48de",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:00f0",
+        "rows": 6,
+        "cols": 192,
+        "payload": "CODE:49a8",
+        "payload_size": 1152
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 19,
+      "synthetic_input": 0,
+      "selector": "0x1e",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45de",
+      "target": "CODE:48ec",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48f4",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 20,
+      "synthetic_input": 0,
+      "selector": "0x20",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e0",
+      "target": "CODE:4920",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 8,
+        "cols": 1,
+        "payload": "CODE:492a",
+        "payload_size": 8
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 21,
+      "synthetic_input": 0,
+      "selector": "0x22",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e2",
+      "target": "CODE:4959",
+      "descriptor": {
+        "first_state": "INTMEM:00a3",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:495d",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 22,
+      "synthetic_input": 0,
+      "selector": "0x24",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e4",
+      "target": "CODE:495f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4967",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 23,
+      "synthetic_input": 0,
+      "selector": "0x26",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e6",
+      "target": "CODE:496d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4972",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 24,
+      "synthetic_input": 0,
+      "selector": "0x29",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45e8",
+      "target": "CODE:4980",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:0080",
+        "rows": 6,
+        "cols": 102,
+        "payload": "CODE:49f0",
+        "payload_size": 612
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 0,
+      "synthetic_input": 64,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 1,
+      "synthetic_input": 64,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 2,
+      "synthetic_input": 64,
+      "selector": "0x00",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c0",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 3,
+      "synthetic_input": 64,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 4,
+      "synthetic_input": 64,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 5,
+      "synthetic_input": 64,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 6,
+      "synthetic_input": 64,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 7,
+      "synthetic_input": 64,
+      "selector": "0x06",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c6",
+      "target": "CODE:485f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4867",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 8,
+      "synthetic_input": 64,
+      "selector": "0x08",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c8",
+      "target": "CODE:486d",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4871",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 9,
+      "synthetic_input": 64,
+      "selector": "0x0a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45ca",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 10,
+      "synthetic_input": 64,
+      "selector": "0x0c",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45cc",
+      "target": "CODE:4873",
+      "descriptor": {
+        "first_state": "INTMEM:003a",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4878",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 11,
+      "synthetic_input": 64,
+      "selector": "0x0f",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45ce",
+      "target": "CODE:487b",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0090",
+        "rows": 4,
+        "cols": 152,
+        "payload": "CODE:491b",
+        "payload_size": 608
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 12,
+      "synthetic_input": 64,
+      "selector": "0x10",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d0",
+      "target": "CODE:4885",
+      "descriptor": {
+        "first_state": "INTMEM:0036",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:488b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 13,
+      "synthetic_input": 64,
+      "selector": "0x12",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d2",
+      "target": "CODE:488f",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4897",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 14,
+      "synthetic_input": 64,
+      "selector": "0x15",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d4",
+      "target": "CODE:489d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 64,
+        "payload": "CODE:48e7",
+        "payload_size": 384
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 15,
+      "synthetic_input": 64,
+      "selector": "0x17",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d6",
+      "target": "CODE:48ab",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 40,
+        "payload": "CODE:48dd",
+        "payload_size": 240
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 16,
+      "synthetic_input": 64,
+      "selector": "0x18",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d8",
+      "target": "CODE:48b9",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:48be",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 17,
+      "synthetic_input": 64,
+      "selector": "0x1a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45da",
+      "target": "CODE:48d0",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48d8",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 18,
+      "synthetic_input": 64,
+      "selector": "0x1d",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45dc",
+      "target": "CODE:48de",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:00f0",
+        "rows": 6,
+        "cols": 192,
+        "payload": "CODE:49a8",
+        "payload_size": 1152
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 19,
+      "synthetic_input": 64,
+      "selector": "0x1e",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45de",
+      "target": "CODE:48ec",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48f4",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 20,
+      "synthetic_input": 64,
+      "selector": "0x20",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e0",
+      "target": "CODE:4920",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 8,
+        "cols": 1,
+        "payload": "CODE:492a",
+        "payload_size": 8
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 21,
+      "synthetic_input": 64,
+      "selector": "0x22",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e2",
+      "target": "CODE:4959",
+      "descriptor": {
+        "first_state": "INTMEM:00a3",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:495d",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 22,
+      "synthetic_input": 64,
+      "selector": "0x24",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e4",
+      "target": "CODE:495f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4967",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 23,
+      "synthetic_input": 64,
+      "selector": "0x26",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e6",
+      "target": "CODE:496d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4972",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 24,
+      "synthetic_input": 64,
+      "selector": "0x29",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45e8",
+      "target": "CODE:4980",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:0080",
+        "rows": 6,
+        "cols": 102,
+        "payload": "CODE:49f0",
+        "payload_size": 612
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 0,
+      "synthetic_input": 128,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 1,
+      "synthetic_input": 128,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 2,
+      "synthetic_input": 128,
+      "selector": "0x00",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c0",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 3,
+      "synthetic_input": 128,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 4,
+      "synthetic_input": 128,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 5,
+      "synthetic_input": 128,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 6,
+      "synthetic_input": 128,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 7,
+      "synthetic_input": 128,
+      "selector": "0x06",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c6",
+      "target": "CODE:485f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4867",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 8,
+      "synthetic_input": 128,
+      "selector": "0x08",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c8",
+      "target": "CODE:486d",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4871",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 9,
+      "synthetic_input": 128,
+      "selector": "0x0a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45ca",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 10,
+      "synthetic_input": 128,
+      "selector": "0x0c",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45cc",
+      "target": "CODE:4873",
+      "descriptor": {
+        "first_state": "INTMEM:003a",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4878",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 11,
+      "synthetic_input": 128,
+      "selector": "0x0f",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45ce",
+      "target": "CODE:487b",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0090",
+        "rows": 4,
+        "cols": 152,
+        "payload": "CODE:491b",
+        "payload_size": 608
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 12,
+      "synthetic_input": 128,
+      "selector": "0x10",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d0",
+      "target": "CODE:4885",
+      "descriptor": {
+        "first_state": "INTMEM:0036",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:488b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 13,
+      "synthetic_input": 128,
+      "selector": "0x12",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d2",
+      "target": "CODE:488f",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4897",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 14,
+      "synthetic_input": 128,
+      "selector": "0x15",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d4",
+      "target": "CODE:489d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 64,
+        "payload": "CODE:48e7",
+        "payload_size": 384
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 15,
+      "synthetic_input": 128,
+      "selector": "0x17",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d6",
+      "target": "CODE:48ab",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 40,
+        "payload": "CODE:48dd",
+        "payload_size": 240
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 16,
+      "synthetic_input": 128,
+      "selector": "0x18",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d8",
+      "target": "CODE:48b9",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:48be",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 17,
+      "synthetic_input": 128,
+      "selector": "0x1a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45da",
+      "target": "CODE:48d0",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48d8",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 18,
+      "synthetic_input": 128,
+      "selector": "0x1d",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45dc",
+      "target": "CODE:48de",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:00f0",
+        "rows": 6,
+        "cols": 192,
+        "payload": "CODE:49a8",
+        "payload_size": 1152
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 19,
+      "synthetic_input": 128,
+      "selector": "0x1e",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45de",
+      "target": "CODE:48ec",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48f4",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 20,
+      "synthetic_input": 128,
+      "selector": "0x20",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e0",
+      "target": "CODE:4920",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 8,
+        "cols": 1,
+        "payload": "CODE:492a",
+        "payload_size": 8
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 21,
+      "synthetic_input": 128,
+      "selector": "0x22",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e2",
+      "target": "CODE:4959",
+      "descriptor": {
+        "first_state": "INTMEM:00a3",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:495d",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 22,
+      "synthetic_input": 128,
+      "selector": "0x24",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e4",
+      "target": "CODE:495f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4967",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 23,
+      "synthetic_input": 128,
+      "selector": "0x26",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e6",
+      "target": "CODE:496d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4972",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 24,
+      "synthetic_input": 128,
+      "selector": "0x29",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45e8",
+      "target": "CODE:4980",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:0080",
+        "rows": 6,
+        "cols": 102,
+        "payload": "CODE:49f0",
+        "payload_size": 612
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 0,
+      "synthetic_input": 255,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 1,
+      "synthetic_input": 255,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 2,
+      "synthetic_input": 255,
+      "selector": "0x00",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c0",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 3,
+      "synthetic_input": 255,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 4,
+      "synthetic_input": 255,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 5,
+      "synthetic_input": 255,
+      "selector": "0x02",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c2",
+      "target": "CODE:483b",
+      "descriptor": {
+        "first_state": "INTMEM:0004",
+        "second_state": null,
+        "rows": 12,
+        "cols": 1,
+        "payload": "CODE:4849",
+        "payload_size": 12
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 6,
+      "synthetic_input": 255,
+      "selector": "0x04",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c4",
+      "target": "CODE:4855",
+      "descriptor": {
+        "first_state": "INTMEM:0037",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:485b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 7,
+      "synthetic_input": 255,
+      "selector": "0x06",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c6",
+      "target": "CODE:485f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4867",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 8,
+      "synthetic_input": 255,
+      "selector": "0x08",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45c8",
+      "target": "CODE:486d",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4871",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 9,
+      "synthetic_input": 255,
+      "selector": "0x0a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45ca",
+      "target": "CODE:4835",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:4839",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 10,
+      "synthetic_input": 255,
+      "selector": "0x0c",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45cc",
+      "target": "CODE:4873",
+      "descriptor": {
+        "first_state": "INTMEM:003a",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4878",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 11,
+      "synthetic_input": 255,
+      "selector": "0x0f",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45ce",
+      "target": "CODE:487b",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0090",
+        "rows": 4,
+        "cols": 152,
+        "payload": "CODE:491b",
+        "payload_size": 608
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 12,
+      "synthetic_input": 255,
+      "selector": "0x10",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d0",
+      "target": "CODE:4885",
+      "descriptor": {
+        "first_state": "INTMEM:0036",
+        "second_state": null,
+        "rows": 4,
+        "cols": 1,
+        "payload": "CODE:488b",
+        "payload_size": 4
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 13,
+      "synthetic_input": 255,
+      "selector": "0x12",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d2",
+      "target": "CODE:488f",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4897",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 14,
+      "synthetic_input": 255,
+      "selector": "0x15",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d4",
+      "target": "CODE:489d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 64,
+        "payload": "CODE:48e7",
+        "payload_size": 384
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 15,
+      "synthetic_input": 255,
+      "selector": "0x17",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45d6",
+      "target": "CODE:48ab",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": "INTMEM:0040",
+        "rows": 6,
+        "cols": 40,
+        "payload": "CODE:48dd",
+        "payload_size": 240
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 16,
+      "synthetic_input": 255,
+      "selector": "0x18",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45d8",
+      "target": "CODE:48b9",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:48be",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 17,
+      "synthetic_input": 255,
+      "selector": "0x1a",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45da",
+      "target": "CODE:48d0",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48d8",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 18,
+      "synthetic_input": 255,
+      "selector": "0x1d",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45dc",
+      "target": "CODE:48de",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:00f0",
+        "rows": 6,
+        "cols": 192,
+        "payload": "CODE:49a8",
+        "payload_size": 1152
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 19,
+      "synthetic_input": 255,
+      "selector": "0x1e",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45de",
+      "target": "CODE:48ec",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:48f4",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 20,
+      "synthetic_input": 255,
+      "selector": "0x20",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e0",
+      "target": "CODE:4920",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 8,
+        "cols": 1,
+        "payload": "CODE:492a",
+        "payload_size": 8
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 21,
+      "synthetic_input": 255,
+      "selector": "0x22",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e2",
+      "target": "CODE:4959",
+      "descriptor": {
+        "first_state": "INTMEM:00a3",
+        "second_state": null,
+        "rows": 2,
+        "cols": 1,
+        "payload": "CODE:495d",
+        "payload_size": 2
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 22,
+      "synthetic_input": 255,
+      "selector": "0x24",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e4",
+      "target": "CODE:495f",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": null,
+        "rows": 6,
+        "cols": 1,
+        "payload": "CODE:4967",
+        "payload_size": 6
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 23,
+      "synthetic_input": 255,
+      "selector": "0x26",
+      "classification": "one_axis",
+      "pointer_address": "CODE:45e6",
+      "target": "CODE:496d",
+      "descriptor": {
+        "first_state": "INTMEM:003b",
+        "second_state": null,
+        "rows": 3,
+        "cols": 1,
+        "payload": "CODE:4972",
+        "payload_size": 3
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "logical_index": 24,
+      "synthetic_input": 255,
+      "selector": "0x29",
+      "classification": "two_axis",
+      "pointer_address": "CODE:45e8",
+      "target": "CODE:4980",
+      "descriptor": {
+        "first_state": "INTMEM:0038",
+        "second_state": "INTMEM:0080",
+        "rows": 6,
+        "cols": 102,
+        "payload": "CODE:49f0",
+        "payload_size": 612
+      },
+      "passed": true,
+      "errors": []
+    }
+  ]
+}

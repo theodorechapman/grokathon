@@ -1,0 +1,89 @@
+N=0 CYC=0 PC=0000 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+N=0 CYC=2 PC=0073 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+0073: mov   a,ip0
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2,"pc":"0075","address":"00A9","data":"00"}
+N=0 CYC=3 PC=0075 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+0075: mov   c,acc.6
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":3,"pc":"0077","address":"00E0","data":"00"}
+N=0 CYC=4 PC=0077 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+0077: mov   f0,c
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":4,"pc":"0079","address":"00D0","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":4,"pc":"0079","address":"00D0","data":"00"}
+N=0 CYC=6 PC=0079 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=00
+0079: setb  swdt
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":6,"pc":"007B","address":"00B8","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":6,"pc":"007B","address":"00B8","data":"40"}
+N=0 CYC=7 PC=007B A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=40
+007B: ljmp  $20E0
+N=0 CYC=9 PC=20E0 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=40
+20E0: ljmp  $5C00
+N=0 CYC=11 PC=5C00 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=40
+5C00: setb  swdt
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":11,"pc":"5C02","address":"00B8","data":"40"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":11,"pc":"5C02","address":"00B8","data":"40"}
+N=0 CYC=12 PC=5C02 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=40
+5C02: setb  clk
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":12,"pc":"5C04","address":"00D8","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":12,"pc":"5C04","address":"00D8","data":"40"}
+N=0 CYC=13 PC=5C04 A=00 B=00 PSW=00 SP=07 DPTR=0000 IE=00 IP=40
+5C04: mov   dph,#$A0
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":13,"pc":"5C07","address":"0083","data":"A0"}
+N=0 CYC=15 PC=5C07 A=00 B=00 PSW=00 SP=07 DPTR=A000 IE=00 IP=40
+5C07: mov   dpl,#$81
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":15,"pc":"5C0A","address":"0082","data":"81"}
+N=0 CYC=17 PC=5C0A A=00 B=00 PSW=00 SP=07 DPTR=A081 IE=00 IP=40
+5C0A: mov   a,#$01
+N=0 CYC=18 PC=5C0C A=01 B=00 PSW=01 SP=07 DPTR=A081 IE=00 IP=40
+5C0C: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":18,"pc":"5C0D","address":"A081","data":"01"}
+[:maincpu] ':maincpu' (5C0D): unmapped xdata memory write to A081 = 01 & FF
+N=0 CYC=20 PC=5C0D A=01 B=00 PSW=01 SP=07 DPTR=A081 IE=00 IP=40
+5C0D: mov   dpl,#$10
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":20,"pc":"5C10","address":"0082","data":"10"}
+N=0 CYC=22 PC=5C10 A=01 B=00 PSW=01 SP=07 DPTR=A010 IE=00 IP=40
+5C10: mov   a,#$81
+N=0 CYC=23 PC=5C12 A=81 B=00 PSW=00 SP=07 DPTR=A010 IE=00 IP=40
+5C12: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":23,"pc":"5C13","address":"A010","data":"81"}
+[:maincpu] ':maincpu' (5C13): unmapped xdata memory write to A010 = 81 & FF
+N=0 CYC=25 PC=5C13 A=81 B=00 PSW=00 SP=07 DPTR=A010 IE=00 IP=40
+5C13: inc   dptr
+N=0 CYC=27 PC=5C14 A=81 B=00 PSW=00 SP=07 DPTR=A011 IE=00 IP=40
+5C14: mov   a,#$81
+N=0 CYC=28 PC=5C16 A=81 B=00 PSW=00 SP=07 DPTR=A011 IE=00 IP=40
+5C16: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":28,"pc":"5C17","address":"A011","data":"81"}
+[:maincpu] ':maincpu' (5C17): unmapped xdata memory write to A011 = 81 & FF
+N=0 CYC=30 PC=5C17 A=81 B=00 PSW=00 SP=07 DPTR=A011 IE=00 IP=40
+5C17: mov   dpl,#$40
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":30,"pc":"5C1A","address":"0082","data":"40"}
+N=0 CYC=32 PC=5C1A A=81 B=00 PSW=00 SP=07 DPTR=A040 IE=00 IP=40
+5C1A: mov   a,#$FF
+N=0 CYC=33 PC=5C1C A=FF B=00 PSW=00 SP=07 DPTR=A040 IE=00 IP=40
+5C1C: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":33,"pc":"5C1D","address":"A040","data":"FF"}
+N=0 CYC=35 PC=5C1D A=FF B=00 PSW=00 SP=07 DPTR=A040 IE=00 IP=40
+5C1D: inc   dptr
+N=0 CYC=37 PC=5C1E A=FF B=00 PSW=00 SP=07 DPTR=A041 IE=00 IP=40
+5C1E: mov   a,#$FF
+N=0 CYC=38 PC=5C20 A=FF B=00 PSW=00 SP=07 DPTR=A041 IE=00 IP=40
+5C20: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":38,"pc":"5C21","address":"A041","data":"FF"}
+N=0 CYC=40 PC=5C21 A=FF B=00 PSW=00 SP=07 DPTR=A041 IE=00 IP=40
+5C21: mov   dpl,#$02
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":40,"pc":"5C24","address":"0082","data":"02"}
+N=0 CYC=42 PC=5C24 A=FF B=00 PSW=00 SP=07 DPTR=A002 IE=00 IP=40
+5C24: mov   a,#$00
+N=0 CYC=43 PC=5C26 A=00 B=00 PSW=00 SP=07 DPTR=A002 IE=00 IP=40
+5C26: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":43,"pc":"5C27","address":"A002","data":"00"}
+[:maincpu] ':maincpu' (5C27): unmapped xdata memory write to A002 = 00 & FF
+N=0 CYC=45 PC=5C27 A=00 B=00 PSW=00 SP=07 DPTR=A002 IE=00 IP=40
+5C27: inc   dptr
+N=0 CYC=47 PC=5C28 A=00 B=00 PSW=00 SP=07 DPTR=A003 IE=00 IP=40
+5C28: mov   a,#$00
+N=0 CYC=48 PC=5C2A A=00 B=00 PSW=00 SP=07 DPTR=A003 IE=00 IP=40
+5C2A: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":48,"pc":"5C2B","address":"A003","data":"00"}
+[:maincpu] ':maincpu' (5C2B): unmapped xdata memory write to A003 = 00 & FF

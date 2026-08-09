@@ -1,0 +1,91 @@
+{
+  "schema": "motronic175-adc-channel-map-v1",
+  "callback_convention": {
+    "callback_min": 0,
+    "callback_max": 127,
+    "addat_formula": "ADDAT = callback_value * 2",
+    "addat_reachable_max": 254,
+    "source": "../mcu-core/mame-sab80c515.patch: tick_adc"
+  },
+  "firmware_boundary": {
+    "proven_scan": "CODE:9e88 selects channels 1..5 and stores them at INTMEM:0036..003a",
+    "proven_channel_zero": "CODE:269b..26a1 selects channel 0; CODE:2cf3 reads ADDAT",
+    "physical_routing": "not proven by the binary",
+    "electrical_transfer_functions": "unknown",
+    "open_short_polarity": "unknown without the ECU analog front end"
+  },
+  "channels": [
+    {
+      "channel": 0,
+      "access": "proven",
+      "destination": "AFM processing path via ADDAT",
+      "logical_role": "air-flow/air-mass input",
+      "role_confidence": "high",
+      "physical_label_status": "inferred",
+      "evidence": ["CODE:269b", "CODE:269e", "CODE:26a1", "CODE:2cf3", "subsystems/04-engine-load-and-modes.md"]
+    },
+    {
+      "channel": 1,
+      "access": "proven",
+      "destination": "INTMEM:0036",
+      "logical_role": "scaled supply-voltage state",
+      "role_confidence": "medium",
+      "physical_label_status": "inferred",
+      "evidence": ["CODE:9e8e..9e9c", "runtime-state.json:INTMEM:0036"]
+    },
+    {
+      "channel": 2,
+      "access": "proven",
+      "destination": "INTMEM:0037",
+      "logical_role": "intake-air-temperature-related state",
+      "role_confidence": "medium",
+      "physical_label_status": "inferred",
+      "evidence": ["CODE:9e8e..9e9c", "runtime-state.json:INTMEM:0037"]
+    },
+    {
+      "channel": 3,
+      "access": "proven",
+      "destination": "INTMEM:0038",
+      "logical_role": "coolant/engine-temperature-related state",
+      "role_confidence": "medium",
+      "physical_label_status": "inferred",
+      "evidence": ["CODE:9e8e..9e9c", "runtime-state.json:INTMEM:0038", "XDF title: Engine temp sensor transfer map"]
+    },
+    {
+      "channel": 4,
+      "access": "proven",
+      "destination": "INTMEM:0039",
+      "logical_role": "unknown hysteretic analog state; lambda is only a hypothesis",
+      "role_confidence": "low",
+      "physical_label_status": "unresolved",
+      "evidence": ["CODE:9e8e..9e9c", "subsystems/03-sensor-acquisition.md"]
+    },
+    {
+      "channel": 5,
+      "access": "proven",
+      "destination": "INTMEM:003a",
+      "logical_role": "unresolved analog input",
+      "role_confidence": "unknown",
+      "physical_label_status": "unresolved",
+      "evidence": ["CODE:9e9e..9ea6", "runtime-state.json:INTMEM:003a"]
+    },
+    {
+      "channel": 6,
+      "access": "not observed",
+      "destination": null,
+      "logical_role": "unresolved",
+      "role_confidence": "unknown",
+      "physical_label_status": "unresolved",
+      "evidence": []
+    },
+    {
+      "channel": 7,
+      "access": "not observed",
+      "destination": null,
+      "logical_role": "unresolved",
+      "role_confidence": "unknown",
+      "physical_label_status": "unresolved",
+      "evidence": []
+    }
+  ]
+}

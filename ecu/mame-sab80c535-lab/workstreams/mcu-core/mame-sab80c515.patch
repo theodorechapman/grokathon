@@ -1,0 +1,786 @@
+diff --git a/scripts/src/cpu.lua b/scripts/src/cpu.lua
+--- a/scripts/src/cpu.lua
++++ b/scripts/src/cpu.lua
+@@ -1218,6 +1218,8 @@
+ 		MAME_DIR .. "src/devices/cpu/mcs51/ds5002fp.h",
+ 		MAME_DIR .. "src/devices/cpu/mcs51/sab80c535.cpp",
+ 		MAME_DIR .. "src/devices/cpu/mcs51/sab80c535.h",
++		MAME_DIR .. "src/devices/cpu/mcs51/sab80c535_irq.cpp",
++		MAME_DIR .. "src/devices/cpu/mcs51/sab80c535_peripherals.cpp",
+ 	}
+ end
+ 
+diff --git a/src/devices/cpu/mcs51/i8051.cpp b/src/devices/cpu/mcs51/i8051.cpp
+--- a/src/devices/cpu/mcs51/i8051.cpp
++++ b/src/devices/cpu/mcs51/i8051.cpp
+@@ -457,7 +457,9 @@
+ {
+ 	if (m_cur_irq_prio >= 0)
+ 		m_irq_active &= ~(1 << m_cur_irq_prio);
+-	if (m_irq_active & 4)
++	if (m_irq_active & 8)
++		m_cur_irq_prio = 3;
++	else if (m_irq_active & 4)
+ 		m_cur_irq_prio = 2;
+ 	else if (m_irq_active & 2)
+ 		m_cur_irq_prio = 1;
+diff --git a/src/devices/cpu/mcs51/i8051.h b/src/devices/cpu/mcs51/i8051.h
+--- a/src/devices/cpu/mcs51/i8051.h
++++ b/src/devices/cpu/mcs51/i8051.h
+@@ -328,7 +328,7 @@
+ 	virtual void update_timer_t2(int cycles);
+ 	void update_irq_prio();
+ 	void execute_op(u8 op);
+-	void check_irqs();
++	virtual void check_irqs();
+ 	void burn_cycles(int cycles);
+ 	void acall(u8 r);
+ 	void set_reg(u8 r, u8 v);
+diff --git a/src/devices/cpu/mcs51/sab80c535.cpp b/src/devices/cpu/mcs51/sab80c535.cpp
+--- a/src/devices/cpu/mcs51/sab80c535.cpp
++++ b/src/devices/cpu/mcs51/sab80c535.cpp
+@@ -7,50 +7,6 @@
+ 
+ DEFINE_DEVICE_TYPE(SAB80C535, sab80c535_device, "sab80c535", "Siemens SAB80C535")
+ 
+-// 80:*p0
+-// 81:*sp
+-// 82:*dpl
+-// 83:*dph
+-// 87:*pcon, power control
+-// 88:*tcon, timer control
+-// 89:*tmod
+-// 8a:*tl0
+-// 8b:*tl1
+-// 8c:*th0
+-// 8d:*th1
+-// 90:*p1
+-// 98:*scon, serial control
+-// 99:*sbuf, serial buffer
+-// a0:*p2
+-// a8:*ien0
+-// a9:!ip0
+-// b0:*p3
+-// b8:!ien1
+-// b9: ip1
+-// c0: ircon, interrupt request control
+-// c1: ccen
+-// c2: ccl1
+-// c3: cch1
+-// c4: ccl2
+-// c5: cch2
+-// c6: ccl3
+-// c7: cch3
+-// c8:*t2con
+-// ca:*crcl
+-// cb:*crch
+-// cc:*tl2
+-// cd:*th2
+-// d0:*psw
+-// d8: adcon, a/d control
+-// d9: addat, a/d data
+-// da: dapr, d/a program
+-// db: p6 (also a/d)
+-// e0:*acc
+-// e8: p4
+-// f0:*b
+-// f8: p5
+-
+-
+ void sab80c535_device::p4_w(u8 data)
+ {
+ 	m_p4 = data;
+@@ -77,9 +33,102 @@
+ 	return m_p5 & m_port_in_cb[5]();
+ }
+ 
++u8 sab80c535_device::p6_r()
++{
++	return m_port_in_cb[6]();
++}
++
++void sab80c535_device::p6_w(u8)
++{
++}
++
++u8 sab80c535_device::ien0_r()
++{
++	return m_ie;
++}
++
++void sab80c535_device::ien0_w(u8 data)
++{
++	m_ie = data;
++	if (BIT(data, IEN_WDT))
++		m_wdt_clear_cycles = m_inst_cycles + 2;
++}
++
++u8 sab80c535_device::ip0_r()
++{
++	return m_ip & 0x7f;
++}
++
++void sab80c535_device::ip0_w(u8 data)
++{
++	m_ip = (m_ip & 0x40) | (data & 0x3f);
++	update_irq_prio();
++}
++
++u8 sab80c535_device::ien1_r()
++{
++	return m_ien1;
++}
++
++void sab80c535_device::ien1_w(u8 data)
++{
++	m_ien1 = data;
++	if (!BIT(data, IEN1_SWDT))
++		return;
++
++	m_watchdog_running = true;
++	m_ip |= 1 << IP0_WDTS;
++	m_swdt_clear_cycles = m_inst_cycles + 2;
++}
++
++u8 sab80c535_device::ip1_r()
++{
++	return m_iph & 0x3f;
++}
++
++void sab80c535_device::ip1_w(u8 data)
++{
++	m_iph = data & 0x3f;
++	update_irq_prio();
++}
++
++u8 sab80c535_device::ccu_r(offs_t offset)
++{
++	if (offset == 0)
++		return m_ircon;
++	if (offset == 1)
++		return m_ccen;
++	return m_cc[offset - 2];
++}
++
++void sab80c535_device::ccu_w(offs_t offset, u8 data)
++{
++	if (offset == 0)
++		m_ircon = data;
++	else if (offset == 1)
++		m_ccen = data;
++	else if (!BIT(offset, 0) && BIT(m_ccen, offset, 2) == 3)
++		request_capture(offset / 2);
++	else
++		m_cc[offset - 2] = data;
++}
++
++u8 sab80c535_device::crc_r(offs_t offset)
++{
++	return m_rcap2 >> (offset * 8);
++}
++
++void sab80c535_device::crc_w(offs_t offset, u8 data)
++{
++	if (offset == 0 && BIT(m_ccen, 0, 2) == 3)
++		request_capture(0);
++	else
++		m_rcap2 = (m_rcap2 & ~(0xff << (offset * 8))) | (data << (offset * 8));
++}
++
+ void sab80c535_device::adcon_w(u8 data)
+ {
+-	m_adcon = data;
++	m_adcon = (m_adcon & 0x10) | (data & 0xcf);
+ }
+ 
+ u8 sab80c535_device::adcon_r()
+@@ -89,15 +138,39 @@
+ 
+ u8 sab80c535_device::addat_r()
+ {
+-	return m_an_func[m_adcon & 7]() * 2;
+-}
+-
++	return m_addat;
++}
++
++void sab80c535_device::addat_w(u8 data)
++{
++	m_addat = data;
++}
++
++u8 sab80c535_device::dapr_r()
++{
++	return m_dapr;
++}
++
++void sab80c535_device::dapr_w(u8 data)
++{
++	m_dapr = data;
++	m_adcon |= 1 << ADCON_BSY;
++	m_adc_cycles = m_inst_cycles + 13;
++}
+ 
+ void sab80c535_device::sfr_map(address_map &map)
+ {
+ 	i8052_device::sfr_map(map);
++	map(0xa8, 0xa8).rw(FUNC(sab80c535_device::ien0_r), FUNC(sab80c535_device::ien0_w));
++	map(0xa9, 0xa9).rw(FUNC(sab80c535_device::ip0_r), FUNC(sab80c535_device::ip0_w));
++	map(0xb8, 0xb8).rw(FUNC(sab80c535_device::ien1_r), FUNC(sab80c535_device::ien1_w));
++	map(0xb9, 0xb9).rw(FUNC(sab80c535_device::ip1_r), FUNC(sab80c535_device::ip1_w));
++	map(0xc0, 0xc7).rw(FUNC(sab80c535_device::ccu_r), FUNC(sab80c535_device::ccu_w));
++	map(0xca, 0xcb).rw(FUNC(sab80c535_device::crc_r), FUNC(sab80c535_device::crc_w));
+ 	map(0xd8, 0xd8).rw(FUNC(sab80c535_device::adcon_r), FUNC(sab80c535_device::adcon_w));
+-	map(0xd9, 0xd9).r(FUNC(sab80c535_device::addat_r));
++	map(0xd9, 0xd9).rw(FUNC(sab80c535_device::addat_r), FUNC(sab80c535_device::addat_w));
++	map(0xda, 0xda).rw(FUNC(sab80c535_device::dapr_r), FUNC(sab80c535_device::dapr_w));
++	map(0xdb, 0xdb).rw(FUNC(sab80c535_device::p6_r), FUNC(sab80c535_device::p6_w));
+ 	map(0xe8, 0xe8).rw(FUNC(sab80c535_device::p4_r), FUNC(sab80c535_device::p4_w));
+ 	map(0xf8, 0xf8).rw(FUNC(sab80c535_device::p5_r), FUNC(sab80c535_device::p5_w));
+ }
+@@ -114,6 +187,19 @@
+ 	save_item(NAME(m_p4));
+ 	save_item(NAME(m_p5));
+ 	save_item(NAME(m_adcon));
++	save_item(NAME(m_addat));
++	save_item(NAME(m_dapr));
++	save_item(NAME(m_ien1));
++	save_item(NAME(m_ircon));
++	save_item(NAME(m_ccen));
++	save_item(NAME(m_cc));
++	save_item(NAME(m_capture_pending));
++	save_item(NAME(m_timer2_prescaler));
++	save_item(NAME(m_wdt_clear_cycles));
++	save_item(NAME(m_swdt_clear_cycles));
++	save_item(NAME(m_capture_cycles));
++	save_item(NAME(m_adc_cycles));
++	save_item(NAME(m_watchdog_running));
+ }
+ 
+ void sab80c535_device::device_reset()
+@@ -121,7 +207,20 @@
+ 	i8052_device::device_reset();
+ 	m_p4 = 0xff;
+ 	m_p5 = 0xff;
+-	m_adcon = 0x00;
++	m_adcon = 0;
++	m_addat = 0;
++	m_dapr = 0;
++	m_ien1 = 0;
++	m_ircon = 0;
++	m_ccen = 0;
++	std::fill(std::begin(m_cc), std::end(m_cc), 0);
++	m_capture_pending = 0;
++	m_timer2_prescaler = 0;
++	m_wdt_clear_cycles = 0;
++	m_swdt_clear_cycles = 0;
++	m_capture_cycles = 0;
++	m_adc_cycles = 0;
++	m_watchdog_running = false;
+ }
+ 
+ std::unique_ptr<util::disasm_interface> sab80c535_device::create_disassembler()
+diff --git a/src/devices/cpu/mcs51/sab80c535.h b/src/devices/cpu/mcs51/sab80c535.h
+--- a/src/devices/cpu/mcs51/sab80c535.h
++++ b/src/devices/cpu/mcs51/sab80c535.h
+@@ -28,22 +28,72 @@
+ 	virtual void device_reset() override ATTR_COLD;
+ 
+ 	virtual std::unique_ptr<util::disasm_interface> create_disassembler() override;
++	virtual void check_irqs() override;
++	virtual void handle_8bit_uart_clock(int source) override;
++	virtual void handle_irq(int irqline, int state, u32 new_state, u32 tr_state) override;
+ 	virtual void sfr_map(address_map &map) override ATTR_COLD;
++	virtual void update_timer_t2(int cycles) override;
+ 
+ 	devcb_read8::array<8> m_an_func;
+ 
+ private:
+-	u8 m_p4;
+-	u8 m_p5;
+-	u8 m_adcon;
++	enum : u8
++	{
++		ADCON_BSY = 4,
++		IEN_WDT = 6,
++		IEN1_SWDT = 6,
++		IP0_WDTS = 6,
++		IRCON_TF2 = 6,
++		IRCON_EXF2 = 7
++	};
++
++	u8 m_p4 = 0;
++	u8 m_p5 = 0;
++	u8 m_adcon = 0;
++	u8 m_addat = 0;
++	u8 m_dapr = 0;
++	u8 m_ien1 = 0;
++	u8 m_ircon = 0;
++	u8 m_ccen = 0;
++	u8 m_cc[6]{};
++	u8 m_capture_pending = 0;
++	u8 m_timer2_prescaler = 0;
++	u8 m_wdt_clear_cycles = 0;
++	u8 m_swdt_clear_cycles = 0;
++	u8 m_capture_cycles = 0;
++	u8 m_adc_cycles = 0;
++	bool m_watchdog_running = false;
+ 
+ 	void p4_w(u8 data);
+ 	u8 p4_r();
+ 	void p5_w(u8 data);
+ 	u8 p5_r();
++	u8 p6_r();
++	void p6_w(u8 data);
++	u8 ien0_r();
++	void ien0_w(u8 data);
++	u8 ip0_r();
++	void ip0_w(u8 data);
++	u8 ien1_r();
++	void ien1_w(u8 data);
++	u8 ip1_r();
++	void ip1_w(u8 data);
++	u8 ccu_r(offs_t offset);
++	void ccu_w(offs_t offset, u8 data);
++	u8 crc_r(offs_t offset);
++	void crc_w(offs_t offset, u8 data);
+ 	void adcon_w(u8 data);
+ 	u8 adcon_r();
+ 	u8 addat_r();
++	void addat_w(u8 data);
++	u8 dapr_r();
++	void dapr_w(u8 data);
++	void tick_adc();
++	void tick_capture();
++	void tick_strobes();
++	void increment_timer2();
++	void compare_timer2();
++	void request_capture(u8 channel);
+ };
+ 
+ DECLARE_DEVICE_TYPE(SAB80C535, sab80c535_device)
+diff --git a/src/devices/cpu/mcs51/sab80c535_irq.cpp b/src/devices/cpu/mcs51/sab80c535_irq.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/devices/cpu/mcs51/sab80c535_irq.cpp
+@@ -0,0 +1,92 @@
++// license:BSD-3-Clause
++// copyright-holders:Steve Ellenoff, Manuel Abadia, Couriersud
++
++#include "emu.h"
++#include "sab80c535.h"
++
++void sab80c535_device::check_irqs()
++{
++	if (!BIT(m_ie, IE_A))
++		return;
++
++	u16 pending =
++			(BIT(m_tcon, TCON_IE0) << 0) |
++			(BIT(m_tcon, TCON_TF0) << 1) |
++			(BIT(m_tcon, TCON_IE1) << 2) |
++			(BIT(m_tcon, TCON_TF1) << 3) |
++			((BIT(m_scon, SCON_RI) | BIT(m_scon, SCON_TI)) << 4) |
++			((BIT(m_ircon, IRCON_TF2) | BIT(m_ircon, IRCON_EXF2)) << 5) |
++			((m_ircon & 0x3f) << 6);
++	const u16 enabled = (m_ie & 0x3f) | (u16(m_ien1 & 0x3f) << 6);
++	pending &= enabled;
++	if (!pending)
++		return;
++
++	static constexpr u8 polling_order[12] = { 0, 6, 1, 7, 2, 8, 3, 9, 4, 10, 5, 11 };
++	static constexpr u8 vectors[12] = {
++		0x03, 0x0b, 0x13, 0x1b, 0x23, 0x2b,
++		0x43, 0x4b, 0x53, 0x5b, 0x63, 0x6b
++	};
++
++	int selected = -1;
++	int selected_priority = -1;
++	for (u8 source : polling_order)
++	{
++		if (!BIT(pending, source))
++			continue;
++		const u8 pair = source < 6 ? source : source - 6;
++		const int priority = BIT(m_ip, pair) | (BIT(m_iph, pair) << 1);
++		if (priority > selected_priority)
++		{
++			selected = source;
++			selected_priority = priority;
++		}
++	}
++
++	if (m_irq_active && selected_priority <= m_cur_irq_prio)
++		return;
++
++	if (selected == 0)
++	{
++		if (m_last_op == 0x20 && m_last_bit == 0xb2)
++			m_pc = m_ppc + 3;
++		standard_irq_callback(0, m_pc);
++	}
++	else if (selected == 2)
++	{
++		if (m_last_op == 0x20 && m_last_bit == 0xb3)
++			m_pc = m_ppc + 3;
++		standard_irq_callback(1, m_pc);
++	}
++
++	push_pc();
++	m_pc = vectors[selected];
++	m_inst_cycles += 2;
++	m_cur_irq_prio = selected_priority;
++	m_irq_active |= 1 << selected_priority;
++
++	switch (selected)
++	{
++	case 0:
++		if (BIT(m_tcon, TCON_IT0))
++			set_ie0(0);
++		break;
++	case 1:
++		set_tf0(0);
++		break;
++	case 2:
++		if (BIT(m_tcon, TCON_IT1))
++			set_ie1(0);
++		break;
++	case 3:
++		set_tf1(0);
++		break;
++	case 7:
++	case 8:
++	case 9:
++	case 10:
++	case 11:
++		m_ircon &= ~(1 << (selected - 6));
++		break;
++	}
++}
+diff --git a/src/devices/cpu/mcs51/sab80c535_peripherals.cpp b/src/devices/cpu/mcs51/sab80c535_peripherals.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/devices/cpu/mcs51/sab80c535_peripherals.cpp
+@@ -0,0 +1,130 @@
++// license:BSD-3-Clause
++// copyright-holders:Steve Ellenoff, Manuel Abadia, Couriersud
++
++#include "emu.h"
++#include "sab80c535.h"
++
++void sab80c535_device::request_capture(u8 channel)
++{
++	m_capture_pending |= 1 << channel;
++	m_capture_cycles = m_inst_cycles + 1;
++}
++
++void sab80c535_device::tick_capture()
++{
++	if (!m_capture_pending || !m_capture_cycles || --m_capture_cycles)
++		return;
++
++	if (BIT(m_capture_pending, 0))
++		m_rcap2 = m_t2;
++	for (unsigned channel = 1; channel < 4; channel++)
++	{
++		if (BIT(m_capture_pending, channel))
++		{
++			m_cc[(channel - 1) * 2] = u8(m_t2);
++			m_cc[(channel - 1) * 2 + 1] = u8(m_t2 >> 8);
++		}
++	}
++	m_capture_pending = 0;
++}
++
++void sab80c535_device::tick_adc()
++{
++	if (!m_adc_cycles || --m_adc_cycles)
++		return;
++
++	// Preserve the existing MAME callback's 7-bit input convention.
++	m_addat = m_an_func[m_adcon & 7]() * 2;
++	m_ircon |= 0x01;
++	if (BIT(m_adcon, 3))
++		m_adc_cycles = 13;
++	else
++		m_adcon &= ~(1 << ADCON_BSY);
++}
++
++void sab80c535_device::tick_strobes()
++{
++	if (m_wdt_clear_cycles && !--m_wdt_clear_cycles)
++		m_ie &= ~(1 << IEN_WDT);
++	if (m_swdt_clear_cycles && !--m_swdt_clear_cycles)
++		m_ien1 &= ~(1 << IEN1_SWDT);
++}
++
++void sab80c535_device::compare_timer2()
++{
++	const u16 values[4] = {
++		m_rcap2,
++		u16(u16(m_cc[0]) | (u16(m_cc[1]) << 8)),
++		u16(u16(m_cc[2]) | (u16(m_cc[3]) << 8)),
++		u16(u16(m_cc[4]) | (u16(m_cc[5]) << 8))
++	};
++	for (unsigned channel = 0; channel < 4; channel++)
++	{
++		if (BIT(m_ccen, channel * 2, 2) == 2 && m_t2 == values[channel])
++			m_ircon |= 1 << (channel + 2);
++	}
++}
++
++void sab80c535_device::increment_timer2()
++{
++	const u16 previous = m_t2;
++	m_t2++;
++	if (m_t2 == 0 && previous == 0xffff)
++	{
++		m_ircon |= 1 << IRCON_TF2;
++		if (BIT(m_t2con, 4) && !BIT(m_t2con, 3))
++			m_t2 = m_rcap2;
++	}
++	compare_timer2();
++}
++
++void sab80c535_device::update_timer_t2(int cycles)
++{
++	while (cycles--)
++	{
++		tick_strobes();
++		tick_adc();
++		tick_capture();
++
++		const u8 mode = m_t2con & 0x03;
++		if (mode == 2)
++		{
++			while (m_t2_cnt > 0)
++			{
++				increment_timer2();
++				m_t2_cnt--;
++			}
++		}
++		else if (mode == 1 || (mode == 3 && !BIT(m_last_line_state, MCS51_T2_LINE)))
++		{
++			if (!BIT(m_t2con, 7) || (++m_timer2_prescaler & 1) == 0)
++				increment_timer2();
++		}
++	}
++}
++
++void sab80c535_device::handle_8bit_uart_clock(int source)
++{
++	mcs51_cpu_device::handle_8bit_uart_clock(source);
++}
++
++void sab80c535_device::handle_irq(int irqline, int state, u32 new_state, u32 tr_state)
++{
++	if (irqline == MCS51_T2_LINE)
++	{
++		if (BIT(tr_state, MCS51_T2_LINE))
++			m_t2_cnt++;
++		return;
++	}
++	if (irqline == MCS51_T2EX_LINE)
++	{
++		if (BIT(tr_state, MCS51_T2EX_LINE) && BIT(m_t2con, 4) && BIT(m_t2con, 3))
++		{
++			m_t2 = m_rcap2;
++			if (BIT(m_ien1, 7))
++				m_ircon |= 1 << IRCON_EXF2;
++		}
++		return;
++	}
++	mcs51_cpu_device::handle_irq(irqline, state, new_state, tr_state);
++}
+diff --git a/src/mame/mame.lst b/src/mame/mame.lst
+--- a/src/mame/mame.lst
++++ b/src/mame/mame.lst
+@@ -44002,6 +44002,12 @@
+ @source:skeleton/molecular.cpp
+ molecula
+ 
++@source:skeleton/motronic175.cpp
++motronic175
++
++@source:skeleton/sab80c515test.cpp
++sab515test
++
+ @source:skeleton/ms9540.cpp
+ ms9540
+ 
+diff --git a/src/mame/skeleton/motronic175.cpp b/src/mame/skeleton/motronic175.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/mame/skeleton/motronic175.cpp
+@@ -0,0 +1,76 @@
++// license:BSD-3-Clause
++// copyright-holders:Supratik Lahiri
++
++#include "emu.h"
++#include "cpu/mcs51/sab80c535.h"
++
++namespace {
++
++class motronic175_state : public driver_device
++{
++public:
++	motronic175_state(const machine_config &mconfig, device_type type, const char *tag)
++		: driver_device(mconfig, type, tag)
++		, m_maincpu(*this, "maincpu")
++	{
++	}
++
++	void motronic175(machine_config &config);
++
++protected:
++	virtual void machine_start() override ATTR_COLD;
++
++private:
++	TIMER_CALLBACK_MEMBER(stop_probe);
++
++	void code_map(address_map &map) ATTR_COLD;
++	void xdata_map(address_map &map) ATTR_COLD;
++
++	required_device<sab80c535_device> m_maincpu;
++	emu_timer *m_stop_timer = nullptr;
++};
++
++void motronic175_state::code_map(address_map &map)
++{
++	map(0x0000, 0x9fff).rom().region("maincpu", 0);
++}
++
++void motronic175_state::xdata_map(address_map &map)
++{
++	// Two proven firmware latches.  Their real Bosch ASIC semantics are unknown.
++	map(0xa040, 0xa041).ram();
++}
++
++void motronic175_state::machine_start()
++{
++	m_stop_timer = timer_alloc(FUNC(motronic175_state::stop_probe), this);
++	m_stop_timer->adjust(attotime::from_msec(4));
++}
++
++TIMER_CALLBACK_MEMBER(motronic175_state::stop_probe)
++{
++	machine().schedule_exit();
++}
++
++static INPUT_PORTS_START(motronic175)
++INPUT_PORTS_END
++
++void motronic175_state::motronic175(machine_config &config)
++{
++	SAB80C535(config, m_maincpu, XTAL(12'000'000));
++	m_maincpu->set_addrmap(AS_PROGRAM, &motronic175_state::code_map);
++	m_maincpu->set_addrmap(AS_DATA, &motronic175_state::xdata_map);
++}
++
++ROM_START(motronic175)
++	ROM_REGION(0xa000, "maincpu", 0)
++	ROM_LOAD(
++			"totalcombinedrom.bin",
++			0x0000,
++			0xa000,
++			CRC(be8680ec) SHA1(57504a65aea024cec06d4639d9e967cd325de272))
++ROM_END
++
++} // anonymous namespace
++
++SYST(1992, motronic175, 0, 0, motronic175, motronic175, motronic175_state, empty_init, "Bosch", "Motronic M1.7 SAB80C515 firmware lab", MACHINE_NO_SOUND | MACHINE_NOT_WORKING)
+diff --git a/src/mame/skeleton/sab80c515test.cpp b/src/mame/skeleton/sab80c515test.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/mame/skeleton/sab80c515test.cpp
+@@ -0,0 +1,91 @@
++// license:BSD-3-Clause
++// copyright-holders:Supratik Lahiri
++
++#include "emu.h"
++#include "cpu/mcs51/sab80c535.h"
++
++namespace {
++
++class sab80c515test_state : public driver_device
++{
++public:
++	sab80c515test_state(const machine_config &mconfig, device_type type, const char *tag)
++		: driver_device(mconfig, type, tag)
++		, m_maincpu(*this, "maincpu")
++	{
++	}
++
++	void sab80c515test(machine_config &config);
++
++protected:
++	virtual void machine_start() override ATTR_COLD;
++
++private:
++	TIMER_CALLBACK_MEMBER(timeout);
++
++	void code_map(address_map &map) ATTR_COLD;
++	void result_w(u8 data);
++	void xdata_map(address_map &map) ATTR_COLD;
++
++	required_device<sab80c535_device> m_maincpu;
++	emu_timer *m_timeout = nullptr;
++};
++
++void sab80c515test_state::code_map(address_map &map)
++{
++	map(0x0000, 0x07ff).rom().region("maincpu", 0);
++}
++
++void sab80c515test_state::xdata_map(address_map &map)
++{
++	map(0xff00, 0xff00).w(FUNC(sab80c515test_state::result_w));
++}
++
++void sab80c515test_state::result_w(u8 data)
++{
++	logerror("SAB515TEST result=%02X cycles=%llu pc=%04X\n",
++			data,
++			static_cast<unsigned long long>(m_maincpu->total_cycles()),
++			unsigned(m_maincpu->pc()));
++	m_timeout->adjust(attotime::never);
++	machine().schedule_exit();
++}
++
++void sab80c515test_state::machine_start()
++{
++	m_timeout = timer_alloc(FUNC(sab80c515test_state::timeout), this);
++	m_timeout->adjust(attotime::from_msec(10));
++}
++
++TIMER_CALLBACK_MEMBER(sab80c515test_state::timeout)
++{
++	logerror("SAB515TEST timeout cycles=%llu pc=%04X\n",
++			static_cast<unsigned long long>(m_maincpu->total_cycles()),
++			unsigned(m_maincpu->pc()));
++	machine().schedule_exit();
++}
++
++static INPUT_PORTS_START(sab80c515test)
++INPUT_PORTS_END
++
++void sab80c515test_state::sab80c515test(machine_config &config)
++{
++	SAB80C535(config, m_maincpu, XTAL(12'000'000));
++	m_maincpu->set_addrmap(AS_PROGRAM, &sab80c515test_state::code_map);
++	m_maincpu->set_addrmap(AS_DATA, &sab80c515test_state::xdata_map);
++	m_maincpu->port_in_cb<6>().set_constant(0xa5);
++	m_maincpu->an0_func().set_constant(0x29);
++}
++
++ROM_START(sab515test)
++	ROM_REGION(0x0800, "maincpu", 0)
++	ROM_LOAD(
++			"sab80c515-test.bin",
++			0x0000,
++			0x0800,
++			CRC(53d3686f) SHA1(97987d08518f285b0e205f2ceb6fc09ea9d9a522))
++ROM_END
++
++} // anonymous namespace
++
++SYST(2026, sab515test, 0, 0, sab80c515test, sab80c515test, sab80c515test_state, empty_init, "MAME", "SAB80C515 peripheral self-test", MACHINE_NO_SOUND | MACHINE_NOT_WORKING)

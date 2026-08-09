@@ -1,0 +1,40 @@
+diff --git a/src/devices/cpu/mcs51/i8051.cpp b/src/devices/cpu/mcs51/i8051.cpp
+index d565ea24579..1b68afdd2dc 100644
+--- a/src/devices/cpu/mcs51/i8051.cpp
++++ b/src/devices/cpu/mcs51/i8051.cpp
+@@ -386,6 +386,7 @@ mcs51_cpu_device::mcs51_cpu_device(const machine_config &mconfig, device_type ty
+ 	, m_internal_ram(*this, "internal_ram")
+ 	, m_port_in_cb(*this, 0xff)
+ 	, m_port_out_cb(*this)
++	, m_instruction_cb(*this)
+ 	, m_rtemp(0)
+ {
+ 	// default to standard cmos interfacing
+@@ -1173,6 +1174,7 @@ void mcs51_cpu_device::execute_run()
+ 		if (!(m_has_pd && BIT(m_pcon, PCON_IDL) && !BIT(m_pcon, PCON_PD)))
+ 		{
+ 			m_ppc = m_pc;
++			m_instruction_cb(m_pc);
+ 			debugger_instruction_hook(m_pc);
+ 			u8 op = m_program.read_byte(m_pc++);
+ 
+diff --git a/src/devices/cpu/mcs51/i8051.h b/src/devices/cpu/mcs51/i8051.h
+index 54ee7af5632..72953a66a14 100644
+--- a/src/devices/cpu/mcs51/i8051.h
++++ b/src/devices/cpu/mcs51/i8051.h
+@@ -44,6 +44,7 @@ public:
+ 
+ 	template <unsigned N> auto port_in_cb() { return m_port_in_cb[N].bind(); }
+ 	template <unsigned N> auto port_out_cb() { return m_port_out_cb[N].bind(); }
++	auto instruction_cb() { return m_instruction_cb.bind(); }
+ 
+ protected:
+ 	enum {
+@@ -297,6 +298,7 @@ protected:
+ 
+ 	devcb_read8::array<8> m_port_in_cb;
+ 	devcb_write8::array<8> m_port_out_cb;
++	devcb_write16 m_instruction_cb;
+ 
+ 	u8 m_rtemp; // for the debugger
+ 

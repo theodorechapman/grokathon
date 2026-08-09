@@ -1,0 +1,58 @@
+import type { ProvenanceItem } from './audit-types.ts';
+
+const choice = (
+  id: string,
+  name: string,
+  value: unknown,
+  file: string,
+  line: number,
+  needle: string,
+  impact: ProvenanceItem['impact'],
+  subsystem = 'kernel',
+  defect?: string,
+): ProvenanceItem => ({
+  id: `choice.${id}`,
+  name,
+  value,
+  provenance: 'arbitrary-model',
+  impact,
+  subsystem,
+  source: { file: `cleanroom/src/${file}`, line, needle },
+  sensitivity: 'unmeasured',
+  defect,
+});
+
+const resolved = (item: ProvenanceItem): ProvenanceItem => ({ ...item, defectStatus: 'resolved' });
+
+export const KERNEL_CHOICES: readonly ProvenanceItem[] = [
+  choice('xram-size', 'external RAM wraps modulo 2 KiB', 0x800, 'hardware/external-memory.ts', 14, 'const SIZE', 'state-layout', 'hardware'),
+  choice('interrupt-priority', 'equal-priority interrupts follow table order', 'vector order only', 'hardware/interrupt-controller.ts', 73, 'next()', 'scheduler'),
+  choice('interrupt-service-limit', 'maximum interrupts per dispatch call', 64, 'hardware/interrupt-controller.ts', 82, 'limit = 64', 'scheduler'),
+  choice('interrupt-enable-storage', 'unlocated per-source enables live in a JavaScript map', true, 'hardware/interrupt-controller.ts', 24, 'enabled = new Map', 'state-layout'),
+  choice('adc-completion', 'ADC conversion completes synchronously', true, 'hardware/adc-unit.ts', 42, 'convert(channel', 'scheduler', 'hardware'),
+  choice('timer1-continuation', 'Timer 1 continues from zero if handler misses reload', true, 'hardware/timer1.ts', 54, 'Without a handler reload', 'scheduler', 'hardware'),
+  choice('timer2-compare-mode', 'Timer 2 compare channels are single-shot', true, 'hardware/timer2.ts', 57, 'arm(channel', 'actuator-wiring', 'hardware'),
+  choice('uart-character-width', 'UART timing uses ten bits per character', 10, 'hardware/machine.ts', 57, '* 10', 'diagnostics', 'hardware'),
+  choice('watchdog-expiry-edge', 'internal watchdog expiry directly restarts the model', 'restart(watchdog)', 'ecu.ts', 88, 'onWatchdogExpiry', 'fault-behavior'),
+  choice('power-reset-retention', 'power-on reset preserves all XRAM', true, 'hardware/machine.ts', 99, 'Retained XRAM', 'state-layout'),
+  choice('startup-stack-pointer', 'startup stack pointer', 0x2f, 'kernel/startup.ts', 42, '0x2f', 'state-layout'),
+  choice('startup-enabled-interrupts', 'startup interrupt enable set and order', ['timer1', 'serial', 'timer2', 'ext3cc0', 'ext0'], 'kernel/startup.ts', 57, "['timer1'", 'scheduler'),
+  choice('startup-markers', 'retained-state marker values', [0x55, 0xaa], 'kernel/startup.ts', 23, 'MARKER_A', 'state-layout'),
+  choice('startup-marker-addresses', 'retained-state marker addresses', [0x00f8, 0x00f9, 0x00fa], 'memory-map.ts', 135, 'startupMarkerA', 'state-layout', 'kernel', 'MAME/XDATA evidence observes retained-state decisions around 0x015b and 0x020c, not these locations.'),
+  choice('recovery-service-binding', 'CODE:25f7 recovery service is modeled as ADC scan', 'parts.adc.scan()', 'ecu.ts', 110, 'runRecovery', 'scheduler'),
+  choice('deferred-order', 'deferred INT0 category order', ['adc', 'timing', 'state', 'serial'], 'kernel/deferred-worker.ts', 27, 'const ORDER', 'scheduler'),
+  choice('foreground-order', 'foreground service order', ['adc-scan', 'air-mass', 'engine-load', 'mode-probe', 'rev-limiter', 'overrun-latch', 'fuel', 'ignition', 'idle', 'adaptation', 'fault-monitors', 'fault-aging', 'integrity', 'diagnostics', 'actuator-tests'], 'ecu-services.ts', 46, 'buildForegroundServices', 'scheduler'),
+  choice('housekeeping-content', 'housekeeping refreshes watchdog then checks sync timeout', ['watchdog.refresh', 'sync.checkTimeout'], 'ecu.ts', 116, 'private housekeeping', 'scheduler'),
+  choice('foreground-time-slicing', 'time advances in slices ending at each assumed foreground period', true, 'ecu.ts', 124, 'cyclePeriod', 'scheduler'),
+  choice('capture-buffer-base', 'capture timestamp ring base', 0x80, 'subsystems/crank-capture.ts', 21, 'TIMESTAMP_BUFFER_BASE', 'state-layout', 'crank-sync'),
+  choice('capture-buffer-size', 'capture timestamp ring triplets', 8, 'subsystems/crank-capture.ts', 22, 'TIMESTAMP_BUFFER_TRIPLETS', 'state-layout', 'crank-sync'),
+  choice('capture-worker-meaning', 'BITS:0021 false means acquire and true means schedule', true, 'subsystems/crank-sync.ts', 69, 'captureWorkerSelect', 'scheduler', 'crank-sync'),
+  resolved(choice('vector-adc', 'ADC interrupt vector', 0x0043, 'kernel/vector-table.ts', 40, "source: 'adc'", 'address', 'hardware', 'Previously used 0x0033; SAB80C515 and binary artifacts place ADC at 0x0043.')),
+  resolved(choice('vector-ext2', 'external-2 interrupt vector', 0x004b, 'kernel/vector-table.ts', 41, "source: 'ext2'", 'address', 'hardware', 'Previously used 0x003b; SAB80C515 and binary artifacts place external-2 at 0x004b.')),
+  choice('vector-ext4', 'external-4 interrupt vector', 0x005b, 'kernel/vector-table.ts', 43, "source: 'ext4'", 'address', 'hardware'),
+  choice('vector-ext5', 'external-5 interrupt vector', 0x0063, 'kernel/vector-table.ts', 44, "source: 'ext5'", 'address', 'hardware'),
+  choice('vector-ext6', 'external-6 interrupt vector', 0x006b, 'kernel/vector-table.ts', 45, "source: 'ext6'", 'address', 'hardware'),
+  resolved(choice('sfr-compare-map', 'compare SFR addresses', { CCL2: 0xc4, CCH2: 0xc5, CCL3: 0xc6, CCH3: 0xc7 }, 'memory-map.ts', 153, 'CCL2', 'address', 'hardware', 'Previously used shifted compare addresses; datasheet/binary evidence proves the corrected map.')),
+  resolved(choice('sfr-capture-map', 'capture SFR addresses', { CRCL: 0xca, CRCH: 0xcb }, 'memory-map.ts', 158, 'CRCL', 'address', 'hardware', 'Previously used 0xc2/0xc3; datasheet/binary evidence proves 0xca/0xcb.')),
+  choice('sfr-timer2-map', 'Timer-2 SFR addresses', { T2CON: 0xc8, TL2: 0xcc, TH2: 0xcd }, 'memory-map.ts', 157, 'T2CON', 'address', 'hardware'),
+];

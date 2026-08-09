@@ -1,0 +1,158 @@
+diff --git a/src/mame/skeleton/motronic175-crank-trace.h b/src/mame/skeleton/motronic175-crank-trace.h
+new file mode 100644
+--- /dev/null
++++ b/src/mame/skeleton/motronic175-crank-trace.h
+@@ -0,0 +1,53 @@
++// license:BSD-3-Clause
++// copyright-holders:Supratik Lahiri
++
++#ifndef MAME_SKELETON_MOTRONIC175_CRANK_TRACE_H
++#define MAME_SKELETON_MOTRONIC175_CRANK_TRACE_H
++
++#pragma once
++
++#include <fstream>
++#include <sstream>
++#include <string>
++#include <vector>
++
++struct motronic_crank_transition
++{
++	u64 cycle;
++	bool high;
++};
++
++inline std::vector<motronic_crank_transition> load_motronic_crank_trace(
++		const char *path)
++{
++	std::ifstream input(path);
++	if (!input)
++		fatalerror("cannot open MOTRONIC_CRANK_TRACE=%s\n", path);
++
++	std::vector<motronic_crank_transition> result;
++	std::string line;
++	unsigned line_number = 0;
++	while (std::getline(input, line))
++	{
++		++line_number;
++		if (line.empty() || line[0] == '#')
++			continue;
++		std::istringstream row(line);
++		u64 cycle;
++		unsigned level;
++		char comma;
++		char trailing;
++		if (!(row >> cycle >> comma >> level) || comma != ',' || level > 1 ||
++				(row >> trailing))
++			fatalerror(
++					"invalid crank trace line %u: %s\n",
++					line_number,
++					line.c_str());
++		if (!result.empty() && cycle <= result.back().cycle)
++			fatalerror("crank trace cycles must increase at line %u\n", line_number);
++		result.push_back({ cycle, level != 0 });
++	}
++	if (result.empty())
++		fatalerror("crank trace contains no transitions: %s\n", path);
++	return result;
++}
++
++#endif
+diff --git a/src/mame/skeleton/motronic175.cpp b/src/mame/skeleton/motronic175.cpp
+--- a/src/mame/skeleton/motronic175.cpp
++++ b/src/mame/skeleton/motronic175.cpp
+@@ -4,6 +4,7 @@
+ #include "emu.h"
+ #include "cpu/mcs51/sab80c535.h"
+ #include "motronic175-xdata.h"
++#include "motronic175-crank-trace.h"
+ 
+ #include <cstdlib>
+ 
+@@ -28,6 +29,7 @@ protected:
+ 	virtual void machine_start() override ATTR_COLD;
+ 
+ private:
++	TIMER_CALLBACK_MEMBER(crank_transition);
+ 	TIMER_CALLBACK_MEMBER(timeout);
+ 	void code_map(address_map &map) ATTR_COLD;
+ 	void instruction(u16 pc);
+@@ -39,8 +41,11 @@ private:
+ 	required_device<sab80c535_device> m_maincpu;
+ 	required_device<motronic175_xdata_device> m_xdata;
+ 	emu_timer *m_timeout = nullptr;
++	emu_timer *m_crank_timer = nullptr;
++	std::vector<motronic_crank_transition> m_crank_trace;
+ 	u64 m_instruction_limit = 200'000;
+ 	u64 m_timeout_ms = 50;
++	u64 m_crank_index = 0;
+ 	u64 m_instructions = 0;
+ 	u64 m_pc_hash = 0xcbf29ce484222325ULL;
+ 	u64 m_p1_transitions = 0;
+@@ -51,6 +56,7 @@ private:
+ 	unsigned m_init_entries = 0;
+ 	unsigned m_supervisor_entries = 0;
+ 	unsigned m_timer1_entries = 0;
++	unsigned m_capture_entries = 0;
+ 	unsigned m_timer2_entries = 0;
+ 	u8 m_p1_last = 0xff;
+ 	const char *m_reason = "external-stop";
+@@ -89,13 +94,34 @@ void motronic175_state::machine_start()
+ 	}
+ 	m_timeout = timer_alloc(FUNC(motronic175_state::timeout), this);
+ 	m_timeout->adjust(attotime::from_msec(m_timeout_ms));
++	m_crank_timer = timer_alloc(FUNC(motronic175_state::crank_transition), this);
++	if (const char *path = std::getenv("MOTRONIC_CRANK_TRACE"))
++	{
++		m_crank_trace = load_motronic_crank_trace(path);
++		m_crank_timer->adjust(
++				m_maincpu->cycles_to_attotime(m_crank_trace.front().cycle));
++	}
+ 	save_item(NAME(m_p1_last));
+ 	save_item(NAME(m_p1_transitions));
++	save_item(NAME(m_crank_index));
+ 	machine().add_notifier(
+ 			MACHINE_NOTIFY_EXIT,
+ 			machine_notify_delegate(&motronic175_state::report, this));
+ }
+ 
++TIMER_CALLBACK_MEMBER(motronic175_state::crank_transition)
++{
++	const motronic_crank_transition &transition = m_crank_trace[m_crank_index++];
++	m_maincpu->set_input_line(
++			SAB80C515_CC0_LINE,
++			transition.high ? ASSERT_LINE : CLEAR_LINE);
++	if (m_crank_index < m_crank_trace.size())
++	{
++		const u64 delta = m_crank_trace[m_crank_index].cycle - transition.cycle;
++		m_crank_timer->adjust(m_maincpu->cycles_to_attotime(delta));
++	}
++}
++
+ void motronic175_state::p1_w(u8 data)
+ {
+ 	if (data != m_p1_last)
+@@ -130,6 +157,8 @@ void motronic175_state::instruction(u16 pc)
+ 	}
+ 	if (pc == 0x002b)
+ 		++m_timer2_entries;
++	if (pc == 0x0053)
++		++m_capture_entries;
+ 	if (pc == 0x001b)
+ 		++m_timer1_entries;
+ 	if (pc == 0x908d)
+@@ -157,10 +186,13 @@ void motronic175_state::report()
+ 			"last_pc=%04x deepest_pc=%04x startup_frontier=%04x "
+ 			"init_entries=%u supervisor_entries=%u foreground_entries=%u "
+ 			"timer1_entries=%u timer2_entries=%u "
++			"crank_transitions=%llu "
++			"capture_entries=%u "
+ 			"pc_hash=%016llx p1_last=%02x p1_transitions=%llu\n",
+ 			m_reason, m_instructions, m_stop_cycle, m_maincpu->total_cycles(),
+ 			m_last_pc, m_deepest_pc, m_startup_frontier, m_init_entries,
+ 			m_supervisor_entries, m_foreground_entries,
+-			m_timer1_entries, m_timer2_entries, m_pc_hash,
++			m_timer1_entries, m_timer2_entries, m_crank_index,
++			m_capture_entries, m_pc_hash,
+ 			m_p1_last, m_p1_transitions);
+ }

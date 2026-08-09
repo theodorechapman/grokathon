@@ -1,0 +1,29 @@
+{
+  "agreement": true,
+  "comparison_mode": "exact",
+  "masks": {},
+  "stream_lengths": {
+    "mame": 31,
+    "static": 31
+  },
+  "agreement_prefix_events": 31,
+  "compared_fields": {
+    "accesses.sfr": 31,
+    "accesses.xdata": 31,
+    "cycles": 31,
+    "interrupt_entry": 31,
+    "opcode": 31,
+    "pc": 31,
+    "registers.a": 31,
+    "registers.b": 31,
+    "registers.dptr": 31,
+    "registers.psw": 31,
+    "registers.sp": 31
+  },
+  "unmatched_fields": {
+    "mame:accesses.idata": 31,
+    "static:registers.ie": 31,
+    "static:registers.ip": 31
+  },
+  "first_divergence": null
+}

@@ -1,0 +1,1058 @@
+Warning: -video none doesn't make much sense without -seconds_to_run
+[:xdata] XMODEL reset=1 unknown_policy=1 unknown_value=00 configured_inputs=0 output_readback=disabled stop_after_taint=0
+[:] ADCMODEL profile=key-on callback_range=0..127 addat=callback*2
+Soft reset
+[:kw71] KW71_TX usec=0 state=0
+[:xdata] XEV seq=1 op=W addr=a081 pc=5c0c value=01 class=unknown-write taint=0
+[:xdata] XEV seq=2 op=W addr=a010 pc=5c12 value=81 class=unknown-write taint=0
+[:xdata] XEV seq=3 op=W addr=a011 pc=5c16 value=81 class=unknown-write taint=0
+[:xdata] XEV seq=4 op=W addr=a040 pc=5c1c value=ff class=output-latch taint=0
+[:xdata] XEV seq=5 op=W addr=a041 pc=5c20 value=ff class=output-latch taint=0
+[:xdata] XEV seq=6 op=W addr=a002 pc=5c26 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=7 op=W addr=a003 pc=5c2a value=00 class=unknown-write taint=0
+[:xdata] XEV seq=8 op=W addr=a004 pc=5c2e value=00 class=unknown-write taint=0
+[:xdata] XEV seq=9 op=W addr=a005 pc=5c32 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=10 op=W addr=a008 pc=5c38 value=00 class=unknown-write taint=0
+[:xdata] XEV seq=11 op=W addr=a009 pc=5c3c value=00 class=unknown-write taint=0
+[:xdata] XEV seq=12 op=W addr=a021 pc=5c42 value=d7 class=unknown-write taint=0
+[:xdata] XEV seq=13 op=W addr=a020 pc=5c48 value=ff class=unknown-write taint=0
+[:xdata] XEV seq=14 op=W addr=0162 pc=5c4e value=d7 class=storage taint=0
+[:xdata] XEV seq=15 op=R addr=0000 pc=5c54 value=00 class=storage taint=0
+[:xdata] XEV seq=16 op=W addr=015b pc=5c78 value=00 class=storage taint=0
+[:xdata] XEV seq=17 op=R addr=015b pc=5c81 value=00 class=storage taint=0
+[:xdata] XEV seq=18 op=W addr=020b pc=5c8a value=00 class=storage taint=0
+[:xdata] XEV seq=19 op=W addr=020c pc=5c8f value=aa class=storage taint=0
+[:xdata] XEV seq=20 op=R addr=015b pc=8f9c value=00 class=storage taint=0
+[:xdata] XEV seq=21 op=W addr=00f1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=22 op=W addr=00f0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=23 op=W addr=00ef pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=24 op=W addr=00ee pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=25 op=W addr=00ed pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=26 op=W addr=00ec pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=27 op=W addr=00eb pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=28 op=W addr=00ea pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=29 op=W addr=00e9 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=30 op=W addr=00e8 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=31 op=W addr=00e7 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=32 op=W addr=00e6 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=33 op=W addr=00e5 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=34 op=W addr=00e4 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=35 op=W addr=00e3 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=36 op=W addr=00e2 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=37 op=W addr=00e1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=38 op=W addr=00e0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=39 op=W addr=00df pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=40 op=W addr=00de pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=41 op=W addr=00dd pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=42 op=W addr=00dc pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=43 op=W addr=00db pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=44 op=W addr=00da pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=45 op=W addr=00d9 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=46 op=W addr=00d8 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=47 op=W addr=00d7 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=48 op=W addr=00d6 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=49 op=W addr=00d5 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=50 op=W addr=00d4 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=51 op=W addr=00d3 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=52 op=W addr=00d2 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=53 op=W addr=00d1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=54 op=W addr=00d0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=55 op=W addr=00cf pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=56 op=W addr=00ce pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=57 op=W addr=00cd pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=58 op=W addr=00cc pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=59 op=W addr=00cb pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=60 op=W addr=00ca pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=61 op=W addr=00c9 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=62 op=W addr=00c8 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=63 op=W addr=00c7 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=64 op=W addr=00c6 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=65 op=W addr=00c5 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=66 op=W addr=00c4 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=67 op=W addr=00c3 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=68 op=W addr=00c2 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=69 op=W addr=00c1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=70 op=W addr=00c0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=71 op=W addr=00bf pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=72 op=W addr=00be pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=73 op=W addr=00bd pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=74 op=W addr=00bc pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=75 op=W addr=00bb pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=76 op=W addr=00ba pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=77 op=W addr=00b9 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=78 op=W addr=00b8 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=79 op=W addr=00b7 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=80 op=W addr=00b6 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=81 op=W addr=00b5 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=82 op=W addr=00b4 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=83 op=W addr=00b3 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=84 op=W addr=00b2 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=85 op=W addr=00b1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=86 op=W addr=00b0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=87 op=W addr=00af pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=88 op=W addr=00ae pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=89 op=W addr=00ad pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=90 op=W addr=00ac pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=91 op=W addr=00ab pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=92 op=W addr=00aa pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=93 op=W addr=00a9 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=94 op=W addr=00a8 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=95 op=W addr=00a7 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=96 op=W addr=00a6 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=97 op=W addr=00a5 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=98 op=W addr=00a4 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=99 op=W addr=00a3 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=100 op=W addr=00a2 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=101 op=W addr=00a1 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=102 op=W addr=00a0 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=103 op=W addr=009f pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=104 op=W addr=009e pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=105 op=W addr=009d pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=106 op=W addr=009c pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=107 op=W addr=009b pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=108 op=W addr=009a pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=109 op=W addr=0099 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=110 op=W addr=0098 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=111 op=W addr=0097 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=112 op=W addr=0096 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=113 op=W addr=0095 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=114 op=W addr=0094 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=115 op=W addr=0093 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=116 op=W addr=0092 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=117 op=W addr=0091 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=118 op=W addr=0090 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=119 op=W addr=008f pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=120 op=W addr=008e pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=121 op=W addr=008d pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=122 op=W addr=008c pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=123 op=W addr=008b pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=124 op=W addr=008a pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=125 op=W addr=0089 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=126 op=W addr=0088 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=127 op=W addr=0087 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=128 op=W addr=0086 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=129 op=W addr=0085 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=130 op=W addr=0084 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=131 op=W addr=0083 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=132 op=W addr=0082 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=133 op=W addr=0081 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=134 op=W addr=0080 pc=8fa6 value=00 class=storage taint=0
+[:xdata] XEV seq=135 op=W addr=0300 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=136 op=W addr=0301 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=137 op=W addr=0302 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=138 op=W addr=0303 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=139 op=W addr=0304 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=140 op=W addr=0305 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=141 op=W addr=0306 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=142 op=W addr=0307 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=143 op=W addr=0308 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=144 op=W addr=0309 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=145 op=W addr=030a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=146 op=W addr=030b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=147 op=W addr=030c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=148 op=W addr=030d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=149 op=W addr=030e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=150 op=W addr=030f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=151 op=W addr=0310 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=152 op=W addr=0311 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=153 op=W addr=0312 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=154 op=W addr=0313 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=155 op=W addr=0314 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=156 op=W addr=0315 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=157 op=W addr=0316 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=158 op=W addr=0317 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=159 op=W addr=0318 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=160 op=W addr=0319 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=161 op=W addr=031a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=162 op=W addr=031b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=163 op=W addr=031c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=164 op=W addr=031d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=165 op=W addr=031e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=166 op=W addr=031f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=167 op=W addr=0320 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=168 op=W addr=0321 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=169 op=W addr=0322 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=170 op=W addr=0323 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=171 op=W addr=0324 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=172 op=W addr=0325 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=173 op=W addr=0326 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=174 op=W addr=0327 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=175 op=W addr=0328 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=176 op=W addr=0329 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=177 op=W addr=032a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=178 op=W addr=032b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=179 op=W addr=032c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=180 op=W addr=032d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=181 op=W addr=032e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=182 op=W addr=032f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=183 op=W addr=0330 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=184 op=W addr=0331 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=185 op=W addr=0332 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=186 op=W addr=0333 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=187 op=W addr=0334 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=188 op=W addr=0335 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=189 op=W addr=0336 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=190 op=W addr=0337 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=191 op=W addr=0338 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=192 op=W addr=0339 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=193 op=W addr=033a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=194 op=W addr=033b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=195 op=W addr=033c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=196 op=W addr=033d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=197 op=W addr=033e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=198 op=W addr=033f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=199 op=W addr=0340 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=200 op=W addr=0341 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=201 op=W addr=0342 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=202 op=W addr=0343 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=203 op=W addr=0344 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=204 op=W addr=0345 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=205 op=W addr=0346 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=206 op=W addr=0347 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=207 op=W addr=0348 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=208 op=W addr=0349 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=209 op=W addr=034a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=210 op=W addr=034b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=211 op=W addr=034c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=212 op=W addr=034d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=213 op=W addr=034e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=214 op=W addr=034f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=215 op=W addr=0350 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=216 op=W addr=0351 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=217 op=W addr=0352 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=218 op=W addr=0353 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=219 op=W addr=0354 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=220 op=W addr=0355 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=221 op=W addr=0356 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=222 op=W addr=0357 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=223 op=W addr=0358 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=224 op=W addr=0359 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=225 op=W addr=035a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=226 op=W addr=035b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=227 op=W addr=035c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=228 op=W addr=035d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=229 op=W addr=035e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=230 op=W addr=035f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=231 op=W addr=0360 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=232 op=W addr=0361 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=233 op=W addr=0362 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=234 op=W addr=0363 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=235 op=W addr=0364 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=236 op=W addr=0365 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=237 op=W addr=0366 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=238 op=W addr=0367 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=239 op=W addr=0368 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=240 op=W addr=0369 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=241 op=W addr=036a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=242 op=W addr=036b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=243 op=W addr=036c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=244 op=W addr=036d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=245 op=W addr=036e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=246 op=W addr=036f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=247 op=W addr=0370 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=248 op=W addr=0371 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=249 op=W addr=0372 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=250 op=W addr=0373 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=251 op=W addr=0374 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=252 op=W addr=0375 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=253 op=W addr=0376 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=254 op=W addr=0377 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=255 op=W addr=0378 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=256 op=W addr=0379 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=257 op=W addr=037a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=258 op=W addr=037b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=259 op=W addr=037c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=260 op=W addr=037d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=261 op=W addr=037e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=262 op=W addr=037f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=263 op=W addr=0380 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=264 op=W addr=0381 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=265 op=W addr=0382 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=266 op=W addr=0383 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=267 op=W addr=0384 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=268 op=W addr=0385 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=269 op=W addr=0386 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=270 op=W addr=0387 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=271 op=W addr=0388 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=272 op=W addr=0389 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=273 op=W addr=038a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=274 op=W addr=038b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=275 op=W addr=038c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=276 op=W addr=038d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=277 op=W addr=038e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=278 op=W addr=038f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=279 op=W addr=0390 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=280 op=W addr=0391 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=281 op=W addr=0392 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=282 op=W addr=0393 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=283 op=W addr=0394 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=284 op=W addr=0395 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=285 op=W addr=0396 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=286 op=W addr=0397 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=287 op=W addr=0398 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=288 op=W addr=0399 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=289 op=W addr=039a pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=290 op=W addr=039b pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=291 op=W addr=039c pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=292 op=W addr=039d pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=293 op=W addr=039e pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=294 op=W addr=039f pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=295 op=W addr=03a0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=296 op=W addr=03a1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=297 op=W addr=03a2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=298 op=W addr=03a3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=299 op=W addr=03a4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=300 op=W addr=03a5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=301 op=W addr=03a6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=302 op=W addr=03a7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=303 op=W addr=03a8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=304 op=W addr=03a9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=305 op=W addr=03aa pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=306 op=W addr=03ab pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=307 op=W addr=03ac pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=308 op=W addr=03ad pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=309 op=W addr=03ae pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=310 op=W addr=03af pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=311 op=W addr=03b0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=312 op=W addr=03b1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=313 op=W addr=03b2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=314 op=W addr=03b3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=315 op=W addr=03b4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=316 op=W addr=03b5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=317 op=W addr=03b6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=318 op=W addr=03b7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=319 op=W addr=03b8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=320 op=W addr=03b9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=321 op=W addr=03ba pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=322 op=W addr=03bb pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=323 op=W addr=03bc pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=324 op=W addr=03bd pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=325 op=W addr=03be pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=326 op=W addr=03bf pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=327 op=W addr=03c0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=328 op=W addr=03c1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=329 op=W addr=03c2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=330 op=W addr=03c3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=331 op=W addr=03c4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=332 op=W addr=03c5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=333 op=W addr=03c6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=334 op=W addr=03c7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=335 op=W addr=03c8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=336 op=W addr=03c9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=337 op=W addr=03ca pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=338 op=W addr=03cb pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=339 op=W addr=03cc pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=340 op=W addr=03cd pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=341 op=W addr=03ce pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=342 op=W addr=03cf pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=343 op=W addr=03d0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=344 op=W addr=03d1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=345 op=W addr=03d2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=346 op=W addr=03d3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=347 op=W addr=03d4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=348 op=W addr=03d5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=349 op=W addr=03d6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=350 op=W addr=03d7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=351 op=W addr=03d8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=352 op=W addr=03d9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=353 op=W addr=03da pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=354 op=W addr=03db pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=355 op=W addr=03dc pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=356 op=W addr=03dd pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=357 op=W addr=03de pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=358 op=W addr=03df pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=359 op=W addr=03e0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=360 op=W addr=03e1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=361 op=W addr=03e2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=362 op=W addr=03e3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=363 op=W addr=03e4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=364 op=W addr=03e5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=365 op=W addr=03e6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=366 op=W addr=03e7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=367 op=W addr=03e8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=368 op=W addr=03e9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=369 op=W addr=03ea pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=370 op=W addr=03eb pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=371 op=W addr=03ec pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=372 op=W addr=03ed pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=373 op=W addr=03ee pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=374 op=W addr=03ef pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=375 op=W addr=03f0 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=376 op=W addr=03f1 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=377 op=W addr=03f2 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=378 op=W addr=03f3 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=379 op=W addr=03f4 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=380 op=W addr=03f5 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=381 op=W addr=03f6 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=382 op=W addr=03f7 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=383 op=W addr=03f8 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=384 op=W addr=03f9 pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=385 op=W addr=03fa pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=386 op=W addr=03fb pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=387 op=W addr=03fc pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=388 op=W addr=03fd pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=389 op=W addr=03fe pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=390 op=W addr=03ff pc=8faf value=00 class=storage taint=0
+[:xdata] XEV seq=391 op=W addr=00f2 pc=8fbe value=03 class=storage taint=0
+[:xdata] XEV seq=392 op=W addr=00f3 pc=8fc2 value=00 class=storage taint=0
+[:xdata] XEV seq=393 op=W addr=002f pc=8fc6 value=00 class=storage taint=0
+[:xdata] XEV seq=394 op=W addr=0225 pc=8fce value=55 class=storage taint=0
+[:xdata] XEV seq=395 op=W addr=0080 pc=8182 value=00 class=storage taint=0
+[:xdata] XEV seq=396 op=W addr=0081 pc=8188 value=01 class=storage taint=0
+[:xdata] XEV seq=397 op=W addr=0082 pc=818c value=0a class=storage taint=0
+[:xdata] XEV seq=398 op=W addr=0083 pc=818f value=00 class=storage taint=0
+[:xdata] XEV seq=399 op=W addr=0084 pc=8191 value=00 class=storage taint=0
+[:xdata] XEV seq=400 op=W addr=0085 pc=8196 value=14 class=storage taint=0
+[:xdata] XEV seq=401 op=W addr=00c3 pc=8fda value=b4 class=storage taint=0
+[:xdata] XEV seq=402 op=W addr=00c4 pc=8fde value=64 class=storage taint=0
+[:xdata] XEV seq=403 op=W addr=00c5 pc=8fe0 value=64 class=storage taint=0
+[:xdata] XEV seq=404 op=R addr=00c2 pc=8fe3 value=00 class=storage taint=0
+[:xdata] XEV seq=405 op=W addr=00c2 pc=8fec value=00 class=storage taint=0
+[:xdata] XEV seq=406 op=W addr=008c pc=8ff0 value=00 class=storage taint=0
+[:xdata] XEV seq=407 op=W addr=00db pc=8ff6 value=1e class=storage taint=0
+[:xdata] XEV seq=408 op=W addr=00dc pc=8ffa value=64 class=storage taint=0
+[:xdata] XEV seq=409 op=W addr=00dd pc=8ffc value=64 class=storage taint=0
+[:xdata] XEV seq=410 op=W addr=00f7 pc=9002 value=01 class=storage taint=0
+[:xdata] XEV seq=411 op=W addr=00f8 pc=9006 value=0a class=storage taint=0
+[:xdata] XEV seq=412 op=W addr=00f9 pc=9008 value=0a class=storage taint=0
+[:xdata] XEV seq=413 op=W addr=00f4 pc=900e value=01 class=storage taint=0
+[:xdata] XEV seq=414 op=W addr=00f5 pc=9012 value=0a class=storage taint=0
+[:xdata] XEV seq=415 op=W addr=00f6 pc=9014 value=0a class=storage taint=0
+[:xdata] XEV seq=416 op=W addr=0110 pc=78ba value=00 class=storage taint=0
+[:xdata] XEV seq=417 op=W addr=0111 pc=78c3 value=1e class=storage taint=0
+[:xdata] XEV seq=418 op=W addr=0112 pc=78c9 value=80 class=storage taint=0
+[:xdata] XEV seq=419 op=W addr=0113 pc=78cb value=80 class=storage taint=0
+[:xdata] XEV seq=420 op=W addr=0114 pc=78cd value=80 class=storage taint=0
+[:xdata] UNKNOWN read addr=a040 pc=5cea value=00 kind=input-status source=global-approximation branch_pc=5cef
+[:xdata] XEV seq=421 op=R addr=a040 pc=5cea value=00 class=input-status taint=1
+[:xdata] TAINT branch read_pc=5cea addr=a040 value=00 branch_pc=5cef
+[:xdata] TAINT outcome read_pc=5cea addr=a040 value=00 branch_pc=5cef next_pc=5d0a
+[:xdata] XEV seq=422 op=R addr=00ec pc=8dd6 value=00 class=storage taint=0
+[:xdata] XEV seq=423 op=R addr=00ec pc=8dd6 value=00 class=storage taint=0
+[:xdata] XEV seq=424 op=R addr=00cb pc=5d1e value=00 class=storage taint=0
+[:xdata] XEV seq=425 op=W addr=a040 pc=5d2f value=fd class=output-latch taint=0
+[:xdata] XEV seq=426 op=W addr=008c pc=5d36 value=00 class=storage taint=0
+[:xdata] XEV seq=427 op=W addr=007a pc=3f5c value=ff class=storage taint=0
+[:xdata] XEV seq=428 op=W addr=0026 pc=3f6e value=7d class=storage taint=0
+[:xdata] XEV seq=429 op=R addr=00c8 pc=3f85 value=00 class=storage taint=0
+[:xdata] XEV seq=430 op=R addr=00ec pc=8dd6 value=00 class=storage taint=0
+[:xdata] XEV seq=431 op=R addr=020c pc=5d53 value=aa class=storage taint=0
+[:xdata] XEV seq=432 op=W addr=015c pc=5d94 value=00 class=storage taint=0
+[:xdata] XEV seq=433 op=W addr=015d pc=5d98 value=00 class=storage taint=0
+[:xdata] XEV seq=434 op=W addr=015e pc=5d9c value=00 class=storage taint=0
+[:xdata] XEV seq=435 op=W addr=015f pc=5da0 value=00 class=storage taint=0
+[:xdata] XEV seq=436 op=W addr=0161 pc=5da4 value=00 class=storage taint=0
+[:xdata] XEV seq=437 op=W addr=0160 pc=5da8 value=00 class=storage taint=0
+[:xdata] XEV seq=438 op=R addr=00c2 pc=901b value=00 class=storage taint=0
+[:xdata] XEV seq=439 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=14924 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=17444 old=7f value=ff changed=80
+[:xdata] XEV seq=440 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=24967 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=27487 old=7f value=ff changed=80
+[:xdata] XEV seq=441 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=35009 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=37529 old=7f value=ff changed=80
+[:xdata] XEV seq=442 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=45051 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=47571 old=7f value=ff changed=80
+[:xdata] XEV seq=443 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=55093 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=57613 old=7f value=ff changed=80
+[:xdata] XEV seq=444 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=65135 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=67655 old=7f value=ff changed=80
+[:xdata] XEV seq=445 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=75177 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=77697 old=7f value=ff changed=80
+[:xdata] XEV seq=446 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=85220 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=87741 old=7f value=ff changed=80
+[:xdata] XEV seq=447 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=95263 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=97784 old=7f value=ff changed=80
+[:xdata] XEV seq=448 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=105307 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=107827 old=7f value=ff changed=80
+[:xdata] XEV seq=449 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=115349 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=117869 old=7f value=ff changed=80
+[:xdata] XEV seq=450 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=125392 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=127913 old=7f value=ff changed=80
+[:xdata] XEV seq=451 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=135436 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=137957 old=7f value=ff changed=80
+[:xdata] XEV seq=452 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=145480 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=148001 old=7f value=ff changed=80
+[:xdata] XEV seq=453 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=155523 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=158043 old=7f value=ff changed=80
+[:xdata] XEV seq=454 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=165565 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=168086 old=7f value=ff changed=80
+[:xdata] XEV seq=455 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=175608 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=178128 old=7f value=ff changed=80
+[:xdata] XEV seq=456 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=185651 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=188171 old=7f value=ff changed=80
+[:xdata] XEV seq=457 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=195693 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=198214 old=7f value=ff changed=80
+[:xdata] XEV seq=458 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=205736 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=208256 old=7f value=ff changed=80
+[:xdata] XEV seq=459 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=215779 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=218300 old=7f value=ff changed=80
+[:xdata] XEV seq=460 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=225822 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=228343 old=7f value=ff changed=80
+[:xdata] XEV seq=461 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=235865 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=238386 old=7f value=ff changed=80
+[:xdata] XEV seq=462 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=245909 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=248430 old=7f value=ff changed=80
+[:xdata] XEV seq=463 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=255953 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=258473 old=7f value=ff changed=80
+[:xdata] XEV seq=464 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=265996 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=268517 old=7f value=ff changed=80
+[:xdata] XEV seq=465 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=276039 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=278560 old=7f value=ff changed=80
+[:xdata] XEV seq=466 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=286082 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=288602 old=7f value=ff changed=80
+[:xdata] XEV seq=467 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=296124 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=298645 old=7f value=ff changed=80
+[:xdata] XEV seq=468 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=306167 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=308687 old=7f value=ff changed=80
+[:xdata] XEV seq=469 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=316210 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=318731 old=7f value=ff changed=80
+[:xdata] XEV seq=470 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=326253 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=328774 old=7f value=ff changed=80
+[:xdata] XEV seq=471 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=336296 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=338816 old=7f value=ff changed=80
+[:xdata] XEV seq=472 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=346338 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=348859 old=7f value=ff changed=80
+[:xdata] XEV seq=473 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=356381 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=358901 old=7f value=ff changed=80
+[:xdata] XEV seq=474 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=366424 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=368945 old=7f value=ff changed=80
+[:xdata] XEV seq=475 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=376467 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=378988 old=7f value=ff changed=80
+[:xdata] XEV seq=476 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=386510 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=389030 old=7f value=ff changed=80
+[:xdata] XEV seq=477 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=396552 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=399072 old=7f value=ff changed=80
+[:xdata] XEV seq=478 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=406594 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=409114 old=7f value=ff changed=80
+[:xdata] XEV seq=479 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=416636 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=419156 old=7f value=ff changed=80
+[:xdata] XEV seq=480 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=426678 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=429198 old=7f value=ff changed=80
+[:xdata] XEV seq=481 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=436721 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=439241 old=7f value=ff changed=80
+[:xdata] XEV seq=482 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=446763 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=449283 old=7f value=ff changed=80
+[:xdata] XEV seq=483 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=456806 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=459327 old=7f value=ff changed=80
+[:xdata] XEV seq=484 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=466849 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=469369 old=7f value=ff changed=80
+[:xdata] XEV seq=485 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=476892 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=479412 old=7f value=ff changed=80
+[:xdata] XEV seq=486 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=486935 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=489456 old=7f value=ff changed=80
+[:xdata] XEV seq=487 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=496978 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=499498 old=7f value=ff changed=80
+[:xdata] XEV seq=488 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=507021 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=509542 old=7f value=ff changed=80
+[:xdata] XEV seq=489 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=517065 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=519586 old=7f value=ff changed=80
+[:xdata] XEV seq=490 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=527108 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=529628 old=7f value=ff changed=80
+[:xdata] XEV seq=491 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=537150 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=539670 old=7f value=ff changed=80
+[:xdata] XEV seq=492 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=547193 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=549713 old=7f value=ff changed=80
+[:xdata] XEV seq=493 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=557235 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=559755 old=7f value=ff changed=80
+[:xdata] XEV seq=494 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=567277 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=569797 old=7f value=ff changed=80
+[:xdata] XEV seq=495 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=577320 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=579841 old=7f value=ff changed=80
+[:xdata] XEV seq=496 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=587363 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=589883 old=7f value=ff changed=80
+[:xdata] XEV seq=497 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=597405 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=599925 old=7f value=ff changed=80
+[:xdata] XEV seq=498 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=607448 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=609969 old=7f value=ff changed=80
+[:xdata] XEV seq=499 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=617491 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=620011 old=7f value=ff changed=80
+[:xdata] XEV seq=500 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=627534 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=630055 old=7f value=ff changed=80
+[:xdata] XEV seq=501 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=637578 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=640098 old=7f value=ff changed=80
+[:xdata] XEV seq=502 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=647620 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=650140 old=7f value=ff changed=80
+[:xdata] XEV seq=503 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=657663 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=660183 old=7f value=ff changed=80
+[:xdata] XEV seq=504 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=667705 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=670225 old=7f value=ff changed=80
+[:xdata] XEV seq=505 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:] SIGOUT kind=p1 cycles=677747 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=680267 old=7f value=ff changed=80
+[:xdata] XEV seq=506 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=507 op=R addr=00c2 pc=9065 value=00 class=storage taint=0
+[:xdata] XEV seq=508 op=W addr=00c2 pc=9068 value=80 class=storage taint=0
+[:xdata] XEV seq=509 op=R addr=00ec pc=8dd6 value=00 class=storage taint=0
+[:xdata] XEV seq=510 op=R addr=00ec pc=8dd6 value=00 class=storage taint=0
+[:] SIGOUT kind=p1 cycles=687789 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=690310 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=511 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=512 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=513 op=R addr=0080 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=514 op=R addr=0081 pc=0689 value=01 class=storage taint=0
+[:xdata] XEV seq=515 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=516 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=517 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=518 op=R addr=0085 pc=0689 value=14 class=storage taint=0
+[:xdata] XEV seq=519 op=W addr=0089 pc=81cb value=00 class=storage taint=0
+[:xdata] XEV seq=520 op=R addr=00ec pc=81d2 value=00 class=storage taint=0
+[:xdata] XEV seq=521 op=R addr=0091 pc=81e0 value=00 class=storage taint=0
+[:xdata] XEV seq=522 op=W addr=0086 pc=81ed value=32 class=storage taint=0
+[:xdata] XEV seq=523 op=W addr=0087 pc=81f2 value=0a class=storage taint=0
+[:xdata] XEV seq=524 op=W addr=0088 pc=81f4 value=0a class=storage taint=0
+[:xdata] XEV seq=525 op=W addr=008a pc=81fd value=0a class=storage taint=0
+[:xdata] XEV seq=526 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=527 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=528 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=529 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=530 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=531 op=W addr=0085 pc=0680 value=14 class=storage taint=0
+[:xdata] XEV seq=532 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=533 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=534 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=535 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=536 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=537 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=538 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=539 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=540 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=541 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=542 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=543 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=544 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=545 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=546 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=547 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=548 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=549 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=697833 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=700354 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=550 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=551 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=552 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=553 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=554 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=555 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=556 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=557 op=R addr=0085 pc=0689 value=14 class=storage taint=0
+[:xdata] XEV seq=558 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=559 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=560 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=561 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=562 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=563 op=W addr=0085 pc=0680 value=13 class=storage taint=0
+[:xdata] XEV seq=564 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=565 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=566 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=567 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=568 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=569 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=570 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=571 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=572 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=573 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=574 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=575 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=576 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=577 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=578 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=579 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=580 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=581 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=707877 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=710398 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=582 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=583 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=584 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=585 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=586 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=587 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=588 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=589 op=R addr=0085 pc=0689 value=13 class=storage taint=0
+[:xdata] XEV seq=590 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=591 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=592 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=593 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=594 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=595 op=W addr=0085 pc=0680 value=12 class=storage taint=0
+[:xdata] XEV seq=596 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=597 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=598 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=599 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=600 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=601 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=602 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=603 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=604 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=605 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=606 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=607 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=608 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=609 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=610 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=611 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=612 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=613 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=717921 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=720442 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=614 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=615 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=616 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=617 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=618 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=619 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=620 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=621 op=R addr=0085 pc=0689 value=12 class=storage taint=0
+[:xdata] XEV seq=622 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=623 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=624 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=625 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=626 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=627 op=W addr=0085 pc=0680 value=11 class=storage taint=0
+[:xdata] XEV seq=628 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=629 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=630 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=631 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=632 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=633 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=634 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=635 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=636 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=637 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=638 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=639 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=640 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=641 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=642 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=643 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=644 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=645 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=727965 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=730486 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=646 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=647 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=648 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=649 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=650 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=651 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=652 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=653 op=R addr=0085 pc=0689 value=11 class=storage taint=0
+[:xdata] XEV seq=654 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=655 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=656 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=657 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=658 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=659 op=W addr=0085 pc=0680 value=10 class=storage taint=0
+[:xdata] XEV seq=660 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=661 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=662 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=663 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=664 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=665 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=666 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=667 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=668 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=669 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=670 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=671 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=672 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=673 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=674 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=675 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=676 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=677 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=738009 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=740530 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=678 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=679 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=680 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=681 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=682 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=683 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=684 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=685 op=R addr=0085 pc=0689 value=10 class=storage taint=0
+[:xdata] XEV seq=686 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=687 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=688 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=689 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=690 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=691 op=W addr=0085 pc=0680 value=0f class=storage taint=0
+[:xdata] XEV seq=692 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=693 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=694 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=695 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=696 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=697 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=698 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=699 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=700 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=701 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=702 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=703 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=704 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=705 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=706 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=707 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=708 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=709 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=748053 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=750574 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=710 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=711 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=712 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=713 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=714 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=715 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=716 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=717 op=R addr=0085 pc=0689 value=0f class=storage taint=0
+[:xdata] XEV seq=718 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=719 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=720 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=721 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=722 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=723 op=W addr=0085 pc=0680 value=0e class=storage taint=0
+[:xdata] XEV seq=724 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=725 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=726 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=727 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=728 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=729 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=730 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=731 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=732 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=733 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=734 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=735 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=736 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=737 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=738 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=739 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=740 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=741 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=758097 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=760618 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=742 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=743 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=744 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=745 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=746 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=747 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=748 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=749 op=R addr=0085 pc=0689 value=0e class=storage taint=0
+[:xdata] XEV seq=750 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=751 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=752 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=753 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=754 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=755 op=W addr=0085 pc=0680 value=0d class=storage taint=0
+[:xdata] XEV seq=756 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=757 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=758 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=759 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=760 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=761 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=762 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=763 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=764 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=765 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=766 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=767 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=768 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=769 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=770 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=771 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=772 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=773 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=768141 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=770662 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=774 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=775 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=776 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=777 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=778 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=779 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=780 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=781 op=R addr=0085 pc=0689 value=0d class=storage taint=0
+[:xdata] XEV seq=782 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=783 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=784 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=785 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=786 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=787 op=W addr=0085 pc=0680 value=0c class=storage taint=0
+[:xdata] XEV seq=788 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=789 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=790 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=791 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=792 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=793 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=794 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=795 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=796 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=797 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=798 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=799 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=800 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=801 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=802 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=803 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=804 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=805 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=778185 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=780706 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=806 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=807 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=808 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=809 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=810 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=811 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=812 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=813 op=R addr=0085 pc=0689 value=0c class=storage taint=0
+[:xdata] XEV seq=814 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=815 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=816 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=817 op=W addr=0083 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=818 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=819 op=W addr=0085 pc=0680 value=0b class=storage taint=0
+[:xdata] XEV seq=820 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=821 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=822 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=823 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=824 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=825 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=826 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=827 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=828 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=829 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=830 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=831 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=832 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=833 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=834 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=835 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=836 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=837 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=788229 old=ff value=7f changed=80
+[:] SIGOUT kind=p1 cycles=790750 old=7f value=ff changed=80
+[:xdata] UNKNOWN read addr=a040 pc=9099 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=838 op=R addr=a040 pc=9099 value=00 class=input-status taint=1
+[:xdata] UNKNOWN read addr=a041 pc=90a0 value=00 kind=input-status source=global-approximation branch_pc=ffff
+[:xdata] XEV seq=839 op=R addr=a041 pc=90a0 value=00 class=input-status taint=1
+[:xdata] XEV seq=840 op=R addr=0080 pc=0689 value=03 class=storage taint=0
+[:xdata] XEV seq=841 op=R addr=0081 pc=0689 value=02 class=storage taint=0
+[:xdata] XEV seq=842 op=R addr=0082 pc=0689 value=0a class=storage taint=0
+[:xdata] XEV seq=843 op=R addr=0083 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=844 op=R addr=0084 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=845 op=R addr=0085 pc=0689 value=0b class=storage taint=0
+[:xdata] XEV seq=846 op=W addr=0080 pc=0680 value=03 class=storage taint=0
+[:xdata] XEV seq=847 op=W addr=0081 pc=0680 value=02 class=storage taint=0
+[:xdata] XEV seq=848 op=W addr=0082 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=849 op=W addr=0083 pc=0680 value=80 class=storage taint=0
+[:xdata] XEV seq=850 op=W addr=0084 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=851 op=W addr=0085 pc=0680 value=0a class=storage taint=0
+[:xdata] XEV seq=852 op=R addr=0080 pc=82ab value=03 class=storage taint=0
+[:xdata] XEV seq=853 op=R addr=008c pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=854 op=R addr=008d pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=855 op=R addr=008e pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=856 op=R addr=008f pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=857 op=R addr=0090 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=858 op=R addr=0091 pc=0689 value=00 class=storage taint=0
+[:xdata] XEV seq=859 op=W addr=008c pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=860 op=W addr=008d pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=861 op=W addr=008e pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=862 op=W addr=008f pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=863 op=W addr=0090 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=864 op=W addr=0091 pc=0680 value=00 class=storage taint=0
+[:xdata] XEV seq=865 op=W addr=0080 pc=83d1 value=03 class=storage taint=0
+[:xdata] XEV seq=866 op=R addr=0110 pc=7763 value=00 class=storage taint=0
+[:xdata] XEV seq=867 op=W addr=0110 pc=7797 value=00 class=storage taint=0
+[:xdata] XEV seq=868 op=R addr=020c pc=5f35 value=aa class=storage taint=0
+[:xdata] XEV seq=869 op=W addr=a040 pc=90d4 value=fd class=output-latch taint=0
+[:] SIGOUT kind=p1 cycles=798272 old=ff value=7f changed=80
+[:xdata] XSUMMARY events=869 read_addresses=22 write_addresses=410 unknown_reads=23 first_unknown_addr=a040 first_unknown_pc=5cea overflow=0 out40_written=1 out41_written=1 out40=fd out41=ff
+[:] ESUMMARY reason=cycle-timeout instructions=494680 cycles=800001 exit_cycles=800001 last_pc=90dd deepest_pc=9ed7 startup_frontier=5d0d init_entries=1 supervisor_entries=1 foreground_entries=0 timer1_entries=158 timer2_entries=6 crank_transitions=0 capture_entries=0 pc_hash=f7ee7d4739e68903 p1_last=7f p1_transitions=157

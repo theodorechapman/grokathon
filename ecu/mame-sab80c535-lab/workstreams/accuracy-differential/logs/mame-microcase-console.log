@@ -1,0 +1,16 @@
+stimulus.bin WRONG CHECKSUMS:
+    EXPECTED: CRC(9e8be8b7) SHA1(eda902c2ac2e66d843be185c7e90b371afda4b9f)
+       FOUND: CRC(771f0388) SHA1(ef9171eb877da0fff446797030eea6441eb2ce37)
+WARNING: the machine might not run correctly.
+[:] EVT {"kind":"run","profile":"surrogate-stimulus","runtime":true,"bound_us":2500}
+Soft reset
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":0,"pc":"0000","address":"0003","data":"FD"}
+[:maincpu] write of un-hooked port 2 ff
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":0,"pc":"0000","address":"0001","data":"FF"}
+[:maincpu] write of un-hooked port 0 ff
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2,"pc":"0103","address":"0081","data":"30"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":8,"pc":"010C","address":"00E0","data":"7E"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":11,"pc":"010F","address":"00F0","data":"7E"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":20,"pc":"0119","address":"A055","data":"BE"}
+Exited via the debugger
+[:] EVT {"kind":"input","interface":"generic-int0","cycles":502,"pc":"0122","state":1}

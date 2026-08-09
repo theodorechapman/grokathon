@@ -1,0 +1,25 @@
+{
+  "name": "motronic-cleanroom",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Clean-room reimplementation of the Motronic 1.7 (SAB80C515) engine controller described in SPECS.md",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test 'test/**/*.test.ts' 'web/test/**/*.test.ts'",
+    "test:gateway": "node --test 'web/test/**/*.test.ts'",
+    "test:web": "node --test 'web/test/**/*.test.ts'",
+    "typecheck": "tsc --noEmit && npm run typecheck:web",
+    "typecheck:web": "tsc -p web/tsconfig.web.json --noEmit && tsc -p web/tsconfig.gateway.json",
+    "build:web": "node web/build.js",
+    "check:web": "npm run typecheck:web && npm run build:web",
+    "demo": "node web/build.js && node web/serve.js",
+    "gateway:mame": "node web/gateway/run-mame-gateway.ts",
+    "demo:mame": "npm run build:web && npm run gateway:mame --"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1"
+  }
+}

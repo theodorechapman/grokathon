@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "profile": "surrogate-stimulus",
+  "pc_events": 1244,
+  "access_events": 124,
+  "interrupt_events": 22,
+  "input_events": 14
+}

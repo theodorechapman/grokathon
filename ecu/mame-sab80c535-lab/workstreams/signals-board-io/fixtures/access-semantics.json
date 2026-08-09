@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "canonical_rom_sha256": "e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33",
+  "tiers": {
+    "proven": "instruction, reference, or recorded canonical runtime",
+    "corroborated": "BMW/Motronic documentation constrains behavior but not PCB routing",
+    "assumption": "deterministic stimulus choice, not a recovered physical value"
+  },
+  "xdata": [
+    {
+      "address": "a040",
+      "access": "read",
+      "pcs": ["5cea"],
+      "proven": "raw bit 0 is copied after XOR 1e into carry; JNC is at 5cef",
+      "branch_effects": {
+        "raw_bit_0_0": "5cef -> 5d0a; startup leaves the wait loop",
+        "raw_bit_0_1": "5cef -> 5cf1; firmware writes ff to a040 and repeats the read"
+      },
+      "runtime": "zero reaches 5d0d; ff-backed startup repeats 5ce5..5d08",
+      "physical_meaning": "unknown"
+    },
+    {
+      "address": "a040",
+      "access": "read",
+      "pcs": ["33a5", "9099"],
+      "proven": "INTMEM 20 receives (raw XOR 1e) AND INTMEM 2e at 33a5; supervisor 9099 omits the mask",
+      "branch_effects": {
+        "normalized_bit_4_0": "idle controller leaves logical selector at 4",
+        "normalized_bit_4_1_bit_6_0": "idle controller chooses logical selector 2",
+        "normalized_bit_4_1_bit_6_1": "idle controller chooses logical selector 3"
+      },
+      "corroborated": "selectors 2 and 3 reach D/R A/C-on and D/R A/C-off idle-target payloads",
+      "boundary": "raw polarity, connector pins, and whether bit 4 is gear or bit 6 is A/C are not proven"
+    },
+    {
+      "address": "a041",
+      "access": "read",
+      "pcs": ["33ae", "90a0"],
+      "proven": "INTMEM 21 receives raw XOR 02",
+      "branch_effects": {
+        "normalized_bit_1_1": "65bb branches to 65df and skips 65be..65dd",
+        "normalized_bit_1_0": "65bb falls through into additional state and threshold qualification"
+      },
+      "physical_meaning": "unknown"
+    },
+    {
+      "address": "a081",
+      "access": "read",
+      "pcs": ["315a", "316e"],
+      "proven": "ACC bit 6 selects 317c when set; clear paths commit output shadow to a040",
+      "physical_meaning": "unknown"
+    },
+    {
+      "addresses": ["a040", "a041"],
+      "access": "write",
+      "proven": "dedicated output latches; a040 receives INTMEM 22 and a041 receives phase/output sequence values",
+      "negative_gate": "writes never supply reads at the same decoded addresses"
+    }
+  ],
+  "ports": [
+    {
+      "signal": "p3.4",
+      "read_pcs": ["2282", "2540"],
+      "proven": "high branches forward; low sets BITS 5d in crank capture/scheduling paths",
+      "corroborated": "BMW documents crank and cam inputs, but no MCU-to-connector route identifies this pin",
+      "physical_meaning": "unknown"
+    },
+    {
+      "signal": "p5.2",
+      "read_pcs": ["5cb9"],
+      "proven": "low selects a p5 write of fb; high selects ff during startup",
+      "physical_meaning": "unknown startup strap or pin condition"
+    },
+    {
+      "signal": "p5.4",
+      "read_pcs": ["230c", "2625", "2c66"],
+      "proven": "firmware first sets the quasi-bidirectional latch; externally low clears BITS 3c and the p5.4 latch, while high takes the forward branch",
+      "physical_meaning": "unknown handshake input"
+    },
+    {
+      "signal": "p5.3",
+      "read_pcs": ["320e", "34a1", "3505"],
+      "proven": "low gates 320e to 3279 and 34a1 into restart initialization; 3505 loops while low",
+      "physical_meaning": "unknown supervision input"
+    },
+    {
+      "signal": "p5.0",
+      "read_pcs": ["9702", "9c36"],
+      "proven": "high enables calls or loop bodies; low takes the skip branches",
+      "physical_meaning": "unknown service or fault-path input"
+    },
+    {
+      "signal": "p3/p5 byte",
+      "read_pcs": ["769c", "76a7", "866b", "8683", "8ccc", "8cf2"],
+      "proven": "diagnostic/test code reads or read-modify-writes complete port bytes",
+      "physical_meaning": "not promoted from service behavior"
+    },
+    {
+      "signal": "p6",
+      "read_pcs": [],
+      "proven": "no direct P6 SFR reference is exported; ADC acquisition reads ADDAT instead",
+      "mcu_model": "P6 callback returns a digital byte and ignores writes",
+      "physical_meaning": "no canonical branch effect recovered"
+    }
+  ],
+  "unresolved": [
+    "A040 input-mask initialization and all raw connector polarities",
+    "A041 bit meanings",
+    "P3/P5 MCU-to-board and board-to-connector routing",
+    "P6 digital use, ADC channel identities, and analog transfer functions",
+    "whether any named operating mode has a unique board-digital signature"
+  ]
+}

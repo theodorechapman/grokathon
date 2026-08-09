@@ -1,0 +1,1383 @@
+CYC=0 0000: debugger-start
+CYC=2 0100: mov   sp,#$30
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2,"pc":"0103","address":"0081","data":"30"}
+CYC=4 0103: mov   p1,#$00
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":4,"pc":"0106","address":"0090","data":"00"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":4,"pc":"0106","address":"0001","data":"00"}
+CYC=6 0106: mov   p1,#$AC
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":6,"pc":"0109","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":6,"pc":"0109","address":"0001","data":"AC"}
+CYC=8 0109: mov   adcon,#$00
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":8,"pc":"010C","address":"00D8","data":"00"}
+CYC=10 010C: mov   a,addat
+[:] EVT {"kind":"input","interface":"adc0-callback","cycles":10,"pc":"010E","state":18}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":10,"pc":"010E","address":"00D9","data":"24"}
+CYC=11 010E: mov   dptr,#$A100
+CYC=13 0111: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":13,"pc":"0112","address":"A100","data":"24"}
+CYC=15 0112: mov   adcon,#$01
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":15,"pc":"0115","address":"00D8","data":"01"}
+CYC=17 0115: mov   a,addat
+[:] EVT {"kind":"input","interface":"adc1-callback","cycles":17,"pc":"0117","state":52}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":17,"pc":"0117","address":"00D9","data":"68"}
+CYC=18 0117: inc   dptr
+CYC=20 0118: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":20,"pc":"0119","address":"A101","data":"68"}
+CYC=22 0119: mov   tmod,#$22
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":22,"pc":"011C","address":"0089","data":"22"}
+CYC=24 011C: mov   th0,#$80
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":24,"pc":"011F","address":"008C","data":"80"}
+CYC=26 011F: mov   tl0,#$80
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":26,"pc":"0122","address":"008A","data":"80"}
+CYC=28 0122: mov   th1,#$FD
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":28,"pc":"0125","address":"008D","data":"FD"}
+CYC=30 0125: mov   tl1,#$FD
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":30,"pc":"0128","address":"008B","data":"FD"}
+CYC=32 0128: mov   scon,#$50
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":32,"pc":"012B","address":"0098","data":"50"}
+CYC=34 012B: mov   ien0,#$93
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":34,"pc":"012E","address":"00A8","data":"93"}
+CYC=36 012E: setb  it0
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":36,"pc":"0130","address":"0088","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":36,"pc":"0130","address":"0088","data":"01"}
+CYC=37 0130: setb  tr0
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":37,"pc":"0132","address":"0088","data":"01"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":37,"pc":"0132","address":"0088","data":"11"}
+CYC=38 0132: setb  tr1
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":38,"pc":"0134","address":"0088","data":"11"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":38,"pc":"0134","address":"0088","data":"51"}
+CYC=39 0134: mov   sbuf,#$A5
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":39,"pc":"0137","address":"0099","data":"A5"}
+CYC=41 0137: sjmp  $0137
+CYC=43 0137: sjmp  $0137
+CYC=45 0137: sjmp  $0137
+CYC=47 0137: sjmp  $0137
+CYC=49 0137: sjmp  $0137
+CYC=51 0137: sjmp  $0137
+CYC=53 0137: sjmp  $0137
+CYC=55 0137: sjmp  $0137
+CYC=57 0137: sjmp  $0137
+CYC=59 0137: sjmp  $0137
+CYC=61 0137: sjmp  $0137
+CYC=63 0137: sjmp  $0137
+CYC=65 0137: sjmp  $0137
+CYC=67 0137: sjmp  $0137
+CYC=69 0137: sjmp  $0137
+CYC=71 0137: sjmp  $0137
+CYC=73 0137: sjmp  $0137
+CYC=75 0137: sjmp  $0137
+CYC=77 0137: sjmp  $0137
+CYC=79 0137: sjmp  $0137
+CYC=81 0137: sjmp  $0137
+CYC=83 0137: sjmp  $0137
+CYC=85 0137: sjmp  $0137
+CYC=87 0137: sjmp  $0137
+CYC=89 0137: sjmp  $0137
+CYC=91 0137: sjmp  $0137
+CYC=93 0137: sjmp  $0137
+CYC=95 0137: sjmp  $0137
+CYC=97 0137: sjmp  $0137
+CYC=99 0137: sjmp  $0137
+CYC=101 0137: sjmp  $0137
+CYC=103 0137: sjmp  $0137
+CYC=105 0137: sjmp  $0137
+CYC=107 0137: sjmp  $0137
+CYC=109 0137: sjmp  $0137
+CYC=111 0137: sjmp  $0137
+CYC=113 0137: sjmp  $0137
+CYC=115 0137: sjmp  $0137
+CYC=117 0137: sjmp  $0137
+CYC=119 0137: sjmp  $0137
+CYC=121 0137: sjmp  $0137
+CYC=123 0137: sjmp  $0137
+CYC=125 0137: sjmp  $0137
+CYC=127 0137: sjmp  $0137
+CYC=129 0137: sjmp  $0137
+CYC=131 0137: sjmp  $0137
+CYC=133 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":134,"pc":"0137","address":"0003","data":"FD"}
+CYC=135 0137: sjmp  $0137
+CYC=137 0137: sjmp  $0137
+CYC=139 0137: sjmp  $0137
+CYC=141 0137: sjmp  $0137
+CYC=143 0137: sjmp  $0137
+CYC=145 0137: sjmp  $0137
+CYC=147 0137: sjmp  $0137
+CYC=149 0137: sjmp  $0137
+CYC=151 0137: sjmp  $0137
+CYC=153 0137: sjmp  $0137
+CYC=155 0137: sjmp  $0137
+CYC=157 0137: sjmp  $0137
+CYC=159 0137: sjmp  $0137
+CYC=161 0137: sjmp  $0137
+CYC=163 0137: sjmp  $0137
+CYC=165 000B: ljmp  $0220
+CYC=169 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":169,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":169,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":169,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":169,"pc":"0222","address":"0001","data":"8C"}
+CYC=170 0222: reti
+CYC=172 0137: sjmp  $0137
+CYC=174 0137: sjmp  $0137
+CYC=176 0137: sjmp  $0137
+CYC=178 0137: sjmp  $0137
+CYC=180 0137: sjmp  $0137
+CYC=182 0137: sjmp  $0137
+CYC=184 0137: sjmp  $0137
+CYC=186 0137: sjmp  $0137
+CYC=188 0137: sjmp  $0137
+CYC=190 0137: sjmp  $0137
+CYC=192 0137: sjmp  $0137
+CYC=194 0137: sjmp  $0137
+CYC=196 0137: sjmp  $0137
+CYC=198 0137: sjmp  $0137
+CYC=200 0137: sjmp  $0137
+CYC=202 0137: sjmp  $0137
+CYC=204 0137: sjmp  $0137
+CYC=206 0137: sjmp  $0137
+CYC=208 0137: sjmp  $0137
+CYC=210 0137: sjmp  $0137
+CYC=212 0137: sjmp  $0137
+CYC=214 0137: sjmp  $0137
+CYC=216 0137: sjmp  $0137
+CYC=218 0137: sjmp  $0137
+CYC=220 0137: sjmp  $0137
+CYC=222 0137: sjmp  $0137
+CYC=224 0137: sjmp  $0137
+CYC=226 0137: sjmp  $0137
+CYC=228 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":230,"pc":"0137","address":"0003","data":"FF"}
+CYC=230 0137: sjmp  $0137
+CYC=232 0137: sjmp  $0137
+CYC=234 0137: sjmp  $0137
+CYC=236 0137: sjmp  $0137
+CYC=238 0137: sjmp  $0137
+CYC=240 0137: sjmp  $0137
+CYC=242 0137: sjmp  $0137
+CYC=244 0137: sjmp  $0137
+CYC=246 0137: sjmp  $0137
+CYC=248 0137: sjmp  $0137
+CYC=250 0137: sjmp  $0137
+CYC=252 0137: sjmp  $0137
+CYC=254 0137: sjmp  $0137
+CYC=256 0137: sjmp  $0137
+CYC=258 0137: sjmp  $0137
+CYC=260 0137: sjmp  $0137
+CYC=262 0137: sjmp  $0137
+CYC=264 0137: sjmp  $0137
+CYC=266 0137: sjmp  $0137
+CYC=268 0137: sjmp  $0137
+CYC=270 0137: sjmp  $0137
+CYC=272 0137: sjmp  $0137
+CYC=274 0137: sjmp  $0137
+CYC=276 0137: sjmp  $0137
+CYC=278 0137: sjmp  $0137
+CYC=280 0137: sjmp  $0137
+CYC=282 0137: sjmp  $0137
+CYC=284 0137: sjmp  $0137
+CYC=286 0137: sjmp  $0137
+CYC=288 0137: sjmp  $0137
+CYC=290 0137: sjmp  $0137
+CYC=292 0137: sjmp  $0137
+CYC=294 000B: ljmp  $0220
+CYC=298 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":298,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":298,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":298,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":298,"pc":"0222","address":"0001","data":"AC"}
+CYC=299 0222: reti
+CYC=301 0137: sjmp  $0137
+CYC=303 0137: sjmp  $0137
+CYC=305 0137: sjmp  $0137
+CYC=307 0137: sjmp  $0137
+CYC=309 0137: sjmp  $0137
+CYC=311 0137: sjmp  $0137
+CYC=313 0137: sjmp  $0137
+CYC=315 0137: sjmp  $0137
+CYC=317 0137: sjmp  $0137
+CYC=319 0137: sjmp  $0137
+CYC=321 0137: sjmp  $0137
+CYC=323 0137: sjmp  $0137
+CYC=325 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":326,"pc":"0137","address":"0003","data":"FD"}
+CYC=327 0137: sjmp  $0137
+CYC=329 0137: sjmp  $0137
+CYC=331 0137: sjmp  $0137
+CYC=333 0137: sjmp  $0137
+CYC=335 0137: sjmp  $0137
+CYC=337 0137: sjmp  $0137
+CYC=339 0137: sjmp  $0137
+CYC=341 0137: sjmp  $0137
+CYC=343 0137: sjmp  $0137
+CYC=345 0137: sjmp  $0137
+CYC=347 0137: sjmp  $0137
+CYC=349 0137: sjmp  $0137
+CYC=351 0137: sjmp  $0137
+CYC=353 0137: sjmp  $0137
+CYC=355 0137: sjmp  $0137
+CYC=357 0137: sjmp  $0137
+CYC=359 0137: sjmp  $0137
+CYC=361 0137: sjmp  $0137
+CYC=363 0137: sjmp  $0137
+CYC=365 0137: sjmp  $0137
+CYC=367 0137: sjmp  $0137
+CYC=369 0137: sjmp  $0137
+CYC=371 0137: sjmp  $0137
+CYC=373 0137: sjmp  $0137
+CYC=375 0137: sjmp  $0137
+CYC=377 0137: sjmp  $0137
+CYC=379 0137: sjmp  $0137
+CYC=381 0137: sjmp  $0137
+CYC=383 0137: sjmp  $0137
+CYC=385 0137: sjmp  $0137
+CYC=387 0137: sjmp  $0137
+CYC=389 0137: sjmp  $0137
+CYC=391 0137: sjmp  $0137
+CYC=393 0137: sjmp  $0137
+CYC=395 0137: sjmp  $0137
+CYC=397 0137: sjmp  $0137
+CYC=399 0137: sjmp  $0137
+CYC=401 0137: sjmp  $0137
+CYC=403 0137: sjmp  $0137
+CYC=405 0137: sjmp  $0137
+CYC=407 0137: sjmp  $0137
+CYC=409 0137: sjmp  $0137
+CYC=411 0137: sjmp  $0137
+CYC=413 0137: sjmp  $0137
+CYC=415 0137: sjmp  $0137
+CYC=417 0137: sjmp  $0137
+CYC=419 0137: sjmp  $0137
+CYC=421 000B: ljmp  $0220
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":422,"pc":"0220","address":"0003","data":"FF"}
+CYC=425 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":425,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":425,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":425,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":425,"pc":"0222","address":"0001","data":"8C"}
+CYC=426 0222: reti
+CYC=428 0137: sjmp  $0137
+CYC=430 0137: sjmp  $0137
+CYC=432 0137: sjmp  $0137
+CYC=434 0137: sjmp  $0137
+CYC=436 0137: sjmp  $0137
+CYC=438 0137: sjmp  $0137
+CYC=440 0137: sjmp  $0137
+CYC=442 0137: sjmp  $0137
+CYC=444 0137: sjmp  $0137
+CYC=446 0137: sjmp  $0137
+CYC=448 0137: sjmp  $0137
+CYC=450 0137: sjmp  $0137
+CYC=452 0137: sjmp  $0137
+CYC=454 0137: sjmp  $0137
+CYC=456 0137: sjmp  $0137
+CYC=458 0137: sjmp  $0137
+CYC=460 0137: sjmp  $0137
+CYC=462 0137: sjmp  $0137
+CYC=464 0137: sjmp  $0137
+CYC=466 0137: sjmp  $0137
+CYC=468 0137: sjmp  $0137
+CYC=470 0137: sjmp  $0137
+CYC=472 0137: sjmp  $0137
+CYC=474 0137: sjmp  $0137
+CYC=476 0137: sjmp  $0137
+CYC=478 0137: sjmp  $0137
+CYC=480 0137: sjmp  $0137
+CYC=482 0137: sjmp  $0137
+CYC=484 0137: sjmp  $0137
+CYC=486 0137: sjmp  $0137
+CYC=488 0137: sjmp  $0137
+CYC=490 0137: sjmp  $0137
+CYC=492 0137: sjmp  $0137
+CYC=494 0137: sjmp  $0137
+CYC=496 0137: sjmp  $0137
+CYC=498 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-int0","cycles":500,"pc":"0137","state":1}
+
+   (interrupted at 0137, IRQ 0)
+
+CYC=500 0003: ljmp  $0200
+CYC=504 0200: mov   dptr,#$A110
+CYC=506 0203: mov   a,#$E0
+CYC=507 0205: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":507,"pc":"0206","address":"A110","data":"E0"}
+CYC=509 0206: reti
+CYC=511 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-int0","cycles":513,"pc":"0137","state":0}
+CYC=513 0137: sjmp  $0137
+CYC=515 0137: sjmp  $0137
+CYC=517 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":518,"pc":"0137","address":"0003","data":"FD"}
+CYC=519 0137: sjmp  $0137
+CYC=521 0137: sjmp  $0137
+CYC=523 0137: sjmp  $0137
+CYC=525 0137: sjmp  $0137
+CYC=527 0137: sjmp  $0137
+CYC=529 0137: sjmp  $0137
+CYC=531 0137: sjmp  $0137
+CYC=533 0137: sjmp  $0137
+CYC=535 0137: sjmp  $0137
+CYC=537 0137: sjmp  $0137
+CYC=539 0137: sjmp  $0137
+CYC=541 0137: sjmp  $0137
+CYC=543 0137: sjmp  $0137
+CYC=545 0137: sjmp  $0137
+CYC=547 0137: sjmp  $0137
+CYC=549 000B: ljmp  $0220
+CYC=553 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":553,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":553,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":553,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":553,"pc":"0222","address":"0001","data":"AC"}
+CYC=554 0222: reti
+CYC=556 0137: sjmp  $0137
+CYC=558 0137: sjmp  $0137
+CYC=560 0137: sjmp  $0137
+CYC=562 0137: sjmp  $0137
+CYC=564 0137: sjmp  $0137
+CYC=566 0137: sjmp  $0137
+CYC=568 0137: sjmp  $0137
+CYC=570 0137: sjmp  $0137
+CYC=572 0137: sjmp  $0137
+CYC=574 0137: sjmp  $0137
+CYC=576 0137: sjmp  $0137
+CYC=578 0137: sjmp  $0137
+CYC=580 0137: sjmp  $0137
+CYC=582 0137: sjmp  $0137
+CYC=584 0137: sjmp  $0137
+CYC=586 0137: sjmp  $0137
+CYC=588 0137: sjmp  $0137
+CYC=590 0137: sjmp  $0137
+CYC=592 0137: sjmp  $0137
+CYC=594 0137: sjmp  $0137
+CYC=596 0137: sjmp  $0137
+CYC=598 0137: sjmp  $0137
+CYC=600 0137: sjmp  $0137
+CYC=602 0137: sjmp  $0137
+CYC=604 0137: sjmp  $0137
+CYC=606 0137: sjmp  $0137
+CYC=608 0137: sjmp  $0137
+CYC=610 0137: sjmp  $0137
+CYC=612 0137: sjmp  $0137
+CYC=614 0137: sjmp  $0137
+CYC=616 0137: sjmp  $0137
+CYC=618 0137: sjmp  $0137
+CYC=620 0137: sjmp  $0137
+CYC=622 0137: sjmp  $0137
+CYC=624 0137: sjmp  $0137
+CYC=626 0137: sjmp  $0137
+CYC=628 0137: sjmp  $0137
+CYC=630 0137: sjmp  $0137
+CYC=632 0137: sjmp  $0137
+CYC=634 0137: sjmp  $0137
+CYC=636 0137: sjmp  $0137
+CYC=638 0137: sjmp  $0137
+CYC=640 0137: sjmp  $0137
+CYC=642 0137: sjmp  $0137
+CYC=644 0137: sjmp  $0137
+CYC=646 0137: sjmp  $0137
+CYC=648 0137: sjmp  $0137
+CYC=650 0137: sjmp  $0137
+CYC=652 0137: sjmp  $0137
+CYC=654 0137: sjmp  $0137
+CYC=656 0137: sjmp  $0137
+CYC=658 0137: sjmp  $0137
+CYC=660 0137: sjmp  $0137
+CYC=662 0137: sjmp  $0137
+CYC=664 0137: sjmp  $0137
+CYC=666 0137: sjmp  $0137
+CYC=668 0137: sjmp  $0137
+CYC=670 0137: sjmp  $0137
+CYC=672 0137: sjmp  $0137
+CYC=674 0137: sjmp  $0137
+CYC=676 0137: sjmp  $0137
+CYC=678 000B: ljmp  $0220
+CYC=682 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":682,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":682,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":682,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":682,"pc":"0222","address":"0001","data":"8C"}
+CYC=683 0222: reti
+CYC=685 0137: sjmp  $0137
+CYC=687 0137: sjmp  $0137
+CYC=689 0137: sjmp  $0137
+CYC=691 0137: sjmp  $0137
+CYC=693 0137: sjmp  $0137
+CYC=695 0137: sjmp  $0137
+CYC=697 0137: sjmp  $0137
+CYC=699 0137: sjmp  $0137
+CYC=701 0137: sjmp  $0137
+CYC=703 0137: sjmp  $0137
+CYC=705 0137: sjmp  $0137
+CYC=707 0137: sjmp  $0137
+CYC=709 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":710,"pc":"0137","address":"0003","data":"FF"}
+CYC=711 0137: sjmp  $0137
+CYC=713 0137: sjmp  $0137
+CYC=715 0137: sjmp  $0137
+CYC=717 0137: sjmp  $0137
+CYC=719 0137: sjmp  $0137
+CYC=721 0137: sjmp  $0137
+CYC=723 0137: sjmp  $0137
+CYC=725 0137: sjmp  $0137
+CYC=727 0137: sjmp  $0137
+CYC=729 0137: sjmp  $0137
+CYC=731 0137: sjmp  $0137
+CYC=733 0137: sjmp  $0137
+CYC=735 0137: sjmp  $0137
+CYC=737 0137: sjmp  $0137
+CYC=739 0137: sjmp  $0137
+CYC=741 0137: sjmp  $0137
+CYC=743 0137: sjmp  $0137
+CYC=745 0137: sjmp  $0137
+CYC=747 0137: sjmp  $0137
+CYC=749 0137: sjmp  $0137
+CYC=751 0137: sjmp  $0137
+CYC=753 0137: sjmp  $0137
+CYC=755 0137: sjmp  $0137
+CYC=757 0137: sjmp  $0137
+CYC=759 0137: sjmp  $0137
+CYC=761 0137: sjmp  $0137
+CYC=763 0137: sjmp  $0137
+CYC=765 0137: sjmp  $0137
+CYC=767 0137: sjmp  $0137
+CYC=769 0137: sjmp  $0137
+CYC=771 0137: sjmp  $0137
+CYC=773 0137: sjmp  $0137
+CYC=775 0137: sjmp  $0137
+CYC=777 0137: sjmp  $0137
+CYC=779 0137: sjmp  $0137
+CYC=781 0137: sjmp  $0137
+CYC=783 0137: sjmp  $0137
+CYC=785 0137: sjmp  $0137
+CYC=787 0137: sjmp  $0137
+CYC=789 0137: sjmp  $0137
+CYC=791 0137: sjmp  $0137
+CYC=793 0137: sjmp  $0137
+CYC=795 0137: sjmp  $0137
+CYC=797 0137: sjmp  $0137
+CYC=799 0137: sjmp  $0137
+CYC=801 0137: sjmp  $0137
+CYC=803 0137: sjmp  $0137
+CYC=805 000B: ljmp  $0220
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":806,"pc":"0220","address":"0003","data":"FD"}
+CYC=809 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":809,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":809,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":809,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":809,"pc":"0222","address":"0001","data":"AC"}
+CYC=810 0222: reti
+CYC=812 0137: sjmp  $0137
+CYC=814 0137: sjmp  $0137
+CYC=816 0137: sjmp  $0137
+CYC=818 0137: sjmp  $0137
+CYC=820 0137: sjmp  $0137
+CYC=822 0137: sjmp  $0137
+CYC=824 0137: sjmp  $0137
+CYC=826 0137: sjmp  $0137
+CYC=828 0137: sjmp  $0137
+CYC=830 0137: sjmp  $0137
+CYC=832 0137: sjmp  $0137
+CYC=834 0137: sjmp  $0137
+CYC=836 0137: sjmp  $0137
+CYC=838 0137: sjmp  $0137
+CYC=840 0137: sjmp  $0137
+CYC=842 0137: sjmp  $0137
+CYC=844 0137: sjmp  $0137
+CYC=846 0137: sjmp  $0137
+CYC=848 0137: sjmp  $0137
+CYC=850 0137: sjmp  $0137
+CYC=852 0137: sjmp  $0137
+CYC=854 0137: sjmp  $0137
+CYC=856 0137: sjmp  $0137
+CYC=858 0137: sjmp  $0137
+CYC=860 0137: sjmp  $0137
+CYC=862 0137: sjmp  $0137
+CYC=864 0137: sjmp  $0137
+CYC=866 0137: sjmp  $0137
+CYC=868 0137: sjmp  $0137
+CYC=870 0137: sjmp  $0137
+CYC=872 0137: sjmp  $0137
+CYC=874 0137: sjmp  $0137
+CYC=876 0137: sjmp  $0137
+CYC=878 0137: sjmp  $0137
+CYC=880 0137: sjmp  $0137
+CYC=882 0137: sjmp  $0137
+CYC=884 0137: sjmp  $0137
+CYC=886 0137: sjmp  $0137
+CYC=888 0137: sjmp  $0137
+CYC=890 0137: sjmp  $0137
+CYC=892 0137: sjmp  $0137
+CYC=894 0137: sjmp  $0137
+CYC=896 0137: sjmp  $0137
+CYC=898 0137: sjmp  $0137
+CYC=900 0137: sjmp  $0137
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":902,"pc":"0137","address":"0003","data":"FF"}
+CYC=902 0137: sjmp  $0137
+CYC=904 0137: sjmp  $0137
+CYC=906 0137: sjmp  $0137
+CYC=908 0137: sjmp  $0137
+CYC=910 0137: sjmp  $0137
+CYC=912 0137: sjmp  $0137
+CYC=914 0137: sjmp  $0137
+CYC=916 0137: sjmp  $0137
+CYC=918 0137: sjmp  $0137
+CYC=920 0137: sjmp  $0137
+CYC=922 0137: sjmp  $0137
+CYC=924 0137: sjmp  $0137
+CYC=926 0137: sjmp  $0137
+CYC=928 0137: sjmp  $0137
+CYC=930 0137: sjmp  $0137
+CYC=932 0137: sjmp  $0137
+CYC=934 000B: ljmp  $0220
+CYC=938 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":938,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":938,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":938,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":938,"pc":"0222","address":"0001","data":"8C"}
+CYC=939 0222: reti
+CYC=941 0137: sjmp  $0137
+CYC=943 0137: sjmp  $0137
+CYC=945 0137: sjmp  $0137
+CYC=947 0137: sjmp  $0137
+CYC=949 0137: sjmp  $0137
+CYC=951 0137: sjmp  $0137
+CYC=953 0137: sjmp  $0137
+CYC=955 0137: sjmp  $0137
+CYC=957 0137: sjmp  $0137
+CYC=959 0137: sjmp  $0137
+CYC=961 0137: sjmp  $0137
+CYC=963 0137: sjmp  $0137
+CYC=965 0137: sjmp  $0137
+CYC=967 0137: sjmp  $0137
+CYC=969 0137: sjmp  $0137
+CYC=971 0137: sjmp  $0137
+CYC=973 0137: sjmp  $0137
+CYC=975 0137: sjmp  $0137
+CYC=977 0137: sjmp  $0137
+CYC=979 0137: sjmp  $0137
+CYC=981 0137: sjmp  $0137
+CYC=983 0137: sjmp  $0137
+CYC=985 0137: sjmp  $0137
+CYC=987 0137: sjmp  $0137
+CYC=989 0137: sjmp  $0137
+CYC=991 0137: sjmp  $0137
+CYC=993 0137: sjmp  $0137
+CYC=995 0137: sjmp  $0137
+CYC=997 0137: sjmp  $0137
+CYC=999 0023: ljmp  $0240
+CYC=1003 0240: mov   a,sbuf
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1003,"pc":"0242","address":"0099","data":"A5"}
+CYC=1004 0242: mov   dptr,#$A112
+CYC=1006 0245: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":1006,"pc":"0246","address":"A112","data":"A5"}
+CYC=1008 0246: clr   ri
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1008,"pc":"0248","address":"0098","data":"52"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1008,"pc":"0248","address":"0098","data":"52"}
+CYC=1009 0248: clr   ti
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1009,"pc":"024A","address":"0098","data":"52"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1009,"pc":"024A","address":"0098","data":"50"}
+CYC=1010 024A: reti
+CYC=1012 0137: sjmp  $0137
+CYC=1014 0137: sjmp  $0137
+CYC=1016 0137: sjmp  $0137
+CYC=1018 0137: sjmp  $0137
+CYC=1020 0137: sjmp  $0137
+CYC=1022 0137: sjmp  $0137
+CYC=1024 0137: sjmp  $0137
+CYC=1026 0137: sjmp  $0137
+CYC=1028 0137: sjmp  $0137
+CYC=1030 0137: sjmp  $0137
+CYC=1032 0137: sjmp  $0137
+CYC=1034 0137: sjmp  $0137
+CYC=1036 0137: sjmp  $0137
+CYC=1038 0137: sjmp  $0137
+CYC=1040 0137: sjmp  $0137
+CYC=1042 0137: sjmp  $0137
+CYC=1044 0137: sjmp  $0137
+CYC=1046 0137: sjmp  $0137
+CYC=1048 0137: sjmp  $0137
+CYC=1050 0137: sjmp  $0137
+CYC=1052 0137: sjmp  $0137
+CYC=1054 0137: sjmp  $0137
+CYC=1056 0137: sjmp  $0137
+CYC=1058 0137: sjmp  $0137
+CYC=1060 0137: sjmp  $0137
+CYC=1062 000B: ljmp  $0220
+CYC=1066 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1066,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1066,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1066,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1066,"pc":"0222","address":"0001","data":"AC"}
+CYC=1067 0222: reti
+CYC=1069 0137: sjmp  $0137
+CYC=1071 0137: sjmp  $0137
+CYC=1073 0137: sjmp  $0137
+CYC=1075 0137: sjmp  $0137
+CYC=1077 0137: sjmp  $0137
+CYC=1079 0137: sjmp  $0137
+CYC=1081 0137: sjmp  $0137
+CYC=1083 0137: sjmp  $0137
+CYC=1085 0137: sjmp  $0137
+CYC=1087 0137: sjmp  $0137
+CYC=1089 0137: sjmp  $0137
+CYC=1091 0137: sjmp  $0137
+CYC=1093 0137: sjmp  $0137
+CYC=1095 0137: sjmp  $0137
+CYC=1097 0137: sjmp  $0137
+CYC=1099 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1101,"pc":"0137","state":0}
+CYC=1101 0137: sjmp  $0137
+CYC=1103 0137: sjmp  $0137
+CYC=1105 0137: sjmp  $0137
+CYC=1107 0137: sjmp  $0137
+CYC=1109 0137: sjmp  $0137
+CYC=1111 0137: sjmp  $0137
+CYC=1113 0137: sjmp  $0137
+CYC=1115 0137: sjmp  $0137
+CYC=1117 0137: sjmp  $0137
+CYC=1119 0137: sjmp  $0137
+CYC=1121 0137: sjmp  $0137
+CYC=1123 0137: sjmp  $0137
+CYC=1125 0137: sjmp  $0137
+CYC=1127 0137: sjmp  $0137
+CYC=1129 0137: sjmp  $0137
+CYC=1131 0137: sjmp  $0137
+CYC=1133 0137: sjmp  $0137
+CYC=1135 0137: sjmp  $0137
+CYC=1137 0137: sjmp  $0137
+CYC=1139 0137: sjmp  $0137
+CYC=1141 0137: sjmp  $0137
+CYC=1143 0137: sjmp  $0137
+CYC=1145 0137: sjmp  $0137
+CYC=1147 0137: sjmp  $0137
+CYC=1149 0137: sjmp  $0137
+CYC=1151 0137: sjmp  $0137
+CYC=1153 0137: sjmp  $0137
+CYC=1155 0137: sjmp  $0137
+CYC=1157 0137: sjmp  $0137
+CYC=1159 0137: sjmp  $0137
+CYC=1161 0137: sjmp  $0137
+CYC=1163 0137: sjmp  $0137
+CYC=1165 0137: sjmp  $0137
+CYC=1167 0137: sjmp  $0137
+CYC=1169 0137: sjmp  $0137
+CYC=1171 0137: sjmp  $0137
+CYC=1173 0137: sjmp  $0137
+CYC=1175 0137: sjmp  $0137
+CYC=1177 0137: sjmp  $0137
+CYC=1179 0137: sjmp  $0137
+CYC=1181 0137: sjmp  $0137
+CYC=1183 0137: sjmp  $0137
+CYC=1185 0137: sjmp  $0137
+CYC=1187 0137: sjmp  $0137
+CYC=1189 000B: ljmp  $0220
+CYC=1193 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1193,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1193,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1193,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1193,"pc":"0222","address":"0001","data":"8C"}
+CYC=1194 0222: reti
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1196,"pc":"0137","state":0}
+CYC=1196 0137: sjmp  $0137
+CYC=1198 0137: sjmp  $0137
+CYC=1200 0137: sjmp  $0137
+CYC=1202 0137: sjmp  $0137
+CYC=1204 0137: sjmp  $0137
+CYC=1206 0137: sjmp  $0137
+CYC=1208 0137: sjmp  $0137
+CYC=1210 0137: sjmp  $0137
+CYC=1212 0137: sjmp  $0137
+CYC=1214 0137: sjmp  $0137
+CYC=1216 0137: sjmp  $0137
+CYC=1218 0137: sjmp  $0137
+CYC=1220 0137: sjmp  $0137
+CYC=1222 0137: sjmp  $0137
+CYC=1224 0137: sjmp  $0137
+CYC=1226 0137: sjmp  $0137
+CYC=1228 0137: sjmp  $0137
+CYC=1230 0137: sjmp  $0137
+CYC=1232 0137: sjmp  $0137
+CYC=1234 0137: sjmp  $0137
+CYC=1236 0137: sjmp  $0137
+CYC=1238 0137: sjmp  $0137
+CYC=1240 0137: sjmp  $0137
+CYC=1242 0137: sjmp  $0137
+CYC=1244 0137: sjmp  $0137
+CYC=1246 0137: sjmp  $0137
+CYC=1248 0137: sjmp  $0137
+CYC=1250 0137: sjmp  $0137
+CYC=1252 0137: sjmp  $0137
+CYC=1254 0137: sjmp  $0137
+CYC=1256 0137: sjmp  $0137
+CYC=1258 0137: sjmp  $0137
+CYC=1260 0137: sjmp  $0137
+CYC=1262 0137: sjmp  $0137
+CYC=1264 0137: sjmp  $0137
+CYC=1266 0137: sjmp  $0137
+CYC=1268 0137: sjmp  $0137
+CYC=1270 0137: sjmp  $0137
+CYC=1272 0137: sjmp  $0137
+CYC=1274 0137: sjmp  $0137
+CYC=1276 0137: sjmp  $0137
+CYC=1278 0137: sjmp  $0137
+CYC=1280 0137: sjmp  $0137
+CYC=1282 0137: sjmp  $0137
+CYC=1284 0137: sjmp  $0137
+CYC=1286 0137: sjmp  $0137
+CYC=1288 0137: sjmp  $0137
+CYC=1290 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1292,"pc":"0137","state":0}
+CYC=1292 0137: sjmp  $0137
+CYC=1294 0137: sjmp  $0137
+CYC=1296 0137: sjmp  $0137
+CYC=1298 0137: sjmp  $0137
+CYC=1300 0137: sjmp  $0137
+CYC=1302 0137: sjmp  $0137
+CYC=1304 0137: sjmp  $0137
+CYC=1306 0137: sjmp  $0137
+CYC=1308 0137: sjmp  $0137
+CYC=1310 0137: sjmp  $0137
+CYC=1312 0137: sjmp  $0137
+CYC=1314 0137: sjmp  $0137
+CYC=1316 0137: sjmp  $0137
+CYC=1318 000B: ljmp  $0220
+CYC=1322 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1322,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1322,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1322,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1322,"pc":"0222","address":"0001","data":"AC"}
+CYC=1323 0222: reti
+CYC=1325 0137: sjmp  $0137
+CYC=1327 0137: sjmp  $0137
+CYC=1329 0137: sjmp  $0137
+CYC=1331 0137: sjmp  $0137
+CYC=1333 0137: sjmp  $0137
+CYC=1335 0137: sjmp  $0137
+CYC=1337 0137: sjmp  $0137
+CYC=1339 0137: sjmp  $0137
+CYC=1341 0137: sjmp  $0137
+CYC=1343 0137: sjmp  $0137
+CYC=1345 0137: sjmp  $0137
+CYC=1347 0137: sjmp  $0137
+CYC=1349 0137: sjmp  $0137
+CYC=1351 0137: sjmp  $0137
+CYC=1353 0137: sjmp  $0137
+CYC=1355 0137: sjmp  $0137
+CYC=1357 0137: sjmp  $0137
+CYC=1359 0137: sjmp  $0137
+CYC=1361 0137: sjmp  $0137
+CYC=1363 0137: sjmp  $0137
+CYC=1365 0137: sjmp  $0137
+CYC=1367 0137: sjmp  $0137
+CYC=1369 0137: sjmp  $0137
+CYC=1371 0137: sjmp  $0137
+CYC=1373 0137: sjmp  $0137
+CYC=1375 0137: sjmp  $0137
+CYC=1377 0137: sjmp  $0137
+CYC=1379 0137: sjmp  $0137
+CYC=1381 0137: sjmp  $0137
+CYC=1383 0137: sjmp  $0137
+CYC=1385 0137: sjmp  $0137
+CYC=1387 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1389,"pc":"0137","state":1}
+CYC=1389 0137: sjmp  $0137
+CYC=1391 0137: sjmp  $0137
+CYC=1393 0137: sjmp  $0137
+CYC=1395 0137: sjmp  $0137
+CYC=1397 0137: sjmp  $0137
+CYC=1399 0137: sjmp  $0137
+CYC=1401 0137: sjmp  $0137
+CYC=1403 0137: sjmp  $0137
+CYC=1405 0137: sjmp  $0137
+CYC=1407 0137: sjmp  $0137
+CYC=1409 0137: sjmp  $0137
+CYC=1411 0137: sjmp  $0137
+CYC=1413 0137: sjmp  $0137
+CYC=1415 0137: sjmp  $0137
+CYC=1417 0137: sjmp  $0137
+CYC=1419 0137: sjmp  $0137
+CYC=1421 0137: sjmp  $0137
+CYC=1423 0137: sjmp  $0137
+CYC=1425 0137: sjmp  $0137
+CYC=1427 0137: sjmp  $0137
+CYC=1429 0137: sjmp  $0137
+CYC=1431 0137: sjmp  $0137
+CYC=1433 0137: sjmp  $0137
+CYC=1435 0137: sjmp  $0137
+CYC=1437 0137: sjmp  $0137
+CYC=1439 0137: sjmp  $0137
+CYC=1441 0137: sjmp  $0137
+CYC=1443 0137: sjmp  $0137
+CYC=1445 000B: ljmp  $0220
+CYC=1449 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1449,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1449,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1449,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1449,"pc":"0222","address":"0001","data":"8C"}
+CYC=1450 0222: reti
+CYC=1452 0137: sjmp  $0137
+CYC=1454 0137: sjmp  $0137
+CYC=1456 0137: sjmp  $0137
+CYC=1458 0137: sjmp  $0137
+CYC=1460 0137: sjmp  $0137
+CYC=1462 0137: sjmp  $0137
+CYC=1464 0137: sjmp  $0137
+CYC=1466 0137: sjmp  $0137
+CYC=1468 0137: sjmp  $0137
+CYC=1470 0137: sjmp  $0137
+CYC=1472 0137: sjmp  $0137
+CYC=1474 0137: sjmp  $0137
+CYC=1476 0137: sjmp  $0137
+CYC=1478 0137: sjmp  $0137
+CYC=1480 0137: sjmp  $0137
+CYC=1482 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1484,"pc":"0137","state":1}
+CYC=1484 0137: sjmp  $0137
+CYC=1486 0137: sjmp  $0137
+CYC=1488 0137: sjmp  $0137
+CYC=1490 0137: sjmp  $0137
+CYC=1492 0137: sjmp  $0137
+CYC=1494 0137: sjmp  $0137
+CYC=1496 0137: sjmp  $0137
+CYC=1498 0137: sjmp  $0137
+CYC=1500 0137: sjmp  $0137
+CYC=1502 0137: sjmp  $0137
+CYC=1504 0137: sjmp  $0137
+CYC=1506 0137: sjmp  $0137
+CYC=1508 0137: sjmp  $0137
+CYC=1510 0137: sjmp  $0137
+CYC=1512 0137: sjmp  $0137
+CYC=1514 0137: sjmp  $0137
+CYC=1516 0137: sjmp  $0137
+CYC=1518 0137: sjmp  $0137
+CYC=1520 0137: sjmp  $0137
+CYC=1522 0137: sjmp  $0137
+CYC=1524 0137: sjmp  $0137
+CYC=1526 0137: sjmp  $0137
+CYC=1528 0137: sjmp  $0137
+CYC=1530 0137: sjmp  $0137
+CYC=1532 0137: sjmp  $0137
+CYC=1534 0137: sjmp  $0137
+CYC=1536 0137: sjmp  $0137
+CYC=1538 0137: sjmp  $0137
+CYC=1540 0137: sjmp  $0137
+CYC=1542 0137: sjmp  $0137
+CYC=1544 0137: sjmp  $0137
+CYC=1546 0137: sjmp  $0137
+CYC=1548 0137: sjmp  $0137
+CYC=1550 0137: sjmp  $0137
+CYC=1552 0137: sjmp  $0137
+CYC=1554 0137: sjmp  $0137
+CYC=1556 0137: sjmp  $0137
+CYC=1558 0137: sjmp  $0137
+CYC=1560 0137: sjmp  $0137
+CYC=1562 0137: sjmp  $0137
+CYC=1564 0137: sjmp  $0137
+CYC=1566 0137: sjmp  $0137
+CYC=1568 0137: sjmp  $0137
+CYC=1570 0137: sjmp  $0137
+CYC=1572 0137: sjmp  $0137
+CYC=1574 000B: ljmp  $0220
+CYC=1578 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1578,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1578,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1578,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1578,"pc":"0222","address":"0001","data":"AC"}
+CYC=1579 0222: reti
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1581,"pc":"0137","state":1}
+CYC=1581 0137: sjmp  $0137
+CYC=1583 0137: sjmp  $0137
+CYC=1585 0137: sjmp  $0137
+CYC=1587 0137: sjmp  $0137
+CYC=1589 0137: sjmp  $0137
+CYC=1591 0137: sjmp  $0137
+CYC=1593 0137: sjmp  $0137
+CYC=1595 0137: sjmp  $0137
+CYC=1597 0137: sjmp  $0137
+CYC=1599 0137: sjmp  $0137
+CYC=1601 0137: sjmp  $0137
+CYC=1603 0137: sjmp  $0137
+CYC=1605 0137: sjmp  $0137
+CYC=1607 0137: sjmp  $0137
+CYC=1609 0137: sjmp  $0137
+CYC=1611 0137: sjmp  $0137
+CYC=1613 0137: sjmp  $0137
+CYC=1615 0137: sjmp  $0137
+CYC=1617 0137: sjmp  $0137
+CYC=1619 0137: sjmp  $0137
+CYC=1621 0137: sjmp  $0137
+CYC=1623 0137: sjmp  $0137
+CYC=1625 0137: sjmp  $0137
+CYC=1627 0137: sjmp  $0137
+CYC=1629 0137: sjmp  $0137
+CYC=1631 0137: sjmp  $0137
+CYC=1633 0137: sjmp  $0137
+CYC=1635 0137: sjmp  $0137
+CYC=1637 0137: sjmp  $0137
+CYC=1639 0137: sjmp  $0137
+CYC=1641 0137: sjmp  $0137
+CYC=1643 0137: sjmp  $0137
+CYC=1645 0137: sjmp  $0137
+CYC=1647 0137: sjmp  $0137
+CYC=1649 0137: sjmp  $0137
+CYC=1651 0137: sjmp  $0137
+CYC=1653 0137: sjmp  $0137
+CYC=1655 0137: sjmp  $0137
+CYC=1657 0137: sjmp  $0137
+CYC=1659 0137: sjmp  $0137
+CYC=1661 0137: sjmp  $0137
+CYC=1663 0137: sjmp  $0137
+CYC=1665 0137: sjmp  $0137
+CYC=1667 0137: sjmp  $0137
+CYC=1669 0137: sjmp  $0137
+CYC=1671 0137: sjmp  $0137
+CYC=1673 0137: sjmp  $0137
+CYC=1675 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1677,"pc":"0137","state":1}
+CYC=1677 0137: sjmp  $0137
+CYC=1679 0137: sjmp  $0137
+CYC=1681 0137: sjmp  $0137
+CYC=1683 0137: sjmp  $0137
+CYC=1685 0137: sjmp  $0137
+CYC=1687 0137: sjmp  $0137
+CYC=1689 0137: sjmp  $0137
+CYC=1691 0137: sjmp  $0137
+CYC=1693 0137: sjmp  $0137
+CYC=1695 0137: sjmp  $0137
+CYC=1697 0137: sjmp  $0137
+CYC=1699 0137: sjmp  $0137
+CYC=1701 000B: ljmp  $0220
+CYC=1705 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1705,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1705,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1705,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1705,"pc":"0222","address":"0001","data":"8C"}
+CYC=1706 0222: reti
+CYC=1708 0137: sjmp  $0137
+CYC=1710 0137: sjmp  $0137
+CYC=1712 0137: sjmp  $0137
+CYC=1714 0137: sjmp  $0137
+CYC=1716 0137: sjmp  $0137
+CYC=1718 0137: sjmp  $0137
+CYC=1720 0137: sjmp  $0137
+CYC=1722 0137: sjmp  $0137
+CYC=1724 0137: sjmp  $0137
+CYC=1726 0137: sjmp  $0137
+CYC=1728 0137: sjmp  $0137
+CYC=1730 0137: sjmp  $0137
+CYC=1732 0137: sjmp  $0137
+CYC=1734 0137: sjmp  $0137
+CYC=1736 0137: sjmp  $0137
+CYC=1738 0137: sjmp  $0137
+CYC=1740 0137: sjmp  $0137
+CYC=1742 0137: sjmp  $0137
+CYC=1744 0137: sjmp  $0137
+CYC=1746 0137: sjmp  $0137
+CYC=1748 0137: sjmp  $0137
+CYC=1750 0137: sjmp  $0137
+CYC=1752 0137: sjmp  $0137
+CYC=1754 0137: sjmp  $0137
+CYC=1756 0137: sjmp  $0137
+CYC=1758 0137: sjmp  $0137
+CYC=1760 0137: sjmp  $0137
+CYC=1762 0137: sjmp  $0137
+CYC=1764 0137: sjmp  $0137
+CYC=1766 0137: sjmp  $0137
+CYC=1768 0137: sjmp  $0137
+CYC=1770 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1772,"pc":"0137","state":0}
+CYC=1772 0137: sjmp  $0137
+CYC=1774 0137: sjmp  $0137
+CYC=1776 0137: sjmp  $0137
+CYC=1778 0137: sjmp  $0137
+CYC=1780 0137: sjmp  $0137
+CYC=1782 0137: sjmp  $0137
+CYC=1784 0137: sjmp  $0137
+CYC=1786 0137: sjmp  $0137
+CYC=1788 0137: sjmp  $0137
+CYC=1790 0137: sjmp  $0137
+CYC=1792 0137: sjmp  $0137
+CYC=1794 0137: sjmp  $0137
+CYC=1796 0137: sjmp  $0137
+CYC=1798 0137: sjmp  $0137
+CYC=1800 0137: sjmp  $0137
+CYC=1802 0137: sjmp  $0137
+CYC=1804 0137: sjmp  $0137
+CYC=1806 0137: sjmp  $0137
+CYC=1808 0137: sjmp  $0137
+CYC=1810 0137: sjmp  $0137
+CYC=1812 0137: sjmp  $0137
+CYC=1814 0137: sjmp  $0137
+CYC=1816 0137: sjmp  $0137
+CYC=1818 0137: sjmp  $0137
+CYC=1820 0137: sjmp  $0137
+CYC=1822 0137: sjmp  $0137
+CYC=1824 0137: sjmp  $0137
+CYC=1826 0137: sjmp  $0137
+CYC=1828 0137: sjmp  $0137
+CYC=1830 000B: ljmp  $0220
+CYC=1834 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1834,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1834,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1834,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1834,"pc":"0222","address":"0001","data":"AC"}
+CYC=1835 0222: reti
+CYC=1837 0137: sjmp  $0137
+CYC=1839 0137: sjmp  $0137
+CYC=1841 0137: sjmp  $0137
+CYC=1843 0137: sjmp  $0137
+CYC=1845 0137: sjmp  $0137
+CYC=1847 0137: sjmp  $0137
+CYC=1849 0137: sjmp  $0137
+CYC=1851 0137: sjmp  $0137
+CYC=1853 0137: sjmp  $0137
+CYC=1855 0137: sjmp  $0137
+CYC=1857 0137: sjmp  $0137
+CYC=1859 0137: sjmp  $0137
+CYC=1861 0137: sjmp  $0137
+CYC=1863 0137: sjmp  $0137
+CYC=1865 0137: sjmp  $0137
+CYC=1867 0137: sjmp  $0137
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1869,"pc":"0137","state":0}
+CYC=1869 0137: sjmp  $0137
+CYC=1871 0137: sjmp  $0137
+CYC=1873 0137: sjmp  $0137
+CYC=1875 0137: sjmp  $0137
+CYC=1877 0137: sjmp  $0137
+CYC=1879 0137: sjmp  $0137
+CYC=1881 0137: sjmp  $0137
+CYC=1883 0137: sjmp  $0137
+CYC=1885 0137: sjmp  $0137
+CYC=1887 0137: sjmp  $0137
+CYC=1889 0137: sjmp  $0137
+CYC=1891 0137: sjmp  $0137
+CYC=1893 0137: sjmp  $0137
+CYC=1895 0137: sjmp  $0137
+CYC=1897 0137: sjmp  $0137
+CYC=1899 0137: sjmp  $0137
+CYC=1901 0137: sjmp  $0137
+CYC=1903 0137: sjmp  $0137
+CYC=1905 0137: sjmp  $0137
+CYC=1907 0137: sjmp  $0137
+CYC=1909 0137: sjmp  $0137
+CYC=1911 0137: sjmp  $0137
+CYC=1913 0137: sjmp  $0137
+CYC=1915 0137: sjmp  $0137
+CYC=1917 0137: sjmp  $0137
+CYC=1919 0137: sjmp  $0137
+CYC=1921 0137: sjmp  $0137
+CYC=1923 0137: sjmp  $0137
+CYC=1925 0137: sjmp  $0137
+CYC=1927 0137: sjmp  $0137
+CYC=1929 0137: sjmp  $0137
+CYC=1931 0137: sjmp  $0137
+CYC=1933 0137: sjmp  $0137
+CYC=1935 0137: sjmp  $0137
+CYC=1937 0137: sjmp  $0137
+CYC=1939 0137: sjmp  $0137
+CYC=1941 0137: sjmp  $0137
+CYC=1943 0137: sjmp  $0137
+CYC=1945 0137: sjmp  $0137
+CYC=1947 0137: sjmp  $0137
+CYC=1949 0137: sjmp  $0137
+CYC=1951 0137: sjmp  $0137
+CYC=1953 0137: sjmp  $0137
+CYC=1955 0137: sjmp  $0137
+CYC=1957 000B: ljmp  $0220
+CYC=1961 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1961,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":1961,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":1961,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":1961,"pc":"0222","address":"0001","data":"8C"}
+CYC=1962 0222: reti
+[:] EVT {"kind":"input","interface":"generic-uart-rx","cycles":1964,"pc":"0137","state":1}
+CYC=1964 0137: sjmp  $0137
+CYC=1966 0137: sjmp  $0137
+CYC=1968 0137: sjmp  $0137
+CYC=1970 0137: sjmp  $0137
+CYC=1972 0137: sjmp  $0137
+CYC=1974 0137: sjmp  $0137
+CYC=1976 0137: sjmp  $0137
+CYC=1978 0137: sjmp  $0137
+CYC=1980 0137: sjmp  $0137
+CYC=1982 0137: sjmp  $0137
+CYC=1984 0137: sjmp  $0137
+CYC=1986 0137: sjmp  $0137
+CYC=1988 0137: sjmp  $0137
+CYC=1990 0137: sjmp  $0137
+CYC=1992 0137: sjmp  $0137
+CYC=1994 0137: sjmp  $0137
+CYC=1996 0137: sjmp  $0137
+CYC=1998 0137: sjmp  $0137
+CYC=2000 0137: sjmp  $0137
+CYC=2002 0137: sjmp  $0137
+CYC=2004 0137: sjmp  $0137
+CYC=2006 0137: sjmp  $0137
+CYC=2008 0137: sjmp  $0137
+CYC=2010 0137: sjmp  $0137
+CYC=2012 0023: ljmp  $0240
+CYC=2016 0240: mov   a,sbuf
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2016,"pc":"0242","address":"0099","data":"3C"}
+CYC=2017 0242: mov   dptr,#$A112
+CYC=2019 0245: movx  @dptr,a
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":2019,"pc":"0246","address":"A112","data":"3C"}
+CYC=2021 0246: clr   ri
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2021,"pc":"0248","address":"0098","data":"55"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2021,"pc":"0248","address":"0098","data":"54"}
+CYC=2022 0248: clr   ti
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2022,"pc":"024A","address":"0098","data":"54"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2022,"pc":"024A","address":"0098","data":"54"}
+CYC=2023 024A: reti
+CYC=2025 0137: sjmp  $0137
+CYC=2027 0137: sjmp  $0137
+CYC=2029 0137: sjmp  $0137
+CYC=2031 0137: sjmp  $0137
+CYC=2033 0137: sjmp  $0137
+CYC=2035 0137: sjmp  $0137
+CYC=2037 0137: sjmp  $0137
+CYC=2039 0137: sjmp  $0137
+CYC=2041 0137: sjmp  $0137
+CYC=2043 0137: sjmp  $0137
+CYC=2045 0137: sjmp  $0137
+CYC=2047 0137: sjmp  $0137
+CYC=2049 0137: sjmp  $0137
+CYC=2051 0137: sjmp  $0137
+CYC=2053 0137: sjmp  $0137
+CYC=2055 0137: sjmp  $0137
+CYC=2057 0137: sjmp  $0137
+CYC=2059 0137: sjmp  $0137
+CYC=2061 0137: sjmp  $0137
+CYC=2063 0137: sjmp  $0137
+CYC=2065 0137: sjmp  $0137
+CYC=2067 0137: sjmp  $0137
+CYC=2069 0137: sjmp  $0137
+CYC=2071 0137: sjmp  $0137
+CYC=2073 0137: sjmp  $0137
+CYC=2075 0137: sjmp  $0137
+CYC=2077 0137: sjmp  $0137
+CYC=2079 0137: sjmp  $0137
+CYC=2081 0137: sjmp  $0137
+CYC=2083 0137: sjmp  $0137
+CYC=2085 000B: ljmp  $0220
+CYC=2089 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2089,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2089,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2089,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":2089,"pc":"0222","address":"0001","data":"AC"}
+CYC=2090 0222: reti
+CYC=2092 0137: sjmp  $0137
+CYC=2094 0137: sjmp  $0137
+CYC=2096 0137: sjmp  $0137
+CYC=2098 0137: sjmp  $0137
+CYC=2100 0137: sjmp  $0137
+CYC=2102 0137: sjmp  $0137
+CYC=2104 0137: sjmp  $0137
+CYC=2106 0137: sjmp  $0137
+CYC=2108 0137: sjmp  $0137
+CYC=2110 0137: sjmp  $0137
+CYC=2112 0137: sjmp  $0137
+CYC=2114 0137: sjmp  $0137
+CYC=2116 0137: sjmp  $0137
+CYC=2118 0137: sjmp  $0137
+CYC=2120 0137: sjmp  $0137
+CYC=2122 0137: sjmp  $0137
+CYC=2124 0137: sjmp  $0137
+CYC=2126 0137: sjmp  $0137
+CYC=2128 0137: sjmp  $0137
+CYC=2130 0137: sjmp  $0137
+CYC=2132 0137: sjmp  $0137
+CYC=2134 0137: sjmp  $0137
+CYC=2136 0137: sjmp  $0137
+CYC=2138 0137: sjmp  $0137
+CYC=2140 0137: sjmp  $0137
+CYC=2142 0137: sjmp  $0137
+CYC=2144 0137: sjmp  $0137
+CYC=2146 0137: sjmp  $0137
+CYC=2148 0137: sjmp  $0137
+CYC=2150 0137: sjmp  $0137
+CYC=2152 0137: sjmp  $0137
+CYC=2154 0137: sjmp  $0137
+CYC=2156 0137: sjmp  $0137
+CYC=2158 0137: sjmp  $0137
+CYC=2160 0137: sjmp  $0137
+CYC=2162 0137: sjmp  $0137
+CYC=2164 0137: sjmp  $0137
+CYC=2166 0137: sjmp  $0137
+CYC=2168 0137: sjmp  $0137
+CYC=2170 0137: sjmp  $0137
+CYC=2172 0137: sjmp  $0137
+CYC=2174 0137: sjmp  $0137
+CYC=2176 0137: sjmp  $0137
+CYC=2178 0137: sjmp  $0137
+CYC=2180 0137: sjmp  $0137
+CYC=2182 0137: sjmp  $0137
+CYC=2184 0137: sjmp  $0137
+CYC=2186 0137: sjmp  $0137
+CYC=2188 0137: sjmp  $0137
+CYC=2190 0137: sjmp  $0137
+CYC=2192 0137: sjmp  $0137
+CYC=2194 0137: sjmp  $0137
+CYC=2196 0137: sjmp  $0137
+CYC=2198 0137: sjmp  $0137
+CYC=2200 0137: sjmp  $0137
+CYC=2202 0137: sjmp  $0137
+CYC=2204 0137: sjmp  $0137
+CYC=2206 0137: sjmp  $0137
+CYC=2208 0137: sjmp  $0137
+CYC=2210 0137: sjmp  $0137
+CYC=2212 0137: sjmp  $0137
+CYC=2214 000B: ljmp  $0220
+CYC=2218 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2218,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2218,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2218,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":2218,"pc":"0222","address":"0001","data":"8C"}
+CYC=2219 0222: reti
+CYC=2221 0137: sjmp  $0137
+CYC=2223 0137: sjmp  $0137
+CYC=2225 0137: sjmp  $0137
+CYC=2227 0137: sjmp  $0137
+CYC=2229 0137: sjmp  $0137
+CYC=2231 0137: sjmp  $0137
+CYC=2233 0137: sjmp  $0137
+CYC=2235 0137: sjmp  $0137
+CYC=2237 0137: sjmp  $0137
+CYC=2239 0137: sjmp  $0137
+CYC=2241 0137: sjmp  $0137
+CYC=2243 0137: sjmp  $0137
+CYC=2245 0137: sjmp  $0137
+CYC=2247 0137: sjmp  $0137
+CYC=2249 0137: sjmp  $0137
+CYC=2251 0137: sjmp  $0137
+CYC=2253 0137: sjmp  $0137
+CYC=2255 0137: sjmp  $0137
+CYC=2257 0137: sjmp  $0137
+CYC=2259 0137: sjmp  $0137
+CYC=2261 0137: sjmp  $0137
+CYC=2263 0137: sjmp  $0137
+CYC=2265 0137: sjmp  $0137
+CYC=2267 0137: sjmp  $0137
+CYC=2269 0137: sjmp  $0137
+CYC=2271 0137: sjmp  $0137
+CYC=2273 0137: sjmp  $0137
+CYC=2275 0137: sjmp  $0137
+CYC=2277 0137: sjmp  $0137
+CYC=2279 0137: sjmp  $0137
+CYC=2281 0137: sjmp  $0137
+CYC=2283 0137: sjmp  $0137
+CYC=2285 0137: sjmp  $0137
+CYC=2287 0137: sjmp  $0137
+CYC=2289 0137: sjmp  $0137
+CYC=2291 0137: sjmp  $0137
+CYC=2293 0137: sjmp  $0137
+CYC=2295 0137: sjmp  $0137
+CYC=2297 0137: sjmp  $0137
+CYC=2299 0137: sjmp  $0137
+CYC=2301 0137: sjmp  $0137
+CYC=2303 0137: sjmp  $0137
+CYC=2305 0137: sjmp  $0137
+CYC=2307 0137: sjmp  $0137
+CYC=2309 0137: sjmp  $0137
+CYC=2311 0137: sjmp  $0137
+CYC=2313 0137: sjmp  $0137
+CYC=2315 0137: sjmp  $0137
+CYC=2317 0137: sjmp  $0137
+CYC=2319 0137: sjmp  $0137
+CYC=2321 0137: sjmp  $0137
+CYC=2323 0137: sjmp  $0137
+CYC=2325 0137: sjmp  $0137
+CYC=2327 0137: sjmp  $0137
+CYC=2329 0137: sjmp  $0137
+CYC=2331 0137: sjmp  $0137
+CYC=2333 0137: sjmp  $0137
+CYC=2335 0137: sjmp  $0137
+CYC=2337 0137: sjmp  $0137
+CYC=2339 0137: sjmp  $0137
+CYC=2341 000B: ljmp  $0220
+CYC=2345 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2345,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2345,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2345,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":2345,"pc":"0222","address":"0001","data":"AC"}
+CYC=2346 0222: reti
+CYC=2348 0137: sjmp  $0137
+CYC=2350 0137: sjmp  $0137
+CYC=2352 0137: sjmp  $0137
+CYC=2354 0137: sjmp  $0137
+CYC=2356 0137: sjmp  $0137
+CYC=2358 0137: sjmp  $0137
+CYC=2360 0137: sjmp  $0137
+CYC=2362 0137: sjmp  $0137
+CYC=2364 0137: sjmp  $0137
+CYC=2366 0137: sjmp  $0137
+CYC=2368 0137: sjmp  $0137
+CYC=2370 0137: sjmp  $0137
+CYC=2372 0137: sjmp  $0137
+CYC=2374 0137: sjmp  $0137
+CYC=2376 0137: sjmp  $0137
+CYC=2378 0137: sjmp  $0137
+CYC=2380 0137: sjmp  $0137
+CYC=2382 0137: sjmp  $0137
+CYC=2384 0137: sjmp  $0137
+CYC=2386 0137: sjmp  $0137
+CYC=2388 0137: sjmp  $0137
+CYC=2390 0137: sjmp  $0137
+CYC=2392 0137: sjmp  $0137
+CYC=2394 0137: sjmp  $0137
+CYC=2396 0137: sjmp  $0137
+CYC=2398 0137: sjmp  $0137
+CYC=2400 0137: sjmp  $0137
+CYC=2402 0137: sjmp  $0137
+CYC=2404 0137: sjmp  $0137
+CYC=2406 0137: sjmp  $0137
+CYC=2408 0137: sjmp  $0137
+CYC=2410 0137: sjmp  $0137
+CYC=2412 0137: sjmp  $0137
+CYC=2414 0137: sjmp  $0137
+CYC=2416 0137: sjmp  $0137
+CYC=2418 0137: sjmp  $0137
+CYC=2420 0137: sjmp  $0137
+CYC=2422 0137: sjmp  $0137
+CYC=2424 0137: sjmp  $0137
+CYC=2426 0137: sjmp  $0137
+CYC=2428 0137: sjmp  $0137
+CYC=2430 0137: sjmp  $0137
+CYC=2432 0137: sjmp  $0137
+CYC=2434 0137: sjmp  $0137
+CYC=2436 0137: sjmp  $0137
+CYC=2438 0137: sjmp  $0137
+CYC=2440 0137: sjmp  $0137
+CYC=2442 0137: sjmp  $0137
+CYC=2444 0137: sjmp  $0137
+CYC=2446 0137: sjmp  $0137
+CYC=2448 0137: sjmp  $0137
+CYC=2450 0137: sjmp  $0137
+CYC=2452 0137: sjmp  $0137
+CYC=2454 0137: sjmp  $0137
+CYC=2456 0137: sjmp  $0137
+CYC=2458 0137: sjmp  $0137
+CYC=2460 0137: sjmp  $0137
+CYC=2462 0137: sjmp  $0137
+CYC=2464 0137: sjmp  $0137
+CYC=2466 0137: sjmp  $0137
+CYC=2468 0137: sjmp  $0137
+CYC=2470 000B: ljmp  $0220
+CYC=2474 0220: cpl   t2ex
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2474,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2474,"pc":"0222","address":"0090","data":"AC"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":2474,"pc":"0222","address":"0090","data":"8C"}
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":2474,"pc":"0222","address":"0001","data":"8C"}
+CYC=2475 0222: reti
+CYC=2477 0137: sjmp  $0137
+CYC=2479 0137: sjmp  $0137
+CYC=2481 0137: sjmp  $0137
+CYC=2483 0137: sjmp  $0137
+CYC=2485 0137: sjmp  $0137
+CYC=2487 0137: sjmp  $0137
+CYC=2489 0137: sjmp  $0137
+CYC=2491 0137: sjmp  $0137
+CYC=2493 0137: sjmp  $0137
+CYC=2495 0137: sjmp  $0137
+CYC=2497 0137: sjmp  $0137
+CYC=2499 0137: sjmp  $0137

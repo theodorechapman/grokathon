@@ -1,0 +1,79 @@
+{
+  "qualification": "Synthetic transport fixtures, not Motronic wheel identification",
+  "machine_cycles_per_second": 1000000,
+  "geometry": {
+    "positions_per_revolution": 12,
+    "missing_positions": [11],
+    "capture_edge": "falling",
+    "pulse_width_cycles": 2,
+    "initial_settle_cycles": 8,
+    "vehicle_claim": false
+  },
+  "scenarios": {
+    "stopped": [
+      {
+        "kind": "stopped",
+        "duration_cycles": 250000
+      }
+    ],
+    "crank": [
+      {
+        "kind": "crank",
+        "revolutions": 3,
+        "start_rpm": 180
+      }
+    ],
+    "idle": [
+      {
+        "kind": "idle",
+        "revolutions": 4,
+        "start_rpm": 850
+      }
+    ],
+    "ramp": [
+      {
+        "kind": "ramp",
+        "revolutions": 5,
+        "start_rpm": 180,
+        "end_rpm": 1800
+      }
+    ],
+    "steady": [
+      {
+        "kind": "steady",
+        "revolutions": 4,
+        "start_rpm": 2500
+      }
+    ],
+    "dropout": [
+      {
+        "kind": "idle",
+        "revolutions": 1,
+        "start_rpm": 850
+      },
+      {
+        "kind": "dropout",
+        "revolutions": 1,
+        "start_rpm": 850
+      },
+      {
+        "kind": "idle",
+        "revolutions": 1,
+        "start_rpm": 850
+      }
+    ],
+    "implausible-edge": [
+      {
+        "kind": "idle",
+        "revolutions": 1,
+        "start_rpm": 850
+      },
+      {
+        "kind": "implausible",
+        "revolutions": 1,
+        "start_rpm": 850,
+        "implausible_after_cycles": 4
+      }
+    ]
+  }
+}

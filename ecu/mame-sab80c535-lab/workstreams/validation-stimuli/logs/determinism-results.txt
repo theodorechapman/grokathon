@@ -1,0 +1,5 @@
+Command: python3 tools/run-mame.py --profile all
+Comparison: byte-for-byte cmp against the immediately preceding normalized run
+Result: PASS
+reset-events.ndjson SHA-256: 15a54db9c0f203e48bd79337ff171c584a867a9187c99afac256b33c554a19d8
+stimulus-events.ndjson SHA-256: 9a533313df98a02231e3d9ce712fc7be5be58c19147025d6da856a7763847303

@@ -1,0 +1,7 @@
+Repository: https://github.com/mamedev/mame.git
+Commit: a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e
+Commit date: 2026-08-08T20:51:44-04:00
+Inspected device: src/devices/cpu/mcs51/sab80c535.{cpp,h}
+Inspected base: src/devices/cpu/mcs51/i8051.{cpp,h}, i8052.{cpp,h}
+Whole-project license: GPL-2.0+
+SAB80C535 and MCS-51 device file license: BSD-3-Clause

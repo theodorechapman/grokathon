@@ -1,0 +1,10 @@
+{
+  "name": "motronic-cleanroom-accuracy-audit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test 'tests/**/*.test.ts'",
+    "typecheck": "tsc --noEmit",
+    "report": "node src/generate-reports.ts"
+  }
+}
