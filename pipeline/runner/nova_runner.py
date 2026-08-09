@@ -1,9 +1,10 @@
 """Nova bridge runner: consumes pipeline/jobs/*.json and ships remix bundles.
 
-V1 scope: every job becomes a remix of the reconstructed Breakout (jobs with no
-parent are treated as reshaping the breakout template per the prompt). Grok
-patches the C source, GBDK builds it, the bundle publishes to the arcade, and
-the job file is deleted in the same commit. The pipeline team's harness can
+Two paths. Jobs with a parent are remixes: Grok patches the parent's GBDK C
+source, GBDK builds it. From-scratch jobs (parent null, source site or x)
+become self-contained browser games: Grok writes a complete index.html
+implementing the prompt. Either way the bundle publishes to the arcade and the
+job file is deleted in the same commit. The pipeline team's harness can
 replace this wholesale; the contract is the only interface.
 
 Run: python3 pipeline/runner/nova_runner.py [--once]
@@ -68,6 +69,18 @@ def extract_c(text: str) -> str:
     return (m.group(1) if m else text).strip() + "\n"
 
 
+def extract_html(text: str) -> str:
+    m = re.search(r"```(?:html)?\n(.*?)```", text, re.S)
+    return (m.group(1) if m else text).strip() + "\n"
+
+
+def header_tag(src: str, tag: str) -> str:
+    """Read a '// TAG: value' or '<!-- TAG: value -->' header comment near the
+    top of generated source. Both pipelines name their games this way."""
+    m = re.search(rf"^\s*(?://|<!--)\s*{tag}:\s*(.+?)\s*(?:-->\s*)?$", src[:600], re.M)
+    return re.sub(r"\s+", " ", m.group(1)).strip().strip("\"'") if m else ""
+
+
 def patch_source(prompt: str, error: str | None = None, parent: str | None = None) -> str:
     # Remix lineage: start from the parent's shipped source when it exists so a
     # remix of a remix keeps its parent's changes instead of resetting to base.
@@ -101,6 +114,65 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
     return extract_c(grok([{"role": "system", "content": system}, {"role": "user", "content": user}]))
 
 
+HTML_SYSTEM = (
+    "You write complete browser games as a single self-contained index.html "
+    "file. Implement the player's game idea faithfully as a small, fun, "
+    "finishable arcade game: every run must end in a win or a loss.\n"
+    "Hard rules:\n"
+    "- Everything inline: all JS and CSS live in the file. No CDN, no external "
+    "URLs, no fetch/XHR, no imports, no web fonts. data: URIs are fine.\n"
+    "- Keyboard AND touch controls must both work.\n"
+    "- The game sizes itself to its viewport at any frame size from a phone to "
+    "a desktop: scale to fit, no scrolling, no overflow, nothing cut off. It "
+    "runs in an iframe with scrolling disabled.\n"
+    "- No console errors on boot or during play.\n"
+    "- REQUIRED: the moment a run ends (win, lose, or game over), post the "
+    'score: window.parent.postMessage({type:"nova:score", score:<number>, '
+    'outcome:"win"|"loss", message:"<short line in the game\'s voice, max 120 '
+    'chars>"}, "*"). score is required (0 is fine). Then freeze play. Do NOT '
+    "draw your own sign-in, claim, retry, or share UI — the arcade renders "
+    "the end screen over the frozen game.\n"
+    "Output ONLY the html in a single ```html code block. The very first "
+    "lines of the file must be these header comments:\n"
+    "<!-- TITLE: <punchy 2-4 word game name, max 40 chars> -->\n"
+    "<!-- DESC: <one short sentence> -->\n"
+    "<!-- CONTROLS: <one short line saying how to play> -->\n"
+    '<!-- SCORING: points -->  (write "time" instead ONLY for a race-to-finish '
+    "where faster is better; then score is elapsed milliseconds)"
+)
+
+
+def generate_html(prompt: str, error: str | None = None, base_html: str | None = None) -> str:
+    if base_html:
+        user = (
+            f"Edit request: {prompt}\n\nApply it to this existing game and "
+            f"output the complete updated index.html:\n```html\n{base_html}\n```"
+        )
+    else:
+        user = f"Game idea: {prompt}"
+    if error:
+        user += f"\n\nYour previous attempt was rejected:\n{error}\nFix it and output the complete corrected index.html."
+    return extract_html(grok([{"role": "system", "content": HTML_SYSTEM}, {"role": "user", "content": user}]))
+
+
+def validate_html(html: str) -> str:
+    """Cheap pre-ship checks against the bundle contract. Empty string = pass."""
+    if not html.strip():
+        return "output was empty"
+    if "nova:score" not in html:
+        return 'missing the required window.parent.postMessage({type:"nova:score",...}) call'
+    lower = html.lower()
+    if "<canvas" not in lower and "<body" not in lower:
+        return "no <canvas> or <body> element; this does not look like a complete html page"
+    # Self-contained: no external resource references. xmlns namespace URIs
+    # are inert identifiers, so strip them before scanning; data: URIs never
+    # match the scheme pattern.
+    stripped = re.sub(r"xmlns(?::[\w-]+)?\s*=\s*([\"'])https?://[^\"']*\1", "", html)
+    if re.search(r"https?://", stripped):
+        return "references an external http(s) URL; the file must be fully self-contained"
+    return ""
+
+
 def build_rom(main_c: str, slug: str) -> tuple[Path | None, str]:
     work = Path(tempfile.mkdtemp(prefix=f"nova-{slug}-"))
     for f in ("assets.c", "assets.h"):
@@ -118,11 +190,11 @@ def build_rom(main_c: str, slug: str) -> tuple[Path | None, str]:
     return rom, ""
 
 
-def make_cover(prompt: str, dest: Path) -> None:
+def make_cover(prompt: str, dest: Path, art: str = "Retro Game Boy game cover art for a breakout remix") -> None:
     try:
         body = json.dumps({
             "model": "grok-imagine-image",
-            "prompt": f"Retro Game Boy game cover art for a breakout remix: {prompt}. Chunky pixels, teal and violet neon on deep navy, no text, no watermark",
+            "prompt": f"{art}: {prompt}. Chunky pixels, teal and violet neon on deep navy, no text, no watermark",
             "n": 1, "aspect_ratio": "16:9",
         }).encode()
         req = urllib.request.Request(
@@ -139,18 +211,82 @@ def make_cover(prompt: str, dest: Path) -> None:
             shutil.copy(parent_cover, dest)
 
 
-def title_for(prompt: str, main_c: str) -> tuple[str, str]:
-    # Grok names the remix in // TITLE: / // DESC: header comments of the C it
-    # returns (same call that patches the source). Raw prompt is the fallback.
-    def header(tag: str) -> str:
-        m = re.search(rf"^\s*//\s*{tag}:\s*(.+)$", main_c[:600], re.M)
-        return re.sub(r"\s+", " ", m.group(1)).strip().strip("\"'") if m else ""
-
-    title = header("TITLE")[:40].rstrip(".") or re.sub(r"\s+", " ", prompt).strip().rstrip(".")[:40] or "Remix"
-    return title, (header("DESC")[:120] or prompt[:120])
+def title_for(prompt: str, src: str) -> tuple[str, str]:
+    # Grok names the game in TITLE / DESC header comments of the source it
+    # returns (same call that writes the code). Raw prompt is the fallback.
+    title = header_tag(src, "TITLE")[:40].rstrip(".") or re.sub(r"\s+", " ", prompt).strip().rstrip(".")[:40] or "Remix"
+    return title, (header_tag(src, "DESC")[:120] or prompt[:120])
 
 
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,59}$")
+
+
+def wants_browser_game(job: dict, target: str | None) -> bool:
+    """From-scratch site/x prompts become browser games. Remixes (parent set)
+    always take the GBDK path. Draft iterations follow whatever the draft
+    already is: html drafts stay html, .gb drafts stay on the GBDK path."""
+    if job.get("parent") or job.get("source") not in ("site", "x"):
+        return False
+    if target:
+        return (GAMES / target / "index.html").exists()
+    return True
+
+
+def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None:
+    base_html = None
+    if target and (GAMES / target / "index.html").exists():
+        base_html = (GAMES / target / "index.html").read_text()
+    html, err = None, None
+    for attempt in range(3):
+        report(slug, "writing the game", f"attempt {attempt + 1}, grok is writing the html")
+        try:
+            html = generate_html(job["prompt"], err, base_html)
+        except Exception as e:
+            err = f"generation call failed: {e}"
+            log(f"job {slug}: {err} (attempt {attempt + 1})")
+            continue
+        report(slug, "verifying", "contract checks")
+        err = validate_html(html)
+        if not err:
+            break
+        log(f"job {slug}: html rejected (attempt {attempt + 1}): {err}")
+    if html is None or err:
+        log(f"job {slug}: giving up after 3 attempts")
+        return None
+
+    title, desc = title_for(job["prompt"], html)
+    bundle = GAMES / slug
+    bundle.mkdir(parents=True, exist_ok=True)
+    (bundle / "index.html").write_text(html)
+    make_cover(job["prompt"], bundle / "cover.png", art="Retro arcade cover art for a browser game")
+    manifest = {
+        "slug": slug,
+        "title": title,
+        "description": desc,
+        "controls": header_tag(html, "CONTROLS")[:120] or "arrows or touch to play",
+        "source": job.get("source", "site"),
+        "parent": None,
+        "creator": job.get("creator"),
+        "scoring": "time" if header_tag(html, "SCORING").lower() == "time" else "points",
+        "createdAt": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+    }
+    if job.get("draft"):
+        manifest["draft"] = True
+    if target:
+        # Rebuild in place: keep the original identity fields so iteration
+        # never changes who made it, when, its lineage, or its draft state.
+        prev_path = bundle / "manifest.json"
+        if prev_path.exists():
+            prev = json.loads(prev_path.read_text())
+            for key in ("createdAt", "creator", "parent", "source"):
+                if key in prev:
+                    manifest[key] = prev[key]
+            if prev.get("draft"):
+                manifest["draft"] = True
+    (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    report(slug, "publishing", "pushing to the arcade")
+    log(f"job {slug}: browser game bundled")
+    return bundle
 
 
 def process_job(job: dict) -> Path | None:
@@ -168,6 +304,10 @@ def process_job(job: dict) -> Path | None:
         slug = target
     log(f"job {slug}: '{job['prompt'][:60]}'")
     report(slug, "queued")
+    # From-scratch prompts (no parent) from the site or X build browser games;
+    # remixes and GBDK draft iterations keep the breakout patch path below.
+    if wants_browser_game(job, target):
+        return process_browser_job(job, slug, target)
     main_c, rom, err = None, None, None
     for attempt in range(3):
         report(slug, "patching source", f"attempt {attempt + 1}, grok is rewriting the C")
