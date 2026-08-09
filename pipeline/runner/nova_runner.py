@@ -411,9 +411,28 @@ def cycle() -> int:
     return len(shipped)
 
 
+def poke_sync() -> None:
+    """Kick the arcade's X sync. GitHub's cron is best-effort and stalls for
+    an hour at a time; the runner loop is always alive, so it drives the
+    cadence and the cron is just backup."""
+    if not SYNC_SECRET:
+        return
+    try:
+        req = urllib.request.Request(
+            "https://playgrokgames.vercel.app/api/x/sync",
+            b"{}",
+            {"Content-Type": "application/json", "x-sync-secret": SYNC_SECRET},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=30).read()
+    except Exception as e:
+        log(f"sync poke failed: {e}")
+
+
 def main() -> None:
     once = "--once" in sys.argv
     log(f"nova runner up (base={BASE_SRC.name}, model={MODEL})")
+    last_sync = 0.0
     while True:
         try:
             cycle()
@@ -421,6 +440,9 @@ def main() -> None:
             log(f"cycle error: {e}")
         if once:
             break
+        if time.time() - last_sync >= 120:
+            poke_sync()
+            last_sync = time.time()
         time.sleep(45)
 
 
