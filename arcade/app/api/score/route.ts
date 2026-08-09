@@ -4,6 +4,8 @@ import { getGame } from "@/lib/games";
 import { readSession } from "@/lib/session";
 
 const MAX_SCORE = 1_000_000_000;
+// Anything under 10s on a time board is not a human run.
+const MIN_TIME_MS = 10_000;
 
 export async function POST(req: NextRequest) {
   const r = redis();
@@ -14,7 +16,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "sign in to claim your score" }, { status: 401 });
   }
 
-  if (await overLimit(`score:${clientIp(req.headers)}`, 20)) {
+  const ip = clientIp(req.headers);
+  if (
+    (await overLimit(`score:${ip}`, 20)) ||
+    (await overLimit(`score:h:${session.handle}`, 20))
+  ) {
     return NextResponse.json({ error: "rate limited" }, { status: 429 });
   }
 
@@ -32,7 +38,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "unknown game" }, { status: 404 });
   }
   const isTime = game.scoring === "time";
-  const min = isTime ? 1 : 0;
+  const min = isTime ? MIN_TIME_MS : 0;
   if (typeof score !== "number" || !Number.isFinite(score) || score < min || score > MAX_SCORE) {
     return NextResponse.json({ error: "invalid score" }, { status: 400 });
   }
@@ -43,5 +49,17 @@ export async function POST(req: NextRequest) {
     { score: Math.floor(score), member: session.handle }
   );
   const best = await r.zscore(`hs:${slug}`, session.handle);
+  // Board-topping runs go to a review log so prize payouts can be checked by
+  // hand: LRANGE review:scores 0 -1.
+  const rank = isTime
+    ? await r.zrank(`hs:${slug}`, session.handle)
+    : await r.zrevrank(`hs:${slug}`, session.handle);
+  if (rank === 0 && best === Math.floor(score)) {
+    await r.lpush(
+      "review:scores",
+      JSON.stringify({ slug, handle: session.handle, score: Math.floor(score), ip, at: new Date().toISOString() })
+    );
+    await r.ltrim("review:scores", 0, 499);
+  }
   return NextResponse.json({ saved: true, handle: session.handle, best });
 }
