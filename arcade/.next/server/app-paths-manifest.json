@@ -1,6 +1,26 @@
 {
+  "/api/auth/callback/route": "app/api/auth/callback/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/logout/route": "app/api/auth/logout/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/create/route": "app/api/create/route.js",
+  "/api/guest-name/route": "app/api/guest-name/route.js",
+  "/api/job-status/route": "app/api/job-status/route.js",
+  "/api/outcome/route": "app/api/outcome/route.js",
+  "/api/play/route": "app/api/play/route.js",
+  "/api/publish/route": "app/api/publish/route.js",
+  "/api/vote/route": "app/api/vote/route.js",
+  "/api/score/route": "app/api/score/route.js",
+  "/api/x/authorize/route": "app/api/x/authorize/route.js",
+  "/api/x/authorize/callback/route": "app/api/x/authorize/callback/route.js",
+  "/api/x/sync/route": "app/api/x/sync/route.js",
+  "/icon.png/route": "app/icon.png/route.js",
   "/api/my-games/route": "app/api/my-games/route.js",
-  "/page": "app/page.js",
+  "/my/page": "app/my/page.js",
+  "/create/page": "app/create/page.js",
   "/g/[slug]/page": "app/g/[slug]/page.js",
-  "/arcade/page": "app/arcade/page.js"
+  "/arcade/page": "app/arcade/page.js",
+  "/page": "app/page.js",
+  "/auth/done/page": "app/auth/done/page.js",
+  "/leaderboard/page": "app/leaderboard/page.js"
 }

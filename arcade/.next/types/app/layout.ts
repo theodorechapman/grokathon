@@ -1,4 +1,4 @@
-// File: /Users/matcha/Code/grokathon/arcade/app/layout.tsx
+// File: /Users/supratikpanuganti/grokathon/nova-wt/arcade/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

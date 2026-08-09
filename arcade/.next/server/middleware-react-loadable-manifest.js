@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app/g/[slug]/game-boy-player.tsx -> gameboy-emulator\":{\"id\":\"app/g/[slug]/game-boy-player.tsx -> gameboy-emulator\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_gameboy-emulator_dist_gameboy_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{}";
