@@ -40,12 +40,6 @@ export function GameFrame({
     }
   }, []);
 
-  const scrollToRemix = useCallback(() => {
-    const box = document.querySelector<HTMLElement>(".remixBox, .remixGate");
-    box?.scrollIntoView({ behavior: "smooth", block: "center" });
-    box?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
-  }, []);
-
   // Every finished run tallies its outcome, signed in or not. Completion
   // rate per game is the signal for what to build next.
   useEffect(() => {
@@ -104,7 +98,6 @@ export function GameFrame({
             scoring={scoring}
             signedIn={signedIn}
             onReplay={restartGame}
-            onRemix={scrollToRemix}
           />
         ) : (
           <button
