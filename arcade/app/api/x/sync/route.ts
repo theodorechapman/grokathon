@@ -3,7 +3,7 @@ import type { Redis } from "@upstash/redis";
 import { redis } from "@/lib/stats";
 import { listPublicGames } from "@/lib/games";
 import { submitJob } from "@/lib/submit-job";
-import { getBotMe, getLikedTweetIds, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
+import { getBotMe, getLikedTweetIds, getMentions, getReplies, postTweet, sendDm, type Tweet } from "@/lib/x-client";
 
 const SITE = "https://playgrokgames.vercel.app";
 const MAX_JOBS_PER_RUN = 5;
@@ -12,7 +12,7 @@ const PENDING_TTL_MS = 72 * 3600 * 1000;
 
 // The like is the moderation gate: asks from X stage here and only become
 // jobs once @suprapan07 (the bot account) has liked the tweet.
-type PendingAsk = { prompt: string; parent: string | null; creator: string; at: string };
+type PendingAsk = { prompt: string; parent: string | null; creator: string; authorId?: string; at: string };
 
 async function stageAsk(r: Redis, tweetId: string, ask: PendingAsk): Promise<void> {
   await r.hset("x:pendingjobs", { [tweetId]: JSON.stringify(ask) });
@@ -36,6 +36,14 @@ async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: numbe
       budget.left -= 1;
       // The ask lands in the creator's tab immediately, building included.
       await r.sadd(`umade:${ask.creator}`, jobSlug);
+      if (ask.authorId) {
+        // Remember who to DM when the bundle publishes.
+        await r.hset("x:asker", { [jobSlug]: ask.authorId });
+        await sendDm(
+          ask.authorId,
+          `Nova is building your game right now. Watch it happen live: ${SITE}/g/${jobSlug} — sign in with X there and it lands in your games tab.`
+        ).catch((err) => console.error("[x:sync] build DM failed:", err));
+      }
       await r.hdel("x:pendingjobs", tweetId);
     } else if (Date.now() - Date.parse(ask.at) > PENDING_TTL_MS) {
       await r.hdel("x:pendingjobs", tweetId);
@@ -88,6 +96,14 @@ async function announceNewGames(r: Redis, result: SyncResult): Promise<void> {
     const tweetId = await postOrDryRun(r, text, parentTweetId ?? undefined);
     await r.hset("x:gamepost", { [game.slug]: tweetId ? packId(tweetId) : "dryrun" });
     await r.sadd("x:posted", game.slug);
+    const askerId = await r.hget<string>("x:asker", game.slug);
+    if (askerId) {
+      await sendDm(
+        askerId,
+        `Your game is up: ${SITE}/g/${game.slug} — play it, share the thread, and reply to it with any sentence to remix.`
+      ).catch((err) => console.error("[x:sync] publish DM failed:", err));
+      await r.hdel("x:asker", game.slug);
+    }
     result.announced.push(game.slug);
   }
 }
@@ -119,6 +135,7 @@ async function repliesToRemixes(r: Redis, result: SyncResult, budget: { left: nu
           prompt: reply.text,
           parent: slug,
           creator: reply.author_handle,
+          authorId: reply.author_id,
           at: new Date().toISOString(),
         });
       }
@@ -141,6 +158,7 @@ async function mentionsToCreations(r: Redis, result: SyncResult, budget: { left:
           prompt,
           parent: null,
           creator: mention.author_handle,
+          authorId: mention.author_id,
           at: new Date().toISOString(),
         });
       }

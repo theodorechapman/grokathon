@@ -108,8 +108,10 @@ def patch_source(prompt: str, error: str | None = None, parent: str | None = Non
         "Only standard GBDK headers available. Output the "
         "COMPLETE modified main.c and nothing else, in a single ```c code block. "
         "The very first two lines of the code block must be comments naming the "
-        "remix: '// TITLE: <punchy 2-4 word game name, max 40 chars, no "
-        "Breakout prefix>' then '// DESC: <one short sentence>'."
+        "remix: '// TITLE: <2-4 word game name, max 40 chars>' then "
+        "'// DESC: <one short sentence>'. If the ask names a known game or "
+        "mechanic, keep that name recognizable in the title (Wide Paddle "
+        "Breakout, not an invented fantasy name)."
     )
     user = f"Remix request: {prompt}\n\nassets.h for reference:\n```c\n{assets_h}\n```\n\nCurrent main.c:\n```c\n{main_c}\n```"
     if error:
@@ -139,7 +141,9 @@ HTML_SYSTEM = (
     "the end screen over the frozen game.\n"
     "Output ONLY the html in a single ```html code block. The very first "
     "lines of the file must be these header comments:\n"
-    "<!-- TITLE: <punchy 2-4 word game name, max 40 chars> -->\n"
+    "<!-- TITLE: <2-4 word game name, max 40 chars; if the ask names a known "
+    "game like snake or pong, keep that name in the title instead of "
+    "inventing one> -->\n"
     "<!-- DESC: <one short sentence> -->\n"
     "<!-- CONTROLS: <one short line saying how to play> -->\n"
     '<!-- SCORING: points -->  (write "time" instead ONLY for a race-to-finish '
