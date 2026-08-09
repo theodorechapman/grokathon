@@ -3,7 +3,10 @@
   "steps": [
     {
       "name": "title",
-      "frames": 60
+      "frames": 60,
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 30
     },
     {
       "name": "press-start",
@@ -13,16 +16,25 @@
     },
     {
       "name": "room-initial",
-      "frames": 118
+      "frames": 118,
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 30
     },
     {
       "name": "move-right",
       "frames": 90,
-      "buttons": ["right"]
+      "buttons": ["right"],
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 15
     },
     {
       "name": "settle-after-right",
-      "frames": 60
+      "frames": 60,
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 15
     },
     {
       "name": "jump",
@@ -31,11 +43,17 @@
     },
     {
       "name": "jump-ascending",
-      "frames": 12
+      "frames": 12,
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 3
     },
     {
       "name": "jump-settled",
-      "frames": 90
+      "frames": 90,
+      "trace": true,
+      "stop_on_divergence": false,
+      "capture_every": 15
     }
   ]
 }

@@ -18,6 +18,8 @@ from compareboy import (  # noqa: E402
     frame_metrics,
     load_script,
     normalize_memory_ranges,
+    normalize_probes,
+    oam_differences,
 )
 
 
@@ -28,6 +30,7 @@ class FakeSameBoy:
         self.frames = 0
         self.keys: set[str] = set()
         self.closed = False
+        self.watchpoints: list[tuple[int, int, str]] = []
 
     def read(self, address: int, length: int = 1) -> bytes:
         if address == 0xFF50:
@@ -37,6 +40,12 @@ class FakeSameBoy:
 
     def run(self, frames: int, *, max_instructions: int) -> dict:
         self.frames += frames
+        if self.watchpoints:
+            return {
+                "stopped": "watch-write",
+                "frames": min(frames, 1),
+                "registers": {"pc": 0x1234},
+            }
         return {"stopped": "frame-limit", "frames": frames}
 
     def key(self, button: str, pressed: bool) -> None:
@@ -66,6 +75,21 @@ class FakeSameBoy:
         if self.is_candidate:
             data[5] = 1
         return bytes(data)
+
+    def save_state(self, path: str | Path) -> None:
+        Path(path).write_text(str(self.frames))
+
+    def load_state(self, path: str | Path) -> None:
+        self.frames = int(Path(path).read_text())
+
+    def add_watchpoint(self, address: int, *, end: int, access: str) -> None:
+        self.watchpoints.append((address, end, access))
+
+    def clear_watchpoints(self) -> None:
+        self.watchpoints.clear()
+
+    def debug(self, command: str) -> str:
+        return f"debug:{command}"
 
     def close(self) -> None:
         self.closed = True
@@ -124,6 +148,29 @@ class MetricTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "exceeds"):
             normalize_memory_ranges([{"name": "bad", "address": 0xFFFF, "length": 2}])
 
+    def test_semantic_probes_validate_types_and_bit_fields(self) -> None:
+        self.assertEqual(
+            normalize_probes(
+                [{"name": "velocity", "address": "$c010", "type": "s16le"}]
+            )[0]["length"],
+            2,
+        )
+        packed = normalize_probes(
+            [{"name": "mode", "address": 0xC011, "type": "u8", "mask": "0x0c", "shift": 2}]
+        )[0]
+        self.assertEqual((packed["mask"], packed["shift"]), (12, 2))
+        with self.assertRaisesRegex(ValueError, "requires length"):
+            normalize_probes([{"name": "bad", "address": 0xC000, "type": "u8", "length": 2}])
+
+    def test_oam_localization_decodes_sprite_coordinates(self) -> None:
+        original = bytes(160)
+        candidate = bytearray(original)
+        candidate[4:8] = bytes([32, 24, 7, 0x20])
+        differences = oam_differences(original, bytes(candidate))
+        self.assertEqual(differences[0]["index"], 1)
+        self.assertEqual(differences[0]["candidate"]["screen_x"], 16)
+        self.assertEqual(differences[0]["candidate"]["screen_y"], 16)
+
 
 class PairTests(unittest.TestCase):
     def test_pair_writes_lossless_checkpoint_images_and_report(self) -> None:
@@ -178,6 +225,59 @@ class PairTests(unittest.TestCase):
             script = Path(temporary_directory) / "script.json"
             script.write_text(json.dumps({"steps": [{"name": "idle", "frames": 1}]}))
             self.assertEqual(load_script(script)["steps"][0]["name"], "idle")
+
+    def test_trace_finds_exact_first_frame_and_decodes_semantic_state(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            original = root / "original.gb"
+            candidate = root / "candidate.gb"
+            original.write_bytes(b"original")
+            candidate.write_bytes(b"candidate")
+            with SameBoyPair(
+                original, candidate, artifacts=root / "artifacts",
+                screenshot_scale=1, emulator_factory=FakeSameBoy,
+            ) as pair:
+                pair.boot()
+                trace = pair.trace(
+                    "motion", 10,
+                    probes=[{
+                        "name": "mapped-value",
+                        "original_address": 0xC000,
+                        "candidate_address": 0xC0FF,
+                        "type": "u8",
+                    }],
+                )
+                self.assertEqual(trace["observed_frames"], 1)
+                self.assertEqual(trace["first_divergence"]["trace_offset"], 1)
+                self.assertTrue(trace["samples"][0]["probes"]["mapped-value"]["equal"])
+                self.assertIn("frame", trace["first_divergence"]["divergent_channels"])
+                self.assertEqual(
+                    trace["first_divergence"]["localization"]["oam_entries"][0]["index"], 1
+                )
+
+    def test_paired_branch_restore_bisection_and_writer_context(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            original = root / "original.gb"
+            candidate = root / "candidate.gb"
+            original.write_bytes(b"original")
+            candidate.write_bytes(b"candidate")
+            with SameBoyPair(original, candidate, emulator_factory=FakeSameBoy) as pair:
+                pair.boot()
+                pair.run(3)
+                with pair.branch("alternate"):
+                    pair.run(7)
+                    self.assertEqual(pair.elapsed_frames, 10)
+                self.assertEqual(pair.elapsed_frames, 3)
+                self.assertEqual(pair.original.frames, 3)
+                self.assertEqual(pair.candidate.frames, 3)
+                bisection = pair.bisect_persistent_divergence("persistent", 8)
+                self.assertEqual(bisection["first_persistent_divergence"], 1)
+                self.assertEqual(pair.elapsed_frames, 3)
+                writer = pair.find_original_writer(0xC123, frames=30)
+                self.assertEqual(writer["writer_pc"], 0x1234)
+                self.assertEqual(writer["disassembly"], "debug:disassemble/12 pc")
+                self.assertEqual(pair.original.frames, 3)
 
 
 if __name__ == "__main__":

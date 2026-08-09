@@ -240,7 +240,25 @@ with SameBoyPair(
 channel divergence, preserving the exact frame and localized evidence. Named
 semantic probes decode corresponding state even when the two ROMs use
 different addresses. `save_pair()` / `load_pair()` make alternate input and
-timing experiments start from precisely corresponding states.
+timing experiments start from precisely corresponding states. Use
+`capture_every=N` to retain a PNG sequence at an intentional cadence; leave it
+unset when the first-divergence PNG is enough. `reload_pair()` reopens both ROMs
+after rebuilding the candidate so the next experiment starts cleanly.
+
+The divergence record decodes differing OAM entries into sprite coordinates,
+classifies VRAM offsets as tile data or tilemaps, identifies palette entries,
+and gives absolute addresses for mapped-memory differences. Once a semantic
+original address looks causal, connect it back to code:
+
+```python
+writer = pair.find_original_writer(0xc4ec, frames=600, buttons=["right"])
+print(writer.get("writer_pc"), writer.get("disassembly"), writer.get("backtrace"))
+```
+
+For alternate branches, `with pair.branch("before-jump"):` automatically
+restores both ROMs afterward. `bisect_persistent_divergence()` is faster when a
+mismatch is known to persist; use `trace()` for transient differences because
+binary search cannot safely find a mismatch that later reconverges.
 
 Each recorded checkpoint writes separate lossless `.original.png`, `.candidate.png`, and
 amplified `.diff.png` files, plus one `.overview.png` triptych ordered

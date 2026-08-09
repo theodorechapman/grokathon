@@ -30,6 +30,7 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label bal
 | `static_re.md` | the RE skill/instructions (copied from `.claude/skills/static-re/`) |
 | `dynamic_re.md` | emulator skill (copied from `.claude/skills/dynamic-re/` when the grokboy bridge is built) |
 | `TASK.md` | the concrete task prompt |
+| `RECONSTRUCTION.md` | causal main-loop model, subsystem ledger, behavioral challenge matrix, and completion audit |
 | `ghidra_work/` | the agent's private Ghidra project + evidence sidecar |
 | `src/` | where the agent writes its raw-C (GBDK) reimplementation, built to `src/reconstructed.gb` |
 | `NOTES.md` | (agent-written) recovered memory map + open questions |
@@ -66,6 +67,9 @@ Screenshots from the emulator bridge are PNGs upscaled 3x by default
 After the reconstruction builds, `agent/compareboy.py` runs the original and
 candidate in independent emulator instances, aligns them after their boot ROMs
 unmap, replays identical inputs, and compares frames, VRAM, palettes, OAM, and
-selected memory. It writes separate lossless original/candidate/difference PNGs,
-a single side-by-side overview PNG per checkpoint, and a structured JSON report. See
-`agent/compare_scripts/postie-first-room.json` for the script format.
+typed semantic state. It supports per-frame first-divergence traces, paired
+save-state branches, sampled PNG sequences, persistent-divergence bisection,
+and original-memory writer lookup. It writes separate lossless
+original/candidate/difference PNGs, a side-by-side overview, and structured
+localized evidence. CompareBoy is a differential debugger, not a completion
+score. See `agent/compare_scripts/postie-first-room.json` for the script format.
