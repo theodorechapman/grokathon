@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { clientIp, overLimit, redis, SLUG_RE } from "@/lib/stats";
+import { clientIp, overLimit, redis, SLUG_RE, topScores } from "@/lib/stats";
 import { getGame } from "@/lib/games";
 import { readSession } from "@/lib/session";
 
@@ -21,11 +21,12 @@ export async function GET(req: NextRequest) {
   }
   const isTime = game.scoring === "time";
   const s = Math.floor(score);
-  const [better, total] = await Promise.all([
+  const [better, total, top] = await Promise.all([
     isTime ? r.zcount(`hs:${slug}`, "-inf", `(${s}`) : r.zcount(`hs:${slug}`, `(${s}`, "+inf"),
     r.zcard(`hs:${slug}`),
+    topScores(slug, 5, isTime),
   ]);
-  return NextResponse.json({ rank: better + 1, total });
+  return NextResponse.json({ rank: better + 1, total, top });
 }
 
 export async function POST(req: NextRequest) {
