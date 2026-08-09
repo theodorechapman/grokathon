@@ -38,6 +38,7 @@ REPO = PIPELINE.parent                               # .../grokathon
 STATIC_DIR = PIPELINE / "static"
 SKILL = REPO / ".claude" / "skills" / "static-re" / "SKILL.md"
 DYNAMIC_SKILL = REPO / ".claude" / "skills" / "dynamic-re" / "SKILL.md"
+RECONSTRUCTION_TEMPLATE = Path(__file__).resolve().parent / "RECONSTRUCTION_TEMPLATE.md"
 EMULATOR_LIB = PIPELINE / "bin" / (
     "libgrokboy.dylib" if sys.platform == "darwin" else "libgrokboy.so"
 )
@@ -186,6 +187,7 @@ def main():
         args.mcp, args.image, rom_path, workdir)
 
     shutil.copy(SKILL, ws / "static_re.md")
+    shutil.copy(RECONSTRUCTION_TEMPLATE, ws / "RECONSTRUCTION.md")
     _write_grok_config(ws, mcp_command, mcp_args, mcp_env)
     emulator = EMULATOR_LIB.exists()
     if emulator:

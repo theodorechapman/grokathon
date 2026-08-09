@@ -203,9 +203,10 @@ actually showing — they are sized for vision models.
 ## Comparing the reconstruction (second emulator)
 
 Once `src/reconstructed.gb` builds, run it in a separate SameBoy instance and
-drive both ROMs with the same cartridge-relative timeline. `SameBoyPair` boots
+drive both ROMs with the same cartridge-relative timeline. `SameBoyPair` is a
+differential debugger and evidence-gathering instrument, not a grader. It boots
 each ROM independently past `FF50`, then compares lossless native RGB, VRAM,
-CGB palettes, direct OAM, and selected CPU memory ranges:
+CGB palettes, direct OAM, and selected CPU state:
 
 ```python
 import sys
@@ -218,30 +219,38 @@ with SameBoyPair(
     artifacts="artifacts/compare",
 ) as pair:
     print(pair.boot())
-    pair.run(60)
-    print(pair.checkpoint("title"))
+    print(pair.trace("title-idle", 60))
     pair.press("start", frames=10)
-    pair.run(118)
-    print(pair.checkpoint(
-        "room",
-        memory=[{
+    pair.save_pair("room-start")
+    print(pair.trace(
+        "room-idle", 118,
+        probes=[{
             "name": "player-x",
             "original_address": 0xc4ec,
             "candidate_address": 0xc100,
-            "length": 2,
+            "type": "u8",
         }],
     ))
+    pair.load_pair("room-start")
+    print(pair.trace("room-right", 118, buttons=["right"]))
     pair.write_report("artifacts/compare/report.json")
 ```
 
-Each checkpoint writes separate lossless `.original.png`, `.candidate.png`, and
+`trace()` observes every frame by default and stops on the first requested
+channel divergence, preserving the exact frame and localized evidence. Named
+semantic probes decode corresponding state even when the two ROMs use
+different addresses. `save_pair()` / `load_pair()` make alternate input and
+timing experiments start from precisely corresponding states.
+
+Each recorded checkpoint writes separate lossless `.original.png`, `.candidate.png`, and
 amplified `.diff.png` files, plus one `.overview.png` triptych ordered
 original/candidate/difference from left to right. The separate files remain the
 exact visual evidence; the overview saves vision-tool calls. A single moment
-can conceal timing and behavior errors, so use multiple checkpoints at
-meaningful transitions and during motion. Video is useful as a human overview,
-but not as the exact oracle: encoding and temporal alignment make it harder to
-attribute a mismatch to a specific input and machine state.
+can conceal timing and behavior errors. Prefer per-frame traces around dynamic
+behavior and sparse checkpoints for stable screens. Video is useful as a human
+overview, but exact PNG frames plus machine state are more useful for
+attribution: video encoding and temporal alignment obscure the first causal
+mismatch.
 
 For a reusable timeline, run the CLI with a JSON script. See
 `/opt/pipeline/agent/compare_scripts/postie-first-room.json` for the format:
@@ -259,9 +268,11 @@ Map semantic state explicitly: `original_address` comes from reverse
 engineering, while `candidate_address` comes from the reconstruction's map or
 symbol file. The `address` shorthand is only appropriate when both layouts are
 intentionally identical. A candidate mismatch falsifies the reconstruction; a
-candidate match does not prove untested behavior. Rebuild and replay until the
-tested checkpoints converge, then record exact matches, divergences, and
-untested scope in `NOTES.md`.
+candidate match does not prove untested behavior. Probe types include `u8`,
+`s8`, `u16le`, `s16le`, and `hex`; optional `mask` and `shift` expose packed
+state. Actively branch from save states with different idle lengths, tap/hold
+durations, chords, boundaries, failures, and restarts. Record exact matches,
+divergences, causal explanations, and untested scope in `RECONSTRUCTION.md`.
 
 ## Save states
 
