@@ -3,17 +3,29 @@ on:
   push:
     branches: [main]
     paths: ["arcade/**"]
+  workflow_dispatch:
 concurrency:
   group: deploy-arcade
   cancel-in-progress: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to Vercel production
+      - uses: oven-sh/setup-bun@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull production configuration
         working-directory: arcade
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx -y vercel@latest --prod --yes --token "${{ secrets.VERCEL_TOKEN }}"
+        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+      - name: Build production artifacts
+        working-directory: arcade
+        run: vercel build --prod --token "$VERCEL_TOKEN"
+      - name: Deploy prebuilt production artifacts
+        working-directory: arcade
+        run: vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN"
