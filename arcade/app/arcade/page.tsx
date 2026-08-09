@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { listPublicGames, type GameManifest } from "@/lib/games";
-import { rankScore, statsFor, type GameStats } from "@/lib/stats";
+import { rankScore, redis, statsFor, type GameStats } from "@/lib/stats";
 import { SiteNav } from "../site-nav";
 import { MyGames } from "./my-games";
 import { VoteButton } from "./vote-button";
@@ -51,6 +51,13 @@ export default async function ArcadePage({
 
   const unranked = await listPublicGames();
   const stats = await statsFor(unranked.map((g) => g.slug));
+  // Every game links back to its X announcement — the thread IS the product story.
+  const gameposts =
+    (await redis()?.hgetall<Record<string, string>>("x:gamepost").catch(() => null)) ?? {};
+  const tweetUrl = (slug: string) => {
+    const id = /^t(\d+)$/.exec(gameposts[slug] ?? "")?.[1];
+    return id ? `https://x.com/suprapan07/status/${id}` : null;
+  };
   const ranked = unranked
     .filter(
       (g) =>
@@ -191,6 +198,15 @@ export default async function ArcadePage({
                       <span className="gameControls">
                         {stats.get(game.slug)!.plays} plays
                       </span>
+                      {tweetUrl(game.slug) && (
+                        <a
+                          href={tweetUrl(game.slug)!}
+                          className="xThreadLink"
+                          title="View the thread on X"
+                        >
+                          𝕏 thread
+                        </a>
+                      )}
                     </div>
                   </div>
                 </article>

@@ -1091,6 +1091,69 @@ a.navSegment:hover {
   font-size: 14px;
 }
 
+.guestNameBox {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 14px;
+  color: var(--dim);
+}
+
+.guestNameBox strong {
+  color: var(--accent);
+}
+
+.guestNameBox input {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: var(--text);
+  font-size: 13px;
+  min-width: 180px;
+}
+
+.guestNameBox button {
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 7px 14px;
+}
+
+.guestNameBox button:disabled {
+  opacity: 0.5;
+}
+
+.xThreadLink {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  color: var(--dim);
+  margin-left: auto;
+}
+
+.xThreadLink:hover {
+  color: var(--accent);
+}
+
+.headActions {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.headActions .remixJump {
+  margin-top: 0;
+}
+
 .xDrive {
   margin-top: 16px;
   color: var(--dim);

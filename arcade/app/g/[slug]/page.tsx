@@ -101,9 +101,19 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
           </h1>
           <p>{game.description}</p>
           {!game.draft && (
-            <a href="#remix" className="filterChip remixJump">
-              ↳ Remix this game
-            </a>
+            <span className="headActions">
+              <a href="#remix" className="filterChip remixJump">
+                ↳ Remix this game
+              </a>
+              {tweetId && (
+                <a
+                  href={`https://x.com/suprapan07/status/${tweetId}`}
+                  className="filterChip remixJump"
+                >
+                  𝕏 View the thread
+                </a>
+              )}
+            </span>
           )}
         </header>
         <QrPanel url={`${SITE}/g/${slug}`} />

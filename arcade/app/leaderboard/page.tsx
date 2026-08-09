@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { listPublicGames } from "@/lib/games";
-import { formatScore, playerBoard, topScores } from "@/lib/stats";
+import { formatScore, playerBoard, redis, topScores } from "@/lib/stats";
+import { guestDisplayName } from "@/lib/guest-name";
+import { GuestNameBox } from "./guest-name-box";
 import { readSession } from "@/lib/session";
 import { SiteNav } from "../site-nav";
 import { SignInButton } from "../sign-in-button";
@@ -66,10 +68,13 @@ export default async function LeaderboardPage({
         </div>
       )}
       {!session && (
-        <div className="boardGate">
-          <span>Playing as a guest. Sign in to claim your plays under your handle.</span>
-          <SignInButton variant="nav" />
-        </div>
+        <>
+          <div className="boardGate">
+            <span>Playing as a guest. Sign in to claim your plays under your handle.</span>
+            <SignInButton variant="nav" />
+          </div>
+          <GuestNameBox />
+        </>
       )}
 
       {selected ? (
@@ -83,6 +88,8 @@ export default async function LeaderboardPage({
 
 async function OverallBoard() {
   const rows = await playerBoard();
+  const customNames =
+    (await redis()?.hgetall<Record<string, string>>("guest:names").catch(() => null)) ?? {};
   if (rows.length === 0) {
     return (
       <p className="empty">
@@ -104,10 +111,13 @@ async function OverallBoard() {
       <tbody>
         {rows.map((row, i) => {
           const guest = row.handle.startsWith("guest:");
+          const display = guest
+            ? customNames[row.handle] ?? guestDisplayName(row.handle.slice(6))
+            : `@${row.handle}`;
           return (
             <tr key={row.handle} className={guest ? "guestRow" : undefined}>
               <td>{i + 1}</td>
-              <td>{guest ? `guest-${row.handle.slice(6, 12)}` : `@${row.handle}`}</td>
+              <td>{display}</td>
               <td>{row.plays}</td>
               <td>{row.games}</td>
             </tr>
