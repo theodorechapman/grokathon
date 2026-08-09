@@ -40,7 +40,8 @@ export default async function LandingPage() {
           <p className={styles.sub}>
             The open source arcade the X community builds one reply at a time.
             Say a game, Grok builds it, a bot proves it playable, and it&apos;s
-            live in your browser in seconds. Then the thread remixes it.
+            live in your browser in seconds. Every game&apos;s code is public,
+            and remixing forks it. Then the thread takes it from there.
           </p>
           <Link href="/arcade" className={styles.heroCta}>
             ▶&nbsp; Enter the arcade
