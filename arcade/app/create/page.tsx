@@ -2,7 +2,7 @@ import { readdir, readFile } from "fs/promises";
 import path from "path";
 import Link from "next/link";
 import { readSession } from "@/lib/session";
-import { listGames } from "@/lib/games";
+import { listGames, listPublicGames } from "@/lib/games";
 import type { BuildRecord } from "@/lib/build-log";
 import { SiteNav } from "../site-nav";
 import { MyCreations } from "../my/my-creations";
@@ -23,7 +23,7 @@ const PIPELINE = [
 
 async function recentBuilds(): Promise<{ slug: string; title: string; record: BuildRecord }[]> {
   const root = path.join(process.cwd(), "public", "games");
-  const games = await listGames();
+  const games = await listPublicGames();
   const titles = new Map(games.map((g) => [g.slug, g.title]));
   const out: { slug: string; title: string; record: BuildRecord }[] = [];
   for (const slug of await readdir(root).catch(() => [] as string[])) {
