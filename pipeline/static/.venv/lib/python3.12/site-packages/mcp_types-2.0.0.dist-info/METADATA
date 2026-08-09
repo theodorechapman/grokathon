@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: mcp-types
+Version: 2.0.0
+Summary: Model Context Protocol wire types
+Project-URL: Homepage, https://modelcontextprotocol.io
+Project-URL: Documentation, https://py.sdk.modelcontextprotocol.io/
+Project-URL: Repository, https://github.com/modelcontextprotocol/python-sdk
+Project-URL: Issues, https://github.com/modelcontextprotocol/python-sdk/issues
+Author: Model Context Protocol a Series of LF Projects, LLC.
+Maintainer-email: David Soria Parra <davidsp@anthropic.com>, Marcelo Trylesinski <marcelotryle@gmail.com>, Max Isbey <maxisbey@anthropic.com>, Felix Weinberger <fweinberger@anthropic.com>
+License: MIT
+License-File: LICENSE
+Keywords: automation,llm,mcp
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Requires-Python: >=3.10
+Requires-Dist: pydantic>=2.12.0
+Requires-Dist: typing-extensions>=4.13.0
+Description-Content-Type: text/markdown
+
+# MCP Types
+
+The wire types for the [Model Context Protocol](https://modelcontextprotocol.io).
+
+This package holds the protocol message models, JSON-RPC envelope types, per-version
+surface validators, and the protocol-version registry. Its only runtime dependencies are
+`pydantic` and `typing-extensions`, so it can be installed on its own when you need to
+(de)serialize MCP traffic without pulling in the full `mcp` SDK.
+
+```python
+from mcp_types import Tool, CallToolRequest
+from mcp_types.version import LATEST_PROTOCOL_VERSION
+```
+
+The `mcp` package re-exports these names, so existing `from mcp import Tool` imports
+keep working.

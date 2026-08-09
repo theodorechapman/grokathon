@@ -1,0 +1,13 @@
+sse_starlette-3.4.8.dist-info/INSTALLER,sha256=5hhM4Q4mYTT9z6QB6PGpUAW81PGNFrYrdXMj4oM_6ak,2
+sse_starlette-3.4.8.dist-info/METADATA,sha256=kJLxRJAG35g112a_50nQP-OeRAdlh5G7U5jsNgvq2aw,15325
+sse_starlette-3.4.8.dist-info/RECORD,,
+sse_starlette-3.4.8.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+sse_starlette-3.4.8.dist-info/WHEEL,sha256=K260EYznzXsJYBQGqmI8VTxEdiZYNvDZwW9cBh9-_MA,91
+sse_starlette-3.4.8.dist-info/licenses/AUTHORS,sha256=wv9j0uzxKLvairGyAWgwpdoSQgL7uXFoaFu5lGrtPxo,395
+sse_starlette-3.4.8.dist-info/licenses/LICENSE,sha256=gK9r_Mvr0sFNSquWaVyrmVDhdxkMyA9e-BnpmZaIPo4,1511
+sse_starlette-3.4.8.dist-info/top_level.txt,sha256=-WvV5NMWkq_J766sZPusKqv8pESM-Dxugi96Lp9oer4,14
+sse_starlette/__init__.py,sha256=FxhGCFdCGQe2zVPcCfnVOJGCnbrHD4Q_sVIMwzdKmwc,218
+sse_starlette/_utils.py,sha256=c1971mx2Wlr_MN7ekij6JYN-e3i9IQbY3l4MqDQ_VEA,1439
+sse_starlette/event.py,sha256=wePjktO-n0jsguXGmlu3hQooQWfJYNrUa8iD_RDe2K0,2801
+sse_starlette/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+sse_starlette/sse.py,sha256=5tTFksFMiZueq_cScAgoopkn9OoRr7FCLEFpQ5CQ8ME,19538

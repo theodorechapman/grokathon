@@ -1,0 +1,21 @@
+{
+  "/api/auth/login/route": "/api/auth/login",
+  "/api/create/route": "/api/create",
+  "/api/auth/callback/route": "/api/auth/callback",
+  "/api/score/route": "/api/score",
+  "/api/play/route": "/api/play",
+  "/api/x/authorize/route": "/api/x/authorize",
+  "/api/x/sync/route": "/api/x/sync",
+  "/_not-found/page": "/_not-found",
+  "/icon.png/route": "/icon.png",
+  "/api/x/authorize/callback/route": "/api/x/authorize/callback",
+  "/api/vote/route": "/api/vote",
+  "/api/auth/logout/route": "/api/auth/logout",
+  "/api/my-games/route": "/api/my-games",
+  "/page": "/",
+  "/create/page": "/create",
+  "/arcade/page": "/arcade",
+  "/auth/done/page": "/auth/done",
+  "/g/[slug]/page": "/g/[slug]",
+  "/leaderboard/page": "/leaderboard"
+}
