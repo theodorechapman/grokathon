@@ -1,0 +1,12 @@
+{
+  "slug": "remix-make-the-background-289fe4",
+  "title": "Blue Breakout",
+  "description": "Break all the bricks with a blue playfield backdrop.",
+  "controls": "D-Pad left/right move paddle; A serves the ball",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": "suprapan07",
+  "rom": "remix-make-the-background-289fe4.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T06:36:22Z"
+}
