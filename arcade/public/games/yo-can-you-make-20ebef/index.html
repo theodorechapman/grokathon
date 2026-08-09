@@ -1,0 +1,865 @@
+<!-- TITLE: Fire Water Duo -->
+<!-- DESC: Guide fire and water twins to their matching doors—avoid the wrong element! -->
+<!-- CONTROLS: Arrows/WASD move, Space switch hero; touch: pad + Jump + Switch -->
+<!-- SCORING: points -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Fire Water Duo</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    overflow: hidden; background: #0a0c12;
+    font-family: system-ui, Segoe UI, Roboto, sans-serif;
+    touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  #wrap {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  canvas {
+    display: block; max-width: 100%; max-height: 100%;
+    width: auto; height: auto; touch-action: none;
+    box-shadow: 0 0 0 2px #1a2030;
+  }
+  #ui {
+    position: absolute; inset: 0; pointer-events: none;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  #pad {
+    pointer-events: auto;
+    display: none;
+    padding: 10px 12px 14px;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  #pad.show { display: flex; }
+  .cluster { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.28);
+    color: #fff; font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .btn:active, .btn.held { background: rgba(255,255,255,0.28); }
+  .btn.wide { width: 76px; border-radius: 18px; font-size: 12px; }
+  .dpad { display: grid; grid-template-columns: 56px 56px 56px; grid-template-rows: 56px; gap: 6px; }
+  .dpad .btn { width: 56px; height: 56px; font-size: 18px; }
+  .ghost { visibility: hidden; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c" width="960" height="540"></canvas>
+  <div id="ui">
+    <div id="pad">
+      <div class="dpad">
+        <div class="btn" id="btnL" data-k="left">◀</div>
+        <div class="btn ghost"></div>
+        <div class="btn" id="btnR" data-k="right">▶</div>
+      </div>
+      <div class="cluster">
+        <div class="btn wide" id="btnSw" data-k="switch">SWITCH</div>
+        <div class="btn" id="btnJ" data-k="jump">JUMP</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  const W = 960, H = 540;
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d");
+  const pad = document.getElementById("pad");
+
+  const keys = { left: false, right: false, jump: false, switch: false };
+  const prevKeys = { jump: false, switch: false };
+  let touchMode = false;
+  let ended = false;
+  let won = false;
+  let score = 0;
+  let runTime = 0;
+  let state = "title"; // title | play | end
+  let active = 0; // 0 fire, 1 water
+  let particles = [];
+  let msgFlash = "";
+  let msgTimer = 0;
+
+  // Level data (regenerated each run)
+  let solids = [];
+  let hazards = []; // {x,y,w,h,type:'lava'|'water'}
+  let gems = [];
+  let doors = [];
+  let movers = [];
+  let fire, water;
+  let heroes;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function irand(a, b) { return (a + Math.floor(Math.random() * (b - a + 1))); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function aabb(a, b) {
+    return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+  }
+
+  function postScore(outcome, message) {
+    if (ended) return;
+    ended = true;
+    state = "end";
+    try {
+      window.parent.postMessage({
+        type: "nova:score",
+        score: score,
+        outcome: outcome,
+        message: message.slice(0, 120)
+      }, "*");
+    } catch (e) {}
+  }
+
+  function spawnBurst(x, y, color, n) {
+    for (let i = 0; i < n; i++) {
+      particles.push({
+        x: x, y: y,
+        vx: rand(-2.5, 2.5), vy: rand(-3.5, -0.5),
+        life: rand(0.4, 0.9), max: 1,
+        color: color, r: rand(2, 5)
+      });
+    }
+  }
+
+  function buildLevel() {
+    solids = [];
+    hazards = [];
+    gems = [];
+    doors = [];
+    movers = [];
+    particles = [];
+    score = 0;
+    runTime = 0;
+    ended = false;
+    won = false;
+    active = 0;
+    msgFlash = "";
+    msgTimer = 0;
+
+    // Borders / floors
+    solids.push({ x: 0, y: 500, w: 960, h: 40 }); // base floor segments will carve with hazards
+    solids.push({ x: -40, y: 0, w: 40, h: 540 });
+    solids.push({ x: 960, y: 0, w: 40, h: 540 });
+    solids.push({ x: 0, y: -40, w: 960, h: 40 });
+
+    // Layout zones with random hazard types and platform jitter
+    const floorY = 500;
+
+    // Starting platform (safe)
+    solids.push({ x: 20, y: 420, w: 160, h: 20 });
+    solids.push({ x: 20, y: 440, w: 40, h: 60 });
+
+    // Hazard pit 1
+    const h1Type = Math.random() < 0.5 ? "lava" : "water";
+    const h1w = irand(90, 130);
+    const h1x = 200;
+    hazards.push({ x: h1x, y: floorY - 18, w: h1w, h: 28, type: h1Type });
+    // ledge after
+    const led1x = h1x + h1w;
+    solids.push({ x: led1x, y: 420 + irand(-10, 10), w: 100, h: 20 });
+
+    // Mid platforms ascending
+    const p2y = 360 + irand(-15, 15);
+    solids.push({ x: 380 + irand(-20, 20), y: p2y, w: 110, h: 18 });
+    const p3y = 300 + irand(-10, 20);
+    solids.push({ x: 520 + irand(-15, 25), y: p3y, w: 90, h: 18 });
+
+    // Hazard pit 2 under mid
+    const h2Type = h1Type === "lava" ? "water" : "lava";
+    hazards.push({ x: 340, y: floorY - 18, w: 220, h: 28, type: h2Type });
+
+    // Right lower safe + optional third hazard
+    solids.push({ x: 580, y: 420, w: 140, h: 18 });
+    if (Math.random() < 0.7) {
+      const h3Type = Math.random() < 0.5 ? "lava" : "water";
+      hazards.push({ x: 730, y: floorY - 18, w: irand(70, 100), h: 28, type: h3Type });
+      solids.push({ x: 840, y: 420, w: 100, h: 18 });
+    } else {
+      solids.push({ x: 730, y: 440, w: 210, h: 18 });
+    }
+
+    // Upper route platforms
+    solids.push({ x: 40, y: 280 + irand(-10, 10), w: 120, h: 16 });
+    solids.push({ x: 200 + irand(-10, 20), y: 230 + irand(-15, 10), w: 100, h: 16 });
+    solids.push({ x: 360, y: 190 + irand(-10, 15), w: 80, h: 16 });
+
+    // Moving platform
+    const mx = 470 + irand(0, 40);
+    const my = 250 + irand(-20, 30);
+    movers.push({
+      x: mx, y: my, w: 90, h: 16,
+      x0: mx, x1: mx + irand(80, 140),
+      speed: rand(0.7, 1.3), dir: 1, ox: 0
+    });
+
+    // High platforms toward doors
+    solids.push({ x: 680 + irand(-20, 20), y: 200 + irand(-15, 15), w: 100, h: 16 });
+    solids.push({ x: 800, y: 160, w: 140, h: 18 });
+    solids.push({ x: 780, y: 300 + irand(-10, 20), w: 120, h: 16 });
+
+    // Small stepping stones
+    solids.push({ x: 300 + irand(-15, 15), y: 470, w: 36, h: 14 });
+    solids.push({ x: 480 + irand(-20, 20), y: 470, w: 36, h: 14 });
+
+    // Ceiling bits / walls for flavor
+    solids.push({ x: 600, y: 80, w: 16, h: 90 });
+    solids.push({ x: 150, y: 100, w: 80, h: 14 });
+
+    // Doors (exits)
+    doors.push({ x: 860, y: 100, w: 36, h: 60, type: "fire", done: false });
+    doors.push({ x: 900, y: 100, w: 36, h: 60, type: "water", done: false });
+    // Door platform already there
+
+    // Gems — random subset of anchor spots
+    const gemSpots = [
+      { x: 90, y: 380, c: "fire" },
+      { x: 250, y: 390, c: "water" },
+      { x: 420, y: 320, c: "fire" },
+      { x: 560, y: 260, c: "water" },
+      { x: 100, y: 240, c: "water" },
+      { x: 240, y: 190, c: "fire" },
+      { x: 400, y: 150, c: "water" },
+      { x: 720, y: 160, c: "fire" },
+      { x: 820, y: 260, c: "water" },
+      { x: 640, y: 380, c: "fire" },
+      { x: 500, y: 430, c: "water" },
+      { x: 880, y: 380, c: "fire" }
+    ];
+    // shuffle
+    for (let i = gemSpots.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = gemSpots[i]; gemSpots[i] = gemSpots[j]; gemSpots[j] = t;
+    }
+    const nGems = irand(6, 9);
+    for (let i = 0; i < nGems; i++) {
+      const g = gemSpots[i];
+      gems.push({
+        x: g.x + rand(-8, 8), y: g.y + rand(-6, 6),
+        w: 14, h: 14, type: g.c, taken: false,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    // Heroes
+    fire = {
+      x: 40, y: 360, w: 22, h: 34,
+      vx: 0, vy: 0, onGround: false, facing: 1,
+      type: "fire", alive: true, atDoor: false,
+      color: "#ff6a2a", glow: "#ffb040", name: "Fire"
+    };
+    water = {
+      x: 80, y: 360, w: 22, h: 34,
+      vx: 0, vy: 0, onGround: false, facing: 1,
+      type: "water", alive: true, atDoor: false,
+      color: "#3ecbff", glow: "#9aecff", name: "Water"
+    };
+    // tiny start jitter
+    fire.x += rand(0, 12);
+    water.x += rand(0, 12);
+    heroes = [fire, water];
+  }
+
+  function allPlatforms() {
+    const list = solids.slice();
+    for (const m of movers) list.push(m);
+    return list;
+  }
+
+  function moveHero(h, dt, controlled) {
+    if (!h.alive) return;
+    if (h.atDoor) {
+      h.vx *= 0.8;
+      h.vy = 0;
+      return;
+    }
+
+    const ACC = 1800;
+    const MAX = 210;
+    const FRIC = 1600;
+    const JUMP = 430;
+    const GRAV = 1200;
+
+    if (controlled) {
+      if (keys.left) { h.vx -= ACC * dt; h.facing = -1; }
+      if (keys.right) { h.vx += ACC * dt; h.facing = 1; }
+      if (!keys.left && !keys.right) {
+        if (h.onGround) {
+          if (h.vx > 0) h.vx = Math.max(0, h.vx - FRIC * dt);
+          else h.vx = Math.min(0, h.vx + FRIC * dt);
+        } else {
+          h.vx *= 0.98;
+        }
+      }
+      h.vx = clamp(h.vx, -MAX, MAX);
+
+      if (keys.jump && !prevKeys.jump && h.onGround) {
+        h.vy = -JUMP;
+        h.onGround = false;
+        spawnBurst(h.x + h.w / 2, h.y + h.h, h.glow, 4);
+      }
+    } else {
+      // idle friction
+      if (h.onGround) {
+        if (h.vx > 0) h.vx = Math.max(0, h.vx - FRIC * 0.7 * dt);
+        else h.vx = Math.min(0, h.vx + FRIC * 0.7 * dt);
+      }
+    }
+
+    h.vy += GRAV * dt;
+    if (h.vy > 700) h.vy = 700;
+
+    // Horizontal move + collide
+    h.x += h.vx * dt;
+    const plats = allPlatforms();
+    for (const p of plats) {
+      if (aabb(h, p)) {
+        if (h.vx > 0) h.x = p.x - h.w;
+        else if (h.vx < 0) h.x = p.x + p.w;
+        h.vx = 0;
+      }
+    }
+    h.x = clamp(h.x, 0, W - h.w);
+
+    // Vertical
+    h.y += h.vy * dt;
+    h.onGround = false;
+    for (const p of plats) {
+      if (aabb(h, p)) {
+        if (h.vy > 0 && h.y + h.h - h.vy * dt <= p.y + 1) {
+          h.y = p.y - h.h;
+          h.vy = 0;
+          h.onGround = true;
+          // ride mover
+          if (p.ox !== undefined) h.x += p.ox;
+        } else if (h.vy < 0) {
+          h.y = p.y + p.h;
+          h.vy = 0;
+        } else {
+          // side nudge
+          if (h.x + h.w / 2 < p.x + p.w / 2) h.x = p.x - h.w;
+          else h.x = p.x + p.w;
+        }
+      }
+    }
+
+    // Hazards
+    const foot = { x: h.x + 4, y: h.y + h.h - 8, w: h.w - 8, h: 10 };
+    for (const hz of hazards) {
+      if (aabb(foot, hz)) {
+        if ((h.type === "fire" && hz.type === "water") ||
+            (h.type === "water" && hz.type === "lava")) {
+          killHero(h);
+          return;
+        }
+        // same element is safe / soothing — slight slow
+        if ((h.type === "fire" && hz.type === "lava") ||
+            (h.type === "water" && hz.type === "water")) {
+          h.vx *= 0.92;
+        }
+      }
+    }
+
+    // Gems
+    for (const g of gems) {
+      if (g.taken) continue;
+      if (g.type !== h.type) continue;
+      if (aabb(h, { x: g.x, y: g.y, w: g.w, h: g.h })) {
+        g.taken = true;
+        score += 100;
+        spawnBurst(g.x + 7, g.y + 7, h.glow, 10);
+        msgFlash = "+100 " + h.name + " gem!";
+        msgTimer = 1.0;
+      }
+    }
+
+    // Doors
+    for (const d of doors) {
+      if (d.type !== h.type) continue;
+      const near = aabb(h, { x: d.x - 4, y: d.y, w: d.w + 8, h: d.h });
+      if (near && h.onGround) {
+        h.atDoor = true;
+        d.done = true;
+        h.x = d.x + (d.w - h.w) / 2;
+        h.y = d.y + d.h - h.h;
+        h.vx = 0;
+        spawnBurst(d.x + d.w / 2, d.y + d.h / 2, h.glow, 14);
+        msgFlash = h.name + " secured the door!";
+        msgTimer = 1.2;
+      }
+    }
+  }
+
+  function killHero(h) {
+    if (!h.alive) return;
+    h.alive = false;
+    spawnBurst(h.x + h.w / 2, h.y + h.h / 2, h.color, 22);
+    // remaining gem score already counted
+    const line = h.type === "fire"
+      ? "Fire sizzled out in the water... duo down!"
+      : "Water boiled away in the lava... duo down!";
+    postScore("loss", line);
+  }
+
+  function update(dt) {
+    if (state !== "play" || ended) {
+      // still update particles for juice
+      updateParticles(dt);
+      if (msgTimer > 0) msgTimer -= dt;
+      prevKeys.jump = keys.jump;
+      prevKeys.switch = keys.switch;
+      return;
+    }
+
+    runTime += dt;
+
+    // switch
+    if (keys.switch && !prevKeys.switch) {
+      active = active === 0 ? 1 : 0;
+      const h = heroes[active];
+      spawnBurst(h.x + h.w / 2, h.y + h.h / 2, h.glow, 6);
+    }
+
+    // movers
+    for (const m of movers) {
+      const prev = m.x;
+      m.x += m.speed * m.dir * 60 * dt;
+      if (m.x > m.x1) { m.x = m.x1; m.dir = -1; }
+      if (m.x < m.x0) { m.x = m.x0; m.dir = 1; }
+      m.ox = m.x - prev;
+    }
+
+    moveHero(fire, dt, active === 0);
+    moveHero(water, dt, active === 1);
+
+    // win check
+    if (fire.alive && water.alive && fire.atDoor && water.atDoor) {
+      const timeBonus = Math.max(0, 1500 - Math.floor(runTime * 20));
+      const gemCount = gems.filter(g => g.taken).length;
+      score += 500 + timeBonus;
+      won = true;
+      const line = "Both elements home! " + gemCount + " gems, sleek clear.";
+      postScore("win", line);
+    }
+
+    // fall death
+    for (const h of heroes) {
+      if (h.alive && h.y > H + 40) killHero(h);
+    }
+
+    updateParticles(dt);
+    if (msgTimer > 0) msgTimer -= dt;
+
+    prevKeys.jump = keys.jump;
+    prevKeys.switch = keys.switch;
+  }
+
+  function updateParticles(dt) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.life -= dt;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 6 * dt;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawBackground() {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#141a2a");
+    g.addColorStop(0.55, "#1a2238");
+    g.addColorStop(1, "#0e121c");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    // distant temple arches
+    ctx.fillStyle = "rgba(255,255,255,0.03)";
+    for (let i = 0; i < 6; i++) {
+      const ax = 80 + i * 150;
+      ctx.fillRect(ax, 60, 50, 200);
+      ctx.beginPath();
+      ctx.arc(ax + 25, 60, 25, Math.PI, 0);
+      ctx.fill();
+    }
+
+    // subtle grid floor glow
+    ctx.strokeStyle = "rgba(80,120,180,0.06)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) {
+      ctx.beginPath(); ctx.moveTo(x, 400); ctx.lineTo(x, H); ctx.stroke();
+    }
+  }
+
+  function drawHazard(hz, t) {
+    const isLava = hz.type === "lava";
+    const base = isLava ? "#c23a12" : "#1a6aaa";
+    const top = isLava ? "#ff7a2a" : "#4ad0ff";
+    ctx.fillStyle = base;
+    ctx.fillRect(hz.x, hz.y, hz.w, hz.h);
+    // wavy surface
+    ctx.fillStyle = top;
+    ctx.beginPath();
+    ctx.moveTo(hz.x, hz.y + 4);
+    for (let x = 0; x <= hz.w; x += 8) {
+      const yy = hz.y + Math.sin(t * 4 + x * 0.15 + hz.x) * 3;
+      ctx.lineTo(hz.x + x, yy);
+    }
+    ctx.lineTo(hz.x + hz.w, hz.y + hz.h);
+    ctx.lineTo(hz.x, hz.y + hz.h);
+    ctx.closePath();
+    ctx.fill();
+    // gloss
+    ctx.fillStyle = isLava ? "rgba(255,220,100,0.25)" : "rgba(200,240,255,0.25)";
+    ctx.fillRect(hz.x, hz.y + 2, hz.w, 4);
+  }
+
+  function drawSolid(p, mover) {
+    ctx.fillStyle = mover ? "#5a6a88" : "#3a455e";
+    roundRect(p.x, p.y, p.w, p.h, 4);
+    ctx.fill();
+    ctx.fillStyle = mover ? "#8aa0c8" : "#6a7a98";
+    ctx.fillRect(p.x + 2, p.y + 2, p.w - 4, 4);
+    if (mover) {
+      ctx.fillStyle = "rgba(255,200,80,0.5)";
+      ctx.fillRect(p.x + p.w / 2 - 10, p.y + 6, 20, 3);
+    }
+  }
+
+  function drawDoor(d) {
+    const isF = d.type === "fire";
+    const col = isF ? "#ff6a2a" : "#3ecbff";
+    ctx.fillStyle = "#1c2230";
+    roundRect(d.x - 4, d.y - 8, d.w + 8, d.h + 12, 6);
+    ctx.fill();
+    ctx.fillStyle = d.done ? col : "#2a3348";
+    roundRect(d.x, d.y, d.w, d.h, 4);
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 2;
+    roundRect(d.x, d.y, d.w, d.h, 4);
+    ctx.stroke();
+    // symbol
+    ctx.fillStyle = col;
+    ctx.font = "bold 16px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText(isF ? "F" : "W", d.x + d.w / 2, d.y + d.h / 2 + 6);
+    if (d.done) {
+      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.fillRect(d.x + 6, d.y + 8, d.w - 12, d.h - 16);
+    }
+  }
+
+  function drawGem(g, t) {
+    if (g.taken) return;
+    const bob = Math.sin(t * 3 + g.phase) * 3;
+    const cx = g.x + g.w / 2;
+    const cy = g.y + g.h / 2 + bob;
+    const col = g.type === "fire" ? "#ff8240" : "#50d8ff";
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(Math.PI / 4);
+    ctx.shadowColor = col;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = col;
+    ctx.fillRect(-6, -6, 12, 12);
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "rgba(255,255,255,0.55)";
+    ctx.fillRect(-3, -3, 5, 5);
+    ctx.restore();
+  }
+
+  function drawHero(h, isActive, t) {
+    if (!h.alive) return;
+    const cx = h.x + h.w / 2;
+    // glow
+    if (isActive && state === "play") {
+      ctx.beginPath();
+      ctx.arc(cx, h.y + h.h / 2, 28 + Math.sin(t * 6) * 2, 0, Math.PI * 2);
+      ctx.fillStyle = h.type === "fire" ? "rgba(255,120,40,0.15)" : "rgba(60,200,255,0.15)";
+      ctx.fill();
+    }
+
+    // body
+    ctx.fillStyle = h.color;
+    roundRect(h.x, h.y + 8, h.w, h.h - 8, 6);
+    ctx.fill();
+    // head
+    ctx.beginPath();
+    ctx.arc(cx, h.y + 10, 10, 0, Math.PI * 2);
+    ctx.fillStyle = h.glow;
+    ctx.fill();
+    // eyes
+    ctx.fillStyle = "#1a1020";
+    const eyeOff = h.facing * 3;
+    ctx.beginPath();
+    ctx.arc(cx - 3 + eyeOff, h.y + 9, 2, 0, Math.PI * 2);
+    ctx.arc(cx + 3 + eyeOff, h.y + 9, 2, 0, Math.PI * 2);
+    ctx.fill();
+    // element flair
+    if (h.type === "fire") {
+      ctx.fillStyle = "#ffdd66";
+      ctx.beginPath();
+      ctx.moveTo(cx, h.y - 4 + Math.sin(t * 10) * 2);
+      ctx.lineTo(cx - 5, h.y + 6);
+      ctx.lineTo(cx + 5, h.y + 6);
+      ctx.fill();
+    } else {
+      ctx.strokeStyle = "rgba(200,250,255,0.7)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(cx, h.y + 6, 6, 0.2, Math.PI - 0.2);
+      ctx.stroke();
+    }
+
+    if (h.atDoor) {
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.font = "bold 11px system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText("OK", cx, h.y - 8);
+    }
+  }
+
+  function drawHUD(t) {
+    // top bar
+    ctx.fillStyle = "rgba(0,0,0,0.35)";
+    ctx.fillRect(0, 0, W, 40);
+
+    ctx.font = "bold 16px system-ui";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#ff8a4a";
+    ctx.fillText("FIRE", 16, 26);
+    ctx.fillStyle = "#5ad4ff";
+    ctx.fillText("WATER", 80, 26);
+
+    ctx.fillStyle = "#c8d0e0";
+    ctx.fillText("Score " + score, 180, 26);
+
+    const gemLeft = gems.filter(g => !g.taken).length;
+    const gemGot = gems.filter(g => g.taken).length;
+    ctx.fillText("Gems " + gemGot + "/" + (gemGot + gemLeft), 300, 26);
+
+    // active indicator
+    const ah = heroes[active];
+    ctx.fillStyle = ah.color;
+    ctx.textAlign = "right";
+    ctx.fillText("Controlling " + ah.name + "  [Space]", W - 16, 26);
+
+    if (msgTimer > 0) {
+      ctx.globalAlpha = Math.min(1, msgTimer * 2);
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.font = "bold 18px system-ui";
+      ctx.fillText(msgFlash, W / 2, 70);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function drawTitle(t) {
+    drawBackground();
+    // decorative hazards
+    ctx.fillStyle = "#c23a12";
+    ctx.fillRect(80, 480, 200, 30);
+    ctx.fillStyle = "#1a6aaa";
+    ctx.fillRect(680, 480, 200, 30);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#ff8a4a";
+    ctx.font = "bold 52px system-ui";
+    ctx.fillText("FIRE", W / 2 - 90, 180);
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 28px system-ui";
+    ctx.fillText("&", W / 2, 180);
+    ctx.fillStyle = "#5ad4ff";
+    ctx.font = "bold 52px system-ui";
+    ctx.fillText("WATER", W / 2 + 120, 180);
+
+    ctx.fillStyle = "#c8d0e0";
+    ctx.font = "20px system-ui";
+    ctx.fillText("Get both heroes to their matching doors.", W / 2, 240);
+    ctx.font = "16px system-ui";
+    ctx.fillStyle = "#8a94a8";
+    ctx.fillText("Fire fears water · Water fears lava · Collect matching gems", W / 2, 275);
+
+    const pulse = 0.65 + Math.sin(t * 3) * 0.35;
+    ctx.globalAlpha = pulse;
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 22px system-ui";
+    ctx.fillText(touchMode ? "Tap to start" : "Press Space / Enter to start", W / 2, 360);
+    ctx.globalAlpha = 1;
+
+    ctx.font = "14px system-ui";
+    ctx.fillStyle = "#6a7388";
+    ctx.fillText("Switch heroes often. Only matching gems count.", W / 2, 420);
+  }
+
+  function drawEndOverlay() {
+    // freeze frame already drawn; light veil so parent UI is clear but game visible
+    ctx.fillStyle = "rgba(0,0,0,0.25)";
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function draw(t) {
+    if (state === "title") {
+      drawTitle(t);
+      return;
+    }
+
+    drawBackground();
+
+    for (const hz of hazards) drawHazard(hz, t);
+    for (const p of solids) {
+      // skip full-screen borders visually thin
+      if (p.x < 0 || p.x >= W || p.y < 0 || p.y >= H - 5) {
+        if (p.y >= 500) {
+          ctx.fillStyle = "#2a3348";
+          ctx.fillRect(p.x, p.y, p.w, p.h);
+        }
+        continue;
+      }
+      drawSolid(p, false);
+    }
+    for (const m of movers) drawSolid(m, true);
+    for (const d of doors) drawDoor(d);
+    for (const g of gems) drawGem(g, t);
+
+    // particles behind heroes sometimes
+    for (const p of particles) {
+      ctx.globalAlpha = clamp(p.life / 0.5, 0, 1);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * (p.life + 0.2), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    drawHero(fire, active === 0, t);
+    drawHero(water, active === 1, t);
+    drawHUD(t);
+
+    if (state === "end") drawEndOverlay();
+  }
+
+  // Input
+  const keyMap = {
+    ArrowLeft: "left", a: "left", A: "left",
+    ArrowRight: "right", d: "right", D: "right",
+    ArrowUp: "jump", w: "jump", W: "jump", " ": "jump",
+    Spacebar: "jump",
+    e: "switch", E: "switch", q: "switch", Q: "switch",
+    Tab: "switch", Shift: "switch"
+  };
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") e.preventDefault();
+    const k = keyMap[e.key];
+    if (k) {
+      keys[k] = true;
+      e.preventDefault();
+    }
+    if (state === "title" && (e.key === " " || e.key === "Enter")) startGame();
+    // jump also bound to space — on title start takes priority once
+  });
+  window.addEventListener("keyup", function (e) {
+    const k = keyMap[e.key];
+    if (k) { keys[k] = false; e.preventDefault(); }
+  });
+
+  function bindBtn(el, key) {
+    const down = function (e) {
+      e.preventDefault();
+      touchMode = true;
+      pad.classList.add("show");
+      keys[key] = true;
+      el.classList.add("held");
+      if (state === "title") startGame();
+    };
+    const up = function (e) {
+      e.preventDefault();
+      keys[key] = false;
+      el.classList.remove("held");
+    };
+    el.addEventListener("touchstart", down, { passive: false });
+    el.addEventListener("touchend", up, { passive: false });
+    el.addEventListener("touchcancel", up, { passive: false });
+    el.addEventListener("mousedown", down);
+    el.addEventListener("mouseup", up);
+    el.addEventListener("mouseleave", up);
+  }
+  bindBtn(document.getElementById("btnL"), "left");
+  bindBtn(document.getElementById("btnR"), "right");
+  bindBtn(document.getElementById("btnJ"), "jump");
+  bindBtn(document.getElementById("btnSw"), "switch");
+
+  canvas.addEventListener("touchstart", function (e) {
+    touchMode = true;
+    pad.classList.add("show");
+    if (state === "title") {
+      e.preventDefault();
+      startGame();
+    }
+  }, { passive: false });
+
+  // detect coarse pointer
+  if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) {
+    touchMode = true;
+    pad.classList.add("show");
+  }
+
+  function startGame() {
+    if (state === "play") return;
+    buildLevel();
+    state = "play";
+    // reset keys so space doesn't instantly jump-switch weirdness
+    keys.jump = false;
+    keys.switch = false;
+    prevKeys.jump = true;
+    prevKeys.switch = true;
+  }
+
+  let last = performance.now();
+  let acc = 0;
+  const step = 1 / 60;
+
+  function frame(now) {
+    let dt = (now - last) / 1000;
+    last = now;
+    if (dt > 0.05) dt = 0.05;
+    acc += dt;
+    while (acc >= step) {
+      update(step);
+      acc -= step;
+    }
+    draw(now / 1000);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // prevent scroll/bounce
+  document.addEventListener("touchmove", function (e) { e.preventDefault(); }, { passive: false });
+})();
+</script>
+</body>
+</html>

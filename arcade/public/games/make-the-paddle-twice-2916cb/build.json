@@ -1,0 +1,23 @@
+{
+  "engine": "sandbox",
+  "audit": true,
+  "job": {},
+  "stages": [
+    {
+      "at": "2026-08-09T03:44:08Z",
+      "stage": "sandbox up",
+      "detail": "audit microVM ready"
+    },
+    {
+      "at": "2026-08-09T03:44:09Z",
+      "stage": "grok cli",
+      "detail": "Grok Build auditing the shipped source in the sandbox"
+    },
+    {
+      "at": "2026-08-09T03:44:29Z",
+      "stage": "verified",
+      "detail": "recompiled, ROM compared, NOVA_STATE checked"
+    }
+  ],
+  "finishedAt": "2026-08-09T03:44:29Z"
+}

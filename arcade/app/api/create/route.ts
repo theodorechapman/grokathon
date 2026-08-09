@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { overLimit, redis } from "@/lib/stats";
 import { readSession } from "@/lib/session";
-import { JobQueueError, submitJob } from "@/lib/submit-job";
+import { getGame } from "@/lib/games";
+import { JobQueueError, SLUG_RE, submitJob } from "@/lib/submit-job";
 
 const MAX_PROMPT = 300;
 const RATE_LIMIT_PER_MIN = 5;
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "the arcade is busy, try again in a minute" }, { status: 429 });
   }
 
-  let body: { prompt?: string; parent?: string };
+  let body: { prompt?: string; parent?: string; target?: string };
   try {
     body = await req.json();
   } catch {
@@ -52,6 +53,29 @@ export async function POST(req: NextRequest) {
   }
 
   const session = await readSession().catch(() => null);
+
+  const target = body.target?.trim() || null;
+  if (target) {
+    // Iterating a draft in place: the target must be an existing draft owned
+    // by the signed-in session handle.
+    if (!SLUG_RE.test(target)) {
+      return NextResponse.json({ error: "invalid target slug" }, { status: 400 });
+    }
+    if (!session) {
+      return NextResponse.json({ error: "sign in to iterate on a draft" }, { status: 401 });
+    }
+    const draft = await getGame(target);
+    if (!draft || draft.draft !== true) {
+      return NextResponse.json(
+        { error: "target isn't an unpublished draft" },
+        { status: 404 }
+      );
+    }
+    if (draft.creator !== session.handle) {
+      return NextResponse.json({ error: "that draft isn't yours" }, { status: 403 });
+    }
+  }
+
   let slug: string;
   try {
     slug = await submitJob({
@@ -59,12 +83,20 @@ export async function POST(req: NextRequest) {
       parent: body.parent ?? null,
       source: "site",
       creator: session?.handle ?? null,
+      target,
+      // Fresh site creations by signed-in users ship as drafts; remixes of
+      // published games and anonymous creations publish instantly.
+      draft: Boolean(session && !body.parent && !target),
     });
   } catch (err) {
     if (err instanceof JobQueueError) {
       console.error("job submit failed", err.status, err.message);
       const friendly =
-        err.status === 503 ? "the queue is full, try again in a few minutes" : "failed to queue job";
+        err.status === 503
+          ? "the queue is full, try again in a few minutes"
+          : err.status === 409
+            ? err.message
+            : "failed to queue job";
       return NextResponse.json({ error: friendly }, { status: err.status });
     }
     throw err;

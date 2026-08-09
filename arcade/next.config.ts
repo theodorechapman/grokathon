@@ -6,6 +6,11 @@ const crossOriginIsolationHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Game pages fs-check bundle files (source.c) at runtime; trace the whole
+  // games tree into the function or the check silently fails on Vercel.
+  outputFileTracingIncludes: {
+    "/g/[slug]": ["./public/games/**"],
+  },
   async headers() {
     return [
       {

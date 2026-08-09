@@ -1,0 +1,12 @@
+{
+  "slug": "yo-go-make-fireboy-d09985",
+  "title": "Fireboy Watergirl",
+  "description": "Guide both heroes to their doors; fire hates water, water hates fire.",
+  "controls": "D-pad move, A jump, B switch hero",
+  "source": "x",
+  "parent": null,
+  "creator": "henryzhangumich",
+  "rom": "yo-go-make-fireboy-d09985.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T04:40:05Z"
+}

@@ -4,17 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { BrowserGameBoy, type GameBoyControl } from "./binjgb-core";
 import styles from "./game-boy-player.module.css";
 
-// WRAM addresses from docs/breakout-reverse-engineering.md. Breakout-specific:
-// when the pipeline ships more ROM games it should provide these per game
-// (manifest field) instead of hardcoding.
-const BRICKS_ADDR = 0xc0a5;
-const BALL_Y_ADDR = 0xc0a2;
-const BALL_Y_DEAD = 0x9a;
-const BRICKS_START = 0x27;
+// Nova arcade protocol (docs/game-bundle-contract.md): every pipeline ROM
+// writes one byte at 0xCF00 — 1 run started, 2 won, 3 lost. It's an absolute
+// address in the C source, so the compiler can't relocate it the way it
+// relocates ordinary globals (which is how the old per-variable watching broke).
+const NOVA_STATE_ADDR = 0xcf00;
 
 function watchRun(
   gameboy: BrowserGameBoy,
-  onRunEnd: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void,
+  onRunEnd: (end: { outcome: "win" | "loss"; score: number }) => void,
   isCancelled: () => boolean
 ) {
   let startedAt = 0;
@@ -23,18 +21,17 @@ function watchRun(
       clearInterval(timer);
       return;
     }
-    const bricks = gameboy.readByte(BRICKS_ADDR);
-    const ballY = gameboy.readByte(BALL_Y_ADDR);
+    const state = gameboy.readByte(NOVA_STATE_ADDR);
     if (startedAt === 0) {
-      if (bricks === BRICKS_START) startedAt = performance.now();
+      if (state === 1) startedAt = performance.now();
       return;
     }
-    if (bricks === 0) {
+    if (state === 2 || state === 3) {
       clearInterval(timer);
-      onRunEnd({ outcome: "win", elapsedMs: Math.round(performance.now() - startedAt) });
-    } else if (ballY >= BALL_Y_DEAD) {
-      clearInterval(timer);
-      onRunEnd({ outcome: "loss", elapsedMs: Math.round(performance.now() - startedAt) });
+      onRunEnd({
+        outcome: state === 2 ? "win" : "loss",
+        score: Math.round(performance.now() - startedAt),
+      });
     }
   }, 200);
 }
@@ -64,7 +61,7 @@ export function GameBoyPlayer({
   title: string;
   onRestart: () => void;
   timeScored?: boolean;
-  onRunEnd?: (end: { outcome: "win" | "loss"; elapsedMs: number }) => void;
+  onRunEnd?: (end: { outcome: "win" | "loss"; score: number }) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameboyRef = useRef<BrowserGameBoy | null>(null);

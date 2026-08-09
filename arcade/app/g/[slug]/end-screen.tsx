@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export type RunEnd = { outcome: "win" | "loss"; elapsedMs: number };
+export type RunEnd = { outcome: "win" | "loss"; score: number; message?: string };
+export type Scoring = "time" | "points";
 
-function fmtTime(ms: number): string {
-  const sec = ms / 1000;
+type BoardRow = { handle: string; score: number };
+type RankInfo = { rank: number; total: number; top: BoardRow[] };
+
+function fmtScore(score: number, scoring: Scoring): string {
+  if (scoring !== "time") return score.toLocaleString();
+  const sec = score / 1000;
   const min = Math.floor(sec / 60);
   return min > 0 ? `${min}:${(sec - min * 60).toFixed(1).padStart(4, "0")}` : `${sec.toFixed(1)}s`;
 }
@@ -13,23 +18,29 @@ function fmtTime(ms: number): string {
 export function EndScreen({
   slug,
   end,
+  scoring,
   signedIn,
   onReplay,
 }: {
   slug: string;
   end: RunEnd;
+  scoring: Scoring;
   signedIn: boolean;
   onReplay: () => void;
 }) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<RankInfo | null>(null);
+
+  // Time games only rank finished runs; points games keep the score either way.
+  const claimable = end.outcome === "win" || scoring === "points";
 
   async function save(): Promise<boolean> {
     try {
       const res = await fetch("/api/score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, score: end.elapsedMs }),
+        body: JSON.stringify({ slug, score: end.score }),
       });
       if (res.ok) {
         setSaved(true);
@@ -45,51 +56,100 @@ export function EndScreen({
     return false;
   }
 
-  function signInAndSave() {
+  // Signed-in players save automatically, no button.
+  useEffect(() => {
+    if (signedIn && claimable) void save();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signedIn, claimable]);
+
+  // The board is the end screen. Refetch after the save lands so the
+  // player's own row shows up in it.
+  useEffect(() => {
+    let alive = true;
+    fetch(`/api/score?slug=${encodeURIComponent(slug)}&score=${end.score}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (alive && data && Array.isArray(data.top)) setInfo(data);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [slug, end.score, saved]);
+
+  function openLogin(onClosed?: () => void) {
     const popup = window.open("/api/auth/login", "nova-x-auth", "width=500,height=700");
     if (!popup) {
       window.location.href = "/api/auth/login";
       return;
     }
-    const timer = setInterval(async () => {
+    const timer = setInterval(() => {
       if (popup.closed) {
         clearInterval(timer);
-        await save();
+        onClosed?.();
       }
     }, 500);
   }
 
+  function signInAndSave() {
+    openLogin(() => {
+      if (claimable) void save();
+      else window.location.reload();
+    });
+  }
+
   return (
     <div className="endScreen">
-      {end.outcome === "loss" ? (
-        <>
-          <h2>Game over</h2>
-          <p>The ball got past you. Runs only count when you clear the board.</p>
-          <button className="endPrimary" onClick={onReplay}>
-            ↻ Retry
-          </button>
-        </>
-      ) : (
-        <>
-          <h2>Cleared!</h2>
-          <p className="endTime">{fmtTime(end.elapsedMs)}</p>
-          {saved ? (
-            <p>On the board. Faster runs overwrite it.</p>
-          ) : signedIn ? (
-            <button className="endPrimary" onClick={() => void save()}>
-              Save to leaderboard
-            </button>
-          ) : (
+      <h2>{end.outcome === "win" ? "Cleared!" : "Game over"}</h2>
+      {claimable && <p className="endTime">{fmtScore(end.score, scoring)}</p>}
+      {claimable && info && !saved && (
+        <p className="endRank">
+          That run lands at <strong>#{info.rank}</strong>
+          {info.total > 0 ? ` of ${info.total + 1}` : ""} on the board.
+        </p>
+      )}
+      {info && (signedIn ? info.top.length > 0 : claimable) && (
+        <div className="endBoardWrap">
+          <table className="board endBoard">
+            <tbody>
+              {(() => {
+                // Signed out: your row sits sharp at its real rank, the
+                // players and times around it are blurred. Curiosity does
+                // the rest.
+                if (signedIn) {
+                  return info.top.slice(0, 5).map((row, i) => (
+                    <tr key={row.handle}>
+                      <td>{i + 1}</td>
+                      <td>@{row.handle}</td>
+                      <td>{fmtScore(row.score, scoring)}</td>
+                    </tr>
+                  ));
+                }
+                const youIdx = Math.min(info.rank - 1, info.top.length);
+                const rows: (BoardRow & { you?: boolean })[] = [...info.top];
+                rows.splice(youIdx, 0, { handle: "you", score: Math.floor(end.score), you: true });
+                const start = Math.max(0, Math.min(youIdx - 2, rows.length - 5));
+                return rows.slice(start, start + 5).map((row, i) => (
+                  <tr key={`${row.handle}-${i}`} className={row.you ? "endRowYou" : "endRowBlur"}>
+                    <td>{start + i + 1}</td>
+                    <td>{row.you ? "you" : `@${row.handle}`}</td>
+                    <td>{fmtScore(row.score, scoring)}</td>
+                  </tr>
+                ));
+              })()}
+            </tbody>
+          </table>
+          {!signedIn && (
             <button className="endPrimary" onClick={signInAndSave}>
-              Sign in with 𝕏 to save your time
+              Sign in with 𝕏 to see who&apos;s around you
             </button>
           )}
-          {error && <p className="endErr">{error}</p>}
-          <button className="endGhost" onClick={onReplay}>
-            Play again
-          </button>
-        </>
+        </div>
       )}
+      {error && <p className="endErr">{error}</p>}
+      <button className="endPrimary" onClick={onReplay}>
+        {end.outcome === "win" ? "Play again" : "↻ Retry"}
+      </button>
     </div>
   );
 }

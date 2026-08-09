@@ -1,0 +1,12 @@
+{
+  "slug": "make-the-gravity-go-4054dc",
+  "title": "Reverse Gravity",
+  "description": "Balls fall upward as gravity flips in this inverted smash-fest.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "starship-breakout",
+  "creator": "henryzhangumich",
+  "rom": "make-the-gravity-go-4054dc.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T23:46:40Z"
+}

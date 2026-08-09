@@ -1,0 +1,12 @@
+{
+  "slug": "space-invaders-0ecdc6",
+  "title": "Space Invaders",
+  "description": "Waves of aliens march down \u2014 blast them all before they land.",
+  "controls": "D-pad left/right move, A fire",
+  "source": "x",
+  "parent": null,
+  "creator": "suprapan07",
+  "rom": "space-invaders-0ecdc6.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T03:12:51Z"
+}

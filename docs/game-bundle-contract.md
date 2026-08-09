@@ -12,6 +12,9 @@ arcade/public/games/<slug>/
   index.html      # browser game entry point, or:
   game.gb         # Game Boy ROM loaded by the arcade's shared emulator
   cover.png       # optional, share card + arcade tile
+  source.c        # optional, the Grok-patched C source; the arcade links it as "view the C source"
+  build.json      # optional, how the game got built: engine, job echo, stage timeline
+  build-log.ndjson # optional, raw Grok Build CLI action stream from the sandbox build
 ```
 
 Every bundle has a manifest and exactly one playable entry point. Browser games
@@ -22,6 +25,7 @@ in the manifest's `rom` field.
 
 - `index.html` is fully self-contained. Inline JS and CSS or relative paths inside the bundle folder only. No CDN, no external fetch. It must run offline in an iframe.
 - A `.gb` bundle contains only the compiled ROM; the emulator and player UI belong to the arcade.
+- Game Boy ROMs MUST implement the NOVA_STATE protocol: one byte at WRAM `0xCF00`, written by the game as an absolute pointer (`#define NOVA_STATE (*(volatile uint8_t *)0xCF00)`): 1 when play begins, 2 on win, 3 on loss. The arcade polls this byte for the end-of-run screen and run timing. Ordinary globals move when the compiler relayouts, so a fixed absolute address is the only reliable channel. The verify bot should reject a ROM that never writes it.
 - Canvas or DOM rendering, either is fine. Must handle keyboard and touch.
 - The game must size itself to its viewport: scale to fit, no scrolling, nothing cut off, at any frame size from a phone to a desktop. The arcade gives the iframe a fixed box and disables scroll, so a game that overflows loses content. The verify bot should treat overflow as a failure.
 - No console errors on boot. The verify bot treats them as failures.
@@ -44,9 +48,37 @@ in the manifest's `rom` field.
 `source` says which pipeline made it. `parent` is the slug it was remixed from, null for originals. That's the lineage the ranking system credits.
 `rom` is required for Game Boy bundles and omitted for `index.html` bundles.
 
-Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters), `scoring` ("time" or "points", default points). Time-scored games report elapsed milliseconds in nova:score and the boards rank fastest first; points games rank highest first.
+Optional manifest fields the arcade understands: `creator` (X handle from the job file, shows "by @handle" on the card and feeds the creator leaderboard), `players` (1 or 2, drives shelf filters, defaults to 1), `tags` (string list, reserved for future filters), `scoring` ("time" or "points", default points), `draft` (boolean, see Drafts below). Time-scored games report elapsed milliseconds in nova:score and the boards rank fastest first; points games rank highest first.
 
-Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number> }, "*")`. Score 0 is fine. This drives the end-of-run claim screen and the leaderboards; a game that never emits it never gets players on a board. The verify bot should check the message fires on game over.
+Score reporting (REQUIRED): when a run ends (win, lose, or game over), the game MUST `window.parent.postMessage({ type: "nova:score", score: <number>, outcome: "win" | "loss", message: "you killed 14 zombies" }, "*")`. `score` is required; 0 is fine. `outcome` and `message` are optional: `outcome` defaults to "win", and `message` (max 120 chars) replaces the arcade's generic outcome line on the shared end screen — write it in the game's own voice. This drives the end-of-run screen (score, claim/sign-in, retry, remix) and the leaderboards; a game that never emits it never gets players on a board. The arcade renders the end screen, so the game must NOT draw its own claim/sign-in UI — freeze play and post the message. The verify bot should check the message fires on game over.
+
+## Drafts
+
+A manifest may carry `"draft": true`. Draft bundles are invisible: the shelf, the home page, and the leaderboards skip them, and the X announcer never posts them. Only the creator (session handle == manifest `creator`) sees the full game page; anyone else hitting `/g/<slug>` gets a "not public yet" page.
+
+New creations from the site by signed-in users start as drafts. X-sourced creations publish instantly (the thread is the point), and remixes of published games publish instantly too.
+
+Drafts are iterated in place: a job may carry `"target": "<existing-draft-slug>"`, which means re-patch that draft instead of minting a new slug. The runner starts from the target bundle's existing source (`source.c` for Game Boy bundles, `index.html` for browser bundles), applies the prompt as an edit, and overwrites the same bundle folder. The manifest keeps its original `createdAt`, `creator`, `parent`, and `draft` flag. The runner validates `target` against the slug regex, same as `parent`. Only one pending iteration per draft: the job file is `pipeline/jobs/<target>.json`, so a second ask while one is queued is rejected.
+
+Publishing removes the `draft` flag from the manifest (a creator-only action via `POST /api/publish`) and freezes the bundle. After publish a bundle is immutable: it can never be re-targeted, and further changes are remixes under new slugs.
+
+## build.json
+
+Optional build provenance the pipeline writes next to the manifest. The arcade
+renders it as the game's build history; absence is fine (hand-built games).
+
+```json
+{
+  "engine": "sandbox | local",
+  "job": { "prompt": "...", "source": "x", "creator": "handle", "tweet": "123" },
+  "stages": [{ "at": "2026-08-08T12:00:00Z", "stage": "compiling", "detail": "..." }],
+  "finishedAt": "2026-08-08T12:03:00Z"
+}
+```
+
+`engine: "sandbox"` means the build ran via the Grok Build CLI in a Vercel
+Sandbox microVM and `build-log.ndjson` holds its raw action stream (one JSON
+line per agent event). `job` echoes the job file minus internals.
 
 ## Adding a game
 
@@ -68,6 +100,8 @@ The repo is the queue. `POST /api/create` on the arcade commits a job file to `p
 ```
 
 `slug` is the folder name the bundle must ship under. `parent` non-null means remix: start from the parent's bundle. `source` says where the ask came from (site, grok, x).
+
+Optional job fields: `"tweet": "<tweet id>"` records the originating X ask so the bundle's build history can link back to the thread. `"draft": true` tells the runner to write `"draft": true` into the shipped manifest (fresh site creations by signed-in users). `"target": "<existing-draft-slug>"` means iterate that draft in place — see Drafts above; when `target` is set the job's slug equals the target.
 
 Optional but nice: the pipeline can write a `status` string into the job file as it works ("writing the spec", "bot is playing it", "repairing"). The waiting room at /g/&lt;slug&gt; shows it live to the person who asked. No status means it displays "building".
 

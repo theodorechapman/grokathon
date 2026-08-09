@@ -15,6 +15,7 @@ export type GameManifest = {
   creator?: string | null;
   players?: 1 | 2;
   tags?: string[];
+  draft?: boolean;
 };
 
 const GAMES_DIR = path.join(process.cwd(), "public", "games");
@@ -32,6 +33,11 @@ export async function listGames(): Promise<GameManifest[]> {
   const dirs = entries.filter((e) => e.isDirectory());
   const games = await Promise.all(dirs.map((d) => readManifest(d.name)));
   return games.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/** Games minus unpublished drafts — what the shelf, home page, boards, and announcer see. */
+export async function listPublicGames(): Promise<GameManifest[]> {
+  return (await listGames()).filter((g) => !g.draft);
 }
 
 export async function getGame(slug: string): Promise<GameManifest | null> {

@@ -1,12 +1,47 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { Redis } from "@upstash/redis";
 import { redis } from "@/lib/stats";
-import { listGames } from "@/lib/games";
+import { listPublicGames } from "@/lib/games";
 import { submitJob } from "@/lib/submit-job";
 import { getBotMe, getMentions, getReplies, postTweet, type Tweet } from "@/lib/x-client";
 
 const SITE = "https://playgrokgames.vercel.app";
 const MAX_JOBS_PER_RUN = 5;
+// An overflow ask waits this long for job budget before it's dropped.
+const PENDING_TTL_MS = 72 * 3600 * 1000;
+
+// No like gate: every ask stages here and converts to a job on the next
+// sync pass, gated only by the per-run job budget. authorId is kept for the
+// record but nobody gets DMed.
+type PendingAsk = { prompt: string; parent: string | null; creator: string; authorId?: string; at: string };
+
+async function stageAsk(r: Redis, tweetId: string, ask: PendingAsk): Promise<void> {
+  await r.hset("x:pendingjobs", { [tweetId]: JSON.stringify(ask) });
+}
+
+async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: number }): Promise<void> {
+  const pending = (await r.hgetall<Record<string, string | PendingAsk>>("x:pendingjobs")) ?? {};
+  if (Object.keys(pending).length === 0) return;
+  for (const [tweetId, raw] of Object.entries(pending)) {
+    const ask: PendingAsk = typeof raw === "string" ? JSON.parse(raw) : raw;
+    if (budget.left > 0) {
+      const jobSlug = await submitJob({
+        prompt: ask.prompt,
+        parent: ask.parent,
+        source: "x",
+        creator: ask.creator,
+        tweet: tweetId,
+      });
+      result.jobs.push(jobSlug);
+      budget.left -= 1;
+      // The ask lands in the creator's tab immediately, building included.
+      await r.sadd(`umade:${ask.creator}`, jobSlug);
+      await r.hdel("x:pendingjobs", tweetId);
+    } else if (Date.now() - Date.parse(ask.at) > PENDING_TTL_MS) {
+      await r.hdel("x:pendingjobs", tweetId);
+    }
+  }
+}
 
 type SyncResult = {
   announced: string[];
@@ -30,22 +65,27 @@ function byIdAscending(a: Tweet, b: Tweet): number {
 }
 
 /** Posts for real when X_POSTING_ENABLED=true, else logs + queues to x:dryrun. */
-async function postOrDryRun(r: Redis, text: string): Promise<string | null> {
+async function postOrDryRun(r: Redis, text: string, replyToId?: string): Promise<string | null> {
   if (process.env.X_POSTING_ENABLED === "true") {
-    return (await postTweet(text)).id;
+    return (await postTweet(text, replyToId)).id;
   }
-  console.log("[x:dryrun] would post:", text);
-  await r.rpush("x:dryrun", JSON.stringify({ text, at: new Date().toISOString() }));
+  console.log("[x:dryrun] would post:", text, replyToId ? `(reply to ${replyToId})` : "");
+  await r.rpush("x:dryrun", JSON.stringify({ text, replyToId, at: new Date().toISOString() }));
   return null;
 }
 
 async function announceNewGames(r: Redis, result: SyncResult): Promise<void> {
-  const games = await listGames();
+  const games = await listPublicGames();
   const posted = new Set(await r.smembers("x:posted"));
+  const gameposts = (await r.hgetall<Record<string, string>>("x:gamepost")) ?? {};
   for (const game of games) {
     if (posted.has(game.slug)) continue;
-    const text = `NEW GAME: ${game.title} — ${game.description} Play it: ${SITE}/g/${game.slug}`;
-    const tweetId = await postOrDryRun(r, text);
+    // Remixes reply into the parent game's announcement thread when we have a
+    // real tweet id for the parent (dry-run sentinels unpack to null).
+    const parentTweetId = game.parent ? unpackId(gameposts[game.parent]) : null;
+    const prefix = game.parent ? "REMIX" : "NEW GAME";
+    const text = `${prefix}: ${game.title} — ${game.description} Play it: ${SITE}/g/${game.slug}`;
+    const tweetId = await postOrDryRun(r, text, parentTweetId ?? undefined);
     await r.hset("x:gamepost", { [game.slug]: tweetId ? packId(tweetId) : "dryrun" });
     await r.sadd("x:posted", game.slug);
     result.announced.push(game.slug);
@@ -63,15 +103,25 @@ async function repliesToRemixes(r: Redis, result: SyncResult, budget: { left: nu
     const replies = (await getReplies(tweetId, sinceId)).sort(byIdAscending);
     for (const reply of replies) {
       if (budget.left <= 0) break;
-      if (reply.author_id !== botId && reply.author_handle) {
-        const jobSlug = await submitJob({
+      // Bot-authored replies count too (the bot is also the owner's personal
+      // account) — but never the bot's own announcements, which always carry
+      // the site link. That also keeps thread-reply announcements from
+      // spawning job loops.
+      // X shortens links to t.co, so a raw URL match misses the bot's own
+      // announcements. Match the announcement prefix and any link instead.
+      const isOwnAnnouncement =
+        reply.author_id === botId &&
+        (/^(NEW GAME|REMIX):/.test(reply.text) ||
+          reply.text.includes("playgrokgames.vercel.app") ||
+          reply.text.includes("t.co/"));
+      if (!isOwnAnnouncement && reply.author_handle) {
+        await stageAsk(r, reply.id, {
           prompt: reply.text,
           parent: slug,
-          source: "x",
           creator: reply.author_handle,
+          authorId: reply.author_id,
+          at: new Date().toISOString(),
         });
-        result.jobs.push(jobSlug);
-        budget.left -= 1;
       }
       await r.set(`x:lastreply:${slug}`, packId(reply.id));
     }
@@ -88,14 +138,13 @@ async function mentionsToCreations(r: Redis, result: SyncResult, budget: { left:
     if (mention.author_id !== botId && mention.author_handle) {
       const prompt = mention.text.replace(/^(?:@\w+[\s,]*)+/, "").trim();
       if (prompt.length >= 3) {
-        const jobSlug = await submitJob({
+        await stageAsk(r, mention.id, {
           prompt,
           parent: null,
-          source: "x",
           creator: mention.author_handle,
+          authorId: mention.author_id,
+          at: new Date().toISOString(),
         });
-        result.jobs.push(jobSlug);
-        budget.left -= 1;
       }
     }
     await r.set("x:lastmention", packId(mention.id));
@@ -123,6 +172,7 @@ export async function POST(req: NextRequest) {
     ["announce", () => announceNewGames(r, result)],
     ["replies", () => repliesToRemixes(r, result, budget)],
     ["mentions", () => mentionsToCreations(r, result, budget)],
+    ["pending", () => pendingToJobs(r, result, budget)],
   ];
   for (const [name, step] of steps) {
     try {

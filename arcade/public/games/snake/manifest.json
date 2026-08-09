@@ -1,0 +1,11 @@
+{
+  "slug": "snake",
+  "title": "Snake",
+  "description": "The classic. Eat apples, grow long, don't hit yourself.",
+  "controls": "Arrows/WASD or swipe to steer",
+  "source": "site",
+  "parent": null,
+  "creator": "suprapan07",
+  "scoring": "points",
+  "createdAt": "2026-08-09T01:45:00Z"
+}

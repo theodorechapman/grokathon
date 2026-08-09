@@ -1,0 +1,13 @@
+{
+  "slug": "tetris-c-test-4f9a1b",
+  "title": "Tetris",
+  "description": "Clear 12 lines before the stack reaches the top.",
+  "controls": "D-Pad move/soft-drop, A rotate",
+  "source": "site",
+  "parent": null,
+  "creator": null,
+  "rom": "tetris-c-test-4f9a1b.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T01:59:42Z",
+  "draft": true
+}

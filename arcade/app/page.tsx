@@ -2,8 +2,31 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import { HeroArt } from "./hero-art";
 import { SiteNav } from "./site-nav";
+import { listPublicGames } from "@/lib/games";
+import { statsFor } from "@/lib/stats";
 
-export default function LandingPage() {
+export const dynamic = "force-dynamic";
+
+
+export default async function LandingPage() {
+  // Top 3 unique games: one per family, ranked by votes then plays.
+  const all = await listPublicGames();
+  const stats = await statsFor(all.map((g) => g.slug));
+  const slugs = new Set(all.map((g) => g.slug));
+  const score = (slug: string) => {
+    const s = stats.get(slug)!;
+    return s.votes * 1000 + s.plays;
+  };
+  const roots = all.filter((g) => !g.parent || !slugs.has(g.parent));
+  const games = roots
+    .map((root) =>
+      [root, ...all.filter((g) => g.parent === root.slug)].reduce((best, g) =>
+        score(g.slug) > score(best.slug) ? g : best
+      )
+    )
+    .sort((a, b) => score(b.slug) - score(a.slug))
+    .slice(0, 3);
+
   return (
     <div className={styles.page}>
       <SiteNav active="home" />
@@ -15,15 +38,54 @@ export default function LandingPage() {
           <img src="/nova-lockup.png" alt="Nova" className={styles.lockup} />
           <p className={styles.tagline}>Every game starts as a sentence.</p>
           <p className={styles.sub}>
-            Say it, and Nova makes it real: built by Grok, proven playable by a
-            bot, live in your browser in seconds. Then the room remixes it.
+            The open source arcade the X community builds one reply at a time.
+            Say a game, Grok builds it, a bot proves it playable, and it&apos;s
+            live in your browser in seconds. Every game&apos;s code is public,
+            and remixing forks it. Then the thread takes it from there.
           </p>
           <Link href="/arcade" className={styles.heroCta}>
             ▶&nbsp; Enter the arcade
           </Link>
-          <p className={styles.chip}>built on Grok</p>
+          <p className={styles.chip}>X driven · open source · powered by Grok</p>
         </div>
       </header>
+
+      {games.length > 0 && (
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2>Top games</h2>
+            <Link href="/arcade" className={styles.sectionLink}>
+              See all games
+            </Link>
+          </div>
+          <div className={styles.freshGrid}>
+            {games.map((game) => (
+              <article key={game.slug} className="gameCard">
+                <Link href={`/g/${game.slug}`} className="gameCover">
+                  {game.hasCover ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={`/games/${game.slug}/cover.png`} alt="" />
+                  ) : (
+                    <span className="gameCoverFallback">{game.title.charAt(0)}</span>
+                  )}
+                </Link>
+                <div className="gameBody">
+                  <h3 className={styles.freshTitle}>{game.title}</h3>
+                  <p className={styles.freshDesc}>{game.description}</p>
+                  <div className={styles.freshFoot}>
+                    <Link href={`/g/${game.slug}`} className="playBtn">
+                      ▶&nbsp; Play
+                    </Link>
+                    <span className="gameControls">
+                      {stats.get(game.slug)!.plays} plays
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <footer className={styles.footer}>
         <span>Grokathon · Aug 8 · Supratik, Theo, Henry</span>

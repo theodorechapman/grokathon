@@ -1,0 +1,12 @@
+{
+  "slug": "rainbow-bricks-that-shuffle-f282da",
+  "title": "Rainbow Shuffle",
+  "description": "Rainbow bricks reshuffle positions every time you lose a ball.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": "suprapan07",
+  "rom": "rainbow-bricks-that-shuffle-f282da.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T23:18:52Z"
+}

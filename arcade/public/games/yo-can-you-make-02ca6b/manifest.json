@@ -1,0 +1,12 @@
+{
+  "slug": "yo-can-you-make-02ca6b",
+  "title": "Elemental Dual Paddle",
+  "description": "Co-op fire and water paddles smash matching bricks without mixing elements.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "x",
+  "parent": "breakout",
+  "creator": "henryzhangumich",
+  "rom": "yo-can-you-make-02ca6b.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-08T23:57:28Z"
+}

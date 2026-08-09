@@ -1,35 +1,42 @@
-import { readSession } from "@/lib/session";
+import { access } from "fs/promises";
+import path from "path";
+import { listPublicGames } from "@/lib/games";
 import { SiteNav } from "../site-nav";
-import { CreateBox } from "../arcade/create-box";
-import { SignInButton } from "../sign-in-button";
+import { CreateShelf, type ShelfGame } from "./create-shelf";
 
 export const dynamic = "force-dynamic";
 
+const X_INTENT = `https://x.com/intent/post?text=${encodeURIComponent(
+  "@suprapan07 make me a game: "
+)}`;
+
 export default async function CreatePage() {
-  const session = await readSession().catch(() => null);
-  if (!session) {
-    return (
-      <main>
-        <SiteNav active="create" />
-        <section className="gate">
-          <h1>Creating needs a name on it</h1>
-          <p>Sign in and every game you make carries your handle.</p>
-          <SignInButton variant="big" />
-        </section>
-      </main>
-    );
-  }
+  const games = await listPublicGames();
+  const shelf: ShelfGame[] = await Promise.all(
+    games.map(async (g) => ({
+      slug: g.slug,
+      title: g.title,
+      creator: g.creator ?? null,
+      hasCover: g.hasCover,
+      hasBuild: await access(path.join(process.cwd(), "public", "games", g.slug, "build-log.ndjson"))
+        .then(() => true)
+        .catch(() => false),
+    })),
+  );
+
   return (
     <main>
       <SiteNav active="create" />
-      <section className="createHero">
-        <h1>Say a game.</h1>
+      <section className="createBar">
         <p>
-          Describe it in a sentence. Grok builds it, a bot plays it until it
-          passes, and it lands in the arcade as a link anyone can play.
+          Post your idea on X and Grok builds it into a real Game Boy ROM you
+          can play and share. Reply to any game&apos;s thread to remix it.
         </p>
-        <CreateBox signedIn />
+        <a className="xCta" href={X_INTENT} target="_blank" rel="noopener noreferrer">
+          𝕏 Post your game idea
+        </a>
       </section>
+      <CreateShelf games={shelf} />
     </main>
   );
 }
