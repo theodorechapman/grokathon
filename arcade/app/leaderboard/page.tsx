@@ -113,9 +113,11 @@ export default async function LeaderboardPage({
 }
 
 async function OverallBoard() {
-  const rows = await playerBoard();
+  const rows = await playerBoard(100);
+  const r = redis();
+  const totalPlayers = (await r?.zcard("uplays").catch(() => null)) ?? rows.length;
   const customNames =
-    (await redis()?.hgetall<Record<string, string>>("guest:names").catch(() => null)) ?? {};
+    (await r?.hgetall<Record<string, string>>("guest:names").catch(() => null)) ?? {};
   if (rows.length === 0) {
     return (
       <p className="empty">
@@ -124,7 +126,15 @@ async function OverallBoard() {
       </p>
     );
   }
+  const totalPlays = rows.reduce((sum, row) => sum + row.plays, 0);
   return (
+    <>
+    <p className="boardTotals">
+      {totalPlayers} players · {totalPlays.toLocaleString()} plays. Names like{" "}
+      <span className="guestChip">glitchy-raven</span> are real people playing as
+      guests — everyone gets a name from their session until they sign in with 𝕏
+      and claim their rows.
+    </p>
     <table className="board">
       <thead>
         <tr>
@@ -143,7 +153,10 @@ async function OverallBoard() {
           return (
             <tr key={row.handle} className={guest ? "guestRow" : undefined}>
               <td>{i + 1}</td>
-              <td>{display}</td>
+              <td>
+                {display}
+                {guest && <span className="guestChip">guest</span>}
+              </td>
               <td>{row.plays}</td>
               <td>{row.games}</td>
             </tr>
@@ -151,6 +164,7 @@ async function OverallBoard() {
         })}
       </tbody>
     </table>
+    </>
   );
 }
 

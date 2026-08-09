@@ -1,0 +1,9 @@
+{
+  "name": "nova-sandbox",
+  "private": true,
+  "type": "module",
+  "description": "Nova game builds driven by the Grok Build CLI inside Vercel Sandbox microVMs",
+  "dependencies": {
+    "@vercel/sandbox": "^0.2.0"
+  }
+}

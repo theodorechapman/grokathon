@@ -31,6 +31,7 @@ async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: numbe
         parent: ask.parent,
         source: "x",
         creator: ask.creator,
+        tweet: tweetId,
       });
       result.jobs.push(jobSlug);
       budget.left -= 1;

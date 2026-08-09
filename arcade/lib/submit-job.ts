@@ -10,6 +10,8 @@ export type JobRequest = {
   target?: string | null;
   /** Ship the bundle as an unpublished draft. */
   draft?: boolean;
+  /** Tweet id of the originating X ask, for the game's build history. */
+  tweet?: string | null;
 };
 
 /** Mirrors the runner's SLUG_RE. */
@@ -72,6 +74,7 @@ export async function submitJob(req: JobRequest): Promise<string> {
     creator: req.creator ?? null,
     ...(req.target ? { target: req.target } : {}),
     ...(req.draft ? { draft: true } : {}),
+    ...(req.tweet ? { tweet: req.tweet } : {}),
   };
 
   const content = Buffer.from(JSON.stringify(job, null, 2)).toString("base64");
