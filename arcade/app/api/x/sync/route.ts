@@ -34,6 +34,8 @@ async function pendingToJobs(r: Redis, result: SyncResult, budget: { left: numbe
       });
       result.jobs.push(jobSlug);
       budget.left -= 1;
+      // The ask lands in the creator's tab immediately, building included.
+      await r.sadd(`umade:${ask.creator}`, jobSlug);
       await r.hdel("x:pendingjobs", tweetId);
     } else if (Date.now() - Date.parse(ask.at) > PENDING_TTL_MS) {
       await r.hdel("x:pendingjobs", tweetId);
