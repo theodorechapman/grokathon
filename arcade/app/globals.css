@@ -1412,6 +1412,20 @@ a.navSegment:hover {
 .sourceLink a:hover {
   opacity: 0.8;
 }
+.sourceLink a.sourceCta {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  border-bottom-style: solid;
+  font-size: 14px;
+}
+.sourceNote {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--dim);
+}
 
 /* my creations */
 .myGamesAll {

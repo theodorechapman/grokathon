@@ -170,7 +170,12 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
         </p>
         {hasSource && (
           <p className="sourceLink">
-            <a href={`/games/${slug}/source.c`}>view the C source →</a>
+            <a className="sourceCta" href={`/games/${slug}/source.c`}>
+              {"</>"} Read this game&apos;s source code
+            </a>
+            <span className="sourceNote">
+              Every game&apos;s code is public. Remixing forks it.
+            </span>
           </p>
         )}
         {buildLog && buildLog.stages.length > 0 && (

@@ -46,6 +46,17 @@ export function GameFrame({
     box?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
   }, []);
 
+  // Every finished run tallies its outcome, signed in or not. Completion
+  // rate per game is the signal for what to build next.
+  useEffect(() => {
+    if (!runEnd) return;
+    fetch("/api/outcome", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug, outcome: runEnd.outcome }),
+    }).catch(() => {});
+  }, [runEnd, slug]);
+
   // Browser games report runs via the contract's nova:score postMessage.
   useEffect(() => {
     if (rom) return;
