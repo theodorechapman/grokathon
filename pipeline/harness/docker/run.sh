@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run one agent RE run in the container. Usage:
 #   run.sh <rom-path> [out-dir]
-# Env passthrough: MODEL, EFFORT, TIER, ENGINE, LABEL.
+# Env passthrough: MODEL, EFFORT, TIER, ENGINE, LABEL, MAX_PASSES.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -34,4 +34,5 @@ exec docker run --rm \
     -e "TIER=${TIER:-fast}" \
     -e "ENGINE=${ENGINE:-codex}" \
     -e "LABEL=${LABEL:-containerized}" \
+    -e "MAX_PASSES=${MAX_PASSES:-8}" \
     staticre-agent:local

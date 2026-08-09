@@ -24,7 +24,8 @@ if [[ "${ENGINE}" == "codex" ]]; then
 fi
 
 args=(--rom "${STATICRE_ROM}" --mcp local --engine "${ENGINE}"
-      --workspaces-dir /out --label "${LABEL:-containerized}")
+      --workspaces-dir /out --label "${LABEL:-containerized}"
+      --max-passes "${MAX_PASSES:-8}")
 [[ -n "${MODEL:-}"  ]] && args+=(--model "${MODEL}")
 [[ -n "${EFFORT:-}" ]] && args+=(--effort "${EFFORT}")
 [[ -n "${TIER:-}"   ]] && args+=(--tier "${TIER}")

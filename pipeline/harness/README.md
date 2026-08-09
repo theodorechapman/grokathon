@@ -17,6 +17,9 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --dry-run
 # use Codex instead, or override the model / name the run
 python harness/run_agent.py --rom raw_rom/breakout.gb --engine codex
 python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label ball-hunt
+
+# From the repository root, Grok Build uses the host CLI and ~/.grok login
+python3 run_postie.py --engine grok
 ```
 
 ## What a run produces
@@ -31,10 +34,12 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label bal
 | `dynamic_re.md` | emulator skill (copied from `.claude/skills/dynamic-re/` when the grokboy bridge is built) |
 | `TASK.md` | the concrete task prompt |
 | `RECONSTRUCTION.md` | causal main-loop model, subsystem ledger, behavioral challenge matrix, and completion audit |
+| `RUN_STATUS.json` | agent-owned `complete`, `incomplete`, or `hard_blocked` declaration |
+| `build_rom.sh` | stable GBDK build entry point; uses native GBDK or the agent container |
 | `ghidra_work/` | the agent's private Ghidra project + evidence sidecar |
 | `src/` | where the agent writes its raw-C (GBDK) reimplementation, built to `src/reconstructed.gb` |
 | `NOTES.md` | (agent-written) recovered memory map + open questions |
-| `run_meta.json` | provenance: engine, model, ROM hashes, program id |
+| `run_meta.json` | provenance plus pass timing and declaration history |
 | `agent.log` | full streaming transcript of the run |
 
 Each run is fully self-contained: separate Ghidra project, separate output,
@@ -48,6 +53,14 @@ separate blinded ROM. Runs never share state, so several can be compared.
   keep the harness itself outside anything sensitive.
 - The first `staticre` tool call in a run is slow (JVM start + auto-analysis);
   this is expected.
+- An `incomplete` status starts another fresh-context agent pass over the same
+  workspace. `--max-passes` defaults to an eight-pass safety ceiling; use `0`
+  for no ceiling. Only `complete` exits successfully, while `hard_blocked`
+  exits distinctly.
+- `run_postie.py --engine grok` deliberately runs on the host, headlessly, and
+  uses the current user's `~/.grok` credential. The harness marks the generated
+  workspace trusted so its per-run staticre MCP server can start. Codex remains
+  containerized.
 
 ## Containerized runs (agent-in-a-box)
 

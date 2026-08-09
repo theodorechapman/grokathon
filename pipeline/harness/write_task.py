@@ -68,8 +68,9 @@ DYNAMIC_TASK = """4. Execute the original program in a headless emulator and
    that expand coverage. Call targets remain the correct function seeds.
 
 6. Implement the behavior supported by your evidence in raw C under `src/`,
-   targeting the Game Boy with GBDK-2020 (`lcc` is at `/opt/gbdk/bin/lcc`).
-   `src/Makefile` must build a real `src/reconstructed.gb`. Keep game logic
+   targeting the Game Boy with GBDK-2020. `src/Makefile` must build a real
+   `src/reconstructed.gb`; invoke it through `./build_rom.sh` so the same task
+   works with either the native or containerized toolchain. Keep game logic
    separable from hardware access and cite source addresses in comments.
 
    Recover the real graphics for exercised screens. Use asset tracing for
@@ -111,29 +112,83 @@ DYNAMIC_TASK = """4. Execute the original program in a headless emulator and
    is never evidence about what the original does; it is how you challenge and
    falsify your reconstruction.
 
-8. You decide when the reconstruction is done. Before declaring it complete,
-   perform the completion audit in `RECONSTRUCTION.md`: explain the recovered
-   main loop and update order; account for each reachable core subsystem; cite
-   original routines/state and experiments for its transition rule; challenge
-   alternate timings and branches; and report the first known divergence plus
-   untested scope. A clean build, visual similarity, exact sampled frames, or a
-   comparison report is never sufficient by itself. You MUST declare the work
-   incomplete if you know a core mechanic is absent, stubbed, snapshot-driven,
-   or contradicted by evidence. Do not hide such gaps behind scoped wording.
+8. Your objective is a complete causal reconstruction, not a useful partial
+   reconstruction or an audit of missing work. Work in this continuous loop:
+
+   1. Select the highest-impact unresolved subsystem or reachable state.
+   2. Gather new static and dynamic evidence.
+   3. Form a concrete transition model and try to falsify it.
+   4. Implement or repair the model.
+   5. Compare original and candidate, then update the ledger.
+   6. Immediately select the next gap and repeat.
+
+   A working ROM, successful build, visual match, comparison report, or list of
+   limitations is only a checkpoint. Do not end the run at a checkpoint. Do
+   not spend time polishing already-matching presentation while core behavior
+   remains open.
+
+   When behavior is difficult to reach normally, do not merely mark it
+   untested. Trace its dispatcher and callers, branch from save states, alter
+   relevant original state through emulator memory writes, force the mode when
+   safe, and observe the responsible routines directly. If one approach fails,
+   use a materially different static or dynamic approach.
+
+9. Before attempting to stop, perform the completion audit in
+   `RECONSTRUCTION.md`, then search it and `NOTES.md` for `open`, `pending`,
+   `partial`, `stubbed`, `unknown`, `unrecovered`, and `untested`. If any term
+   describes reachable core behavior, resume the loop. Uncertainty, complexity,
+   an imperfect input sequence, or the existence of remaining work is not a
+   blocker; each is the next experiment queue.
+
+   You own the final decision. Immediately before your final response, write
+   `RUN_STATUS.json` with exactly one of these statuses:
+
+   - `complete`: you judge the reachable core program causally reconstructed,
+     with no known missing, stubbed, snapshot-driven, or contradicted core
+     mechanic.
+   - `hard_blocked`: necessary evidence is genuinely unavailable because a
+     tool or environment failure prevents further work. Record at least three
+     materially distinct attempts to overcome every blocker.
+   - `incomplete`: use only if the process is being forced to yield before the
+     work is done. Include the single highest-priority next action so another
+     pass can continue immediately.
+
+   The file must be valid JSON with this shape:
+
+   ```json
+   {{
+     "status": "complete | hard_blocked | incomplete",
+     "summary": "short evidence-based status",
+     "next_priority": "empty only when complete",
+     "blockers": []
+   }}
+   ```
+
+   A truthful `incomplete` declaration does not finish the task. The harness
+   will start another pass in this same workspace. Do not summarize prior work
+   on that pass; attack the recorded priority and continue the loop.
 """
 
 STATIC_IMPLEMENT_TASK = """4. Reimplement the evidence-supported program in raw C under `src/`,
 targeting the Game Boy with GBDK-2020. `src/Makefile` must build a real
-`src/reconstructed.gb`. Keep game logic separable from hardware access and cite
-source addresses in comments. Complete `RECONSTRUCTION.md`, including causal
-transition rules and the completion audit. Without dynamic comparison, state
-the resulting fidelity limits explicitly and do not claim unverified behavioral
-completeness.
+`src/reconstructed.gb`; invoke it through `./build_rom.sh`. Keep game logic
+separable from hardware access and cite source addresses in comments. Complete
+`RECONSTRUCTION.md`, including causal transition rules and the completion audit.
+Without dynamic comparison, state the resulting fidelity limits explicitly and
+do not claim unverified behavioral completeness.
+
+Work continuously from the highest-impact open ledger row through evidence,
+model, implementation, and verification. A build or a limitations report is a
+checkpoint, not a reason to stop. Before your final response write
+`RUN_STATUS.json` using the schema and completion rules in `RECONSTRUCTION.md`.
+If core work remains, declare `incomplete` with the next concrete action; the
+harness will continue in the same workspace.
 """
 
 TASK_FOOTER = """
 Work autonomously. Do not ask for confirmation; proceed on the best available
-evidence and note your uncertainty in confidence values and NOTES.md.
+evidence. Treat uncertainty as an experiment queue and resolve it wherever the
+available tools permit.
 """
 
 

@@ -70,3 +70,25 @@ replace a recovered update rule.
 The agent owns the completion decision. It must be honest: any known missing
 core mechanic, snapshot-driven substitute for dynamic behavior, or unexplained
 reachable state keeps the reconstruction incomplete.
+
+Before stopping, search this ledger and `NOTES.md` for `open`, `pending`,
+`partial`, `stubbed`, `unknown`, `unrecovered`, and `untested`. An occurrence
+that describes reachable core behavior is a work item, not a final limitation.
+Continue with the highest-impact item.
+
+Immediately before the final response, write `RUN_STATUS.json`:
+
+```json
+{
+  "status": "complete | hard_blocked | incomplete",
+  "summary": "short evidence-based status",
+  "next_priority": "empty only when complete",
+  "blockers": []
+}
+```
+
+`complete` means no known missing or contradicted reachable core mechanic.
+`hard_blocked` is reserved for unavailable evidence caused by a tool or
+environment failure after at least three distinct recovery attempts.
+`incomplete` means the harness must continue in this workspace, starting with
+`next_priority`.
