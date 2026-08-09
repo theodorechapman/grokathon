@@ -1,0 +1,6 @@
+{
+  "/api/my-games/route": "app/api/my-games/route.js",
+  "/page": "app/page.js",
+  "/g/[slug]/page": "app/g/[slug]/page.js",
+  "/arcade/page": "app/arcade/page.js"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "motronic-signals-engine-plant",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fixtures": "node scripts/write-fixtures.ts",
+    "runtime:scenarios": "node scripts/run-runtime-scenarios.ts",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}

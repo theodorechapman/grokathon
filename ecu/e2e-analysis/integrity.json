@@ -1,0 +1,139 @@
+{
+  "stored_candidate": {
+    "cpu_address": "CODE:9f00",
+    "external_eprom_physical_offset": "0x1f00",
+    "value": 32559,
+    "value_hex": "0x7f2f"
+  },
+  "calculations": {
+    "sum16_CODE_0000_9eff": {
+      "value": 32559,
+      "value_hex": "0x7f2f"
+    },
+    "sum16_CODE_0000_9fff": {
+      "value": 16827,
+      "value_hex": "0x41bb"
+    },
+    "sum16_external_CPU_2000_9eff": {
+      "value": 51728,
+      "value_hex": "0xca10"
+    }
+  },
+  "exact_sum_match": true,
+  "runtime_verifier": {
+    "function": "CODE:9016",
+    "proposed_name": "verify_combined_rom_checksum",
+    "algorithm": "sum16 bytes CODE:0000-9eff from zero; compare high byte to CODE:9f00 and low byte to CODE:9f01",
+    "instruction_evidence": {
+      "CODE:9021": "MOV R2,#0x9f",
+      "CODE:9023": "MOV DPTR,#0x0",
+      "CODE:9027": "MOV R0,A",
+      "CODE:9028": "MOV R1,A",
+      "CODE:902a": "MOVC A,@A+DPTR",
+      "CODE:902b": "ADD A,R0",
+      "CODE:902f": "INC R1",
+      "CODE:9030": "INC DPTR"
+    },
+    "evidence_matched": true,
+    "failure_path": "records fault-table identifier at CODE:4532 with subtype 4"
+  },
+  "ghidra_direct_references": [],
+  "instructions_with_candidate_constants": [
+    {
+      "function": "CODE:2d73",
+      "instruction": "CODE:2f4e",
+      "text": "MOV R0,#0x9f"
+    },
+    {
+      "function": "CODE:3ef5",
+      "instruction": "CODE:3eff",
+      "text": "MOV DPTR,#0x9f48"
+    },
+    {
+      "function": "CODE:3ef5",
+      "instruction": "CODE:3f3b",
+      "text": "MOV DPTR,#0x9f90"
+    },
+    {
+      "function": "CODE:3ef5",
+      "instruction": "CODE:3f64",
+      "text": "MOV DPTR,#0x9f42"
+    },
+    {
+      "function": "CODE:3fa0",
+      "instruction": "CODE:3fa3",
+      "text": "MOV DPTR,#0x9f45"
+    },
+    {
+      "function": "CODE:6099",
+      "instruction": "CODE:60fd",
+      "text": "MOV R0,#0x9f"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8548",
+      "text": "MOV DPTR,#0x9f02"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8552",
+      "text": "MOV DPTR,#0x9f0c"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8563",
+      "text": "MOV DPTR,#0x9f16"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8574",
+      "text": "MOV DPTR,#0x9f1d"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8586",
+      "text": "MOV DPTR,#0x9f20"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:86cb",
+      "text": "CJNE R7,#0x9f,0x8701"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8704",
+      "text": "CJNE R7,#0x9f,0x8727"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:872a",
+      "text": "CJNE R7,#0x9f,0x872f"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8732",
+      "text": "CJNE R7,#0x9f,0x8749"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8860",
+      "text": "MOV DPTR,#0x9f39"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:8898",
+      "text": "CJNE R7,#0x9f,0x88a4"
+    },
+    {
+      "function": "CODE:8475",
+      "instruction": "CODE:88a7",
+      "text": "CJNE R7,#0x9f,0x88b3"
+    },
+    {
+      "function": "CODE:9016",
+      "instruction": "CODE:9021",
+      "text": "MOV R2,#0x9f"
+    }
+  ],
+  "assessment": "The stored word exactly equals the 16-bit byte sum over CODE:0000-9eff. CODE:9016 independently computes this sum and compares it big-endian with CODE:9f00-9f01."
+}

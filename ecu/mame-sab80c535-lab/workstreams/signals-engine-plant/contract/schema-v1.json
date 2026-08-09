@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokathon.local/motronic-signals/v1",
+  "title": "Motronic deterministic signal scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "seed",
+    "qualification",
+    "timebase",
+    "durationTicks",
+    "assumptions",
+    "frames",
+    "crankEdges",
+    "diagnosticBytes",
+    "oracleHooks"
+  ],
+  "properties": {
+    "schema": { "const": "motronic-signals/v1" },
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "seed": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+    "qualification": { "type": "string", "minLength": 1 },
+    "timebase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ticksPerSecond",
+        "unit",
+        "sampleEveryTicks",
+        "interpolation",
+        "byteQuantization"
+      ],
+      "properties": {
+        "ticksPerSecond": { "type": "integer", "minimum": 1 },
+        "unit": { "const": "bench-tick" },
+        "sampleEveryTicks": { "type": "integer", "minimum": 1 },
+        "interpolation": { "const": "linear-then-nearest" },
+        "byteQuantization": { "const": "nearest-ties-up-saturate-u8" }
+      }
+    },
+    "durationTicks": { "type": "integer", "minimum": 1 },
+    "assumptions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/assumption" }
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/frame" }
+    },
+    "crankEdges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/crankEdge" }
+    },
+    "diagnosticBytes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/diagnosticByte" }
+    },
+    "oracleHooks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/oracleHook" }
+    }
+  },
+  "$defs": {
+    "byte": { "type": "integer", "minimum": 0, "maximum": 255 },
+    "tick": { "type": "integer", "minimum": 0 },
+    "byteVector": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/byte" }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "claim", "confidence", "sources", "excludes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "claim": { "type": "string", "minLength": 1 },
+        "confidence": {
+          "enum": ["firmware-proof", "corroborated", "assumed", "unknown"]
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "excludes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "boardStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["a040", "a041", "a081"],
+      "properties": {
+        "a040": { "$ref": "#/$defs/byte" },
+        "a041": { "$ref": "#/$defs/byte" },
+        "a081": { "$ref": "#/$defs/byte" }
+      }
+    },
+    "digitalPorts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["p3", "p5", "p6"],
+      "properties": {
+        "p3": { "$ref": "#/$defs/byte" },
+        "p5": { "$ref": "#/$defs/byte" },
+        "p6": { "$ref": "#/$defs/byte" }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tick", "boardStatus", "adc", "digitalPorts"],
+      "properties": {
+        "tick": { "$ref": "#/$defs/tick" },
+        "boardStatus": { "$ref": "#/$defs/boardStatus" },
+        "adc": { "$ref": "#/$defs/byteVector" },
+        "digitalPorts": { "$ref": "#/$defs/digitalPorts" }
+      }
+    },
+    "crankEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tick", "endpoint", "edge"],
+      "properties": {
+        "tick": { "$ref": "#/$defs/tick" },
+        "endpoint": { "const": "external-3/CC0" },
+        "edge": { "const": "falling" }
+      }
+    },
+    "diagnosticByte": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tick", "endpoint", "value"],
+      "properties": {
+        "tick": { "$ref": "#/$defs/tick" },
+        "endpoint": { "const": "UART/RXD" },
+        "value": { "$ref": "#/$defs/byte" }
+      }
+    },
+    "oracleHook": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "role", "expectation", "evidence"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": {
+          "enum": ["p1", "sfr-write", "xdata-write", "xdata-access", "pc"]
+        },
+        "mask": { "$ref": "#/$defs/byte" },
+        "addresses": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0, "maximum": 65535 }
+        },
+        "ranges": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "integer", "minimum": 0, "maximum": 65535 }
+          }
+        },
+        "role": { "type": "string", "minLength": 1 },
+        "expectation": {
+          "enum": [
+            "record-transitions",
+            "record-schedules",
+            "record-values",
+            "record-progress"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

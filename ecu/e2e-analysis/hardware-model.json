@@ -1,0 +1,3149 @@
+{
+  "vectors": [
+    {
+      "vector": "CODE:0000",
+      "name": "reset",
+      "manufacturer_role": "reset",
+      "firmware_name": "reset_vector",
+      "direct_targets": [
+        "CODE:0073"
+      ],
+      "wrapper_instructions": {
+        "CODE:0073": [
+          {
+            "address": "CODE:0073",
+            "text": "MOV A,0xa9"
+          },
+          {
+            "address": "CODE:0075",
+            "text": "MOV CY,0xe6"
+          },
+          {
+            "address": "CODE:0077",
+            "text": "MOV 0xd5,CY"
+          },
+          {
+            "address": "CODE:0079",
+            "text": "SETB 0xbe"
+          },
+          {
+            "address": "CODE:007b",
+            "text": "LJMP 0x20e0"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0000",
+        "CODE:0073",
+        "CODE:20e0",
+        "CODE:5c00"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0003",
+      "name": "external_0",
+      "manufacturer_role": "external interrupt 0",
+      "firmware_name": "ext0_vector",
+      "direct_targets": [
+        "CODE:2000"
+      ],
+      "wrapper_instructions": {
+        "CODE:2000": [
+          {
+            "address": "CODE:2000",
+            "text": "LJMP 0x2606"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0003",
+        "CODE:2000",
+        "CODE:20ee",
+        "CODE:2606"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:000b",
+      "name": "timer_0",
+      "manufacturer_role": "timer 0 overflow",
+      "firmware_name": "timer0_vector",
+      "direct_targets": [
+        "CODE:2010"
+      ],
+      "wrapper_instructions": {
+        "CODE:2010": [
+          {
+            "address": "CODE:2010",
+            "text": "CPL 0x95"
+          },
+          {
+            "address": "CODE:2012",
+            "text": "CLR 0x8c"
+          },
+          {
+            "address": "CODE:2014",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:000b",
+        "CODE:2010"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0013",
+      "name": "external_1",
+      "manufacturer_role": "external interrupt 1",
+      "firmware_name": "ext1_vector",
+      "direct_targets": [
+        "CODE:2030"
+      ],
+      "wrapper_instructions": {
+        "CODE:2030": [
+          {
+            "address": "CODE:2030",
+            "text": "DJNZ 0x16,0x2036"
+          },
+          {
+            "address": "CODE:2033",
+            "text": "INC 0x16"
+          },
+          {
+            "address": "CODE:2035",
+            "text": "RETI"
+          },
+          {
+            "address": "CODE:2036",
+            "text": "INC 0x16"
+          },
+          {
+            "address": "CODE:2038",
+            "text": "DJNZ 0x17,0x203d"
+          },
+          {
+            "address": "CODE:203b",
+            "text": "INC 0x17"
+          },
+          {
+            "address": "CODE:203d",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0013",
+        "CODE:2030"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:001b",
+      "name": "timer_1",
+      "manufacturer_role": "timer 1 overflow",
+      "firmware_name": "timer1_vector",
+      "direct_targets": [
+        "CODE:2050"
+      ],
+      "wrapper_instructions": {
+        "CODE:2050": [
+          {
+            "address": "CODE:2050",
+            "text": "DJNZ 0x16,0x2055"
+          },
+          {
+            "address": "CODE:2053",
+            "text": "INC 0x16"
+          },
+          {
+            "address": "CODE:2055",
+            "text": "LJMP 0x257d"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:001b",
+        "CODE:2050",
+        "CODE:2564",
+        "CODE:257d"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0023",
+      "name": "serial",
+      "manufacturer_role": "UART receive/transmit",
+      "firmware_name": "serial_vector",
+      "direct_targets": [
+        "CODE:2060"
+      ],
+      "wrapper_instructions": {
+        "CODE:2060": [
+          {
+            "address": "CODE:2060",
+            "text": "LJMP 0x8960"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0023",
+        "CODE:2060",
+        "CODE:8960"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:002b",
+      "name": "timer_2",
+      "manufacturer_role": "timer 2 overflow",
+      "firmware_name": "timer2_vector",
+      "direct_targets": [
+        "CODE:2070"
+      ],
+      "wrapper_instructions": {
+        "CODE:2070": [
+          {
+            "address": "CODE:2070",
+            "text": "INC 0x3f"
+          },
+          {
+            "address": "CODE:2072",
+            "text": "CLR 0xc6"
+          },
+          {
+            "address": "CODE:2074",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:002b",
+        "CODE:2070"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0043",
+      "name": "adc",
+      "manufacturer_role": "ADC completion",
+      "firmware_name": "adc_vector",
+      "direct_targets": [
+        "CODE:2080"
+      ],
+      "wrapper_instructions": {
+        "CODE:2080": [
+          {
+            "address": "CODE:2080",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0043",
+        "CODE:2080"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:004b",
+      "name": "external_2",
+      "manufacturer_role": "external interrupt 2",
+      "firmware_name": "ext2_vector",
+      "direct_targets": [
+        "CODE:2090"
+      ],
+      "wrapper_instructions": {
+        "CODE:2090": [
+          {
+            "address": "CODE:2090",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:004b",
+        "CODE:2090"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0053",
+      "name": "external_3",
+      "manufacturer_role": "external interrupt 3",
+      "firmware_name": "ext3_vector",
+      "direct_targets": [
+        "CODE:20a0"
+      ],
+      "wrapper_instructions": {
+        "CODE:20a0": [
+          {
+            "address": "CODE:20a0",
+            "text": "JB 0x21,0x20a6"
+          },
+          {
+            "address": "CODE:20a3",
+            "text": "LJMP 0x2462"
+          },
+          {
+            "address": "CODE:20a6",
+            "text": "LJMP 0x21d8"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0053",
+        "CODE:20a0",
+        "CODE:21d8",
+        "CODE:2462",
+        "CODE:2564",
+        "CODE:25f8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:005b",
+      "name": "external_4",
+      "manufacturer_role": "external interrupt 4",
+      "firmware_name": "ext4_vector",
+      "direct_targets": [
+        "CODE:20b0"
+      ],
+      "wrapper_instructions": {
+        "CODE:20b0": [
+          {
+            "address": "CODE:20b0",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:005b",
+        "CODE:20b0"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:0063",
+      "name": "external_5",
+      "manufacturer_role": "external interrupt 5",
+      "firmware_name": "ext5_vector",
+      "direct_targets": [
+        "CODE:20c0"
+      ],
+      "wrapper_instructions": {
+        "CODE:20c0": [
+          {
+            "address": "CODE:20c0",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:0063",
+        "CODE:20c0"
+      ],
+      "confidence": "high"
+    },
+    {
+      "vector": "CODE:006b",
+      "name": "external_6",
+      "manufacturer_role": "external interrupt 6",
+      "firmware_name": "ext6_vector",
+      "direct_targets": [
+        "CODE:20d0"
+      ],
+      "wrapper_instructions": {
+        "CODE:20d0": [
+          {
+            "address": "CODE:20d0",
+            "text": "RETI"
+          }
+        ]
+      },
+      "worker_chain_depth_3": [
+        "CODE:006b",
+        "CODE:20d0"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "peripheral_count": 33,
+  "peripherals": [
+    {
+      "address": "SFR:0080",
+      "readers": [],
+      "writers": [
+        "CODE:0100"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:010f",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:011d",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:0155",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:0160",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:0187",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:01a1",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P0",
+      "manufacturer_group": "port",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0081",
+      "readers": [],
+      "writers": [
+        "CODE:21d8",
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:22ad",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5cdf",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "SP",
+      "manufacturer_group": "core",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0087",
+      "readers": [],
+      "writers": [
+        "CODE:8475",
+        "CODE:8943"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:849e",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8953",
+          "function": "CODE:8943",
+          "access": "WRITE"
+        }
+      ],
+      "name": "PCON",
+      "manufacturer_group": "core",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0088",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cd0",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TCON",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0089",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5ccd",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TMOD",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:008a",
+      "readers": [],
+      "writers": [
+        "CODE:21d8",
+        "CODE:27cc",
+        "CODE:5d4e"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:22d2",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:22eb",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:299f",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2a2c",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2cc5",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2cd4",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5dd8",
+          "function": "CODE:5d4e",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TL0",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:008b",
+      "readers": [],
+      "writers": [
+        "CODE:257d"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2595",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:25a6",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:25bc",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TL1",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:008c",
+      "readers": [],
+      "writers": [
+        "CODE:21d8",
+        "CODE:27cc",
+        "CODE:5d4e"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:22d5",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:22ee",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:29a2",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2a2f",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2cc8",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2cd7",
+          "function": "CODE:27cc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5dd6",
+          "function": "CODE:5d4e",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TH0",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:008d",
+      "readers": [],
+      "writers": [
+        "CODE:257d"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2592",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:25a3",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:25b9",
+          "function": "CODE:257d",
+          "access": "WRITE"
+        }
+      ],
+      "name": "TH1",
+      "manufacturer_group": "timer",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0090",
+      "readers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:7658",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:5c00",
+        "CODE:6327",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2413",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:2418",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:5cb0",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:640f",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6432",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6449",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:7695",
+          "function": "CODE:7658",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:865c",
+          "function": "CODE:8475",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:865f",
+          "function": "CODE:8475",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cb9",
+          "function": "CODE:8bac",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cbe",
+          "function": "CODE:8bac",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P1",
+      "manufacturer_group": "port",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0098",
+      "readers": [],
+      "writers": [
+        "CODE:5c00",
+        "CODE:8475",
+        "CODE:8919",
+        "CODE:8943",
+        "CODE:8960"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cd6",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:84a1",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:84ce",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:892d",
+          "function": "CODE:8919",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8932",
+          "function": "CODE:8919",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8956",
+          "function": "CODE:8943",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8962",
+          "function": "CODE:8960",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8968",
+          "function": "CODE:8960",
+          "access": "WRITE"
+        }
+      ],
+      "name": "SCON",
+      "manufacturer_group": "serial",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:0099",
+      "readers": [
+        "CODE:7705",
+        "CODE:774f",
+        "CODE:8475",
+        "CODE:8aa0",
+        "CODE:8afd",
+        "CODE:8b70"
+      ],
+      "writers": [
+        "CODE:32f5",
+        "CODE:331c",
+        "CODE:7705",
+        "CODE:7829",
+        "CODE:8475",
+        "CODE:8919"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:32fe",
+          "function": "CODE:32f5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3329",
+          "function": "CODE:331c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:771b",
+          "function": "CODE:7705",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:7745",
+          "function": "CODE:7705",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7783",
+          "function": "CODE:774f",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:7832",
+          "function": "CODE:7829",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:84b3",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:84d4",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8508",
+          "function": "CODE:8475",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8935",
+          "function": "CODE:8919",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8aaa",
+          "function": "CODE:8aa0",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8b12",
+          "function": "CODE:8afd",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8ba7",
+          "function": "CODE:8b70",
+          "access": "READ"
+        }
+      ],
+      "name": "SBUF",
+      "manufacturer_group": "serial",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00a0",
+      "readers": [],
+      "writers": [
+        "CODE:0100",
+        "CODE:067c",
+        "CODE:0686",
+        "CODE:33a0",
+        "CODE:349e",
+        "CODE:3524",
+        "CODE:3530",
+        "CODE:3585",
+        "CODE:3610",
+        "CODE:3723",
+        "CODE:3800",
+        "CODE:39b3",
+        "CODE:3a83",
+        "CODE:3ab2",
+        "CODE:3de4",
+        "CODE:3e86",
+        "CODE:3ef5",
+        "CODE:3fa0",
+        "CODE:5c00",
+        "CODE:5d10",
+        "CODE:5d4e",
+        "CODE:5f6b",
+        "CODE:6083",
+        "CODE:6099",
+        "CODE:61fc",
+        "CODE:62e2",
+        "CODE:6576",
+        "CODE:6651",
+        "CODE:66b1",
+        "CODE:677c",
+        "CODE:6b60",
+        "CODE:6b8d",
+        "CODE:6eea",
+        "CODE:71b6",
+        "CODE:7328",
+        "CODE:73af",
+        "CODE:74fe",
+        "CODE:752a",
+        "CODE:75f5",
+        "CODE:7705",
+        "CODE:774f",
+        "CODE:7835",
+        "CODE:78a8",
+        "CODE:7a13",
+        "CODE:7c1c",
+        "CODE:8171",
+        "CODE:829f",
+        "CODE:8475",
+        "CODE:89c4",
+        "CODE:8dd1",
+        "CODE:8e50",
+        "CODE:8f32",
+        "CODE:8f97",
+        "CODE:9016",
+        "CODE:908d",
+        "CODE:90f5",
+        "CODE:9158",
+        "CODE:93ff",
+        "CODE:9500",
+        "CODE:955c",
+        "CODE:9df1"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:011a",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:015d",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:0180",
+          "function": "CODE:0100",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:067c",
+          "function": "CODE:067c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:0686",
+          "function": "CODE:0686",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:33a0",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:33c7",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:33cf",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:33dc",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:33e2",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:348a",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3492",
+          "function": "CODE:33a0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:349e",
+          "function": "CODE:349e",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3524",
+          "function": "CODE:3524",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3578",
+          "function": "CODE:3530",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:35a2",
+          "function": "CODE:3585",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:35be",
+          "function": "CODE:3585",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:35c6",
+          "function": "CODE:3585",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:35d5",
+          "function": "CODE:3585",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:35d9",
+          "function": "CODE:3585",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3630",
+          "function": "CODE:3610",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3667",
+          "function": "CODE:3610",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:367f",
+          "function": "CODE:3610",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:369b",
+          "function": "CODE:3610",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3749",
+          "function": "CODE:3723",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:37c8",
+          "function": "CODE:3723",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:37f4",
+          "function": "CODE:3723",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3866",
+          "function": "CODE:3800",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:389f",
+          "function": "CODE:3800",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:38c4",
+          "function": "CODE:3800",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:395a",
+          "function": "CODE:3800",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:39d9",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:39e3",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:39eb",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3a50",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3a56",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3a65",
+          "function": "CODE:39b3",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3a83",
+          "function": "CODE:3a83",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3a94",
+          "function": "CODE:3a83",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3ab2",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3bf7",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c00",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c20",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c35",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c3a",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c50",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c63",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3c8e",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3cf0",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3d38",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3d70",
+          "function": "CODE:3ab2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3de4",
+          "function": "CODE:3de4",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3e92",
+          "function": "CODE:3e86",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3e98",
+          "function": "CODE:3e86",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3ef5",
+          "function": "CODE:3ef5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3f76",
+          "function": "CODE:3ef5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:3fa0",
+          "function": "CODE:3fa0",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c4f",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c5b",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c64",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c72",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c79",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c7c",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c84",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5c92",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5ca1",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5ce5",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d0a",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d19",
+          "function": "CODE:5d10",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d2a",
+          "function": "CODE:5d10",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d30",
+          "function": "CODE:5d10",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d4e",
+          "function": "CODE:5d4e",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5d85",
+          "function": "CODE:5d4e",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5f70",
+          "function": "CODE:5f6b",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5f7c",
+          "function": "CODE:5f6b",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6083",
+          "function": "CODE:6083",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:60ec",
+          "function": "CODE:6099",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:61a6",
+          "function": "CODE:6099",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6209",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:621c",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:625b",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6270",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6279",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:62de",
+          "function": "CODE:61fc",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:62e2",
+          "function": "CODE:62e2",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6576",
+          "function": "CODE:6576",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:666a",
+          "function": "CODE:6651",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:66c6",
+          "function": "CODE:66b1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6754",
+          "function": "CODE:66b1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:677c",
+          "function": "CODE:677c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6b60",
+          "function": "CODE:6b60",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6b8d",
+          "function": "CODE:6b8d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6eee",
+          "function": "CODE:6eea",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6ef4",
+          "function": "CODE:6eea",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:71b9",
+          "function": "CODE:71b6",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7205",
+          "function": "CODE:71b6",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7230",
+          "function": "CODE:71b6",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7236",
+          "function": "CODE:71b6",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7257",
+          "function": "CODE:71b6",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7328",
+          "function": "CODE:7328",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:733d",
+          "function": "CODE:7328",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7363",
+          "function": "CODE:7328",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7366",
+          "function": "CODE:7328",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:73af",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:73e3",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:73f1",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7427",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7435",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:745f",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:749c",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:74b4",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:74bd",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:74c8",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:74eb",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:74fa",
+          "function": "CODE:73af",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7503",
+          "function": "CODE:74fe",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:751e",
+          "function": "CODE:74fe",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7560",
+          "function": "CODE:752a",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:75fc",
+          "function": "CODE:75f5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7604",
+          "function": "CODE:75f5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7742",
+          "function": "CODE:7705",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:775e",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7775",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:778b",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:77a3",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7819",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7823",
+          "function": "CODE:774f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7835",
+          "function": "CODE:7835",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7851",
+          "function": "CODE:7835",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:785a",
+          "function": "CODE:7835",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:786e",
+          "function": "CODE:7835",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7882",
+          "function": "CODE:7835",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:78ae",
+          "function": "CODE:78a8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:78bb",
+          "function": "CODE:78a8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a23",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a40",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a4f",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a70",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a8d",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7a9c",
+          "function": "CODE:7a13",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:7c1c",
+          "function": "CODE:7c1c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8171",
+          "function": "CODE:8171",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:82a3",
+          "function": "CODE:829f",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:861f",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8875",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:88d1",
+          "function": "CODE:8475",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:89c8",
+          "function": "CODE:89c4",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8dd1",
+          "function": "CODE:8dd1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8e63",
+          "function": "CODE:8e50",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8f63",
+          "function": "CODE:8f32",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8f75",
+          "function": "CODE:8f32",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8f97",
+          "function": "CODE:8f97",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8f9f",
+          "function": "CODE:8f97",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8fc7",
+          "function": "CODE:8f97",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8fcf",
+          "function": "CODE:8f97",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9016",
+          "function": "CODE:9016",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9094",
+          "function": "CODE:908d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:90cd",
+          "function": "CODE:908d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:90e3",
+          "function": "CODE:908d",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:90f7",
+          "function": "CODE:90f5",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9173",
+          "function": "CODE:9158",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:922f",
+          "function": "CODE:9158",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9378",
+          "function": "CODE:9158",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:93c6",
+          "function": "CODE:9158",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:93d5",
+          "function": "CODE:9158",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9403",
+          "function": "CODE:93ff",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9509",
+          "function": "CODE:9500",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:955f",
+          "function": "CODE:955c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9df4",
+          "function": "CODE:9df1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9dfc",
+          "function": "CODE:9df1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9e03",
+          "function": "CODE:9df1",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9e14",
+          "function": "CODE:9df1",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P2",
+      "manufacturer_group": "port/xram_page",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00a8",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5caa",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "IEN0",
+      "manufacturer_group": "interrupt",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00a9",
+      "readers": [
+        "CODE:0073"
+      ],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:0073",
+          "function": "CODE:0073",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5cc4",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "IP0",
+      "manufacturer_group": "interrupt",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00b0",
+      "readers": [
+        "CODE:7658",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "writers": [
+        "CODE:5c00",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cb3",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:769c",
+          "function": "CODE:7658",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8668",
+          "function": "CODE:8475",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:866b",
+          "function": "CODE:8475",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8ccc",
+          "function": "CODE:8bac",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cd1",
+          "function": "CODE:8bac",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P3",
+      "manufacturer_group": "port",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00b8",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cad",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "IEN1",
+      "manufacturer_group": "interrupt",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00b9",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cc7",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "IP1",
+      "manufacturer_group": "interrupt",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c0",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cca",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "IRCON",
+      "manufacturer_group": "interrupt",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c1",
+      "readers": [
+        "CODE:21d8",
+        "CODE:261c",
+        "CODE:27cc",
+        "CODE:6327",
+        "CODE:8000",
+        "CODE:908d",
+        "CODE:9cf2",
+        "CODE:9d16"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:261c",
+        "CODE:27cc",
+        "CODE:5c00",
+        "CODE:6327",
+        "CODE:8000",
+        "CODE:908d",
+        "CODE:9cf2",
+        "CODE:9d16"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2247",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:22e4",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:22fd",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:231a",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:2361",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:238f",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:23a4",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:23b5",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:23ca",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:23df",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:23f0",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:240a",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:240d",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:242b",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:243c",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:2447",
+          "function": "CODE:21d8",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:2633",
+          "function": "CODE:261c",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:27a5",
+          "function": "CODE:261c",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:2c74",
+          "function": "CODE:27cc",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:5cd9",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6415",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6422",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6443",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6446",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:645a",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6467",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6472",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:6494",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:64a7",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:64b4",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:64d6",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:64e9",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:64f6",
+          "function": "CODE:6327",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:800e",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8019",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8028",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8035",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8040",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:804f",
+          "function": "CODE:8000",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:90d5",
+          "function": "CODE:908d",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:90da",
+          "function": "CODE:908d",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:9d0a",
+          "function": "CODE:9cf2",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:9d10",
+          "function": "CODE:9cf2",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:9d2e",
+          "function": "CODE:9d16",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:9d34",
+          "function": "CODE:9d16",
+          "access": "READ_WRITE"
+        }
+      ],
+      "name": "CCEN",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c4",
+      "readers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:23cf",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:23e5",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23e7",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2444",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:642a",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:646f",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:64db",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:64ed",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64ef",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:803c",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8045",
+          "function": "CODE:8000",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8047",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        }
+      ],
+      "name": "CCL2",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c5",
+      "readers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:23c6",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23d4",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23ec",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23ee",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2441",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6427",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:646c",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:64d4",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64de",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64f2",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64f4",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:804b",
+          "function": "CODE:8000",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:804d",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        }
+      ],
+      "name": "CCH2",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c6",
+      "readers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2394",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:23aa",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23ac",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:241b",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2431",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2433",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2444",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6419",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:641b",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:642a",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:644c",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:645e",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6460",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:646f",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6499",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:64ab",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64ad",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8015",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:801e",
+          "function": "CODE:8000",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8020",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        }
+      ],
+      "name": "CCL3",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c7",
+      "readers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "writers": [
+        "CODE:21d8",
+        "CODE:6327",
+        "CODE:8000"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:238b",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2399",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23b1",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:23b3",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2406",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2420",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2438",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:243a",
+          "function": "CODE:21d8",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:2441",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:641e",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6420",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:6427",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6441",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:644f",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6463",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6465",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:646c",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:6492",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:649c",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64b0",
+          "function": "CODE:6327",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:64b2",
+          "function": "CODE:6327",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:8024",
+          "function": "CODE:8000",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8026",
+          "function": "CODE:8000",
+          "access": "WRITE"
+        }
+      ],
+      "name": "CCH3",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00c8",
+      "readers": [],
+      "writers": [
+        "CODE:5c00"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cd3",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        }
+      ],
+      "name": "T2CON",
+      "manufacturer_group": "timer2",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00ca",
+      "readers": [
+        "CODE:21d8",
+        "CODE:2462",
+        "CODE:5d4e"
+      ],
+      "writers": [
+        "CODE:908d"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:2265",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2476",
+          "function": "CODE:2462",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5e62",
+          "function": "CODE:5d4e",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:90d8",
+          "function": "CODE:908d",
+          "access": "WRITE"
+        }
+      ],
+      "name": "CRCL",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00cb",
+      "readers": [
+        "CODE:21d8",
+        "CODE:2462",
+        "CODE:257d",
+        "CODE:5d10",
+        "CODE:5d4e"
+      ],
+      "writers": [],
+      "evidence": [
+        {
+          "instruction": "CODE:2268",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:226d",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2479",
+          "function": "CODE:2462",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:247e",
+          "function": "CODE:2462",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:25ce",
+          "function": "CODE:257d",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:25ec",
+          "function": "CODE:257d",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5d3c",
+          "function": "CODE:5d10",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5e65",
+          "function": "CODE:5d4e",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5e6a",
+          "function": "CODE:5d4e",
+          "access": "READ"
+        }
+      ],
+      "name": "CRCH",
+      "manufacturer_group": "compare_capture",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00cd",
+      "readers": [
+        "CODE:21d8",
+        "CODE:2462",
+        "CODE:5d4e"
+      ],
+      "writers": [],
+      "evidence": [
+        {
+          "instruction": "CODE:226f",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2273",
+          "function": "CODE:21d8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2480",
+          "function": "CODE:2462",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:2484",
+          "function": "CODE:2462",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5e6c",
+          "function": "CODE:5d4e",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:5e70",
+          "function": "CODE:5d4e",
+          "access": "READ"
+        }
+      ],
+      "name": "TH2",
+      "manufacturer_group": "timer2",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00d8",
+      "readers": [
+        "CODE:261c",
+        "CODE:9ec2"
+      ],
+      "writers": [
+        "CODE:261c",
+        "CODE:5c00",
+        "CODE:9ec2"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:269b",
+          "function": "CODE:261c",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:269e",
+          "function": "CODE:261c",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:5cdc",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9ec6",
+          "function": "CODE:9ec2",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:9eca",
+          "function": "CODE:9ec2",
+          "access": "WRITE"
+        }
+      ],
+      "name": "ADCON0",
+      "manufacturer_group": "adc",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00d9",
+      "readers": [
+        "CODE:2ce8",
+        "CODE:9ec2"
+      ],
+      "writers": [],
+      "evidence": [
+        {
+          "instruction": "CODE:2cf3",
+          "function": "CODE:2ce8",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:9ed2",
+          "function": "CODE:9ec2",
+          "access": "READ"
+        }
+      ],
+      "name": "ADDAT",
+      "manufacturer_group": "adc",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00da",
+      "readers": [],
+      "writers": [
+        "CODE:261c",
+        "CODE:9ec2"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:26a1",
+          "function": "CODE:261c",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:9ecc",
+          "function": "CODE:9ec2",
+          "access": "WRITE"
+        }
+      ],
+      "name": "DAPR",
+      "manufacturer_group": "adc",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00e8",
+      "readers": [
+        "CODE:7658",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "writers": [
+        "CODE:5c00",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cb6",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:76a3",
+          "function": "CODE:7658",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8674",
+          "function": "CODE:8475",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8677",
+          "function": "CODE:8475",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cdf",
+          "function": "CODE:8bac",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8ce4",
+          "function": "CODE:8bac",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P4",
+      "manufacturer_group": "port",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    },
+    {
+      "address": "SFR:00f8",
+      "readers": [
+        "CODE:7658",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "writers": [
+        "CODE:5c00",
+        "CODE:8475",
+        "CODE:8bac"
+      ],
+      "evidence": [
+        {
+          "instruction": "CODE:5cbc",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:5cc1",
+          "function": "CODE:5c00",
+          "access": "WRITE"
+        },
+        {
+          "instruction": "CODE:76a7",
+          "function": "CODE:7658",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8680",
+          "function": "CODE:8475",
+          "access": "READ_WRITE"
+        },
+        {
+          "instruction": "CODE:8683",
+          "function": "CODE:8475",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cf2",
+          "function": "CODE:8bac",
+          "access": "READ"
+        },
+        {
+          "instruction": "CODE:8cf7",
+          "function": "CODE:8bac",
+          "access": "WRITE"
+        }
+      ],
+      "name": "P5",
+      "manufacturer_group": "port",
+      "firmware_proof": "peripheral register access; physical ECU endpoint not proven"
+    }
+  ],
+  "functions_by_manufacturer_peripheral_group": {
+    "adc": [
+      "CODE:261c",
+      "CODE:2ce8",
+      "CODE:5c00",
+      "CODE:9ec2"
+    ],
+    "compare_capture": [
+      "CODE:21d8",
+      "CODE:2462",
+      "CODE:257d",
+      "CODE:261c",
+      "CODE:27cc",
+      "CODE:5c00",
+      "CODE:5d10",
+      "CODE:5d4e",
+      "CODE:6327",
+      "CODE:8000",
+      "CODE:908d",
+      "CODE:9cf2",
+      "CODE:9d16"
+    ],
+    "core": [
+      "CODE:21d8",
+      "CODE:5c00",
+      "CODE:8475",
+      "CODE:8943"
+    ],
+    "interrupt": [
+      "CODE:0073",
+      "CODE:5c00"
+    ],
+    "port": [
+      "CODE:0100",
+      "CODE:21d8",
+      "CODE:5c00",
+      "CODE:6327",
+      "CODE:7658",
+      "CODE:8475",
+      "CODE:8bac"
+    ],
+    "port/xram_page": [
+      "CODE:0100",
+      "CODE:067c",
+      "CODE:0686",
+      "CODE:33a0",
+      "CODE:349e",
+      "CODE:3524",
+      "CODE:3530",
+      "CODE:3585",
+      "CODE:3610",
+      "CODE:3723",
+      "CODE:3800",
+      "CODE:39b3",
+      "CODE:3a83",
+      "CODE:3ab2",
+      "CODE:3de4",
+      "CODE:3e86",
+      "CODE:3ef5",
+      "CODE:3fa0",
+      "CODE:5c00",
+      "CODE:5d10",
+      "CODE:5d4e",
+      "CODE:5f6b",
+      "CODE:6083",
+      "CODE:6099",
+      "CODE:61fc",
+      "CODE:62e2",
+      "CODE:6576",
+      "CODE:6651",
+      "CODE:66b1",
+      "CODE:677c",
+      "CODE:6b60",
+      "CODE:6b8d",
+      "CODE:6eea",
+      "CODE:71b6",
+      "CODE:7328",
+      "CODE:73af",
+      "CODE:74fe",
+      "CODE:752a",
+      "CODE:75f5",
+      "CODE:7705",
+      "CODE:774f",
+      "CODE:7835",
+      "CODE:78a8",
+      "CODE:7a13",
+      "CODE:7c1c",
+      "CODE:8171",
+      "CODE:829f",
+      "CODE:8475",
+      "CODE:89c4",
+      "CODE:8dd1",
+      "CODE:8e50",
+      "CODE:8f32",
+      "CODE:8f97",
+      "CODE:9016",
+      "CODE:908d",
+      "CODE:90f5",
+      "CODE:9158",
+      "CODE:93ff",
+      "CODE:9500",
+      "CODE:955c",
+      "CODE:9df1"
+    ],
+    "serial": [
+      "CODE:32f5",
+      "CODE:331c",
+      "CODE:5c00",
+      "CODE:7705",
+      "CODE:774f",
+      "CODE:7829",
+      "CODE:8475",
+      "CODE:8919",
+      "CODE:8943",
+      "CODE:8960",
+      "CODE:8aa0",
+      "CODE:8afd",
+      "CODE:8b70"
+    ],
+    "timer": [
+      "CODE:21d8",
+      "CODE:257d",
+      "CODE:27cc",
+      "CODE:5c00",
+      "CODE:5d4e"
+    ],
+    "timer2": [
+      "CODE:21d8",
+      "CODE:2462",
+      "CODE:5c00",
+      "CODE:5d4e"
+    ]
+  },
+  "logical_endpoints": [
+    {
+      "name": "crank_capture_input",
+      "endpoint": "external-3/CC0",
+      "functions": [
+        "CODE:20a0",
+        "CODE:2462",
+        "CODE:21d8"
+      ],
+      "confidence": "high logical; medium physical"
+    },
+    {
+      "name": "ignition_coil_drive",
+      "endpoint": "P1.5 toggled by Timer 0",
+      "functions": [
+        "CODE:2010",
+        "CODE:21d8",
+        "CODE:27cc"
+      ],
+      "confidence": "high logical; medium-high physical"
+    },
+    {
+      "name": "injector_bank_a_drive",
+      "endpoint": "CC2/P1.2",
+      "functions": [
+        "CODE:21d8",
+        "CODE:2fd3"
+      ],
+      "confidence": "high logical; medium-high physical"
+    },
+    {
+      "name": "injector_bank_b_drive",
+      "endpoint": "CC3/P1.3",
+      "functions": [
+        "CODE:21d8",
+        "CODE:2fd3"
+      ],
+      "confidence": "high logical; medium-high physical"
+    },
+    {
+      "name": "iac_valve_drive",
+      "endpoint": "P1.7 toggled by Timer 1",
+      "functions": [
+        "CODE:257d",
+        "CODE:6bb7",
+        "CODE:6db6"
+      ],
+      "confidence": "high logical; medium-high physical"
+    },
+    {
+      "name": "discrete_output_latch",
+      "endpoint": "INTMEM:0022 -> EXTMEM:a040",
+      "functions": [
+        "CODE:61b3"
+      ],
+      "confidence": "high logical; unknown relay identities"
+    }
+  ],
+  "confidence_boundary": "Vector and SFR roles come from the SAB80C515 architecture. Injector/coil/IAC/relay assignments require ECU wiring evidence."
+}

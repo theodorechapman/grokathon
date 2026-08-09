@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokathon.local/motronic-bridge/v1",
+  "title": "Motronic lockstep runtime bridge",
+  "oneOf": [
+    { "$ref": "#/$defs/hello" },
+    { "$ref": "#/$defs/advance" },
+    { "$ref": "#/$defs/shutdown" },
+    { "$ref": "#/$defs/ready" },
+    { "$ref": "#/$defs/frame" },
+    { "$ref": "#/$defs/error" }
+  ],
+  "$defs": {
+    "schema": { "const": "motronic-bridge/v1" },
+    "cycle": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "byte": { "type": "integer", "minimum": 0, "maximum": 255 },
+    "hello": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "hello" }
+      }
+    },
+    "advance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type", "seq", "fromCycle", "toCycle", "events"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "advance" },
+        "seq": { "$ref": "#/$defs/cycle" },
+        "fromCycle": { "$ref": "#/$defs/cycle" },
+        "toCycle": { "$ref": "#/$defs/cycle" },
+        "events": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": { "$ref": "#/$defs/inputEvent" }
+        }
+      }
+    },
+    "shutdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "shutdown" }
+      }
+    },
+    "inputEvent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "address", "value"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "const": "xdata" },
+            "address": { "type": "integer", "minimum": 40960, "maximum": 41215 },
+            "value": { "$ref": "#/$defs/byte" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "channel", "value"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "const": "adc" },
+            "channel": { "type": "integer", "minimum": 0, "maximum": 7 },
+            "value": { "type": "integer", "minimum": 0, "maximum": 127 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "port", "value"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "const": "port" },
+            "port": { "enum": [3, 5, 6] },
+            "value": { "$ref": "#/$defs/byte" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "state"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "const": "cc0" },
+            "state": { "enum": [0, 1] }
+          }
+        }
+      ]
+    },
+    "ready": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type", "cycle", "nextSeq", "romSha256", "mameCommit", "limits"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "ready" },
+        "cycle": { "$ref": "#/$defs/cycle" },
+        "nextSeq": { "$ref": "#/$defs/cycle" },
+        "romSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mameCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxEvents", "maxBatchCycles"],
+          "properties": {
+            "maxEvents": { "type": "integer", "minimum": 1, "maximum": 4096 },
+            "maxBatchCycles": { "type": "integer", "minimum": 1, "maximum": 12000000 }
+          }
+        }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type", "seq", "fromCycle", "toCycle", "cycle", "telemetry", "counters"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "frame" },
+        "seq": { "$ref": "#/$defs/cycle" },
+        "fromCycle": { "$ref": "#/$defs/cycle" },
+        "toCycle": { "$ref": "#/$defs/cycle" },
+        "cycle": { "$ref": "#/$defs/cycle" },
+        "telemetry": {
+          "type": "array",
+          "maxItems": 16384,
+          "items": { "$ref": "#/$defs/telemetryEvent" }
+        },
+        "counters": { "$ref": "#/$defs/counters" }
+      }
+    },
+    "counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instructions", "init", "supervisor", "foreground", "timer0", "timer1", "timer2", "capture", "vector0063", "vector006b", "unknownXdataReads"],
+      "properties": {
+        "instructions": { "$ref": "#/$defs/cycle" },
+        "init": { "$ref": "#/$defs/cycle" },
+        "supervisor": { "$ref": "#/$defs/cycle" },
+        "foreground": { "$ref": "#/$defs/cycle" },
+        "timer0": { "$ref": "#/$defs/cycle" },
+        "timer1": { "$ref": "#/$defs/cycle" },
+        "timer2": { "$ref": "#/$defs/cycle" },
+        "capture": { "$ref": "#/$defs/cycle" },
+        "vector0063": { "$ref": "#/$defs/cycle" },
+        "vector006b": { "$ref": "#/$defs/cycle" },
+        "unknownXdataReads": { "$ref": "#/$defs/cycle" }
+      }
+    },
+    "telemetryEvent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "bit", "state"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "const": "p1" },
+            "bit": { "enum": [2, 3, 5, 7] },
+            "state": { "enum": [0, 1] }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cycle", "kind", "address", "value"],
+          "properties": {
+            "cycle": { "$ref": "#/$defs/cycle" },
+            "kind": { "enum": ["sfr-write", "xdata-write"] },
+            "address": { "type": "integer", "minimum": 0, "maximum": 65535 },
+            "value": { "$ref": "#/$defs/byte" }
+          }
+        }
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "type", "fatal", "message"],
+      "properties": {
+        "schema": { "$ref": "#/$defs/schema" },
+        "type": { "const": "error" },
+        "fatal": { "const": true },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+bit-us 104
+byte 20000 06 good # startup byte proven at CODE:774f
+byte 24000 7e good # complement of ECU keyword 0x81
+byte 28000 f3 good # wrong complement for ECU length 0x0d; expected 0xf2

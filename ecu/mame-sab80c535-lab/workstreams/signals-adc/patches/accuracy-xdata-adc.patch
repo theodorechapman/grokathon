@@ -1,0 +1,105 @@
+diff --git a/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/build.sh b/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/build.sh
+--- a/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/build.sh
++++ b/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/build.sh
+@@ -51,10 +51,12 @@ if ! rg -q "instruction_cb" "$MAME_DIR/src/devices/cpu/mcs51/i8051.h"; then
+ 	fi
+ fi
+ install -m 0644 "$ROOT"/src/* "$MAME_DIR/src/mame/skeleton/"
++install -m 0644 "$ROOT"/../signals-adc/src/motronic175-adc.* \
++	"$MAME_DIR/src/mame/skeleton/"
+ 
+ make -C "$MAME_DIR" \
+ 	SUBTARGET=motronic175 \
+-	SOURCES=src/mame/skeleton/motronic175.cpp,src/mame/skeleton/motronic175-xdata.cpp,src/mame/skeleton/motronic175-xdata-config.cpp,src/mame/skeleton/sab80c515test.cpp \
++	SOURCES=src/mame/skeleton/motronic175.cpp,src/mame/skeleton/motronic175-adc.cpp,src/mame/skeleton/motronic175-xdata.cpp,src/mame/skeleton/motronic175-xdata-config.cpp,src/mame/skeleton/sab80c515test.cpp \
+ 	REGENIE=1 SYMBOLS=0 IGNORE_GIT=1 OSD=sdl USE_LIBSDL=1 \
+ 	OVERRIDE_CC=/usr/bin/clang OVERRIDE_CXX=/usr/bin/clang++ "-j$JOBS"
+ test -x "$MAME_DIR/motronic175"
+diff --git a/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/src/motronic175.cpp b/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/src/motronic175.cpp
+--- a/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/src/motronic175.cpp
++++ b/ecu/mame-sab80c535-lab/workstreams/accuracy-xdata/src/motronic175.cpp
+@@ -3,6 +3,7 @@
+ 
+ #include "emu.h"
+ #include "cpu/mcs51/sab80c535.h"
++#include "motronic175-adc.h"
+ #include "motronic175-xdata.h"
+ 
+ #include <cstdlib>
+@@ -29,6 +30,15 @@ protected:
+ 
+ private:
+ 	TIMER_CALLBACK_MEMBER(timeout);
++	u8 adc_sample(unsigned channel);
++	u8 adc0_r();
++	u8 adc1_r();
++	u8 adc2_r();
++	u8 adc3_r();
++	u8 adc4_r();
++	u8 adc5_r();
++	u8 adc6_r();
++	u8 adc7_r();
+ 	void code_map(address_map &map) ATTR_COLD;
+ 	void instruction(u16 pc);
+ 	void p1_w(u8 data);
+@@ -36,6 +46,7 @@ private:
+ 	void request_stop(const char *reason);
+ 	void xdata_map(address_map &map) ATTR_COLD;
+ 
++	motronic175_adc_provider m_adc;
+ 	required_device<sab80c535_device> m_maincpu;
+ 	required_device<motronic175_xdata_device> m_xdata;
+ 	emu_timer *m_timeout = nullptr;
+@@ -71,8 +82,27 @@ void motronic175_state::xdata_map(address_map &map)
+ 			FUNC(motronic175_xdata_device::write));
+ }
+ 
++u8 motronic175_state::adc_sample(unsigned channel)
++{
++	const u64 elapsed_us = machine().time().as_ticks(1'000'000);
++	return m_adc.sample(channel, elapsed_us);
++}
++
++u8 motronic175_state::adc0_r() { return adc_sample(0); }
++u8 motronic175_state::adc1_r() { return adc_sample(1); }
++u8 motronic175_state::adc2_r() { return adc_sample(2); }
++u8 motronic175_state::adc3_r() { return adc_sample(3); }
++u8 motronic175_state::adc4_r() { return adc_sample(4); }
++u8 motronic175_state::adc5_r() { return adc_sample(5); }
++u8 motronic175_state::adc6_r() { return adc_sample(6); }
++u8 motronic175_state::adc7_r() { return adc_sample(7); }
++
+ void motronic175_state::machine_start()
+ {
++	std::string adc_error;
++	if (!m_adc.configure(std::getenv("MOTRONIC_ADC_PROFILE"),
++			std::getenv("MOTRONIC_ADC_FAULT_CHANNEL"), adc_error))
++		fatalerror("%s\n", adc_error.c_str());
+ 	if (const char *limit = std::getenv("MOTRONIC_INSTRUCTION_LIMIT"))
+ 	{
+ 		char *end = nullptr;
+@@ -87,6 +117,9 @@ void motronic175_state::machine_start()
+ 		if (!end || *end || !m_timeout_ms)
+ 			fatalerror("invalid MOTRONIC_TIMEOUT_MS=%s\n", timeout);
+ 	}
++	logerror(
++			"ADCMODEL profile=%s callback_range=0..127 addat=callback*2\n",
++			m_adc.profile_name());
+ 	m_timeout = timer_alloc(FUNC(motronic175_state::timeout), this);
+ 	m_timeout->adjust(attotime::from_msec(m_timeout_ms));
+ 	save_item(NAME(m_p1_last));
+@@ -173,6 +206,14 @@ void motronic175_state::motronic175(machine_config &config)
+ 	SAB80C535(config, m_maincpu, XTAL(12'000'000));
+ 	m_maincpu->set_addrmap(AS_PROGRAM, &motronic175_state::code_map);
+ 	m_maincpu->set_addrmap(AS_DATA, &motronic175_state::xdata_map);
++	m_maincpu->an0_func().set(FUNC(motronic175_state::adc0_r));
++	m_maincpu->an1_func().set(FUNC(motronic175_state::adc1_r));
++	m_maincpu->an2_func().set(FUNC(motronic175_state::adc2_r));
++	m_maincpu->an3_func().set(FUNC(motronic175_state::adc3_r));
++	m_maincpu->an4_func().set(FUNC(motronic175_state::adc4_r));
++	m_maincpu->an5_func().set(FUNC(motronic175_state::adc5_r));
++	m_maincpu->an6_func().set(FUNC(motronic175_state::adc6_r));
++	m_maincpu->an7_func().set(FUNC(motronic175_state::adc7_r));
+ 	m_maincpu->instruction_cb().set(FUNC(motronic175_state::instruction));
+ 	m_maincpu->port_in_cb<3>().set_constant(0xff);
+ 	m_maincpu->port_in_cb<5>().set_constant(0xff);

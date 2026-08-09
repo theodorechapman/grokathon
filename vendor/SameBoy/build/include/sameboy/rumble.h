@@ -1,0 +1,11 @@
+#pragma once
+
+#include "defs.h"
+
+typedef enum {
+    GB_RUMBLE_DISABLED,
+    GB_RUMBLE_CARTRIDGE_ONLY,
+    GB_RUMBLE_ALL_GAMES
+} GB_rumble_mode_t;
+
+void GB_set_rumble_mode(GB_gameboy_t *gb, GB_rumble_mode_t mode);

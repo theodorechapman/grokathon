@@ -1,0 +1,102 @@
+{
+  "schema": "motronic175-adc-profiles-v1",
+  "time_unit": "emulated_microseconds",
+  "value_unit": "7-bit_mame_callback_count",
+  "normalized_ratio_formula": "callback_count / 127",
+  "addat_formula": "callback_count * 2",
+  "normal_profiles": [
+    "key-on",
+    "cold-crank",
+    "warm-idle",
+    "part-load",
+    "wot",
+    "overrun"
+  ],
+  "fault_assumption": {
+    "default_target_channel": 3,
+    "activation_us": 100000,
+    "sensor-open": "inject callback high rail; actual ECU open polarity is unknown",
+    "sensor-short": "inject callback low rail; actual ECU short polarity is unknown"
+  },
+  "profiles": {
+    "key-on": {
+      "loop": false,
+      "rationale": "air path low; supply-related input settles after key application",
+      "frames": [
+        {"time_us": 0, "callback": [5, 85, 92, 90, 64, 64, 64, 64]},
+        {"time_us": 50000, "callback": [7, 98, 92, 90, 64, 64, 64, 64]},
+        {"time_us": 400000, "callback": [7, 100, 92, 90, 64, 64, 64, 64]}
+      ]
+    },
+    "cold-crank": {
+      "loop": false,
+      "rationale": "air-path pulsation and supply-related sag; temperature channels slow",
+      "frames": [
+        {"time_us": 0, "callback": [8, 100, 95, 102, 64, 64, 64, 64]},
+        {"time_us": 100000, "callback": [18, 72, 95, 102, 62, 64, 64, 64]},
+        {"time_us": 250000, "callback": [25, 68, 95, 102, 66, 64, 64, 64]},
+        {"time_us": 500000, "callback": [18, 77, 95, 102, 62, 64, 64, 64]},
+        {"time_us": 900000, "callback": [28, 88, 95, 102, 66, 64, 64, 64]}
+      ]
+    },
+    "warm-idle": {
+      "loop": true,
+      "rationale": "small air-path ripple and bounded unknown-channel dither",
+      "frames": [
+        {"time_us": 0, "callback": [27, 100, 58, 44, 48, 64, 64, 64]},
+        {"time_us": 100000, "callback": [30, 100, 58, 44, 56, 64, 64, 64]},
+        {"time_us": 200000, "callback": [26, 99, 58, 44, 72, 64, 64, 64]},
+        {"time_us": 300000, "callback": [29, 100, 58, 44, 55, 64, 64, 64]},
+        {"time_us": 400000, "callback": [27, 100, 58, 44, 48, 64, 64, 64]}
+      ]
+    },
+    "part-load": {
+      "loop": false,
+      "rationale": "air-path ramps to a stable interior load stimulus",
+      "frames": [
+        {"time_us": 0, "callback": [27, 100, 58, 44, 52, 64, 64, 64]},
+        {"time_us": 100000, "callback": [38, 99, 58, 44, 58, 64, 64, 64]},
+        {"time_us": 400000, "callback": [52, 100, 58, 44, 68, 64, 64, 64]},
+        {"time_us": 800000, "callback": [55, 100, 58, 44, 57, 64, 64, 64]}
+      ]
+    },
+    "wot": {
+      "loop": false,
+      "rationale": "fast air-path rise while slow channels remain fixed",
+      "frames": [
+        {"time_us": 0, "callback": [35, 100, 58, 44, 58, 64, 64, 64]},
+        {"time_us": 100000, "callback": [75, 99, 58, 44, 66, 64, 64, 64]},
+        {"time_us": 250000, "callback": [101, 98, 58, 44, 74, 64, 64, 64]},
+        {"time_us": 500000, "callback": [104, 99, 58, 44, 72, 64, 64, 64]}
+      ]
+    },
+    "overrun": {
+      "loop": false,
+      "rationale": "air-path decays quickly; temperature channels remain fixed",
+      "frames": [
+        {"time_us": 0, "callback": [55, 100, 58, 44, 58, 64, 64, 64]},
+        {"time_us": 100000, "callback": [30, 100, 58, 44, 52, 64, 64, 64]},
+        {"time_us": 300000, "callback": [12, 100, 58, 44, 45, 64, 64, 64]},
+        {"time_us": 700000, "callback": [7, 100, 58, 44, 48, 64, 64, 64]}
+      ]
+    },
+    "sensor-open": {
+      "loop": false,
+      "rationale": "warm-idle baseline plus assumed high-rail fault injection",
+      "frames": [
+        {"time_us": 0, "callback": [27, 100, 58, 44, 48, 64, 64, 64]},
+        {"time_us": 100000, "callback": [30, 100, 58, 127, 56, 64, 64, 64]},
+        {"time_us": 400000, "callback": [27, 100, 58, 127, 48, 64, 64, 64]}
+      ]
+    },
+    "sensor-short": {
+      "loop": false,
+      "rationale": "warm-idle baseline plus assumed low-rail fault injection",
+      "frames": [
+        {"time_us": 0, "callback": [27, 100, 58, 44, 48, 64, 64, 64]},
+        {"time_us": 100000, "callback": [30, 100, 58, 0, 56, 64, 64, 64]},
+        {"time_us": 400000, "callback": [27, 100, 58, 0, 48, 64, 64, 64]}
+      ]
+    }
+  }
+}

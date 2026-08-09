@@ -1,0 +1,14 @@
+diff --git a/src/mame/mame.lst b/src/mame/mame.lst
+index 0a96e41c431..2e4a6ae50a3 100644
+--- a/src/mame/mame.lst
++++ b/src/mame/mame.lst
+@@ -44002,6 +44002,9 @@ modellot
+ @source:skeleton/molecular.cpp
+ molecula
+ 
++@source:skeleton/motronic175.cpp
++motronic175
++
+ @source:skeleton/ms9540.cpp
+ ms9540
+ 

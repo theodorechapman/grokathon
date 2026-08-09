@@ -1,0 +1,34 @@
+[:] EVT {"kind":"run","profile":"canonical-reset","runtime":true,"bound_us":50}
+Soft reset
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":0,"pc":"0000","address":"0003","data":"FD"}
+[:maincpu] write of un-hooked port 2 ff
+[:] EVT {"kind":"access","space":"port","access":"write","cycles":0,"pc":"0000","address":"0001","data":"FF"}
+[:maincpu] write of un-hooked port 0 ff
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":2,"pc":"0075","address":"00A9","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":3,"pc":"0077","address":"00E0","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":4,"pc":"0079","address":"00D0","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":4,"pc":"0079","address":"00D0","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":6,"pc":"007B","address":"00B8","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":6,"pc":"007B","address":"00B8","data":"40"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":11,"pc":"5C02","address":"00B8","data":"40"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":11,"pc":"5C02","address":"00B8","data":"40"}
+[:] EVT {"kind":"access","space":"sfr","access":"read","cycles":12,"pc":"5C04","address":"00D8","data":"00"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":12,"pc":"5C04","address":"00D8","data":"40"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":13,"pc":"5C07","address":"0083","data":"A0"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":15,"pc":"5C0A","address":"0082","data":"81"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":18,"pc":"5C0D","address":"A081","data":"01"}
+[:maincpu] ':maincpu' (5C0D): unmapped xdata memory write to A081 = 01 & FF
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":20,"pc":"5C10","address":"0082","data":"10"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":23,"pc":"5C13","address":"A010","data":"81"}
+[:maincpu] ':maincpu' (5C13): unmapped xdata memory write to A010 = 81 & FF
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":28,"pc":"5C17","address":"A011","data":"81"}
+[:maincpu] ':maincpu' (5C17): unmapped xdata memory write to A011 = 81 & FF
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":30,"pc":"5C1A","address":"0082","data":"40"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":33,"pc":"5C1D","address":"A040","data":"FF"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":38,"pc":"5C21","address":"A041","data":"FF"}
+[:] EVT {"kind":"access","space":"sfr","access":"write","cycles":40,"pc":"5C24","address":"0082","data":"02"}
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":43,"pc":"5C27","address":"A002","data":"00"}
+[:maincpu] ':maincpu' (5C27): unmapped xdata memory write to A002 = 00 & FF
+[:] EVT {"kind":"access","space":"xdata","access":"write","cycles":48,"pc":"5C2B","address":"A003","data":"00"}
+[:maincpu] ':maincpu' (5C2B): unmapped xdata memory write to A003 = 00 & FF

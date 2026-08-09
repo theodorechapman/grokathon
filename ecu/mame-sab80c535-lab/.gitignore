@@ -1,0 +1,9 @@
+mame/
+build/
+obj/
+cfg/
+__pycache__/
+motronic175
+*.dSYM/
+error.log
+debug.log

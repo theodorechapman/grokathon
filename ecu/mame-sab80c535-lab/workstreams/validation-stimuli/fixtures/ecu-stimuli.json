@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "qualification": "Deterministic logical-interface fixtures, not an engine, vehicle, electrical, or Bosch ASIC simulation.",
+  "clock_assumption_hz": 12000000,
+  "interfaces": [
+    {
+      "id": "crank-capture",
+      "logical_endpoint": "external-3/CC0",
+      "fixture": {
+        "kind": "active-low-edge-train",
+        "capture_ticks": [
+          4096,
+          8192,
+          12288,
+          18432
+        ],
+        "qualification": "Arbitrary deterministic intervals for capture plumbing; not a tooth wheel or RPM model."
+      },
+      "evidence": [
+        "hardware-model.json logical_endpoints crank_capture_input",
+        "subsystems/02-crank-synchronization-rpm.md:5-24"
+      ],
+      "upstream_runtime": "blocked: no Siemens external-3 interrupt, CC0, IRCON, or capture registers",
+      "surrogate_runtime": "generic external-0 line scheduling exercised only as line-delivery plumbing"
+    },
+    {
+      "id": "adc-inputs",
+      "logical_endpoint": "ADCON0 channels 0-7 / ADDAT",
+      "fixture": {
+        "kind": "raw-callback-values",
+        "channels": {
+          "0": 18,
+          "1": 52,
+          "2": 86,
+          "3": 120,
+          "4": 154,
+          "5": 188
+        },
+        "qualification": "Raw deterministic codes; no volts, temperatures, transfer functions, or physical channel identity."
+      },
+      "evidence": [
+        "hardware-model.json SFR d8/d9",
+        "subsystems/03-sensor-acquisition.md:5-17"
+      ],
+      "upstream_runtime": "channels 0 and 1 callback selection and doubled ADDAT values exercised by surrogate firmware",
+      "canonical_runtime": "blocked before ADC initialization by missing Siemens and XDATA semantics"
+    },
+    {
+      "id": "kw71-uart-input",
+      "logical_endpoint": "P3.0/RXD and SBUF",
+      "fixture": {
+        "kind": "8n1-byte",
+        "byte": "3c",
+        "bit_period_us": 96,
+        "line_states": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        "qualification": "Generic 8051 mode-1 receive waveform; not K-line voltage levels, wakeup, exact ECU baud, or a KW71 session."
+      },
+      "evidence": [
+        "hardware-model.json serial vector/SBUF",
+        "subsystems/10-kw71-diagnostics.md:5-35"
+      ],
+      "upstream_runtime": "generic UART transmit and receive exercised by surrogate firmware",
+      "canonical_runtime": "blocked by incomplete initialization and absent ECU environment"
+    },
+    {
+      "id": "ignition-output",
+      "logical_endpoint": "Timer0/P1.5",
+      "fixture": {
+        "kind": "port-transition-oracle",
+        "required_subsequence": [
+          "ac",
+          "8c",
+          "ac"
+        ],
+        "qualification": "Software pin transitions only; not dwell, coil current, four-coil distribution, or spark."
+      },
+      "evidence": [
+        "hardware-model.json ignition_coil_drive",
+        "subsystems/06-ignition-control.md:46-56"
+      ],
+      "upstream_runtime": "generic Timer0 interrupt and explicit P1.5 CPL exercised by surrogate firmware"
+    },
+    {
+      "id": "injector-bank-a-output",
+      "logical_endpoint": "CC2/P1.2",
+      "fixture": {
+        "kind": "compare-output-observation",
+        "pin_mask": "04",
+        "qualification": "Observe compare-driven edges and duration only; not injector hydraulics or bank wiring."
+      },
+      "evidence": [
+        "hardware-model.json injector_bank_a_drive",
+        "subsystems/05-fuel-control.md:52-57"
+      ],
+      "upstream_runtime": "blocked: Siemens CCEN/CC2 compare semantics are absent"
+    },
+    {
+      "id": "injector-bank-b-output",
+      "logical_endpoint": "CC3/P1.3",
+      "fixture": {
+        "kind": "compare-output-observation",
+        "pin_mask": "08",
+        "qualification": "Observe compare-driven edges and duration only; not injector hydraulics or bank wiring."
+      },
+      "evidence": [
+        "hardware-model.json injector_bank_b_drive",
+        "subsystems/05-fuel-control.md:52-57"
+      ],
+      "upstream_runtime": "blocked: Siemens CCEN/CC3 compare semantics are absent"
+    },
+    {
+      "id": "iac-output",
+      "logical_endpoint": "Timer1/P1.7",
+      "fixture": {
+        "kind": "port-transition-oracle",
+        "pin_mask": "80",
+        "qualification": "Observe software PWM phases only; not valve current, airflow, or closed-loop idle simulation."
+      },
+      "evidence": [
+        "hardware-model.json iac_valve_drive",
+        "subsystems/07-idle-control.md:40-48"
+      ],
+      "upstream_runtime": "generic Timer1 exists, but canonical P1.7 behavior is blocked by earlier missing peripherals"
+    }
+  ]
+}

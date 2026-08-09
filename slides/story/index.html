@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The car brain that boots on a laptop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="story.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <svg class="wheel" viewBox="0 0 200 200" aria-hidden="true">
+        <g class="wheel-spin" transform="translate(100 100)">
+          <circle class="wheel-hub" r="22" />
+          <circle class="wheel-ring" r="68" fill="none" />
+          <g class="teeth"></g>
+          <circle class="wheel-hub-core" r="8" />
+        </g>
+      </svg>
+      <div class="hero-copy">
+        <p class="kicker">BMW · early 1990s · Bosch Motronic</p>
+        <h1>This is a car’s brain.<br />We got it to boot on a laptop.</h1>
+        <p class="lede">
+          Not a simulation of “how engines work.”
+          The actual program from a ~1990 BMW engine computer —
+          opened, explained, rebuilt, and finally run in an emulator
+          until it checked itself and said it was alive.
+        </p>
+      </div>
+    </header>
+
+    <section class="block">
+      <h2>The box under the hood</h2>
+      <p>
+        In a BMW E30 318is (M42 engine, about 1990–91) sits a Bosch Motronic M1.7.
+        Part number <code>0261200175</code>. Software
+        <code>1267356378</code>. Inside: a Siemens SAB80C515 chip and
+        <strong>40,960 bytes</strong> of firmware — a frozen program that decides
+        when to squirt fuel and when to fire the spark plugs.
+      </p>
+      <p class="aside">
+        An ECU doesn’t “drive.” It listens to sensors, then commands injectors and coils
+        thousands of times a minute so the engine keeps running.
+      </p>
+    </section>
+
+    <section class="sense-act" aria-label="What the ECU does">
+      <div>
+        <h3>It listens</h3>
+        <ul>
+          <li>Crankshaft position / speed</li>
+          <li>Throttle</li>
+          <li>Airflow</li>
+          <li>Temperatures</li>
+          <li>Battery voltage</li>
+        </ul>
+      </div>
+      <div class="sense-mid" aria-hidden="true">
+        <span class="chip-label">ECU</span>
+        <span class="chip-sub">40 KB firmware</span>
+      </div>
+      <div>
+        <h3>It commands</h3>
+        <ul>
+          <li>Fuel injectors</li>
+          <li>Ignition coils</li>
+          <li>Idle valve</li>
+          <li>Warning / fault memory</li>
+          <li>Shop diagnostics line</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>First we had to understand it</h2>
+      <p>
+        The binary is opaque until you reverse-engineer it: follow the code,
+        read the chip datasheets, and write down what each job does.
+        We ended up with a human-readable map of eleven jobs — reset and timing,
+        crank sync, sensors, load, fuel, spark, idle, limiters, faults,
+        diagnostics, integrity checks — plus hundreds of named functions and
+        calibration tables.
+      </p>
+      <p>
+        That map is the product. Everything after it is a way to prove the map.
+      </p>
+    </section>
+
+    <section class="split">
+      <article>
+        <h2>Proof A — rebuild from the map</h2>
+        <p>
+          From the written description alone, we wrote a fresh model in TypeScript.
+          No original binary inside. Twist a virtual throttle, spin a virtual crank,
+          and you can watch mode, fuel pulse width, and spark advance respond —
+          in the browser, with every number tagged “proven from the binary”
+          or “assumed because the writeup didn’t settle it.”
+        </p>
+        <p class="fact">96 automated tests. One self-contained bench page.</p>
+      </article>
+      <article>
+        <h2>Proof B — run the real program</h2>
+        <p>
+          Separately, we taught the MAME emulator this specific chip and board:
+          missing peripherals, fake sensor voltages, fake crank pulses.
+          Then we loaded the <em>original</em> 40 KB ROM — the same bits that
+          lived in the car — and let it execute.
+        </p>
+        <p class="fact">
+          In 800&nbsp;ms of emulated time it ran <strong>494,680</strong> instructions,
+          finished its ROM checksum path, and entered its supervisor.
+          A separate chip self-test suite: 55 checks, all pass.
+        </p>
+      </article>
+    </section>
+
+    <section class="payoff" id="payoff">
+      <p class="payoff-kicker">The moment that matters</p>
+      <p class="payoff-line">
+        The old brain woke up.<br />
+        Not as a screenshot of code — as a program running.
+      </p>
+      <p class="payoff-note">
+        Crank edges arrived. The capture routine ran. The main loop ran.
+        We’re not claiming a finished virtual car yet — tooth geometry and some
+        equations are still assumed — but the firmware boots, checks itself,
+        and accepts the outside world we feed it.
+      </p>
+    </section>
+
+    <footer class="foot">
+      <p>
+        One sentence:
+        <strong>we reverse-engineered a 1990s BMW engine computer into a map,
+        rebuilt the map as a live demo, and also ran the original firmware
+        for nearly half a million instructions until its own integrity check passed.</strong>
+      </p>
+    </footer>
+  </main>
+  <script src="story.js"></script>
+</body>
+</html>

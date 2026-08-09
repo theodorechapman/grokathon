@@ -1,0 +1,296 @@
+CYC=0 0000: debugger-start
+CYC=2 0073: mov   a,ip0
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+CYC=3 0075: mov   c,acc.6
+CYC=4 0077: mov   f0,c
+CYC=6 0079: setb  swdt
+CYC=7 007B: ljmp  $20E0
+CYC=9 20E0: ljmp  $5C00
+CYC=11 5C00: setb  swdt
+CYC=12 5C02: setb  clk
+CYC=13 5C04: mov   dph,#$A0
+CYC=15 5C07: mov   dpl,#$81
+CYC=17 5C0A: mov   a,#$01
+CYC=18 5C0C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a081 pc=5c0c value=01 class=asic-register-unknown unknown=0
+CYC=20 5C0D: mov   dpl,#$10
+CYC=22 5C10: mov   a,#$81
+CYC=23 5C12: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a010 pc=5c12 value=81 class=asic-register-unknown unknown=0
+CYC=25 5C13: inc   dptr
+CYC=27 5C14: mov   a,#$81
+CYC=28 5C16: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a011 pc=5c16 value=81 class=asic-register-unknown unknown=0
+CYC=30 5C17: mov   dpl,#$40
+CYC=32 5C1A: mov   a,#$FF
+CYC=33 5C1C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a040 pc=5c1c value=ff class=output-latch unknown=0
+CYC=35 5C1D: inc   dptr
+CYC=37 5C1E: mov   a,#$FF
+CYC=38 5C20: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a041 pc=5c20 value=ff class=output-latch unknown=0
+CYC=40 5C21: mov   dpl,#$02
+CYC=42 5C24: mov   a,#$00
+CYC=43 5C26: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a002 pc=5c26 value=00 class=asic-register-unknown unknown=0
+CYC=45 5C27: inc   dptr
+CYC=47 5C28: mov   a,#$00
+CYC=48 5C2A: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a003 pc=5c2a value=00 class=asic-register-unknown unknown=0
+CYC=50 5C2B: inc   dptr
+CYC=52 5C2C: mov   a,#$00
+CYC=53 5C2E: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a004 pc=5c2e value=00 class=asic-register-unknown unknown=0
+CYC=55 5C2F: inc   dptr
+CYC=57 5C30: mov   a,#$00
+CYC=58 5C32: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a005 pc=5c32 value=00 class=asic-register-unknown unknown=0
+CYC=60 5C33: mov   dpl,#$08
+CYC=62 5C36: mov   a,#$00
+CYC=63 5C38: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a008 pc=5c38 value=00 class=asic-register-unknown unknown=0
+CYC=65 5C39: inc   dptr
+CYC=67 5C3A: mov   a,#$00
+CYC=68 5C3C: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a009 pc=5c3c value=00 class=asic-register-unknown unknown=0
+CYC=70 5C3D: mov   dpl,#$21
+CYC=72 5C40: mov   a,#$D7
+CYC=73 5C42: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a021 pc=5c42 value=d7 class=asic-register-unknown unknown=0
+CYC=75 5C43: mov   dpl,#$20
+CYC=77 5C46: mov   a,#$FF
+CYC=78 5C48: movx  @dptr,a
+[:xdata] XDATA first op=W addr=a020 pc=5c48 value=ff class=asic-register-unknown unknown=0
+CYC=80 5C49: mov   dptr,#$0162
+CYC=82 5C4C: mov   a,#$D7
+CYC=83 5C4E: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0162 pc=5c4e value=d7 class=xram-disabled unknown=0
+CYC=85 5C4F: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=87 5C52: mov   r0,#$00
+CYC=88 5C54: movx  a,@r0
+[:xdata] XDATA first op=R addr=0000 pc=5c54 value=ff class=xram-disabled unknown=1
+[:xdata] XDATA dependency first_unknown_read_pc=5c54 decision_pc=5c55 value=ff
+CYC=90 5C55: cjne  a,#$55,$5C72
+CYC=92 5C72: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=94 5C75: mov   r0,#$5B
+CYC=95 5C77: clr   a
+CYC=96 5C78: movx  @r0,a
+[:xdata] XDATA first op=W addr=015b pc=5c78 value=00 class=xram-disabled unknown=0
+CYC=98 5C79: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=100 5C7C: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=102 5C7F: mov   r0,#$5B
+CYC=103 5C81: movx  a,@r0
+[:xdata] XDATA first op=R addr=015b pc=5c81 value=ff class=xram-disabled unknown=1
+CYC=105 5C82: jnz   $5C92
+CYC=107 5C92: mov   p2,#$02
+[:maincpu] write of un-hooked port 2 02
+CYC=109 5C95: mov   r0,#$0C
+CYC=110 5C97: movx  a,@r0
+[:xdata] XDATA first op=R addr=020c pc=5c97 value=ff class=xram-disabled unknown=1
+CYC=112 5C98: cjne  a,#$55,$5C9F
+CYC=114 5C9F: setb  p5.2
+[:maincpu] read of un-hooked port 5 (PC=5C9F)
+[:maincpu] write of un-hooked port 5 ff
+CYC=115 5CA1: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=117 5CA4: lcall $20E8
+CYC=119 20E8: ljmp  $8F97
+CYC=121 8F97: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=123 8F9A: mov   r0,#$5B
+CYC=124 8F9C: movx  a,@r0
+CYC=126 8F9D: jnz   $8FD2
+CYC=128 8FD2: lcall $8171
+CYC=130 8171: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=132 8174: mov   dptr,#$44F5
+CYC=134 8177: lcall $817E
+CYC=136 817E: mov   r0,#$80
+CYC=137 8180: mov   a,#$00
+CYC=138 8182: movx  @r0,a
+[:xdata] XDATA first op=W addr=0080 pc=8182 value=00 class=xram-disabled unknown=0
+CYC=140 8183: ret
+CYC=142 817A: lcall $8184
+CYC=144 8184: mov   r0,#$81
+CYC=145 8186: mov   a,#$01
+CYC=146 8188: movx  @r0,a
+[:xdata] XDATA first op=W addr=0081 pc=8188 value=01 class=xram-disabled unknown=0
+CYC=148 8189: inc   r0
+CYC=149 818A: mov   a,#$0A
+CYC=150 818C: movx  @r0,a
+[:xdata] XDATA first op=W addr=0082 pc=818c value=0a class=xram-disabled unknown=0
+CYC=152 818D: inc   r0
+CYC=153 818E: clr   a
+CYC=154 818F: movx  @r0,a
+[:xdata] XDATA first op=W addr=0083 pc=818f value=00 class=xram-disabled unknown=0
+CYC=156 8190: inc   r0
+CYC=157 8191: movx  @r0,a
+[:xdata] XDATA first op=W addr=0084 pc=8191 value=00 class=xram-disabled unknown=0
+CYC=159 8192: inc   r0
+CYC=160 8193: mov   a,#$28
+CYC=161 8195: movc  a,@a+dptr
+CYC=163 8196: movx  @r0,a
+[:xdata] XDATA first op=W addr=0085 pc=8196 value=14 class=xram-disabled unknown=0
+CYC=165 8197: ret
+CYC=167 817D: ret
+CYC=169 8FD5: mov   r0,#$C3
+CYC=170 8FD7: mov   a,#$7B
+CYC=171 8FD9: movc  a,@a+dptr
+CYC=173 8FDA: movx  @r0,a
+[:xdata] XDATA first op=W addr=00c3 pc=8fda value=b4 class=xram-disabled unknown=0
+CYC=175 8FDB: mov   a,#$64
+CYC=176 8FDD: inc   r0
+CYC=177 8FDE: movx  @r0,a
+[:xdata] XDATA first op=W addr=00c4 pc=8fde value=64 class=xram-disabled unknown=0
+CYC=179 8FDF: inc   r0
+CYC=180 8FE0: movx  @r0,a
+[:xdata] XDATA first op=W addr=00c5 pc=8fe0 value=64 class=xram-disabled unknown=0
+CYC=182 8FE1: mov   r0,#$C2
+CYC=183 8FE3: movx  a,@r0
+[:xdata] XDATA first op=R addr=00c2 pc=8fe3 value=ff class=xram-disabled unknown=1
+CYC=185 8FE4: clr   acc.0
+CYC=186 8FE6: clr   acc.7
+CYC=187 8FE8: clr   acc.6
+CYC=188 8FEA: clr   acc.3
+CYC=189 8FEC: movx  @r0,a
+[:xdata] XDATA first op=W addr=00c2 pc=8fec value=36 class=xram-disabled unknown=0
+CYC=191 8FED: mov   r0,#$8C
+CYC=192 8FEF: clr   a
+CYC=193 8FF0: movx  @r0,a
+[:xdata] XDATA first op=W addr=008c pc=8ff0 value=00 class=xram-disabled unknown=0
+CYC=195 8FF1: mov   r0,#$DB
+CYC=196 8FF3: mov   a,#$6F
+CYC=197 8FF5: movc  a,@a+dptr
+CYC=199 8FF6: movx  @r0,a
+[:xdata] XDATA first op=W addr=00db pc=8ff6 value=1e class=xram-disabled unknown=0
+CYC=201 8FF7: mov   a,#$64
+CYC=202 8FF9: inc   r0
+CYC=203 8FFA: movx  @r0,a
+[:xdata] XDATA first op=W addr=00dc pc=8ffa value=64 class=xram-disabled unknown=0
+CYC=205 8FFB: inc   r0
+CYC=206 8FFC: movx  @r0,a
+[:xdata] XDATA first op=W addr=00dd pc=8ffc value=64 class=xram-disabled unknown=0
+CYC=208 8FFD: mov   r0,#$F7
+CYC=209 8FFF: mov   a,#$6A
+CYC=210 9001: movc  a,@a+dptr
+CYC=212 9002: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f7 pc=9002 value=01 class=xram-disabled unknown=0
+CYC=214 9003: mov   a,#$0A
+CYC=215 9005: inc   r0
+CYC=216 9006: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f8 pc=9006 value=0a class=xram-disabled unknown=0
+CYC=218 9007: inc   r0
+CYC=219 9008: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f9 pc=9008 value=0a class=xram-disabled unknown=0
+CYC=221 9009: mov   r0,#$F4
+CYC=222 900B: mov   a,#$69
+CYC=223 900D: movc  a,@a+dptr
+CYC=225 900E: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f4 pc=900e value=01 class=xram-disabled unknown=0
+CYC=227 900F: mov   a,#$0A
+CYC=228 9011: inc   r0
+CYC=229 9012: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f5 pc=9012 value=0a class=xram-disabled unknown=0
+CYC=231 9013: inc   r0
+CYC=232 9014: movx  @r0,a
+[:xdata] XDATA first op=W addr=00f6 pc=9014 value=0a class=xram-disabled unknown=0
+CYC=234 9015: ret
+CYC=236 5CA7: lcall $78A8
+CYC=238 78A8: push  rb0r0
+CYC=240 78AA: push  dph
+CYC=242 78AC: push  dpl
+CYC=244 78AE: mov   p2,#$01
+[:maincpu] write of un-hooked port 2 01
+CYC=246 78B1: clr   $29.1
+CYC=247 78B3: clr   $23.6
+CYC=248 78B5: clr   $29.0
+CYC=249 78B7: mov   r0,#$10
+CYC=250 78B9: clr   a
+CYC=251 78BA: movx  @r0,a
+[:xdata] XDATA first op=W addr=0110 pc=78ba value=00 class=xram-disabled unknown=0
+CYC=253 78BB: mov   p2,#$00
+[:maincpu] write of un-hooked port 2 00
+CYC=255 78BE: mov   dptr,#$0111
+CYC=257 78C1: mov   a,#$1E
+CYC=258 78C3: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0111 pc=78c3 value=1e class=xram-disabled unknown=0
+CYC=260 78C4: mov   dptr,#$0112
+CYC=262 78C7: mov   a,#$80
+CYC=263 78C9: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0112 pc=78c9 value=80 class=xram-disabled unknown=0
+CYC=265 78CA: inc   dptr
+CYC=267 78CB: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0113 pc=78cb value=80 class=xram-disabled unknown=0
+CYC=269 78CC: inc   dptr
+CYC=271 78CD: movx  @dptr,a
+[:xdata] XDATA first op=W addr=0114 pc=78cd value=80 class=xram-disabled unknown=0
+CYC=273 78CE: pop   dpl
+CYC=275 78D0: pop   dph
+CYC=277 78D2: pop   rb0r0
+CYC=279 78D4: ret
+CYC=281 5CAA: mov   ien0,#$A0
+CYC=283 5CAD: mov   ien1,#$00
+CYC=285 5CB0: mov   p1,#$FF
+[:maincpu] write of un-hooked port 1 ff
+CYC=287 5CB3: mov   p3,#$FF
+[:maincpu] write of un-hooked port 3 ff
+CYC=289 5CB6: mov   p4,#$FF
+[:maincpu] write of un-hooked port 4 ff
+CYC=291 5CB9: jnb   p5.2,$5CC1
+[:maincpu] read of un-hooked port 5 (PC=5CB9)
+CYC=293 5CBC: mov   p5,#$FF
+[:maincpu] write of un-hooked port 5 ff
+CYC=295 5CBF: sjmp  $5CC4
+CYC=297 5CC4: mov   ip0,#$3A
+[:maincpu] ':maincpu' (5CC7): unmapped sfr memory write to A9 = 3A & FF
+CYC=299 5CC7: mov   ip1,#$26
+[:maincpu] ':maincpu' (5CCA): unmapped sfr memory write to B9 = 26 & FF
+CYC=301 5CCA: mov   ircon,#$00
+[:maincpu] ':maincpu' (5CCD): unmapped sfr memory write to C0 = 00 & FF
+CYC=303 5CCD: mov   tmod,#$11
+CYC=305 5CD0: mov   tcon,#$05
+CYC=307 5CD3: mov   t2con,#$85
+CYC=309 002B: ljmp  $2070
+CYC=313 2070: inc   $3F
+CYC=314 2072: clr   tf2
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+CYC=315 2074: reti
+CYC=317 002B: ljmp  $2070
+CYC=321 2070: inc   $3F
+CYC=322 2072: clr   tf2
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+CYC=323 2074: reti
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory read from C0 & FF
+[:maincpu] ':maincpu' (2074): unmapped sfr memory write to C0 = 00 & FF
+[:xdata] XDATA summary distinct=44 unknown_reads=5 first_unknown_read_pc=5c54 overflow=0 out_a040=ff out_a041=ff
+[:] EXEC summary reason=timer2-interrupt-storm instructions=251 cycles=429 exit_cycles=16670 deepest_pc=9015 last_pc=002b startup_frontier=5cd3 init_entries=1 timer2_entries=16 foreground_entries=0 foreground_instruction=0

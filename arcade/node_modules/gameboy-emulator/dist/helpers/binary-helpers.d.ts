@@ -1,0 +1,10 @@
+export declare function getBit(value: number, bitPosition: number): number;
+export declare function clearBit(value: number, bitPosition: number): number;
+export declare function setBit(value: number, bitPosition: number, bitValue: number): number;
+export declare function asUint8(value: number): number;
+export declare function asUint16(value: number): number;
+export declare function convertUint8ToInt8(value: number): number;
+export declare function getLeastSignificantByte(word: number): number;
+export declare function getMostSignificantByte(word: number): number;
+export declare function getLowerNibble(byte: number): number;
+export declare function getUpperNibble(byte: number): number;

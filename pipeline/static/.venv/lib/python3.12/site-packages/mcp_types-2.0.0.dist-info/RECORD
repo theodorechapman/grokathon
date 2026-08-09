@@ -1,0 +1,15 @@
+mcp_types-2.0.0.dist-info/INSTALLER,sha256=5hhM4Q4mYTT9z6QB6PGpUAW81PGNFrYrdXMj4oM_6ak,2
+mcp_types-2.0.0.dist-info/METADATA,sha256=641G3wfOKL8A9BOMm3aiwARt-lx-yfLF0i1g6zjtFio,1914
+mcp_types-2.0.0.dist-info/RECORD,,
+mcp_types-2.0.0.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+mcp_types-2.0.0.dist-info/WHEEL,sha256=lCkmxWfQsSc9CfIClYeavTdQeEX2toPqufh9gI35EQA,87
+mcp_types-2.0.0.dist-info/licenses/LICENSE,sha256=XhPbvB0SD8KgPOzefJFCSuLX3hG2PVje0vRDHiYe5Q0,1071
+mcp_types/__init__.py,sha256=eR3nUuX5XKk8OASZVhzLO2t4die9NOYqPp8yF2JYOS8,11548
+mcp_types/_types.py,sha256=DQcAe_UFLF_hI9bxKt2uj9zU6r_Ss6L9Y5w6R2dbfZg,79979
+mcp_types/_v2025_11_25/__init__.py,sha256=mF-0Yc_jIU9a9OwnMUDa6g0lfNITsA0adgOZiPwgieY,104129
+mcp_types/_v2026_07_28/__init__.py,sha256=RNt1DinD9pt6nWIUnmdsuqEZIwult5xS6Uw70VhKT-A,121356
+mcp_types/_wire_base.py,sha256=Xcy2Q4X8UIPLK8ynK790a0HvI5XVkfR4TuqdVDhVM7Y,315
+mcp_types/jsonrpc.py,sha256=wtG8HQfF68dZeRnk9lYRw4h9UEEPEVtKSdeRj2j_v4k,4485
+mcp_types/methods.py,sha256=6qC_exE-3X7QkaCnkoFWsapQI9Y8XEkaSt0fxiRooQ0,36220
+mcp_types/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+mcp_types/version.py,sha256=4kTAuw3ad0tQr0ovGiFFvmUReU_f1j5qbHr-YO5i5R4,2785

@@ -1,0 +1,89 @@
+openjdk version "21.0.12" 2026-07-21
+OpenJDK Runtime Environment Homebrew (build 21.0.12)
+OpenJDK 64-Bit Server VM Homebrew (build 21.0.12, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/matcha/Library/ghidra/ghidra_12.1.2_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/matcha/Library/ghidra/ghidra_12.1.2_PUBLIC/preferences (Preferences)  
+INFO  Loading previous preferences: /Users/matcha/Library/ghidra/ghidra_11.4.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (3678 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (12274 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 210 extension points (114 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/accuracy-differential
+    /Users/matcha/Code/grokathon/ecu/e2e-analysis
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.1.2/libexec/Ghidra/Processors/PIC/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: /tmp/mame-motronic-accuracy-differential/ghidra-project/MotronicDifferential (HeadlessAnalyzer)  
+INFO  Creating project: /tmp/mame-motronic-accuracy-differential/ghidra-project/MotronicDifferential (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /tmp/mame-motronic-accuracy-differential/ghidra-project/MotronicDifferential (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/matcha/Code/grokathon/ecu/analysis/TotalCombinedROM.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x0") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: 8051:BE:16:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/matcha/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: PrepareCombinedMotronic175.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/matcha/Code/grokathon/ecu/e2e-analysis/PrepareCombinedMotronic175.java (HeadlessAnalyzer)  
+WARN  Decompiling CODE:9d16, pcode error at CODE:a000: Could not follow disassembly flow into non-existing memory at CODE:a000 (DecompileCallback)  
+WARN  Decompiling CODE:9d16, pcode error at CODE:d2e0: Could not follow disassembly flow into non-existing memory at CODE:d2e0 (DecompileCallback)  
+WARN  Decompiling CODE:9cf2, pcode error at CODE:a000: Could not follow disassembly flow into non-existing memory at CODE:a000 (DecompileCallback)  
+WARN  Decompiling CODE:9cf2, pcode error at CODE:d2e0: Could not follow disassembly flow into non-existing memory at CODE:d2e0 (DecompileCallback)  
+WARN  Decompiling CODE:9b49, pcode error at CODE:e5f0: Could not follow disassembly flow into non-existing memory at CODE:e5f0 (DecompileCallback)  
+INFO  Packed database cache: /var/tmp/matcha-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.593 secs
+    Apply Data Archives                        1.472 secs
+    Basic Constant Reference Analyzer          1.181 secs
+    Call Convention ID                         0.016 secs
+    Call-Fixup Installer                       0.021 secs
+    Create Function                            0.398 secs
+    Decompiler Switch Analysis                 5.187 secs
+    Demangler GNU                              0.225 secs
+    Disassemble Entry Points                   0.014 secs
+    Embedded Media                             0.033 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.087 secs
+    Non-Returning Functions - Discovered       0.034 secs
+    Shared Return Calls                        0.187 secs
+    Stack                                      0.735 secs
+    Subroutine References                      0.128 secs
+-----------------------------------------------------
+     Total Time   10 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Execute script: TraceSelectedRoutines.java '/tmp/mame-motronic-accuracy-differential/fresh-emulator-traces.json'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/matcha/Code/grokathon/ecu/e2e-analysis/TraceSelectedRoutines.java (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: TraceBoundedState.java '/tmp/mame-motronic-accuracy-differential/ghidra-bounded.json' '64'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/accuracy-differential/TraceBoundedState.java (HeadlessAnalyzer)  
+WARN  Uninitialized memory read at CODE:5c54: EXTMEM:0000:1 (EmulatorHelper)  
+INFO  /TotalCombinedROM.bin: file created (matcha) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /TotalCombinedROM.bin (MotronicDifferential:/TotalCombinedROM.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

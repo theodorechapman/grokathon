@@ -1,0 +1,72 @@
+diff --git a/src/mame/skeleton/motronic175.cpp b/src/mame/skeleton/motronic175.cpp
+index 6720b5f..735ce48 100644
+--- a/src/mame/skeleton/motronic175.cpp
++++ b/src/mame/skeleton/motronic175.cpp
+@@ -3,6 +3,7 @@
+ 
+ #include "emu.h"
+ #include "cpu/mcs51/sab80c535.h"
++#include "motronic175-kw71.h"
+ #include "motronic175-xdata.h"
+ 
+ #include <cstdlib>
+@@ -19,6 +20,7 @@ public:
+ 		: driver_device(mconfig, type, tag)
+ 		, m_maincpu(*this, "maincpu")
+ 		, m_xdata(*this, "xdata")
++		, m_kw71(*this, "kw71")
+ 	{
+ 	}
+ 
+@@ -38,6 +40,7 @@ private:
+ 
+ 	required_device<sab80c535_device> m_maincpu;
+ 	required_device<motronic175_xdata_device> m_xdata;
++	required_device<motronic175_kw71_device> m_kw71;
+ 	emu_timer *m_timeout = nullptr;
+ 	u64 m_instruction_limit = 200'000;
+ 	u64 m_timeout_ms = 50;
+@@ -55,6 +58,7 @@ private:
+ 	u8 m_p1_last = 0xff;
+ 	const char *m_reason = "external-stop";
+ 	bool m_stopping = false;
++	bool m_continue_foreground = false;
+ };
+ 
+ void motronic175_state::code_map(address_map &map)
+@@ -88,5 +92,7 @@ void motronic175_state::machine_start()
+ 			fatalerror("invalid MOTRONIC_TIMEOUT_MS=%s\n", timeout);
+ 	}
++	m_continue_foreground =
++			std::getenv("MOTRONIC_CONTINUE_FOREGROUND") != nullptr;
+ 	m_timeout = timer_alloc(FUNC(motronic175_state::timeout), this);
+ 	m_timeout->adjust(attotime::from_msec(m_timeout_ms));
+ 	save_item(NAME(m_p1_last));
+@@ -138,7 +144,8 @@ void motronic175_state::instruction(u16 pc)
+ 	if (pc == 0x601a)
+ 	{
+ 		++m_foreground_entries;
+-		request_stop("foreground");
++		if (!m_continue_foreground)
++			request_stop("foreground");
+ 	}
+ 	if (m_instructions >= m_instruction_limit)
+ 		request_stop("instruction-limit");
+@@ -174,14 +181,15 @@ void motronic175_state::motronic175(machine_config &config)
+ 	m_maincpu->set_addrmap(AS_PROGRAM, &motronic175_state::code_map);
+ 	m_maincpu->set_addrmap(AS_DATA, &motronic175_state::xdata_map);
+ 	m_maincpu->instruction_cb().set(FUNC(motronic175_state::instruction));
+-	m_maincpu->port_in_cb<3>().set_constant(0xff);
++	m_maincpu->port_in_cb<3>().set(m_kw71, FUNC(motronic175_kw71_device::p3_r));
+ 	m_maincpu->port_in_cb<5>().set_constant(0xff);
+ 	m_maincpu->port_in_cb<6>().set_constant(0xff);
+ 	m_maincpu->port_out_cb<0>().set_nop();
+ 	m_maincpu->port_out_cb<1>().set(FUNC(motronic175_state::p1_w));
+ 	m_maincpu->port_out_cb<2>().set_nop();
+-	m_maincpu->port_out_cb<3>().set_nop();
++	m_maincpu->port_out_cb<3>().set(m_kw71, FUNC(motronic175_kw71_device::p3_w));
+ 	m_maincpu->port_out_cb<4>().set_nop();
+ 	m_maincpu->port_out_cb<5>().set_nop();
+ 	MOTRONIC175_XDATA(config, m_xdata, 0);
++	MOTRONIC175_KW71(config, m_kw71, 0);
+ }

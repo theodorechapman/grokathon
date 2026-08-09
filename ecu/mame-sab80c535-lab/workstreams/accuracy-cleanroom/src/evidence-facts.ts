@@ -1,0 +1,46 @@
+import type { ProvenanceItem } from './audit-types.ts';
+
+const fact = (
+  id: string,
+  name: string,
+  value: unknown,
+  provenance: ProvenanceItem['provenance'],
+  file: string,
+  line: number,
+  needle: string,
+  impact: ProvenanceItem['impact'],
+  subsystem: string,
+): ProvenanceItem => ({
+  id: `fact.${id}`,
+  name,
+  value,
+  provenance,
+  impact,
+  subsystem,
+  source: { file, line, needle },
+});
+
+export const EVIDENCE_FACTS: readonly ProvenanceItem[] = [
+  fact('image-hash', 'canonical combined image SHA-256', 'e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33', 'binary-proven', 'ecu/e2e-analysis/README.md', 23, 'e262e6', 'address', 'image'),
+  fact('internal-provenance', 'internal ROM provenance', 'community UART dump; corroborated, not factory-authenticated', 'xdf-community', 'ecu/e2e-analysis/manifest.json', 6, 'Community UART-derived', 'api-confidence', 'image'),
+  fact('reset-runtime', 'canonical reset path reaches 5c00 at cycle 11', ['0000', '0073', '0075', '0077', '0079', '007b', '20e0', '5c00'], 'runtime-proven', 'ecu/mame-sab80c535-lab/workstreams/validation-stimuli/README.md', 51, 'Exact prefix', 'scheduler', 'kernel'),
+  fact('reset-sfr', 'canonical reset reads SFR a9', 0xa9, 'runtime-proven', 'ecu/mame-sab80c535-lab/workstreams/validation-stimuli/README.md', 53, 'SFR read', 'address', 'hardware'),
+  fact('master-directory', 'master pointer directory', { base: 0x45c0, entries: 150, terminator: 0x46ec }, 'binary-proven', 'ecu/e2e-analysis/calibration-index.json', 2, '"table_address"', 'calibration', 'calibration'),
+  fact('selector-rule', 'selector byte rule', 'ff terminates; &fe pointer offset; bit0 second dimension', 'binary-proven', 'ecu/e2e-analysis/lookup-configuration.json', 7, 'selector_rule', 'calibration', 'calibration'),
+  fact('checksum', 'combined ROM checksum', { coverageEnd: 0x9f00, value: 0x7f2f }, 'binary-proven', 'ecu/e2e-analysis/integrity.json', 9, 'sum16_CODE_0000_9eff', 'control-equation', 'integrity'),
+  fact('checksum-runtime-algorithm', 'runtime checksum algorithm at 9016', 'zero-seeded modulo-65536 byte sum', 'binary-proven', 'ecu/e2e-analysis/integrity.json', 24, 'CODE:9016', 'control-equation', 'integrity'),
+  fact('lookup-runtime', 'Ghidra lookup traces passed', '100/100', 'runtime-proven', 'ecu/e2e-analysis/README.md', 96, 'reproduces reset', 'calibration', 'calibration'),
+  fact('lookup-independent', 'independent lookup decoder passed', 100, 'runtime-proven', 'ecu/e2e-analysis/README.md', 101, 'independent Python decoder', 'calibration', 'calibration'),
+  fact('output-ignition', 'logical ignition endpoint', 'Timer0/P1.5', 'binary-proven', 'ecu/e2e-analysis/hardware-model.json', 3103, 'P1.5', 'actuator-wiring', 'ignition'),
+  fact('output-injector-a', 'logical injector A endpoint', 'CC2/P1.2', 'binary-proven', 'ecu/e2e-analysis/hardware-model.json', 3113, 'CC2/P1.2', 'actuator-wiring', 'fuel'),
+  fact('output-injector-b', 'logical injector B endpoint', 'CC3/P1.3', 'binary-proven', 'ecu/e2e-analysis/hardware-model.json', 3122, 'CC3/P1.3', 'actuator-wiring', 'fuel'),
+  fact('output-idle', 'logical IAC endpoint', 'Timer1/P1.7', 'binary-proven', 'ecu/e2e-analysis/hardware-model.json', 3131, 'P1.7', 'actuator-wiring', 'idle'),
+  fact('rev-primary', 'primary rev-limit record', { address: 0x42d5, raw: 0x90, buffer: 3 }, 'binary-proven', 'ecu/e2e-analysis/traces/scenarios.json', 231, 'rev_limit_records', 'calibration', 'rev-limiter'),
+  fact('rev-equations', 'rev-limit RPM equations', ['912500/raw', 'buffer*40'], 'xdf-community', 'ecu/e2e-analysis/subsystems/08-limiters-and-mode-cuts.md', 13, '912500', 'control-equation', 'rev-limiter'),
+  fact('adc-roles', '0036-0040 normalized state names', 'evidence-scored semantic names', 'inferred', 'ecu/e2e-analysis/subsystems/03-sensor-acquisition.md', 27, '0036', 'api-confidence', 'sensors'),
+  fact('physical-crank', 'external-3/CC0 is engine position input', 'corroborated inference', 'inferred', 'ecu/e2e-analysis/subsystems/02-crank-synchronization-rpm.md', 8, 'corroborated inference', 'api-confidence', 'crank-sync'),
+  fact('vector-roles', 'interrupt vector roles', 'SAB80C515 architecture', 'datasheet-derived', 'ecu/e2e-analysis/hardware-model.json', 3148, 'Vector and SFR roles', 'address', 'hardware'),
+  fact('mame-peripheral-gap', 'canonical compare/capture/watchdog runtime support', 'blocked', 'runtime-proven', 'ecu/mame-sab80c535-lab/workstreams/validation-stimuli/README.md', 119, 'not runtime-verified', 'api-confidence', 'hardware'),
+  fact('scenario-boundary', 'e2e named scenarios are component fixtures', 'not whole-vehicle simulation', 'inferred', 'ecu/e2e-analysis/traces/scenarios.json', 2, 'qualification', 'api-confidence', 'validation'),
+  fact('xdf-unit-boundary', 'AFR/BTDC/RPM labels need consumer equations', true, 'xdf-community', 'ecu/e2e-analysis/OPEN-QUESTIONS.md', 36, 'XDF AFR', 'api-confidence', 'calibration'),
+];

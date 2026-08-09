@@ -1,0 +1,1406 @@
+{"command": "/tmp/mame-motronic-validation/motronicvalid motronicstim -rompath /tmp/mame-motronic-validation-run/roms -cfg_directory /tmp/mame-motronic-validation-run/cfg -debug -debugger osx -debugscript /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/validation-stimuli/fixtures/trace-stimulus.cmd -sound none -nothrottle -nosleep -nowriteconfig -skip_gameinfo -oslog", "kind": "provenance", "mame_commit": "a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e", "profile": "surrogate-stimulus", "rom_path": "/Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/validation-stimuli/fixtures/stimulus.bin", "rom_sha256": "c9cf8a0250f311bb221451bbd9fed879a451c58838d08d0d004cd343c296e389", "rom_size": 4096, "runtime": true}
+{"cycles": 0, "kind": "pc", "pc": "0000", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 0}
+{"bound_us": 2500, "cycles": 0, "kind": "run", "profile": "surrogate-stimulus", "runtime": true, "source": "mame-driver-runtime", "source_index": 1}
+{"access": "write", "address": "0003", "cycles": 0, "data": "FD", "kind": "access", "pc": "0000", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 3, "space": "port"}
+{"access": "write", "address": "0001", "cycles": 0, "data": "FF", "kind": "access", "pc": "0000", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 5, "space": "port"}
+{"cycles": 2, "kind": "pc", "pc": "0100", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1}
+{"access": "write", "address": "0081", "cycles": 2, "data": "30", "kind": "access", "pc": "0103", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 7, "space": "sfr"}
+{"cycles": 4, "kind": "pc", "pc": "0103", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 2}
+{"access": "write", "address": "0090", "cycles": 4, "data": "00", "kind": "access", "pc": "0106", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 8, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 4, "data": "00", "kind": "access", "pc": "0106", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 9, "space": "port"}
+{"cycles": 6, "kind": "pc", "pc": "0106", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 3}
+{"access": "write", "address": "0090", "cycles": 6, "data": "AC", "kind": "access", "pc": "0109", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 10, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 6, "data": "AC", "kind": "access", "pc": "0109", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 11, "space": "port"}
+{"cycles": 8, "kind": "pc", "pc": "0109", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 4}
+{"access": "write", "address": "00D8", "cycles": 8, "data": "00", "kind": "access", "pc": "010C", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 12, "space": "sfr"}
+{"cycles": 10, "kind": "pc", "pc": "010c", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 5}
+{"cycles": 10, "interface": "adc0-callback", "kind": "input", "pc": "010E", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 13, "state": 18}
+{"access": "read", "address": "00D9", "cycles": 10, "data": "24", "kind": "access", "pc": "010E", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 14, "space": "sfr"}
+{"cycles": 11, "kind": "pc", "pc": "010e", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 6}
+{"cycles": 13, "kind": "pc", "pc": "0111", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 7}
+{"access": "write", "address": "A100", "cycles": 13, "data": "24", "kind": "access", "pc": "0112", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 15, "space": "xdata"}
+{"cycles": 15, "kind": "pc", "pc": "0112", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 8}
+{"access": "write", "address": "00D8", "cycles": 15, "data": "01", "kind": "access", "pc": "0115", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 16, "space": "sfr"}
+{"cycles": 17, "kind": "pc", "pc": "0115", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 9}
+{"cycles": 17, "interface": "adc1-callback", "kind": "input", "pc": "0117", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 17, "state": 52}
+{"access": "read", "address": "00D9", "cycles": 17, "data": "68", "kind": "access", "pc": "0117", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 18, "space": "sfr"}
+{"cycles": 18, "kind": "pc", "pc": "0117", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 10}
+{"cycles": 20, "kind": "pc", "pc": "0118", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 11}
+{"access": "write", "address": "A101", "cycles": 20, "data": "68", "kind": "access", "pc": "0119", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 19, "space": "xdata"}
+{"cycles": 22, "kind": "pc", "pc": "0119", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 12}
+{"access": "write", "address": "0089", "cycles": 22, "data": "22", "kind": "access", "pc": "011C", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 20, "space": "sfr"}
+{"cycles": 24, "kind": "pc", "pc": "011c", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 13}
+{"access": "write", "address": "008C", "cycles": 24, "data": "80", "kind": "access", "pc": "011F", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 21, "space": "sfr"}
+{"cycles": 26, "kind": "pc", "pc": "011f", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 14}
+{"access": "write", "address": "008A", "cycles": 26, "data": "80", "kind": "access", "pc": "0122", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 22, "space": "sfr"}
+{"cycles": 28, "kind": "pc", "pc": "0122", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 15}
+{"access": "write", "address": "008D", "cycles": 28, "data": "FD", "kind": "access", "pc": "0125", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 23, "space": "sfr"}
+{"cycles": 30, "kind": "pc", "pc": "0125", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 16}
+{"access": "write", "address": "008B", "cycles": 30, "data": "FD", "kind": "access", "pc": "0128", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 24, "space": "sfr"}
+{"cycles": 32, "kind": "pc", "pc": "0128", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 17}
+{"access": "write", "address": "0098", "cycles": 32, "data": "50", "kind": "access", "pc": "012B", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 25, "space": "sfr"}
+{"cycles": 34, "kind": "pc", "pc": "012b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 18}
+{"access": "write", "address": "00A8", "cycles": 34, "data": "93", "kind": "access", "pc": "012E", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 26, "space": "sfr"}
+{"cycles": 36, "kind": "pc", "pc": "012e", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 19}
+{"access": "read", "address": "0088", "cycles": 36, "data": "00", "kind": "access", "pc": "0130", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 27, "space": "sfr"}
+{"access": "write", "address": "0088", "cycles": 36, "data": "01", "kind": "access", "pc": "0130", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 28, "space": "sfr"}
+{"cycles": 37, "kind": "pc", "pc": "0130", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 20}
+{"access": "read", "address": "0088", "cycles": 37, "data": "01", "kind": "access", "pc": "0132", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 29, "space": "sfr"}
+{"access": "write", "address": "0088", "cycles": 37, "data": "11", "kind": "access", "pc": "0132", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 30, "space": "sfr"}
+{"cycles": 38, "kind": "pc", "pc": "0132", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 21}
+{"access": "read", "address": "0088", "cycles": 38, "data": "11", "kind": "access", "pc": "0134", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 31, "space": "sfr"}
+{"access": "write", "address": "0088", "cycles": 38, "data": "51", "kind": "access", "pc": "0134", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 32, "space": "sfr"}
+{"cycles": 39, "kind": "pc", "pc": "0134", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 22}
+{"access": "write", "address": "0099", "cycles": 39, "data": "A5", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 33, "space": "sfr"}
+{"cycles": 41, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 23}
+{"cycles": 43, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 24}
+{"cycles": 45, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 25}
+{"cycles": 47, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 26}
+{"cycles": 49, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 27}
+{"cycles": 51, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 28}
+{"cycles": 53, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 29}
+{"cycles": 55, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 30}
+{"cycles": 57, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 31}
+{"cycles": 59, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 32}
+{"cycles": 61, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 33}
+{"cycles": 63, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 34}
+{"cycles": 65, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 35}
+{"cycles": 67, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 36}
+{"cycles": 69, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 37}
+{"cycles": 71, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 38}
+{"cycles": 73, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 39}
+{"cycles": 75, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 40}
+{"cycles": 77, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 41}
+{"cycles": 79, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 42}
+{"cycles": 81, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 43}
+{"cycles": 83, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 44}
+{"cycles": 85, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 45}
+{"cycles": 87, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 46}
+{"cycles": 89, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 47}
+{"cycles": 91, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 48}
+{"cycles": 93, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 49}
+{"cycles": 95, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 50}
+{"cycles": 97, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 51}
+{"cycles": 99, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 52}
+{"cycles": 101, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 53}
+{"cycles": 103, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 54}
+{"cycles": 105, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 55}
+{"cycles": 107, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 56}
+{"cycles": 109, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 57}
+{"cycles": 111, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 58}
+{"cycles": 113, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 59}
+{"cycles": 115, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 60}
+{"cycles": 117, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 61}
+{"cycles": 119, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 62}
+{"cycles": 121, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 63}
+{"cycles": 123, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 64}
+{"cycles": 125, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 65}
+{"cycles": 127, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 66}
+{"cycles": 129, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 67}
+{"cycles": 131, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 68}
+{"cycles": 133, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 69}
+{"access": "write", "address": "0003", "cycles": 134, "data": "FD", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 34, "space": "port"}
+{"cycles": 135, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 70}
+{"cycles": 137, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 71}
+{"cycles": 139, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 72}
+{"cycles": 141, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 73}
+{"cycles": 143, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 74}
+{"cycles": 145, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 75}
+{"cycles": 147, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 76}
+{"cycles": 149, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 77}
+{"cycles": 151, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 78}
+{"cycles": 153, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 79}
+{"cycles": 155, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 80}
+{"cycles": 157, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 81}
+{"cycles": 159, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 82}
+{"cycles": 161, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 83}
+{"cycles": 163, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 84}
+{"cycles": 165, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 85}
+{"cycles": 165, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 85}
+{"cycles": 169, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 86}
+{"access": "read", "address": "0090", "cycles": 169, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 35, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 169, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 36, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 169, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 37, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 169, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 38, "space": "port"}
+{"cycles": 170, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 87}
+{"cycles": 172, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 88}
+{"cycles": 174, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 89}
+{"cycles": 176, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 90}
+{"cycles": 178, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 91}
+{"cycles": 180, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 92}
+{"cycles": 182, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 93}
+{"cycles": 184, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 94}
+{"cycles": 186, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 95}
+{"cycles": 188, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 96}
+{"cycles": 190, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 97}
+{"cycles": 192, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 98}
+{"cycles": 194, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 99}
+{"cycles": 196, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 100}
+{"cycles": 198, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 101}
+{"cycles": 200, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 102}
+{"cycles": 202, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 103}
+{"cycles": 204, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 104}
+{"cycles": 206, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 105}
+{"cycles": 208, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 106}
+{"cycles": 210, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 107}
+{"cycles": 212, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 108}
+{"cycles": 214, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 109}
+{"cycles": 216, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 110}
+{"cycles": 218, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 111}
+{"cycles": 220, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 112}
+{"cycles": 222, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 113}
+{"cycles": 224, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 114}
+{"cycles": 226, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 115}
+{"cycles": 228, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 116}
+{"cycles": 230, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 117}
+{"access": "write", "address": "0003", "cycles": 230, "data": "FF", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 39, "space": "port"}
+{"cycles": 232, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 118}
+{"cycles": 234, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 119}
+{"cycles": 236, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 120}
+{"cycles": 238, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 121}
+{"cycles": 240, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 122}
+{"cycles": 242, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 123}
+{"cycles": 244, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 124}
+{"cycles": 246, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 125}
+{"cycles": 248, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 126}
+{"cycles": 250, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 127}
+{"cycles": 252, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 128}
+{"cycles": 254, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 129}
+{"cycles": 256, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 130}
+{"cycles": 258, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 131}
+{"cycles": 260, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 132}
+{"cycles": 262, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 133}
+{"cycles": 264, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 134}
+{"cycles": 266, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 135}
+{"cycles": 268, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 136}
+{"cycles": 270, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 137}
+{"cycles": 272, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 138}
+{"cycles": 274, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 139}
+{"cycles": 276, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 140}
+{"cycles": 278, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 141}
+{"cycles": 280, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 142}
+{"cycles": 282, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 143}
+{"cycles": 284, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 144}
+{"cycles": 286, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 145}
+{"cycles": 288, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 146}
+{"cycles": 290, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 147}
+{"cycles": 292, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 148}
+{"cycles": 294, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 149}
+{"cycles": 294, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 149}
+{"cycles": 298, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 150}
+{"access": "read", "address": "0090", "cycles": 298, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 40, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 298, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 41, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 298, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 42, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 298, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 43, "space": "port"}
+{"cycles": 299, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 151}
+{"cycles": 301, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 152}
+{"cycles": 303, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 153}
+{"cycles": 305, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 154}
+{"cycles": 307, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 155}
+{"cycles": 309, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 156}
+{"cycles": 311, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 157}
+{"cycles": 313, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 158}
+{"cycles": 315, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 159}
+{"cycles": 317, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 160}
+{"cycles": 319, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 161}
+{"cycles": 321, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 162}
+{"cycles": 323, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 163}
+{"cycles": 325, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 164}
+{"access": "write", "address": "0003", "cycles": 326, "data": "FD", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 44, "space": "port"}
+{"cycles": 327, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 165}
+{"cycles": 329, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 166}
+{"cycles": 331, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 167}
+{"cycles": 333, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 168}
+{"cycles": 335, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 169}
+{"cycles": 337, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 170}
+{"cycles": 339, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 171}
+{"cycles": 341, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 172}
+{"cycles": 343, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 173}
+{"cycles": 345, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 174}
+{"cycles": 347, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 175}
+{"cycles": 349, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 176}
+{"cycles": 351, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 177}
+{"cycles": 353, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 178}
+{"cycles": 355, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 179}
+{"cycles": 357, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 180}
+{"cycles": 359, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 181}
+{"cycles": 361, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 182}
+{"cycles": 363, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 183}
+{"cycles": 365, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 184}
+{"cycles": 367, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 185}
+{"cycles": 369, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 186}
+{"cycles": 371, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 187}
+{"cycles": 373, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 188}
+{"cycles": 375, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 189}
+{"cycles": 377, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 190}
+{"cycles": 379, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 191}
+{"cycles": 381, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 192}
+{"cycles": 383, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 193}
+{"cycles": 385, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 194}
+{"cycles": 387, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 195}
+{"cycles": 389, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 196}
+{"cycles": 391, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 197}
+{"cycles": 393, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 198}
+{"cycles": 395, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 199}
+{"cycles": 397, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 200}
+{"cycles": 399, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 201}
+{"cycles": 401, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 202}
+{"cycles": 403, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 203}
+{"cycles": 405, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 204}
+{"cycles": 407, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 205}
+{"cycles": 409, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 206}
+{"cycles": 411, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 207}
+{"cycles": 413, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 208}
+{"cycles": 415, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 209}
+{"cycles": 417, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 210}
+{"cycles": 419, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 211}
+{"cycles": 421, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 212}
+{"cycles": 421, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 212}
+{"access": "write", "address": "0003", "cycles": 422, "data": "FF", "kind": "access", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 45, "space": "port"}
+{"cycles": 425, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 213}
+{"access": "read", "address": "0090", "cycles": 425, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 46, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 425, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 47, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 425, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 48, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 425, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 49, "space": "port"}
+{"cycles": 426, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 214}
+{"cycles": 428, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 215}
+{"cycles": 430, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 216}
+{"cycles": 432, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 217}
+{"cycles": 434, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 218}
+{"cycles": 436, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 219}
+{"cycles": 438, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 220}
+{"cycles": 440, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 221}
+{"cycles": 442, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 222}
+{"cycles": 444, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 223}
+{"cycles": 446, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 224}
+{"cycles": 448, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 225}
+{"cycles": 450, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 226}
+{"cycles": 452, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 227}
+{"cycles": 454, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 228}
+{"cycles": 456, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 229}
+{"cycles": 458, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 230}
+{"cycles": 460, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 231}
+{"cycles": 462, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 232}
+{"cycles": 464, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 233}
+{"cycles": 466, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 234}
+{"cycles": 468, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 235}
+{"cycles": 470, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 236}
+{"cycles": 472, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 237}
+{"cycles": 474, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 238}
+{"cycles": 476, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 239}
+{"cycles": 478, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 240}
+{"cycles": 480, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 241}
+{"cycles": 482, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 242}
+{"cycles": 484, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 243}
+{"cycles": 486, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 244}
+{"cycles": 488, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 245}
+{"cycles": 490, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 246}
+{"cycles": 492, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 247}
+{"cycles": 494, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 248}
+{"cycles": 496, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 249}
+{"cycles": 498, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 250}
+{"cycles": 500, "kind": "pc", "pc": "0003", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 251}
+{"cycles": 500, "interface": "generic-int0", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 50, "state": 1}
+{"cycles": 500, "kind": "interrupt", "pc": "0003", "profile": "surrogate-stimulus", "source": "generic-external-0", "source_index": 251}
+{"cycles": 504, "kind": "pc", "pc": "0200", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 252}
+{"cycles": 506, "kind": "pc", "pc": "0203", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 253}
+{"cycles": 507, "kind": "pc", "pc": "0205", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 254}
+{"access": "write", "address": "A110", "cycles": 507, "data": "E0", "kind": "access", "pc": "0206", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 51, "space": "xdata"}
+{"cycles": 509, "kind": "pc", "pc": "0206", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 255}
+{"cycles": 511, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 256}
+{"cycles": 513, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 257}
+{"cycles": 513, "interface": "generic-int0", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 52, "state": 0}
+{"cycles": 515, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 258}
+{"cycles": 517, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 259}
+{"access": "write", "address": "0003", "cycles": 518, "data": "FD", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 53, "space": "port"}
+{"cycles": 519, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 260}
+{"cycles": 521, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 261}
+{"cycles": 523, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 262}
+{"cycles": 525, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 263}
+{"cycles": 527, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 264}
+{"cycles": 529, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 265}
+{"cycles": 531, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 266}
+{"cycles": 533, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 267}
+{"cycles": 535, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 268}
+{"cycles": 537, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 269}
+{"cycles": 539, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 270}
+{"cycles": 541, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 271}
+{"cycles": 543, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 272}
+{"cycles": 545, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 273}
+{"cycles": 547, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 274}
+{"cycles": 549, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 275}
+{"cycles": 549, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 275}
+{"cycles": 553, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 276}
+{"access": "read", "address": "0090", "cycles": 553, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 54, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 553, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 55, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 553, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 56, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 553, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 57, "space": "port"}
+{"cycles": 554, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 277}
+{"cycles": 556, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 278}
+{"cycles": 558, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 279}
+{"cycles": 560, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 280}
+{"cycles": 562, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 281}
+{"cycles": 564, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 282}
+{"cycles": 566, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 283}
+{"cycles": 568, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 284}
+{"cycles": 570, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 285}
+{"cycles": 572, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 286}
+{"cycles": 574, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 287}
+{"cycles": 576, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 288}
+{"cycles": 578, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 289}
+{"cycles": 580, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 290}
+{"cycles": 582, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 291}
+{"cycles": 584, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 292}
+{"cycles": 586, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 293}
+{"cycles": 588, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 294}
+{"cycles": 590, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 295}
+{"cycles": 592, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 296}
+{"cycles": 594, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 297}
+{"cycles": 596, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 298}
+{"cycles": 598, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 299}
+{"cycles": 600, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 300}
+{"cycles": 602, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 301}
+{"cycles": 604, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 302}
+{"cycles": 606, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 303}
+{"cycles": 608, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 304}
+{"cycles": 610, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 305}
+{"cycles": 612, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 306}
+{"cycles": 614, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 307}
+{"cycles": 616, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 308}
+{"cycles": 618, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 309}
+{"cycles": 620, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 310}
+{"cycles": 622, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 311}
+{"cycles": 624, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 312}
+{"cycles": 626, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 313}
+{"cycles": 628, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 314}
+{"cycles": 630, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 315}
+{"cycles": 632, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 316}
+{"cycles": 634, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 317}
+{"cycles": 636, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 318}
+{"cycles": 638, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 319}
+{"cycles": 640, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 320}
+{"cycles": 642, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 321}
+{"cycles": 644, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 322}
+{"cycles": 646, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 323}
+{"cycles": 648, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 324}
+{"cycles": 650, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 325}
+{"cycles": 652, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 326}
+{"cycles": 654, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 327}
+{"cycles": 656, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 328}
+{"cycles": 658, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 329}
+{"cycles": 660, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 330}
+{"cycles": 662, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 331}
+{"cycles": 664, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 332}
+{"cycles": 666, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 333}
+{"cycles": 668, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 334}
+{"cycles": 670, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 335}
+{"cycles": 672, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 336}
+{"cycles": 674, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 337}
+{"cycles": 676, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 338}
+{"cycles": 678, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 339}
+{"cycles": 678, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 339}
+{"cycles": 682, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 340}
+{"access": "read", "address": "0090", "cycles": 682, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 58, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 682, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 59, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 682, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 60, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 682, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 61, "space": "port"}
+{"cycles": 683, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 341}
+{"cycles": 685, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 342}
+{"cycles": 687, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 343}
+{"cycles": 689, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 344}
+{"cycles": 691, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 345}
+{"cycles": 693, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 346}
+{"cycles": 695, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 347}
+{"cycles": 697, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 348}
+{"cycles": 699, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 349}
+{"cycles": 701, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 350}
+{"cycles": 703, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 351}
+{"cycles": 705, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 352}
+{"cycles": 707, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 353}
+{"cycles": 709, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 354}
+{"access": "write", "address": "0003", "cycles": 710, "data": "FF", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 62, "space": "port"}
+{"cycles": 711, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 355}
+{"cycles": 713, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 356}
+{"cycles": 715, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 357}
+{"cycles": 717, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 358}
+{"cycles": 719, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 359}
+{"cycles": 721, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 360}
+{"cycles": 723, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 361}
+{"cycles": 725, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 362}
+{"cycles": 727, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 363}
+{"cycles": 729, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 364}
+{"cycles": 731, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 365}
+{"cycles": 733, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 366}
+{"cycles": 735, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 367}
+{"cycles": 737, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 368}
+{"cycles": 739, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 369}
+{"cycles": 741, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 370}
+{"cycles": 743, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 371}
+{"cycles": 745, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 372}
+{"cycles": 747, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 373}
+{"cycles": 749, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 374}
+{"cycles": 751, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 375}
+{"cycles": 753, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 376}
+{"cycles": 755, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 377}
+{"cycles": 757, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 378}
+{"cycles": 759, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 379}
+{"cycles": 761, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 380}
+{"cycles": 763, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 381}
+{"cycles": 765, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 382}
+{"cycles": 767, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 383}
+{"cycles": 769, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 384}
+{"cycles": 771, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 385}
+{"cycles": 773, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 386}
+{"cycles": 775, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 387}
+{"cycles": 777, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 388}
+{"cycles": 779, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 389}
+{"cycles": 781, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 390}
+{"cycles": 783, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 391}
+{"cycles": 785, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 392}
+{"cycles": 787, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 393}
+{"cycles": 789, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 394}
+{"cycles": 791, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 395}
+{"cycles": 793, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 396}
+{"cycles": 795, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 397}
+{"cycles": 797, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 398}
+{"cycles": 799, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 399}
+{"cycles": 801, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 400}
+{"cycles": 803, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 401}
+{"cycles": 805, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 402}
+{"cycles": 805, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 402}
+{"access": "write", "address": "0003", "cycles": 806, "data": "FD", "kind": "access", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 63, "space": "port"}
+{"cycles": 809, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 403}
+{"access": "read", "address": "0090", "cycles": 809, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 64, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 809, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 65, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 809, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 66, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 809, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 67, "space": "port"}
+{"cycles": 810, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 404}
+{"cycles": 812, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 405}
+{"cycles": 814, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 406}
+{"cycles": 816, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 407}
+{"cycles": 818, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 408}
+{"cycles": 820, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 409}
+{"cycles": 822, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 410}
+{"cycles": 824, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 411}
+{"cycles": 826, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 412}
+{"cycles": 828, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 413}
+{"cycles": 830, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 414}
+{"cycles": 832, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 415}
+{"cycles": 834, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 416}
+{"cycles": 836, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 417}
+{"cycles": 838, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 418}
+{"cycles": 840, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 419}
+{"cycles": 842, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 420}
+{"cycles": 844, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 421}
+{"cycles": 846, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 422}
+{"cycles": 848, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 423}
+{"cycles": 850, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 424}
+{"cycles": 852, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 425}
+{"cycles": 854, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 426}
+{"cycles": 856, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 427}
+{"cycles": 858, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 428}
+{"cycles": 860, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 429}
+{"cycles": 862, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 430}
+{"cycles": 864, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 431}
+{"cycles": 866, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 432}
+{"cycles": 868, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 433}
+{"cycles": 870, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 434}
+{"cycles": 872, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 435}
+{"cycles": 874, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 436}
+{"cycles": 876, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 437}
+{"cycles": 878, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 438}
+{"cycles": 880, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 439}
+{"cycles": 882, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 440}
+{"cycles": 884, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 441}
+{"cycles": 886, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 442}
+{"cycles": 888, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 443}
+{"cycles": 890, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 444}
+{"cycles": 892, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 445}
+{"cycles": 894, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 446}
+{"cycles": 896, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 447}
+{"cycles": 898, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 448}
+{"cycles": 900, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 449}
+{"cycles": 902, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 450}
+{"access": "write", "address": "0003", "cycles": 902, "data": "FF", "kind": "access", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 68, "space": "port"}
+{"cycles": 904, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 451}
+{"cycles": 906, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 452}
+{"cycles": 908, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 453}
+{"cycles": 910, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 454}
+{"cycles": 912, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 455}
+{"cycles": 914, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 456}
+{"cycles": 916, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 457}
+{"cycles": 918, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 458}
+{"cycles": 920, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 459}
+{"cycles": 922, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 460}
+{"cycles": 924, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 461}
+{"cycles": 926, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 462}
+{"cycles": 928, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 463}
+{"cycles": 930, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 464}
+{"cycles": 932, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 465}
+{"cycles": 934, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 466}
+{"cycles": 934, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 466}
+{"cycles": 938, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 467}
+{"access": "read", "address": "0090", "cycles": 938, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 69, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 938, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 70, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 938, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 71, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 938, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 72, "space": "port"}
+{"cycles": 939, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 468}
+{"cycles": 941, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 469}
+{"cycles": 943, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 470}
+{"cycles": 945, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 471}
+{"cycles": 947, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 472}
+{"cycles": 949, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 473}
+{"cycles": 951, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 474}
+{"cycles": 953, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 475}
+{"cycles": 955, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 476}
+{"cycles": 957, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 477}
+{"cycles": 959, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 478}
+{"cycles": 961, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 479}
+{"cycles": 963, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 480}
+{"cycles": 965, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 481}
+{"cycles": 967, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 482}
+{"cycles": 969, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 483}
+{"cycles": 971, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 484}
+{"cycles": 973, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 485}
+{"cycles": 975, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 486}
+{"cycles": 977, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 487}
+{"cycles": 979, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 488}
+{"cycles": 981, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 489}
+{"cycles": 983, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 490}
+{"cycles": 985, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 491}
+{"cycles": 987, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 492}
+{"cycles": 989, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 493}
+{"cycles": 991, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 494}
+{"cycles": 993, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 495}
+{"cycles": 995, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 496}
+{"cycles": 997, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 497}
+{"cycles": 999, "kind": "pc", "pc": "0023", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 498}
+{"cycles": 999, "kind": "interrupt", "pc": "0023", "profile": "surrogate-stimulus", "source": "generic-uart", "source_index": 498}
+{"cycles": 1003, "kind": "pc", "pc": "0240", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 499}
+{"access": "read", "address": "0099", "cycles": 1003, "data": "A5", "kind": "access", "pc": "0242", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 73, "space": "sfr"}
+{"cycles": 1004, "kind": "pc", "pc": "0242", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 500}
+{"cycles": 1006, "kind": "pc", "pc": "0245", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 501}
+{"access": "write", "address": "A112", "cycles": 1006, "data": "A5", "kind": "access", "pc": "0246", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 74, "space": "xdata"}
+{"cycles": 1008, "kind": "pc", "pc": "0246", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 502}
+{"access": "read", "address": "0098", "cycles": 1008, "data": "52", "kind": "access", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 75, "space": "sfr"}
+{"access": "write", "address": "0098", "cycles": 1008, "data": "52", "kind": "access", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 76, "space": "sfr"}
+{"cycles": 1009, "kind": "pc", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 503}
+{"access": "read", "address": "0098", "cycles": 1009, "data": "52", "kind": "access", "pc": "024A", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 77, "space": "sfr"}
+{"access": "write", "address": "0098", "cycles": 1009, "data": "50", "kind": "access", "pc": "024A", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 78, "space": "sfr"}
+{"cycles": 1010, "kind": "pc", "pc": "024a", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 504}
+{"cycles": 1012, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 505}
+{"cycles": 1014, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 506}
+{"cycles": 1016, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 507}
+{"cycles": 1018, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 508}
+{"cycles": 1020, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 509}
+{"cycles": 1022, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 510}
+{"cycles": 1024, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 511}
+{"cycles": 1026, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 512}
+{"cycles": 1028, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 513}
+{"cycles": 1030, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 514}
+{"cycles": 1032, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 515}
+{"cycles": 1034, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 516}
+{"cycles": 1036, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 517}
+{"cycles": 1038, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 518}
+{"cycles": 1040, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 519}
+{"cycles": 1042, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 520}
+{"cycles": 1044, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 521}
+{"cycles": 1046, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 522}
+{"cycles": 1048, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 523}
+{"cycles": 1050, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 524}
+{"cycles": 1052, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 525}
+{"cycles": 1054, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 526}
+{"cycles": 1056, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 527}
+{"cycles": 1058, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 528}
+{"cycles": 1060, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 529}
+{"cycles": 1062, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 530}
+{"cycles": 1062, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 530}
+{"cycles": 1066, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 531}
+{"access": "read", "address": "0090", "cycles": 1066, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 79, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1066, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 80, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1066, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 81, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1066, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 82, "space": "port"}
+{"cycles": 1067, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 532}
+{"cycles": 1069, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 533}
+{"cycles": 1071, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 534}
+{"cycles": 1073, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 535}
+{"cycles": 1075, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 536}
+{"cycles": 1077, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 537}
+{"cycles": 1079, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 538}
+{"cycles": 1081, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 539}
+{"cycles": 1083, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 540}
+{"cycles": 1085, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 541}
+{"cycles": 1087, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 542}
+{"cycles": 1089, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 543}
+{"cycles": 1091, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 544}
+{"cycles": 1093, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 545}
+{"cycles": 1095, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 546}
+{"cycles": 1097, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 547}
+{"cycles": 1099, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 548}
+{"cycles": 1101, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 549}
+{"cycles": 1101, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 83, "state": 0}
+{"cycles": 1103, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 550}
+{"cycles": 1105, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 551}
+{"cycles": 1107, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 552}
+{"cycles": 1109, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 553}
+{"cycles": 1111, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 554}
+{"cycles": 1113, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 555}
+{"cycles": 1115, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 556}
+{"cycles": 1117, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 557}
+{"cycles": 1119, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 558}
+{"cycles": 1121, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 559}
+{"cycles": 1123, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 560}
+{"cycles": 1125, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 561}
+{"cycles": 1127, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 562}
+{"cycles": 1129, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 563}
+{"cycles": 1131, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 564}
+{"cycles": 1133, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 565}
+{"cycles": 1135, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 566}
+{"cycles": 1137, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 567}
+{"cycles": 1139, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 568}
+{"cycles": 1141, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 569}
+{"cycles": 1143, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 570}
+{"cycles": 1145, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 571}
+{"cycles": 1147, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 572}
+{"cycles": 1149, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 573}
+{"cycles": 1151, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 574}
+{"cycles": 1153, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 575}
+{"cycles": 1155, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 576}
+{"cycles": 1157, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 577}
+{"cycles": 1159, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 578}
+{"cycles": 1161, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 579}
+{"cycles": 1163, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 580}
+{"cycles": 1165, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 581}
+{"cycles": 1167, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 582}
+{"cycles": 1169, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 583}
+{"cycles": 1171, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 584}
+{"cycles": 1173, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 585}
+{"cycles": 1175, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 586}
+{"cycles": 1177, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 587}
+{"cycles": 1179, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 588}
+{"cycles": 1181, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 589}
+{"cycles": 1183, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 590}
+{"cycles": 1185, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 591}
+{"cycles": 1187, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 592}
+{"cycles": 1189, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 593}
+{"cycles": 1189, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 593}
+{"cycles": 1193, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 594}
+{"access": "read", "address": "0090", "cycles": 1193, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 84, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1193, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 85, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1193, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 86, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1193, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 87, "space": "port"}
+{"cycles": 1194, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 595}
+{"cycles": 1196, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 596}
+{"cycles": 1196, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 88, "state": 0}
+{"cycles": 1198, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 597}
+{"cycles": 1200, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 598}
+{"cycles": 1202, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 599}
+{"cycles": 1204, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 600}
+{"cycles": 1206, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 601}
+{"cycles": 1208, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 602}
+{"cycles": 1210, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 603}
+{"cycles": 1212, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 604}
+{"cycles": 1214, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 605}
+{"cycles": 1216, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 606}
+{"cycles": 1218, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 607}
+{"cycles": 1220, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 608}
+{"cycles": 1222, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 609}
+{"cycles": 1224, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 610}
+{"cycles": 1226, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 611}
+{"cycles": 1228, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 612}
+{"cycles": 1230, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 613}
+{"cycles": 1232, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 614}
+{"cycles": 1234, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 615}
+{"cycles": 1236, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 616}
+{"cycles": 1238, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 617}
+{"cycles": 1240, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 618}
+{"cycles": 1242, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 619}
+{"cycles": 1244, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 620}
+{"cycles": 1246, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 621}
+{"cycles": 1248, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 622}
+{"cycles": 1250, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 623}
+{"cycles": 1252, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 624}
+{"cycles": 1254, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 625}
+{"cycles": 1256, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 626}
+{"cycles": 1258, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 627}
+{"cycles": 1260, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 628}
+{"cycles": 1262, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 629}
+{"cycles": 1264, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 630}
+{"cycles": 1266, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 631}
+{"cycles": 1268, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 632}
+{"cycles": 1270, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 633}
+{"cycles": 1272, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 634}
+{"cycles": 1274, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 635}
+{"cycles": 1276, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 636}
+{"cycles": 1278, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 637}
+{"cycles": 1280, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 638}
+{"cycles": 1282, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 639}
+{"cycles": 1284, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 640}
+{"cycles": 1286, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 641}
+{"cycles": 1288, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 642}
+{"cycles": 1290, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 643}
+{"cycles": 1292, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 644}
+{"cycles": 1292, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 89, "state": 0}
+{"cycles": 1294, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 645}
+{"cycles": 1296, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 646}
+{"cycles": 1298, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 647}
+{"cycles": 1300, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 648}
+{"cycles": 1302, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 649}
+{"cycles": 1304, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 650}
+{"cycles": 1306, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 651}
+{"cycles": 1308, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 652}
+{"cycles": 1310, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 653}
+{"cycles": 1312, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 654}
+{"cycles": 1314, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 655}
+{"cycles": 1316, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 656}
+{"cycles": 1318, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 657}
+{"cycles": 1318, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 657}
+{"cycles": 1322, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 658}
+{"access": "read", "address": "0090", "cycles": 1322, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 90, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1322, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 91, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1322, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 92, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1322, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 93, "space": "port"}
+{"cycles": 1323, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 659}
+{"cycles": 1325, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 660}
+{"cycles": 1327, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 661}
+{"cycles": 1329, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 662}
+{"cycles": 1331, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 663}
+{"cycles": 1333, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 664}
+{"cycles": 1335, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 665}
+{"cycles": 1337, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 666}
+{"cycles": 1339, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 667}
+{"cycles": 1341, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 668}
+{"cycles": 1343, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 669}
+{"cycles": 1345, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 670}
+{"cycles": 1347, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 671}
+{"cycles": 1349, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 672}
+{"cycles": 1351, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 673}
+{"cycles": 1353, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 674}
+{"cycles": 1355, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 675}
+{"cycles": 1357, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 676}
+{"cycles": 1359, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 677}
+{"cycles": 1361, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 678}
+{"cycles": 1363, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 679}
+{"cycles": 1365, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 680}
+{"cycles": 1367, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 681}
+{"cycles": 1369, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 682}
+{"cycles": 1371, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 683}
+{"cycles": 1373, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 684}
+{"cycles": 1375, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 685}
+{"cycles": 1377, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 686}
+{"cycles": 1379, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 687}
+{"cycles": 1381, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 688}
+{"cycles": 1383, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 689}
+{"cycles": 1385, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 690}
+{"cycles": 1387, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 691}
+{"cycles": 1389, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 692}
+{"cycles": 1389, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 94, "state": 1}
+{"cycles": 1391, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 693}
+{"cycles": 1393, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 694}
+{"cycles": 1395, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 695}
+{"cycles": 1397, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 696}
+{"cycles": 1399, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 697}
+{"cycles": 1401, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 698}
+{"cycles": 1403, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 699}
+{"cycles": 1405, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 700}
+{"cycles": 1407, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 701}
+{"cycles": 1409, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 702}
+{"cycles": 1411, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 703}
+{"cycles": 1413, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 704}
+{"cycles": 1415, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 705}
+{"cycles": 1417, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 706}
+{"cycles": 1419, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 707}
+{"cycles": 1421, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 708}
+{"cycles": 1423, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 709}
+{"cycles": 1425, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 710}
+{"cycles": 1427, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 711}
+{"cycles": 1429, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 712}
+{"cycles": 1431, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 713}
+{"cycles": 1433, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 714}
+{"cycles": 1435, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 715}
+{"cycles": 1437, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 716}
+{"cycles": 1439, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 717}
+{"cycles": 1441, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 718}
+{"cycles": 1443, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 719}
+{"cycles": 1445, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 720}
+{"cycles": 1445, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 720}
+{"cycles": 1449, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 721}
+{"access": "read", "address": "0090", "cycles": 1449, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 95, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1449, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 96, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1449, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 97, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1449, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 98, "space": "port"}
+{"cycles": 1450, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 722}
+{"cycles": 1452, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 723}
+{"cycles": 1454, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 724}
+{"cycles": 1456, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 725}
+{"cycles": 1458, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 726}
+{"cycles": 1460, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 727}
+{"cycles": 1462, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 728}
+{"cycles": 1464, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 729}
+{"cycles": 1466, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 730}
+{"cycles": 1468, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 731}
+{"cycles": 1470, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 732}
+{"cycles": 1472, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 733}
+{"cycles": 1474, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 734}
+{"cycles": 1476, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 735}
+{"cycles": 1478, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 736}
+{"cycles": 1480, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 737}
+{"cycles": 1482, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 738}
+{"cycles": 1484, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 739}
+{"cycles": 1484, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 99, "state": 1}
+{"cycles": 1486, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 740}
+{"cycles": 1488, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 741}
+{"cycles": 1490, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 742}
+{"cycles": 1492, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 743}
+{"cycles": 1494, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 744}
+{"cycles": 1496, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 745}
+{"cycles": 1498, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 746}
+{"cycles": 1500, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 747}
+{"cycles": 1502, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 748}
+{"cycles": 1504, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 749}
+{"cycles": 1506, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 750}
+{"cycles": 1508, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 751}
+{"cycles": 1510, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 752}
+{"cycles": 1512, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 753}
+{"cycles": 1514, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 754}
+{"cycles": 1516, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 755}
+{"cycles": 1518, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 756}
+{"cycles": 1520, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 757}
+{"cycles": 1522, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 758}
+{"cycles": 1524, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 759}
+{"cycles": 1526, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 760}
+{"cycles": 1528, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 761}
+{"cycles": 1530, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 762}
+{"cycles": 1532, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 763}
+{"cycles": 1534, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 764}
+{"cycles": 1536, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 765}
+{"cycles": 1538, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 766}
+{"cycles": 1540, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 767}
+{"cycles": 1542, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 768}
+{"cycles": 1544, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 769}
+{"cycles": 1546, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 770}
+{"cycles": 1548, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 771}
+{"cycles": 1550, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 772}
+{"cycles": 1552, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 773}
+{"cycles": 1554, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 774}
+{"cycles": 1556, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 775}
+{"cycles": 1558, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 776}
+{"cycles": 1560, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 777}
+{"cycles": 1562, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 778}
+{"cycles": 1564, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 779}
+{"cycles": 1566, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 780}
+{"cycles": 1568, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 781}
+{"cycles": 1570, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 782}
+{"cycles": 1572, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 783}
+{"cycles": 1574, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 784}
+{"cycles": 1574, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 784}
+{"cycles": 1578, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 785}
+{"access": "read", "address": "0090", "cycles": 1578, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 100, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1578, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 101, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1578, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 102, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1578, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 103, "space": "port"}
+{"cycles": 1579, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 786}
+{"cycles": 1581, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 787}
+{"cycles": 1581, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 104, "state": 1}
+{"cycles": 1583, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 788}
+{"cycles": 1585, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 789}
+{"cycles": 1587, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 790}
+{"cycles": 1589, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 791}
+{"cycles": 1591, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 792}
+{"cycles": 1593, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 793}
+{"cycles": 1595, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 794}
+{"cycles": 1597, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 795}
+{"cycles": 1599, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 796}
+{"cycles": 1601, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 797}
+{"cycles": 1603, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 798}
+{"cycles": 1605, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 799}
+{"cycles": 1607, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 800}
+{"cycles": 1609, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 801}
+{"cycles": 1611, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 802}
+{"cycles": 1613, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 803}
+{"cycles": 1615, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 804}
+{"cycles": 1617, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 805}
+{"cycles": 1619, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 806}
+{"cycles": 1621, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 807}
+{"cycles": 1623, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 808}
+{"cycles": 1625, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 809}
+{"cycles": 1627, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 810}
+{"cycles": 1629, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 811}
+{"cycles": 1631, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 812}
+{"cycles": 1633, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 813}
+{"cycles": 1635, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 814}
+{"cycles": 1637, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 815}
+{"cycles": 1639, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 816}
+{"cycles": 1641, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 817}
+{"cycles": 1643, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 818}
+{"cycles": 1645, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 819}
+{"cycles": 1647, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 820}
+{"cycles": 1649, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 821}
+{"cycles": 1651, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 822}
+{"cycles": 1653, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 823}
+{"cycles": 1655, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 824}
+{"cycles": 1657, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 825}
+{"cycles": 1659, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 826}
+{"cycles": 1661, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 827}
+{"cycles": 1663, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 828}
+{"cycles": 1665, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 829}
+{"cycles": 1667, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 830}
+{"cycles": 1669, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 831}
+{"cycles": 1671, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 832}
+{"cycles": 1673, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 833}
+{"cycles": 1675, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 834}
+{"cycles": 1677, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 835}
+{"cycles": 1677, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 105, "state": 1}
+{"cycles": 1679, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 836}
+{"cycles": 1681, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 837}
+{"cycles": 1683, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 838}
+{"cycles": 1685, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 839}
+{"cycles": 1687, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 840}
+{"cycles": 1689, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 841}
+{"cycles": 1691, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 842}
+{"cycles": 1693, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 843}
+{"cycles": 1695, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 844}
+{"cycles": 1697, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 845}
+{"cycles": 1699, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 846}
+{"cycles": 1701, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 847}
+{"cycles": 1701, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 847}
+{"cycles": 1705, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 848}
+{"access": "read", "address": "0090", "cycles": 1705, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 106, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1705, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 107, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1705, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 108, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1705, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 109, "space": "port"}
+{"cycles": 1706, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 849}
+{"cycles": 1708, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 850}
+{"cycles": 1710, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 851}
+{"cycles": 1712, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 852}
+{"cycles": 1714, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 853}
+{"cycles": 1716, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 854}
+{"cycles": 1718, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 855}
+{"cycles": 1720, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 856}
+{"cycles": 1722, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 857}
+{"cycles": 1724, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 858}
+{"cycles": 1726, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 859}
+{"cycles": 1728, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 860}
+{"cycles": 1730, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 861}
+{"cycles": 1732, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 862}
+{"cycles": 1734, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 863}
+{"cycles": 1736, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 864}
+{"cycles": 1738, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 865}
+{"cycles": 1740, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 866}
+{"cycles": 1742, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 867}
+{"cycles": 1744, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 868}
+{"cycles": 1746, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 869}
+{"cycles": 1748, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 870}
+{"cycles": 1750, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 871}
+{"cycles": 1752, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 872}
+{"cycles": 1754, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 873}
+{"cycles": 1756, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 874}
+{"cycles": 1758, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 875}
+{"cycles": 1760, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 876}
+{"cycles": 1762, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 877}
+{"cycles": 1764, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 878}
+{"cycles": 1766, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 879}
+{"cycles": 1768, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 880}
+{"cycles": 1770, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 881}
+{"cycles": 1772, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 882}
+{"cycles": 1772, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 110, "state": 0}
+{"cycles": 1774, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 883}
+{"cycles": 1776, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 884}
+{"cycles": 1778, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 885}
+{"cycles": 1780, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 886}
+{"cycles": 1782, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 887}
+{"cycles": 1784, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 888}
+{"cycles": 1786, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 889}
+{"cycles": 1788, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 890}
+{"cycles": 1790, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 891}
+{"cycles": 1792, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 892}
+{"cycles": 1794, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 893}
+{"cycles": 1796, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 894}
+{"cycles": 1798, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 895}
+{"cycles": 1800, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 896}
+{"cycles": 1802, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 897}
+{"cycles": 1804, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 898}
+{"cycles": 1806, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 899}
+{"cycles": 1808, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 900}
+{"cycles": 1810, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 901}
+{"cycles": 1812, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 902}
+{"cycles": 1814, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 903}
+{"cycles": 1816, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 904}
+{"cycles": 1818, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 905}
+{"cycles": 1820, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 906}
+{"cycles": 1822, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 907}
+{"cycles": 1824, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 908}
+{"cycles": 1826, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 909}
+{"cycles": 1828, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 910}
+{"cycles": 1830, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 911}
+{"cycles": 1830, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 911}
+{"cycles": 1834, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 912}
+{"access": "read", "address": "0090", "cycles": 1834, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 111, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1834, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 112, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1834, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 113, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1834, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 114, "space": "port"}
+{"cycles": 1835, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 913}
+{"cycles": 1837, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 914}
+{"cycles": 1839, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 915}
+{"cycles": 1841, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 916}
+{"cycles": 1843, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 917}
+{"cycles": 1845, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 918}
+{"cycles": 1847, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 919}
+{"cycles": 1849, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 920}
+{"cycles": 1851, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 921}
+{"cycles": 1853, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 922}
+{"cycles": 1855, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 923}
+{"cycles": 1857, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 924}
+{"cycles": 1859, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 925}
+{"cycles": 1861, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 926}
+{"cycles": 1863, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 927}
+{"cycles": 1865, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 928}
+{"cycles": 1867, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 929}
+{"cycles": 1869, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 930}
+{"cycles": 1869, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 115, "state": 0}
+{"cycles": 1871, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 931}
+{"cycles": 1873, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 932}
+{"cycles": 1875, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 933}
+{"cycles": 1877, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 934}
+{"cycles": 1879, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 935}
+{"cycles": 1881, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 936}
+{"cycles": 1883, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 937}
+{"cycles": 1885, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 938}
+{"cycles": 1887, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 939}
+{"cycles": 1889, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 940}
+{"cycles": 1891, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 941}
+{"cycles": 1893, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 942}
+{"cycles": 1895, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 943}
+{"cycles": 1897, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 944}
+{"cycles": 1899, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 945}
+{"cycles": 1901, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 946}
+{"cycles": 1903, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 947}
+{"cycles": 1905, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 948}
+{"cycles": 1907, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 949}
+{"cycles": 1909, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 950}
+{"cycles": 1911, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 951}
+{"cycles": 1913, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 952}
+{"cycles": 1915, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 953}
+{"cycles": 1917, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 954}
+{"cycles": 1919, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 955}
+{"cycles": 1921, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 956}
+{"cycles": 1923, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 957}
+{"cycles": 1925, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 958}
+{"cycles": 1927, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 959}
+{"cycles": 1929, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 960}
+{"cycles": 1931, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 961}
+{"cycles": 1933, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 962}
+{"cycles": 1935, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 963}
+{"cycles": 1937, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 964}
+{"cycles": 1939, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 965}
+{"cycles": 1941, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 966}
+{"cycles": 1943, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 967}
+{"cycles": 1945, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 968}
+{"cycles": 1947, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 969}
+{"cycles": 1949, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 970}
+{"cycles": 1951, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 971}
+{"cycles": 1953, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 972}
+{"cycles": 1955, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 973}
+{"cycles": 1957, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 974}
+{"cycles": 1957, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 974}
+{"cycles": 1961, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 975}
+{"access": "read", "address": "0090", "cycles": 1961, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 116, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 1961, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 117, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 1961, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 118, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 1961, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 119, "space": "port"}
+{"cycles": 1962, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 976}
+{"cycles": 1964, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 977}
+{"cycles": 1964, "interface": "generic-uart-rx", "kind": "input", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 120, "state": 1}
+{"cycles": 1966, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 978}
+{"cycles": 1968, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 979}
+{"cycles": 1970, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 980}
+{"cycles": 1972, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 981}
+{"cycles": 1974, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 982}
+{"cycles": 1976, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 983}
+{"cycles": 1978, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 984}
+{"cycles": 1980, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 985}
+{"cycles": 1982, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 986}
+{"cycles": 1984, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 987}
+{"cycles": 1986, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 988}
+{"cycles": 1988, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 989}
+{"cycles": 1990, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 990}
+{"cycles": 1992, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 991}
+{"cycles": 1994, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 992}
+{"cycles": 1996, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 993}
+{"cycles": 1998, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 994}
+{"cycles": 2000, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 995}
+{"cycles": 2002, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 996}
+{"cycles": 2004, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 997}
+{"cycles": 2006, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 998}
+{"cycles": 2008, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 999}
+{"cycles": 2010, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1000}
+{"cycles": 2012, "kind": "pc", "pc": "0023", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1001}
+{"cycles": 2012, "kind": "interrupt", "pc": "0023", "profile": "surrogate-stimulus", "source": "generic-uart", "source_index": 1001}
+{"cycles": 2016, "kind": "pc", "pc": "0240", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1002}
+{"access": "read", "address": "0099", "cycles": 2016, "data": "3C", "kind": "access", "pc": "0242", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 121, "space": "sfr"}
+{"cycles": 2017, "kind": "pc", "pc": "0242", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1003}
+{"cycles": 2019, "kind": "pc", "pc": "0245", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1004}
+{"access": "write", "address": "A112", "cycles": 2019, "data": "3C", "kind": "access", "pc": "0246", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 122, "space": "xdata"}
+{"cycles": 2021, "kind": "pc", "pc": "0246", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1005}
+{"access": "read", "address": "0098", "cycles": 2021, "data": "55", "kind": "access", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 123, "space": "sfr"}
+{"access": "write", "address": "0098", "cycles": 2021, "data": "54", "kind": "access", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 124, "space": "sfr"}
+{"cycles": 2022, "kind": "pc", "pc": "0248", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1006}
+{"access": "read", "address": "0098", "cycles": 2022, "data": "54", "kind": "access", "pc": "024A", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 125, "space": "sfr"}
+{"access": "write", "address": "0098", "cycles": 2022, "data": "54", "kind": "access", "pc": "024A", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 126, "space": "sfr"}
+{"cycles": 2023, "kind": "pc", "pc": "024a", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1007}
+{"cycles": 2025, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1008}
+{"cycles": 2027, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1009}
+{"cycles": 2029, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1010}
+{"cycles": 2031, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1011}
+{"cycles": 2033, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1012}
+{"cycles": 2035, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1013}
+{"cycles": 2037, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1014}
+{"cycles": 2039, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1015}
+{"cycles": 2041, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1016}
+{"cycles": 2043, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1017}
+{"cycles": 2045, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1018}
+{"cycles": 2047, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1019}
+{"cycles": 2049, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1020}
+{"cycles": 2051, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1021}
+{"cycles": 2053, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1022}
+{"cycles": 2055, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1023}
+{"cycles": 2057, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1024}
+{"cycles": 2059, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1025}
+{"cycles": 2061, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1026}
+{"cycles": 2063, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1027}
+{"cycles": 2065, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1028}
+{"cycles": 2067, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1029}
+{"cycles": 2069, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1030}
+{"cycles": 2071, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1031}
+{"cycles": 2073, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1032}
+{"cycles": 2075, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1033}
+{"cycles": 2077, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1034}
+{"cycles": 2079, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1035}
+{"cycles": 2081, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1036}
+{"cycles": 2083, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1037}
+{"cycles": 2085, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1038}
+{"cycles": 2085, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 1038}
+{"cycles": 2089, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1039}
+{"access": "read", "address": "0090", "cycles": 2089, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 127, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 2089, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 128, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 2089, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 129, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 2089, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 130, "space": "port"}
+{"cycles": 2090, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1040}
+{"cycles": 2092, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1041}
+{"cycles": 2094, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1042}
+{"cycles": 2096, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1043}
+{"cycles": 2098, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1044}
+{"cycles": 2100, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1045}
+{"cycles": 2102, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1046}
+{"cycles": 2104, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1047}
+{"cycles": 2106, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1048}
+{"cycles": 2108, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1049}
+{"cycles": 2110, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1050}
+{"cycles": 2112, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1051}
+{"cycles": 2114, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1052}
+{"cycles": 2116, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1053}
+{"cycles": 2118, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1054}
+{"cycles": 2120, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1055}
+{"cycles": 2122, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1056}
+{"cycles": 2124, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1057}
+{"cycles": 2126, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1058}
+{"cycles": 2128, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1059}
+{"cycles": 2130, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1060}
+{"cycles": 2132, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1061}
+{"cycles": 2134, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1062}
+{"cycles": 2136, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1063}
+{"cycles": 2138, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1064}
+{"cycles": 2140, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1065}
+{"cycles": 2142, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1066}
+{"cycles": 2144, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1067}
+{"cycles": 2146, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1068}
+{"cycles": 2148, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1069}
+{"cycles": 2150, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1070}
+{"cycles": 2152, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1071}
+{"cycles": 2154, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1072}
+{"cycles": 2156, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1073}
+{"cycles": 2158, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1074}
+{"cycles": 2160, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1075}
+{"cycles": 2162, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1076}
+{"cycles": 2164, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1077}
+{"cycles": 2166, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1078}
+{"cycles": 2168, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1079}
+{"cycles": 2170, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1080}
+{"cycles": 2172, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1081}
+{"cycles": 2174, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1082}
+{"cycles": 2176, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1083}
+{"cycles": 2178, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1084}
+{"cycles": 2180, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1085}
+{"cycles": 2182, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1086}
+{"cycles": 2184, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1087}
+{"cycles": 2186, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1088}
+{"cycles": 2188, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1089}
+{"cycles": 2190, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1090}
+{"cycles": 2192, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1091}
+{"cycles": 2194, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1092}
+{"cycles": 2196, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1093}
+{"cycles": 2198, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1094}
+{"cycles": 2200, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1095}
+{"cycles": 2202, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1096}
+{"cycles": 2204, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1097}
+{"cycles": 2206, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1098}
+{"cycles": 2208, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1099}
+{"cycles": 2210, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1100}
+{"cycles": 2212, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1101}
+{"cycles": 2214, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1102}
+{"cycles": 2214, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 1102}
+{"cycles": 2218, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1103}
+{"access": "read", "address": "0090", "cycles": 2218, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 131, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 2218, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 132, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 2218, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 133, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 2218, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 134, "space": "port"}
+{"cycles": 2219, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1104}
+{"cycles": 2221, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1105}
+{"cycles": 2223, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1106}
+{"cycles": 2225, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1107}
+{"cycles": 2227, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1108}
+{"cycles": 2229, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1109}
+{"cycles": 2231, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1110}
+{"cycles": 2233, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1111}
+{"cycles": 2235, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1112}
+{"cycles": 2237, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1113}
+{"cycles": 2239, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1114}
+{"cycles": 2241, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1115}
+{"cycles": 2243, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1116}
+{"cycles": 2245, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1117}
+{"cycles": 2247, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1118}
+{"cycles": 2249, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1119}
+{"cycles": 2251, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1120}
+{"cycles": 2253, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1121}
+{"cycles": 2255, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1122}
+{"cycles": 2257, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1123}
+{"cycles": 2259, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1124}
+{"cycles": 2261, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1125}
+{"cycles": 2263, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1126}
+{"cycles": 2265, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1127}
+{"cycles": 2267, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1128}
+{"cycles": 2269, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1129}
+{"cycles": 2271, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1130}
+{"cycles": 2273, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1131}
+{"cycles": 2275, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1132}
+{"cycles": 2277, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1133}
+{"cycles": 2279, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1134}
+{"cycles": 2281, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1135}
+{"cycles": 2283, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1136}
+{"cycles": 2285, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1137}
+{"cycles": 2287, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1138}
+{"cycles": 2289, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1139}
+{"cycles": 2291, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1140}
+{"cycles": 2293, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1141}
+{"cycles": 2295, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1142}
+{"cycles": 2297, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1143}
+{"cycles": 2299, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1144}
+{"cycles": 2301, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1145}
+{"cycles": 2303, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1146}
+{"cycles": 2305, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1147}
+{"cycles": 2307, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1148}
+{"cycles": 2309, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1149}
+{"cycles": 2311, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1150}
+{"cycles": 2313, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1151}
+{"cycles": 2315, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1152}
+{"cycles": 2317, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1153}
+{"cycles": 2319, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1154}
+{"cycles": 2321, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1155}
+{"cycles": 2323, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1156}
+{"cycles": 2325, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1157}
+{"cycles": 2327, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1158}
+{"cycles": 2329, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1159}
+{"cycles": 2331, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1160}
+{"cycles": 2333, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1161}
+{"cycles": 2335, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1162}
+{"cycles": 2337, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1163}
+{"cycles": 2339, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1164}
+{"cycles": 2341, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1165}
+{"cycles": 2341, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 1165}
+{"cycles": 2345, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1166}
+{"access": "read", "address": "0090", "cycles": 2345, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 135, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 2345, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 136, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 2345, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 137, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 2345, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 138, "space": "port"}
+{"cycles": 2346, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1167}
+{"cycles": 2348, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1168}
+{"cycles": 2350, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1169}
+{"cycles": 2352, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1170}
+{"cycles": 2354, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1171}
+{"cycles": 2356, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1172}
+{"cycles": 2358, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1173}
+{"cycles": 2360, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1174}
+{"cycles": 2362, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1175}
+{"cycles": 2364, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1176}
+{"cycles": 2366, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1177}
+{"cycles": 2368, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1178}
+{"cycles": 2370, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1179}
+{"cycles": 2372, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1180}
+{"cycles": 2374, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1181}
+{"cycles": 2376, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1182}
+{"cycles": 2378, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1183}
+{"cycles": 2380, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1184}
+{"cycles": 2382, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1185}
+{"cycles": 2384, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1186}
+{"cycles": 2386, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1187}
+{"cycles": 2388, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1188}
+{"cycles": 2390, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1189}
+{"cycles": 2392, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1190}
+{"cycles": 2394, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1191}
+{"cycles": 2396, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1192}
+{"cycles": 2398, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1193}
+{"cycles": 2400, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1194}
+{"cycles": 2402, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1195}
+{"cycles": 2404, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1196}
+{"cycles": 2406, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1197}
+{"cycles": 2408, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1198}
+{"cycles": 2410, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1199}
+{"cycles": 2412, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1200}
+{"cycles": 2414, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1201}
+{"cycles": 2416, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1202}
+{"cycles": 2418, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1203}
+{"cycles": 2420, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1204}
+{"cycles": 2422, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1205}
+{"cycles": 2424, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1206}
+{"cycles": 2426, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1207}
+{"cycles": 2428, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1208}
+{"cycles": 2430, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1209}
+{"cycles": 2432, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1210}
+{"cycles": 2434, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1211}
+{"cycles": 2436, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1212}
+{"cycles": 2438, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1213}
+{"cycles": 2440, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1214}
+{"cycles": 2442, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1215}
+{"cycles": 2444, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1216}
+{"cycles": 2446, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1217}
+{"cycles": 2448, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1218}
+{"cycles": 2450, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1219}
+{"cycles": 2452, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1220}
+{"cycles": 2454, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1221}
+{"cycles": 2456, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1222}
+{"cycles": 2458, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1223}
+{"cycles": 2460, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1224}
+{"cycles": 2462, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1225}
+{"cycles": 2464, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1226}
+{"cycles": 2466, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1227}
+{"cycles": 2468, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1228}
+{"cycles": 2470, "kind": "pc", "pc": "000b", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1229}
+{"cycles": 2470, "kind": "interrupt", "pc": "000b", "profile": "surrogate-stimulus", "source": "generic-timer-0", "source_index": 1229}
+{"cycles": 2474, "kind": "pc", "pc": "0220", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1230}
+{"access": "read", "address": "0090", "cycles": 2474, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 139, "space": "sfr"}
+{"access": "read", "address": "0090", "cycles": 2474, "data": "AC", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 140, "space": "sfr"}
+{"access": "write", "address": "0090", "cycles": 2474, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 141, "space": "sfr"}
+{"access": "write", "address": "0001", "cycles": 2474, "data": "8C", "kind": "access", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-driver-runtime", "source_index": 142, "space": "port"}
+{"cycles": 2475, "kind": "pc", "pc": "0222", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1231}
+{"cycles": 2477, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1232}
+{"cycles": 2479, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1233}
+{"cycles": 2481, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1234}
+{"cycles": 2483, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1235}
+{"cycles": 2485, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1236}
+{"cycles": 2487, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1237}
+{"cycles": 2489, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1238}
+{"cycles": 2491, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1239}
+{"cycles": 2493, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1240}
+{"cycles": 2495, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1241}
+{"cycles": 2497, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1242}
+{"cycles": 2499, "kind": "pc", "pc": "0137", "profile": "surrogate-stimulus", "source": "mame-debugger-runtime", "source_index": 1243}

@@ -1,0 +1,11 @@
+Soft reset
+[:maincpu] write of un-hooked port 3 fd
+[:maincpu] write of un-hooked port 2 ff
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 0 ff
+[:maincpu] ':maincpu' (0075): unmapped sfr memory read from A9 & FF
+[:maincpu] ':maincpu' (5C0D): unmapped xdata memory write to A081 = 01 & FF
+[:maincpu] ':maincpu' (5C13): unmapped xdata memory write to A010 = 81 & FF
+[:maincpu] ':maincpu' (5C17): unmapped xdata memory write to A011 = 81 & FF
+[:maincpu] ':maincpu' (5C27): unmapped xdata memory write to A002 = 00 & FF
+[:maincpu] ':maincpu' (5C2B): unmapped xdata memory write to A003 = 00 & FF

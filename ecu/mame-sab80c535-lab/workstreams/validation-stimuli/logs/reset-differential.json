@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "runtime_source": "mame-debugger-runtime",
+  "matched_pc_count": 8,
+  "path": [
+    "0000",
+    "0073",
+    "0075",
+    "0077",
+    "0079",
+    "007b",
+    "20e0",
+    "5c00"
+  ]
+}

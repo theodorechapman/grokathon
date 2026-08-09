@@ -1,0 +1,13 @@
+test_altered_pc_fails_cpu_semantics (__main__.NegativeGateTests.test_altered_pc_fails_cpu_semantics) ... ok
+test_changed_register_fails_cpu_semantics (__main__.NegativeGateTests.test_changed_register_fails_cpu_semantics) ... ok
+test_corrupted_rom_fails (__main__.NegativeGateTests.test_corrupted_rom_fails) ... ok
+test_dropped_access_fails_memory_mapping (__main__.NegativeGateTests.test_dropped_access_fails_memory_mapping) ... ok
+test_fabricated_provenance_fails (__main__.NegativeGateTests.test_fabricated_provenance_fails) ... ok
+test_known_ip_alias_divergence_fails_peripheral_state (__main__.NegativeGateTests.test_known_ip_alias_divergence_fails_peripheral_state) ... ok
+test_non_monotonic_cycles_fail_validation (__main__.NegativeGateTests.test_non_monotonic_cycles_fail_validation) ... ok
+test_unavailable_fields_are_reported (__main__.NegativeGateTests.test_unavailable_fields_are_reported) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.110s
+
+OK

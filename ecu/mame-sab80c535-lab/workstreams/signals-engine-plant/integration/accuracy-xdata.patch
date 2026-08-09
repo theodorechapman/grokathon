@@ -1,0 +1,58 @@
+diff --git a/src/motronic175-xdata.h b/src/motronic175-xdata.h
+index 36f2049..cb9330f 100644
+--- a/src/motronic175-xdata.h
++++ b/src/motronic175-xdata.h
+@@ -22,6 +22,7 @@ public:
+ 
+ 	void begin_instruction(u16 pc);
+ 	u8 read(offs_t offset);
++	void set_input(u16 address, u8 value);
+ 	void report();
+ 	void write(offs_t offset, u8 data);
+ 
+diff --git a/src/motronic175-xdata.cpp b/src/motronic175-xdata.cpp
+index b920660..80576f3 100644
+--- a/src/motronic175-xdata.cpp
++++ b/src/motronic175-xdata.cpp
+@@ -114,6 +114,19 @@ u8 motronic175_xdata_device::unknown_read(u16 address, const char *kind)
+ 	return value;
+ }
+ 
++void motronic175_xdata_device::set_input(u16 address, u8 value)
++{
++	if ((address & 0xff00) != 0xa000)
++		fatalerror("signal input address outside A000-A0FF: %04x\n", address);
++	m_inputs[address & 0xff] = value;
++	m_input_configured[address & 0xff] = 1;
++	logerror(
++			"SIGIN kind=xdata-input cycles=%llu address=%04x value=%02x\n",
++			machine().time().as_ticks(12'000'000),
++			address,
++			value);
++}
++
+ u8 motronic175_xdata_device::read(offs_t offset)
+ {
+ 	const u16 address = u16(offset);
+diff --git a/src/motronic175.cpp b/src/motronic175.cpp
+index 69a6154..47b7d31 100644
+--- a/src/motronic175.cpp
++++ b/src/motronic175.cpp
+@@ -98,8 +98,16 @@ void motronic175_state::machine_start()
+ 
+ void motronic175_state::p1_w(u8 data)
+ {
+-	if (data != m_p1_last)
++	if (data != m_p1_last)
++	{
+ 		++m_p1_transitions;
++		logerror(
++				"SIGOUT kind=p1 cycles=%llu old=%02x value=%02x changed=%02x\n",
++				m_maincpu->total_cycles(),
++				m_p1_last,
++				data,
++				m_p1_last ^ data);
++	}
+ 	m_p1_last = data;
+ }
+ 

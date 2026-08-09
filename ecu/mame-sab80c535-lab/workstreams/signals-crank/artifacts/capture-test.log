@@ -1,0 +1,8 @@
+Warning: -video none doesn't make much sense without -seconds_to_run
+Soft reset
+[:maincpu] write of un-hooked port 3 fd
+[:maincpu] write of un-hooked port 2 ff
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 0 ff
+[:maincpu] write of un-hooked port 1 ff
+[:] SAB515CAP result=00 transitions=4 cycles=884 pc=019B

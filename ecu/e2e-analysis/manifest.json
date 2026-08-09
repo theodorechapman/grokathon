@@ -1,0 +1,240 @@
+{
+  "canonical_image": {
+    "path": "/Users/matcha/Code/grokathon/ecu/analysis/TotalCombinedROM.bin",
+    "size": 40960,
+    "sha256": "e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33",
+    "provenance": "Community UART-derived internal ROM combined with the external EPROM; strongly corroborated, not factory-authenticated."
+  },
+  "external_eprom": {
+    "path": "/Users/matcha/Code/grokathon/ecu/318i_175_soft1267356378.bin",
+    "size": 32768,
+    "sha256": "d0dfe278311142c9e2114d106791cdd4cf09b0d0cc2d35c4f64fc20b7ecbbc68"
+  },
+  "internal_rom": {
+    "cpu_range": "CODE:0000-1fff",
+    "size": 8192,
+    "sha256": "78578932ddc905732a2c074a8a0a3b1468af7393b5439f389b9c69d4f42f133f",
+    "sum16": 46367,
+    "sum16_hex": "0xb51f",
+    "non_ff_bytes": 1183,
+    "programmed_ranges": [
+      {
+        "start": 0,
+        "start_hex": "0x0000",
+        "end": 6,
+        "end_hex": "0x0006",
+        "size": 6
+      },
+      {
+        "start": 11,
+        "start_hex": "0x000b",
+        "end": 14,
+        "end_hex": "0x000e",
+        "size": 3
+      },
+      {
+        "start": 19,
+        "start_hex": "0x0013",
+        "end": 22,
+        "end_hex": "0x0016",
+        "size": 3
+      },
+      {
+        "start": 27,
+        "start_hex": "0x001b",
+        "end": 30,
+        "end_hex": "0x001e",
+        "size": 3
+      },
+      {
+        "start": 35,
+        "start_hex": "0x0023",
+        "end": 38,
+        "end_hex": "0x0026",
+        "size": 3
+      },
+      {
+        "start": 43,
+        "start_hex": "0x002b",
+        "end": 46,
+        "end_hex": "0x002e",
+        "size": 3
+      },
+      {
+        "start": 67,
+        "start_hex": "0x0043",
+        "end": 70,
+        "end_hex": "0x0046",
+        "size": 3
+      },
+      {
+        "start": 75,
+        "start_hex": "0x004b",
+        "end": 78,
+        "end_hex": "0x004e",
+        "size": 3
+      },
+      {
+        "start": 83,
+        "start_hex": "0x0053",
+        "end": 86,
+        "end_hex": "0x0056",
+        "size": 3
+      },
+      {
+        "start": 91,
+        "start_hex": "0x005b",
+        "end": 94,
+        "end_hex": "0x005e",
+        "size": 3
+      },
+      {
+        "start": 99,
+        "start_hex": "0x0063",
+        "end": 102,
+        "end_hex": "0x0066",
+        "size": 3
+      },
+      {
+        "start": 107,
+        "start_hex": "0x006b",
+        "end": 110,
+        "end_hex": "0x006e",
+        "size": 3
+      },
+      {
+        "start": 115,
+        "start_hex": "0x0073",
+        "end": 126,
+        "end_hex": "0x007e",
+        "size": 11
+      },
+      {
+        "start": 256,
+        "start_hex": "0x0100",
+        "end": 393,
+        "end_hex": "0x0189",
+        "size": 137
+      },
+      {
+        "start": 394,
+        "start_hex": "0x018a",
+        "end": 419,
+        "end_hex": "0x01a3",
+        "size": 25
+      },
+      {
+        "start": 420,
+        "start_hex": "0x01a4",
+        "end": 537,
+        "end_hex": "0x0219",
+        "size": 117
+      },
+      {
+        "start": 538,
+        "start_hex": "0x021a",
+        "end": 565,
+        "end_hex": "0x0235",
+        "size": 27
+      },
+      {
+        "start": 566,
+        "start_hex": "0x0236",
+        "end": 681,
+        "end_hex": "0x02a9",
+        "size": 115
+      },
+      {
+        "start": 682,
+        "start_hex": "0x02aa",
+        "end": 709,
+        "end_hex": "0x02c5",
+        "size": 27
+      },
+      {
+        "start": 710,
+        "start_hex": "0x02c6",
+        "end": 711,
+        "end_hex": "0x02c7",
+        "size": 1
+      },
+      {
+        "start": 1024,
+        "start_hex": "0x0400",
+        "end": 1044,
+        "end_hex": "0x0414",
+        "size": 20
+      },
+      {
+        "start": 1045,
+        "start_hex": "0x0415",
+        "end": 1062,
+        "end_hex": "0x0426",
+        "size": 17
+      },
+      {
+        "start": 1063,
+        "start_hex": "0x0427",
+        "end": 1086,
+        "end_hex": "0x043e",
+        "size": 23
+      },
+      {
+        "start": 1087,
+        "start_hex": "0x043f",
+        "end": 1230,
+        "end_hex": "0x04ce",
+        "size": 143
+      },
+      {
+        "start": 1231,
+        "start_hex": "0x04cf",
+        "end": 1415,
+        "end_hex": "0x0587",
+        "size": 184
+      },
+      {
+        "start": 1416,
+        "start_hex": "0x0588",
+        "end": 1694,
+        "end_hex": "0x069e",
+        "size": 278
+      },
+      {
+        "start": 1695,
+        "start_hex": "0x069f",
+        "end": 1712,
+        "end_hex": "0x06b0",
+        "size": 17
+      },
+      {
+        "start": 8190,
+        "start_hex": "0x1ffe",
+        "end": 8192,
+        "end_hex": "0x2000",
+        "size": 2
+      }
+    ]
+  },
+  "mapping_verification": {
+    "cpu_0x2000_0x7fff_matches_external_same_offset": true,
+    "cpu_0x8000_0x9fff_matches_external_0x0000_0x1fff": true
+  },
+  "cpu_memory_map": [
+    {
+      "start": "0x0000",
+      "end": "0x1fff",
+      "source": "combined internal UART image"
+    },
+    {
+      "start": "0x2000",
+      "end": "0x7fff",
+      "source": "external EPROM offsets 0x2000-0x7fff"
+    },
+    {
+      "start": "0x8000",
+      "end": "0x9fff",
+      "source": "external EPROM offsets 0x0000-0x1fff"
+    }
+  ]
+}

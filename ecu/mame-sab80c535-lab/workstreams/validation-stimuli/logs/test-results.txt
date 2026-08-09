@@ -1,0 +1,24 @@
+$ python3 tests/test-negative-gates.py -v
+test_rejects_absent_hardware_evidence (__main__.NegativeGateTests.test_rejects_absent_hardware_evidence) ... ok
+test_rejects_non_monotonic_cycles (__main__.NegativeGateTests.test_rejects_non_monotonic_cycles) ... ok
+test_rejects_rom_mismatch (__main__.NegativeGateTests.test_rejects_rom_mismatch) ... ok
+test_rejects_wrong_pc_cycle (__main__.NegativeGateTests.test_rejects_wrong_pc_cycle) ... ok
+test_rejects_wrong_pc_order (__main__.NegativeGateTests.test_rejects_wrong_pc_order) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+$ python3 tools/run-mame.py --profile all
+PASS ROM /Users/matcha/Code/grokathon/ecu/analysis/TotalCombinedROM.bin size=0xa000 sha256=e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33
+PASS {"access_events": 24, "input_events": 0, "interrupt_events": 0, "passed": true, "pc_events": 31, "profile": "canonical-reset"}
+PASS {"matched_pc_count": 8, "passed": true, "path": ["0000", "0073", "0075", "0077", "0079", "007b", "20e0", "5c00"], "runtime_source": "mame-debugger-runtime"}
+PASS ROM /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/validation-stimuli/fixtures/stimulus.bin size=0x1000 sha256=c9cf8a0250f311bb221451bbd9fed879a451c58838d08d0d004cd343c296e389
+PASS {"access_events": 124, "input_events": 14, "interrupt_events": 22, "passed": true, "pc_events": 1244, "profile": "surrogate-stimulus"}
+$ python3 tools/run-mame.py --profile all # deterministic replay
+PASS ROM /Users/matcha/Code/grokathon/ecu/analysis/TotalCombinedROM.bin size=0xa000 sha256=e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33
+PASS {"access_events": 24, "input_events": 0, "interrupt_events": 0, "passed": true, "pc_events": 31, "profile": "canonical-reset"}
+PASS {"matched_pc_count": 8, "passed": true, "path": ["0000", "0073", "0075", "0077", "0079", "007b", "20e0", "5c00"], "runtime_source": "mame-debugger-runtime"}
+PASS ROM /Users/matcha/Code/grokathon/ecu/mame-sab80c535-lab/workstreams/validation-stimuli/fixtures/stimulus.bin size=0x1000 sha256=c9cf8a0250f311bb221451bbd9fed879a451c58838d08d0d004cd343c296e389
+PASS {"access_events": 124, "input_events": 14, "interrupt_events": 22, "passed": true, "pc_events": 1244, "profile": "surrogate-stimulus"}
+PASS: normalized reset and stimulus replays are byte-identical

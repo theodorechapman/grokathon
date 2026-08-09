@@ -1,0 +1,7 @@
+Warning: -video none doesn't make much sense without -seconds_to_run
+Soft reset
+[:maincpu] write of un-hooked port 3 fd
+[:maincpu] write of un-hooked port 2 ff
+[:maincpu] write of un-hooked port 1 ff
+[:maincpu] write of un-hooked port 0 ff
+[:] SAB515TEST result=00 cycles=469 pc=0535

@@ -1,0 +1,29 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - link [ref=f2e4] [cursor=pointer]:
+        - /url: /
+        - img "Nova" [ref=f2e5]
+      - generic [ref=f2e6]:
+        - link "Arcade" [ref=f2e7] [cursor=pointer]:
+          - /url: /arcade
+        - link "Sign in with 𝕏" [ref=f2e9] [cursor=pointer]:
+          - /url: /api/auth/login
+    - link "← Back to the arcade" [ref=f2e10] [cursor=pointer]:
+      - /url: /arcade
+    - generic [ref=f2e11]:
+      - heading "Breakout" [level=1] [ref=f2e12]
+      - paragraph [ref=f2e13]: The first game. Reverse-engineered from a Game Boy ROM and rebuilt for the browser, brick by brick.
+    - iframe [ref=f2e15]:
+      - main [ref=f3e2]:
+        - generic "Breakout game screen" [ref=f3e4]: Canvas is required to run the game.
+    - generic [ref=f2e16]:
+      - paragraph [ref=f2e17]: left and right arrows to move the paddle
+      - generic [ref=f2e18]:
+        - img "QR code for https://playgrokgames.vercel.app/g/breakout" [ref=f2e19]
+        - paragraph [ref=f2e20]: Scan to play on your phone
+    - generic [ref=f2e21]:
+      - textbox "Describe your remix" [ref=f2e22]:
+        - /placeholder: "Remix it: make gravity low, two players, neon everything"
+      - button "Remix" [disabled] [ref=f2e23]
+  - alert [ref=f2e24]

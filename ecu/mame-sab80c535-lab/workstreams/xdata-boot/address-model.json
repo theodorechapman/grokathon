@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "rom_sha256": "e262e6aa26ddf6c7c8aa02f636d422709309e0a08945739b84886204d1693e33",
+  "xram_window": {
+    "range": "0000-03ff",
+    "classification": "retained RAM",
+    "evidence_tier": "approximation over proven storage accesses",
+    "basis": [
+      "5c00 checks paged warm/cold markers and preserves or increments 015b",
+      "8f97 clears 0081-00f1 and 0300-03ff",
+      "runtime-state.json records read/write state throughout pages 00-03",
+      "physical decode width, technology, and power-on contents remain unknown"
+    ]
+  },
+  "proven_storage": [
+    {
+      "range": "0300-03ff",
+      "classification": "proven storage",
+      "basis": "8faa-8fb7 clears the full range; record consumers read and write it"
+    },
+    {
+      "range": "0000,015a-015b,020b-020c",
+      "classification": "retained RAM",
+      "basis": "5c54-5c98 performs marker reads, conditional updates, and cold/warm selection"
+    },
+    {
+      "range": "0162",
+      "classification": "retained RAM",
+      "basis": "written at 5c4e and read/written by later state routines"
+    }
+  ],
+  "asic_registers": [
+    {
+      "range": "a081",
+      "write_classification": "unknown",
+      "read_classification": "input/status",
+      "basis": "5c0c writes 01; 2fd3 later reads it; no readback equivalence is proven"
+    },
+    {
+      "range": "a010-a011",
+      "write_classification": "unknown",
+      "read_classification": "unknown",
+      "basis": "5c12 and 5c16 write 81; authoritative direct references contain no readers"
+    },
+    {
+      "range": "a040",
+      "write_classification": "write-only output",
+      "read_classification": "input/status",
+      "basis": "61b3 commits the 0022 output shadow; 5cea and 33a0 use independent read semantics"
+    },
+    {
+      "range": "a041",
+      "write_classification": "write-only output",
+      "read_classification": "input/status",
+      "basis": "phase/output writers are proven; 33a0 uses independent read semantics"
+    },
+    {
+      "range": "a002-a005,a008-a009,a020-a021",
+      "write_classification": "unknown",
+      "read_classification": "unknown",
+      "basis": "startup and runtime write the registers, but physical ASIC semantics are unresolved"
+    }
+  ],
+  "ordered_early_accesses": [
+    {"pc": "5c0c", "op": "W", "address": "a081", "value": "01"},
+    {"pc": "5c12", "op": "W", "address": "a010", "value": "81"},
+    {"pc": "5c16", "op": "W", "address": "a011", "value": "81"},
+    {"pc": "5c1c", "op": "W", "address": "a040", "value": "ff"},
+    {"pc": "5c20", "op": "W", "address": "a041", "value": "ff"},
+    {"pc": "5c26", "op": "W", "address": "a002", "value": "00"},
+    {"pc": "5c2a", "op": "W", "address": "a003", "value": "00"},
+    {"pc": "5c2e", "op": "W", "address": "a004", "value": "00"},
+    {"pc": "5c32", "op": "W", "address": "a005", "value": "00"},
+    {"pc": "5c38", "op": "W", "address": "a008", "value": "00"},
+    {"pc": "5c3c", "op": "W", "address": "a009", "value": "00"},
+    {"pc": "5c42", "op": "W", "address": "a021", "value": "d7"},
+    {"pc": "5c48", "op": "W", "address": "a020", "value": "ff"},
+    {"pc": "5c4e", "op": "W", "address": "0162", "value": "d7"},
+    {"pc": "5c54", "op": "R", "address": "0000", "value": "00"},
+    {"pc": "5c78", "op": "W", "address": "015b", "value": "00"},
+    {"pc": "5c81", "op": "R", "address": "015b", "value": "00"},
+    {"pc": "5c8a", "op": "W", "address": "020b", "value": "00"},
+    {"pc": "5c8f", "op": "W", "address": "020c", "value": "aa"}
+  ],
+  "conditional_marker_accesses": [
+    {"pc": "5c60", "op": "R", "address": "015a", "condition": "0000 equals 55"},
+    {"pc": "5c69", "op": "R", "address": "015b", "condition": "015a equals complement of 0000"},
+    {"pc": "5c6f", "op": "W", "address": "015b", "condition": "warm marker pair valid"},
+    {"pc": "5c97", "op": "R", "address": "020c", "condition": "015b nonzero"}
+  ],
+  "first_later_reads_on_cold_path": [
+    {"pc": "8f9c", "address": "015b", "classification": "retained RAM"},
+    {"pc": "8fe3", "address": "00c2", "classification": "retained RAM"},
+    {
+      "pc": "5cea",
+      "address": "a040",
+      "classification": "input/status",
+      "decision_pc": "5cef",
+      "modeled_value": "ff open bus",
+      "runtime_status": "not reached because inherited Timer-2 interrupts after 5cd3"
+    }
+  ]
+}

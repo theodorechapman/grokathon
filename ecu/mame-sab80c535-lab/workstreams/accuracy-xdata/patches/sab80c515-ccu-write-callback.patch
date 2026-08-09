@@ -1,0 +1,45 @@
+diff --git a/src/devices/cpu/mcs51/sab80c535.h b/src/devices/cpu/mcs51/sab80c535.h
+--- a/src/devices/cpu/mcs51/sab80c535.h
++++ b/src/devices/cpu/mcs51/sab80c535.h
+@@ -27,6 +27,7 @@ public:
+ 	auto an5_func() { return m_an_func[5].bind(); }
+ 	auto an6_func() { return m_an_func[6].bind(); }
+ 	auto an7_func() { return m_an_func[7].bind(); }
++	auto ccu_write_cb() { return m_ccu_write_cb.bind(); }
+ 
+ protected:
+ 	virtual void device_start() override ATTR_COLD;
+@@ -40,6 +41,7 @@ protected:
+ 	virtual void update_timer_t2(int cycles) override;
+ 
+ 	devcb_read8::array<8> m_an_func;
++	devcb_write8 m_ccu_write_cb;
+ 
+ private:
+ 	enum : u8
+diff --git a/src/devices/cpu/mcs51/sab80c535.cpp b/src/devices/cpu/mcs51/sab80c535.cpp
+--- a/src/devices/cpu/mcs51/sab80c535.cpp
++++ b/src/devices/cpu/mcs51/sab80c535.cpp
+@@ -111,6 +111,8 @@ void sab80c535_device::ccu_w(offs_t offset, u8 data)
+ 		request_capture(offset / 2);
+ 	else
+ 		m_cc[offset - 2] = data;
++	if (offset == 1 || offset >= 4)
++		m_ccu_write_cb(offset, data);
+ }
+ 
+ u8 sab80c535_device::crc_r(offs_t offset)
+@@ -178,12 +180,13 @@ void sab80c535_device::sfr_map(address_map &map)
+ sab80c535_device::sab80c535_device(const machine_config &mconfig, const char *tag, device_t *owner, u32 clock)
+ 	: i8052_device(mconfig, SAB80C535, tag, owner, clock, 0)
+ 	, m_an_func(*this, 0)
++	, m_ccu_write_cb(*this)
+ {
+ }
+ 
+ void sab80c535_device::device_start()
+ {
+ 	i8052_device::device_start();
+ 	save_item(NAME(m_p4));
+ 	save_item(NAME(m_p5));
+ 	save_item(NAME(m_adcon));

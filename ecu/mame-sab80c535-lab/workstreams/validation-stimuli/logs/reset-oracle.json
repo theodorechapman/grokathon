@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "profile": "canonical-reset",
+  "pc_events": 31,
+  "access_events": 24,
+  "interrupt_events": 0,
+  "input_events": 0
+}

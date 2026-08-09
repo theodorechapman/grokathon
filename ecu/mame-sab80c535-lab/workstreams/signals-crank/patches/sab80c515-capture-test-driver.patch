@@ -1,0 +1,166 @@
+diff --git a/src/mame/mame.lst b/src/mame/mame.lst
+--- a/src/mame/mame.lst
++++ b/src/mame/mame.lst
+@@ -44005,6 +44005,9 @@ motronic175
+ @source:skeleton/sab80c515test.cpp
+ sab515test
+ 
++@source:skeleton/sab80c515-capture-test.cpp
++sab515cap
++
+ @source:skeleton/ms9540.cpp
+ ms9540
+ 
+diff --git a/src/mame/skeleton/sab80c515-capture-test.cpp b/src/mame/skeleton/sab80c515-capture-test.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/mame/skeleton/sab80c515-capture-test.cpp
+@@ -0,0 +1,148 @@
++// license:BSD-3-Clause
++// copyright-holders:Supratik Lahiri
++
++#include "emu.h"
++#include "cpu/mcs51/sab80c535.h"
++
++namespace {
++
++struct capture_pin_event
++{
++	u64 cycle;
++	int state;
++};
++
++static constexpr capture_pin_event CAPTURE_TRANSITIONS[] = {
++	{ 40, ASSERT_LINE },
++	{ 200, CLEAR_LINE },
++	{ 204, ASSERT_LINE },
++	{ 321, CLEAR_LINE },
++};
++
++class sab80c515_capture_test_state : public driver_device
++{
++public:
++	sab80c515_capture_test_state(
++			const machine_config &mconfig,
++			device_type type,
++			const char *tag)
++		: driver_device(mconfig, type, tag)
++		, m_maincpu(*this, "maincpu")
++	{
++	}
++
++	void sab80c515_capture_test(machine_config &config);
++
++protected:
++	virtual void machine_start() override ATTR_COLD;
++
++private:
++	TIMER_CALLBACK_MEMBER(capture_transition);
++	TIMER_CALLBACK_MEMBER(timeout);
++	void code_map(address_map &map) ATTR_COLD;
++	void result_w(u8 data);
++	void xdata_map(address_map &map) ATTR_COLD;
++
++	required_device<sab80c535_device> m_maincpu;
++	emu_timer *m_capture_timer = nullptr;
++	emu_timer *m_timeout_timer = nullptr;
++	u8 m_transition_index = 0;
++};
++
++void sab80c515_capture_test_state::code_map(address_map &map)
++{
++	map(0x0000, 0x07ff).rom().region("maincpu", 0);
++}
++
++void sab80c515_capture_test_state::xdata_map(address_map &map)
++{
++	map(0xff00, 0xff00).w(FUNC(sab80c515_capture_test_state::result_w));
++}
++
++void sab80c515_capture_test_state::machine_start()
++{
++	m_capture_timer = timer_alloc(
++			FUNC(sab80c515_capture_test_state::capture_transition),
++			this);
++	m_timeout_timer = timer_alloc(
++			FUNC(sab80c515_capture_test_state::timeout),
++			this);
++	m_capture_timer->adjust(
++			m_maincpu->cycles_to_attotime(CAPTURE_TRANSITIONS[0].cycle));
++	m_timeout_timer->adjust(attotime::from_msec(2));
++	save_item(NAME(m_transition_index));
++}
++
++TIMER_CALLBACK_MEMBER(sab80c515_capture_test_state::capture_transition)
++{
++	const capture_pin_event &transition =
++			CAPTURE_TRANSITIONS[m_transition_index++];
++	m_maincpu->set_input_line(SAB80C515_CC0_LINE, transition.state);
++	if (m_transition_index < std::size(CAPTURE_TRANSITIONS))
++	{
++		const u64 delta =
++				CAPTURE_TRANSITIONS[m_transition_index].cycle - transition.cycle;
++		m_capture_timer->adjust(m_maincpu->cycles_to_attotime(delta));
++	}
++}
++
++void sab80c515_capture_test_state::result_w(u8 data)
++{
++	logerror(
++			"SAB515CAP result=%02X transitions=%u cycles=%llu pc=%04X\n",
++			data,
++			m_transition_index,
++			static_cast<unsigned long long>(m_maincpu->total_cycles()),
++			unsigned(m_maincpu->pc()));
++	m_timeout_timer->adjust(attotime::never);
++	machine().schedule_exit();
++}
++
++TIMER_CALLBACK_MEMBER(sab80c515_capture_test_state::timeout)
++{
++	logerror(
++			"SAB515CAP timeout transitions=%u cycles=%llu pc=%04X\n",
++			m_transition_index,
++			static_cast<unsigned long long>(m_maincpu->total_cycles()),
++			unsigned(m_maincpu->pc()));
++	machine().schedule_exit();
++}
++
++static INPUT_PORTS_START(sab80c515_capture_test)
++INPUT_PORTS_END
++
++void sab80c515_capture_test_state::sab80c515_capture_test(
++		machine_config &config)
++{
++	SAB80C535(config, m_maincpu, XTAL(12'000'000));
++	m_maincpu->set_addrmap(
++			AS_PROGRAM,
++			&sab80c515_capture_test_state::code_map);
++	m_maincpu->set_addrmap(
++			AS_DATA,
++			&sab80c515_capture_test_state::xdata_map);
++}
++
++ROM_START(sab515cap)
++	ROM_REGION(0x0800, "maincpu", 0)
++	ROM_LOAD(
++			"sab80c515-capture-test.bin",
++			0x0000,
++			0x0800,
++			CRC(dcfd8ed7) SHA1(c0cc7558d64523d067ffa4049c8869a8c64d9e94))
++ROM_END
++
++} // anonymous namespace
++
++SYST(
++		2026,
++		sab515cap,
++		0,
++		0,
++		sab80c515_capture_test,
++		sab80c515_capture_test,
++		sab80c515_capture_test_state,
++		empty_init,
++		"MAME",
++		"SAB80C515 external CC0 capture test",
++		MACHINE_NO_SOUND | MACHINE_NOT_WORKING)

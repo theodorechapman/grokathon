@@ -1,0 +1,122 @@
+{
+  "profile": "surrogate-stimulus",
+  "mame_commit": "a5cc550d0a2cf7218cbd94c1a0780f7a713f8d8e",
+  "rom_size": 4096,
+  "rom_sha256": "c9cf8a0250f311bb221451bbd9fed879a451c58838d08d0d004cd343c296e389",
+  "minimum_pc_events": 100,
+  "maximum_cycle": 2600,
+  "pc_order": "prefix",
+  "ordered_pcs": [
+    "0000",
+    "0100"
+  ],
+  "require_accesses": [
+    {
+      "space": "sfr",
+      "access": "write",
+      "address": "00d8",
+      "data": "00"
+    },
+    {
+      "space": "sfr",
+      "access": "read",
+      "address": "00d9",
+      "data": "24"
+    },
+    {
+      "space": "sfr",
+      "access": "write",
+      "address": "00d8",
+      "data": "01"
+    },
+    {
+      "space": "sfr",
+      "access": "read",
+      "address": "00d9",
+      "data": "68"
+    },
+    {
+      "space": "xdata",
+      "access": "write",
+      "address": "a100",
+      "data": "24"
+    },
+    {
+      "space": "xdata",
+      "access": "write",
+      "address": "a101",
+      "data": "68"
+    },
+    {
+      "space": "xdata",
+      "access": "write",
+      "address": "a110",
+      "data": "e0"
+    },
+    {
+      "space": "xdata",
+      "access": "write",
+      "address": "a112",
+      "data": "3c"
+    }
+  ],
+  "require_interrupts": [
+    {
+      "source": "generic-external-0",
+      "minimum": 1
+    },
+    {
+      "source": "generic-timer-0",
+      "minimum": 2
+    },
+    {
+      "source": "generic-uart",
+      "minimum": 2
+    }
+  ],
+  "require_inputs": [
+    {
+      "interface": "adc0-callback",
+      "state": 18
+    },
+    {
+      "interface": "adc1-callback",
+      "state": 52
+    },
+    {
+      "interface": "generic-int0",
+      "state": 1
+    },
+    {
+      "interface": "generic-int0",
+      "state": 0
+    },
+    {
+      "interface": "generic-uart-rx",
+      "state": 0
+    },
+    {
+      "interface": "generic-uart-rx",
+      "state": 1
+    }
+  ],
+  "require_port_sequences": [
+    {
+      "address": "0001",
+      "values": [
+        "00",
+        "ac",
+        "8c",
+        "ac"
+      ]
+    },
+    {
+      "address": "0003",
+      "values": [
+        "ff",
+        "fd",
+        "ff"
+      ]
+    }
+  ]
+}

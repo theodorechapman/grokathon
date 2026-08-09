@@ -1,0 +1,1210 @@
+{
+  "identity": {
+    "path": "/Users/matcha/Code/grokathon/ecu/318i_175_soft1267356378.bin",
+    "size": 32768,
+    "sha256": "d0dfe278311142c9e2114d106791cdd4cf09b0d0cc2d35c4f64fc20b7ecbbc68",
+    "dme": "0261200175",
+    "software": "1267356378"
+  },
+  "checksum": {
+    "xdf_claims": [
+      {
+        "address": "0x7ffd",
+        "raw_hex": "ffff",
+        "value": 65535
+      }
+    ],
+    "metadata_word_at_0x1f00": 32559,
+    "assessment": "The XDF address 0x7ffd contains erased 0xffff bytes and is not a credible stored checksum in this image. The 0x7f2f word at 0x1f00 precedes the DME/software identifiers and is a stronger checksum candidate, but its algorithm is not proven by the dumped external code."
+  },
+  "xdf": {
+    "title": "BMW E30 175bin",
+    "active_entry_count": 40,
+    "issue_count": 15,
+    "issues": [
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "axis": "x",
+        "expected": 6,
+        "actual": 4
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "High part throttle fuel map2",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "High part throttle fuel map2",
+        "axis": "y",
+        "expected": 12,
+        "actual": 7
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "High part throttle fuel map3",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low Throttle Fuel map3",
+        "axis": "y",
+        "expected": 12,
+        "actual": 7
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "High part Throttle Ignition map(in real BTDC)",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "High part Throttle Ignition map2",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low part Throttle Ignition Map2",
+        "axis": "y",
+        "expected": 12,
+        "actual": 1
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low part Throttle Ignition Map3",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low part Throttle Ignition Map3",
+        "axis": "y",
+        "expected": 12,
+        "actual": 1
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low part Throttle Ignition Map4",
+        "axis": "x",
+        "expected": 7,
+        "actual": 6
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Low part Throttle Ignition Map4",
+        "axis": "y",
+        "expected": 12,
+        "actual": 1
+      },
+      {
+        "type": "axis_label_count_mismatch",
+        "title": "Map Address INDEX in the code",
+        "axis": "y",
+        "expected": 132,
+        "actual": 1
+      },
+      {
+        "type": "duplicate_address_views",
+        "address": 18911,
+        "address_hex": "0x49df",
+        "titles": [
+          "Fuel WOT Map1",
+          "Fuel WOT Map1(AFR example)"
+        ]
+      },
+      {
+        "type": "duplicate_address_views",
+        "address": 19266,
+        "address_hex": "0x4b42",
+        "titles": [
+          "High part throttle fuel map ",
+          "High part throttle fuel map(in AFR example)"
+        ]
+      }
+    ]
+  },
+  "calibration_descriptors": {
+    "decoded_unique_count": 110,
+    "matched_xdf_title_count": 30,
+    "matched_xdf_titles": [
+      "Engine temp sensor transfer map",
+      "Engine temperature enrichment",
+      "Engine temperature enrichment2",
+      "Fuel Acceleration enrichment",
+      "Fuel Idle Map",
+      "Fuel WOT Map 2",
+      "Fuel WOT Map1",
+      "Fuel WOT Map1(AFR example)",
+      "High part Throttle Ignition map(in real BTDC)",
+      "High part Throttle Ignition map2",
+      "High part Throttle Ignition map3",
+      "High part Throttle Ignition map4",
+      "High part throttle fuel map ",
+      "High part throttle fuel map(in AFR example)",
+      "High part throttle fuel map2",
+      "High part throttle fuel map3",
+      "Idle speed(AT in D or R with A/C on)",
+      "Idle speed(AT in D or R with AC off)",
+      "Idle speed(AT in P or N, AC on or off)",
+      "Ignition Idle Timing map",
+      "Ignition WOT Map 1",
+      "Ignition WOT Map 2",
+      "Injector Lag vs. Battery voltage",
+      "Low Throttle Fuel map ",
+      "Low Throttle Fuel map2",
+      "Low Throttle Fuel map3",
+      "Low part Throttle Ignition Map",
+      "Low part Throttle Ignition Map2",
+      "Low part Throttle Ignition Map3",
+      "Low part Throttle Ignition Map4"
+    ],
+    "true_dimension_mismatches": [],
+    "one_dimensional_orientation_differences": [
+      {
+        "title": "Injector Lag vs. Battery voltage",
+        "descriptor_target": "0x4885",
+        "descriptor_dimensions": [
+          4,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          4
+        ]
+      },
+      {
+        "title": "Engine temperature enrichment",
+        "descriptor_target": "0x495f",
+        "descriptor_dimensions": [
+          6,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          6
+        ]
+      },
+      {
+        "title": "Engine temperature enrichment2",
+        "descriptor_target": "0x4980",
+        "descriptor_dimensions": [
+          6,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          6
+        ]
+      },
+      {
+        "title": "Idle speed(AT in P or N, AC on or off)",
+        "descriptor_target": "0x57e7",
+        "descriptor_dimensions": [
+          6,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          6
+        ]
+      },
+      {
+        "title": "Idle speed(AT in D or R with A/C on)",
+        "descriptor_target": "0x57f5",
+        "descriptor_dimensions": [
+          4,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          4
+        ]
+      },
+      {
+        "title": "Idle speed(AT in D or R with AC off)",
+        "descriptor_target": "0x57ff",
+        "descriptor_dimensions": [
+          4,
+          1
+        ],
+        "xdf_dimensions": [
+          1,
+          4
+        ]
+      }
+    ],
+    "xdf_tables_without_exact_descriptor": [
+      {
+        "title": "Injector trim(Air temp/battery voltage)",
+        "address": 18737,
+        "address_hex": "0x4931",
+        "rows": 8,
+        "cols": 5
+      },
+      {
+        "title": "Ignition Dwell (battery voltage vs. RPM)",
+        "address": 20715,
+        "address_hex": "0x50eb",
+        "rows": 12,
+        "cols": 7
+      },
+      {
+        "title": "Map Address INDEX in the code",
+        "address": 17856,
+        "address_hex": "0x45c0",
+        "rows": 132,
+        "cols": 2
+      },
+      {
+        "title": "AFM voltage transfer map",
+        "address": 18192,
+        "address_hex": "0x4710",
+        "rows": 32,
+        "cols": 1
+      },
+      {
+        "title": "AFM map scale factors (injector size adjusting)",
+        "address": 18176,
+        "address_hex": "0x4700",
+        "rows": 1,
+        "cols": 8
+      }
+    ],
+    "used_descriptors": [
+      {
+        "pointer_indices": [
+          0,
+          5,
+          62,
+          102,
+          105
+        ],
+        "target": "0x4835",
+        "type": "0x38",
+        "dimensions": [
+          2,
+          1
+        ],
+        "payload_address": "0x4839",
+        "immediate_call_count": 24,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          1
+        ],
+        "target": "0x483b",
+        "type": "0x04",
+        "dimensions": [
+          12,
+          1
+        ],
+        "payload_address": "0x4849",
+        "immediate_call_count": 2,
+        "xdf_titles": [
+          "Engine temp sensor transfer map"
+        ]
+      },
+      {
+        "pointer_indices": [
+          2
+        ],
+        "target": "0x4855",
+        "type": "0x37",
+        "dimensions": [
+          4,
+          1
+        ],
+        "payload_address": "0x485b",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          3
+        ],
+        "target": "0x485f",
+        "type": "0x38",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x4867",
+        "immediate_call_count": 4,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          4
+        ],
+        "target": "0x486d",
+        "type": "0x38",
+        "dimensions": [
+          2,
+          1
+        ],
+        "payload_address": "0x4871",
+        "immediate_call_count": 1,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          6
+        ],
+        "target": "0x4873",
+        "type": "0x3a",
+        "dimensions": [
+          3,
+          1
+        ],
+        "payload_address": "0x4878",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          7
+        ],
+        "target": "0x487b",
+        "type": "0x3b",
+        "dimensions": [
+          4,
+          1
+        ],
+        "payload_address": "0x4881",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          8
+        ],
+        "target": "0x4885",
+        "type": "0x36",
+        "dimensions": [
+          4,
+          1
+        ],
+        "payload_address": "0x488b",
+        "immediate_call_count": 1,
+        "xdf_titles": [
+          "Injector Lag vs. Battery voltage"
+        ]
+      },
+      {
+        "pointer_indices": [
+          9
+        ],
+        "target": "0x488f",
+        "type": "0x3b",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x4897",
+        "immediate_call_count": 1,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          10
+        ],
+        "target": "0x489d",
+        "type": "0x3b",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x48a5",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          11
+        ],
+        "target": "0x48ab",
+        "type": "0x3b",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x48b3",
+        "immediate_call_count": 1,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          12
+        ],
+        "target": "0x48b9",
+        "type": "0x3b",
+        "dimensions": [
+          3,
+          4
+        ],
+        "payload_address": "0x48c4",
+        "immediate_call_count": 1,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          13
+        ],
+        "target": "0x48d0",
+        "type": "0x38",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x48d8",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          16
+        ],
+        "target": "0x4920",
+        "type": "0x3b",
+        "dimensions": [
+          8,
+          1
+        ],
+        "payload_address": "0x492a",
+        "immediate_call_count": 2,
+        "xdf_titles": []
+      },
+      {
+        "pointer_indices": [
+          19
+        ],
+        "target": "0x496d",
+        "type": "0x3b",
+        "dimensions": [
+          3,
+          3
+        ],
+        "payload_address": "0x4977",
+        "immediate_call_count": 1,
+        "xdf_titles": [
+          "Fuel Acceleration enrichment"
+        ]
+      },
+      {
+        "pointer_indices": [
+          20
+        ],
+        "target": "0x4980",
+        "type": "0x38",
+        "dimensions": [
+          6,
+          1
+        ],
+        "payload_address": "0x4988",
+        "immediate_call_count": 2,
+        "xdf_titles": [
+          "Engine temperature enrichment2"
+        ]
+      }
+    ]
+  },
+  "master_lookup": {
+    "service": "CODE:0400",
+    "pointer_count": 132,
+    "unique_target_count": 128,
+    "resolved_immediate_calls": 57,
+    "dynamic_or_unresolved_calls": 19,
+    "used_immediate_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      16,
+      17,
+      19,
+      20,
+      21,
+      24
+    ],
+    "top_used_indices": [
+      {
+        "index": 0,
+        "target": "0x4835",
+        "immediate_call_count": 21,
+        "call_addresses": [
+          "CODE:33ef",
+          "CODE:3572",
+          "CODE:3725",
+          "CODE:3729",
+          "CODE:3805",
+          "CODE:39be",
+          "CODE:3b62",
+          "CODE:608c",
+          "CODE:632f",
+          "CODE:633b",
+          "CODE:653c",
+          "CODE:6b68",
+          "CODE:6b6f",
+          "CODE:6b74",
+          "CODE:6c47",
+          "CODE:71e2",
+          "CODE:75f7",
+          "CODE:7c8b",
+          "CODE:9e47",
+          "CODE:9eb3",
+          "CODE:9ebc"
+        ],
+        "functions": [
+          "CODE:33a0",
+          "CODE:3530",
+          "CODE:3723",
+          "CODE:3800",
+          "CODE:39b3",
+          "CODE:3ab2",
+          "CODE:6083",
+          "CODE:6327",
+          "CODE:6501",
+          "CODE:6b66",
+          "CODE:6bb7",
+          "CODE:71b6",
+          "CODE:75f5",
+          "CODE:7c22",
+          "CODE:9e43",
+          "CODE:9e88"
+        ]
+      },
+      {
+        "index": 3,
+        "target": "0x485f",
+        "immediate_call_count": 4,
+        "call_addresses": [
+          "CODE:3ac1",
+          "CODE:3ac5",
+          "CODE:6b7c",
+          "CODE:6bde"
+        ],
+        "functions": [
+          "CODE:3ab2",
+          "CODE:6b66",
+          "CODE:6bb7"
+        ]
+      },
+      {
+        "index": 5,
+        "target": "0x4835",
+        "immediate_call_count": 3,
+        "call_addresses": [
+          "CODE:3b17",
+          "CODE:6cf1",
+          "CODE:6f79"
+        ],
+        "functions": [
+          "CODE:3ab2",
+          "CODE:6bb7",
+          "CODE:6f57"
+        ]
+      },
+      {
+        "index": 17,
+        "target": "0x4959",
+        "immediate_call_count": 3,
+        "call_addresses": [
+          "CODE:3679",
+          "CODE:3981",
+          "CODE:3986"
+        ],
+        "functions": [
+          "CODE:3610",
+          "CODE:3800"
+        ]
+      },
+      {
+        "index": 1,
+        "target": "0x483b",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:6c5b",
+          "CODE:7d0c"
+        ],
+        "functions": [
+          "CODE:6bb7",
+          "CODE:7cf6"
+        ]
+      },
+      {
+        "index": 2,
+        "target": "0x4855",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:3ad7",
+          "CODE:7c99"
+        ],
+        "functions": [
+          "CODE:3ab2",
+          "CODE:7c92"
+        ]
+      },
+      {
+        "index": 6,
+        "target": "0x4873",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:3b0a",
+          "CODE:717d"
+        ],
+        "functions": [
+          "CODE:3ab2",
+          "CODE:7163"
+        ]
+      },
+      {
+        "index": 7,
+        "target": "0x487b",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:6d02",
+          "CODE:7167"
+        ],
+        "functions": [
+          "CODE:6bb7",
+          "CODE:7163"
+        ]
+      },
+      {
+        "index": 10,
+        "target": "0x489d",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:38ae",
+          "CODE:38b7"
+        ],
+        "functions": [
+          "CODE:3800"
+        ]
+      },
+      {
+        "index": 13,
+        "target": "0x48d0",
+        "immediate_call_count": 2,
+        "call_addresses": [
+          "CODE:35b1",
+          "CODE:35ba"
+        ],
+        "functions": [
+          "CODE:3585"
+        ]
+      }
+    ],
+    "unresolved_calls": [
+      {
+        "call_address": "CODE:3435",
+        "function": "CODE:33a0"
+      },
+      {
+        "call_address": "CODE:3446",
+        "function": "CODE:33a0"
+      },
+      {
+        "call_address": "CODE:3640",
+        "function": "CODE:3610"
+      },
+      {
+        "call_address": "CODE:3759",
+        "function": "CODE:3723"
+      },
+      {
+        "call_address": "CODE:37c2",
+        "function": "CODE:3723"
+      },
+      {
+        "call_address": "CODE:3831",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:3835",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:383d",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:384f",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:3858",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:385d",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:3862",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:388f",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:389b",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:38e7",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:3917",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:392c",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:3931",
+        "function": "CODE:3800"
+      },
+      {
+        "call_address": "CODE:7619",
+        "function": "CODE:75f5"
+      }
+    ]
+  },
+  "rev_limit": {
+    "xdf_constants": [
+      {
+        "title": "Rev Limit(primary)",
+        "address": "0x42d5",
+        "raw_hex": "90",
+        "value": 6336.805556,
+        "equation": "912500/X,TH|0|0|0|0|"
+      },
+      {
+        "title": "Rev Limit(secondary)",
+        "address": "0x4313",
+        "raw_hex": "90",
+        "value": 6336.805556,
+        "equation": "912500/X,TH|0|0|0|0|"
+      },
+      {
+        "title": "Rev Limit buffer(primary)",
+        "address": "0x42d6",
+        "raw_hex": "03",
+        "value": 120,
+        "equation": "X*40,TH|0|0|0|0|"
+      },
+      {
+        "title": "Rev Limit buffer(secondary)",
+        "address": "0x4314",
+        "raw_hex": "03",
+        "value": 120,
+        "equation": "X*40,TH|0|0|0|0|"
+      }
+    ],
+    "primary_record_base": "0x42d0",
+    "secondary_record_base": "0x430e",
+    "identical_record_prefix_bytes": 18,
+    "identical_record_prefix_hex": "02010154509003340f04100a331040080105",
+    "direct_dptr_loads_of_primary_base": [
+      "0x3535"
+    ],
+    "functions_with_direct_nearby_references": [
+      {
+        "entry": "CODE:3530",
+        "name": "FUN_CODE_3530",
+        "references": [
+          "CODE:42d0",
+          "CODE:42d1",
+          "CODE:42d2"
+        ]
+      }
+    ],
+    "interpretation": "External code directly loads the primary record base and copies only offsets 0..2. No external byte-exact reference reaches the limit bytes at offsets 5..6. Their runtime consumer may be in the undumped internal ROM; the XDF names remain plausible but not fully code-proven."
+  },
+  "ghidra": {
+    "language": "8051:BE:16:default",
+    "memory_blocks": [
+      {
+        "name": "INTERNAL_MASK_ROM_UNDUMPED",
+        "start": "CODE:0000",
+        "end": "CODE:1fff",
+        "size": 8192,
+        "initialized": false,
+        "read": true,
+        "write": false,
+        "execute": true
+      },
+      {
+        "name": "EXTERNAL_EPROM_LOW",
+        "start": "CODE:2000",
+        "end": "CODE:7fff",
+        "size": 24576,
+        "initialized": true,
+        "read": true,
+        "write": false,
+        "execute": true
+      },
+      {
+        "name": "EXTERNAL_EPROM_HIGH_ALIAS",
+        "start": "CODE:8000",
+        "end": "CODE:9fff",
+        "size": 8192,
+        "initialized": true,
+        "read": true,
+        "write": false,
+        "execute": true
+      },
+      {
+        "name": "REG_BANK_1",
+        "start": "INTMEM:0000",
+        "end": "INTMEM:0007",
+        "size": 8,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "REG_BANK_2",
+        "start": "INTMEM:0008",
+        "end": "INTMEM:000f",
+        "size": 8,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "REG_BANK_3",
+        "start": "INTMEM:0010",
+        "end": "INTMEM:0017",
+        "size": 8,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "REG_BANK_4",
+        "start": "INTMEM:0018",
+        "end": "INTMEM:001f",
+        "size": 8,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "INTMEM",
+        "start": "INTMEM:0020",
+        "end": "INTMEM:00ff",
+        "size": 224,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "SFR",
+        "start": "SFR:0080",
+        "end": "SFR:00ff",
+        "size": 128,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "BITS",
+        "start": "BITS:0000",
+        "end": "BITS:007f",
+        "size": 128,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      },
+      {
+        "name": "SFR-BITS",
+        "start": "BITS:0080",
+        "end": "BITS:00ff",
+        "size": 128,
+        "initialized": false,
+        "read": true,
+        "write": true,
+        "execute": false
+      }
+    ],
+    "function_count": 296,
+    "decompiled_function_count": 80,
+    "functions_with_calibration_references": [
+      {
+        "entry": "CODE:3530",
+        "name": "FUN_CODE_3530",
+        "references": [
+          "CODE:42d0",
+          "CODE:42d1",
+          "CODE:42d2"
+        ]
+      },
+      {
+        "entry": "CODE:3ee2",
+        "name": "FUN_CODE_3ee2",
+        "references": [
+          "CODE:44ea"
+        ]
+      },
+      {
+        "entry": "CODE:3ef5",
+        "name": "FUN_CODE_3ef5",
+        "references": [
+          "CODE:4515",
+          "CODE:4516",
+          "CODE:4532"
+        ]
+      },
+      {
+        "entry": "CODE:61fc",
+        "name": "FUN_CODE_61fc",
+        "references": [
+          "CODE:453f",
+          "CODE:4577",
+          "CODE:4578"
+        ]
+      },
+      {
+        "entry": "CODE:73af",
+        "name": "FUN_CODE_73af",
+        "references": [
+          "CODE:453b"
+        ]
+      },
+      {
+        "entry": "CODE:7705",
+        "name": "FUN_CODE_7705",
+        "references": [
+          "CODE:457a"
+        ]
+      },
+      {
+        "entry": "CODE:809d",
+        "name": "FUN_CODE_809d",
+        "references": [
+          "CODE:4517",
+          "CODE:4518",
+          "CODE:451d",
+          "CODE:451e"
+        ]
+      },
+      {
+        "entry": "CODE:8198",
+        "name": "FUN_CODE_8198",
+        "references": [
+          "CODE:451a",
+          "CODE:451b",
+          "CODE:451f",
+          "CODE:4520",
+          "CODE:4521",
+          "CODE:4522"
+        ]
+      },
+      {
+        "entry": "CODE:829f",
+        "name": "FUN_CODE_829f",
+        "references": [
+          "CODE:452f",
+          "CODE:4530"
+        ]
+      },
+      {
+        "entry": "CODE:8402",
+        "name": "FUN_CODE_8402",
+        "references": [
+          "CODE:4532",
+          "CODE:4533",
+          "CODE:47b1",
+          "CODE:47b5"
+        ]
+      },
+      {
+        "entry": "CODE:8475",
+        "name": "FUN_CODE_8475",
+        "references": [
+          "CODE:44fd",
+          "CODE:44fe",
+          "CODE:4501",
+          "CODE:4502",
+          "CODE:4503",
+          "CODE:4504",
+          "CODE:4505",
+          "CODE:4506",
+          "CODE:4507",
+          "CODE:4508",
+          "CODE:450b",
+          "CODE:450c",
+          "CODE:450d",
+          "CODE:450e",
+          "CODE:4513",
+          "CODE:4514",
+          "CODE:4515",
+          "CODE:4516"
+        ]
+      },
+      {
+        "entry": "CODE:8e50",
+        "name": "FUN_CODE_8e50",
+        "references": [
+          "CODE:4532",
+          "CODE:4533",
+          "CODE:455c",
+          "CODE:4560",
+          "CODE:4561",
+          "CODE:457c",
+          "CODE:457d"
+        ]
+      },
+      {
+        "entry": "CODE:9016",
+        "name": "FUN_CODE_9016",
+        "references": [
+          "CODE:4532"
+        ]
+      },
+      {
+        "entry": "CODE:90f5",
+        "name": "FUN_CODE_90f5",
+        "references": [
+          "CODE:4532"
+        ]
+      },
+      {
+        "entry": "CODE:9158",
+        "name": "FUN_CODE_9158",
+        "references": [
+          "CODE:4535",
+          "CODE:4536",
+          "CODE:4537",
+          "CODE:4542",
+          "CODE:4543",
+          "CODE:454f",
+          "CODE:4552",
+          "CODE:4553",
+          "CODE:4554",
+          "CODE:4557",
+          "CODE:4558",
+          "CODE:4559",
+          "CODE:4562",
+          "CODE:4563",
+          "CODE:456a",
+          "CODE:456b",
+          "CODE:4572",
+          "CODE:4573",
+          "CODE:4574",
+          "CODE:4575"
+        ]
+      },
+      {
+        "entry": "CODE:93ff",
+        "name": "FUN_CODE_93ff",
+        "references": [
+          "CODE:4533",
+          "CODE:4534",
+          "CODE:4540",
+          "CODE:4541",
+          "CODE:456c",
+          "CODE:456d",
+          "CODE:456e",
+          "CODE:456f",
+          "CODE:4571",
+          "CODE:4576"
+        ]
+      },
+      {
+        "entry": "CODE:9500",
+        "name": "FUN_CODE_9500",
+        "references": [
+          "CODE:453a"
+        ]
+      },
+      {
+        "entry": "CODE:951c",
+        "name": "FUN_CODE_951c",
+        "references": [
+          "CODE:453d",
+          "CODE:453e"
+        ]
+      },
+      {
+        "entry": "CODE:955c",
+        "name": "FUN_CODE_955c",
+        "references": [
+          "CODE:455d",
+          "CODE:455e",
+          "CODE:4564"
+        ]
+      },
+      {
+        "entry": "CODE:9678",
+        "name": "FUN_CODE_9678",
+        "references": [
+          "CODE:4565",
+          "CODE:4566",
+          "CODE:4567",
+          "CODE:4568"
+        ]
+      },
+      {
+        "entry": "CODE:96b2",
+        "name": "FUN_CODE_96b2",
+        "references": [
+          "CODE:4569"
+        ]
+      },
+      {
+        "entry": "CODE:96cf",
+        "name": "FUN_CODE_96cf",
+        "references": [
+          "CODE:454b",
+          "CODE:454c",
+          "CODE:454d",
+          "CODE:454e",
+          "CODE:4550"
+        ]
+      },
+      {
+        "entry": "CODE:9df1",
+        "name": "FUN_CODE_9df1",
+        "references": [
+          "CODE:453c",
+          "CODE:4579"
+        ]
+      }
+    ],
+    "function_count_with_sfr_references": 102
+  }
+}

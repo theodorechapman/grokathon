@@ -1,0 +1,68 @@
+{
+  "agreement": false,
+  "comparison_mode": "masked",
+  "masks": {
+    "psw": "0xfe"
+  },
+  "stream_lengths": {
+    "mame": 31,
+    "ghidra": 64,
+    "static": 31
+  },
+  "agreement_prefix_events": 31,
+  "compared_fields": {
+    "accesses.sfr": 31,
+    "accesses.xdata": 31,
+    "cycles": 31,
+    "interrupt_entry": 31,
+    "opcode": 31,
+    "pc": 31,
+    "registers.a": 31,
+    "registers.b": 31,
+    "registers.dptr": 31,
+    "registers.psw": 31,
+    "registers.sp": 31
+  },
+  "unmatched_fields": {
+    "ghidra:accesses.idata": 31,
+    "ghidra:accesses.sfr": 31,
+    "ghidra:accesses.xdata": 31,
+    "ghidra:cycles": 31,
+    "ghidra:registers.ie": 31,
+    "ghidra:registers.ip": 31,
+    "mame:accesses.idata": 31,
+    "mame:registers.r0": 31,
+    "mame:registers.r1": 31,
+    "mame:registers.r2": 31,
+    "mame:registers.r3": 31,
+    "mame:registers.r4": 31,
+    "mame:registers.r5": 31,
+    "mame:registers.r6": 31,
+    "mame:registers.r7": 31,
+    "static:registers.ie": 31,
+    "static:registers.ip": 31,
+    "static:registers.r0": 31,
+    "static:registers.r1": 31,
+    "static:registers.r2": 31,
+    "static:registers.r3": 31,
+    "static:registers.r4": 31,
+    "static:registers.r5": 31,
+    "static:registers.r6": 31,
+    "static:registers.r7": 31
+  },
+  "first_divergence": {
+    "ordinal": 31,
+    "pcs": {
+      "mame": null,
+      "ghidra": "5c2b",
+      "static": null
+    },
+    "field": "event_presence",
+    "category": "unavailable_evidence",
+    "values": {
+      "mame": 31,
+      "ghidra": 64,
+      "static": 31
+    }
+  }
+}
