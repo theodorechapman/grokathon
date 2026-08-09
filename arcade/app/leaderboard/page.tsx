@@ -72,25 +72,19 @@ export default async function LeaderboardPage({
                 >
                   {game.title}
                 </Link>
-                {selectedRoot?.slug === game.slug && familyRemixes.length > 0 && (
-                  <nav className="boardFamList">
-                    {familyRemixes.map((remix) => (
-                      <Link
-                        key={remix.slug}
-                        href={`/leaderboard?g=${remix.slug}`}
-                        className={
-                          selected?.slug === remix.slug
-                            ? "boardFamRow boardFamRowActive"
-                            : "boardFamRow"
-                        }
-                        style={{ paddingLeft: 12 + (remix.depth - 1) * 14 }}
-                      >
-                        <span className="boardFamTitle">↳ {remix.title}</span>
-                        <span className="boardFamStats">{remix.plays} plays</span>
-                      </Link>
-                    ))}
-                  </nav>
-                )}
+                {selectedRoot?.slug === game.slug &&
+                  familyRemixes.map((remix) => (
+                    <Link
+                      key={remix.slug}
+                      href={`/leaderboard?g=${remix.slug}`}
+                      className={
+                        selected?.slug === remix.slug ? "railCheck railCheckOn" : "railCheck"
+                      }
+                      style={{ paddingLeft: 14 + remix.depth * 14 }}
+                    >
+                      ↳ {remix.title}
+                    </Link>
+                  ))}
               </div>
             ))}
           </div>
