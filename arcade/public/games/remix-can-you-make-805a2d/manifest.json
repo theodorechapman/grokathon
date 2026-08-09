@@ -1,0 +1,12 @@
+{
+  "slug": "remix-can-you-make-805a2d",
+  "title": "Postie Breakout",
+  "description": "Classic brick-breaker with a green playfield for Postie.",
+  "controls": "D-Pad left/right moves paddle; clear all bricks to win",
+  "source": "remix",
+  "parent": "kirbys-dream-land",
+  "creator": "suprapan07",
+  "rom": "remix-can-you-make-805a2d.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T05:42:45Z"
+}
