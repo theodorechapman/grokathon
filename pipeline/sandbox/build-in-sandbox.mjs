@@ -35,12 +35,21 @@ async function streamGrok(sandbox, task, logPath) {
     env: { XAI_API_KEY: process.env.XAI_API_KEY ?? "" },
     detached: true,
   });
-  for await (const line of cmd.logs()) {
-    const text = line.data.toString().trimEnd();
-    if (!text) continue;
-    appendFileSync(logPath, text + "\n");
-    emit({ event: "log", line: text.slice(0, 2000) });
+  // logs() yields chunks, not lines: one chunk can hold several NDJSON events
+  // or end mid-line. Split on newlines and buffer the partial tail, or the
+  // runner's per-line JSON parse silently drops everything.
+  let tail = "";
+  const emitLine = (line) => {
+    if (!line.trim()) return;
+    appendFileSync(logPath, line + "\n");
+    emit({ event: "log", line });
+  };
+  for await (const chunk of cmd.logs()) {
+    const parts = (tail + chunk.data.toString()).split("\n");
+    tail = parts.pop() ?? "";
+    parts.forEach(emitLine);
   }
+  emitLine(tail);
   const done = await cmd.wait();
   return done.exitCode;
 }
