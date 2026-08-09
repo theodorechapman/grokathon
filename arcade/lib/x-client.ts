@@ -153,6 +153,22 @@ export async function getLikedTweetIds(): Promise<Set<string>> {
   return new Set((page.data ?? []).map((t) => t.id));
 }
 
+/** DM a user. Notification layer for the build pipeline — a failed DM must
+ * never fail the sync, callers catch. */
+export async function sendDm(participantId: string, text: string): Promise<void> {
+  const token = await accessToken();
+  const res = await fetch(`${API}/dm_conversations/with/${participantId}/messages`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ text }),
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (!res.ok) {
+    const detail = await res.text();
+    throw new Error(`X DM failed: ${res.status} ${detail.slice(0, 200)}`);
+  }
+}
+
 export async function getReplies(conversationId: string, sinceId?: string): Promise<Tweet[]> {
   const params: Record<string, string> = {
     query: `conversation_id:${conversationId}`,
