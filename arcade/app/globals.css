@@ -1996,3 +1996,35 @@ a.myCreationParent:hover {
   letter-spacing: 0.06em;
   color: var(--dim);
 }
+
+.boardScroll {
+  margin-top: 24px;
+  max-height: 440px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.boardScroll .board {
+  margin-top: 0;
+}
+
+.boardScroll .board th {
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  z-index: 1;
+}
+
+.boardScroll .board tr:last-child td {
+  border-bottom: none;
+}
+
+.boardFootnote {
+  margin-top: 8px;
+  text-align: right;
+  color: var(--dim);
+  font-size: 12px;
+  font-family: var(--font-mono), monospace;
+}

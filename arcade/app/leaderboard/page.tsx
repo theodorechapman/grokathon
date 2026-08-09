@@ -138,35 +138,40 @@ async function OverallBoard() {
       guests — everyone gets a name from their session until they sign in with 𝕏
       and claim their rows.
     </p>
-    <table className="board">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>Plays</th>
-          <th>Games played</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row, i) => {
-          const guest = row.handle.startsWith("guest:");
-          const display = guest
-            ? customNames[row.handle] ?? guestDisplayName(row.handle.slice(6))
-            : `@${row.handle}`;
-          return (
-            <tr key={row.handle} className={guest ? "guestRow" : undefined}>
-              <td>{i + 1}</td>
-              <td>
-                {display}
-                {guest && <span className="guestChip">guest</span>}
-              </td>
-              <td>{row.plays}</td>
-              <td>{row.games}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="boardScroll">
+      <table className="board">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Plays</th>
+            <th>Games played</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => {
+            const guest = row.handle.startsWith("guest:");
+            const display = guest
+              ? customNames[row.handle] ?? guestDisplayName(row.handle.slice(6))
+              : `@${row.handle}`;
+            return (
+              <tr key={row.handle} className={guest ? "guestRow" : undefined}>
+                <td>{i + 1}</td>
+                <td>
+                  {display}
+                  {guest && <span className="guestChip">guest</span>}
+                </td>
+                <td>{row.plays}</td>
+                <td>{row.games}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    <p className="boardFootnote">
+      showing top {rows.length} of {totalPlayers} players
+    </p>
     </>
   );
 }
