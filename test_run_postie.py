@@ -1,24 +1,16 @@
 from __future__ import annotations
 
-import subprocess
 import unittest
-from unittest import mock
 
 import run_postie
 
 
-class GrokAuthenticationTests(unittest.TestCase):
-    def test_authenticated_models_response(self) -> None:
-        response = subprocess.CompletedProcess(["grok", "models"], 0, "Default model: grok-4.5\n")
-        with mock.patch.object(run_postie.subprocess, "run", return_value=response):
-            self.assertTrue(run_postie.grok_is_authenticated("grok"))
+class EngineDefaultTests(unittest.TestCase):
+    def test_grok_is_pinned_to_45_high(self) -> None:
+        self.assertEqual(run_postie.engine_defaults("grok"), ("grok-4.5", "high"))
 
-    def test_unauthenticated_models_response(self) -> None:
-        response = subprocess.CompletedProcess(
-            ["grok", "models"], 0, "You are not authenticated.\n"
-        )
-        with mock.patch.object(run_postie.subprocess, "run", return_value=response):
-            self.assertFalse(run_postie.grok_is_authenticated("grok"))
+    def test_codex_defaults_are_unchanged(self) -> None:
+        self.assertEqual(run_postie.engine_defaults("codex"), ("gpt-5.6-sol", "high"))
 
 
 if __name__ == "__main__":

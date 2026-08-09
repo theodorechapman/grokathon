@@ -41,6 +41,7 @@ class CommandTests(unittest.TestCase):
     def test_grok_command_is_headless_and_passes_effort(self) -> None:
         command = run_agent._grok_cmd(Path("/work"), "continue", "grok-test", "high")
         self.assertIn("--trust", command)
+        self.assertIn("--no-auto-update", command)
         self.assertIn("--output-format", command)
         self.assertIn("streaming-json", command)
         self.assertIn("--reasoning-effort", command)

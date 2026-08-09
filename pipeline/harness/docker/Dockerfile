@@ -1,8 +1,8 @@
 # Agent-in-a-box: the staticre backend (JDK + Ghidra + GhidraBoy + staticre)
-# plus the Codex CLI, GBDK-2020, the harness, and the grokboy SameBoy bridge for
-# dynamic analysis. A run is fully self-contained: the staticre MCP runs as a
-# subprocess *inside* this container (--mcp local). The ROM is a bind-mount
-# input; the workspace is written to a mounted /out.
+# plus the Codex and Grok Build CLIs, GBDK-2020, the harness, and the grokboy
+# SameBoy bridge for dynamic analysis. A run is fully self-contained: the
+# staticre MCP runs as a subprocess *inside* this container (--mcp local). The
+# ROM is a bind-mount input; the workspace is written to a mounted /out.
 
 # --- grokboy builder: SameBoy core + boot ROM + the native bridge ---
 # SameBoy's build needs rgbds (boot ROM assembly) and cppp (a small C
@@ -38,6 +38,20 @@ RUN curl -fsSL "$CODEX_URL" -o /tmp/codex.tar.gz \
     && (mv /usr/local/bin/codex-aarch64-unknown-linux-musl /usr/local/bin/codex 2>/dev/null || true) \
     && chmod +x /usr/local/bin/codex \
     && rm /tmp/codex.tar.gz
+
+# Grok Build CLI. This image is arm64 (as are the pinned Codex and GBDK
+# artifacts above/below), so pin and verify the official Linux arm64 binary.
+# It lives outside GROK_HOME because runtime authentication mounts a temporary
+# ~/.grok directory containing the user's local credential.
+ARG GROK_VERSION=0.2.114
+ARG GROK_BASE_URL=https://x.ai/cli
+ARG GROK_SHA256=478b0681185a9d0c7f358f06e2cc531a54e6b51aaf53f1ca1f4b453397fe3dc3
+RUN curl -fsSL "$GROK_BASE_URL/grok-${GROK_VERSION}-linux-aarch64" -o /tmp/grok \
+    && echo "$GROK_SHA256  /tmp/grok" | sha256sum -c - \
+    && install -m 755 /tmp/grok /usr/local/bin/grok \
+    && ln -s /usr/local/bin/grok /usr/local/bin/agent \
+    && rm -f /tmp/grok \
+    && /usr/local/bin/grok --version
 
 # GBDK-2020, so the agent can compile its raw-C reconstruction to a ROM
 ARG GBDK_URL=https://github.com/gbdk-2020/gbdk-2020/releases/download/4.5.0/gbdk-linux-arm64.tar.gz

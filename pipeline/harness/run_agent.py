@@ -126,6 +126,7 @@ def _grok_cmd(ws: Path, prompt: str, model: str | None,
         "--permission-mode", "bypassPermissions",
         "--output-format", "streaming-json",
         "--disable-web-search",
+        "--no-auto-update",
     ]
     if model:
         cmd += ["--model", model]

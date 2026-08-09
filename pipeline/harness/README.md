@@ -18,7 +18,7 @@ python harness/run_agent.py --rom raw_rom/breakout.gb --dry-run
 python harness/run_agent.py --rom raw_rom/breakout.gb --engine codex
 python harness/run_agent.py --rom raw_rom/breakout.gb --model grok-4 --label ball-hunt
 
-# From the repository root, Grok Build uses the host CLI and ~/.grok login
+# From the repository root, run containerized Grok 4.5 High with ~/.grok auth
 python3 run_postie.py --engine grok
 ```
 
@@ -57,21 +57,23 @@ separate blinded ROM. Runs never share state, so several can be compared.
   workspace. `--max-passes` defaults to an eight-pass safety ceiling; use `0`
   for no ceiling. Only `complete` exits successfully, while `hard_blocked`
   exits distinctly.
-- `run_postie.py --engine grok` deliberately runs on the host, headlessly, and
-  uses the current user's `~/.grok` credential. The harness marks the generated
-  workspace trusted so its per-run staticre MCP server can start. Codex remains
-  containerized.
+- `run_postie.py --engine grok` runs Grok Build inside the agent container,
+  pinned to `grok-4.5` with `high` reasoning effort. The
+  runner gives the container a writable, ephemeral copy of `~/.grok` auth and
+  syncs only refreshed auth back afterward. It never mounts the host's Grok
+  binary, configuration, plugins, or session history.
 
 ## Containerized runs (agent-in-a-box)
 
 `docker/` builds an image containing the full stack: staticre backend, Codex
-CLI, GBDK-2020, this harness, and the grokboy SameBoy bridge (`agent/sameboy.py` +
-`bin/libgrokboy.so`) for dynamic analysis.
+and Grok Build CLIs, GBDK-2020, this harness, and the grokboy SameBoy bridge
+(`agent/sameboy.py` + `bin/libgrokboy.so`) for dynamic analysis.
 
 ```sh
 pipeline/harness/docker/build.sh        # build (needs staticre:local base)
 pipeline/harness/docker/smoke.sh        # verify the emulator bridge in-container
 pipeline/harness/docker/run.sh rom.gb   # one containerized agent run
+ENGINE=grok pipeline/harness/docker/run.sh rom.gb  # Grok 4.5 High
 ```
 
 Screenshots from the emulator bridge are PNGs upscaled 3x by default
