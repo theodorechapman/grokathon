@@ -1,0 +1,12 @@
+{
+  "slug": "make-the-ball-leave-d5f0e3",
+  "title": "Neon Ball Trail",
+  "description": "Break bricks while your ball paints a glowing neon path.",
+  "controls": "left and right arrows to move the paddle",
+  "source": "remix",
+  "parent": "breakout",
+  "creator": null,
+  "rom": "make-the-ball-leave-d5f0e3.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T00:19:23Z"
+}
