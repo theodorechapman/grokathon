@@ -125,7 +125,7 @@ export default async function ArcadePage({
 
       <header className="masthead" style={{ marginTop: 8 }}>
         <h1>The arcade</h1>
-        <p>Say a game, watch it get built, remix anyone&apos;s.</p>
+        <p>Pick a game and play. Beat the board, then remix it into your own.</p>
       </header>
 
       <MyGames />
