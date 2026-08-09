@@ -168,7 +168,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
             one file you can read.
           </p>
         )}
-        <BuildHistory slug={slug} />
+        <BuildHistory slug={slug} title={game.title} />
         {/* Every C-first creation ships its full source; the link shows
             wherever a real source.c exists. */}
         {hasSource && (

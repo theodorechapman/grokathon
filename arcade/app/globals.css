@@ -2139,3 +2139,87 @@ a.myCreationParent:hover {
     text-align: center;
   }
 }
+
+/* ---- build log modal ---- */
+
+.buildModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(6, 6, 10, 0.78);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.buildModal {
+  width: min(1000px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.buildModalHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.buildModalHead h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.buildModalHead .cardByline {
+  display: block;
+  margin-top: 6px;
+  max-width: 75ch;
+  line-height: 1.5;
+}
+
+.buildModalClose {
+  flex: none;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--dim);
+  font-size: 14px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.buildModalClose:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.buildModal .buildTerm {
+  margin-top: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.buildModal .buildTermBody {
+  min-height: 0;
+  flex: 1;
+}
+
+.buildModal .termScreen {
+  height: min(64vh, 640px);
+}
+
+@media (max-width: 720px) {
+  .buildModalOverlay { padding: 10px; }
+  .buildModal { max-height: 96vh; padding: 14px; }
+  .buildModal .termScreen { height: 58vh; }
+}
