@@ -1,0 +1,12 @@
+{
+  "slug": "faster-aliens-two-lives-313e5e",
+  "title": "Space Invaders",
+  "description": "Clear three waves \u2014 aliens speed up each round; two lives.",
+  "controls": "D-pad left/right move, A fire",
+  "source": "remix",
+  "parent": "space-invaders-0ecdc6",
+  "creator": "suprapan07",
+  "rom": "faster-aliens-two-lives-313e5e.gb",
+  "scoring": "time",
+  "createdAt": "2026-08-09T04:32:21Z"
+}

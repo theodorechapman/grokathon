@@ -1,0 +1,52 @@
+{
+  "engine": "sandbox",
+  "job": {
+    "prompt": "make the aliens march faster each wave and give the player two lives",
+    "source": "x",
+    "parent": "space-invaders-0ecdc6",
+    "creator": "suprapan07"
+  },
+  "stages": [
+    {
+      "at": "2026-08-09T04:31:22Z",
+      "stage": "queued",
+      "detail": ""
+    },
+    {
+      "at": "2026-08-09T04:31:22Z",
+      "stage": "forking source",
+      "detail": "starting from space-invaders-0ecdc6's shipped source.c"
+    },
+    {
+      "at": "2026-08-09T04:31:23Z",
+      "stage": "sandbox up",
+      "detail": "booting a Vercel Sandbox microVM with GBDK + Grok Build CLI"
+    },
+    {
+      "at": "2026-08-09T04:31:25Z",
+      "stage": "grok cli",
+      "detail": "attempt 1: Grok Build rewriting main.c in the sandbox"
+    },
+    {
+      "at": "2026-08-09T04:32:05Z",
+      "stage": "compiling",
+      "detail": "verifying: fresh lcc build, 32KB ROM, NOVA_STATE intact"
+    },
+    {
+      "at": "2026-08-09T04:32:07Z",
+      "stage": "sandbox done",
+      "detail": "artifacts downloaded, microVM shut down"
+    },
+    {
+      "at": "2026-08-09T04:32:11Z",
+      "stage": "cover art",
+      "detail": "grok-imagine drawing the cover"
+    },
+    {
+      "at": "2026-08-09T04:32:21Z",
+      "stage": "publishing",
+      "detail": "pushing to the arcade"
+    }
+  ],
+  "finishedAt": "2026-08-09T04:32:21Z"
+}
