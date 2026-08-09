@@ -243,14 +243,14 @@ def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None
         base_html = (GAMES / target / "index.html").read_text()
     html, err = None, None
     for attempt in range(3):
-        report(slug, "writing the game", f"attempt {attempt + 1}, grok is writing the html")
+        report(slug, "writing the game", f"attempt {attempt + 1}, {MODEL} writing a self-contained index.html")
         try:
             html = generate_html(job["prompt"], err, base_html)
         except Exception as e:
             err = f"generation call failed: {e}"
             log(f"job {slug}: {err} (attempt {attempt + 1})")
             continue
-        report(slug, "verifying", "contract checks")
+        report(slug, "verifying", "contract checks: self-contained, nova:score wired, fits any viewport")
         err = validate_html(html)
         if not err:
             break
@@ -263,6 +263,7 @@ def process_browser_job(job: dict, slug: str, target: str | None) -> Path | None
     bundle = GAMES / slug
     bundle.mkdir(parents=True, exist_ok=True)
     (bundle / "index.html").write_text(html)
+    report(slug, "cover art", "grok-imagine drawing the cover")
     make_cover(job["prompt"], bundle / "cover.png", art="Retro arcade cover art for a browser game")
     manifest = {
         "slug": slug,
@@ -313,14 +314,21 @@ def process_job(job: dict) -> Path | None:
     # remixes and GBDK draft iterations keep the breakout patch path below.
     if wants_browser_game(job, target):
         return process_browser_job(job, slug, target)
+    lineage = target or job.get("parent")
+    report(
+        slug,
+        "forking source",
+        f"starting from {lineage}'s shipped source.c" if lineage
+        else "starting from the C reverse-engineered out of the original Breakout rom",
+    )
     main_c, rom, err = None, None, None
     for attempt in range(3):
-        report(slug, "patching source", f"attempt {attempt + 1}, grok is rewriting the C")
-        main_c = patch_source(job["prompt"], err, target or job.get("parent"))
-        report(slug, "compiling", "gbdk building the rom")
+        report(slug, "patching source", f"attempt {attempt + 1}, {MODEL} rewriting the C")
+        main_c = patch_source(job["prompt"], err, lineage)
+        report(slug, "compiling", "gbdk lcc building a real 32KB .gb rom")
         rom, err = build_rom(main_c, slug)
         if rom:
-            report(slug, "verifying", "rom checks")
+            report(slug, "verifying", f"NOVA_STATE protocol at WRAM 0xCF00, rom is {rom.stat().st_size} bytes")
             break
         log(f"job {slug}: build failed (attempt {attempt + 1}): {err.splitlines()[-1] if err else '?'}")
     if not rom:
@@ -331,6 +339,7 @@ def process_job(job: dict) -> Path | None:
     bundle = GAMES / slug
     bundle.mkdir(parents=True, exist_ok=True)
     shutil.copy(rom, bundle / f"{slug}.gb")
+    report(slug, "cover art", "grok-imagine drawing the cover")
     make_cover(job["prompt"], bundle / "cover.png")
     manifest = {
         "slug": slug,
