@@ -21,9 +21,11 @@ export function GameFrame({
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [runId, setRunId] = useState(0);
   const [runEnd, setRunEnd] = useState<RunEnd | null>(null);
+  const [showStartHint, setShowStartHint] = useState(true);
 
   const restartGame = useCallback(() => {
     setRunEnd(null);
+    setShowStartHint(true);
     setRunId((n) => n + 1);
   }, []);
 
@@ -76,6 +78,15 @@ export function GameFrame({
     return () => window.removeEventListener("message", onMessage);
   }, [rom]);
 
+  useEffect(() => {
+    if (!rom) return;
+    const dismissStartHint = (event: KeyboardEvent) => {
+      if (event.key === "Enter") setShowStartHint(false);
+    };
+    window.addEventListener("keydown", dismissStartHint);
+    return () => window.removeEventListener("keydown", dismissStartHint);
+  }, [rom]);
+
   return (
     <>
       <div className="player" ref={playerRef} tabIndex={rom ? 0 : -1} onPointerDown={focusGame}>
@@ -98,6 +109,9 @@ export function GameFrame({
             tabIndex={0}
             onLoad={focusGame}
           />
+        )}
+        {rom && showStartHint && !runEnd && (
+          <p className="desktopStartHint">Press enter to start</p>
         )}
         {runEnd ? (
           <EndScreen
