@@ -5814,66 +5814,6 @@ __registry["web/app/bench"] = function (module, exports, require) {
 Object.defineProperty(exports, "__esModule", { value: true });
 
 };
-__registry["web/app/cylinder-cycle"] = function (module, exports, require) {
-"use strict";
-/**
- * Four-stroke cycle math for the cutaway inline-four.
- *
- * Flat-plane crank (throws 0-180-180-0) firing 1-3-4-2. `cylinderCycle` maps
- * a 0..4π engine-cycle angle to everything the paint code needs per cylinder:
- * slider-crank positions, valve lifts, and how bright the combustion and
- * spark events should be. Only one cylinder is ever on its power stroke.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.exhaustPulse = exports.cylinderCycle = exports.DECK_Y = exports.BASE_X = exports.SPACING = exports.BORE = exports.ROD_L = exports.THROW_R = void 0;
-exports.THROW_R = 34;
-exports.ROD_L = 118;
-exports.BORE = 44;
-exports.SPACING = 72;
-exports.BASE_X = -1.5 * exports.SPACING;
-/** Top of the block; piston crowns just reach it at TDC. */
-exports.DECK_Y = -184;
-const TAU = Math.PI * 2;
-const CYCLE = 2 * TAU;
-const THROWS = [0, Math.PI, Math.PI, 0];
-/** Cycle angle of each cylinder's firing TDC; an even 180° apart in 1-3-4-2. */
-const FIRING = [1.5 * Math.PI, 0.5 * Math.PI, 2.5 * Math.PI, 3.5 * Math.PI];
-/** How long the spark kernel stays visible before TDC, in crank radians. */
-const SPARK_LEAD = 0.5;
-const halfSine = (t) => Math.sin(Math.max(0, Math.min(1, t)) * Math.PI);
-const cylinderCycle = (cycleAngle, index) => {
-    const angle = (cycleAngle + THROWS[index]) % TAU;
-    const pinX = Math.cos(angle) * exports.THROW_R;
-    const pinY = Math.sin(angle) * exports.THROW_R;
-    const pistonY = pinY - Math.sqrt(exports.ROD_L * exports.ROD_L - pinX * pinX);
-    const phase = (((cycleAngle - FIRING[index]) % CYCLE) + CYCLE) % CYCLE;
-    const stroke = phase / Math.PI;
-    return {
-        angle,
-        pinX,
-        pinY,
-        pistonY,
-        phase,
-        combustion: stroke < 1 ? (1 - stroke) ** 1.6 : 0,
-        exhaustLift: stroke >= 1 && stroke < 2 ? halfSine(stroke - 1) : 0,
-        intakeLift: stroke >= 2 && stroke < 3 ? halfSine(stroke - 2) : 0,
-        spark: phase > CYCLE - SPARK_LEAD ? (phase - (CYCLE - SPARK_LEAD)) / SPARK_LEAD : 0,
-    };
-};
-exports.cylinderCycle = cylinderCycle;
-/** 0..1 blowdown pressure at the exhaust header, summed over cylinders. */
-const exhaustPulse = (cycleAngle) => {
-    let total = 0;
-    for (let index = 0; index < 4; index += 1) {
-        const stroke = (0, exports.cylinderCycle)(cycleAngle, index).phase / Math.PI;
-        if (stroke >= 1 && stroke < 1.7)
-            total += 1 - (stroke - 1) / 0.7;
-    }
-    return Math.min(1, total);
-};
-exports.exhaustPulse = exhaustPulse;
-
-};
 __registry["web/app/dom"] = function (module, exports, require) {
 "use strict";
 /**
@@ -5904,25 +5844,35 @@ const el = (tag, options = {}) => {
 exports.el = el;
 
 };
-__registry["web/app/engine-block"] = function (module, exports, require) {
+__registry["web/app/engine-draw"] = function (module, exports, require) {
 "use strict";
 /**
- * Static scenery for the cutaway inline-four: dyno-bay backdrop, block
- * casting, oil pan, and cylinder bores. The moving parts are painted by
- * engine-draw.ts on top of this.
+ * Canvas paint routines for the cutaway inline-four demo.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.paintBore = exports.paintBlock = exports.paintBackdrop = void 0;
-const cylinder_cycle_ts_1 = require("./cylinder-cycle.js");
+exports.paintEngine = void 0;
 const TAU = Math.PI * 2;
+const THROWS = [0, Math.PI, Math.PI, 0];
+const stroke = (ctx, path, color, width) => {
+    ctx.beginPath();
+    path();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.stroke();
+};
+const fill = (ctx, path, color) => {
+    ctx.beginPath();
+    path();
+    ctx.fillStyle = color;
+    ctx.fill();
+};
 const paintBackdrop = (ctx, w, h) => {
     const bg = ctx.createLinearGradient(0, 0, 0, h);
-    bg.addColorStop(0, '#131722');
-    bg.addColorStop(0.7, '#0c0f15');
-    bg.addColorStop(1, '#080a0e');
+    bg.addColorStop(0, '#12151c');
+    bg.addColorStop(1, '#0a0c10');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = 'rgba(120, 140, 160, 0.07)';
+    ctx.strokeStyle = 'rgba(120, 140, 160, 0.08)';
     ctx.lineWidth = 1;
     for (let x = 0; x < w; x += 36) {
         ctx.beginPath();
@@ -5931,470 +5881,184 @@ const paintBackdrop = (ctx, w, h) => {
         ctx.stroke();
     }
 };
-exports.paintBackdrop = paintBackdrop;
 const paintBlock = (ctx) => {
-    ctx.fillStyle = 'rgba(0,0,0,0.4)';
-    ctx.beginPath();
-    ctx.ellipse(6, 56, 218, 26, 0, 0, TAU);
-    ctx.fill();
-    const steel = ctx.createLinearGradient(0, cylinder_cycle_ts_1.DECK_Y, 0, 98);
-    steel.addColorStop(0, '#2c3543');
-    steel.addColorStop(0.55, '#212936');
-    steel.addColorStop(1, '#171d27');
-    ctx.fillStyle = steel;
-    ctx.beginPath();
-    ctx.moveTo(-178, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(178, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(196, 46);
-    ctx.lineTo(-196, 46);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#66748a';
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-    // oil pan with a glint of oil at the sump line
-    ctx.fillStyle = '#131820';
-    ctx.beginPath();
-    ctx.moveTo(-150, 46);
-    ctx.lineTo(150, 46);
-    ctx.lineTo(112, 98);
-    ctx.lineTo(-112, 98);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#4c5665';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.strokeStyle = 'rgba(212, 158, 64, 0.3)';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(-118, 78);
-    ctx.lineTo(118, 78);
-    ctx.stroke();
+    fill(ctx, () => {
+        ctx.ellipse(0, 48, 210, 28, 0, 0, TAU);
+    }, 'rgba(0,0,0,0.35)');
+    fill(ctx, () => {
+        ctx.moveTo(-175, -210);
+        ctx.lineTo(175, -210);
+        ctx.lineTo(195, 40);
+        ctx.lineTo(-195, 40);
+        ctx.closePath();
+    }, '#1e2530');
+    stroke(ctx, () => {
+        ctx.moveTo(-175, -210);
+        ctx.lineTo(175, -210);
+        ctx.lineTo(195, 40);
+        ctx.lineTo(-195, 40);
+        ctx.closePath();
+    }, '#6b7788', 3);
+    fill(ctx, () => {
+        ctx.rect(-170, -248, 340, 42);
+    }, '#2a3340');
+    stroke(ctx, () => {
+        ctx.rect(-170, -248, 340, 42);
+    }, '#8a97a8', 2);
+    fill(ctx, () => {
+        ctx.moveTo(-150, 40);
+        ctx.lineTo(150, 40);
+        ctx.lineTo(110, 95);
+        ctx.lineTo(-110, 95);
+        ctx.closePath();
+    }, '#151a22');
+    stroke(ctx, () => {
+        ctx.moveTo(-150, 40);
+        ctx.lineTo(150, 40);
+        ctx.lineTo(110, 95);
+        ctx.lineTo(-110, 95);
+        ctx.closePath();
+    }, '#5a6575', 2);
 };
-exports.paintBlock = paintBlock;
-const paintBore = (ctx, cx) => {
-    const wall = ctx.createLinearGradient(cx - cylinder_cycle_ts_1.BORE / 2, 0, cx + cylinder_cycle_ts_1.BORE / 2, 0);
-    wall.addColorStop(0, '#0d1117');
-    wall.addColorStop(0.5, '#1a212b');
-    wall.addColorStop(1, '#0d1117');
-    ctx.fillStyle = wall;
-    ctx.fillRect(cx - cylinder_cycle_ts_1.BORE / 2, cylinder_cycle_ts_1.DECK_Y, cylinder_cycle_ts_1.BORE, 178);
-    ctx.strokeStyle = '#4a5566';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(cx - cylinder_cycle_ts_1.BORE / 2, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(cx - cylinder_cycle_ts_1.BORE / 2, -6);
-    ctx.moveTo(cx + cylinder_cycle_ts_1.BORE / 2, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(cx + cylinder_cycle_ts_1.BORE / 2, -6);
-    ctx.stroke();
-};
-exports.paintBore = paintBore;
-
-};
-__registry["web/app/engine-draw"] = function (module, exports, require) {
-"use strict";
-/**
- * Canvas paint routines for the moving parts of the cutaway inline-four:
- * crank train, pistons, combustion, and flywheel. Static scenery lives in
- * engine-block.ts, the head in engine-head.ts, cycle math in cylinder-cycle.ts.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.paintEngine = void 0;
-const cylinder_cycle_ts_1 = require("./cylinder-cycle.js");
-const engine_block_ts_1 = require("./engine-block.js");
-const engine_head_ts_1 = require("./engine-head.js");
-const TAU = Math.PI * 2;
-const paintCrankWeb = (ctx, cx, angle) => {
-    ctx.save();
-    ctx.translate(cx, 0);
-    ctx.rotate(angle);
-    // counterweight sector opposite the pin, then the arm out to it
-    ctx.fillStyle = '#333d4b';
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.arc(0, 0, 42, Math.PI - 0.95, Math.PI + 0.95);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#6f7b8c';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.fillStyle = '#3c4654';
-    ctx.beginPath();
-    ctx.roundRect(-8, -11, cylinder_cycle_ts_1.THROW_R + 16, 22, 8);
-    ctx.fill();
-    ctx.strokeStyle = '#727e90';
-    ctx.stroke();
-    ctx.restore();
-};
-const paintPiston = (ctx, cx, c) => {
-    const crownY = c.pistonY - 26;
-    ctx.strokeStyle = '#b7c1cf';
-    ctx.lineWidth = 7;
-    ctx.beginPath();
-    ctx.moveTo(cx + c.pinX, c.pinY);
-    ctx.lineTo(cx, c.pistonY);
-    ctx.stroke();
-    ctx.strokeStyle = '#69758a';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fillStyle = '#4d5867';
-    ctx.beginPath();
-    ctx.arc(cx + c.pinX, c.pinY, 10, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = '#94a0b0';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fillStyle = '#202832';
-    ctx.beginPath();
-    ctx.arc(cx + c.pinX, c.pinY, 4, 0, TAU);
-    ctx.fill();
-    const skin = ctx.createLinearGradient(cx - cylinder_cycle_ts_1.BORE / 2, 0, cx + cylinder_cycle_ts_1.BORE / 2, 0);
-    skin.addColorStop(0, '#d3dae4');
-    skin.addColorStop(0.55, '#9aa5b4');
-    skin.addColorStop(1, '#7e8a99');
-    ctx.fillStyle = skin;
-    ctx.beginPath();
-    ctx.roundRect(cx - cylinder_cycle_ts_1.BORE / 2 + 3, crownY, cylinder_cycle_ts_1.BORE - 6, 40, 3);
-    ctx.fill();
-    ctx.strokeStyle = '#e8eef5';
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-    // ring pack lives just under the crown, not at the pin
-    ctx.strokeStyle = 'rgba(24, 28, 36, 0.55)';
-    ctx.lineWidth = 1.5;
-    for (const dy of [5, 9.5, 14]) {
-        ctx.beginPath();
-        ctx.moveTo(cx - cylinder_cycle_ts_1.BORE / 2 + 5, crownY + dy);
-        ctx.lineTo(cx + cylinder_cycle_ts_1.BORE / 2 - 5, crownY + dy);
-        ctx.stroke();
+const paintCylinders = (ctx, state, crankAngle, sparkFlash) => {
+    const throwR = 34;
+    const rodL = 118;
+    const bore = 42;
+    const spacing = 72;
+    const baseX = -1.5 * spacing;
+    for (let i = 0; i < 4; i += 1) {
+        const cx = baseX + i * spacing;
+        const angle = crankAngle + THROWS[i];
+        const pinX = cx + Math.cos(angle) * throwR;
+        const pinY = Math.sin(angle) * throwR;
+        const pistonY = pinY - Math.sqrt(Math.max(0, rodL * rodL - (pinX - cx) * (pinX - cx)));
+        stroke(ctx, () => {
+            ctx.moveTo(cx - bore / 2, -200);
+            ctx.lineTo(cx - bore / 2, 10);
+            ctx.moveTo(cx + bore / 2, -200);
+            ctx.lineTo(cx + bore / 2, 10);
+        }, '#4a5566', 2);
+        stroke(ctx, () => {
+            ctx.moveTo(pinX, pinY);
+            ctx.lineTo(cx, pistonY);
+        }, '#c5ced9', 5);
+        stroke(ctx, () => {
+            ctx.moveTo(pinX, pinY);
+            ctx.lineTo(cx, pistonY);
+        }, '#7a8696', 1.5);
+        fill(ctx, () => {
+            ctx.roundRect(cx - bore / 2 + 2, pistonY - 18, bore - 4, 36, 4);
+        }, state.cutting ? '#5a3030' : '#b8c2cf');
+        stroke(ctx, () => {
+            ctx.roundRect(cx - bore / 2 + 2, pistonY - 18, bore - 4, 36, 4);
+        }, '#e8eef5', 1.5);
+        ctx.strokeStyle = 'rgba(20,24,30,0.45)';
+        ctx.lineWidth = 1;
+        for (const dy of [-8, -2, 4]) {
+            ctx.beginPath();
+            ctx.moveTo(cx - bore / 2 + 4, pistonY + dy);
+            ctx.lineTo(cx + bore / 2 - 4, pistonY + dy);
+            ctx.stroke();
+        }
+        const nearTdc = Math.cos(angle) > 0.92 && state.fuelled && state.running;
+        if (nearTdc || (sparkFlash > 0 && i % 2 === Math.floor(crankAngle / Math.PI) % 2)) {
+            const glow = ctx.createRadialGradient(cx, pistonY - 28, 2, cx, pistonY - 28, 28);
+            glow.addColorStop(0, `rgba(255, 200, 80, ${0.55 + sparkFlash * 0.35})`);
+            glow.addColorStop(1, 'rgba(255, 80, 20, 0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(cx, pistonY - 28, 28, 0, TAU);
+            ctx.fill();
+        }
+        fill(ctx, () => {
+            ctx.arc(pinX, pinY, 9, 0, TAU);
+        }, '#dfe6ef');
+        stroke(ctx, () => {
+            ctx.arc(pinX, pinY, 9, 0, TAU);
+        }, '#8b96a5', 1.5);
     }
-    ctx.fillStyle = '#7a8798';
-    ctx.beginPath();
-    ctx.arc(cx, c.pistonY, 5, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = '#dfe6ef';
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-};
-const paintCharge = (ctx, state, cx, c) => {
-    const crownY = c.pistonY - 26;
-    const strength = c.combustion * (0.55 + state.throttle * 0.45);
-    if (state.fuelled && state.running && strength > 0.06) {
-        const flame = ctx.createLinearGradient(0, cylinder_cycle_ts_1.DECK_Y - 10, 0, crownY + 10);
-        flame.addColorStop(0, `rgba(255, 246, 205, ${Math.min(1, 1.1 * strength)})`);
-        flame.addColorStop(0.4, `rgba(255, 168, 60, ${0.7 * strength})`);
-        flame.addColorStop(1, 'rgba(255, 90, 20, 0)');
-        ctx.fillStyle = flame;
-        ctx.fillRect(cx - cylinder_cycle_ts_1.BORE / 2 + 3, cylinder_cycle_ts_1.DECK_Y - 9, cylinder_cycle_ts_1.BORE - 6, crownY - cylinder_cycle_ts_1.DECK_Y + 18);
-        const core = ctx.createRadialGradient(cx, cylinder_cycle_ts_1.DECK_Y + 6, 2, cx, cylinder_cycle_ts_1.DECK_Y + 6, 20);
-        core.addColorStop(0, `rgba(255, 255, 230, ${0.75 * strength})`);
-        core.addColorStop(1, 'rgba(255, 200, 80, 0)');
-        ctx.fillStyle = core;
-        ctx.beginPath();
-        ctx.arc(cx, cylinder_cycle_ts_1.DECK_Y + 6, 20, 0, TAU);
-        ctx.fill();
-    }
-    else if (state.running && c.intakeLift > 0) {
-        ctx.fillStyle = `rgba(96, 196, 232, ${(0.05 + 0.12 * state.throttle) * c.intakeLift})`;
-        ctx.fillRect(cx - cylinder_cycle_ts_1.BORE / 2 + 3, cylinder_cycle_ts_1.DECK_Y - 4, cylinder_cycle_ts_1.BORE - 6, crownY - cylinder_cycle_ts_1.DECK_Y + 2);
-    }
-};
-const paintFlywheel = (ctx, cycleAngle, rpm) => {
-    ctx.save();
-    ctx.translate(cylinder_cycle_ts_1.BASE_X + 3 * cylinder_cycle_ts_1.SPACING + 82, 0);
-    const disc = ctx.createRadialGradient(0, 0, 8, 0, 0, 58);
-    disc.addColorStop(0, '#38424f');
-    disc.addColorStop(1, '#262e3a');
-    ctx.fillStyle = disc;
-    ctx.beginPath();
-    ctx.arc(0, 0, 58, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = '#93a0b1';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-    // ring gear + spokes; extra ghosted passes read as motion blur at speed
-    const passes = rpm > 2500 ? 3 : 1;
-    for (let p = 0; p < passes; p += 1) {
+    stroke(ctx, () => {
+        ctx.moveTo(baseX - 40, 0);
+        ctx.lineTo(baseX + 3 * spacing + 40, 0);
+    }, '#9aa6b5', 6);
+    for (let i = 0; i < 4; i += 1) {
+        const cx = baseX + i * spacing;
+        const angle = crankAngle + THROWS[i] + Math.PI;
         ctx.save();
-        ctx.rotate((cycleAngle % TAU) - p * 0.11);
-        ctx.globalAlpha = 1 / (p + 1);
-        ctx.strokeStyle = '#5b6779';
-        ctx.lineWidth = 2;
-        for (let t = 0; t < 28; t += 1) {
-            const a = (t / 28) * TAU;
-            ctx.beginPath();
-            ctx.moveTo(Math.cos(a) * 52, Math.sin(a) * 52);
-            ctx.lineTo(Math.cos(a) * 57, Math.sin(a) * 57);
-            ctx.stroke();
-        }
-        ctx.strokeStyle = '#6a7688';
-        for (let s = 0; s < 8; s += 1) {
-            const a = (s / 8) * TAU;
-            ctx.beginPath();
-            ctx.moveTo(Math.cos(a) * 17, Math.sin(a) * 17);
-            ctx.lineTo(Math.cos(a) * 48, Math.sin(a) * 48);
-            ctx.stroke();
-        }
+        ctx.translate(cx, 0);
+        ctx.rotate(angle);
+        fill(ctx, () => {
+            ctx.ellipse(0, 18, 16, 26, 0, 0, TAU);
+        }, '#3a4452');
+        stroke(ctx, () => {
+            ctx.ellipse(0, 18, 16, 26, 0, 0, TAU);
+        }, '#7d8898', 1.5);
         ctx.restore();
     }
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = '#ccd4e0';
-    ctx.beginPath();
-    ctx.arc(0, 0, 13, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = '#8b96a5';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
+    ctx.save();
+    ctx.translate(baseX + 3 * spacing + 78, 0);
+    ctx.rotate(crankAngle);
+    fill(ctx, () => {
+        ctx.arc(0, 0, 58, 0, TAU);
+    }, '#2c3440');
+    stroke(ctx, () => {
+        ctx.arc(0, 0, 58, 0, TAU);
+    }, '#9aa7b8', 3);
+    for (let i = 0; i < 8; i += 1) {
+        const a = (i / 8) * TAU;
+        stroke(ctx, () => {
+            ctx.moveTo(Math.cos(a) * 18, Math.sin(a) * 18);
+            ctx.lineTo(Math.cos(a) * 50, Math.sin(a) * 50);
+        }, '#6a7688', 2);
+    }
+    fill(ctx, () => {
+        ctx.arc(0, 0, 12, 0, TAU);
+    }, '#cfd7e2');
     ctx.restore();
 };
-const paintEngine = (ctx, cssW, cssH, state, cycleAngle, vibPhase) => {
-    ctx.clearRect(0, 0, cssW, cssH);
-    (0, engine_block_ts_1.paintBackdrop)(ctx, cssW, cssH);
-    const scale = Math.min(cssW, cssH) / 545;
-    const amp = state.running
-        ? Math.min(4, 0.5 + (state.rpm / 7000) * 2 + (state.cutting ? 2.2 : 0))
-        : 0;
-    ctx.save();
-    ctx.translate(cssW * 0.48 + Math.sin(vibPhase) * amp * 0.7, cssH * 0.6 + Math.cos(vibPhase * 1.7) * amp * 0.4);
-    ctx.scale(scale, scale);
-    (0, engine_block_ts_1.paintBlock)(ctx);
-    for (let i = 0; i < 4; i += 1)
-        (0, engine_block_ts_1.paintBore)(ctx, cylinder_cycle_ts_1.BASE_X + i * cylinder_cycle_ts_1.SPACING);
-    (0, engine_head_ts_1.paintHead)(ctx, state, cycleAngle);
-    ctx.strokeStyle = '#39424f';
-    ctx.lineWidth = 9;
-    ctx.beginPath();
-    ctx.moveTo(cylinder_cycle_ts_1.BASE_X - 46, 0);
-    ctx.lineTo(cylinder_cycle_ts_1.BASE_X + 3 * cylinder_cycle_ts_1.SPACING + 46, 0);
-    ctx.stroke();
-    for (let i = 0; i < 4; i += 1) {
-        const cx = cylinder_cycle_ts_1.BASE_X + i * cylinder_cycle_ts_1.SPACING;
-        const c = (0, cylinder_cycle_ts_1.cylinderCycle)(cycleAngle, i);
-        paintCrankWeb(ctx, cx, c.angle);
-        paintPiston(ctx, cx, c);
-        paintCharge(ctx, state, cx, c);
+const paintBreathing = (ctx, state, crankAngle) => {
+    fill(ctx, () => {
+        ctx.moveTo(-210, -230);
+        ctx.lineTo(-175, -230);
+        ctx.lineTo(-175, -190);
+        ctx.lineTo(-210, -190);
+        ctx.closePath();
+    }, '#243040');
+    const throttleOpen = 0.15 + state.throttle * 0.85;
+    fill(ctx, () => {
+        ctx.rect(-250, -228, 42, 14 * throttleOpen + 4);
+    }, `rgba(94, 234, 212, ${0.15 + state.throttle * 0.35})`);
+    if (state.fuelled && state.running && state.rpm > 200) {
+        const pulse = 0.4 + 0.6 * Math.abs(Math.sin(crankAngle * 2));
+        const ex = ctx.createLinearGradient(175, -220, 280, -180);
+        ex.addColorStop(0, `rgba(255, 120, 40, ${0.35 * pulse})`);
+        ex.addColorStop(1, 'rgba(255, 80, 20, 0)');
+        ctx.fillStyle = ex;
+        ctx.beginPath();
+        ctx.moveTo(175, -230);
+        ctx.lineTo(280, -200 - 20 * pulse);
+        ctx.lineTo(280, -160 + 10 * pulse);
+        ctx.lineTo(175, -190);
+        ctx.closePath();
+        ctx.fill();
     }
-    paintFlywheel(ctx, cycleAngle, state.rpm);
+};
+const paintEngine = (ctx, cssW, cssH, state, crankAngle, sparkFlash) => {
+    ctx.clearRect(0, 0, cssW, cssH);
+    paintBackdrop(ctx, cssW, cssH);
+    const scale = Math.min(cssW, cssH) / 520;
+    ctx.save();
+    ctx.translate(cssW * 0.48, cssH * 0.62);
+    ctx.scale(scale, scale);
+    paintBlock(ctx);
+    paintCylinders(ctx, state, crankAngle, sparkFlash);
+    paintBreathing(ctx, state, crankAngle);
     ctx.restore();
     ctx.fillStyle = 'rgba(200, 210, 220, 0.45)';
     ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, monospace';
-    ctx.fillText('INLINE-4  ·  FIRING 1-3-4-2  ·  CUTAWAY SLOWED FOR CLARITY', 16, cssH - 16);
+    ctx.fillText('INLINE-4  ·  FLAT-PLANE  ·  DEMO KINEMATICS', 16, cssH - 16);
 };
 exports.paintEngine = paintEngine;
-
-};
-__registry["web/app/engine-head"] = function (module, exports, require) {
-"use strict";
-/**
- * Head, valvetrain, and manifold paint for the cutaway inline-four.
- * Cams turn at half crank speed and press each valve open on its stroke;
- * the throttle butterfly tilts with the pedal and the header glows on
- * blowdown. Cycle math is shared with engine-draw.ts via cylinder-cycle.ts.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.paintHead = void 0;
-const cylinder_cycle_ts_1 = require("./cylinder-cycle.js");
-const HEAD_TOP = -206;
-const GALLERY_TOP = -228;
-const COVER_TOP = -246;
-const paintHeadBody = (ctx) => {
-    ctx.fillStyle = '#252e3b';
-    ctx.fillRect(-178, HEAD_TOP, 356, cylinder_cycle_ts_1.DECK_Y - HEAD_TOP);
-    ctx.strokeStyle = '#6b7788';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(-178, HEAD_TOP, 356, cylinder_cycle_ts_1.DECK_Y - HEAD_TOP);
-    // head gasket line on the deck
-    ctx.strokeStyle = '#0d1117';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(-178, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(178, cylinder_cycle_ts_1.DECK_Y);
-    ctx.stroke();
-    // cam gallery recess, then the cover on top
-    ctx.fillStyle = '#151b25';
-    ctx.fillRect(-172, GALLERY_TOP, 344, HEAD_TOP - GALLERY_TOP);
-    ctx.strokeStyle = '#4c5665';
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(-172, GALLERY_TOP, 344, HEAD_TOP - GALLERY_TOP);
-    ctx.fillStyle = '#2b3442';
-    ctx.beginPath();
-    ctx.roundRect(-178, COVER_TOP, 356, GALLERY_TOP - COVER_TOP, 6);
-    ctx.fill();
-    ctx.strokeStyle = '#7f8b9c';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-    ctx.lineWidth = 1;
-    for (let x = -160; x < 178; x += 28) {
-        ctx.beginPath();
-        ctx.moveTo(x, COVER_TOP + 4);
-        ctx.lineTo(x, GALLERY_TOP - 4);
-        ctx.stroke();
-    }
-};
-const paintChamber = (ctx, cx) => {
-    ctx.fillStyle = '#0c1015';
-    ctx.beginPath();
-    ctx.moveTo(cx - 19, cylinder_cycle_ts_1.DECK_Y);
-    ctx.lineTo(cx - 19, cylinder_cycle_ts_1.DECK_Y - 6);
-    ctx.lineTo(cx, cylinder_cycle_ts_1.DECK_Y - 12);
-    ctx.lineTo(cx + 19, cylinder_cycle_ts_1.DECK_Y - 6);
-    ctx.lineTo(cx + 19, cylinder_cycle_ts_1.DECK_Y);
-    ctx.closePath();
-    ctx.fill();
-};
-const paintValve = (ctx, vx, lift, camRot) => {
-    const drop = lift * 6;
-    // cam lobe: an off-centre ellipse reads as the egg profile edge-on
-    ctx.save();
-    ctx.translate(vx, -217);
-    ctx.rotate(camRot);
-    ctx.fillStyle = '#48525f';
-    ctx.beginPath();
-    ctx.ellipse(3.5, 0, 10, 6, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#7d8898';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.fillStyle = '#5a6472';
-    ctx.beginPath();
-    ctx.arc(0, 0, 4, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-    ctx.fillStyle = '#8b96a5';
-    ctx.fillRect(vx - 5, -211 + drop, 10, 5);
-    ctx.strokeStyle = '#c5ced9';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(vx, -206 + drop);
-    ctx.lineTo(vx, -190 + drop);
-    ctx.stroke();
-    ctx.strokeStyle = 'rgba(180,190,205,0.5)';
-    ctx.lineWidth = 1;
-    for (const y of [-203, -199, -195]) {
-        ctx.beginPath();
-        ctx.moveTo(vx - 4.5, y + drop * 0.5);
-        ctx.lineTo(vx + 4.5, y + drop * 0.5);
-        ctx.stroke();
-    }
-    ctx.strokeStyle = '#dfe6ef';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(vx - 6.5, -189 + drop);
-    ctx.lineTo(vx + 6.5, -189 + drop);
-    ctx.stroke();
-};
-const paintPlug = (ctx, cx, spark) => {
-    ctx.fillStyle = '#d9dee6';
-    ctx.fillRect(cx - 2.5, -216, 5, 8);
-    ctx.fillStyle = '#8a94a3';
-    ctx.fillRect(cx - 3.5, -208, 7, 12);
-    ctx.strokeStyle = '#c5ced9';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(cx, -196);
-    ctx.lineTo(cx, -191);
-    ctx.stroke();
-    if (spark > 0) {
-        const flash = ctx.createRadialGradient(cx, -190, 1, cx, -190, 6 + spark * 8);
-        flash.addColorStop(0, `rgba(220,235,255, ${0.9 * spark})`);
-        flash.addColorStop(1, 'rgba(140,180,255, 0)');
-        ctx.fillStyle = flash;
-        ctx.beginPath();
-        ctx.arc(cx, -190, 6 + spark * 8, 0, Math.PI * 2);
-        ctx.fill();
-    }
-};
-const paintIntake = (ctx, state) => {
-    ctx.fillStyle = '#232c38';
-    ctx.beginPath();
-    ctx.moveTo(-178, -204);
-    ctx.lineTo(-214, -212);
-    ctx.lineTo(-214, -184);
-    ctx.lineTo(-178, -188);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = '#5a6575';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.fillStyle = '#2a3340';
-    ctx.beginPath();
-    ctx.roundRect(-246, -212, 32, 28, 5);
-    ctx.fill();
-    ctx.strokeStyle = '#6b7788';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fillStyle = '#11161d';
-    ctx.fillRect(-243, -205, 26, 14);
-    ctx.fillStyle = '#1c232d';
-    ctx.fillRect(-254, -210, 8, 24);
-    // butterfly: vertical is closed, tilts open with the pedal
-    ctx.save();
-    ctx.translate(-230, -198);
-    ctx.rotate(Math.PI / 2 - (0.12 + state.throttle * 1.15));
-    ctx.strokeStyle = '#c5ced9';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(-9, 0);
-    ctx.lineTo(9, 0);
-    ctx.stroke();
-    ctx.restore();
-    if (state.running && state.throttle > 0.02) {
-        ctx.strokeStyle = `rgba(94, 234, 212, ${0.12 + state.throttle * 0.3})`;
-        ctx.lineWidth = 1.5;
-        for (const y of [-201, -196]) {
-            ctx.beginPath();
-            ctx.moveTo(-252, y);
-            ctx.lineTo(-216, y);
-            ctx.stroke();
-        }
-    }
-};
-const paintExhaust = (ctx, state, cycleAngle) => {
-    const pulse = state.running && state.rpm > 100 ? (0, cylinder_cycle_ts_1.exhaustPulse)(cycleAngle) : 0;
-    const heat = state.fuelled ? 1 : 0.25;
-    const pipe = () => {
-        ctx.beginPath();
-        ctx.moveTo(176, -198);
-        ctx.bezierCurveTo(226, -196, 246, -172, 250, -134);
-        ctx.stroke();
-    };
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#454f5d';
-    ctx.lineWidth = 15;
-    pipe();
-    ctx.strokeStyle = '#2a323d';
-    ctx.lineWidth = 11;
-    pipe();
-    if (pulse > 0) {
-        ctx.strokeStyle = `rgba(255, 150, 60, ${(0.1 + 0.4 * pulse) * heat})`;
-        ctx.lineWidth = 7;
-        pipe();
-        const puff = ctx.createRadialGradient(250, -128, 2, 250, -128, 18);
-        puff.addColorStop(0, `rgba(255, 130, 50, ${0.35 * pulse * heat})`);
-        puff.addColorStop(1, 'rgba(255, 90, 30, 0)');
-        ctx.fillStyle = puff;
-        ctx.beginPath();
-        ctx.arc(250, -128, 18, 0, Math.PI * 2);
-        ctx.fill();
-    }
-    ctx.lineCap = 'butt';
-};
-const paintHead = (ctx, state, cycleAngle) => {
-    paintHeadBody(ctx);
-    for (let i = 0; i < 4; i += 1) {
-        const cx = cylinder_cycle_ts_1.BASE_X + i * cylinder_cycle_ts_1.SPACING;
-        const c = (0, cylinder_cycle_ts_1.cylinderCycle)(cycleAngle, i);
-        paintChamber(ctx, cx);
-        // cam nose points down (π/2) exactly at each valve's peak lift
-        paintValve(ctx, cx - 11, c.intakeLift, (c.phase - 2.5 * Math.PI) / 2 + Math.PI / 2);
-        paintValve(ctx, cx + 11, c.exhaustLift, (c.phase - 1.5 * Math.PI) / 2 + Math.PI / 2);
-        paintPlug(ctx, cx, state.running && state.fuelled ? c.spark : 0);
-    }
-    paintIntake(ctx, state);
-    paintExhaust(ctx, state, cycleAngle);
-};
-exports.paintHead = paintHead;
 
 };
 __registry["web/app/engine-plant"] = function (module, exports, require) {
@@ -6451,18 +6115,12 @@ __registry["web/app/engine-view"] = function (module, exports, require) {
 "use strict";
 /**
  * Cutaway inline-four that turns on the canvas.
- *
- * The crank is integrated over a full 720° four-stroke cycle so firing order,
- * valve events, and spark all stay phased. Display speed is a compressed map
- * of plant RPM — real crank speed would alias to noise at 60 fps — while the
- * vibration phase tracks the true speed so the engine still feels fast.
+ * Angle is integrated from plant RPM so the metal actually spins.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createEngineView = void 0;
 const engine_draw_ts_1 = require("./engine-draw.js");
 const TAU = Math.PI * 2;
-const CYCLE = 2 * TAU;
-const displayRevPerSec = (rpm) => (rpm <= 0 ? 0 : 0.9 + (rpm / 7000) * 3.4);
 const createEngineView = () => {
     const node = document.createElement('canvas');
     node.className = 'engine-canvas';
@@ -6472,8 +6130,8 @@ const createEngineView = () => {
         throw new Error('2d canvas is unavailable');
     let cssW = 640;
     let cssH = 420;
-    let cycleAngle = 0;
-    let vibPhase = 0;
+    let crankAngle = 0;
+    let sparkFlash = 0;
     const setSize = (width, height) => {
         cssW = Math.max(320, Math.floor(width));
         cssH = Math.max(240, Math.floor(height));
@@ -6487,10 +6145,13 @@ const createEngineView = () => {
     const draw = (state, seconds) => {
         const dt = Math.min(0.05, Math.max(0, seconds));
         if (state.running && state.rpm > 0) {
-            cycleAngle = (cycleAngle + displayRevPerSec(state.rpm) * TAU * dt) % CYCLE;
-            vibPhase = (vibPhase + (state.rpm / 60) * TAU * dt) % TAU;
+            crankAngle = (crankAngle + (state.rpm / 60) * TAU * dt) % TAU;
         }
-        (0, engine_draw_ts_1.paintEngine)(ctx, cssW, cssH, state, cycleAngle, vibPhase);
+        if (state.spark)
+            sparkFlash = 1;
+        else
+            sparkFlash = Math.max(0, sparkFlash - dt * 8);
+        (0, engine_draw_ts_1.paintEngine)(ctx, cssW, cssH, state, crankAngle, sparkFlash);
     };
     setSize(cssW, cssH);
     return { node, setSize, draw };
@@ -7187,6 +6848,7 @@ const createEngineDemoPanel = (bench) => {
     const cutBadge = (0, dom_ts_1.el)('div', { class: 'cut-badge', text: 'REV CUT' });
     cutBadge.hidden = true;
     let lastNow = performance.now();
+    let sparkPulse = false;
     const applyScenario = (scenario) => {
         bench.setThrottle(scenario.throttle);
         bench.setBrake(scenario.brake);
@@ -7251,7 +6913,7 @@ const createEngineDemoPanel = (bench) => {
                             brake.node,
                             (0, dom_ts_1.el)('p', {
                                 class: 'demo-blurb',
-                                text: 'Throttle and load drive a toy plant into the clean-room controller. The cutaway is slowed so the four-stroke cycle stays readable.',
+                                text: 'Throttle and load drive a toy plant into the clean-room controller. The metal turns at plant RPM.',
                             }),
                         ],
                     }),
@@ -7276,6 +6938,8 @@ const createEngineDemoPanel = (bench) => {
             const rpm = bench.rpm();
             const fuelled = snapshot.fuel !== null && !snapshot.fuel.cut && snapshot.fuel.pulseCount > 0;
             const cutting = snapshot.limiter.cutStageActive;
+            // Brief spark flash when ignition advance is reported and engine is turning.
+            sparkPulse = running && rpm > 400 && Math.random() < Math.min(0.35, rpm / 9000);
             power.textContent = running ? 'stop' : 'start';
             power.classList.toggle('is-running', running);
             node.classList.toggle('is-cutting', cutting);
@@ -7299,6 +6963,7 @@ const createEngineDemoPanel = (bench) => {
                 throttle: bench.throttle(),
                 fuelled,
                 cutting,
+                spark: sparkPulse,
             }, seconds);
         },
     };

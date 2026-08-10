@@ -1,22 +1,15 @@
 /**
- * Entry point: build the bench, mount the panels, run the frame loop.
- *
- * One `Ecu` is stepped in real time and read back once per frame. If anything
- * throws, the loop stops and says so rather than quietly drawing stale numbers.
+ * Entry: mount the engine demo and run the frame loop.
  */
 
 import { createBench } from './bench-runner.ts';
 import type { Bench } from './bench.ts';
 import { el } from './dom.ts';
 import { createMameBench } from './mame-bench.ts';
-import { createBenchPanel } from './panel-bench.ts';
-import { createEvidencePanel } from './panel-evidence.ts';
-import { createHeaderPanel } from './panel-header.ts';
-import { createMemoryPanel } from './panel-memory.ts';
-import { createScopePanel } from './panel-scope.ts';
+import { createEngineDemoPanel } from './panel-engine-demo.ts';
 import type { Panel } from './panel.ts';
 
-const AUTOSTART_DELAY_MS = 1400;
+const AUTOSTART_DELAY_MS = 800;
 
 const selectBench = (): Bench => {
   const backend = new URL(window.location.href).searchParams.get('backend') ?? 'cleanroom';
@@ -30,18 +23,12 @@ const mount = (): void => {
   if (root === null) throw new Error('#app is missing from the page shell');
 
   const bench = selectBench();
-  const panels: Panel[] = [
-    createHeaderPanel(bench),
-    createBenchPanel(bench),
-    createMemoryPanel(),
-    createScopePanel(bench),
-    createEvidencePanel(bench),
-  ];
+  const panels: Panel[] = [createEngineDemoPanel(bench)];
   for (const panel of panels) root.append(panel.node);
 
   const fail = (error: unknown): void => {
     const message = error instanceof Error ? error.message : String(error);
-    root.prepend(el('p', { class: 'failure', text: `the bench stopped: ${message}` }));
+    root.prepend(el('p', { class: 'failure', text: `demo stopped: ${message}` }));
     throw error;
   };
 
@@ -67,7 +54,6 @@ const mount = (): void => {
     if (provenance.mode === 'demo' && provenance.controls === 'read-write') bench.start();
   }, reduced ? 0 : AUTOSTART_DELAY_MS);
 
-  // The selected bench is also available for inspection and manual ticking.
   (window as unknown as { motronic: typeof bench }).motronic = bench;
 };
 

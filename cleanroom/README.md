@@ -8,7 +8,7 @@ invariant the specification states, not copied from anywhere.
 ```bash
 npm test          # 96 tests, node --test, no runtime dependencies
 npm run typecheck # tsc --noEmit, strict
-npm run demo      # build the browser bench and serve it on :8099
+./demo.sh         # build every demo (and the MAME gateway when available), hub on :8099 — see DEMOS.md
 node examples/drive-cycle.ts
 ```
 
@@ -84,8 +84,12 @@ about the pin on the other end.
 
 ```bash
 npm run build:web   # tsc -> web/.build, inlined into web/dist/motronic-bench.html
-npm run demo        # the same build, then http://localhost:8099
+npm run demo        # build all demos, then a hub at http://localhost:8099
+npm run demo:3d     # vite dev server for web3d/ (hot reload while hacking on it)
 ```
+
+The hub at `/` links every demo: `/3d/` (the three.js engine bay in `web3d/`),
+`/2d` (this page), and `/classic` (the pre-rework demo frozen in `web-original/`).
 
 The output is a single self-contained HTML file (~300 kB, no network requests, no dependencies),
 so `web/dist/motronic-bench.html` can also just be opened from disk. Building needs `tsc` on the
