@@ -4,6 +4,38 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GameBoyPlayer } from "./game-boy-player";
 import { EndScreen, type RunEnd, type Scoring } from "./end-screen";
 
+// Games must stay silent: sound bleeds into screen recordings. The frame is
+// same-origin, so suspending WebAudio and muting media elements from here
+// covers every generated game without touching bundles.
+function muteFrameAudio(frame: HTMLIFrameElement) {
+  const win = frame.contentWindow as (Window & typeof globalThis) | null;
+  if (!win) return;
+  for (const name of ["AudioContext", "webkitAudioContext"]) {
+    const ctx = (win as unknown as Record<string, { prototype: AudioContext }>)[name];
+    if (ctx) ctx.prototype.resume = () => Promise.resolve();
+  }
+  const mediaProto = win.HTMLMediaElement?.prototype;
+  if (mediaProto) {
+    const play = mediaProto.play;
+    mediaProto.play = function () {
+      this.muted = true;
+      this.volume = 0;
+      return play.call(this);
+    };
+  }
+  const muteAll = () => {
+    win.document.querySelectorAll<HTMLMediaElement>("audio, video").forEach((el) => {
+      el.muted = true;
+      el.volume = 0;
+    });
+  };
+  muteAll();
+  new win.MutationObserver(muteAll).observe(win.document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
+
 export function GameFrame({
   slug,
   title,
@@ -107,7 +139,10 @@ export function GameFrame({
             title={title}
             scrolling="no"
             tabIndex={0}
-            onLoad={focusGame}
+            onLoad={() => {
+              if (frameRef.current) muteFrameAudio(frameRef.current);
+              focusGame();
+            }}
           />
         )}
         {rom && showStartHint && !runEnd && (

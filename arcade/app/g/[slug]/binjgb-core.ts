@@ -166,9 +166,8 @@ export class BrowserGameBoy {
   }
 
   startAudio() {
-    if (this.audioStarted) return;
-    this.audioStarted = true;
-    void this.audioContext.resume();
+    // Audio stays off: game sound bleeds into screen recordings. The context
+    // is never resumed, so pushAudio's running-state guard keeps it silent.
   }
 
   setControl(control: GameBoyControl, pressed: boolean) {
