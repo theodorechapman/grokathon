@@ -6,6 +6,7 @@
  *   /         hub page linking the demos below
  *   /3d/      the three.js engine bay        (web3d/dist, built by vite)
  *   /2d       the current 2D bench           (web/dist, built by build.js)
+ *   /evidence the metrics evidence bench     (web/dist, built by build.js)
  *   /classic  the original demo, frozen      (web-original, a kept artifact)
  *   /api/*    proxied to the MAME gateway    (run-mame-gateway.ts, :8098)
  *
@@ -28,6 +29,7 @@ const mamePort = Number(process.env.MAME_PORT ?? 8098);
 const DIST_3D = join(root, 'web3d', 'dist');
 const PAGES = {
   '/2d': join(here, 'dist', 'motronic-bench.html'),
+  '/evidence': join(here, 'dist', 'evidence-bench.html'),
   '/classic': join(root, 'web-original', 'motronic-bench.html'),
 };
 
@@ -44,6 +46,13 @@ const DEMOS = [
     name: '2D bench',
     detail: 'canvas cutaway · four-stroke cycle · big gauges',
     file: PAGES['/2d'],
+    rebuild: 'npm run demo',
+  },
+  {
+    href: '/evidence',
+    name: 'Evidence bench',
+    detail: 'metrics report · black ink proven, red pen assumed',
+    file: PAGES['/evidence'],
     rebuild: 'npm run demo',
   },
   {

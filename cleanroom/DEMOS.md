@@ -13,8 +13,12 @@ exist (and says how to get them when they don't), and serves a hub linking:
 |---|---|---|
 | `/3d/` | three.js engine bay — attract mode, faders, live scope | clean-room model, in-browser |
 | `/2d` | 2D canvas cutaway with the four-stroke cycle | clean-room model, in-browser |
+| `/evidence` | the metrics evidence bench — a test-report layout where black ink is proven, red pen is model-assumed | clean-room model, in-browser |
 | `/classic` | the original demo, frozen as first shipped | clean-room model, in-browser |
 | `/3d/?backend=mame` | the 3D bay on the **real firmware** | MAME gateway on :8098 |
+
+`?backend=mame` also works on `/2d` and `/evidence` (the gateway's own page on
+:8098 is the evidence bench).
 
 The MAME card on the hub lights up only while the gateway answers; without it
 everything else still works. `/2d?backend=mame` works too.

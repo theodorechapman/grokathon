@@ -56,8 +56,11 @@ const argumentsFrom = (values: string[]): Arguments => {
     ),
     socketPath:
       pairs.socket ?? `/tmp/motronic-gateway-${process.pid}.sock`,
+    // The gateway's own page is the evidence bench — the report layout built
+    // for evidence-bounded MAME runs. Other pages reach the gateway through
+    // the demo hub's /api proxy instead.
     htmlPath: resolve(
-      pairs.html ?? join(here, '..', 'dist', 'motronic-bench.html'),
+      pairs.html ?? join(here, '..', 'dist', 'evidence-bench.html'),
     ),
     port,
   };

@@ -113,8 +113,11 @@ dom helper, cycle math) — do not fork those files. Key modules:
 
 ## Gotchas
 
-- `web/build.js` inlines **every** compiled module into one HTML file; dead
-  modules bloat the bundle, so delete unused files rather than orphaning them.
+- `web/build.js` compiles once and emits **two** self-contained pages from a
+  `PAGES` list: `motronic-bench.html` (engine demo, `app/main.ts`) and
+  `evidence-bench.html` (the metrics report, `app/main-evidence.ts` with
+  `shell-evidence.html` + `style-evidence.css`). Every compiled module is
+  inlined into both; delete unused files rather than orphaning them.
 - `web-original/` is a frozen artifact. Do not rebuild or "fix" it.
 - Ports: hub 8099 (`PORT`), gateway 8098 (`MAME_PORT`). The gateway defaults
   to 8098 specifically so both run together; don't reuse `PORT` for it.

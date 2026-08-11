@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
- * Build the demo into one self-contained HTML file.
+ * Build the demos into self-contained HTML files.
  *
  * `tsc` compiles `src/` and `web/app/` together to CommonJS in `web/.build/`,
  * which resolves the `.ts` import specifiers a browser cannot load. Every
- * emitted module is then inlined into `dist/motronic-bench.html` behind a
- * twenty-line module registry, so the page makes no network request at all.
+ * emitted module is then inlined behind a twenty-line module registry, so the
+ * pages make no network request at all. One compile feeds every page; each
+ * page differs only in entry module, shell, and stylesheet.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -16,8 +17,21 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const buildDir = join(here, '.build');
 const distDir = join(here, 'dist');
-const outFile = join(distDir, 'motronic-bench.html');
-const ENTRY = 'web/app/main';
+
+const PAGES = [
+  {
+    entry: 'web/app/main',
+    shell: 'shell.html',
+    style: 'style.css',
+    out: 'motronic-bench.html',
+  },
+  {
+    entry: 'web/app/main-evidence',
+    shell: 'shell-evidence.html',
+    style: 'style-evidence.css',
+    out: 'evidence-bench.html',
+  },
+];
 
 const compile = () => {
   rmSync(buildDir, { recursive: true, force: true });
@@ -76,31 +90,32 @@ function __makeRequire(from) {
 }
 `;
 
-const bundle = (modules) => {
+const bundle = (modules, entry) => {
   const parts = [RUNTIME];
   for (const [id, source] of modules) {
     parts.push(
       `__registry[${JSON.stringify(id)}] = function (module, exports, require) {\n${source}\n};`,
     );
   }
-  parts.push(`__makeRequire('bundle')(${JSON.stringify('./' + ENTRY)});`);
+  parts.push(`__makeRequire('bundle')(${JSON.stringify('./' + entry)});`);
   return parts.join('\n');
 };
 
 const build = () => {
   compile();
   const modules = collectModules();
-  if (!modules.has(ENTRY)) throw new Error(`entry module ${ENTRY} was not emitted`);
-
-  const script = bundle(modules).replaceAll('</script', '<\\/script');
-  const html = readFileSync(join(here, 'shell.html'), 'utf8')
-    .replace('/* STYLE */', () => readFileSync(join(here, 'style.css'), 'utf8'))
-    .replace('/* SCRIPT */', () => script);
-
   mkdirSync(distDir, { recursive: true });
-  writeFileSync(outFile, html);
-  const kb = (Buffer.byteLength(html) / 1024).toFixed(0);
-  process.stdout.write(`${modules.size} modules -> ${outFile} (${kb} kB, self-contained)\n`);
+  for (const page of PAGES) {
+    if (!modules.has(page.entry)) throw new Error(`entry module ${page.entry} was not emitted`);
+    const script = bundle(modules, page.entry).replaceAll('</script', '<\\/script');
+    const html = readFileSync(join(here, page.shell), 'utf8')
+      .replace('/* STYLE */', () => readFileSync(join(here, page.style), 'utf8'))
+      .replace('/* SCRIPT */', () => script);
+    const outFile = join(distDir, page.out);
+    writeFileSync(outFile, html);
+    const kb = (Buffer.byteLength(html) / 1024).toFixed(0);
+    process.stdout.write(`${modules.size} modules -> ${outFile} (${kb} kB, self-contained)\n`);
+  }
 };
 
 build();
