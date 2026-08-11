@@ -1,0 +1,380 @@
+/*
+ * 3D engine-bay demo: full-viewport canvas under a pointer-through operator
+ * console. One accent (hot orange) against cool steel glass; all data in
+ * tabular monospace so readouts never jitter.
+ */
+
+:root {
+  --bay: #0a0d13;
+  --glass: rgba(13, 17, 24, 0.66);
+  --line: rgba(148, 170, 200, 0.16);
+  --line-strong: rgba(148, 170, 200, 0.3);
+  --ink: #dce4ee;
+  --dim: #75828f;
+  --hot: #ff7a29;
+  --hot-deep: #e5551e;
+  --sans: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bay);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app { position: relative; width: 100%; height: 100%; }
+#app > canvas { position: absolute; inset: 0; display: block; }
+
+.hud { position: absolute; inset: 0; pointer-events: none; }
+
+/* ---- title ---------------------------------------------------------- */
+
+.hud-title { position: absolute; top: 20px; left: 24px; }
+
+.hud-title h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ---- console (bottom left) ------------------------------------------ */
+
+.hud-console,
+.hud-instruments {
+  pointer-events: auto;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.hud-console {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 14px 18px;
+  padding: 16px;
+}
+
+.hud-keys { display: flex; flex-direction: column; gap: 8px; }
+
+.hud-key {
+  min-width: 92px;
+  padding: 9px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hud-key:hover { border-color: var(--hot); }
+.hud-key:focus-visible,
+.hud-scenario:focus-visible,
+.hud-fader-track:focus-visible {
+  outline: 2px solid var(--hot);
+  outline-offset: 2px;
+}
+
+.hud-power.is-running {
+  color: var(--hot);
+  border-color: var(--hot-deep);
+  background: rgba(255, 122, 41, 0.08);
+}
+
+.hud-auto.is-active {
+  color: var(--bay);
+  background: var(--hot);
+  border-color: var(--hot);
+}
+
+.hud-scenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-content: start;
+}
+
+.hud-scenario {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.hud-scenario:hover { color: var(--ink); border-color: var(--line-strong); }
+.hud-scenario.is-active { color: var(--hot); border-color: var(--hot-deep); }
+
+/* ---- faders --------------------------------------------------------- */
+
+.hud-faders {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.hud-fader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-fader-value {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  min-width: 3ch;
+  text-align: center;
+}
+
+.hud-fader-track {
+  position: relative;
+  width: 34px;
+  height: 130px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  cursor: ns-resize;
+  touch-action: none;
+  background:
+    repeating-linear-gradient(
+      to top,
+      transparent 0,
+      transparent 11.6px,
+      var(--line) 11.6px,
+      var(--line) 13px
+    ) center / 12px 100% no-repeat;
+}
+
+.hud-fader-fill {
+  position: absolute;
+  bottom: 0;
+  left: 13px;
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to top, rgba(255, 122, 41, 0.25), rgba(255, 122, 41, 0.8));
+}
+
+.hud-fader-thumb {
+  position: absolute;
+  left: 3px;
+  width: 26px;
+  height: 12px;
+  margin-bottom: -6px;
+  border-radius: 3px;
+  background: linear-gradient(#e8eef6, #aab6c6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hud-fader-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ---- instruments (right) -------------------------------------------- */
+
+.hud-instruments {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 210px;
+  padding: 16px;
+  font-family: var(--mono);
+}
+
+.hud-rpm { padding-bottom: 12px; }
+
+.hud-rpm-value {
+  font-size: 34px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.is-cutting .hud-rpm-value { color: var(--hot); }
+
+.hud-rpm-bar {
+  margin-top: 8px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.hud-rpm-fill {
+  height: 100%;
+  width: 0;
+  background: var(--ink);
+  transition: width 120ms linear;
+}
+
+.hud-rpm-fill.is-hot { background: var(--hot); }
+
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.hud-row-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.hud-row-value {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- scope (bottom centre) ------------------------------------------ */
+
+.hud-scope {
+  pointer-events: auto;
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  width: min(600px, 40vw);
+  height: 128px;
+  padding: 12px;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.hud-scope-legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hud-scope-screen {
+  position: relative;
+  flex: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.hud-scope-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.hud-scope-timebase {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+}
+
+@media (max-width: 1100px) {
+  .hud-scope { display: none; }
+}
+
+/* ---- backend states -------------------------------------------------- */
+
+.hud--no-auto .hud-auto { display: none; }
+
+.hud-failure {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--hot-deep);
+  background: rgba(229, 85, 30, 0.16);
+  color: var(--hot);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+/* ---- cut lamp ------------------------------------------------------- */
+
+.hud-cut-lamp {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 18px;
+  border-radius: 7px;
+  border: 1px solid var(--hot-deep);
+  background: rgba(229, 85, 30, 0.16);
+  color: var(--hot);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  animation: hud-lamp 0.5s steps(2, jump-none) infinite;
+}
+
+@keyframes hud-lamp {
+  from { opacity: 1; }
+  to { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-cut-lamp { animation: none; }
+  .hud-rpm-fill { transition: none; }
+}
+
+/* ---- small screens -------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .hud-instruments { right: 12px; width: 150px; padding: 12px; }
+  .hud-console { left: 12px; bottom: 12px; padding: 12px; gap: 10px 12px; }
+  .hud-title { left: 14px; top: 12px; }
+  .hud-fader-track { height: 96px; }
+}

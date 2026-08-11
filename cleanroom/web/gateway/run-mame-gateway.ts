@@ -41,7 +41,9 @@ const argumentsFrom = (values: string[]): Arguments => {
   const mame = pairs.mame ?? process.env.MOTRONIC_MAME;
   const rom = pairs.rom ?? process.env.MOTRONIC_ROM;
   if (!mame || !rom) throw new Error('--mame and --rom are required');
-  const port = Number(pairs.port ?? process.env.PORT ?? '8099');
+  // 8098 by default so the demo hub (web/serve.js, :8099) can run alongside
+  // and proxy /api/* here.
+  const port = Number(pairs.port ?? process.env.PORT ?? '8098');
   if (!Number.isInteger(port) || port < 0 || port > 65_535) {
     throw new Error('--port must be an integer in 0..65535');
   }
@@ -54,8 +56,11 @@ const argumentsFrom = (values: string[]): Arguments => {
     ),
     socketPath:
       pairs.socket ?? `/tmp/motronic-gateway-${process.pid}.sock`,
+    // The gateway's own page is the evidence bench — the report layout built
+    // for evidence-bounded MAME runs. Other pages reach the gateway through
+    // the demo hub's /api proxy instead.
     htmlPath: resolve(
-      pairs.html ?? join(here, '..', 'dist', 'motronic-bench.html'),
+      pairs.html ?? join(here, '..', 'dist', 'evidence-bench.html'),
     ),
     port,
   };

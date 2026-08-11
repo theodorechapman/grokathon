@@ -15,7 +15,9 @@
     "typecheck:web": "tsc -p web/tsconfig.web.json --noEmit && tsc -p web/tsconfig.gateway.json",
     "build:web": "node web/build.js",
     "check:web": "npm run typecheck:web && npm run build:web",
-    "demo": "node web/build.js && node web/serve.js",
+    "build:3d": "npm --prefix web3d install --no-audit --no-fund && npm --prefix web3d run build",
+    "demo": "node web/build.js && npm run build:3d && node web/serve.js",
+    "demo:3d": "npm --prefix web3d run dev",
     "gateway:mame": "node web/gateway/run-mame-gateway.ts",
     "demo:mame": "npm run build:web && npm run gateway:mame --"
   },

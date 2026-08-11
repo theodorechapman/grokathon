@@ -1,0 +1,20 @@
+{
+  "name": "motronic-cleanroom-web3d",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "3D engine-bay demo for the Motronic 1.7 clean-room controller: Vite + three.js frontend over the same bench as web/",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "three": "^0.172.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.172.0",
+    "vite": "^6.0.0"
+  }
+}
